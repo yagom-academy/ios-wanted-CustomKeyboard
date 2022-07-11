@@ -51,9 +51,9 @@ final class ReviewListTableViewCell: UITableViewCell {
         return stackView
     }()
     
-    var verticcalStackView: UIStackView = {
+    var verticalStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 5
+        stackView.spacing = 8
         stackView.distribution = .fill
         stackView.axis = .vertical
         stackView.alignment = .leading
@@ -76,20 +76,23 @@ final class ReviewListTableViewCell: UITableViewCell {
         horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(horizontalStackView)
         
-        [profileImage,verticcalStackView].forEach {
+        [profileImage,verticalStackView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             horizontalStackView.addArrangedSubview($0)
         }
         
         [userNameLabel,reviewTextLabel,timeLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            verticcalStackView.addArrangedSubview($0)
+            verticalStackView.addArrangedSubview($0)
         }
     }
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            
+            horizontalStackView.topAnchor.constraint(equalTo: self.topAnchor,constant: 15),
+            horizontalStackView.leftAnchor.constraint(equalTo: self.leftAnchor),
+            horizontalStackView.rightAnchor.constraint(equalTo: self.rightAnchor),
+            horizontalStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: -10)
         ])
     }
     

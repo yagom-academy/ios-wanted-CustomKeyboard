@@ -40,7 +40,7 @@ final class ReviewListView: UIView {
     
     lazy var verticalStackView: UIStackView = {
        let stackView = UIStackView()
-        stackView.spacing = 30
+        stackView.spacing = 20
         stackView.distribution = .fill
         stackView.axis = .vertical
         stackView.alignment = .center
@@ -51,7 +51,6 @@ final class ReviewListView: UIView {
         lazy var tableView = UITableView()
         tableView.register(ReviewListTableViewCell.self, forCellReuseIdentifier: ReviewListTableViewCell.identifier)
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 120
         return tableView
     }()
     
