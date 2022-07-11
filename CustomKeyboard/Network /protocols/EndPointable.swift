@@ -19,10 +19,6 @@ protocol EndPointable {
 extension EndPointable {
   var scheme: String {"https"}
   var host: String {"api.plkey.app"}
-  var queryItems: [URLQueryItem]? {
-    [URLQueryItem(name: "start", value: "0"),
-     URLQueryItem(name: "count", value: "20")]
-  }
 }
 
 
