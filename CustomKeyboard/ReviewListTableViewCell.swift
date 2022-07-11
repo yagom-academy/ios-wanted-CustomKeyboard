@@ -1,0 +1,101 @@
+//
+//  ReviewListTableViewCell.swift
+//  CustomKeyboard
+//
+//  Created by yc on 2022/07/11.
+//
+
+import UIKit
+
+class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
+    
+    private lazy var profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .lightGray
+        imageView.layer.cornerRadius = 35.0
+        return imageView
+    }()
+    private lazy var nameLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 18.0, weight: .semibold)
+        label.textColor = .label
+        label.text = "ABCDEFG"
+        return label
+    }()
+    private lazy var rateLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16.0, weight: .regular)
+        label.textColor = .secondaryLabel
+        label.text = "ABCDEFG"
+        return label
+    }()
+    private lazy var contentLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16.0, weight: .regular)
+        label.textColor = .secondaryLabel
+        label.text = "ABCDEFG"
+        return label
+    }()
+    private lazy var dateLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14.0, weight: .regular)
+        label.textColor = .secondaryLabel
+        label.text = "ABCDEFG"
+        return label
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupLayout()
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+private extension ReviewListTableViewCell {
+    func setupLayout() {
+        [
+            profileImageView,
+            nameLabel,
+            rateLabel,
+            contentLabel,
+            dateLabel
+        ].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview($0)
+        }
+        
+        let commonSpacing = 16.0
+        
+        nameLabel.setContentHuggingPriority(.init(rawValue: 1000), for: .vertical)
+        rateLabel.setContentHuggingPriority(.init(rawValue: 1000), for: .vertical)
+        contentLabel.setContentHuggingPriority(.init(rawValue: 1000), for: .vertical)
+        dateLabel.setContentHuggingPriority(.init(rawValue: 999), for: .vertical)
+        
+        NSLayoutConstraint.activate([
+            profileImageView.widthAnchor.constraint(equalToConstant: 70.0),
+            profileImageView.heightAnchor.constraint(equalToConstant: 70.0),
+            profileImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: commonSpacing),
+            profileImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: commonSpacing),
+            
+            nameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: commonSpacing),
+            nameLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: commonSpacing),
+            nameLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -commonSpacing),
+            
+            rateLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            rateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: commonSpacing),
+            rateLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
+            
+            contentLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            contentLabel.topAnchor.constraint(equalTo: rateLabel.bottomAnchor, constant: commonSpacing),
+            contentLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
+            
+            dateLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            dateLabel.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: commonSpacing),
+            dateLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
+            dateLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -commonSpacing)
+        ])
+        
+    }
+}
