@@ -37,6 +37,7 @@ class WriteReviewButtonView : UIView{
     }
     
     override func layoutSubviews() {
+        super.layoutSubviews() 
         writeReviewButton.layer.cornerRadius = writeReviewButton.bounds.height / 2
     }
     
