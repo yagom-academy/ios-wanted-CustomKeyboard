@@ -51,8 +51,10 @@ extension ViewController: UITableViewDataSource {
             withIdentifier: ReviewListTableViewCell.identifier,
             for: indexPath
         ) as? ReviewListTableViewCell else { return UITableViewCell() }
+        
         let review = viewModel.reviewList[indexPath.row]
         cell.setupView(review: review)
+
         return cell
     }
 }
@@ -83,6 +85,18 @@ private extension ViewController {
 extension ViewController: CommentButtonDelegate {
     func present() {
         let controller = WriteController()
+        controller.delegate = self
         self.present(controller, animated: true)
+    }
+}
+
+extension ViewController: CommentEditDelegate {
+    var commentValue: String? {
+        get {
+            return commentButton.presentButton.text
+        }
+        set {
+            commentButton.presentButton.text = newValue
+        }
     }
 }

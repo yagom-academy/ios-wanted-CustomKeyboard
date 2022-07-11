@@ -17,6 +17,7 @@ struct Network {
     let parameters: [String: String]
     
     func get(completion: @escaping (Result<[ReviewResult], NetworkError>) -> Void) {
+    
         var urlComponents = URLComponents(string: path)
         urlComponents?.setQueryItems(with: parameters)
         
