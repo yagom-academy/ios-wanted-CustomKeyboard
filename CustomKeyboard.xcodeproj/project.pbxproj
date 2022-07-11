@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E20AB8B287BFCE800C60D7C /* ReviewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20AB8A287BFCE800C60D7C /* ReviewListViewModel.swift */; };
+		0E20AB8E287BFEDA00C60D7C /* Extension_UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20AB8D287BFEDA00C60D7C /* Extension_UIImage.swift */; };
 		C717525D287BF7040017487F /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C717525C287BF7040017487F /* ReviewModel.swift */; };
 		C717525F287BF8320017487F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C717525E287BF8320017487F /* NetworkManager.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E20AB8A287BFCE800C60D7C /* ReviewListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewModel.swift; sourceTree = "<group>"; };
+		0E20AB8D287BFEDA00C60D7C /* Extension_UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_UIImage.swift; sourceTree = "<group>"; };
 		C717525C287BF7040017487F /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
 		C717525E287BF8320017487F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,6 +45,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E20AB89287BFCD400C60D7C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0E20AB8A287BFCE800C60D7C /* ReviewListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0E20AB8C287BFEC500C60D7C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0E20AB8D287BFEDA00C60D7C /* Extension_UIImage.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		C7175257287BF67C0017487F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -73,13 +93,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		C717525B287BF6E10017487F /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		DE15E64F28604278003DD2F5 = {
 			isa = PBXGroup;
 			children = (
@@ -99,7 +112,8 @@
 		DE15E65A28604278003DD2F5 /* CustomKeyboard */ = {
 			isa = PBXGroup;
 			children = (
-				C717525B287BF6E10017487F /* ViewModel */,
+				0E20AB8C287BFEC500C60D7C /* Extension */,
+				0E20AB89287BFCD400C60D7C /* ViewModel */,
 				C717525A287BF6D80017487F /* Model */,
 				C7175259287BF6A60017487F /* Application */,
 				C7175258287BF6890017487F /* Manager */,
@@ -184,7 +198,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E20AB8B287BFCE800C60D7C /* ReviewListViewModel.swift in Sources */,
 				DE15E66028604278003DD2F5 /* ViewController.swift in Sources */,
+				0E20AB8E287BFEDA00C60D7C /* Extension_UIImage.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				C717525F287BF8320017487F /* NetworkManager.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
