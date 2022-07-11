@@ -45,6 +45,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B592B4C287C13B900267FCA /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6B592B46287C0FAE00267FCA /* Network.swift */,
+				6B592B4D287C13C200267FCA /* Extension */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		6B592B4D287C13C200267FCA /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6B592B4A287C0FB800267FCA /* CellIdentifiable.swift */,
+				18A109AB287BFF6200BC2E5C /* TextFieldExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		6B592B4E287C13CF00267FCA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6B592B4F287C13E400267FCA /* Home */,
+				6B592B50287C13EC00267FCA /* Write */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6B592B4F287C13E400267FCA /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				180EC612287BEECB008430FB /* ViewController.swift */,
+				18A109A9287BF90F00BC2E5C /* CommentButton.swift */,
+				6B592B48287C0FB400267FCA /* ReviewListTableViewCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		6B592B50287C13EC00267FCA /* Write */ = {
+			isa = PBXGroup;
+			children = (
+				18A109AD287C03C400BC2E5C /* WriteController.swift */,
+			);
+			path = Write;
+			sourceTree = "<group>";
+		};
+		6B592B51287C145100267FCA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		DE15E64F28604278003DD2F5 = {
 			isa = PBXGroup;
 			children = (
@@ -68,13 +120,9 @@
 				DE15E66428604279003DD2F5 /* Assets.xcassets */,
 				DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */,
 				DE15E66928604279003DD2F5 /* Info.plist */,
-				180EC612287BEECB008430FB /* ViewController.swift */,
-				18A109A9287BF90F00BC2E5C /* CommentButton.swift */,
-				18A109AB287BFF6200BC2E5C /* TextFieldExtension.swift */,
-				18A109AD287C03C400BC2E5C /* WriteController.swift */,
-				6B592B46287C0FAE00267FCA /* Network.swift */,
-				6B592B48287C0FB400267FCA /* ReviewListTableViewCell.swift */,
-				6B592B4A287C0FB800267FCA /* CellIdentifiable.swift */,
+				6B592B4E287C13CF00267FCA /* View */,
+				6B592B4C287C13B900267FCA /* Service */,
+				6B592B51287C145100267FCA /* Model */,
 			);
 			path = CustomKeyboard;
 			sourceTree = "<group>";
