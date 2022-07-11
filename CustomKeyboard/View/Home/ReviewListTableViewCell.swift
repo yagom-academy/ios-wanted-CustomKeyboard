@@ -13,47 +13,65 @@ class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
         imageView.layer.cornerRadius = 35.0
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18.0, weight: .semibold)
         label.textColor = .label
-        label.text = "ABCDEFG"
         return label
     }()
     private lazy var rateLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0, weight: .regular)
         label.textColor = .secondaryLabel
-        label.text = "ABCDEFG"
         return label
     }()
     private lazy var contentLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0, weight: .regular)
         label.textColor = .secondaryLabel
-        label.text = "ABCDEFG"
         return label
     }()
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14.0, weight: .regular)
         label.textColor = .secondaryLabel
-        label.text = "ABCDEFG"
         return label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()
+        viewModel.delegate = self
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    let viewModel = ReviewListTableViewCellViewModel()
+    
+    func setupView(review: ReviewResult) {
+        setupProfileImageView(review: review)
+        nameLabel.text = review.user.userName
+        rateLabel.text = review.rate
+        contentLabel.text = review.reviewContent
+        dateLabel.text = review.createdAt
+    }
+}
+
+extension ReviewListTableViewCell: ReviewListTableViewCellViewModelDelegate {
+    func reviewListTableViewCell(didLoadImage image: UIImage?) {
+        profileImageView.image = image
+    }
 }
 
 private extension ReviewListTableViewCell {
+    func setupProfileImageView(review: ReviewResult) {
+        viewModel.loadImage(urlString: review.user.profileImage)
+    }
     func setupLayout() {
         [
             profileImageView,
@@ -96,6 +114,5 @@ private extension ReviewListTableViewCell {
             dateLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
             dateLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -commonSpacing)
         ])
-        
     }
 }

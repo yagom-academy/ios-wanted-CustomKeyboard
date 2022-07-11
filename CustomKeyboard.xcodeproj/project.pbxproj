@@ -11,9 +11,14 @@
 		18A109AA287BF90F00BC2E5C /* CommentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A109A9287BF90F00BC2E5C /* CommentButton.swift */; };
 		18A109AC287BFF6200BC2E5C /* TextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A109AB287BFF6200BC2E5C /* TextFieldExtension.swift */; };
 		18A109AE287C03C400BC2E5C /* WriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A109AD287C03C400BC2E5C /* WriteController.swift */; };
+		6B574180287C3D8900A026A5 /* URLComponents+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B57417F287C3D8900A026A5 /* URLComponents+.swift */; };
+		6B574182287C404600A026A5 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B574181287C404600A026A5 /* ImageLoader.swift */; };
+		6B574184287C418F00A026A5 /* ReviewListTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B574183287C418F00A026A5 /* ReviewListTableViewCellViewModel.swift */; };
 		6B592B47287C0FAE00267FCA /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B592B46287C0FAE00267FCA /* Network.swift */; };
 		6B592B49287C0FB400267FCA /* ReviewListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B592B48287C0FB400267FCA /* ReviewListTableViewCell.swift */; };
 		6B592B4B287C0FB800267FCA /* CellIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B592B4A287C0FB800267FCA /* CellIdentifiable.swift */; };
+		6B592B53287C188B00267FCA /* ReviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B592B52287C188B00267FCA /* ReviewResponse.swift */; };
+		6B592B55287C2CB600267FCA /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B592B54287C2CB600267FCA /* ViewModel.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66428604279003DD2F5 /* Assets.xcassets */; };
 		DE15E66828604279003DD2F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */; };
@@ -24,9 +29,14 @@
 		18A109A9287BF90F00BC2E5C /* CommentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentButton.swift; sourceTree = "<group>"; };
 		18A109AB287BFF6200BC2E5C /* TextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExtension.swift; sourceTree = "<group>"; };
 		18A109AD287C03C400BC2E5C /* WriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteController.swift; sourceTree = "<group>"; };
+		6B57417F287C3D8900A026A5 /* URLComponents+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+.swift"; sourceTree = "<group>"; };
+		6B574181287C404600A026A5 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		6B574183287C418F00A026A5 /* ReviewListTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		6B592B46287C0FAE00267FCA /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		6B592B48287C0FB400267FCA /* ReviewListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewListTableViewCell.swift; sourceTree = "<group>"; };
 		6B592B4A287C0FB800267FCA /* CellIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellIdentifiable.swift; sourceTree = "<group>"; };
+		6B592B52287C188B00267FCA /* ReviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewResponse.swift; sourceTree = "<group>"; };
+		6B592B54287C2CB600267FCA /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE15E66428604279003DD2F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				6B592B46287C0FAE00267FCA /* Network.swift */,
+				6B574181287C404600A026A5 /* ImageLoader.swift */,
 				6B592B4D287C13C200267FCA /* Extension */,
 			);
 			path = Service;
@@ -59,6 +70,7 @@
 			children = (
 				6B592B4A287C0FB800267FCA /* CellIdentifiable.swift */,
 				18A109AB287BFF6200BC2E5C /* TextFieldExtension.swift */,
+				6B57417F287C3D8900A026A5 /* URLComponents+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -78,6 +90,8 @@
 				180EC612287BEECB008430FB /* ViewController.swift */,
 				18A109A9287BF90F00BC2E5C /* CommentButton.swift */,
 				6B592B48287C0FB400267FCA /* ReviewListTableViewCell.swift */,
+				6B574183287C418F00A026A5 /* ReviewListTableViewCellViewModel.swift */,
+				6B592B54287C2CB600267FCA /* ViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -93,6 +107,7 @@
 		6B592B51287C145100267FCA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6B592B52287C188B00267FCA /* ReviewResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -197,13 +212,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B574180287C3D8900A026A5 /* URLComponents+.swift in Sources */,
+				6B592B55287C2CB600267FCA /* ViewModel.swift in Sources */,
+				6B574182287C404600A026A5 /* ImageLoader.swift in Sources */,
 				6B592B49287C0FB400267FCA /* ReviewListTableViewCell.swift in Sources */,
 				6B592B4B287C0FB800267FCA /* CellIdentifiable.swift in Sources */,
 				18A109AA287BF90F00BC2E5C /* CommentButton.swift in Sources */,
 				18A109AC287BFF6200BC2E5C /* TextFieldExtension.swift in Sources */,
 				6B592B47287C0FAE00267FCA /* Network.swift in Sources */,
 				180EC613287BEECB008430FB /* ViewController.swift in Sources */,
+				6B592B53287C188B00267FCA /* ReviewResponse.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
+				6B574184287C418F00A026A5 /* ReviewListTableViewCellViewModel.swift in Sources */,
 				18A109AE287C03C400BC2E5C /* WriteController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
