@@ -23,12 +23,15 @@ class HomeTableViewCell: UITableViewCell {
     func configureCell(_ review: Review) {
         nameLabel.text = review.user.userName
         contentLabel.text = review.content
-        timeLabel.text = review.createdAt
-        
+        timeLabel.text = getTimeInterval(review.createdAt)
         ImageManager.shared.download(review.user.profileImage) { data in
             DispatchQueue.main.async {
                 self.userImageView.image = UIImage(data: data)
             }
         }
     }
+    
+    
 }
+
+
