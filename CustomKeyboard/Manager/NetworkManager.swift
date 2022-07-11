@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum NetworkError : Error{
+enum NetworkError : Error {
     case url
     case network
     case decode
@@ -15,8 +15,8 @@ enum NetworkError : Error{
 
 class NetworkManager{
     
-    func fetchAllReviews(completion : @escaping (Result<[ReviewModel], NetworkError>) -> Void){
-        let urlStr = "https://api.plkey.app/theme/review?themeld=6&start=0&count=20"
+    func fetchAllReviews(start: Int, completion : @escaping (Result<[ReviewModel], NetworkError>) -> Void){
+        let urlStr = "https://api.plkey.app/theme/review?themeld=6&start=\(start)&count=10"
         guard let url = URL(string: urlStr) else {
             completion(.failure(.url))
             return
