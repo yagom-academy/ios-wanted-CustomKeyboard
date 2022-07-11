@@ -71,6 +71,18 @@ private extension ViewController {
 extension ViewController: CommentButtonDelegate {
     func present() {
         let controller = WriteController()
+        controller.delegate = self
         self.present(controller, animated: true)
+    }
+}
+
+extension ViewController: CommentEditDelegate {
+    var commentValue: String? {
+        get {
+            return commentButton.presentButton.text
+        }
+        set {
+            commentButton.presentButton.text = newValue
+        }
     }
 }
