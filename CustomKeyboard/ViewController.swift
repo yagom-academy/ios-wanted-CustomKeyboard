@@ -18,6 +18,7 @@ class ViewController: UIViewController {
             forCellReuseIdentifier: ReviewListTableViewCell.identifier
         )
         return tableView
+    }()
     lazy var commentButton: CommentButton = {
         let button = CommentButton()
         button.delegate = self
@@ -28,7 +29,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupLayout()
-        
     }
 }
 
@@ -48,23 +48,22 @@ extension ViewController: UITableViewDataSource {
 private extension ViewController {
     func setupLayout() {
         [
-            reviewListTableView,
-            commentButton
+            commentButton,
+            reviewListTableView
         ].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
         
         NSLayoutConstraint.activate([
-            reviewListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            reviewListTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            reviewListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            reviewListTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
             commentButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: 20),
             commentButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -20),
-//            commentButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             commentButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            
+            reviewListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            reviewListTableView.topAnchor.constraint(equalTo: commentButton.bottomAnchor, constant: 16.0),
+            reviewListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            reviewListTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ]) 
     }
 }
