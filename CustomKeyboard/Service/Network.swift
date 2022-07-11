@@ -13,10 +13,10 @@ enum NetworkError: Error {
 
 struct Network {
     
-    private let path: String
-    private let parameters: [String: String]
+    let path: String
+    let parameters: [String: String]
     
-    func get(completion: @escaping (Result<Void, NetworkError>) -> Void) {
+    func get(completion: @escaping (Result<[ReviewResult], NetworkError>) -> Void) {
         var urlComponents = URLComponents(string: path)
         urlComponents?.setQueryItems(with: parameters)
         
@@ -26,14 +26,21 @@ struct Network {
         }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
-            guard (response as? HTTPURLResponse)?.statusCode == 200 else { return }
-        }
-        
-    }
-}
-
-extension URLComponents {
-    mutating func setQueryItems(with parameters: [String: String]) {
-        self.queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) }
+            guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+                completion(.failure(.unknown))
+                return
+            }
+            guard let data = data else {
+                completion(.failure(.unknown))
+                return
+            }
+            
+            do {
+                let result = try JSONDecoder().decode(ReviewResponse.self, from: data)
+                completion(.success(result.data))
+            } catch {
+                completion(.failure(.unknown))
+            }
+        }.resume()
     }
 }
