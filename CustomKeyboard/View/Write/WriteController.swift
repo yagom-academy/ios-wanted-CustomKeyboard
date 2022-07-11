@@ -25,6 +25,8 @@ class WriteController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configUI()
+        
+        commentEditView.text = delegate?.commentValue
     }
     
     func configUI() {

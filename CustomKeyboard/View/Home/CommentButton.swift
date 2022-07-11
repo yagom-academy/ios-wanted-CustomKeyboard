@@ -67,7 +67,8 @@ class CommentButton: UIView {
 
 extension CommentButton: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        self.presentButton.resignFirstResponder()
         self.delegate?.present()
-        return true
+        return false
     }
 }
