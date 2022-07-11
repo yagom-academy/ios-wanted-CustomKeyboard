@@ -10,14 +10,18 @@ import UIKit
 
 class ReviewListViewModel {
     private var reviews: [ReviewModel] = []
-    var cusor = 0
+    private var cusor = 0
+    
+    var reviewsCount: Int {
+        return reviews.count
+    }
     
     let networkManager = NetworkManager()
     
     init(){
     }
     
-    func fetAllReviews(completion: @escaping (Bool) -> Void) {
+    func fethAllReviews(completion: @escaping (Bool) -> Void) {
         self.networkManager.fetchAllReviews(start: cusor) { [weak self] result in
             switch result {
             case .success(let reviews):
@@ -63,9 +67,9 @@ struct ReviewViewModel {
         }
         
         if dateInterval < 60 {
-            return String(dateInterval)
+            return "\(dateInterval)분"
         } else if dateInterval <= 1440 {
-            return String(dateInterval / 60)
+            return String(dateInterval / 60) + "시간"
         } else {
             return reviewModel.createdAt.split(separator: "T").map { String($0) }.first!
         }
