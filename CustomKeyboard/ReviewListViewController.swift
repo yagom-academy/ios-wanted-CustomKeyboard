@@ -1,5 +1,5 @@
 //
-//  ReviewListViewController.swift
+//  ReviewListCell.swift
 //  CustomKeyboard
 //
 //  Created by CHUBBY on 2022/07/11.
@@ -7,72 +7,48 @@
 
 import UIKit
 
-final class ReviewListCell: UITableViewCell {
+final class ReviewListViewController : UIViewController {
     
-    static let identifier = "ReviewListCell"
-    
-    private lazy var profileImageView: UIImageView = {
-        let imgView = UIImageView()
-        imgView.image = UIImage(systemName: "person.circle.fill")
+    private lazy var reviewListTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.separatorColor = UIColor.gray
+        tableView.dataSource = self
+        tableView.estimatedRowHeight = UITableView.automaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         
-        return imgView
+        tableView.register(ReviewListCell.self, forCellReuseIdentifier: "ReviewListCell")
+        
+        return tableView
     }()
     
-    private lazy var userNameLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .label
-        label.font = .systemFont(ofSize: 15.0, weight: .bold)
-        label.text = "홍길동"
-        
-        return label
-    }()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpTableView()
+        print(reviewListTableView.rowHeight)
+    }
     
-    private lazy var ratingLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .label
-        label.text = "별점 : ⭐️⭐️⭐️⭐️⭐️"
-        label.textColor = UIColor.red
-        
-        return label
-    }()
-    
-    private lazy var reviewLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .label
-        label.text = "리뷰 : 아진짜 귀여워요!!!"
-        
-        return label
-    }()
-    
-    private lazy var timeLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .label
-        label.text = "1분전"
-        label.textColor = UIColor.gray
-        
-        return label
-    }()
-    
-    func setUp() {
-        let labelStackView = UIStackView(arrangedSubviews: [ userNameLabel, ratingLabel, reviewLabel, timeLabel ])
-        labelStackView.axis = .vertical
-        labelStackView.spacing = 10.0
-        labelStackView.distribution = .fillEqually
-        
-        [ profileImageView, labelStackView].forEach { addSubview($0)}
-        
-        profileImageView.translatesAutoresizingMaskIntoConstraints = false
-        labelStackView.translatesAutoresizingMaskIntoConstraints = false
+    func setUpTableView() {
+        view.addSubview(reviewListTableView)
+        reviewListTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            profileImageView.widthAnchor.constraint(equalToConstant: 30),
-            profileImageView.heightAnchor.constraint(equalToConstant: 30),
-            profileImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            profileImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            profileImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 20),
-            labelStackView.topAnchor.constraint(equalTo: profileImageView.topAnchor),
-            labelStackView.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 20)
+            reviewListTableView.topAnchor.constraint(equalTo: view.topAnchor),
+            reviewListTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            reviewListTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            reviewListTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
+}
 
+extension ReviewListViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewListCell.identifier, for: indexPath) as? ReviewListCell else { return UITableViewCell() }
+        cell.setUp()
+        return cell
+    }
 }

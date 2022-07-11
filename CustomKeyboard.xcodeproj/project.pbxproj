@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		0E20AB8B287BFCE800C60D7C /* ReviewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20AB8A287BFCE800C60D7C /* ReviewListViewModel.swift */; };
 		0E20AB8E287BFEDA00C60D7C /* Extension_UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20AB8D287BFEDA00C60D7C /* Extension_UIImage.swift */; };
-		12744E2E287C300700C0AD4A /* ReviewListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12744E2D287C300700C0AD4A /* ReviewListCell.swift */; };
-		12744E30287C305D00C0AD4A /* ReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12744E2F287C305C00C0AD4A /* ReviewListViewController.swift */; };
+		12744E2E287C300700C0AD4A /* ReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12744E2D287C300700C0AD4A /* ReviewListViewController.swift */; };
+		12744E30287C305D00C0AD4A /* ReviewListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12744E2F287C305C00C0AD4A /* ReviewListCell.swift */; };
 		C717525D287BF7040017487F /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C717525C287BF7040017487F /* ReviewModel.swift */; };
 		C717525F287BF8320017487F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C717525E287BF8320017487F /* NetworkManager.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
@@ -22,8 +22,8 @@
 /* Begin PBXFileReference section */
 		0E20AB8A287BFCE800C60D7C /* ReviewListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewModel.swift; sourceTree = "<group>"; };
 		0E20AB8D287BFEDA00C60D7C /* Extension_UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_UIImage.swift; sourceTree = "<group>"; };
-		12744E2D287C300700C0AD4A /* ReviewListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewListCell.swift; path = CustomKeyboard/ReviewListCell.swift; sourceTree = SOURCE_ROOT; };
-		12744E2F287C305C00C0AD4A /* ReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewListViewController.swift; path = CustomKeyboard/ReviewListViewController.swift; sourceTree = SOURCE_ROOT; };
+		12744E2D287C300700C0AD4A /* ReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewListViewController.swift; path = CustomKeyboard/ReviewListViewController.swift; sourceTree = SOURCE_ROOT; };
+		12744E2F287C305C00C0AD4A /* ReviewListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewListCell.swift; path = CustomKeyboard/ReviewListCell.swift; sourceTree = SOURCE_ROOT; };
 		C717525C287BF7040017487F /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
 		C717525E287BF8320017487F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,8 +64,8 @@
 		C7175257287BF67C0017487F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				12744E2D287C300700C0AD4A /* ReviewListCell.swift */,
-				12744E2F287C305C00C0AD4A /* ReviewListViewController.swift */,
+				12744E2D287C300700C0AD4A /* ReviewListViewController.swift */,
+				12744E2F287C305C00C0AD4A /* ReviewListCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -199,11 +199,11 @@
 			files = (
 				0E20AB8B287BFCE800C60D7C /* ReviewListViewModel.swift in Sources */,
 				0E20AB8E287BFEDA00C60D7C /* Extension_UIImage.swift in Sources */,
-				12744E2E287C300700C0AD4A /* ReviewListCell.swift in Sources */,
+				12744E2E287C300700C0AD4A /* ReviewListViewController.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				C717525F287BF8320017487F /* NetworkManager.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
-				12744E30287C305D00C0AD4A /* ReviewListViewController.swift in Sources */,
+				12744E30287C305D00C0AD4A /* ReviewListCell.swift in Sources */,
 				C717525D287BF7040017487F /* ReviewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,7 +347,6 @@
 				INFOPLIST_FILE = CustomKeyboard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -374,7 +373,6 @@
 				INFOPLIST_FILE = CustomKeyboard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
