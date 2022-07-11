@@ -7,17 +7,16 @@
 
 import Foundation
 
-struct ReviewList : Codable{
-    let reviewList : [ReviewModel]
+struct ReviewList: Codable {
+    let data: [ReviewModel]
 }
 
-struct ReviewModel : Codable{
-    let user : User
-    let content : String
-    let createdAt : Date
+struct ReviewModel: Codable {
+    let user: User
+    let content, createdAt: String
 }
 
-struct User : Codable{
-    let userName : String
-    let profileImage : String
+struct User: Codable {
+    let profileImage: String
+    let userName: String
 }

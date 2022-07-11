@@ -8,11 +8,27 @@
 import Foundation
 import UIKit
 
-struct ReviewListViewModel {
-    var reviews: ReviewList
+class ReviewListViewModel {
+    var reviews: [ReviewModel] = []
+    
+    let networkManager = NetworkManager()
+    
+    init(){
+    }
+    
+    func fetAllReviews(){
+        self.networkManager.fetchAllReviews { [weak self] result in
+            switch result{
+            case .success(let reviews):
+                self?.reviews = reviews
+            case .failure(_):
+                break
+            }
+        }
+    }
     
     func reviewAtIndex(index: Int) -> ReviewViewModel {
-        return ReviewViewModel(reviewModel: reviews.reviewList[index])
+        return ReviewViewModel(reviewModel: reviews[index])
     }
 }
 
