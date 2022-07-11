@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B757C3E0287C0CF600606708 /* EndPointable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B757C3DF287C0CF600606708 /* EndPointable.swift */; };
+		B779BB7C287C10D600BB8DF5 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BB7B287C10D600BB8DF5 /* Requestable.swift */; };
+		B779BB7F287C5C5000BB8DF5 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BB7E287C5C5000BB8DF5 /* EndPoint.swift */; };
+		B779BB81287C5C5800BB8DF5 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BB80287C5C5800BB8DF5 /* Request.swift */; };
+		B779BB83287C5CEB00BB8DF5 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BB82287C5CEB00BB8DF5 /* NetworkService.swift */; };
+		B779BB85287C5DA200BB8DF5 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BB84287C5DA200BB8DF5 /* NetworkError.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
 		DE15E66028604278003DD2F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65F28604278003DD2F5 /* ViewController.swift */; };
@@ -16,6 +22,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B757C3DF287C0CF600606708 /* EndPointable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointable.swift; sourceTree = "<group>"; };
+		B779BB7B287C10D600BB8DF5 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
+		B779BB7E287C5C5000BB8DF5 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		B779BB80287C5C5800BB8DF5 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		B779BB82287C5CEB00BB8DF5 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		B779BB84287C5DA200BB8DF5 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE15E65D28604278003DD2F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +49,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B757C3DE287C07A000606708 /* Network  */ = {
+			isa = PBXGroup;
+			children = (
+				B779BB82287C5CEB00BB8DF5 /* NetworkService.swift */,
+				B779BB7E287C5C5000BB8DF5 /* EndPoint.swift */,
+				B779BB80287C5C5800BB8DF5 /* Request.swift */,
+				B779BB84287C5DA200BB8DF5 /* NetworkError.swift */,
+				B779BB7D287C5C3D00BB8DF5 /* protocols */,
+			);
+			path = "Network ";
+			sourceTree = "<group>";
+		};
+		B779BB7D287C5C3D00BB8DF5 /* protocols */ = {
+			isa = PBXGroup;
+			children = (
+				B757C3DF287C0CF600606708 /* EndPointable.swift */,
+				B779BB7B287C10D600BB8DF5 /* Requestable.swift */,
+			);
+			path = protocols;
+			sourceTree = "<group>";
+		};
 		DE15E64F28604278003DD2F5 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +89,7 @@
 		DE15E65A28604278003DD2F5 /* CustomKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				B757C3DE287C07A000606708 /* Network  */,
 				DE15E65B28604278003DD2F5 /* AppDelegate.swift */,
 				DE15E65D28604278003DD2F5 /* SceneDelegate.swift */,
 				DE15E65F28604278003DD2F5 /* ViewController.swift */,
@@ -138,8 +172,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B779BB7F287C5C5000BB8DF5 /* EndPoint.swift in Sources */,
+				B779BB83287C5CEB00BB8DF5 /* NetworkService.swift in Sources */,
+				B779BB7C287C10D600BB8DF5 /* Requestable.swift in Sources */,
 				DE15E66028604278003DD2F5 /* ViewController.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
+				B779BB81287C5C5800BB8DF5 /* Request.swift in Sources */,
+				B779BB85287C5DA200BB8DF5 /* NetworkError.swift in Sources */,
+				B757C3E0287C0CF600606708 /* EndPointable.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,7 +328,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SNPLab/Info.plist;
+				INFOPLIST_FILE = CustomKeyBoard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -315,7 +355,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SNPLab/Info.plist;
+				INFOPLIST_FILE = CustomKeyBoard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
