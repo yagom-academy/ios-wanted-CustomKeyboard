@@ -18,6 +18,7 @@ class ReviewListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         reviewListView.tableView.dataSource = self
+        reviewListView.tableView.delegate = self
     }
 }
 
@@ -31,6 +32,10 @@ extension ReviewListViewController: UITableViewDataSource {
         
         return cell
     }
-    
-    
+}
+
+extension ReviewListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 1
+    }
 }
