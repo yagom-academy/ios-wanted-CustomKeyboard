@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0142F4CC287C0A76006F3E48 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4CB287C0A76006F3E48 /* HomeTableViewCell.swift */; };
 		0142F4D0287C0C9C006F3E48 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4CF287C0C9C006F3E48 /* Review.swift */; };
+		0142F4D4287C2C83006F3E48 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4D3287C2C83006F3E48 /* ImageManager.swift */; };
+		0142F4D6287C3078006F3E48 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4D5287C3078006F3E48 /* HomeViewModel.swift */; };
 		9F5042FC287C144900CDBD9C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5042FB287C144900CDBD9C /* NetworkManager.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
@@ -21,6 +23,8 @@
 /* Begin PBXFileReference section */
 		0142F4CB287C0A76006F3E48 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		0142F4CF287C0C9C006F3E48 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		0142F4D3287C2C83006F3E48 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		0142F4D5287C3078006F3E48 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		9F5042FB287C144900CDBD9C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +47,59 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0142F4D7287C34C3006F3E48 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0142F4D5287C3078006F3E48 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0142F4D8287C34CC006F3E48 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0142F4CF287C0C9C006F3E48 /* Review.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0142F4D9287C34D9006F3E48 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DE15E65F28604278003DD2F5 /* HomeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0142F4DA287C34E5006F3E48 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0142F4CB287C0A76006F3E48 /* HomeTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		0142F4DB287C3510006F3E48 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				DE15E65B28604278003DD2F5 /* AppDelegate.swift */,
+				DE15E65D28604278003DD2F5 /* SceneDelegate.swift */,
+				DE15E66128604278003DD2F5 /* Main.storyboard */,
+				DE15E66428604279003DD2F5 /* Assets.xcassets */,
+				DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		0142F4DC287C3519006F3E48 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				9F5042FB287C144900CDBD9C /* NetworkManager.swift */,
+				0142F4D3287C2C83006F3E48 /* ImageManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		DE15E64F28604278003DD2F5 = {
 			isa = PBXGroup;
 			children = (
@@ -62,16 +119,13 @@
 		DE15E65A28604278003DD2F5 /* CustomKeyboard */ = {
 			isa = PBXGroup;
 			children = (
-				DE15E65B28604278003DD2F5 /* AppDelegate.swift */,
-				DE15E65D28604278003DD2F5 /* SceneDelegate.swift */,
-				0142F4CF287C0C9C006F3E48 /* Review.swift */,
-				0142F4CB287C0A76006F3E48 /* HomeTableViewCell.swift */,
-				DE15E65F28604278003DD2F5 /* HomeViewController.swift */,
-				DE15E66128604278003DD2F5 /* Main.storyboard */,
-				DE15E66428604279003DD2F5 /* Assets.xcassets */,
-				DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */,
+				0142F4DB287C3510006F3E48 /* Application */,
+				0142F4D8287C34CC006F3E48 /* Model */,
+				0142F4DA287C34E5006F3E48 /* Cell */,
+				0142F4D9287C34D9006F3E48 /* ViewController */,
+				0142F4D7287C34C3006F3E48 /* ViewModel */,
+				0142F4DC287C3519006F3E48 /* Manager */,
 				DE15E66928604279003DD2F5 /* Info.plist */,
-				9F5042FB287C144900CDBD9C /* NetworkManager.swift */,
 			);
 			path = CustomKeyboard;
 			sourceTree = "<group>";
@@ -149,6 +203,8 @@
 			files = (
 				9F5042FC287C144900CDBD9C /* NetworkManager.swift in Sources */,
 				0142F4D0287C0C9C006F3E48 /* Review.swift in Sources */,
+				0142F4D4287C2C83006F3E48 /* ImageManager.swift in Sources */,
+				0142F4D6287C3078006F3E48 /* HomeViewModel.swift in Sources */,
 				DE15E66028604278003DD2F5 /* HomeViewController.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				0142F4CC287C0A76006F3E48 /* HomeTableViewCell.swift in Sources */,

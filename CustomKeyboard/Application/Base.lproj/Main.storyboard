@@ -69,7 +69,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="contentLabel" destination="pR7-43-SeC" id="QHV-p0-E0o"/>
+                                            <outlet property="contentLabel" destination="3R5-Wu-Ova" id="4tu-vg-y2j"/>
                                             <outlet property="nameLabel" destination="lwv-Qz-OHq" id="Agl-DZ-jmQ"/>
                                             <outlet property="timeLabel" destination="pR7-43-SeC" id="jjy-s7-afX"/>
                                             <outlet property="userImageView" destination="hiv-iK-wAr" id="LMp-B4-eLn"/>
@@ -86,21 +86,24 @@
                                             <constraint firstAttribute="width" secondItem="Mhv-PO-f4S" secondAttribute="height" multiplier="1:1" id="RZZ-Mv-8bb"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="이 테마가 마음에 드시나요?" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6I2-LJ-GZD">
-                                        <rect key="frame" x="108.5" y="43" width="257.5" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FuI-1r-Vry">
+                                        <rect key="frame" x="108.5" y="44.5" width="257.5" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="이 테마가 마음에 드시나요?"/>
+                                        <connections>
+                                            <segue destination="uYA-pl-ktf" kind="show" id="qPi-3E-LmP"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="FuI-1r-Vry" firstAttribute="centerY" secondItem="IU3-Gi-MkH" secondAttribute="centerY" id="1f8-hx-g17"/>
                                     <constraint firstAttribute="height" constant="120" id="2ir-QZ-Bjj"/>
                                     <constraint firstItem="Mhv-PO-f4S" firstAttribute="leading" secondItem="IU3-Gi-MkH" secondAttribute="leading" constant="16" id="2wK-jo-ocr"/>
                                     <constraint firstItem="Mhv-PO-f4S" firstAttribute="centerY" secondItem="IU3-Gi-MkH" secondAttribute="centerY" id="37S-xj-wSk"/>
-                                    <constraint firstItem="6I2-LJ-GZD" firstAttribute="leading" secondItem="Mhv-PO-f4S" secondAttribute="trailing" constant="16" id="A4b-2D-xJM"/>
+                                    <constraint firstItem="FuI-1r-Vry" firstAttribute="leading" secondItem="Mhv-PO-f4S" secondAttribute="trailing" constant="16" id="Dpw-w8-l5Q"/>
                                     <constraint firstItem="Mhv-PO-f4S" firstAttribute="width" secondItem="IU3-Gi-MkH" secondAttribute="width" multiplier="0.2" id="L9M-fA-cXG"/>
-                                    <constraint firstItem="6I2-LJ-GZD" firstAttribute="trailing" secondItem="IU3-Gi-MkH" secondAttribute="trailing" constant="-16" id="Q5f-VZ-EGU"/>
-                                    <constraint firstItem="6I2-LJ-GZD" firstAttribute="centerY" secondItem="IU3-Gi-MkH" secondAttribute="centerY" id="iB8-fe-ulQ"/>
+                                    <constraint firstItem="FuI-1r-Vry" firstAttribute="trailing" secondItem="IU3-Gi-MkH" secondAttribute="trailing" constant="-16" id="nyV-AO-RsX"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -122,7 +125,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="265" y="115"/>
+            <point key="canvasLocation" x="194" y="89"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="wBz-Ht-cNg">
+            <objects>
+                <viewController id="uYA-pl-ktf" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Q9A-Sd-6th">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="tab-qp-O50"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="q2v-zJ-dgr"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n6M-h7-hMN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1180" y="88"/>
         </scene>
     </scenes>
     <resources>

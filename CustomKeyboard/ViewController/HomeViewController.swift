@@ -4,39 +4,44 @@
 //
 
 import UIKit
+import Combine
 
 class HomeViewController: UIViewController {
-
-    var reviewList = [Review]()
-    let networkManager = NetworkManager()
     
     @IBOutlet weak var tableView: UITableView!
+    
+    private let viewModel = HomeViewModel()
+    private var cancellable = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configure()
-        networkManager.downloadReview(closure: { reviewData in
-            self.reviewList = reviewData.data
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        })
         
+        viewModel.fetch()
     }
 }
 
-// MARK: -
+// MARK: - Private
 
-private extension HomeViewController {
-    
-    func configure() {
+extension HomeViewController {
+    private func configure() {
         configureTableView()
+        bind()
     }
     
-    func configureTableView() {
+    private func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
+    }
+    
+    private func bind() {
+        viewModel.$reviewList
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                self.tableView.reloadData()
+            }
+            .store(in: &cancellable)
     }
 }
 
@@ -44,7 +49,7 @@ private extension HomeViewController {
 
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.reviewList.count
+        return viewModel.reviewListCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -52,7 +57,8 @@ extension HomeViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.nameLabel.text = reviewList[indexPath.row].user.userName
+        let review = viewModel.review(at: indexPath.row)
+        cell.configureCell(review)
         return cell
     }
 }
