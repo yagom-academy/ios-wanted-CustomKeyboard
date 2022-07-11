@@ -19,28 +19,24 @@ class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18.0, weight: .semibold)
         label.textColor = .label
-        label.text = "ABCDEFG"
         return label
     }()
     private lazy var rateLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0, weight: .regular)
         label.textColor = .secondaryLabel
-        label.text = "ABCDEFG"
         return label
     }()
     private lazy var contentLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0, weight: .regular)
         label.textColor = .secondaryLabel
-        label.text = "ABCDEFG"
         return label
     }()
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14.0, weight: .regular)
         label.textColor = .secondaryLabel
-        label.text = "ABCDEFG"
         return label
     }()
     
@@ -50,6 +46,13 @@ class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupView(review: ReviewResult) {
+        nameLabel.text = review.user.userName
+        rateLabel.text = review.rate
+        contentLabel.text = review.reviewContent
+        dateLabel.text = review.createdAt
     }
 }
 

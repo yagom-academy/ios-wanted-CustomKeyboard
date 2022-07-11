@@ -25,22 +25,34 @@ class ViewController: UIViewController {
         return button
     }()
     
+    let viewModel = ViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupLayout()
+        viewModel.delegate = self
+        viewModel.fetchReviewList()
+    }
+}
+
+extension ViewController: ViewModelDelegate {
+    func viewModel(didEndFetchReviewList viewModel: ViewModel) {
+        reviewListTableView.reloadData()
     }
 }
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return viewModel.reviewList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: ReviewListTableViewCell.identifier,
             for: indexPath
         ) as? ReviewListTableViewCell else { return UITableViewCell() }
+        let review = viewModel.reviewList[indexPath.row]
+        cell.setupView(review: review)
         return cell
     }
 }
