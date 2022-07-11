@@ -36,7 +36,7 @@ class ReviewListViewModel {
 }
 
 struct ReviewViewModel {
-    let reviewModel: ReviewModel
+    private let reviewModel: ReviewModel
     
     init(reviewModel: ReviewModel) {
         self.reviewModel = reviewModel
