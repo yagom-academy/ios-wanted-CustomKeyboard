@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		180EC613287BEECB008430FB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180EC612287BEECB008430FB /* ViewController.swift */; };
+		18A109AA287BF90F00BC2E5C /* CommentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A109A9287BF90F00BC2E5C /* CommentButton.swift */; };
+		18A109AC287BFF6200BC2E5C /* TextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A109AB287BFF6200BC2E5C /* TextFieldExtension.swift */; };
+		18A109AE287C03C400BC2E5C /* WriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A109AD287C03C400BC2E5C /* WriteController.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66428604279003DD2F5 /* Assets.xcassets */; };
 		DE15E66828604279003DD2F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */; };
@@ -15,6 +18,9 @@
 
 /* Begin PBXFileReference section */
 		180EC612287BEECB008430FB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		18A109A9287BF90F00BC2E5C /* CommentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentButton.swift; sourceTree = "<group>"; };
+		18A109AB287BFF6200BC2E5C /* TextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExtension.swift; sourceTree = "<group>"; };
+		18A109AD287C03C400BC2E5C /* WriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteController.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE15E66428604279003DD2F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,6 +63,9 @@
 				DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */,
 				DE15E66928604279003DD2F5 /* Info.plist */,
 				180EC612287BEECB008430FB /* ViewController.swift */,
+				18A109A9287BF90F00BC2E5C /* CommentButton.swift */,
+				18A109AB287BFF6200BC2E5C /* TextFieldExtension.swift */,
+				18A109AD287C03C400BC2E5C /* WriteController.swift */,
 			);
 			path = CustomKeyboard;
 			sourceTree = "<group>";
@@ -131,8 +140,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18A109AA287BF90F00BC2E5C /* CommentButton.swift in Sources */,
+				18A109AC287BFF6200BC2E5C /* TextFieldExtension.swift in Sources */,
 				180EC613287BEECB008430FB /* ViewController.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
+				18A109AE287C03C400BC2E5C /* WriteController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
