@@ -329,7 +329,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SWD9W7PNH2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SNPLab/Info.plist;
+				INFOPLIST_FILE = CustomKeyboard/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -357,7 +357,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SWD9W7PNH2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SNPLab/Info.plist;
+				INFOPLIST_FILE = CustomKeyboard/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
