@@ -26,14 +26,8 @@ class ReviewTableViewCell: UITableViewCell {
         let rateLabel = UILabel()
         rateLabel.text = "별점: ⭐️"
         rateLabel.font = UIFont.systemFont(ofSize: 16)
+        rateLabel.numberOfLines = 2
         return rateLabel
-    }()
-    
-    private let reviewLabel: UILabel = {
-        let reviewLabel = UILabel()
-        reviewLabel.text = "리뷰: 굳"
-        reviewLabel.font = UIFont.systemFont(ofSize: 16)
-        return reviewLabel
     }()
     
     private let timeLabel: UILabel = {
@@ -62,19 +56,17 @@ class ReviewTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setLayout() {
+    private func setLayout() {
         contentView.addSubview(profileImageView)
         contentView.addSubview(labelStackView)
         labelStackView.addArrangedSubview(nickNameLabel)
         labelStackView.addArrangedSubview(rateLabel)
-        labelStackView.addArrangedSubview(reviewLabel)
         labelStackView.addArrangedSubview(timeLabel)
         
         
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         nickNameLabel.translatesAutoresizingMaskIntoConstraints = false
         rateLabel.translatesAutoresizingMaskIntoConstraints = false
-        reviewLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         labelStackView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -91,5 +83,26 @@ class ReviewTableViewCell: UITableViewCell {
             labelStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
         ])
     }
+    
+    func fetchDataFromTableView(data: ReviewData) {
+        // imageView 통신
+
+        do {
+            if let url = URL(string: data.user.profileImage) {
+                let imgData = try Data(contentsOf: url)
+                DispatchQueue.main.async {
+                    self.profileImageView.image = UIImage(data: imgData)
+                }
+            }
+        } catch {
+            
+        }
+        
+        //
+        nickNameLabel.text = data.user.userName
+        rateLabel.text = data.content
+        timeLabel.text = data.createdAt
+    }
+    
 }
 
