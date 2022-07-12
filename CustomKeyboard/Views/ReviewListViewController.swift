@@ -21,6 +21,7 @@ class ReviewListViewController: UIViewController {
         reviewTableView.delegate = self
         reviewTableView.dataSource = self
         reviewTableView.register(ReviewTableViewCell.self, forCellReuseIdentifier: "Cell")
+        reviewTableView.register(ReviewListHeaderView.self, forHeaderFooterViewReuseIdentifier: "headerCell")
     }
     
     func setLayout() {
@@ -50,11 +51,24 @@ extension ReviewListViewController: UITableViewDataSource {
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerCell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerCell") as! ReviewListHeaderView
+        headerCell.delegate = self
+        return headerCell
+    }
 }
 
 extension ReviewListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 100
+    }
+}
+
+extension ReviewListViewController: PresentButtonSelectable {
+    func presentButtonStatus() {
+        print("페이지 이동")
     }
 }
