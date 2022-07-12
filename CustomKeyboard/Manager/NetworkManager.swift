@@ -36,4 +36,27 @@ class NetworkManager{
             completion(.success(data.data))
         }.resume()
     }
+    
+    func uploadPost(with data : PostReview, completion : @escaping (Bool)->Void){
+        guard let url = URL(string: "https://api.plkey.app/tmp/theme/PLKEY0-L-81/review") else {
+            completion(false)
+            return
+        }
+        guard let data = try? JSONEncoder().encode(data) else {
+            completion(false)
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = data
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error != nil else {
+                return
+            }
+            guard let response = response as? HTTPURLResponse, (200..<300) ~= response.statusCode else{
+                return
+            }
+            print(response.statusCode)
+        }.resume()
+    }
 }

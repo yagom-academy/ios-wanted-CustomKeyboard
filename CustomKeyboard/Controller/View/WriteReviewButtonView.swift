@@ -41,6 +41,18 @@ class WriteReviewButtonView: UIView {
         super.layoutSubviews()
         writeReviewButton.layer.cornerRadius = writeReviewButton.bounds.height / 2
     }
+    
+    func writeReviewButtonTapped(){
+        var networkManager = NetworkManager()
+        guard let content = writeReviewButton.currentTitle else {return}
+        networkManager.uploadPost(with: PostReview(content: content)) { success in
+            if success{
+                DispatchQueue.main.async {
+                    self.writeReviewButton.setTitle("", for: .normal)
+                }
+            }
+        }
+    }
 }
 
 // MARK: - UI
