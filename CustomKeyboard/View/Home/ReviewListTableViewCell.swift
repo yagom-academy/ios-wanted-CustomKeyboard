@@ -21,6 +21,7 @@ class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18.0, weight: .semibold)
         label.textColor = .label
+        label.numberOfLines = 0
         return label
     }()
     private lazy var rateLabel: UILabel = {
@@ -33,11 +34,12 @@ class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0, weight: .regular)
         label.textColor = .secondaryLabel
+        label.numberOfLines = 0
         return label
     }()
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14.0, weight: .regular)
+        label.font = .systemFont(ofSize: 12.0, weight: .regular)
         label.textColor = .secondaryLabel
         return label
     }()
