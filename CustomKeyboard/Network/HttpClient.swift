@@ -30,6 +30,7 @@ class HttpClient {
             }
         }
     }
+    
     func getJson(completed: @escaping (Result<Data, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             
