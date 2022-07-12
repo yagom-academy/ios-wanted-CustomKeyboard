@@ -15,13 +15,18 @@ struct ReviewResult: Decodable {
     let id: String
     let user: ReviewUser
     private let content: String
-    let createdAt: String
+    private let createdAt: String
     
     var rate: String {
-        return content.split(separator: "\n").map { String($0) }[0]
+        let rateStr = content.split(separator: "\n").map { String($0) }[0]
+        return rateStr.contains("⭐️") ? rateStr : "Rating: 내용없음"
     }
     var reviewContent: String {
-        return content.split(separator: "\n").map { String($0) }.last ?? ""
+        let reviewStr = content.split(separator: "\n").map { String($0) }.last ?? ""
+        return reviewStr.contains("Review: ") ? reviewStr : "Review: 내용없음"
+    }
+    var date: String? {
+        return createdAt.toDate?.intervalCurrentTime
     }
     
     enum CodingKeys: String, CodingKey {

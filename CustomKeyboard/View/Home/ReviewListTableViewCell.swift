@@ -60,7 +60,7 @@ class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
         nameLabel.text = review.user.userName
         rateLabel.text = review.rate
         contentLabel.text = review.reviewContent
-        dateLabel.text = review.createdAt
+        dateLabel.text = review.date
     }
 }
 
