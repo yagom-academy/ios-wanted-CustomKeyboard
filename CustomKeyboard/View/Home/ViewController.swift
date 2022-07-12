@@ -37,8 +37,29 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: ViewModelDelegate {
+    func clearText() {
+        DispatchQueue.main.async { [weak self] in
+            guard let presentButton = self?.commentButton.stackView.arrangedSubviews[1] as? UITextField else { return }
+            presentButton.text = nil
+        }
+        
+        DispatchQueue.main.async {
+            self.updateClearView()
+        }
+    }
+    
     func viewModel(didEndFetchReviewList viewModel: ViewModel) {
         reviewListTableView.reloadData()
+    }
+    
+    private func updateClearView() {
+        UIView.animate(withDuration: 0.5) {
+            let sendButton = self.commentButton.stackView.arrangedSubviews[2]
+            sendButton.isHidden = true
+            let profileImage = self.commentButton.stackView.arrangedSubviews[0]
+            profileImage.isHidden = false
+            self.commentButton.stackView.layoutIfNeeded()
+        }
     }
 }
 
@@ -73,6 +94,7 @@ private extension ViewController {
             commentButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: 20),
             commentButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -20),
             commentButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            commentButton.heightAnchor.constraint(equalToConstant: 50),
             
             reviewListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             reviewListTableView.topAnchor.constraint(equalTo: commentButton.bottomAnchor, constant: 16.0),
@@ -88,15 +110,34 @@ extension ViewController: CommentButtonDelegate {
         controller.delegate = self
         self.present(controller, animated: true)
     }
+    
+    func post() {
+        guard let commentView = commentButton.stackView.arrangedSubviews[1] as? UITextField,
+              let comment = commentView.text else { return }
+        viewModel.postComment(comment)
+        
+    }
 }
 
 extension ViewController: CommentEditDelegate {
     var commentValue: String? {
         get {
-            return commentButton.presentButton.text
+            guard let textfield = commentButton.stackView.arrangedSubviews[1] as? UITextField else { return "" }
+            return textfield.text
         }
         set {
-            commentButton.presentButton.text = newValue
+            guard let textfield = commentButton.stackView.arrangedSubviews[1] as? UITextField else { return }
+            textfield.text = newValue
+            updateInputView()
+        }
+    }
+    
+    private func updateInputView() {
+        UIView.animate(withDuration: 0.5) {
+            let sendButton = self.commentButton.stackView.arrangedSubviews[2]
+            sendButton.isHidden = false
+            let profileImage = self.commentButton.stackView.arrangedSubviews[0]
+            profileImage.isHidden = true
         }
     }
 }
