@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0E20AB8B287BFCE800C60D7C /* ReviewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20AB8A287BFCE800C60D7C /* ReviewListViewModel.swift */; };
 		0E20AB8E287BFEDA00C60D7C /* Extension_UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20AB8D287BFEDA00C60D7C /* Extension_UIImage.swift */; };
+		0E55485E287D3A35000F328D /* WriteReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E55485D287D3A35000F328D /* WriteReviewController.swift */; };
 		12744E2E287C300700C0AD4A /* ReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12744E2D287C300700C0AD4A /* ReviewListViewController.swift */; };
 		12744E30287C305D00C0AD4A /* ReviewListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12744E2F287C305C00C0AD4A /* ReviewListCell.swift */; };
 		C717525D287BF7040017487F /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C717525C287BF7040017487F /* ReviewModel.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		0E20AB8A287BFCE800C60D7C /* ReviewListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewModel.swift; sourceTree = "<group>"; };
 		0E20AB8D287BFEDA00C60D7C /* Extension_UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_UIImage.swift; sourceTree = "<group>"; };
+		0E55485D287D3A35000F328D /* WriteReviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewController.swift; sourceTree = "<group>"; };
 		12744E2D287C300700C0AD4A /* ReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewListViewController.swift; path = CustomKeyboard/Controller/ReviewListViewController.swift; sourceTree = SOURCE_ROOT; };
 		12744E2F287C305C00C0AD4A /* ReviewListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewListCell.swift; path = CustomKeyboard/Controller/View/ReviewListCell.swift; sourceTree = SOURCE_ROOT; };
 		C717525C287BF7040017487F /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 			children = (
 				0E323CFE287C412100392AA6 /* View */,
 				12744E2D287C300700C0AD4A /* ReviewListViewController.swift */,
+				0E55485D287D3A35000F328D /* WriteReviewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E20AB8B287BFCE800C60D7C /* ReviewListViewModel.swift in Sources */,
+				0E55485E287D3A35000F328D /* WriteReviewController.swift in Sources */,
 				0E20AB8E287BFEDA00C60D7C /* Extension_UIImage.swift in Sources */,
 				12744E2E287C300700C0AD4A /* ReviewListViewController.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,

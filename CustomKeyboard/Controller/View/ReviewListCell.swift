@@ -55,7 +55,7 @@ final class ReviewListCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: - Method
     func configureCell(with reviewModel: ReviewViewModel) {
         userNameLabel.text = reviewModel.name
@@ -68,8 +68,9 @@ final class ReviewListCell: UITableViewCell {
 // MARK: - UI
 extension ReviewListCell {
     private func configureSubViews() {
+        
         [profileImageView, userNameLabel,
-        reviewLabel, timeLabel].forEach {
+         reviewLabel, timeLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview($0)
         }

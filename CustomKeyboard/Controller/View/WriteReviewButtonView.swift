@@ -5,7 +5,6 @@
 //  Created by JunHwan Kim on 2022/07/11.
 //
 
-import Foundation
 import UIKit
 
 class WriteReviewButtonView: UIView {
