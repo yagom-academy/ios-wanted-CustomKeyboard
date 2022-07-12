@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CustomKeyboardView" customModule="CustomKeyboard" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="218"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="mhC-Mt-enT">
+                    <rect key="frame" x="3" y="0.0" width="408" height="215"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="efI-cq-VXF">
+                            <rect key="frame" x="0.0" y="0.0" width="408" height="54"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAC-Yo-ez0">
+                                    <rect key="frame" x="0.0" y="0.0" width="38" height="54"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQU-cz-sTq">
+                                    <rect key="frame" x="41" y="0.0" width="38" height="54"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abv-bZ-oqx">
+                                    <rect key="frame" x="82" y="0.0" width="38.5" height="54"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5G-9C-yRC">
+                                    <rect key="frame" x="123.5" y="0.0" width="38" height="54"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gok-Jy-lM4">
+                                    <rect key="frame" x="164.5" y="0.0" width="38" height="54"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="55U-4J-ecZ">
+                                    <rect key="frame" x="205.5" y="0.0" width="38" height="54"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEI-8d-lri">
+                                    <rect key="frame" x="246.5" y="0.0" width="38" height="54"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yrx-XS-rQC">
+                                    <rect key="frame" x="287.5" y="0.0" width="38.5" height="54"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cyg-HZ-ZXo">
+                                    <rect key="frame" x="329" y="0.0" width="38" height="54"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Dp-cb-Mz3">
+                                    <rect key="frame" x="370" y="0.0" width="38" height="54"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="xvu-0l-KRo">
+                            <rect key="frame" x="0.0" y="54" width="408" height="53.5"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xeV-qz-hiV">
+                                    <rect key="frame" x="0.0" y="0.0" width="42.5" height="53.5"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ldw-dj-7lf">
+                                    <rect key="frame" x="45.5" y="0.0" width="43" height="53.5"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aAN-d8-3eo">
+                                    <rect key="frame" x="91.5" y="0.0" width="42.5" height="53.5"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Gu-Lv-jbG">
+                                    <rect key="frame" x="137" y="0.0" width="42.5" height="53.5"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e5H-h8-UpC">
+                                    <rect key="frame" x="182.5" y="0.0" width="43" height="53.5"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mv5-A2-9IC">
+                                    <rect key="frame" x="228.5" y="0.0" width="42.5" height="53.5"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4y-DL-hjj">
+                                    <rect key="frame" x="274" y="0.0" width="42.5" height="53.5"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S6V-8h-2HW">
+                                    <rect key="frame" x="319.5" y="0.0" width="43" height="53.5"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcA-95-HiD">
+                                    <rect key="frame" x="365.5" y="0.0" width="42.5" height="53.5"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="sc6-Mb-25s">
+                            <rect key="frame" x="0.0" y="107.5" width="408" height="54"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDP-Ck-jGe">
+                                    <rect key="frame" x="0.0" y="0.0" width="41" height="54"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="zOK-Cf-OAe">
+                                    <rect key="frame" x="46" y="0.0" width="312" height="54"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9oT-CS-0oa">
+                                            <rect key="frame" x="0.0" y="0.0" width="42" height="54"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AeN-ch-iMK">
+                                            <rect key="frame" x="45" y="0.0" width="42" height="54"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptn-GC-DUL">
+                                            <rect key="frame" x="90" y="0.0" width="42" height="54"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9GZ-hp-hVn">
+                                            <rect key="frame" x="135" y="0.0" width="42" height="54"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aw7-9V-JSU">
+                                            <rect key="frame" x="180" y="0.0" width="42" height="54"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgq-ge-U0Z">
+                                            <rect key="frame" x="225" y="0.0" width="42" height="54"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WAn-Ag-iFg">
+                                            <rect key="frame" x="270" y="0.0" width="42" height="54"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="liA-gH-urk">
+                                    <rect key="frame" x="363" y="0.0" width="45" height="54"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1ea-2o-QzQ">
+                            <rect key="frame" x="0.0" y="161.5" width="408" height="53.5"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CGe-PY-tT3">
+                                    <rect key="frame" x="0.0" y="0.0" width="111.5" height="53.5"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DC1-Cd-xnE">
+                                    <rect key="frame" x="121.5" y="0.0" width="111" height="53.5"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TTH-vH-Aev">
+                                    <rect key="frame" x="242.5" y="0.0" width="165.5" height="53.5"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="mhC-Mt-enT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="3" id="759-lT-m1L"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="mhC-Mt-enT" secondAttribute="bottom" constant="3" id="9qY-Zh-57o"/>
+                <constraint firstItem="mhC-Mt-enT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="A7Q-cA-AeO"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="mhC-Mt-enT" secondAttribute="trailing" constant="3" id="Og8-O1-EUS"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="aButton" destination="xeV-qz-hiV" id="faI-MR-CYj"/>
+                <outlet property="bButton" destination="Aw7-9V-JSU" id="nuf-v8-ow0"/>
+                <outlet property="cButton" destination="ptn-GC-DUL" id="gnt-Ov-qYh"/>
+                <outlet property="dButton" destination="aAN-d8-3eo" id="AGr-YX-gnA"/>
+                <outlet property="deleteButton" destination="liA-gH-urk" id="ST4-3p-XB9"/>
+                <outlet property="eButton" destination="abv-bZ-oqx" id="8Wb-tk-DPu"/>
+                <outlet property="fButton" destination="7Gu-Lv-jbG" id="aHV-TH-MWN"/>
+                <outlet property="gButton" destination="e5H-h8-UpC" id="E9H-Zt-tta"/>
+                <outlet property="hButton" destination="Mv5-A2-9IC" id="pWt-5O-VUO"/>
+                <outlet property="iButton" destination="yrx-XS-rQC" id="rdK-fh-Esf"/>
+                <outlet property="jButton" destination="h4y-DL-hjj" id="i3X-bU-4tZ"/>
+                <outlet property="kButton" destination="S6V-8h-2HW" id="g9p-Jg-tro"/>
+                <outlet property="lButton" destination="HcA-95-HiD" id="4ap-uX-JiT"/>
+                <outlet property="mButton" destination="WAn-Ag-iFg" id="w4m-PO-S3Y"/>
+                <outlet property="nButton" destination="Mgq-ge-U0Z" id="tFD-b4-NfF"/>
+                <outlet property="oButton" destination="Cyg-HZ-ZXo" id="TNJ-Bw-sGO"/>
+                <outlet property="pButton" destination="5Dp-cb-Mz3" id="WYx-7E-lL9"/>
+                <outlet property="qButton" destination="AAC-Yo-ez0" id="X4T-c5-wuL"/>
+                <outlet property="rButton" destination="T5G-9C-yRC" id="M6P-is-AmF"/>
+                <outlet property="returnButton" destination="TTH-vH-Aev" id="wfS-Lo-2FC"/>
+                <outlet property="sButton" destination="Ldw-dj-7lf" id="bDC-eV-QsS"/>
+                <outlet property="shiftButton" destination="uDP-Ck-jGe" id="g6t-I0-XR7"/>
+                <outlet property="spaceButton" destination="DC1-Cd-xnE" id="lkW-XU-ljZ"/>
+                <outlet property="switchButton" destination="CGe-PY-tT3" id="fxl-dJ-je0"/>
+                <outlet property="tButton" destination="gok-Jy-lM4" id="3FJ-cq-vbE"/>
+                <outlet property="uButton" destination="MEI-8d-lri" id="qHV-eK-dQV"/>
+                <outlet property="vButton" destination="9GZ-hp-hVn" id="CeU-bm-63V"/>
+                <outlet property="wButton" destination="dQU-cz-sTq" id="Q7T-wi-xwY"/>
+                <outlet property="xButton" destination="AeN-ch-iMK" id="kvd-b1-6aT"/>
+                <outlet property="yButton" destination="55U-4J-ecZ" id="CLk-c1-ZsT"/>
+                <outlet property="zButton" destination="9oT-CS-0oa" id="WXV-ZK-3Bk"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="221.65178571428569"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
