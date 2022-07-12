@@ -35,8 +35,8 @@ class HttpClient {
         DispatchQueue.global(qos: .background).async {
             
             do {
-                let url = URL(string: self.baseUrl)
-                let data = try Data(contentsOf: url!)
+                guard let url = URL(string: self.baseUrl) else { return }
+                let data = try Data(contentsOf: url)
                 DispatchQueue.main.async {
                     completed(Result.success(data))
                 }
