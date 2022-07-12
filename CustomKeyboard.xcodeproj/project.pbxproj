@@ -10,6 +10,8 @@
 		0E20AB8B287BFCE800C60D7C /* ReviewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20AB8A287BFCE800C60D7C /* ReviewListViewModel.swift */; };
 		0E20AB8E287BFEDA00C60D7C /* Extension_UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20AB8D287BFEDA00C60D7C /* Extension_UIImage.swift */; };
 		0E55485E287D3A35000F328D /* WriteReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E55485D287D3A35000F328D /* WriteReviewViewController.swift */; };
+		0EECF418287D57190094171E /* CustomKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EECF417287D57190094171E /* CustomKeyboardView.xib */; };
+		0EECF41A287D57230094171E /* CustomKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EECF419287D57230094171E /* CustomKeyboardView.swift */; };
 		12744E2E287C300700C0AD4A /* ReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12744E2D287C300700C0AD4A /* ReviewListViewController.swift */; };
 		12744E30287C305D00C0AD4A /* ReviewListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12744E2F287C305C00C0AD4A /* ReviewListCell.swift */; };
 		C717525D287BF7040017487F /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C717525C287BF7040017487F /* ReviewModel.swift */; };
@@ -26,6 +28,8 @@
 		0E20AB8A287BFCE800C60D7C /* ReviewListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewModel.swift; sourceTree = "<group>"; };
 		0E20AB8D287BFEDA00C60D7C /* Extension_UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_UIImage.swift; sourceTree = "<group>"; };
 		0E55485D287D3A35000F328D /* WriteReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewViewController.swift; sourceTree = "<group>"; };
+		0EECF417287D57190094171E /* CustomKeyboardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomKeyboardView.xib; sourceTree = "<group>"; };
+		0EECF419287D57230094171E /* CustomKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyboardView.swift; sourceTree = "<group>"; };
 		12744E2D287C300700C0AD4A /* ReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewListViewController.swift; path = CustomKeyboard/Controller/ReviewListViewController.swift; sourceTree = SOURCE_ROOT; };
 		12744E2F287C305C00C0AD4A /* ReviewListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewListCell.swift; path = CustomKeyboard/Controller/View/ReviewListCell.swift; sourceTree = SOURCE_ROOT; };
 		C717525C287BF7040017487F /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
@@ -80,10 +84,20 @@
 		0E323CFE287C412100392AA6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0EECF416287D56F70094171E /* CustomKeyboardView */,
 				12744E2F287C305C00C0AD4A /* ReviewListCell.swift */,
 				C7175262287C43CE0017487F /* WriteReviewButtonView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		0EECF416287D56F70094171E /* CustomKeyboardView */ = {
+			isa = PBXGroup;
+			children = (
+				0EECF417287D57190094171E /* CustomKeyboardView.xib */,
+				0EECF419287D57230094171E /* CustomKeyboardView.swift */,
+			);
+			path = CustomKeyboardView;
 			sourceTree = "<group>";
 		};
 		C7175258287BF6890017487F /* Manager */ = {
@@ -203,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE15E66828604279003DD2F5 /* LaunchScreen.storyboard in Resources */,
+				0EECF418287D57190094171E /* CustomKeyboardView.xib in Resources */,
 				DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,6 +231,7 @@
 			files = (
 				0E20AB8B287BFCE800C60D7C /* ReviewListViewModel.swift in Sources */,
 				0E55485E287D3A35000F328D /* WriteReviewViewController.swift in Sources */,
+				0EECF41A287D57230094171E /* CustomKeyboardView.swift in Sources */,
 				0E20AB8E287BFEDA00C60D7C /* Extension_UIImage.swift in Sources */,
 				12744E2E287C300700C0AD4A /* ReviewListViewController.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,

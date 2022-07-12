@@ -50,7 +50,7 @@ class NetworkManager{
         request.httpMethod = "POST"
         request.httpBody = data
         URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
+            guard let _ = data, error == nil else {
                 return
             }
             guard let response = response as? HTTPURLResponse, (200..<300) ~= response.statusCode else{
