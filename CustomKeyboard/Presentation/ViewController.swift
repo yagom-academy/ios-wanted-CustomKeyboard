@@ -17,7 +17,15 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        NetworkManager.shared.fetchReview { result in
+            switch result {
+            case .success(let value):
+                print(value)
+            case .failure(_):
+                print(CustomError.loadError)
+            }
+        }
         
     }
 }

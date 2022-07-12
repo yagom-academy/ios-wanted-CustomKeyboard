@@ -7,21 +7,35 @@
 
 import Foundation
 
+// MARK: - ReviewTypes
 struct ReviewTypes: Codable {
     var data: [ReviewType]
 }
 
+// MARK: - ReviewType
 struct ReviewType: Codable {
-    var _id: String
+    var id: String
     var user: User
     var content: String
     var createdAt: String
     var updatedAt: String
+    
+    enum CodingKeys: String , CodingKey {
+        case id = "_id"
+        case user, content, createdAt, updatedAt
+        
+    }
 }
 
+// MARK: - User
 struct User: Codable {
-    var _id: String
-    var isAdmin: String
+    var id: String
+    var isAdmin: Bool
     var profileImage: String
     var userName: String
+    
+    enum CodingKeys : String , CodingKey {
+        case id = "_id"
+        case isAdmin, profileImage, userName
+    }
 }
