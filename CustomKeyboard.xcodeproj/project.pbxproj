@@ -14,6 +14,8 @@
 		DE15E66028604278003DD2F5 /* ReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65F28604278003DD2F5 /* ReviewListViewController.swift */; };
 		DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66428604279003DD2F5 /* Assets.xcassets */; };
 		DE15E66828604279003DD2F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */; };
+		F035E55B287D3C09002DA8F9 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F035E55A287D3C09002DA8F9 /* HttpClient.swift */; };
+		F035E55D287D3E41002DA8F9 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F035E55C287D3E41002DA8F9 /* Repository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		DE15E66428604279003DD2F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DE15E66728604279003DD2F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DE15E66928604279003DD2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F035E55A287D3C09002DA8F9 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
+		F035E55C287D3E41002DA8F9 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,7 @@
 		DE15E65A28604278003DD2F5 /* CustomKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				F035E559287D3BFB002DA8F9 /* Network */,
 				DE15E65B28604278003DD2F5 /* AppDelegate.swift */,
 				DE15E65D28604278003DD2F5 /* SceneDelegate.swift */,
 				36431EB5287D46C3003C99B4 /* Views */,
@@ -84,6 +89,15 @@
 				DE15E66928604279003DD2F5 /* Info.plist */,
 			);
 			path = CustomKeyboard;
+			sourceTree = "<group>";
+		};
+		F035E559287D3BFB002DA8F9 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F035E55A287D3C09002DA8F9 /* HttpClient.swift */,
+				F035E55C287D3E41002DA8F9 /* Repository.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,6 +174,8 @@
 				36F646D0287D39E8007288C7 /* ReviewTableViewCell.swift in Sources */,
 				36431EB8287D4D79003C99B4 /* ReviewListHeaderView.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
+				F035E55D287D3E41002DA8F9 /* Repository.swift in Sources */,
+				F035E55B287D3C09002DA8F9 /* HttpClient.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
