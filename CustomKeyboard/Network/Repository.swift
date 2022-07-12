@@ -7,10 +7,31 @@
 
 import Foundation
 
-class Repository {
-    private let httpClient = HttpClient(baseUrl: "https://api.plkey.app/theme/review")
+enum RepositoryError {
     
-    func reviewData(completion: @escaping(Data) -> Void) {
-        httpClient.getJson(path: "", params: "", completed: <#T##(Result<String, Error>) -> Void#>)
+}
+
+class Repository {
+    
+    private var currentPage = 0
+    
+    private let httpClient = HttpClient(baseUrl: "https://api.plkey.app/theme/review?themeId=6&start=0&count=20")
+    
+    func reviewData(completion: @escaping (Result<ModelData, Error>) -> Void) {
+        httpClient.getJson { result in
+            switch result {
+            case .success(let data):
+                let decoder = JSONDecoder()
+                do {
+                    let reviewData = try decoder.decode(ModelData.self, from: data)
+                    completion(.success(reviewData))
+                } catch let error {
+                    completion(.failure(error))
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
