@@ -18,11 +18,13 @@ class WriteReviewButtonView: UIView {
     private lazy var writeReviewButton: UIButton = {
         let writeReviewButton = UIButton()
         writeReviewButton.backgroundColor = .systemGray5
+        writeReviewButton.setTitle("", for: .normal)
         return writeReviewButton
     }()
     
     private lazy var sendReviewButton: UIButton = {
         let sendReviewButton = UIButton()
+        sendReviewButton.addTarget(self, action: #selector(tapSendReviewButton), for: .touchUpInside)
         return sendReviewButton
     }()
     
@@ -42,10 +44,10 @@ class WriteReviewButtonView: UIView {
         writeReviewButton.layer.cornerRadius = writeReviewButton.bounds.height / 2
     }
     
-    func writeReviewButtonTapped(){
+    @objc func tapSendReviewButton(){
         var networkManager = NetworkManager()
         guard let content = writeReviewButton.currentTitle else {return}
-        networkManager.uploadPost(with: PostReview(content: content)) { success in
+        networkManager.uploadPost(with: PostReviewModel(content: content)) { success in
             if success{
                 DispatchQueue.main.async {
                     self.writeReviewButton.setTitle("", for: .normal)

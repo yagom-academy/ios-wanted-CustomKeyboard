@@ -37,7 +37,7 @@ class NetworkManager{
         }.resume()
     }
     
-    func uploadPost(with data : PostReview, completion : @escaping (Bool)->Void){
+    func uploadPost(with data : PostReviewModel, completion : @escaping (Bool)->Void){
         guard let url = URL(string: "https://api.plkey.app/tmp/theme/PLKEY0-L-81/review") else {
             completion(false)
             return
@@ -50,13 +50,13 @@ class NetworkManager{
         request.httpMethod = "POST"
         request.httpBody = data
         URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error != nil else {
+            guard let data = data, error == nil else {
                 return
             }
             guard let response = response as? HTTPURLResponse, (200..<300) ~= response.statusCode else{
                 return
             }
-            print(response.statusCode)
+            completion(true)
         }.resume()
     }
 }
