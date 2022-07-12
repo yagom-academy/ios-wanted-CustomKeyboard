@@ -36,5 +36,9 @@ class CreateReviewViewController: UIViewController {
     private func setKeyboardInputView() {
          
     }
+    
+    private func dissmiss() {
+        self.dismiss(animated: true)
+    }
 
 }
