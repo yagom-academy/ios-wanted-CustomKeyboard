@@ -8,6 +8,10 @@
 import UIKit
 
 class WriteReviewButtonView: UIView {
+    
+    // MARK: - Properties
+    private var writeReviewButtonTrailingConstraint: NSLayoutConstraint!
+    
     // MARK: - ViewProperties
     private lazy var profileImageView: UIImageView = {
         let profileImageView = UIImageView()
@@ -15,14 +19,20 @@ class WriteReviewButtonView: UIView {
         return profileImageView
     }()
     
-    private lazy var writeReviewButton: UIButton = {
+    lazy var writeReviewButton: UIButton = {
         let writeReviewButton = UIButton()
         writeReviewButton.backgroundColor = .systemGray5
+        writeReviewButton.setTitleColor(UIColor.black, for: .normal)
+        writeReviewButton.setTitle("이 테마가 마음에 드시나요?", for: .normal)
+        
         return writeReviewButton
     }()
     
-    private lazy var sendReviewButton: UIButton = {
+    lazy var sendReviewButton: UIButton = {
         let sendReviewButton = UIButton()
+        sendReviewButton.setTitle("작성", for: .normal)
+        sendReviewButton.setTitleColor(UIColor.black, for: .normal)
+        
         return sendReviewButton
     }()
     
@@ -31,6 +41,7 @@ class WriteReviewButtonView: UIView {
         super.init(frame: .zero)
         configureSubViews()
         setConstraints()
+        showSendReviewButton(isCanSend: false)
     }
     
     required init?(coder: NSCoder) {
@@ -40,6 +51,13 @@ class WriteReviewButtonView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         writeReviewButton.layer.cornerRadius = writeReviewButton.bounds.height / 2
+    }
+    
+    // MARK: - Method
+    func showSendReviewButton(isCanSend: Bool) {
+        print("asdf")
+        sendReviewButton.isHidden = isCanSend ? false : true
+        writeReviewButtonTrailingConstraint.constant = isCanSend ? -60 : -10
     }
 }
 
@@ -55,6 +73,7 @@ extension WriteReviewButtonView {
     private func setConstraints() {
         setConstraintsOfProfileImageView()
         setConstraintsOfWriteReviewButton()
+        setConstraintsOfSendReviewButton()
     }
     
     private func setConstraintsOfProfileImageView() {
@@ -67,11 +86,19 @@ extension WriteReviewButtonView {
     }
     
     private func setConstraintsOfWriteReviewButton() {
+        writeReviewButtonTrailingConstraint = writeReviewButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15)
         NSLayoutConstraint.activate([
             writeReviewButton.heightAnchor.constraint(equalToConstant: 50),
             writeReviewButton.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 10),
-            writeReviewButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            writeReviewButtonTrailingConstraint,
             writeReviewButton.topAnchor.constraint(equalTo: topAnchor, constant: 10)
+        ])
+    }
+    
+    private func setConstraintsOfSendReviewButton() {
+        NSLayoutConstraint.activate([
+            sendReviewButton.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor),
+            sendReviewButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
         ])
     }
 }

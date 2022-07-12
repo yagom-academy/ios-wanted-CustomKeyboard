@@ -41,11 +41,16 @@ final class ReviewListViewController : UIViewController {
         configureSubViews()
         setConstraints()
         fetchNewReviews()
+        configureTarget()
     }
     
     // MARK: - Method
     private func fetchNewReviews() {
         reviewListViewModel.fetchReviews()
+    }
+    
+    private func configureTarget() {
+        writeReviewButtonView.writeReviewButton.addTarget(self, action: #selector(writeReviewbuttonTapped), for: .touchUpInside)
     }
 }
 
@@ -96,5 +101,23 @@ extension ReviewListViewController: UITableViewDataSource {
         cell.configureCell(with: reviewModel)
         
         return cell
+    }
+}
+
+// MARK: - TargetMethod
+extension ReviewListViewController {
+    @objc private func writeReviewbuttonTapped() {
+        let vc = WriteReviewViewController()
+        vc.delegate = self
+        self.present(vc, animated: true)
+    }
+}
+
+// MARK: - WriteReviewViewControllerDelegate
+extension ReviewListViewController: WriteReviewViewControllerDelegate {
+    func sendReviewMessage(review: String) {
+        let reviewMessage = review.isEmpty ? "이 테마가 마음에 드시나요?" : review
+        writeReviewButtonView.writeReviewButton.setTitle(reviewMessage, for: .normal)
+        writeReviewButtonView.showSendReviewButton(isCanSend: true)
     }
 }
