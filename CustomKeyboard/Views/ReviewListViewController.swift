@@ -7,11 +7,15 @@ import UIKit
 
 class ReviewListViewController: UIViewController {
 
+    private let repo = Repository()
+    private var dataList = ModelData()
+    
     private var reviewTableView: UITableView = {
         let reviewTableView = UITableView()
+        reviewTableView.register(ReviewTableViewCell.self, forCellReuseIdentifier: "Cell")
+        reviewTableView.register(ReviewListHeaderView.self, forHeaderFooterViewReuseIdentifier: "headerCell")
         return reviewTableView
     }()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,11 +24,11 @@ class ReviewListViewController: UIViewController {
         
         reviewTableView.delegate = self
         reviewTableView.dataSource = self
-        reviewTableView.register(ReviewTableViewCell.self, forCellReuseIdentifier: "Cell")
-        reviewTableView.register(ReviewListHeaderView.self, forHeaderFooterViewReuseIdentifier: "headerCell")
+        
+        getData()
     }
     
-    func setLayout() {
+    private func setLayout() {
         view.backgroundColor = .white
         view.addSubview(reviewTableView)
         reviewTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -39,15 +43,28 @@ class ReviewListViewController: UIViewController {
         ])
         
     }
+    private func getData() {
+        repo.reviewData { result in
+            switch result {
+            case .success(let data):
+                self.dataList = data
+                self.reviewTableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
 
 extension ReviewListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return dataList.data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ReviewTableViewCell
+        let reviewData = dataList.data[indexPath.row]
+        cell.fetchDataFromTableView(data: reviewData)
         return cell
     }
     
