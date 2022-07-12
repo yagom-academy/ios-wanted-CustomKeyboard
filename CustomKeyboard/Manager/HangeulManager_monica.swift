@@ -36,8 +36,8 @@ class HangeulManager {
     static let shared = HangeulManager()
     private init() { }
 
-    private var buffer = [String]() // 아직 조합이 완성되지 않은 문자들만 담아놓기
-    private var bufferString = [String]() // 화면에 출력될 글자들만 담아놓기
+    private var separatedBuffer = [String]() // 아직 조합이 완성되지 않은 문자들만 담아놓기
+    private var combinedBuffer = [String]() // 화면에 출력될 글자들만 담아놓기
     private var status = HangeulStatus.start
 }
 
@@ -45,11 +45,9 @@ class HangeulManager {
 
 extension HangeulManager {
     func update(_ input: String) {
-        setStatus(input) // 조합상태 결정짓고
-        print("status: \(self.status)")
-        self.buffer.append(input)
-//        setBuffer(input) // buffer에는 아직 문자가 완성되지 않은 애들만 담아놓기
-//        setBufferString(input) // 조합상태에 따라서 출력할 문자열 완성하기
+        setStatus(input)
+        setSeparatedBuffer(input)
+//        setCombinedBuffer(input) // 조합상태에 따라서 출력할 문자열 완성하기
     }
 }
 
@@ -65,7 +63,7 @@ extension HangeulManager {
     private func setBasicStatus() {
         switch self.status {
         case .endCaseOne:
-            if buffer.isEmpty {
+            if separatedBuffer.isEmpty {
                 self.status = .start
             } else {
                 self.status = .choseong
@@ -79,7 +77,7 @@ extension HangeulManager {
     
     private func setNewStatus(_ input: String) {
         let characterKind:CharacterKind = HangeulCharacter.jungseong.contains(input) ? .vowel : .consonant
-        let lastChar = self.buffer.last ?? ""
+        let lastChar = self.separatedBuffer.last ?? ""
         
         switch self.status {
         case .start:
@@ -126,5 +124,55 @@ extension HangeulManager {
         default:
             break
         }
+    }
+}
+
+// MARK: - buffer에 문자 추가/삭제
+
+extension HangeulManager {
+    private func setSeparatedBuffer(_ input: String) {
+        let characterKind: CharacterKind = HangeulCharacter.jungseong.contains(input) ? .vowel : .consonant
+
+        switch self.status {
+        case .choseong, .jungseong, .jongseong:
+            self.separatedBuffer.append(input)
+        case .doubleJungseong:
+            let last = separatedBuffer.removeLast()
+            let newChar = Double.jungseong[last]?[input]
+            self.separatedBuffer.append(newChar ?? "")
+        case .doubleJongseong:
+            let last = self.separatedBuffer.removeLast()
+            let newChar = Double.jongseong[last]?[input]
+            self.separatedBuffer.append(newChar ?? "")
+        case .endCaseOne:
+            if characterKind == .vowel {
+                self.separatedBuffer = []
+            } else {
+                self.separatedBuffer = [input]
+            }
+        case .endCaseTwo:
+            let last = separatedBuffer.removeLast()
+            self.separatedBuffer = [last, input]
+        default:
+            break
+        }
+    }
+}
+
+// MARK: - 프로퍼티 리셋
+
+extension HangeulManager {
+    func reset() {
+        self.separatedBuffer = []
+        self.combinedBuffer = []
+        self.status = .start
+    }
+}
+
+// MARK: - SeparatedBuffer 원소 개수 Get(테스트용)
+
+extension HangeulManager {
+    func getSeparatedBufferCount() -> Int {
+        return self.separatedBuffer.count
     }
 }
