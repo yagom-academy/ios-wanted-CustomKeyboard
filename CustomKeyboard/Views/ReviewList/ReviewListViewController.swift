@@ -86,6 +86,8 @@ extension ReviewListViewController: UITableViewDelegate {
 
 extension ReviewListViewController: PresentButtonSelectable {
     func presentButtonStatus() {
-        print("페이지 이동")
+        let createReviewVC = CreateReviewViewController()
+        createReviewVC.modalPresentationStyle = .fullScreen
+        self.present(createReviewVC, animated: true)
     }
 }
