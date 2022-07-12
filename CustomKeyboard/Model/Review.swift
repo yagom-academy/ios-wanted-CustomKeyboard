@@ -21,3 +21,7 @@ struct User: Decodable {
     let userName: String
     let profileImage: String
 }
+
+struct Content: Encodable {
+    let content: String
+}

@@ -29,4 +29,27 @@ class NetworkManager {
             }
         }.resume()
     }
+    
+    func postReview(content: String) {
+        guard let url = URL(string: "https://api.plkey.app/tmp/theme/PLKEY0-L-81/review") else {
+            return
+        }
+        
+        let content = Content(content: content)
+        
+        guard let data = try? JSONEncoder().encode(content) else {
+            print("JSONEncoder Error")
+            return
+        }
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "POST"
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.uploadTask(with: urlRequest, from: data) { (data: Data?, response: URLResponse?, error: Error?) in
+            if let response = response as? HTTPURLResponse, response.statusCode == 200 {
+                print("200")
+            }
+        }.resume()
+    }
 }
