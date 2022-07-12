@@ -7,22 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B779BBCF287D4B5300BB8DF5 /* ReviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBC5287D4B5300BB8DF5 /* ReviewDTO.swift */; };
+		B779BBD0287D4B5300BB8DF5 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBC6287D4B5300BB8DF5 /* NetworkService.swift */; };
+		B779BBD1287D4B5300BB8DF5 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBC7287D4B5300BB8DF5 /* Request.swift */; };
+		B779BBD2287D4B5300BB8DF5 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBC8287D4B5300BB8DF5 /* NetworkError.swift */; };
+		B779BBD3287D4B5300BB8DF5 /* EndPointable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBCA287D4B5300BB8DF5 /* EndPointable.swift */; };
+		B779BBD4287D4B5300BB8DF5 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBCB287D4B5300BB8DF5 /* Requestable.swift */; };
+		B779BBD5287D4B5300BB8DF5 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBCC287D4B5300BB8DF5 /* EndPoint.swift */; };
+		B779BBD6287D4B5300BB8DF5 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBCE287D4B5300BB8DF5 /* Review.swift */; };
 		B7F1DCF0287C12EE0065D587 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F1DCEF287C12EE0065D587 /* ReviewTableViewCell.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
 		DE15E66028604278003DD2F5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65F28604278003DD2F5 /* HomeViewController.swift */; };
-		DE15E66328604278003DD2F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66128604278003DD2F5 /* Main.storyboard */; };
 		DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66428604279003DD2F5 /* Assets.xcassets */; };
 		DE15E66828604279003DD2F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B779BBC5287D4B5300BB8DF5 /* ReviewDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewDTO.swift; sourceTree = "<group>"; };
+		B779BBC6287D4B5300BB8DF5 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		B779BBC7287D4B5300BB8DF5 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		B779BBC8287D4B5300BB8DF5 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		B779BBCA287D4B5300BB8DF5 /* EndPointable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPointable.swift; sourceTree = "<group>"; };
+		B779BBCB287D4B5300BB8DF5 /* Requestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
+		B779BBCC287D4B5300BB8DF5 /* EndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		B779BBCE287D4B5300BB8DF5 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		B7F1DCEF287C12EE0065D587 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE15E65D28604278003DD2F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		DE15E65F28604278003DD2F5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		DE15E66228604278003DD2F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DE15E66428604279003DD2F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DE15E66728604279003DD2F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DE15E66928604279003DD2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -39,6 +53,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B779BBC4287D4B5300BB8DF5 /* Network  */ = {
+			isa = PBXGroup;
+			children = (
+				B779BBC5287D4B5300BB8DF5 /* ReviewDTO.swift */,
+				B779BBC6287D4B5300BB8DF5 /* NetworkService.swift */,
+				B779BBC7287D4B5300BB8DF5 /* Request.swift */,
+				B779BBC8287D4B5300BB8DF5 /* NetworkError.swift */,
+				B779BBC9287D4B5300BB8DF5 /* protocols */,
+				B779BBCC287D4B5300BB8DF5 /* EndPoint.swift */,
+			);
+			path = "Network ";
+			sourceTree = "<group>";
+		};
+		B779BBC9287D4B5300BB8DF5 /* protocols */ = {
+			isa = PBXGroup;
+			children = (
+				B779BBCA287D4B5300BB8DF5 /* EndPointable.swift */,
+				B779BBCB287D4B5300BB8DF5 /* Requestable.swift */,
+			);
+			path = protocols;
+			sourceTree = "<group>";
+		};
+		B779BBCD287D4B5300BB8DF5 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				B779BBCE287D4B5300BB8DF5 /* Review.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
 		B7F1DCEE287C12D40065D587 /* ReviewTableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -66,11 +110,12 @@
 		DE15E65A28604278003DD2F5 /* CustomKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				B779BBCD287D4B5300BB8DF5 /* Domain */,
+				B779BBC4287D4B5300BB8DF5 /* Network  */,
 				B7F1DCEE287C12D40065D587 /* ReviewTableView */,
 				DE15E65B28604278003DD2F5 /* AppDelegate.swift */,
 				DE15E65D28604278003DD2F5 /* SceneDelegate.swift */,
 				DE15E65F28604278003DD2F5 /* HomeViewController.swift */,
-				DE15E66128604278003DD2F5 /* Main.storyboard */,
 				DE15E66428604279003DD2F5 /* Assets.xcassets */,
 				DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */,
 				DE15E66928604279003DD2F5 /* Info.plist */,
@@ -138,7 +183,6 @@
 			files = (
 				DE15E66828604279003DD2F5 /* LaunchScreen.storyboard in Resources */,
 				DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */,
-				DE15E66328604278003DD2F5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,8 +194,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE15E66028604278003DD2F5 /* HomeViewController.swift in Sources */,
+				B779BBD2287D4B5300BB8DF5 /* NetworkError.swift in Sources */,
+				B779BBD3287D4B5300BB8DF5 /* EndPointable.swift in Sources */,
 				B7F1DCF0287C12EE0065D587 /* ReviewTableViewCell.swift in Sources */,
+				B779BBD5287D4B5300BB8DF5 /* EndPoint.swift in Sources */,
+				B779BBD6287D4B5300BB8DF5 /* Review.swift in Sources */,
+				B779BBCF287D4B5300BB8DF5 /* ReviewDTO.swift in Sources */,
+				B779BBD4287D4B5300BB8DF5 /* Requestable.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
+				B779BBD1287D4B5300BB8DF5 /* Request.swift in Sources */,
+				B779BBD0287D4B5300BB8DF5 /* NetworkService.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,14 +211,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		DE15E66128604278003DD2F5 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DE15E66228604278003DD2F5 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -303,7 +347,6 @@
 				INFOPLIST_FILE = CustomKeyboard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -331,7 +374,6 @@
 				INFOPLIST_FILE = CustomKeyboard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

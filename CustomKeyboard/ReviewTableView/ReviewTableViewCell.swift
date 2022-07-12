@@ -60,13 +60,11 @@ class ReviewTableViewCell: UITableViewCell {
         
         
     }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setUpCell()
-        
-    }
-    
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
     private func setUpCell() {
         userIdLable = UILabel()
         userIdLable.textColor = .black
