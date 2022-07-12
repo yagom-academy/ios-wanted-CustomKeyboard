@@ -8,7 +8,7 @@
 import XCTest
 @testable import CustomKeyboard
 
-class CustomKeyboardTests: XCTestCase {
+class setSeparatedBufferTests: XCTestCase {
 
     var hangeulManager: HangeulManager!
     

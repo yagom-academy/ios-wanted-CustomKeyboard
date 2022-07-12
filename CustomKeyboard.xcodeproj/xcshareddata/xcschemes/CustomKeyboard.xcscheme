@@ -32,11 +32,16 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9F50430A287E300700CDBD9C"
+               BlueprintIdentifier = "9F504317287E323300CDBD9C"
                BuildableName = "CustomKeyboardTests.xctest"
                BlueprintName = "CustomKeyboardTests"
                ReferencedContainer = "container:CustomKeyboard.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "CustomKeyboardTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
