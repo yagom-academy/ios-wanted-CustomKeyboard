@@ -7,23 +7,12 @@
 
 import Foundation
 
-enum CustomError: Error {
-    case makeURL
-    case loadError
-    case noData
-    var description: String {
-        switch self {
-        case .makeURL:
-            return "URL 에러"
-        case .loadError:
-            return "로드 에러"
-        case .noData:
-            return "데이터가 없습니다."
-        }
-    }
-}
-
 class NetworkManager {
+    struct SuccessPostData {
+        var responseCode: Int
+        var data: String
+    }
+    
     static let shared = NetworkManager()
     private let api = NetworkAPI()
     private let session: URLSession
@@ -34,7 +23,7 @@ class NetworkManager {
     
     func fetchReview(completion: @escaping (Result<ReviewTypes, CustomError>) -> ()) {
         guard let url = api.getGetReviewAPI().url else {
-            completion(.failure(CustomError.makeURL))
+            completion(.failure(CustomError.makeURLError))
             return
         }
         var request = URLRequest(url: url)
@@ -48,7 +37,6 @@ class NetworkManager {
                 return
             }
             guard let data = data else {
-                print(URLError.dataNotAllowed)
                 completion(.failure(CustomError.noData))
                 return
             }
@@ -56,46 +44,49 @@ class NetworkManager {
                 let hasData = try JSONDecoder().decode(ReviewTypes.self, from: data)
                 completion(.success(hasData))
             } catch {
-                print(error)
+                completion(.failure(CustomError.decodingError))
             }
         }.resume()
     }
     
-    func postReview(message: String) {
+    func postReview(message: String, completion: @escaping (Result<SuccessPostData, CustomError>) -> ()) {
         struct PostData: Codable {
             var content: String
         }
+        
         guard let url = api.getPostReviewAPI().url else {
-            return print(URLError.badURL)
+            completion(.failure(CustomError.makeURLError))
+            return
         }
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        
         guard let jsonData = try? JSONEncoder().encode(PostData(content: message)) else {
-            print("encoding Error")
+            completion(.failure(CustomError.encodingError))
             return
         }
         request.httpBody = jsonData
         
         session.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print(error.localizedDescription)
+            guard error == nil,
+                let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(CustomError.loadError))
                 return
             }
-            
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
-                print(URLError.badServerResponse)
+            guard (200...299).contains(httpResponse.statusCode) else {
+                completion(.failure(CustomError.responseError(code: httpResponse.statusCode)))
                 return
             }
             guard let data = data else {
-                print(URLError.dataNotAllowed)
+                completion(.failure(CustomError.noData))
                 return
             }
             do {
-                let hadData = try JSONDecoder().decode(ReviewTypes.self, from: data)
-                print(hadData)
+                let postedData = try JSONDecoder().decode(PostData.self, from: data)
+                completion(.success(SuccessPostData(responseCode: httpResponse.statusCode, data: postedData.content)))
             } catch {
-                print(error)
+                completion(.failure(CustomError.decodingError))
             }
         }.resume()
     }
