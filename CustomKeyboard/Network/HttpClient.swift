@@ -13,8 +13,8 @@ class HttpClient {
     init(baseUrl: String) {
         self.baseUrl = baseUrl
     }
-    // ?themeId=6&start=0&count=20
-    func getJson(params: [String: Any], completed: @escaping (Result<Data, Error>) -> Void) { // paging 질문
+    // TODO: - UrlSession 으로
+    func getJson(params: [String: Any], completed: @escaping (Result<Data, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             
             do {

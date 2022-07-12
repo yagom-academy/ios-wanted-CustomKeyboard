@@ -44,7 +44,7 @@ class ReviewListViewController: UIViewController {
         
     }
     private func getData() {
-        repo.reviewData { result in
+        repo.getReviewData { result in
             switch result {
             case .success(let data):
                 self.dataList = data
