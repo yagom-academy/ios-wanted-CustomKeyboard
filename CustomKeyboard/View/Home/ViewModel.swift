@@ -9,6 +9,7 @@ import Foundation
 
 protocol ViewModelDelegate: AnyObject {
     func viewModel(didEndFetchReviewList viewModel: ViewModel)
+    func clearText()
 }
 class ViewModel {
     var reviewList = [ReviewResult]()
@@ -32,6 +33,14 @@ class ViewModel {
                 }
             case .failure(let error):
                 print("ERROR \(error.localizedDescription)🎉")
+            }
+        }
+    }
+    
+    func postComment(_ comment: String) {
+        Network(path: "", parameters: [:]).post(comment) { isSuccess in
+            if isSuccess {
+                self.delegate?.clearText()
             }
         }
     }
