@@ -8,61 +8,71 @@
 import Foundation
 import UIKit
 
-class WriteReviewButtonView : UIView{
-    
-    private lazy var profileImageView : UIImageView = {
+class WriteReviewButtonView: UIView {
+    // MARK: - ViewProperties
+    private lazy var profileImageView: UIImageView = {
         let profileImageView = UIImageView()
-        profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView.image = UIImage(systemName: "person.circle.fill")
         return profileImageView
     }()
     
-    private lazy var writeReviewButton : UIButton = {
+    private lazy var writeReviewButton: UIButton = {
         let writeReviewButton = UIButton()
-        writeReviewButton.translatesAutoresizingMaskIntoConstraints = false
         writeReviewButton.backgroundColor = .systemGray5
         return writeReviewButton
     }()
     
-    private lazy var sendReviewButton : UIButton = {
+    private lazy var sendReviewButton: UIButton = {
         let sendReviewButton = UIButton()
-        sendReviewButton.translatesAutoresizingMaskIntoConstraints = false
         return sendReviewButton
     }()
     
-    
+    // MARK: - LifeCycle
     init() {
         super.init(frame: .zero)
-        setup()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews() 
-        writeReviewButton.layer.cornerRadius = writeReviewButton.bounds.height / 2
+        configureSubViews()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(){
-        addSubview(profileImageView)
-        addSubview(writeReviewButton)
-        addSubview(sendReviewButton)
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        writeReviewButton.layer.cornerRadius = writeReviewButton.bounds.height / 2
+    }
+}
+
+// MARK: - UI
+extension WriteReviewButtonView {
+    private func configureSubViews() {
+        [profileImageView, writeReviewButton, sendReviewButton].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview($0)
+        }
+    }
+    
+    private func setConstraints() {
+        setConstraintsOfProfileImageView()
+        setConstraintsOfWriteReviewButton()
+    }
+    
+    private func setConstraintsOfProfileImageView() {
         NSLayoutConstraint.activate([
-            
             profileImageView.heightAnchor.constraint(equalToConstant:  50),
             profileImageView.widthAnchor.constraint(equalToConstant:  50),
             profileImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            
-            //writeReviewButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
-            writeReviewButton.heightAnchor.constraint(equalToConstant: 50),
-            writeReviewButton.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 10),
-            writeReviewButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            writeReviewButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            //sendReviewButton.widthAnchor.constraint(equalToConstant: 30),
+            profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10)
         ])
     }
     
+    private func setConstraintsOfWriteReviewButton() {
+        NSLayoutConstraint.activate([
+            writeReviewButton.heightAnchor.constraint(equalToConstant: 50),
+            writeReviewButton.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 10),
+            writeReviewButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            writeReviewButton.topAnchor.constraint(equalTo: topAnchor, constant: 10)
+        ])
+    }
 }

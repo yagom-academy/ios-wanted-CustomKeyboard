@@ -9,27 +9,32 @@ import Foundation
 import UIKit
 
 class ReviewListViewModel {
-    private var reviews: [ReviewModel] = []
-    private var cusor = 0
-    
+    // MARK: - Properties
+    private let networkManager = NetworkManager()
+    private var reviews: [ReviewModel] = [] {
+        didSet {
+            onUpdate()
+        }
+    }
+    private var startPoint = 0
     var reviewsCount: Int {
         return reviews.count
     }
     
-    let networkManager = NetworkManager()
+    var onUpdate: () -> Void = { }
     
-    init(){
-    }
+    // MARK: - LifeCycle
+    init() { }
     
-    func fethAllReviews(completion: @escaping (Bool) -> Void) {
-        self.networkManager.fetchAllReviews(start: cusor) { [weak self] result in
+    // MARK: - Method
+    func fetchReviews() {
+        self.networkManager.fetchReviews(start: startPoint) { [weak self] result in
             switch result {
             case .success(let reviews):
-                self?.reviews = reviews
-                self?.cusor += 10
-                completion(true)
-            case .failure(_):
-                completion(false)
+                self?.reviews.append(contentsOf: reviews)
+                self?.startPoint += 10
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
@@ -60,9 +65,10 @@ struct ReviewViewModel {
     
     var createDate: String {
         let createDate = calculateDate(to: reviewModel.createdAt)
-        guard let dateInterval = Calendar.current.dateComponents(.init([.minute]),
-                                                                 from: createDate,
-                                                                 to: Date()).minute else {
+        guard let dateInterval = Calendar.current
+            .dateComponents(.init([.minute]),
+                            from: createDate,
+                            to: Date()).minute else {
             return ""
         }
         
@@ -71,7 +77,7 @@ struct ReviewViewModel {
         } else if dateInterval <= 1440 {
             return String(dateInterval / 60) + "시간"
         } else {
-            return reviewModel.createdAt.split(separator: "T").map { String($0) }.first!
+            return reviewModel.createdAt.components(separatedBy: "T").first ?? ""
         }
     }
     

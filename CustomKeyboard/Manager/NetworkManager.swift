@@ -15,7 +15,7 @@ enum NetworkError : Error {
 
 class NetworkManager{
     
-    func fetchAllReviews(start: Int, completion : @escaping (Result<[ReviewModel], NetworkError>) -> Void){
+    func fetchReviews(start: Int, completion : @escaping (Result<[ReviewModel], NetworkError>) -> Void){
         let urlStr = "https://api.plkey.app/theme/review?themeld=6&start=\(start)&count=10"
         guard let url = URL(string: urlStr) else {
             completion(.failure(.url))
@@ -35,7 +35,5 @@ class NetworkManager{
             }
             completion(.success(data.data))
         }.resume()
-        
     }
-    
 }
