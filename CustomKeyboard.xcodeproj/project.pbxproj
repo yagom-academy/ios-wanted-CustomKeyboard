@@ -11,6 +11,9 @@
 		965B428D287BF6E800E304E4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B428C287BF6E800E304E4 /* BaseViewController.swift */; };
 		965B428F287BF73700E304E4 /* ReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B428E287BF73700E304E4 /* ReviewListViewController.swift */; };
 		965B4293287BF81900E304E4 /* ReviewListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B4292287BF81900E304E4 /* ReviewListTableViewCell.swift */; };
+		965B4295287C3BBF00E304E4 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B4294287C3BBF00E304E4 /* KeyboardView.swift */; };
+		965B4297287C3BCA00E304E4 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B4296287C3BCA00E304E4 /* KeyboardViewController.swift */; };
+		965B429A287C3EC700E304E4 /* KeyboadCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B4299287C3EC700E304E4 /* KeyboadCollectionViewCell.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
 		DE15E66028604278003DD2F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65F28604278003DD2F5 /* ViewController.swift */; };
@@ -23,6 +26,9 @@
 		965B428C287BF6E800E304E4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		965B428E287BF73700E304E4 /* ReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewController.swift; sourceTree = "<group>"; };
 		965B4292287BF81900E304E4 /* ReviewListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListTableViewCell.swift; sourceTree = "<group>"; };
+		965B4294287C3BBF00E304E4 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		965B4296287C3BCA00E304E4 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		965B4299287C3EC700E304E4 /* KeyboadCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboadCollectionViewCell.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE15E65D28604278003DD2F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +89,7 @@
 		965B4281287BF5B000E304E4 /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				965B4298287C3EA500E304E4 /* Cell */,
 				965B4284287BF5DF00E304E4 /* View */,
 				965B4285287BF5E400E304E4 /* ViewModel */,
 			);
@@ -108,6 +115,8 @@
 		965B4284287BF5DF00E304E4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				965B4294287C3BBF00E304E4 /* KeyboardView.swift */,
+				965B4296287C3BCA00E304E4 /* KeyboardViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -154,6 +163,14 @@
 			isa = PBXGroup;
 			children = (
 				965B4292287BF81900E304E4 /* ReviewListTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		965B4298287C3EA500E304E4 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				965B4299287C3EC700E304E4 /* KeyboadCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -258,7 +275,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				965B429A287C3EC700E304E4 /* KeyboadCollectionViewCell.swift in Sources */,
 				965B4293287BF81900E304E4 /* ReviewListTableViewCell.swift in Sources */,
+				965B4295287C3BBF00E304E4 /* KeyboardView.swift in Sources */,
+				965B4297287C3BCA00E304E4 /* KeyboardViewController.swift in Sources */,
 				965B428F287BF73700E304E4 /* ReviewListViewController.swift in Sources */,
 				965B428D287BF6E800E304E4 /* BaseViewController.swift in Sources */,
 				965B4289287BF68F00E304E4 /* ReviewListView.swift in Sources */,
@@ -332,7 +352,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "/Users/ain/Desktop/Desktop/ios-wanted-CustomKeyboard/CustomKeyboard/Info.plist";
+				INFOPLIST_FILE = CustomKeyboard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -387,7 +407,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "/Users/ain/Desktop/Desktop/ios-wanted-CustomKeyboard/CustomKeyboard/Info.plist";
+				INFOPLIST_FILE = CustomKeyboard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -406,7 +426,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/ain/Desktop/Desktop/ios-wanted-CustomKeyboard/CustomKeyboard/Info.plist";
+				INFOPLIST_FILE = CustomKeyboard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -432,7 +452,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/ain/Desktop/Desktop/ios-wanted-CustomKeyboard/CustomKeyboard/Info.plist";
+				INFOPLIST_FILE = CustomKeyboard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

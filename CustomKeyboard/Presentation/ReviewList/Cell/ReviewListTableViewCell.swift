@@ -85,6 +85,7 @@ final class ReviewListTableViewCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
             verticalStackView.addArrangedSubview($0)
         }
+        backgroundColor = .white
     }
     
     func setupConstraints() {
