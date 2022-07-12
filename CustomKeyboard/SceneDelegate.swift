@@ -11,10 +11,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        let mainVC = ReviewListViewController()
+
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = mainVC
+        window = UIWindow(windowScene: windowScene) // SceneDelegate의 프로퍼티에 설정해줌
+        let mainViewController = ViewController() // 맨 처음 보여줄 ViewController
+
+        window?.rootViewController = mainViewController
         window?.makeKeyAndVisible()
     }
     
