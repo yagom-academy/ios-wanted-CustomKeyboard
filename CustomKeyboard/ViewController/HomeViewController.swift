@@ -32,7 +32,8 @@ extension HomeViewController {
     
     private func configureTableView() {
         tableView.dataSource = self
-        tableView.delegate = self
+//        tableView.allowsSelection = false
+//        tableView.separatorStyle = .none
     }
     
     private func bind() {
@@ -60,13 +61,5 @@ extension HomeViewController: UITableViewDataSource {
         let review = viewModel.review(at: indexPath.row)
         cell.configureCell(review)
         return cell
-    }
-}
-
-// MARK: - UITableViewDelegate
-
-extension HomeViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120.0
     }
 }

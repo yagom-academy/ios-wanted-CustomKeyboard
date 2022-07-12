@@ -18,20 +18,24 @@ class HomeTableViewCell: UITableViewCell {
 
     override func prepareForReuse() {
         userImageView.image = nil
+        nameLabel.text = nil
+        contentLabel.text = nil
+        timeLabel.text = nil
+    }
+    
+    override func layoutSubviews() {
+        userImageView.layer.cornerRadius = userImageView.frame.width / 2
+        userImageView.clipsToBounds = true
     }
 
     func configureCell(_ review: Review) {
         nameLabel.text = review.user.userName
         contentLabel.text = review.content
-        timeLabel.text = getTimeInterval(review.createdAt)
+        timeLabel.text = TimeManager.shared.getTimeInterval(review.createdAt)
         ImageManager.shared.download(review.user.profileImage) { data in
             DispatchQueue.main.async {
                 self.userImageView.image = UIImage(data: data)
             }
         }
     }
-    
-    
 }
-
-
