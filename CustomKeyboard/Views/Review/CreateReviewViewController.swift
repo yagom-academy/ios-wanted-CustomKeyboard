@@ -34,7 +34,9 @@ class CreateReviewViewController: UIViewController {
     }
     
     private func setKeyboardInputView() {
-         
+        guard let customKeyboardView = Bundle.main.loadNibNamed("CustomKeyboard", owner: nil)?.first as? CustomKeyboardView else { return }
+        reviewTextView.inputView = customKeyboardView
+        
     }
     
     private func dissmiss() {
