@@ -13,6 +13,8 @@
 		DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66428604279003DD2F5 /* Assets.xcassets */; };
 		DE15E66828604279003DD2F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */; };
 		DFC51027287D48CC003D26B0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC51026287D48CC003D26B0 /* BaseViewController.swift */; };
+		E11AAD6C287D4E11001B1F96 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11AAD6B287D4E11001B1F96 /* KeyboardViewController.swift */; };
+		E11AAD6E287D5101001B1F96 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11AAD6D287D5101001B1F96 /* KeyboardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		DE15E66728604279003DD2F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DE15E66928604279003DD2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DFC51026287D48CC003D26B0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		E11AAD6B287D4E11001B1F96 /* KeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		E11AAD6D287D5101001B1F96 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +80,9 @@
 		DFC51022287D46A6003D26B0 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				E11AAD6B287D4E11001B1F96 /* KeyboardViewController.swift */,
 				DE15E65F28604278003DD2F5 /* ViewController.swift */,
+				E11AAD6D287D5101001B1F96 /* KeyboardView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -178,7 +184,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE15E66028604278003DD2F5 /* ViewController.swift in Sources */,
+				E11AAD6C287D4E11001B1F96 /* KeyboardViewController.swift in Sources */,
 				DFC51027287D48CC003D26B0 /* BaseViewController.swift in Sources */,
+				E11AAD6E287D5101001B1F96 /* KeyboardView.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 			);
