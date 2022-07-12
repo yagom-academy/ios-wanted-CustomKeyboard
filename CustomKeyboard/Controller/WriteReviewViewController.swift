@@ -21,7 +21,8 @@ class WriteReviewViewController: UIViewController {
         let textView = UITextView()
         textView.layer.borderColor = UIColor.lightGray.cgColor
         textView.layer.borderWidth = 1
-        
+        guard let loadNib = Bundle.main.loadNibNamed("CustomKeyboardView", owner: nil)?.first as? CustomKeyboardView else { return textView}
+        textView.inputView = loadNib
         textView.becomeFirstResponder()
         
         return textView
