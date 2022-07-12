@@ -58,6 +58,6 @@ class User: Codable {
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: UserCodingKeys.self)
         userName = try values.decode(String.self, forKey: .userName)
-        profileImage = try values.decode(String.self, forKey: .userName)
+        profileImage = try values.decode(String.self, forKey: .profileImage)
     }
 }
