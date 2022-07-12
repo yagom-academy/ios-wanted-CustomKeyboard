@@ -18,6 +18,20 @@ class ReviewListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         reviewListView.tableView.dataSource = self
+        reviewListView.reviewInputView.delegate = self
+    }
+    
+}
+
+extension ReviewListViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "이 테마가 마음에 드시나요?" {
+            textView.text = nil
+            textView.textColor = .black
+        }
+        let keyboardViewController = KeyboardViewController()
+        present(keyboardViewController, animated: true)
     }
 }
 
