@@ -33,10 +33,15 @@ final class ReviewListViewController : UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        reviewListViewModel.onUpdate = { [weak self] in
+        reviewListViewModel.tableViewUpdate = { [weak self] in
             DispatchQueue.main.async {
                 self?.reviewListTableView.reloadSections(IndexSet(0...0), with: .automatic)
             }
+        }
+        
+        reviewListViewModel.sendButtonStateUpdate = { [weak self] in
+            self?.writeReviewButtonView.writeReviewButton.setTitle(self?.reviewListViewModel.userWriteReview, for: .normal)
+            self?.writeReviewButtonView.showSendReviewButton(isCanSend: true)
         }
         configureSubViews()
         setConstraints()
@@ -50,7 +55,8 @@ final class ReviewListViewController : UIViewController {
     }
     
     private func configureTarget() {
-        writeReviewButtonView.writeReviewButton.addTarget(self, action: #selector(writeReviewbuttonTapped), for: .touchUpInside)
+        writeReviewButtonView.writeReviewButton.addTarget(self, action: #selector(tapWriteReviewbutton), for: .touchUpInside)
+        writeReviewButtonView.sendReviewButton.addTarget(self, action: #selector(tapSendReviewButton), for: .touchUpInside)
     }
 }
 
@@ -106,18 +112,20 @@ extension ReviewListViewController: UITableViewDataSource {
 
 // MARK: - TargetMethod
 extension ReviewListViewController {
-    @objc private func writeReviewbuttonTapped() {
+    @objc private func tapWriteReviewbutton() {
         let vc = WriteReviewViewController()
         vc.delegate = self
         self.present(vc, animated: true)
+    }
+    
+    @objc func tapSendReviewButton(){
+        reviewListViewModel.sendReview()
     }
 }
 
 // MARK: - WriteReviewViewControllerDelegate
 extension ReviewListViewController: WriteReviewViewControllerDelegate {
     func sendReviewMessage(review: String) {
-        let reviewMessage = review.isEmpty ? "이 테마가 마음에 드시나요?" : review
-        writeReviewButtonView.writeReviewButton.setTitle(reviewMessage, for: .normal)
-        writeReviewButtonView.showSendReviewButton(isCanSend: true)
+        reviewListViewModel.userWriteReview = review
     }
 }

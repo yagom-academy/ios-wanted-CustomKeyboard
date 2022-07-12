@@ -56,6 +56,7 @@ class NetworkManager{
             guard let response = response as? HTTPURLResponse, (200..<300) ~= response.statusCode else{
                 return
             }
+            print(response.statusCode)
             completion(true)
         }.resume()
     }

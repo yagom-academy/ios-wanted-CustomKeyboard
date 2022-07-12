@@ -5,7 +5,6 @@
 //  Created by J_Min on 2022/07/11.
 //
 
-import Foundation
 import UIKit
 
 class ReviewListViewModel {
@@ -13,15 +12,21 @@ class ReviewListViewModel {
     private let networkManager = NetworkManager()
     private var reviews: [ReviewModel] = [] {
         didSet {
-            onUpdate()
+            tableViewUpdate()
         }
     }
     private var startPoint = 0
     var reviewsCount: Int {
         return reviews.count
     }
+    var userWriteReview = "" {
+        didSet {
+            sendButtonStateUpdate()
+        }
+    }
     
-    var onUpdate: () -> Void = { }
+    var tableViewUpdate: () -> Void = { }
+    var sendButtonStateUpdate: () -> Void = { }
     
     // MARK: - LifeCycle
     init() { }
@@ -37,6 +42,23 @@ class ReviewListViewModel {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func sendReview() {
+        let content = userWriteReview
+        networkManager.uploadPost(with: PostReviewModel(content: content)) { [weak self] success in
+            guard let self = self else { return }
+            if success{
+                self.reviews.insert(self.createReviewModel(), at: 0)
+            }
+        }
+    }
+    
+    private func createReviewModel() -> ReviewModel {
+        let user = User(profileImage: "https://playkeyboard.s3.ap-northeast-2.amazonaws.com/user/610b92d53840a549cce54456/profile.png", userName: "user")
+        let reviewModel = ReviewModel(user: user, content: self.userWriteReview, createdAt: "2022-07-12")
+        
+        return reviewModel
     }
     
     func reviewAtIndex(index: Int) -> ReviewViewModel {
@@ -85,7 +107,7 @@ struct ReviewViewModel {
         var sliceDateStr = dateStr.components(separatedBy: ["T", "."])
         sliceDateStr.removeLast()
         let joinedDateStr = sliceDateStr.joined(separator: "/")
-
+        
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy-MM-dd/HH:mm:ss"
         dateformatter.timeZone = TimeZone(identifier: "kr")

@@ -33,8 +33,6 @@ class WriteReviewButtonView: UIView {
         sendReviewButton.setTitle("작성", for: .normal)
         sendReviewButton.setTitleColor(UIColor.black, for: .normal)
         
-        sendReviewButton.addTarget(self, action: #selector(tapSendReviewButton), for: .touchUpInside)
-        
         return sendReviewButton
     }()
     
@@ -57,24 +55,10 @@ class WriteReviewButtonView: UIView {
     
     // MARK: - Method
     func showSendReviewButton(isCanSend: Bool) {
-        print("asdf")
         sendReviewButton.isHidden = isCanSend ? false : true
         writeReviewButtonTrailingConstraint.constant = isCanSend ? -60 : -10
     }
-    
-    @objc func tapSendReviewButton(){
-        let networkManager = NetworkManager()
-        guard let content = writeReviewButton.currentTitle else {return}
-        networkManager.uploadPost(with: PostReviewModel(content: content)) { success in
-            if success{
-                DispatchQueue.main.async {
-                    self.writeReviewButton.setTitle("", for: .normal)
-                }
-            }
-        }
-    }
 }
-
 
 // MARK: - UI
 extension WriteReviewButtonView {
