@@ -14,159 +14,292 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="218"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="mhC-Mt-enT">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mhC-Mt-enT">
                     <rect key="frame" x="3" y="0.0" width="408" height="215"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="efI-cq-VXF">
-                            <rect key="frame" x="0.0" y="0.0" width="408" height="54"/>
+                            <rect key="frame" x="0.0" y="0.0" width="408" height="46.5"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAC-Yo-ez0">
-                                    <rect key="frame" x="0.0" y="0.0" width="38" height="54"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="38" height="46.5"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅂ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQU-cz-sTq">
-                                    <rect key="frame" x="41" y="0.0" width="38" height="54"/>
+                                    <rect key="frame" x="41" y="0.0" width="38" height="46.5"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅈ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abv-bZ-oqx">
-                                    <rect key="frame" x="82" y="0.0" width="38.5" height="54"/>
+                                    <rect key="frame" x="82" y="0.0" width="38.5" height="46.5"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㄷ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5G-9C-yRC">
-                                    <rect key="frame" x="123.5" y="0.0" width="38" height="54"/>
+                                    <rect key="frame" x="123.5" y="0.0" width="38" height="46.5"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㄱ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gok-Jy-lM4">
-                                    <rect key="frame" x="164.5" y="0.0" width="38" height="54"/>
+                                    <rect key="frame" x="164.5" y="0.0" width="38" height="46.5"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅅ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="55U-4J-ecZ">
-                                    <rect key="frame" x="205.5" y="0.0" width="38" height="54"/>
+                                    <rect key="frame" x="205.5" y="0.0" width="38" height="46.5"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅛ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEI-8d-lri">
-                                    <rect key="frame" x="246.5" y="0.0" width="38" height="54"/>
+                                    <rect key="frame" x="246.5" y="0.0" width="38" height="46.5"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅕ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yrx-XS-rQC">
-                                    <rect key="frame" x="287.5" y="0.0" width="38.5" height="54"/>
+                                    <rect key="frame" x="287.5" y="0.0" width="38.5" height="46.5"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅑ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cyg-HZ-ZXo">
-                                    <rect key="frame" x="329" y="0.0" width="38" height="54"/>
+                                    <rect key="frame" x="329" y="0.0" width="38" height="46.5"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅐ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Dp-cb-Mz3">
-                                    <rect key="frame" x="370" y="0.0" width="38" height="54"/>
+                                    <rect key="frame" x="370" y="0.0" width="38" height="46.5"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅔ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="xvu-0l-KRo">
-                            <rect key="frame" x="0.0" y="54" width="408" height="53.5"/>
+                            <rect key="frame" x="0.0" y="56.5" width="408" height="46"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xeV-qz-hiV">
-                                    <rect key="frame" x="0.0" y="0.0" width="42.5" height="53.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="42.5" height="46"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅁ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ldw-dj-7lf">
-                                    <rect key="frame" x="45.5" y="0.0" width="43" height="53.5"/>
+                                    <rect key="frame" x="45.5" y="0.0" width="43" height="46"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㄴ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aAN-d8-3eo">
-                                    <rect key="frame" x="91.5" y="0.0" width="42.5" height="53.5"/>
+                                    <rect key="frame" x="91.5" y="0.0" width="42.5" height="46"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅇ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Gu-Lv-jbG">
-                                    <rect key="frame" x="137" y="0.0" width="42.5" height="53.5"/>
+                                    <rect key="frame" x="137" y="0.0" width="42.5" height="46"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㄹ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e5H-h8-UpC">
-                                    <rect key="frame" x="182.5" y="0.0" width="43" height="53.5"/>
+                                    <rect key="frame" x="182.5" y="0.0" width="43" height="46"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅎ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mv5-A2-9IC">
-                                    <rect key="frame" x="228.5" y="0.0" width="42.5" height="53.5"/>
+                                    <rect key="frame" x="228.5" y="0.0" width="42.5" height="46"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅗ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4y-DL-hjj">
-                                    <rect key="frame" x="274" y="0.0" width="42.5" height="53.5"/>
+                                    <rect key="frame" x="274" y="0.0" width="42.5" height="46"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅓ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S6V-8h-2HW">
-                                    <rect key="frame" x="319.5" y="0.0" width="43" height="53.5"/>
+                                    <rect key="frame" x="319.5" y="0.0" width="43" height="46"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅏ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcA-95-HiD">
-                                    <rect key="frame" x="365.5" y="0.0" width="42.5" height="53.5"/>
+                                    <rect key="frame" x="365.5" y="0.0" width="42.5" height="46"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅣ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="sc6-Mb-25s">
-                            <rect key="frame" x="0.0" y="107.5" width="408" height="54"/>
+                            <rect key="frame" x="0.0" y="112.5" width="408" height="46.5"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDP-Ck-jGe">
-                                    <rect key="frame" x="0.0" y="0.0" width="41" height="54"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="41" height="46.5"/>
+                                    <color key="backgroundColor" red="0.32463479039999998" green="0.32501488919999999" blue="0.33796396849999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="⇧">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="zOK-Cf-OAe">
-                                    <rect key="frame" x="46" y="0.0" width="312" height="54"/>
+                                    <rect key="frame" x="46" y="0.0" width="312" height="46.5"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9oT-CS-0oa">
-                                            <rect key="frame" x="0.0" y="0.0" width="42" height="54"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="42" height="46.5"/>
+                                            <color key="backgroundColor" systemColor="systemGrayColor"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" title="ㅋ">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AeN-ch-iMK">
-                                            <rect key="frame" x="45" y="0.0" width="42" height="54"/>
+                                            <rect key="frame" x="45" y="0.0" width="42" height="46.5"/>
+                                            <color key="backgroundColor" systemColor="systemGrayColor"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" title="ㅌ">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptn-GC-DUL">
-                                            <rect key="frame" x="90" y="0.0" width="42" height="54"/>
+                                            <rect key="frame" x="90" y="0.0" width="42" height="46.5"/>
+                                            <color key="backgroundColor" systemColor="systemGrayColor"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" title="ㅊ">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9GZ-hp-hVn">
-                                            <rect key="frame" x="135" y="0.0" width="42" height="54"/>
+                                            <rect key="frame" x="135" y="0.0" width="42" height="46.5"/>
+                                            <color key="backgroundColor" systemColor="systemGrayColor"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" title="ㅍ">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aw7-9V-JSU">
-                                            <rect key="frame" x="180" y="0.0" width="42" height="54"/>
+                                            <rect key="frame" x="180" y="0.0" width="42" height="46.5"/>
+                                            <color key="backgroundColor" systemColor="systemGrayColor"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" title="ㅠ">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgq-ge-U0Z">
-                                            <rect key="frame" x="225" y="0.0" width="42" height="54"/>
+                                            <rect key="frame" x="225" y="0.0" width="42" height="46.5"/>
+                                            <color key="backgroundColor" systemColor="systemGrayColor"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" title="ㅜ">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WAn-Ag-iFg">
-                                            <rect key="frame" x="270" y="0.0" width="42" height="54"/>
+                                            <rect key="frame" x="270" y="0.0" width="42" height="46.5"/>
+                                            <color key="backgroundColor" systemColor="systemGrayColor"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" title="ㅡ">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
                                         </button>
                                     </subviews>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="liA-gH-urk">
-                                    <rect key="frame" x="363" y="0.0" width="45" height="54"/>
+                                    <rect key="frame" x="363" y="0.0" width="45" height="46.5"/>
+                                    <color key="backgroundColor" red="0.32430873247599046" green="0.32363062071817383" blue="0.33641616923292883" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="⌫">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1ea-2o-QzQ">
-                            <rect key="frame" x="0.0" y="161.5" width="408" height="53.5"/>
+                            <rect key="frame" x="0.0" y="169" width="408" height="46"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CGe-PY-tT3">
-                                    <rect key="frame" x="0.0" y="0.0" width="111.5" height="53.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="92" height="46"/>
+                                    <color key="backgroundColor" red="0.29462605710000001" green="0.29488286380000001" blue="0.30368864540000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="123">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DC1-Cd-xnE">
-                                    <rect key="frame" x="121.5" y="0.0" width="111" height="53.5"/>
+                                    <rect key="frame" x="102" y="0.0" width="204" height="46"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="스페이스">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TTH-vH-Aev">
-                                    <rect key="frame" x="242.5" y="0.0" width="165.5" height="53.5"/>
+                                    <rect key="frame" x="316" y="0.0" width="92" height="46"/>
+                                    <color key="backgroundColor" red="0.25958275790000002" green="0.25998112559999997" blue="0.27346810700000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="⏎">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                             </subviews>
+                            <constraints>
+                                <constraint firstItem="DC1-Cd-xnE" firstAttribute="centerX" secondItem="1ea-2o-QzQ" secondAttribute="centerX" id="869-Tb-r9F"/>
+                            </constraints>
                         </stackView>
                     </subviews>
+                    <color key="backgroundColor" red="0.21861525018190597" green="0.21861525018190597" blue="0.21861525018190597" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="DC1-Cd-xnE" firstAttribute="width" secondItem="mhC-Mt-enT" secondAttribute="width" multiplier="0.5" id="DJ1-3K-vKH"/>
+                        <constraint firstItem="1ea-2o-QzQ" firstAttribute="width" secondItem="mhC-Mt-enT" secondAttribute="width" id="mAh-xi-K09"/>
+                    </constraints>
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -217,6 +350,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
