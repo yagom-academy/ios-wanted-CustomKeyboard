@@ -58,6 +58,8 @@ class KeyboardView: UIView {
         button.layer.cornerRadius = 5
         button.setImage(UIImage.init(systemName: "circle"), for: .normal)
         
+        button.addTarget(nil, action: #selector(shiftButtonTouched(_:)), for: .touchUpInside)
+        
         button.heightAnchor.constraint(equalToConstant: self.bounds.height * 0.3 / 4 * 0.8 ) .isActive  = true
         button.widthAnchor.constraint(equalTo: button.heightAnchor).isActive = true
         return button
@@ -114,6 +116,8 @@ class KeyboardView: UIView {
         return stackView
     }()
     
+    private var toBeConvertedButtons = [UIButton]()
+    
     // MARK: - LifeCycles
     
     override init(frame: CGRect) {
@@ -128,6 +132,28 @@ class KeyboardView: UIView {
         setupConstraints()
     }
     
+    // MARK: - objc Methods
+    
+    @objc func keyboardButtonTouched(_ sender: UIButton) {
+        var isShiftedState = sender.state
+        if sender.state.rawValue == 5 {
+            isShiftedState = UIControl.State.selected
+        }
+        
+        guard let contents = sender.title(for: isShiftedState) else {
+            return
+        }
+        
+        print(contents)
+    }
+    
+    @objc func shiftButtonTouched(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        toBeConvertedButtons.forEach {
+            $0.isSelected = sender.isSelected
+        }
+    }
+    
 }
 
 extension KeyboardView {
@@ -136,7 +162,27 @@ extension KeyboardView {
     
     private func insertKeyboardKeys() {
         for char in "ㅂㅈㄷㄱㅅㅛㅕㅑㅐㅔ" {
-            let key = makeKeyboardButtons(contents: "\(char)")
+            let key : UIButton!
+            switch char {
+            case "ㅂ":
+                key = makeKeyboardButtons(contents: "\(char)",converted: "ㅃ")
+            case "ㅈ":
+                key = makeKeyboardButtons(contents: "\(char)",converted: "ㅉ")
+            case "ㄷ":
+                key = makeKeyboardButtons(contents: "\(char)",converted: "ㄸ")
+            case "ㄱ":
+                key = makeKeyboardButtons(contents: "\(char)",converted: "ㄲ")
+            case "ㅅ":
+                key = makeKeyboardButtons(contents: "\(char)",converted: "ㅆ")
+            case "ㅐ":
+                key = makeKeyboardButtons(contents: "\(char)",converted: "ㅒ")
+            case "ㅔ":
+                key = makeKeyboardButtons(contents: "\(char)",converted: "ㅖ")
+            default:
+                key = makeKeyboardButtons(contents: "\(char)")
+                break
+            }
+            
             keyboardFirstLineStackView.addArrangedSubview(key)
         }
         
@@ -156,16 +202,15 @@ extension KeyboardView {
         
     }
     
-    @objc func keyboardButtonTouched(_ sender: UIButton) {
-        guard let contents = sender.title(for: .normal) else {
-            return
-        }
-        print(contents)
-    }
-    
-    private func makeKeyboardButtons(contents: String) -> UIButton {
+    private func makeKeyboardButtons(contents: String, converted: String? = nil) -> UIButton {
         let button = UIButton()
         button.setTitle(contents, for: .normal)
+        
+        if let converted = converted {
+            button.setTitle(converted, for: .selected)
+            toBeConvertedButtons.append(button)
+        }
+        
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(nil, action: #selector(keyboardButtonTouched(_:)), for: .touchUpInside)
         button.backgroundColor = .systemGray2
