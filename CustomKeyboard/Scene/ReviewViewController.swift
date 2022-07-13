@@ -81,6 +81,10 @@ extension ReviewViewController: UITableViewDataSource, UITableViewDelegate {
         
         return header
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 84
+    }
 }
 
 // MARK: - TextFieldDelegate
