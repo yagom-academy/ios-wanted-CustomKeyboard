@@ -115,7 +115,7 @@ extension ReviewListView {
             reviewWritingView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             reviewWritingView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             reviewWritingView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
-            reviewWritingView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.3)
+            reviewWritingView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * Style.reviewWritingViewHeightRatio)
         ])
     }
 
@@ -132,7 +132,7 @@ extension ReviewListView {
         NSLayoutConstraint.activate([
             reviewWritingLabel.leadingAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.trailingAnchor, constant: Style.spacing),
             reviewWritingLabel.centerYAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.centerYAnchor),
-            reviewWritingLabel.heightAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8)
+            reviewWritingLabel.heightAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.widthAnchor, multiplier: Style.reviewWritingLabelHeightRatio)
         ])
     }
 
@@ -142,7 +142,7 @@ extension ReviewListView {
             uploadButton.trailingAnchor.constraint(equalTo: reviewWritingView.safeAreaLayoutGuide.trailingAnchor, constant: -Style.spacing),
             uploadButton.centerYAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.centerYAnchor),
             uploadButton.widthAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.widthAnchor),
-            uploadButton.heightAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.8)
+            uploadButton.heightAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.heightAnchor, multiplier: Style.uploadButtonHeightRatio)
         ])
     }
 
@@ -174,9 +174,12 @@ extension ReviewListView {
         static let reviewLineLimit: Int = 1
         static let spacing: CGFloat = 10
         static let padding: CGFloat = 15
-        static let widthRatio: CGFloat = 0.15
         static let half: CGFloat = 0.5
         static let cornerRadius: CGFloat = 20
+        static let reviewWritingViewHeightRatio: CGFloat = 0.3
+        static let profileImageWidthRatio: CGFloat = 0.15
+        static let reviewWritingLabelHeightRatio: CGFloat = 0.8
+        static let uploadButtonHeightRatio: CGFloat = 0.8
 
     }
 
