@@ -9,7 +9,7 @@ import UIKit
 
 class BasicKeyLine: UIStackView {
     var buttons: [UIButton]?
-    private var textField: UITextField?
+    var delegate: BasicKeyLineDelegate?
     
     init(keys:[String]) {
         super.init(frame: CGRect.zero)
@@ -69,9 +69,6 @@ extension BasicKeyLine {
     }
     
     @objc func tappedButton(_ sender: UIButton) {
-        print(sender.tag)
-        print(String(UnicodeScalar(sender.tag)!))
-//        guard let textField = textField else { return }
-//        textField.text = (textField.text ?? "") + key
+        delegate?.tappedKey(unicode: sender.tag)
     }
 }

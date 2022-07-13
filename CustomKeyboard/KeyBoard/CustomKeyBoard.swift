@@ -40,7 +40,6 @@ class CustomKeyBoard: UIView {
         super.init(frame: CGRect.zero)
         attribute()
         layout()
-        connetTextView()
     }
     
     required init?(coder: NSCoder) {
@@ -48,16 +47,49 @@ class CustomKeyBoard: UIView {
     }
 }
 
-//MARK: - UITextView와 키보드를 연결하는 메서드
+//MARK: - Basic(기본)키 이벤트 메서드
+extension CustomKeyBoard: BasicKeyLineDelegate {
+    private func connectBasicKeyDelegate() {
+        [firstLineDynamicBasicKeys, secondLineBasicKeys, thirdLineBasicKeys].forEach {
+            $0.delegate = self
+        }
+    }
+    
+    func tappedKey(unicode: Int) {
+        let word = String(UnicodeScalar(unicode)!)
+        guard let beforeWord = delegate?.connectTextView().text else { return }
+        delegate?.connectTextView().text = beforeWord + word
+    }
+}
+
+//MARK: - Shift 버튼 기능
 extension CustomKeyBoard {
-    private func connetTextView() {
-        self.textView = delegate?.connectTextView()
+    @objc private func tappedShiftKey() {
+        firstLineDynamicBasicKeys.tappedShiftKey()
+    }
+}
+
+//MARK: - Space 버튼 기능
+extension CustomKeyBoard {
+    @objc private func tappedSpaceButton(_ sender: UIButton) {
+        let space = String(UnicodeScalar(sender.tag)!)
+        guard let beforeWord = delegate?.connectTextView().text else { return }
+        delegate?.connectTextView().text = beforeWord + space
+    }
+}
+
+//MARK: - Return 버튼 기능
+extension CustomKeyBoard {
+    @objc private func tappedReturnButton() {
+        delegate?.tappedReturnButton()
     }
 }
 
 //MARK: - attribute
 extension CustomKeyBoard {
     private func attribute() {
+        connectBasicKeyDelegate()
+        
         self.backgroundColor = .systemGray3
         
         mainContainer.axis = .vertical
@@ -94,28 +126,6 @@ extension CustomKeyBoard {
         [shiftButton, backButton, spaceButton, returnButton].forEach {
             $0.titleLabel?.font = .systemFont(ofSize: Math.fontSize)
         }
-    }
-}
-
-//MARK: - Shift 버튼 기능
-extension CustomKeyBoard {
-    @objc private func tappedShiftKey() {
-        firstLineDynamicBasicKeys.tappedShiftKey()
-    }
-}
-
-//MARK: - Space 버튼 기능
-extension CustomKeyBoard {
-    @objc private func tappedSpaceButton(_ sender: UIButton) {
-        let space = String(UnicodeScalar(sender.tag)!)
-        self.textView?.text = (self.textView?.text) ?? "" + space
-    }
-}
-
-//MARK: - Return 버튼 기능
-extension CustomKeyBoard {
-    @objc private func tappedReturnButton() {
-        delegate?.tappedReturnButton()
     }
 }
 
