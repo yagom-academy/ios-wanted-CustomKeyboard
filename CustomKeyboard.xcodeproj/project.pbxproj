@@ -16,6 +16,10 @@
 		FE43998A287D766D00BFF841 /* CustomKeyBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE439989287D766D00BFF841 /* CustomKeyBoard.swift */; };
 		FE43998D287D908C00BFF841 /* BasicKeyOneLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE43998C287D908C00BFF841 /* BasicKeyOneLine.swift */; };
 		FEF67F8E287D2A29008E9A97 /* NetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF67F8D287D2A29008E9A97 /* NetworkAPI.swift */; };
+		FF66E251287ECCD8008DF303 /* ReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E250287ECCD8008DF303 /* ReviewListViewController.swift */; };
+		FF66E254287ECEAD008DF303 /* ReviewListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E253287ECEAD008DF303 /* ReviewListCell.swift */; };
+		FF66E257287ED6B5008DF303 /* UITextField+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E256287ED6B5008DF303 /* UITextField+Custom.swift */; };
+		FF66E259287ED6EC008DF303 /* UIImageView+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E258287ED6EC008DF303 /* UIImageView+Custom.swift */; };
 		FFE4229A287D1F2A00EA04AF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE42299287D1F2A00EA04AF /* NetworkManager.swift */; };
 		FFE4229C287D215200EA04AF /* ReviewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE4229B287D215200EA04AF /* ReviewType.swift */; };
 /* End PBXBuildFile section */
@@ -32,6 +36,10 @@
 		FE439989287D766D00BFF841 /* CustomKeyBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyBoard.swift; sourceTree = "<group>"; };
 		FE43998C287D908C00BFF841 /* BasicKeyOneLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicKeyOneLine.swift; sourceTree = "<group>"; };
 		FEF67F8D287D2A29008E9A97 /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
+		FF66E250287ECCD8008DF303 /* ReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewController.swift; sourceTree = "<group>"; };
+		FF66E253287ECEAD008DF303 /* ReviewListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListCell.swift; sourceTree = "<group>"; };
+		FF66E256287ED6B5008DF303 /* UITextField+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Custom.swift"; sourceTree = "<group>"; };
+		FF66E258287ED6EC008DF303 /* UIImageView+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Custom.swift"; sourceTree = "<group>"; };
 		FFE42299287D1F2A00EA04AF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		FFE4229B287D215200EA04AF /* ReviewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,6 +74,7 @@
 		DE15E65A28604278003DD2F5 /* CustomKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				FF66E255287ED658008DF303 /* Extension */,
 				FE439988287D765100BFF841 /* KeyBoard */,
 				FFE422A0287D42A700EA04AF /* Entities */,
 				FFE4229F287D427200EA04AF /* Presentation */,
@@ -103,6 +112,24 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		FF66E252287ECE78008DF303 /* ReviewList */ = {
+			isa = PBXGroup;
+			children = (
+				FF66E250287ECCD8008DF303 /* ReviewListViewController.swift */,
+				FF66E253287ECEAD008DF303 /* ReviewListCell.swift */,
+			);
+			path = ReviewList;
+			sourceTree = "<group>";
+		};
+		FF66E255287ED658008DF303 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				FF66E256287ED6B5008DF303 /* UITextField+Custom.swift */,
+				FF66E258287ED6EC008DF303 /* UIImageView+Custom.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		FFE4229D287D422A00EA04AF /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +151,7 @@
 		FFE4229F287D427200EA04AF /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				FF66E252287ECE78008DF303 /* ReviewList */,
 				DE15E65F28604278003DD2F5 /* ViewController.swift */,
 			);
 			path = Presentation;
@@ -208,13 +236,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF66E257287ED6B5008DF303 /* UITextField+Custom.swift in Sources */,
 				FE439987287D6B1D00BFF841 /* CustomError.swift in Sources */,
 				FFE4229A287D1F2A00EA04AF /* NetworkManager.swift in Sources */,
 				FE43998D287D908C00BFF841 /* BasicKeyOneLine.swift in Sources */,
 				DE15E66028604278003DD2F5 /* ViewController.swift in Sources */,
 				FE43998A287D766D00BFF841 /* CustomKeyBoard.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
+				FF66E251287ECCD8008DF303 /* ReviewListViewController.swift in Sources */,
+				FF66E259287ED6EC008DF303 /* UIImageView+Custom.swift in Sources */,
 				FFE4229C287D215200EA04AF /* ReviewType.swift in Sources */,
+				FF66E254287ECEAD008DF303 /* ReviewListCell.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 				FEF67F8E287D2A29008E9A97 /* NetworkAPI.swift in Sources */,
 			);
