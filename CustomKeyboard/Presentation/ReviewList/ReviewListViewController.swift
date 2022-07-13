@@ -141,7 +141,7 @@ extension ReviewListViewController {
                                                heightDimension: .fractionalHeight(0.3))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
                                                      subitem: item, count: 1)
-       
+        
         //섹션
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
@@ -172,6 +172,12 @@ extension ReviewListViewController: UICollectionViewDataSource {
         guard let url = URL(string: self.reviewDatas[indexPath.row].user.profileImage) else {
             return ReviewListCell()
         }
+        
+        cell.backgroundColor = .systemBackground
+        cell.profileImage.load(url: url)
+        cell.userNameLabel.text = reviewDatas[indexPath.row].user.userName
+        cell.contentsLabel.text = reviewDatas[indexPath.row].content
+        cell.timeLabel.text = reviewDatas[indexPath.row].updatedAt
         
         return cell
     }
