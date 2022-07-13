@@ -12,6 +12,9 @@ class ReviewListViewController: UIViewController {
     
     private var reviewTableView: UITableView = {
         let reviewTableView = UITableView()
+        reviewTableView.sectionHeaderTopPadding = 0
+        reviewTableView.separatorInset.left = 16
+        reviewTableView.separatorInset.right = 16
         reviewTableView.register(ReviewTableViewCell.self, forCellReuseIdentifier: "Cell")
         reviewTableView.register(ReviewListHeaderView.self, forHeaderFooterViewReuseIdentifier: "headerCell")
         return reviewTableView
@@ -62,14 +65,14 @@ extension ReviewListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ReviewTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? ReviewTableViewCell else { return UITableViewCell()}
         let reviewData = dataList.data[indexPath.row]
         cell.fetchDataFromTableView(data: reviewData)
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerCell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerCell") as! ReviewListHeaderView
+        guard let headerCell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerCell") as? ReviewListHeaderView else { return UITableViewHeaderFooterView()}
         headerCell.delegate = self
         return headerCell
     }
