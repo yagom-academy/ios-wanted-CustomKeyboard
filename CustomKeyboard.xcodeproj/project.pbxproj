@@ -15,6 +15,7 @@
 		DFC51027287D48CC003D26B0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC51026287D48CC003D26B0 /* BaseViewController.swift */; };
 		DFC5102C287D4CC8003D26B0 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC5102B287D4CC8003D26B0 /* ReviewTableViewCell.swift */; };
 		DFE6D8D1287EBD2800A45033 /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE6D8D0287EBD2800A45033 /* BasePaddingLabel.swift */; };
+		DFE6D8D3287EBD9C00A45033 /* ReviewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE6D8D2287EBD9C00A45033 /* ReviewListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		DFC51026287D48CC003D26B0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DFC5102B287D4CC8003D26B0 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		DFE6D8D0287EBD2800A45033 /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
+		DFE6D8D2287EBD9C00A45033 /* ReviewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				DE15E65F28604278003DD2F5 /* ReviewListViewController.swift */,
+				DFE6D8D2287EBD9C00A45033 /* ReviewListView.swift */,
 				DFC5102B287D4CC8003D26B0 /* ReviewTableViewCell.swift */,
 			);
 			path = Presentation;
@@ -185,6 +188,7 @@
 			files = (
 				DE15E66028604278003DD2F5 /* ReviewListViewController.swift in Sources */,
 				DFC5102C287D4CC8003D26B0 /* ReviewTableViewCell.swift in Sources */,
+				DFE6D8D3287EBD9C00A45033 /* ReviewListView.swift in Sources */,
 				DFC51027287D48CC003D26B0 /* BaseViewController.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
