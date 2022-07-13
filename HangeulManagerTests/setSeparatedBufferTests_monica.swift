@@ -130,7 +130,7 @@ class setSeparatedBufferTests: XCTestCase {
         let input1 = "ㅈ"
         let input2 = "ㅏ"
         let input3 = "ㅗ"
-        let expectation = 0
+        let expectation = 1
         hangeulManager.update(input1)
         hangeulManager.update(input2)
         hangeulManager.update(input3)

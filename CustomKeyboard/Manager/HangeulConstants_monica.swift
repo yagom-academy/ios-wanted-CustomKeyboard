@@ -14,7 +14,14 @@ struct HG {
     }
     
     enum Status {
-        case start, choseong, jungseong, doubleJungseong, jongseong, doubleJongseong, endCaseOne, endCaseTwo
+        case start // combinedBuffer에 아무 글자도 없을 때 == 지금까지 입력된 값이 없을 때
+        case top
+        case mid
+        case doubleMid
+        case end
+        case doubleEnd
+        case finishPassOne
+        case finishPassTwo
     }
     
     static let baseCode = 44032
