@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum HangeulStatus {
+enum HGStatus {
     case start, choseong, jungseong, doubleJungseong, jongseong, doubleJongseong, endCaseOne, endCaseTwo
 }
 
@@ -15,7 +15,7 @@ enum CharacterKind {
     case consonant, vowel
 }
 
-struct HangeulCharacter {
+struct HGChar {
     static let choseong: [String] = ["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
 
     static let jungseong: [String] = ["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"]
@@ -44,7 +44,7 @@ class HangeulManager {
 
     private var separatedBuffer = [String]() // 아직 조합이 완성되지 않은 문자들만 담아놓기
     private var combinedBuffer = [String]() // 화면에 출력될 글자들만 담아놓기
-    private var status = HangeulStatus.start
+    private var status = HGStatus.start
 }
 
 // MARK: - 문자 입력시 호출
@@ -82,7 +82,7 @@ extension HangeulManager {
     }
     
     private func setNewStatus(_ input: String) {
-        let characterKind:CharacterKind = HangeulCharacter.jungseong.contains(input) ? .vowel : .consonant
+        let characterKind:CharacterKind = HGChar.jungseong.contains(input) ? .vowel : .consonant
         let lastChar = self.separatedBuffer.last ?? ""
         
         switch self.status {
@@ -99,7 +99,7 @@ extension HangeulManager {
                 status = .endCaseOne // 초성이 들어온 상태에서 또 자음이 입력된 경우 끝!
             }
         case .jungseong: // 종성이 될수 있는 자음 또는 겹모음이 될수 있는 모음
-            if HangeulCharacter.jongseong.contains(input) {
+            if HGChar.jongseong.contains(input) {
                 status = .jongseong
             } else if Double.jungseong[lastChar]?[input] != nil {
                 status = .doubleJungseong
@@ -108,7 +108,7 @@ extension HangeulManager {
                 status = .endCaseOne
             }
         case .doubleJungseong: // 종성이 될 수 있는 자음
-            if HangeulCharacter.jongseong.contains(input) {
+            if HGChar.jongseong.contains(input) {
                     status = .jongseong
                 } else {
                     status = .endCaseOne
@@ -137,7 +137,7 @@ extension HangeulManager {
 
 extension HangeulManager {
     private func setSeparatedBuffer(_ input: String) {
-        let characterKind: CharacterKind = HangeulCharacter.jungseong.contains(input) ? .vowel : .consonant
+        let characterKind: CharacterKind = HGChar.jungseong.contains(input) ? .vowel : .consonant
 
         switch self.status {
         case .choseong, .jungseong, .jongseong:
@@ -187,11 +187,11 @@ extension HangeulManager {
 
 extension HangeulManager {
     func getCombinedWord(_ cho: String, _ jung: String, _ jong: String) -> String {
-        let choIndex = Int(HangeulCharacter.choseong.firstIndex(of: cho) ?? 0)
-        let jungIndex = Int(HangeulCharacter.jungseong.firstIndex(of: jung) ?? 0)
-        let jongIndex = Int(HangeulCharacter.jongseong.firstIndex(of: jong) ?? 0)
+        let choIndex = Int(HGChar.choseong.firstIndex(of: cho) ?? 0)
+        let jungIndex = Int(HGChar.jungseong.firstIndex(of: jung) ?? 0)
+        let jongIndex = Int(HGChar.jongseong.firstIndex(of: jong) ?? 0)
         
-        let combinedValue = (choIndex * HangeulCharacter.jungCount * HangeulCharacter.jongCount) + (jungIndex * HangeulCharacter.jongCount) + jongIndex + HangeulCharacter.baseCode
+        let combinedValue = (choIndex * HGChar.jungCount * HGChar.jongCount) + (jungIndex * HGChar.jongCount) + jongIndex + HGChar.baseCode
         
         let combinedWord = String(UnicodeScalar(combinedValue)!)
         
@@ -203,11 +203,11 @@ extension HangeulManager {
 
 extension HangeulManager {
     func getSeparatedCharacters(from word: String) -> [String] {
-        let unicode = Int(UnicodeScalar(word)!.value) - HangeulCharacter.baseCode
+        let unicode = Int(UnicodeScalar(word)!.value) - HGChar.baseCode
         
-        let choValue = (((unicode - (unicode % HangeulCharacter.jongCount)) / HangeulCharacter.jongCount) / HangeulCharacter.jungCount) + HangeulCharacter.firstChoseongUnicodeValue
-        let jungValue = (((unicode - (unicode % HangeulCharacter.jongCount)) / HangeulCharacter.jongCount) % HangeulCharacter.jungCount) + HangeulCharacter.firstJungseongUnicodeValue
-        let jongValue = (unicode % HangeulCharacter.jongCount) + HangeulCharacter.firstJongseongUnicodeValue
+        let choValue = (((unicode - (unicode % HGChar.jongCount)) / HGChar.jongCount) / HGChar.jungCount) + HGChar.firstChoseongUnicodeValue
+        let jungValue = (((unicode - (unicode % HGChar.jongCount)) / HGChar.jongCount) % HGChar.jungCount) + HGChar.firstJungseongUnicodeValue
+        let jongValue = (unicode % HGChar.jongCount) + HGChar.firstJongseongUnicodeValue
 
         let cho = String(UnicodeScalar(choValue)!)
         let jung = String(UnicodeScalar(jungValue)!)
