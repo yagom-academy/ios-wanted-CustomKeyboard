@@ -28,6 +28,16 @@ class ReviewTableViewHeader: UITableViewHeaderFooterView {
         return textField
     }()
     
+    private let writeButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("작성", for: .normal)
+        button.tintColor = .label
+        button.layer.cornerRadius = 10
+        button.backgroundColor = .systemGray
+        
+        return button
+    }()
+    
     func setup() {
         layout()
     }
@@ -37,7 +47,8 @@ extension ReviewTableViewHeader {
     private func layout() {
         [
             profileImage,
-            reviewTextField
+            reviewTextField,
+            writeButton
         ].forEach {
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +64,12 @@ extension ReviewTableViewHeader {
         
         reviewTextField.centerYAnchor.constraint(equalTo: profileImage.centerYAnchor).isActive = true
         reviewTextField.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: inset).isActive = true
-        reviewTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset).isActive = true
+        reviewTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -74).isActive = true
         reviewTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        writeButton.centerYAnchor.constraint(equalTo: profileImage.centerYAnchor).isActive = true
+        writeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset).isActive = true
+        writeButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        writeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
 }
