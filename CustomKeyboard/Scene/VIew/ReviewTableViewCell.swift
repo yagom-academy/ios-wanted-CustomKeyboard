@@ -22,11 +22,13 @@ class ReviewTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "default_image")
         imageView.contentMode = .scaleAspectFit
+        imageView.layer.cornerRadius = 25
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    private var userIdLable: UILabel = {
+    private var userNameLable: UILabel = {
         let lable = UILabel()
         lable.textColor = .black
         lable.font = UIFont.boldSystemFont(ofSize: 16)
@@ -46,7 +48,7 @@ class ReviewTableViewCell: UITableViewCell {
         let lable = UILabel()
         lable.textColor = .black
         lable.font = UIFont.systemFont(ofSize: 15)
-//        lable.text = "Review : "
+        lable.numberOfLines = 0
         lable.translatesAutoresizingMaskIntoConstraints = false
         return lable
     }()
@@ -55,6 +57,7 @@ class ReviewTableViewCell: UITableViewCell {
         lable.textColor = .lightGray
         lable.font = UIFont.systemFont(ofSize: 13)
         lable.text = "1분"
+        lable.frame.size.height = 10
         lable.translatesAutoresizingMaskIntoConstraints = false
         return lable
     }()
@@ -73,11 +76,11 @@ class ReviewTableViewCell: UITableViewCell {
     }()
     
     private lazy var userInfoStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [userIdLable,reviewRateLable,contentLable,lastUpdateTimeLabel])
+        let stackView = UIStackView(arrangedSubviews: [reviewRateLable,contentLable,lastUpdateTimeLabel])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 10
-        stackView.distribution = .fillEqually
+        stackView.spacing = 5
+        stackView.distribution = .fill
         
         return stackView
     }()
@@ -88,6 +91,7 @@ class ReviewTableViewCell: UITableViewCell {
         containterView.addSubview(userProfileImageView)
         containterView.addSubview(userInfoStackView)
         containterView.addSubview(reportButton)
+        containterView.addSubview(userNameLable)
         
         NSLayoutConstraint.activate([
             containterView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
@@ -105,21 +109,30 @@ class ReviewTableViewCell: UITableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            userInfoStackView.topAnchor.constraint(equalTo: containterView.topAnchor,constant: 10),
-            userInfoStackView.leftAnchor.constraint(equalTo: userProfileImageView.rightAnchor, constant: 10),
-            userInfoStackView.bottomAnchor.constraint(equalTo: containterView.bottomAnchor,constant: -10),
+            userNameLable.topAnchor.constraint(equalTo: containterView.topAnchor,constant: 10),
+            userNameLable.leftAnchor.constraint(equalTo: userProfileImageView.rightAnchor, constant: 10),
+            userNameLable.rightAnchor.constraint(equalTo: reportButton.leftAnchor,constant: 10),
+            userNameLable.heightAnchor.constraint(equalToConstant: 20)
         ])
         
         NSLayoutConstraint.activate([
-            reportButton.centerYAnchor.constraint(equalTo: userIdLable.centerYAnchor),
+            reportButton.centerYAnchor.constraint(equalTo: userNameLable.centerYAnchor),
             reportButton.rightAnchor.constraint(equalTo: containterView.rightAnchor,constant: -10),
-            reportButton.heightAnchor.constraint(equalToConstant: 10)
+            reportButton.heightAnchor.constraint(equalToConstant: 10),
+            reportButton.widthAnchor.constraint(equalToConstant: 60)
+        ])
+        
+        NSLayoutConstraint.activate([
+            userInfoStackView.topAnchor.constraint(equalTo: userNameLable.bottomAnchor,constant: 8),
+            userInfoStackView.leftAnchor.constraint(equalTo: userProfileImageView.rightAnchor, constant: 10),
+            userInfoStackView.rightAnchor.constraint(equalTo: containterView.rightAnchor, constant: -10),
+            userInfoStackView.bottomAnchor.constraint(equalTo: containterView.bottomAnchor,constant: -10),
         ])
     }
         
     public func setupReviewData(_ review : Review) {
 //      guard let rate = review.content["Rating"] else {return}
-      userIdLable.text = review.user.userName
+      userNameLable.text = review.user.userName
       reviewRateLable.text = review.content["Rating"] != nil ? "Rating: \(String(describing: review.content["Rating"]!))" : nil
       contentLable.text = review.content["Review"] != nil ? "Review: \(String(describing: review.content["Review"]!))" : nil
       lastUpdateTimeLabel.text = review.lastModifiedAt

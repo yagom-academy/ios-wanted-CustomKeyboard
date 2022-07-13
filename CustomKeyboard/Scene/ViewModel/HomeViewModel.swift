@@ -46,8 +46,8 @@ final class HomeViewModel {
       switch result {
       case .success(_):
         let mockReview = Review(id: "호잇",
-                                user: User(id: "ㅇ",
-                                           userName: "ㅇㄴ",
+                                user: User(id: "호이",
+                                           userName: "o달빔o",
                                            profileImage: URL(string: "https://images-ext-1.discordapp.net/external/wGnZ_ZYU8R3dpD6TuirMAYy4MMxXGK5FZ0bXDkViwHc/https/lh3.googleusercontent.com/a-/AFdZucovSc1tTn1tLVqxz2O8O9s3IZwxAZB3Xr6dIc34%3Ds96-c")!),
                                            content: ["Review":review],
                                 lastModifiedAt: CustomDateFormatter.shared.dateToString(from: Date()))
