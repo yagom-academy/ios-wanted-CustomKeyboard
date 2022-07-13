@@ -9,6 +9,7 @@ import UIKit
 
 class CreateReviewViewController: UIViewController {
 
+    
     private let reviewTextView: UITextView = {
         var textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -32,9 +33,10 @@ class CreateReviewViewController: UIViewController {
             reviewTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
-    
+
     private func setKeyboardInputView() {
         guard let customKeyboardView = Bundle.main.loadNibNamed("CustomKeyboard", owner: nil)?.first as? CustomKeyboardView else { return }
+        customKeyboardView.delegate = self
         reviewTextView.inputView = customKeyboardView
         
     }
@@ -43,4 +45,29 @@ class CreateReviewViewController: UIViewController {
         self.dismiss(animated: true)
     }
 
+}
+
+extension CreateReviewViewController: KeyboardInfoReceivable {
+    func customKeyboardView(pressedKeyboardButton: UIButton) {
+        let hungul = pressedKeyboardButton.titleLabel!.text!
+        
+        
+        
+        
+        let keyboadMaker = KeyboardMaker()
+
+        
+        keyboadMaker.putHangul(input: hungul)
+        
+        
+    }
+    func customKeyboardView(pressedDeleteButton: UIButton) {
+        
+    }
+}
+
+extension CreateReviewViewController {
+    
+    
+    
 }
