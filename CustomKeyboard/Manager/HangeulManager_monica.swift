@@ -21,11 +21,21 @@ class HangeulManager {
 
 extension HangeulManager {
     func update(_ inputString: String) {
+//        print("=====================================")
+//        print("상태: \(status)")
+//        print("separatedBuffer:")
+//        for ele in separatedBuffer {
+//            print(String(UnicodeScalar(ele)!))
+//        }
+//        print("combinedBuffer:")
+//        for ele in combinedBuffer {
+//            print(String(UnicodeScalar(ele)!))
+//        }
         let input = Int(UnicodeScalar(inputString)!.value)
         setStatus(input)
         setSeparatedBuffer(input)
-        print("status: \(status), buffer: \(separatedBuffer), input: \(input)")
-//        setCombinedBuffer(input) // 조합상태에 따라서 출력할 문자열 완성하기
+        setCombinedBuffer(input) // 조합상태에 따라서 출력할 문자열 완성하기
+        
     }
 }
 
@@ -42,8 +52,8 @@ extension HangeulManager {
     private func setBasicStatus() {
         switch status {
         case .endCaseOne:
-            if separatedBuffer.isEmpty {
-                status = .start
+            if HG.fixed.mid.list.contains(separatedBuffer.last!) {
+                status = .jungseong
             } else {
                 status = .choseong
             }
@@ -74,7 +84,7 @@ extension HangeulManager {
         case .jungseong:
             if bufferHasChoseong() && HG.compatible.endList.contains(input) {
                 status = .jongseong
-            } else if isDouble(a: prev, b: input) {
+            } else if canBeDouble(a: prev, b: input) {
                 status = .doubleJungseong
             } else {
                 status = .endCaseOne
@@ -86,7 +96,7 @@ extension HangeulManager {
                 status = .endCaseOne
             }
         case .jongseong:
-            if isDouble(a: prev, b: input) {
+            if canBeDouble(a: prev, b: input) {
                 status = .doubleJongseong
             } else if charKind == .vowel {
                 status = .endCaseTwo
@@ -138,7 +148,9 @@ extension HangeulManager {
             separatedBuffer.append(char)
         case .endCaseOne:
             if charKind == .vowel {
-                separatedBuffer = []
+                let index = HG.compatible.midList.firstIndex(of: input) ?? 0
+                let char = HG.fixed.mid.list[index]
+                separatedBuffer = [char]
             } else {
                 let index = HG.compatible.topList.firstIndex(of: input) ?? 0
                 let char = HG.fixed.top.list[index]
@@ -154,6 +166,67 @@ extension HangeulManager {
         }
     }
 }
+
+// MARK: - combinedBuffer에 문자 추가/삭제
+
+extension HangeulManager {
+    private func setCombinedBuffer(_ input: Int) {
+        var word : Int!
+        let curr = separatedBuffer.last ?? 0
+        
+        if status != .endCaseOne && status != .choseong && !(status == .jungseong && !bufferHasChoseong()){
+            let prevWord = combinedBuffer.removeLast()
+            let char = getSeparatedCharacters(from: prevWord)
+            print("------setCombinedBuffer")
+            for ele in char {
+                print(String(UnicodeScalar(ele)!))
+            }
+            switch status {
+            case .jungseong:
+                word = getCombinedWord(char[0], curr, HG.fixed.end.blank, isDouble: false)
+            case .jongseong:
+                word = getCombinedWord(char[0], char[1], curr, isDouble: false)
+            case .doubleJungseong:
+                if bufferHasChoseong() {
+                    word = getCombinedWord(char[0], curr, HG.fixed.end.blank, isDouble: false)
+                } else {
+                    word = curr
+                }
+            case .doubleJongseong:
+                word = getCombinedWord(char[0], char[1], curr, isDouble: false)
+            case .endCaseTwo:
+                if HG.fixed.end.split[char[2]] != nil {
+                    let prevWord = getCombinedWord(char[0], char[1], HG.fixed.end.split[char[2]]?.first ?? 0, isDouble: false)
+                    combinedBuffer.append(prevWord)
+                    let prev = HG.fixed.end.split[char[2]]?.last ?? 0
+                    word = getCombinedWord(prev, curr, HG.fixed.end.blank, isDouble: true)
+                } else {
+                    let prevWord = getCombinedWord(char[0], char[1], HG.fixed.end.blank, isDouble: false)
+                    combinedBuffer.append(prevWord)
+                    word = getCombinedWord(char[2], curr, HG.fixed.end.blank, isDouble: true)
+                }
+            default:
+                break
+            }
+        } else if status == .endCaseOne || status == .choseong {
+            var index : Int!
+            if HG.compatible.midList.contains(input) {
+                index = HG.compatible.midList.firstIndex(of: input) ?? 0
+                word = HG.fixed.mid.list[index]
+            } else {
+                index = HG.compatible.topList.firstIndex(of: input) ?? 0
+                word = HG.fixed.top.list[index]
+            }
+        } else {
+            let index = HG.compatible.midList.firstIndex(of: input) ?? 0
+            word = HG.fixed.mid.list[index]
+        }
+        combinedBuffer.append(word)
+    }
+}
+
+
+
 // MARK: - 프로퍼티 초기화
 
 extension HangeulManager {
@@ -175,8 +248,18 @@ extension HangeulManager {
 // MARK: - 초성/중성/종성을 모아 한 글자로 만드는 메서드
 
 extension HangeulManager {
-    func getCombinedWord(_ top: Int, _ mid: Int, _ end: Int) -> Int {
-        let topIndex = Int(HG.fixed.top.list.firstIndex(of: top) ?? 0)
+    func getCombinedWord(_ top: Int, _ mid: Int, _ end: Int, isDouble: Bool) -> Int {
+        var topIndex : Int!
+        
+        if isDouble {
+            if status == .endCaseTwo {
+                let endIndex = HG.fixed.end.list.firstIndex(of: top) ?? 0
+                let compatible = HG.compatible.endList[endIndex]
+                topIndex = Int(HG.compatible.topList.firstIndex(of: compatible) ?? 0)
+            }
+        } else {
+            topIndex = Int(HG.fixed.top.list.firstIndex(of: top) ?? 0)
+        }
         let midIndex = Int(HG.fixed.mid.list.firstIndex(of: mid) ?? 0)
         let endIndex = Int(HG.fixed.end.list.firstIndex(of: end) ?? 0)
         
@@ -190,6 +273,11 @@ extension HangeulManager {
 
 extension HangeulManager {
     func getSeparatedCharacters(from word: Int) -> [Int] {
+        if status == .jungseong {
+            return [word, 0, 0]
+        }
+        
+        
         let unicode = word - HG.baseCode
         
         let top = (((unicode - (unicode % HG.endCount)) / HG.endCount) / HG.midCount) + HG.fixed.top.list.first!
@@ -205,7 +293,7 @@ extension HangeulManager {
 
 extension HangeulManager {
     
-    private func isDouble(a prev: Int, b input: Int) -> Bool {
+    private func canBeDouble(a prev: Int, b input: Int) -> Bool {
         
         if status == .jungseong {
             
@@ -236,4 +324,16 @@ extension HangeulManager {
         return separatedBuffer.count > 1 ? true : false
     }
     
+}
+
+// MARK: - combinedBuffer에 있는 원소를 문자열로 만들어 반환
+
+extension HangeulManager {
+    func getOutputString() -> String {
+        var output = ""
+        for word in combinedBuffer {
+            output += String(UnicodeScalar(word)!)
+        }
+        return output
+    }
 }

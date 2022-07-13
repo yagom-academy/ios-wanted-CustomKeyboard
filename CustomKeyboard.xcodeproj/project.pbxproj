@@ -20,7 +20,8 @@
 		9F50431B287E323300CDBD9C /* setSeparatedBufferTests_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F50431A287E323300CDBD9C /* setSeparatedBufferTests_monica.swift */; };
 		9F504322287E4EE200CDBD9C /* getSeparatedTests_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F504321287E4EE200CDBD9C /* getSeparatedTests_monica.swift */; };
 		9FDEAB4D287E596200C0663D /* getCombinedTests_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDEAB4C287E596200C0663D /* getCombinedTests_monica.swift */; };
-		9FDEAB51287E94A400C0663D /* HangeulConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDEAB50287E94A400C0663D /* HangeulConstants.swift */; };
+		9FDEAB51287E94A400C0663D /* HangeulConstants_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDEAB50287E94A400C0663D /* HangeulConstants_monica.swift */; };
+		9FDEAB53287ECFAD00C0663D /* setCombinedTests_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDEAB52287ECFAD00C0663D /* setCombinedTests_monica.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
 		DE15E66028604278003DD2F5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65F28604278003DD2F5 /* HomeViewController.swift */; };
@@ -54,7 +55,8 @@
 		9F50431A287E323300CDBD9C /* setSeparatedBufferTests_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setSeparatedBufferTests_monica.swift; sourceTree = "<group>"; };
 		9F504321287E4EE200CDBD9C /* getSeparatedTests_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getSeparatedTests_monica.swift; sourceTree = "<group>"; };
 		9FDEAB4C287E596200C0663D /* getCombinedTests_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCombinedTests_monica.swift; sourceTree = "<group>"; };
-		9FDEAB50287E94A400C0663D /* HangeulConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulConstants.swift; sourceTree = "<group>"; };
+		9FDEAB50287E94A400C0663D /* HangeulConstants_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulConstants_monica.swift; sourceTree = "<group>"; };
+		9FDEAB52287ECFAD00C0663D /* setCombinedTests_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setCombinedTests_monica.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE15E65D28604278003DD2F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,7 +136,7 @@
 				0142F4D3287C2C83006F3E48 /* ImageManager.swift */,
 				9F504300287C484900CDBD9C /* TimeManager.swift */,
 				9F504302287D5C8F00CDBD9C /* HangeulManager_monica.swift */,
-				9FDEAB50287E94A400C0663D /* HangeulConstants.swift */,
+				9FDEAB50287E94A400C0663D /* HangeulConstants_monica.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -153,6 +155,7 @@
 				9F50431A287E323300CDBD9C /* setSeparatedBufferTests_monica.swift */,
 				9F504321287E4EE200CDBD9C /* getSeparatedTests_monica.swift */,
 				9FDEAB4C287E596200C0663D /* getCombinedTests_monica.swift */,
+				9FDEAB52287ECFAD00C0663D /* setCombinedTests_monica.swift */,
 			);
 			path = HangeulManagerTests;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F504322287E4EE200CDBD9C /* getSeparatedTests_monica.swift in Sources */,
+				9FDEAB53287ECFAD00C0663D /* setCombinedTests_monica.swift in Sources */,
 				9FDEAB4D287E596200C0663D /* getCombinedTests_monica.swift in Sources */,
 				9F50431B287E323300CDBD9C /* setSeparatedBufferTests_monica.swift in Sources */,
 			);
@@ -311,7 +315,7 @@
 				0142F4D6287C3078006F3E48 /* HomeViewModel.swift in Sources */,
 				DE15E66028604278003DD2F5 /* HomeViewController.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
-				9FDEAB51287E94A400C0663D /* HangeulConstants.swift in Sources */,
+				9FDEAB51287E94A400C0663D /* HangeulConstants_monica.swift in Sources */,
 				0142F4CC287C0A76006F3E48 /* HomeTableViewCell.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 				9F504303287D5C8F00CDBD9C /* HangeulManager_monica.swift in Sources */,
