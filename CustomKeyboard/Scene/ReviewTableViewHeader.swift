@@ -60,7 +60,6 @@ extension ReviewTableViewHeader {
         profileImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset).isActive = true
         profileImage.widthAnchor.constraint(equalToConstant: 60).isActive = true
         profileImage.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        profileImage.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -inset).isActive = true
         
         reviewTextField.centerYAnchor.constraint(equalTo: profileImage.centerYAnchor).isActive = true
         reviewTextField.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: inset).isActive = true
