@@ -74,7 +74,8 @@ extension ReviewViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         // TODO: - KeyboardViewController와 연결
-        let vc = UIViewController()
-//        navigationController?.pushViewController(vc, animated: true)
+        let vc = KeyboardViewController()
+        navigationController?.pushViewController(vc, animated: true)
+        textField.resignFirstResponder()
     }
 }
