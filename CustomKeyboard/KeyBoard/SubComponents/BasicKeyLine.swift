@@ -63,6 +63,7 @@ extension BasicKeyLine {
             btn.tag = Int(UnicodeScalar(key)!.value)
             btn.sizeToFit()
             btn.addTarget(self, action: #selector(tappedButton(_:)), for: .touchUpInside)
+            btn.titleLabel?.font = .systemFont(ofSize: CustomKeyBoard.Math.fontSize)
             return btn
         }
     }

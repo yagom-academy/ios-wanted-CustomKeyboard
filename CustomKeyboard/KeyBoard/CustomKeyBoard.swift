@@ -14,12 +14,13 @@ class CustomKeyBoard: UIView {
                     .first!.delegate as! SceneDelegate
             return sceneDelegate.windowWidth!
         }
-        
         static let buttonPadding = 5.0
         static let buttonWidth = windowWidth / 10.0 - buttonPadding
+        static let fontSize: CGFloat = windowWidth < 340 ? 13.0 : 19.0
     }
     
     private let mainContainer = UIStackView()
+    
     private let firstLineDynamicBasicKeys = DynamicBasicKeyLine()
     
     private let secondLineBasicKeys = BasicKeyLine(keys: ["ㅁ", "ㄴ", "ㅇ", "ㄹ", "ㅎ", "ㅗ", "ㅓ", "ㅏ", "ㅣ"])
@@ -29,7 +30,9 @@ class CustomKeyBoard: UIView {
     private let shiftButton = UIButton()
     private let backButton = UIButton()
     
-    private let firthLineKeys = UIView()
+    private let firthLineContainer = UIStackView()
+    private let spaceButton = UIButton()
+    private let enterButton = UIButton()
     
     init() {
         super.init(frame: CGRect.zero)
@@ -54,19 +57,30 @@ extension CustomKeyBoard {
         thirdLineContainer.axis = .horizontal
         thirdLineContainer.distribution = .equalSpacing
         
-        shiftButton.setTitle("Shift", for: .normal)
+        firthLineContainer.axis = .horizontal
+        firthLineContainer.spacing = 10
+        
+        shiftButton.setTitle("shift", for: .normal)
         shiftButton.addTarget(self, action: #selector(tappedShiftKey), for: .touchUpInside)
         
-        backButton.setTitle("Back", for: .normal)
+        backButton.setTitle("back", for: .normal)
         
-        [shiftButton, backButton].forEach {
+        [shiftButton, backButton, enterButton].forEach {
             $0.backgroundColor = .systemGray
             $0.setTitleColor(.black, for: .normal)
             $0.layer.cornerRadius = 10
         }
+        print(Math.windowWidth)
+        spaceButton.setTitle("space", for: .normal)
+        spaceButton.backgroundColor = .white
+        spaceButton.setTitleColor(.black, for: .normal)
+        spaceButton.layer.cornerRadius = 10
         
-        //temp
-        firthLineKeys.backgroundColor = .red
+        enterButton.setTitle("enter", for: .normal)
+        
+        [shiftButton, backButton, spaceButton, enterButton].forEach {
+            $0.titleLabel?.font = .systemFont(ofSize: Math.fontSize)
+        }
     }
 }
 
@@ -86,26 +100,40 @@ extension CustomKeyBoard {
         mainContainer.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         mainContainer.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         mainContainer.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        let bottomPaddingView = UIView()
         
-        [UIView(), firstLineDynamicBasicKeys, secondLineBasicKeys, thirdLineContainer, firthLineKeys, UIView()].forEach {
+        [UIView(), firstLineDynamicBasicKeys, secondLineBasicKeys, thirdLineContainer, firthLineContainer, bottomPaddingView].forEach {
             mainContainer.addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        
-        [firstLineDynamicBasicKeys, secondLineBasicKeys, thirdLineContainer, firthLineKeys].forEach {
-            $0.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1/5).isActive = true
+        bottomPaddingView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1/8).isActive = true
+        [firstLineDynamicBasicKeys, secondLineBasicKeys, thirdLineContainer, firthLineContainer].forEach {
+            $0.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1/6).isActive = true
         }
         firstLineDynamicBasicKeys.widthAnchor.constraint(equalToConstant: Math.windowWidth-Math.buttonPadding*2).isActive = true
         secondLineBasicKeys.widthAnchor.constraint(equalToConstant: Math.windowWidth-Math.buttonWidth-Math.buttonPadding*2).isActive = true
-        thirdLineContainer.widthAnchor.constraint(equalToConstant: Math.windowWidth).isActive = true
+        thirdLineContainer.widthAnchor.constraint(equalToConstant: Math.windowWidth-Math.buttonPadding*2).isActive = true
+        firthLineContainer.widthAnchor.constraint(equalToConstant: Math.windowWidth-Math.buttonPadding*2).isActive = true
         
+        //MARK: 세번째줄
         [shiftButton, thirdLineBasicKeys, backButton].forEach {
             thirdLineContainer.addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         thirdLineBasicKeys.widthAnchor.constraint(equalToConstant: Math.windowWidth-Math.buttonWidth*3-Math.buttonPadding*2).isActive = true
         [shiftButton, backButton].forEach {
-            $0.widthAnchor.constraint(equalToConstant: Math.buttonWidth*1.5).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Math.buttonWidth*1.3).isActive = true
+        }
+        
+        //MARK: 네번쨰줄
+        let spaceView = UIView()
+        [spaceView, spaceButton, enterButton].forEach {
+            firthLineContainer.addArrangedSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        [spaceView, enterButton].forEach {
+            $0.widthAnchor.constraint(equalToConstant: Math.buttonWidth*2.5).isActive = true
         }
     }
 }
