@@ -17,15 +17,13 @@ final class ReviewListView: UIView {
         return image
     }()
     
-    lazy var reviewInputView: UITextView = {
-       let view = UITextView()
-        view.backgroundColor = UIColor(red: 242/255, green: 243/255, blue: 247/255, alpha: 1)
-        view.layer.cornerRadius = 20
-        view.text = "이 테마가 마음에 드시나요?"
-        view.textColor = .gray
-        view.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        view.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        return view
+    lazy var reviewInputLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = UIColor(red: 242/255, green: 243/255, blue: 247/255, alpha: 1)
+        label.text = "이 테마가 마음에 드시나요?"
+        label.textColor = .gray
+        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        return label
     }()
     
     lazy var reviewInputHorizontalStackView: UIStackView = {
@@ -73,7 +71,7 @@ final class ReviewListView: UIView {
             verticalStackView.addArrangedSubview($0)
         }
         
-        [profileImage,reviewInputView].forEach {
+        [profileImage,reviewInputLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             reviewInputHorizontalStackView.addArrangedSubview($0)
         }
@@ -84,7 +82,7 @@ final class ReviewListView: UIView {
         
         NSLayoutConstraint.activate([
             profileImage.centerYAnchor.constraint(equalTo: reviewInputHorizontalStackView.centerYAnchor),
-            reviewInputView.centerYAnchor.constraint(equalTo: reviewInputHorizontalStackView.centerYAnchor),
+            reviewInputLabel.centerYAnchor.constraint(equalTo: reviewInputHorizontalStackView.centerYAnchor),
             reviewInputHorizontalStackView.leadingAnchor.constraint(equalTo: verticalStackView.leadingAnchor),
             reviewInputHorizontalStackView.trailingAnchor.constraint(equalTo: verticalStackView.trailingAnchor),
             verticalStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
