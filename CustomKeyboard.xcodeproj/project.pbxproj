@@ -16,6 +16,7 @@
 		FE43998A287D766D00BFF841 /* CustomKeyBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE439989287D766D00BFF841 /* CustomKeyBoard.swift */; };
 		FE43998D287D908C00BFF841 /* BasicKeyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE43998C287D908C00BFF841 /* BasicKeyLine.swift */; };
 		FE574865287E9FAB0001B8A2 /* CustomKeyBoardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE574864287E9FAB0001B8A2 /* CustomKeyBoardDelegate.swift */; };
+		FE831580287EC8640039A56B /* ReviewWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE83157F287EC8640039A56B /* ReviewWriteView.swift */; };
 		FEB79C88287E83E500B5168A /* DynamicBasicKeyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB79C87287E83E500B5168A /* DynamicBasicKeyLine.swift */; };
 		FEF67F8E287D2A29008E9A97 /* NetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF67F8D287D2A29008E9A97 /* NetworkAPI.swift */; };
 		FFE4229A287D1F2A00EA04AF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE42299287D1F2A00EA04AF /* NetworkManager.swift */; };
@@ -34,6 +35,7 @@
 		FE439989287D766D00BFF841 /* CustomKeyBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyBoard.swift; sourceTree = "<group>"; };
 		FE43998C287D908C00BFF841 /* BasicKeyLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicKeyLine.swift; sourceTree = "<group>"; };
 		FE574864287E9FAB0001B8A2 /* CustomKeyBoardDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyBoardDelegate.swift; sourceTree = "<group>"; };
+		FE83157F287EC8640039A56B /* ReviewWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewWriteView.swift; sourceTree = "<group>"; };
 		FEB79C87287E83E500B5168A /* DynamicBasicKeyLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicBasicKeyLine.swift; sourceTree = "<group>"; };
 		FEF67F8D287D2A29008E9A97 /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
 		FFE42299287D1F2A00EA04AF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				DE15E65F28604278003DD2F5 /* ViewController.swift */,
+				FE83157F287EC8640039A56B /* ReviewWriteView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				DE15E66028604278003DD2F5 /* ViewController.swift in Sources */,
 				FE43998A287D766D00BFF841 /* CustomKeyBoard.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
+				FE831580287EC8640039A56B /* ReviewWriteView.swift in Sources */,
 				FFE4229C287D215200EA04AF /* ReviewType.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 				FEF67F8E287D2A29008E9A97 /* NetworkAPI.swift in Sources */,
