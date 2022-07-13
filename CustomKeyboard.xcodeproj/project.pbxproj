@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B7344044287E830900C9B8B0 /* ReviewTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7344043287E830900C9B8B0 /* ReviewTextFieldView.swift */; };
 		B779BBCF287D4B5300BB8DF5 /* ReviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBC5287D4B5300BB8DF5 /* ReviewDTO.swift */; };
 		B779BBD0287D4B5300BB8DF5 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBC6287D4B5300BB8DF5 /* NetworkService.swift */; };
 		B779BBD1287D4B5300BB8DF5 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBC7287D4B5300BB8DF5 /* Request.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B7344043287E830900C9B8B0 /* ReviewTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTextFieldView.swift; sourceTree = "<group>"; };
 		B779BBC5287D4B5300BB8DF5 /* ReviewDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewDTO.swift; sourceTree = "<group>"; };
 		B779BBC6287D4B5300BB8DF5 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B779BBC7287D4B5300BB8DF5 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
@@ -65,6 +67,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B7344045287E838800C9B8B0 /* ReviewTextFieldView */ = {
+			isa = PBXGroup;
+			children = (
+				B7344043287E830900C9B8B0 /* ReviewTextFieldView.swift */,
+			);
+			path = ReviewTextFieldView;
+			sourceTree = "<group>";
+		};
 		B779BBC4287D4B5300BB8DF5 /* Network  */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +164,7 @@
 				B779BBD7287D51B000BB8DF5 /* Repository */,
 				B779BBCD287D4B5300BB8DF5 /* Domain */,
 				B779BBC4287D4B5300BB8DF5 /* Network  */,
+				B7344045287E838800C9B8B0 /* ReviewTextFieldView */,
 				B7F1DCEE287C12D40065D587 /* ReviewTableView */,
 				DE15E65B28604278003DD2F5 /* AppDelegate.swift */,
 				DE15E65D28604278003DD2F5 /* SceneDelegate.swift */,
@@ -249,6 +260,7 @@
 				B779BBD4287D4B5300BB8DF5 /* Requestable.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				B779BBD1287D4B5300BB8DF5 /* Request.swift in Sources */,
+				B7344044287E830900C9B8B0 /* ReviewTextFieldView.swift in Sources */,
 				B779BBD0287D4B5300BB8DF5 /* NetworkService.swift in Sources */,
 				B779BBF6287E500100BB8DF5 /* String+.swift in Sources */,
 				B779BBD9287D51CD00BB8DF5 /* ReviewRepository.swift in Sources */,

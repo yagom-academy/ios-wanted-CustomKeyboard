@@ -11,96 +11,123 @@ class ReviewTableViewCell: UITableViewCell {
     
     static let cellID = "CellID"
     
-    public var userProfileImageView : UIImageView!
-    public var userIdLable : UILabel!
-    public var reviewRateLable : UILabel!
-    public var contentLable : UILabel!
-    public var lastUpdateTimeLabel : UILabel!
-    public var reportButton : UIButton!
+    private var containterView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private var userProfileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "default_image")
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private var userIdLable: UILabel = {
+        let lable = UILabel()
+        lable.textColor = .black
+        lable.font = UIFont.boldSystemFont(ofSize: 16)
+        lable.text = "o달빔o"
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        return lable
+    }()
+    
+    private var reviewRateLable: UILabel = {
+        let lable = UILabel()
+        lable.textColor = .black
+        lable.font = UIFont.systemFont(ofSize: 15)
+        lable.text = "Rating : ⭐⭐⭐⭐⭐️"
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        return lable
+    }()
+    private var contentLable: UILabel = {
+        let lable = UILabel()
+        lable.textColor = .black
+        lable.font = UIFont.systemFont(ofSize: 15)
+        lable.text = "Review : "
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        return lable
+    }()
+    private var lastUpdateTimeLabel: UILabel = {
+        let lable = UILabel()
+        lable.textColor = .lightGray
+        lable.font = UIFont.systemFont(ofSize: 13)
+        lable.text = "1분"
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        return lable
+    }()
+    private var reportButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        let attribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10)]
+        let attributedTitle = NSAttributedString(string: "신고", attributes: attribute)
+        button.setAttributedTitle(attributedTitle, for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.tintColor = .lightGray
+        button.setImage(UIImage(named: "siren.png"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var userInfoStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [userIdLable,reviewRateLable,contentLable,lastUpdateTimeLabel])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.distribution = .fillEqually
+        
+        return stackView
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-     
-        setUpCell()
+        contentView.addSubview(containterView)
+        containterView.addSubview(userProfileImageView)
+        containterView.addSubview(userInfoStackView)
+        containterView.addSubview(reportButton)
         
-        contentView.addSubview(userIdLable)
-        contentView.addSubview(reviewRateLable)
-        contentView.addSubview(contentLable)
-        contentView.addSubview(lastUpdateTimeLabel)
-        contentView.addSubview(userProfileImageView)
-        contentView.addSubview(reportButton)
-
-        userProfileImageView.translatesAutoresizingMaskIntoConstraints = false
-        userIdLable.translatesAutoresizingMaskIntoConstraints = false
-        reviewRateLable.translatesAutoresizingMaskIntoConstraints = false
-        contentLable.translatesAutoresizingMaskIntoConstraints = false
-        lastUpdateTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-        reportButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            containterView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            containterView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            containterView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            containterView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            containterView.heightAnchor.constraint(equalTo: contentView.heightAnchor)
+        ])
         
-        userProfileImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor,constant: 10).isActive = true
-        userProfileImageView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 10).isActive = true
-        userProfileImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        userProfileImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        NSLayoutConstraint.activate([
+            userProfileImageView.leftAnchor.constraint(equalTo: containterView.leftAnchor,constant: 10),
+            userProfileImageView.topAnchor.constraint(equalTo: containterView.topAnchor,constant: 10),
+            userProfileImageView.heightAnchor.constraint(equalToConstant: 50),
+            userProfileImageView.widthAnchor.constraint(equalToConstant: 50)
+        ])
         
-        userIdLable.topAnchor.constraint(equalTo: userProfileImageView.topAnchor, constant: 10).isActive = true
-        userIdLable.leftAnchor.constraint(equalTo: userProfileImageView.rightAnchor, constant: 10).isActive = true
+        NSLayoutConstraint.activate([
+            userInfoStackView.topAnchor.constraint(equalTo: containterView.topAnchor,constant: 10),
+            userInfoStackView.leftAnchor.constraint(equalTo: userProfileImageView.rightAnchor, constant: 10),
+            userInfoStackView.bottomAnchor.constraint(equalTo: containterView.bottomAnchor,constant: -10),
+        ])
         
-        reviewRateLable.topAnchor.constraint(equalTo: userIdLable.bottomAnchor, constant: 10).isActive = true
-        reviewRateLable.leftAnchor.constraint(equalTo: userProfileImageView.rightAnchor, constant: 10).isActive = true
-        
-        contentLable.topAnchor.constraint(equalTo: reviewRateLable.bottomAnchor, constant: 5).isActive = true
-        contentLable.leftAnchor.constraint(equalTo: userProfileImageView.rightAnchor, constant: 10).isActive = true
-        
-        lastUpdateTimeLabel.topAnchor.constraint(equalTo: contentLable.bottomAnchor, constant: 5).isActive = true
-        lastUpdateTimeLabel.leftAnchor.constraint(equalTo: userProfileImageView.rightAnchor, constant: 10).isActive = true
-        
-        reportButton.centerYAnchor.constraint(equalTo: userIdLable.centerYAnchor).isActive = true
-        reportButton.rightAnchor.constraint(equalTo: self.rightAnchor,constant: -10).isActive = true
-        reportButton.heightAnchor.constraint(equalToConstant: 10).isActive = true
-        
+        NSLayoutConstraint.activate([
+            reportButton.centerYAnchor.constraint(equalTo: userIdLable.centerYAnchor),
+            reportButton.rightAnchor.constraint(equalTo: containterView.rightAnchor,constant: -10),
+            reportButton.heightAnchor.constraint(equalToConstant: 10)
+        ])
+    }
+    
+    private func setupCell() {
         
     }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-    private func setUpCell() {
-        userIdLable = UILabel()
-        userIdLable.textColor = .black
-        userIdLable.font = UIFont.boldSystemFont(ofSize: 16)
-        userIdLable.text = "o달빔o"
-        
-        reviewRateLable = UILabel()
-        reviewRateLable.textColor = .black
-        reviewRateLable.font = UIFont.systemFont(ofSize: 15)
-        reviewRateLable.text = "Rating : ⭐⭐⭐⭐⭐️"
-        
-        contentLable = UILabel()
-        contentLable.textColor = .black
-        contentLable.font = UIFont.systemFont(ofSize: 15)
-        contentLable.text = "Review : "
-        
-        lastUpdateTimeLabel = UILabel()
-        lastUpdateTimeLabel.textColor = .lightGray
-        lastUpdateTimeLabel.font = UIFont.systemFont(ofSize: 13)
-        lastUpdateTimeLabel.text = "1분"
-        
-        userProfileImageView = UIImageView()
-        userProfileImageView.image = UIImage(named: "default_image")
-        userProfileImageView.frame.size.height = 30
-        userProfileImageView.frame.size.width = 30
-        userProfileImageView.contentMode = .scaleAspectFit
-        
-        reportButton = UIButton(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
-        let attribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10)]
-        let attributedTitle = NSAttributedString(string: "신고", attributes: attribute)
-        reportButton.setAttributedTitle(attributedTitle, for: .normal)
-        reportButton.setTitleColor(.black, for: .normal)
-        reportButton.tintColor = .lightGray
-        reportButton.setImage(UIImage(named: "siren.png"), for: .normal)
-        reportButton.imageView?.contentMode = .scaleAspectFit
-        reportButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+    
+    public func setupReviewData(_ review : Review) {
+        userIdLable.text = review.user.id
+        contentLable.text = review.content["content"]
     }
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
