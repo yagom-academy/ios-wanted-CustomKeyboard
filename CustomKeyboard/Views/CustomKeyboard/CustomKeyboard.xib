@@ -28,6 +28,9 @@
                                     <state key="normal" title="ㅂ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="a42-eZ-bae"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQU-cz-sTq">
                                     <rect key="frame" x="41" y="0.0" width="38" height="46.5"/>
@@ -36,6 +39,9 @@
                                     <state key="normal" title="ㅈ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="gSe-H3-N0V"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abv-bZ-oqx">
                                     <rect key="frame" x="82" y="0.0" width="38.5" height="46.5"/>
@@ -44,6 +50,9 @@
                                     <state key="normal" title="ㄷ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="kV7-eG-E5R"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5G-9C-yRC">
                                     <rect key="frame" x="123.5" y="0.0" width="38" height="46.5"/>
@@ -52,6 +61,9 @@
                                     <state key="normal" title="ㄱ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="W1q-SA-k33"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gok-Jy-lM4">
                                     <rect key="frame" x="164.5" y="0.0" width="38" height="46.5"/>
@@ -60,6 +72,9 @@
                                     <state key="normal" title="ㅅ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="27X-rZ-fiC"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="55U-4J-ecZ">
                                     <rect key="frame" x="205.5" y="0.0" width="38" height="46.5"/>
@@ -68,6 +83,9 @@
                                     <state key="normal" title="ㅛ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="myv-x7-uPV"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEI-8d-lri">
                                     <rect key="frame" x="246.5" y="0.0" width="38" height="46.5"/>
@@ -76,6 +94,9 @@
                                     <state key="normal" title="ㅕ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="CNl-Ju-ACB"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yrx-XS-rQC">
                                     <rect key="frame" x="287.5" y="0.0" width="38.5" height="46.5"/>
@@ -84,6 +105,9 @@
                                     <state key="normal" title="ㅑ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="KRc-CP-5Qo"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cyg-HZ-ZXo">
                                     <rect key="frame" x="329" y="0.0" width="38" height="46.5"/>
@@ -92,6 +116,9 @@
                                     <state key="normal" title="ㅐ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="poH-CY-ZYb"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Dp-cb-Mz3">
                                     <rect key="frame" x="370" y="0.0" width="38" height="46.5"/>
@@ -100,6 +127,9 @@
                                     <state key="normal" title="ㅔ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="zFB-b8-mvN"/>
+                                    </connections>
                                 </button>
                             </subviews>
                         </stackView>
@@ -113,6 +143,9 @@
                                     <state key="normal" title="ㅁ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="699-is-TfD"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ldw-dj-7lf">
                                     <rect key="frame" x="45.5" y="0.0" width="43" height="46"/>
@@ -121,6 +154,9 @@
                                     <state key="normal" title="ㄴ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="ZJf-LS-DXg"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aAN-d8-3eo">
                                     <rect key="frame" x="91.5" y="0.0" width="42.5" height="46"/>
@@ -129,6 +165,9 @@
                                     <state key="normal" title="ㅇ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="x42-f1-VgZ"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Gu-Lv-jbG">
                                     <rect key="frame" x="137" y="0.0" width="42.5" height="46"/>
@@ -137,6 +176,9 @@
                                     <state key="normal" title="ㄹ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="oxW-Un-fft"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e5H-h8-UpC">
                                     <rect key="frame" x="182.5" y="0.0" width="43" height="46"/>
@@ -145,6 +187,9 @@
                                     <state key="normal" title="ㅎ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="CfJ-Ms-yke"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mv5-A2-9IC">
                                     <rect key="frame" x="228.5" y="0.0" width="42.5" height="46"/>
@@ -153,6 +198,9 @@
                                     <state key="normal" title="ㅗ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="0nb-Oa-bfg"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4y-DL-hjj">
                                     <rect key="frame" x="274" y="0.0" width="42.5" height="46"/>
@@ -161,6 +209,9 @@
                                     <state key="normal" title="ㅓ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="NQX-F9-fKn"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S6V-8h-2HW">
                                     <rect key="frame" x="319.5" y="0.0" width="43" height="46"/>
@@ -169,6 +220,9 @@
                                     <state key="normal" title="ㅏ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="hZO-uJ-oju"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcA-95-HiD">
                                     <rect key="frame" x="365.5" y="0.0" width="42.5" height="46"/>
@@ -177,90 +231,130 @@
                                     <state key="normal" title="ㅣ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="xpV-88-umb"/>
+                                    </connections>
                                 </button>
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="sc6-Mb-25s">
                             <rect key="frame" x="0.0" y="112.5" width="408" height="46.5"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDP-Ck-jGe">
-                                    <rect key="frame" x="0.0" y="0.0" width="41" height="46.5"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDP-Ck-jGe">
+                                    <rect key="frame" x="0.0" y="0.0" width="35.5" height="46.5"/>
                                     <color key="backgroundColor" red="0.32463479039999998" green="0.32501488919999999" blue="0.33796396849999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="uDP-Ck-jGe" secondAttribute="height" multiplier="1:1.3" id="dDO-aO-pVK"/>
+                                    </constraints>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" title="⇧">
+                                    <state key="normal" image="shift" catalog="system">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <buttonConfiguration key="configuration" style="plain" image="shift" catalog="system">
+                                        <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </buttonConfiguration>
+                                    <connections>
+                                        <action selector="pressShiftButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="o9T-R5-xGL"/>
+                                    </connections>
                                 </button>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="zOK-Cf-OAe">
-                                    <rect key="frame" x="46" y="0.0" width="312" height="46.5"/>
+                                    <rect key="frame" x="40.5" y="0.0" width="323.5" height="46.5"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9oT-CS-0oa">
-                                            <rect key="frame" x="0.0" y="0.0" width="42" height="46.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="43.5" height="46.5"/>
                                             <color key="backgroundColor" systemColor="systemGrayColor"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                             <state key="normal" title="ㅋ">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="4RJ-w6-wxv"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AeN-ch-iMK">
-                                            <rect key="frame" x="45" y="0.0" width="42" height="46.5"/>
+                                            <rect key="frame" x="46.5" y="0.0" width="44" height="46.5"/>
                                             <color key="backgroundColor" systemColor="systemGrayColor"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                             <state key="normal" title="ㅌ">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="Ord-tD-nF5"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptn-GC-DUL">
-                                            <rect key="frame" x="90" y="0.0" width="42" height="46.5"/>
+                                            <rect key="frame" x="93.5" y="0.0" width="43.5" height="46.5"/>
                                             <color key="backgroundColor" systemColor="systemGrayColor"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                             <state key="normal" title="ㅊ">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="yqi-In-4zm"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9GZ-hp-hVn">
-                                            <rect key="frame" x="135" y="0.0" width="42" height="46.5"/>
+                                            <rect key="frame" x="140" y="0.0" width="43.5" height="46.5"/>
                                             <color key="backgroundColor" systemColor="systemGrayColor"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                             <state key="normal" title="ㅍ">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="4ZG-7W-IYZ"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aw7-9V-JSU">
-                                            <rect key="frame" x="180" y="0.0" width="42" height="46.5"/>
+                                            <rect key="frame" x="186.5" y="0.0" width="43.5" height="46.5"/>
                                             <color key="backgroundColor" systemColor="systemGrayColor"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                             <state key="normal" title="ㅠ">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="gcS-6D-swr"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgq-ge-U0Z">
-                                            <rect key="frame" x="225" y="0.0" width="42" height="46.5"/>
+                                            <rect key="frame" x="233" y="0.0" width="44" height="46.5"/>
                                             <color key="backgroundColor" systemColor="systemGrayColor"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                             <state key="normal" title="ㅜ">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="9Fd-uv-Mkv"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WAn-Ag-iFg">
-                                            <rect key="frame" x="270" y="0.0" width="42" height="46.5"/>
+                                            <rect key="frame" x="280" y="0.0" width="43.5" height="46.5"/>
                                             <color key="backgroundColor" systemColor="systemGrayColor"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                             <state key="normal" title="ㅡ">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="kaZ-fe-HRH"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="liA-gH-urk">
-                                    <rect key="frame" x="363" y="0.0" width="45" height="46.5"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="liA-gH-urk">
+                                    <rect key="frame" x="369" y="0.0" width="39" height="46.5"/>
                                     <color key="backgroundColor" red="0.32430873247599046" green="0.32363062071817383" blue="0.33641616923292883" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" title="⌫">
+                                    <state key="normal" image="delete.left" catalog="system">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="pressDeleteButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="PYE-H3-2kY"/>
+                                    </connections>
                                 </button>
                             </subviews>
+                            <constraints>
+                                <constraint firstItem="uDP-Ck-jGe" firstAttribute="width" secondItem="liA-gH-urk" secondAttribute="width" multiplier="0.911111" id="NwO-ah-Oe8"/>
+                            </constraints>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1ea-2o-QzQ">
                             <rect key="frame" x="0.0" y="169" width="408" height="46"/>
@@ -280,6 +374,9 @@
                                     <state key="normal" title="스페이스">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="BfJ-6u-p6W"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TTH-vH-Aev">
                                     <rect key="frame" x="316" y="0.0" width="92" height="46"/>
@@ -288,6 +385,9 @@
                                     <state key="normal" title="⏎">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="pIT-8Y-WWY"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <constraints>
@@ -348,6 +448,8 @@
         </view>
     </objects>
     <resources>
+        <image name="delete.left" catalog="system" width="128" height="104"/>
+        <image name="shift" catalog="system" width="128" height="106"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
