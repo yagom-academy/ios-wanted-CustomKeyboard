@@ -8,11 +8,7 @@
 import Foundation
 
 class NetworkManager {
-    struct SuccessPostData {
-        var responseCode: Int
-        var data: String
-    }
-    
+    typealias ResponseCode = Int
     static let shared = NetworkManager()
     private let api = NetworkAPI()
     private let session: URLSession
@@ -49,7 +45,7 @@ class NetworkManager {
         }.resume()
     }
     
-    func postReview(message: String, completion: @escaping (Result<SuccessPostData, CustomError>) -> ()) {
+    func postReview(message: String, completion: @escaping (Result<ResponseCode, CustomError>) -> ()) {
         struct PostData: Codable {
             var content: String
         }
@@ -58,7 +54,7 @@ class NetworkManager {
             completion(.failure(CustomError.makeURLError))
             return
         }
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
@@ -78,16 +74,7 @@ class NetworkManager {
                 completion(.failure(CustomError.responseError(code: httpResponse.statusCode)))
                 return
             }
-            guard let data = data else {
-                completion(.failure(CustomError.noData))
-                return
-            }
-            do {
-                let postedData = try JSONDecoder().decode(PostData.self, from: data)
-                completion(.success(SuccessPostData(responseCode: httpResponse.statusCode, data: postedData.content)))
-            } catch {
-                completion(.failure(CustomError.decodingError))
-            }
+            completion(.success(httpResponse.statusCode))
         }.resume()
     }
 }
