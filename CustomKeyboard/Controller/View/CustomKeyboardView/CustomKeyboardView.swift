@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CustomKeyboardDelegate : AnyObject{
-    func hangulKeypadTap()
+    func hangulKeypadTap(char: String)
     func backKeypadTap()
     func enterKeypadTap()
     func spaceKeypadTap()
@@ -19,7 +19,7 @@ class CustomKeyboardView: UIView {
     weak var delegate : CustomKeyboardDelegate?
     
     @IBAction func hangulKeypadTap(_ sender: UIButton) {
-        delegate?.hangulKeypadTap()
+        delegate?.hangulKeypadTap(char: sender.currentTitle!)
     }
     
     @IBAction func shiftKeypadTap(_ sender: UIButton) {

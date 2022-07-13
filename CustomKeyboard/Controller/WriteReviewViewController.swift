@@ -15,13 +15,15 @@ class WriteReviewViewController: UIViewController {
     
     // MARK: - Properties
     weak var delegate: WriteReviewViewControllerDelegate?
+    let keyboardIOManager = KeyboardIOManager()
     
     // MARK: - ViewProperties
-    private let writeReviewTextView: UITextView = {
+    private lazy var writeReviewTextView: UITextView = {
         let textView = UITextView()
         textView.layer.borderColor = UIColor.lightGray.cgColor
         textView.layer.borderWidth = 1
         guard let loadNib = Bundle.main.loadNibNamed("CustomKeyboardView", owner: nil)?.first as? CustomKeyboardView else { return textView}
+        loadNib.delegate = keyboardIOManager
         textView.inputView = loadNib
         textView.becomeFirstResponder()
         
@@ -32,6 +34,9 @@ class WriteReviewViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        keyboardIOManager.updateTextView = {
+            self.writeReviewTextView.insertText($0)
+        }
         view.backgroundColor = .systemBackground
         configureSubViews()
         setConstraintsOfWriteReviewTextView()
