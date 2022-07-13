@@ -7,6 +7,10 @@
 
 import UIKit
 
-struct Review {
+struct Post: Codable {
+    let content: String
     
+    enum CodingKeys: String, CodingKey {
+        case content
+    }
 }
