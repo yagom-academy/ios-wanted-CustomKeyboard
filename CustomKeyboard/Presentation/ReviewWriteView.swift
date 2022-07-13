@@ -9,7 +9,7 @@ import UIKit
 
 class ReviewWriteView: UIViewController {
     private let textView = UITextView()
-    
+    private let customKeyboard = CustomKeyBoard()
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -29,14 +29,19 @@ class ReviewWriteView: UIViewController {
     }
     
     private func layout() {
-        [textView].forEach {
+        [textView, customKeyboard].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
+        customKeyboard.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        customKeyboard.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        customKeyboard.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        customKeyboard.heightAnchor.constraint(equalToConstant: CustomKeyBoard.Math.width*3/4).isActive = true
+        
         textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        textView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        textView.bottomAnchor.constraint(equalTo: customKeyboard.topAnchor).isActive = true
     }
 }

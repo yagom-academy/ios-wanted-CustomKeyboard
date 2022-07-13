@@ -9,14 +9,14 @@ import UIKit
 
 class CustomKeyBoard: UIView {
     struct Math {
-        static var windowWidth: CGFloat {
+        static var width: CGFloat {
             let sceneDelegate = UIApplication.shared.connectedScenes
                     .first!.delegate as! SceneDelegate
             return sceneDelegate.windowWidth!
         }
         static let buttonPadding = 5.0
-        static let buttonWidth = windowWidth / 10.0 - buttonPadding
-        static let fontSize: CGFloat = windowWidth < 340 ? 13.0 : 19.0
+        static let buttonWidth = width / 10.0 - buttonPadding
+        static let fontSize: CGFloat = width < 340 ? 13.0 : 19.0
     }
     var delegate: CustomKeyBoardDelegate?
     
@@ -71,7 +71,7 @@ extension CustomKeyBoard {
             $0.setTitleColor(.black, for: .normal)
             $0.layer.cornerRadius = 10
         }
-        print(Math.windowWidth)
+        print(Math.width)
         spaceButton.setTitle("space", for: .normal)
         spaceButton.backgroundColor = .white
         spaceButton.setTitleColor(.black, for: .normal)
@@ -129,17 +129,17 @@ extension CustomKeyBoard {
         [firstLineDynamicBasicKeys, secondLineBasicKeys, thirdLineContainer, firthLineContainer].forEach {
             $0.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1/6).isActive = true
         }
-        firstLineDynamicBasicKeys.widthAnchor.constraint(equalToConstant: Math.windowWidth-Math.buttonPadding*2).isActive = true
-        secondLineBasicKeys.widthAnchor.constraint(equalToConstant: Math.windowWidth-Math.buttonWidth-Math.buttonPadding*2).isActive = true
-        thirdLineContainer.widthAnchor.constraint(equalToConstant: Math.windowWidth-Math.buttonPadding*2).isActive = true
-        firthLineContainer.widthAnchor.constraint(equalToConstant: Math.windowWidth-Math.buttonPadding*2).isActive = true
+        firstLineDynamicBasicKeys.widthAnchor.constraint(equalToConstant: Math.width-Math.buttonPadding*2).isActive = true
+        secondLineBasicKeys.widthAnchor.constraint(equalToConstant: Math.width-Math.buttonWidth-Math.buttonPadding*2).isActive = true
+        thirdLineContainer.widthAnchor.constraint(equalToConstant: Math.width-Math.buttonPadding*2).isActive = true
+        firthLineContainer.widthAnchor.constraint(equalToConstant: Math.width-Math.buttonPadding*2).isActive = true
         
         //MARK: 세번째줄
         [shiftButton, thirdLineBasicKeys, backButton].forEach {
             thirdLineContainer.addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        thirdLineBasicKeys.widthAnchor.constraint(equalToConstant: Math.windowWidth-Math.buttonWidth*3-Math.buttonPadding*2).isActive = true
+        thirdLineBasicKeys.widthAnchor.constraint(equalToConstant: Math.width-Math.buttonWidth*3-Math.buttonPadding*2).isActive = true
         [shiftButton, backButton].forEach {
             $0.widthAnchor.constraint(equalToConstant: Math.buttonWidth*1.3).isActive = true
         }
