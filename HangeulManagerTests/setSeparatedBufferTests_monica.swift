@@ -23,7 +23,7 @@ class setSeparatedBufferTests: XCTestCase {
 
     func testSetSeparatedBuffer1() throws {
         hangeulManager.reset()
-        let input = HGChar.choseong.randomElement()!
+        let input = "ㄱ"
         let expectation = 1
         hangeulManager.update(input)
         let result = hangeulManager.getSeparatedBufferCount()
@@ -33,8 +33,8 @@ class setSeparatedBufferTests: XCTestCase {
 
     func testSetSeparatedBuffer2() throws {
         hangeulManager.reset()
-        let input1 = HGChar.choseong.randomElement()!
-        let input2 = HGChar.jungseong.randomElement()!
+        let input1 = "ㄱ"
+        let input2 = "ㅏ"
         let expectation = 2
         hangeulManager.update(input1)
         hangeulManager.update(input2)
@@ -45,7 +45,7 @@ class setSeparatedBufferTests: XCTestCase {
     
     func testSetSeparatedBuffer3() throws {
         hangeulManager.reset()
-        let input1 = HGChar.choseong.randomElement()!
+        let input1 = "ㄴ"
         let input2 = "ㅗ"
         let input3 = "ㅏ"
         let expectation = 2
@@ -59,8 +59,8 @@ class setSeparatedBufferTests: XCTestCase {
     
     func testSetSeparatedBuffer4() throws {
         hangeulManager.reset()
-        let input1 = HGChar.choseong.randomElement()!
-        let input2 = HGChar.choseong.randomElement()!
+        let input1 = "ㄱ"
+        let input2 = "ㄴ"
         let expectation = 1
         hangeulManager.update(input1)
         hangeulManager.update(input2)
@@ -71,8 +71,8 @@ class setSeparatedBufferTests: XCTestCase {
     
     func testSetSeparatedBuffer5() throws {
         hangeulManager.reset()
-        let input = HGChar.jungseong.randomElement()!
-        let expectation = 0
+        let input = "ㅑ"
+        let expectation = 1
         hangeulManager.update(input)
         let result = hangeulManager.getSeparatedBufferCount()
         
@@ -81,9 +81,9 @@ class setSeparatedBufferTests: XCTestCase {
     
     func testSetSeparatedBuffer6() throws {
         hangeulManager.reset()
-        let input1 = HGChar.choseong.randomElement()!
-        let input2 = HGChar.jungseong.randomElement()!
-        let input3 = HGChar.jongseong.randomElement()!
+        let input1 = "ㄹ"
+        let input2 = "ㅗ"
+        let input3 = "ㅇ"
         let expectation = 3
         hangeulManager.update(input1)
         hangeulManager.update(input2)
@@ -95,10 +95,10 @@ class setSeparatedBufferTests: XCTestCase {
     
     func testSetSeparatedBuffer7() throws {
         hangeulManager.reset()
-        let input1 = HGChar.choseong.randomElement()!
+        let input1 = "ㅊ"
         let input2 = "ㅡ"
         let input3 = "ㅣ"
-        let input4 = HGChar.jongseong.randomElement()!
+        let input4 = "ㅁ"
         let expectation = 3
         hangeulManager.update(input1)
         hangeulManager.update(input2)
@@ -111,8 +111,8 @@ class setSeparatedBufferTests: XCTestCase {
     
     func testSetSeparatedBuffer8() throws {
         hangeulManager.reset()
-        let input1 = HGChar.choseong.randomElement()!
-        let input2 = HGChar.jungseong.randomElement()!
+        let input1 = "ㅇ"
+        let input2 = "ㅑ"
         let input3 = "ㄹ"
         let input4 = "ㅁ"
         let expectation = 3
@@ -127,7 +127,7 @@ class setSeparatedBufferTests: XCTestCase {
     
     func testSetSeparatedBuffer9() throws {
         hangeulManager.reset()
-        let input1 = HGChar.choseong.randomElement()!
+        let input1 = "ㅈ"
         let input2 = "ㅏ"
         let input3 = "ㅗ"
         let expectation = 0
@@ -141,7 +141,7 @@ class setSeparatedBufferTests: XCTestCase {
     
     func testSetSeparatedBuffer10() throws {
         hangeulManager.reset()
-        let input1 = HGChar.choseong.randomElement()!
+        let input1 = "ㅎ"
         let input2 = "ㅡ"
         let input3 = "ㅣ"
         let input4 = "ㄹ"
@@ -159,11 +159,11 @@ class setSeparatedBufferTests: XCTestCase {
     
     func testSetSeparatedBuffer11() throws {
         hangeulManager.reset()
-        let input1 = HGChar.choseong.randomElement()!
-        let input2 = HGChar.jungseong.randomElement()!
+        let input1 = "ㄴ"
+        let input2 = "ㅏ"
         let input3 = "ㄹ"
         let input4 = "ㅁ"
-        let input5 = HGChar.jungseong.randomElement()!
+        let input5 = "ㅓ"
         let expectation = 2
         hangeulManager.update(input1)
         hangeulManager.update(input2)
@@ -177,12 +177,12 @@ class setSeparatedBufferTests: XCTestCase {
     
     func testSetSeparatedBuffer12() throws {
         hangeulManager.reset()
-        let input1 = HGChar.choseong.randomElement()!
+        let input1 = "ㄷ"
         let input2 = "ㅡ"
         let input3 = "ㅣ"
         let input4 = "ㄹ"
         let input5 = "ㅁ"
-        let input6 = HGChar.jungseong.randomElement()!
+        let input6 = "ㅣ"
         let expectation = 2
         hangeulManager.update(input1)
         hangeulManager.update(input2)
@@ -197,10 +197,10 @@ class setSeparatedBufferTests: XCTestCase {
     
     func testSetSeparatedBuffer13() throws {
         hangeulManager.reset()
-        let input1 = HGChar.choseong.randomElement()!
-        let input2 = HGChar.jungseong.randomElement()!
+        let input1 = "ㄹ"
+        let input2 = "ㅗ"
         let input3 = "ㄹ"
-        let input4 = HGChar.jungseong.randomElement()!
+        let input4 = "ㅏ"
         let expectation = 2
         hangeulManager.update(input1)
         hangeulManager.update(input2)
@@ -213,12 +213,12 @@ class setSeparatedBufferTests: XCTestCase {
     
     func testSetSeparatedBuffer14() throws {
         hangeulManager.reset()
-        let input1 = HGChar.choseong.randomElement()!
+        let input1 = "ㅎ"
         let input2 = "ㅗ"
         let input3 = "ㅏ"
-        let input4 = HGChar.jongseong.randomElement()!
-        let input5 = HGChar.jungseong.randomElement()!
-        let expectation = 2
+        let input4 = "ㅁ"
+        let input5 = "ㅂ"
+        let expectation = 1
         hangeulManager.update(input1)
         hangeulManager.update(input2)
         hangeulManager.update(input3)
@@ -231,9 +231,9 @@ class setSeparatedBufferTests: XCTestCase {
     
     func testSetSeparatedBuffer15() throws {
         hangeulManager.reset()
-        let input1 = HGChar.choseong.randomElement()!
-        let input2 = HGChar.jungseong.randomElement()!
-        let input3 = HGChar.jongseong.randomElement()!
+        let input1 = "ㄱ"
+        let input2 = "ㅏ"
+        let input3 = "ㄴ"
         let input4 = "ㅍ"
         let expectation = 1
         hangeulManager.update(input1)
@@ -247,8 +247,8 @@ class setSeparatedBufferTests: XCTestCase {
     
     func testSetSeparatedBuffer16() throws {
         hangeulManager.reset()
-        let input1 = HGChar.choseong.randomElement()!
-        let input2 = HGChar.jungseong.randomElement()!
+        let input1 = "ㄹ"
+        let input2 = "ㅜ"
         let input3 = "ㄹ"
         let input4 = "ㅁ"
         let input5 = "ㅅ"
@@ -265,10 +265,10 @@ class setSeparatedBufferTests: XCTestCase {
     
     func testSetSeparatedBuffer17() throws {
         hangeulManager.reset()
-        let input1 = HGChar.choseong.randomElement()!
+        let input1 = "ㄲ"
         let input2 = "ㅗ"
         let input3 = "ㅏ"
-        let input4 = HGChar.jungseong.randomElement()!
+        let input4 = "ㅜ"
         let input5 = "ㅅ"
         let expectation = 1
         hangeulManager.update(input1)
@@ -283,7 +283,7 @@ class setSeparatedBufferTests: XCTestCase {
     
     func testSetSeparatedBuffer18() throws {
         hangeulManager.reset()
-        let input1 = HGChar.choseong.randomElement()!
+        let input1 = "ㅁ"
         let input2 = "ㅗ"
         let input3 = "ㅏ"
         let input4 = "ㄹ"

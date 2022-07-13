@@ -7,122 +7,94 @@
 
 import Foundation
 
-enum HGStatus {
-    case start, choseong, jungseong, doubleJungseong, jongseong, doubleJongseong, endCaseOne, endCaseTwo
-}
-
-enum CharacterKind {
-    case consonant, vowel
-}
-
-struct HGChar {
-    static let choseong: [String] = ["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
-
-    static let jungseong: [String] = ["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"]
-
-    static let jongseong: [String] = ["", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
-
-    static let splitJongseong: [String] = ["", "ㄱ", "ㄲ", "ㄱㅅ", "ㄴ", "ㄴㅈ", "ㄴㅎ", "ㄷ", "ㄹ", "ㄹㄱ", "ㄹㅁ", "ㄹㅂ", "ㄹㅅ", "ㄹㅌ", "ㄹㅍ", "ㄹㅎ", "ㅁ", "ㅂ", "ㅂㅅ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
-    
-    static let baseCode = 44032
-    static let jungCount = 21
-    static let jongCount = 28
-    static let firstChoseongUnicodeValue = 0x1100
-    static let firstJungseongUnicodeValue = 0x1161
-    static let firstJongseongUnicodeValue = 0x11A7
-}
-
-struct Double {
-    static let jungseong = ["ㅗ": ["ㅏ": "ㅘ", "ㅐ": "ㅙ", "ㅣ": "ㅚ"], "ㅜ": ["ㅓ": "ㅝ", "ㅔ": "ㅞ", "ㅣ": "ㅟ"], "ㅡ": ["ㅣ": "ㅢ"]]
-    static let jongseong = ["ㄱ": ["ㅅ": "ㄳ"], "ㄴ": ["ㅈ": "ㄵ", "ㅎ": "ㄶ"], "ㄹ": ["ㄱ": "ㄺ", "ㅁ": "ㄻ", "ㅂ": "ㄼ", "ㅅ": "ㄽ", "ㅌ": "ㄾ", "ㅍ": "ㄿ", "ㅎ": "ㅀ"], "ㅂ": ["ㅅ": "ㅄ"]]
-}
-
 class HangeulManager {
 
     static let shared = HangeulManager()
     private init() { }
 
-    private var separatedBuffer = [String]() // 아직 조합이 완성되지 않은 문자들만 담아놓기
-    private var combinedBuffer = [String]() // 화면에 출력될 글자들만 담아놓기
-    private var status = HGStatus.start
+    private var separatedBuffer = [Int]() // 아직 조합이 완성되지 않은 문자들만 담아놓기(fixed unicode)
+    private var combinedBuffer = [Int]() // 화면에 출력될 글자들만 담아놓기(fixed unicode)
+    private var status = HG.Status.start
 }
 
 // MARK: - 문자 입력시 호출
 
 extension HangeulManager {
-    func update(_ input: String) {
+    func update(_ inputString: String) {
+        let input = Int(UnicodeScalar(inputString)!.value)
         setStatus(input)
         setSeparatedBuffer(input)
+        print("status: \(status), buffer: \(separatedBuffer), input: \(input)")
 //        setCombinedBuffer(input) // 조합상태에 따라서 출력할 문자열 완성하기
     }
 }
+
 
 // MARK: - 문자 조합 상태 결정
 
 extension HangeulManager {
 
-    private func setStatus(_ input: String) {
-                setBasicStatus()
-                setNewStatus(input)
+    private func setStatus(_ input: Int) {
+        setBasicStatus()
+        setNewStatus(input)
     }
 
     private func setBasicStatus() {
-        switch self.status {
+        switch status {
         case .endCaseOne:
             if separatedBuffer.isEmpty {
-                self.status = .start
+                status = .start
             } else {
-                self.status = .choseong
+                status = .choseong
             }
         case .endCaseTwo:
-            self.status = .jungseong
+            status = .jungseong
         default:
             break
         }
     }
     
-    private func setNewStatus(_ input: String) {
-        let characterKind:CharacterKind = HGChar.jungseong.contains(input) ? .vowel : .consonant
-        let lastChar = self.separatedBuffer.last ?? ""
+    private func setNewStatus(_ input: Int) {
+        let charKind: HG.Kind = HG.compatible.midList.contains(input) ? .vowel : .consonant
+        let prev = separatedBuffer.last ?? 0
         
-        switch self.status {
+        switch status {
         case .start:
-            if characterKind == .consonant {
-                self.status = .choseong
+            if charKind == .consonant {
+                status = .choseong
             } else {
-                self.status = .endCaseOne
+                status = .jungseong
             }
         case .choseong:
-            if characterKind == .vowel {
+            if charKind == .vowel {
                 status = .jungseong
             } else {
-                status = .endCaseOne // 초성이 들어온 상태에서 또 자음이 입력된 경우 끝!
+                status = .endCaseOne
             }
-        case .jungseong: // 종성이 될수 있는 자음 또는 겹모음이 될수 있는 모음
-            if HGChar.jongseong.contains(input) {
+        case .jungseong:
+            if bufferHasChoseong() && HG.compatible.endList.contains(input) {
                 status = .jongseong
-            } else if Double.jungseong[lastChar]?[input] != nil {
+            } else if isDouble(a: prev, b: input) {
                 status = .doubleJungseong
-                print("here!")
             } else {
                 status = .endCaseOne
             }
-        case .doubleJungseong: // 종성이 될 수 있는 자음
-            if HGChar.jongseong.contains(input) {
-                    status = .jongseong
-                } else {
-                    status = .endCaseOne
-                }
+        case .doubleJungseong:
+            if bufferHasChoseong() && HG.compatible.endList.contains(input) {
+                status = .jongseong
+            } else {
+                status = .endCaseOne
+            }
         case .jongseong:
-            if Double.jongseong[lastChar]?[input] != nil {
+            if isDouble(a: prev, b: input) {
                 status = .doubleJongseong
-            } else if characterKind == .vowel {
+            } else if charKind == .vowel {
                 status = .endCaseTwo
             } else {
                 status = .endCaseOne
             }
         case .doubleJongseong:
-            if characterKind == .vowel {
+            if charKind == .vowel {
                 status = .endCaseTwo
             } else {
                 status = .endCaseOne
@@ -133,38 +105,55 @@ extension HangeulManager {
     }
 }
 
-// MARK: - buffer에 문자 추가/삭제
+// MARK: - separatedBuffer에 문자 추가/삭제
 
 extension HangeulManager {
-    private func setSeparatedBuffer(_ input: String) {
-        let characterKind: CharacterKind = HGChar.jungseong.contains(input) ? .vowel : .consonant
-
-        switch self.status {
-        case .choseong, .jungseong, .jongseong:
-            self.separatedBuffer.append(input)
+    private func setSeparatedBuffer(_ input: Int) {
+        let charKind: HG.Kind = HG.compatible.midList.contains(input) ? .vowel : .consonant
+        
+        switch status {
+        case .choseong:
+            let index = HG.compatible.topList.firstIndex(of: input) ?? 0
+            let char = HG.fixed.top.list[index]
+            separatedBuffer.append(char)
+        case .jungseong:
+            let index = HG.compatible.midList.firstIndex(of: input) ?? 0
+            let char = HG.fixed.mid.list[index]
+            separatedBuffer.append(char)
+        case .jongseong:
+            let index = HG.compatible.endList.firstIndex(of: input) ?? 0
+            let char = HG.fixed.end.list[index]
+            separatedBuffer.append(char)
         case .doubleJungseong:
-            let last = separatedBuffer.removeLast()
-            let newChar = Double.jungseong[last]?[input]
-            self.separatedBuffer.append(newChar ?? "")
+            let index = HG.compatible.midList.firstIndex(of: input) ?? 0
+            let curr = HG.fixed.mid.list[index]
+            let prev = separatedBuffer.removeLast()
+            let char = HG.fixed.mid.double[prev]?[curr] ?? 0
+            separatedBuffer.append(char)
         case .doubleJongseong:
-            let last = self.separatedBuffer.removeLast()
-            let newChar = Double.jongseong[last]?[input]
-            self.separatedBuffer.append(newChar ?? "")
+            let index = HG.compatible.endList.firstIndex(of: input) ?? 0
+            let curr = HG.fixed.end.list[index]
+            let prev = separatedBuffer.removeLast()
+            let char = HG.fixed.end.double[prev]?[curr] ?? 0
+            separatedBuffer.append(char)
         case .endCaseOne:
-            if characterKind == .vowel {
-                self.separatedBuffer = []
+            if charKind == .vowel {
+                separatedBuffer = []
             } else {
-                self.separatedBuffer = [input]
+                let index = HG.compatible.topList.firstIndex(of: input) ?? 0
+                let char = HG.fixed.top.list[index]
+                separatedBuffer = [char]
             }
         case .endCaseTwo:
-            let last = separatedBuffer.removeLast()
-            self.separatedBuffer = [last, input]
+            let prev = separatedBuffer.removeLast()
+            let index = HG.compatible.midList.firstIndex(of: input) ?? 0
+            let char = HG.fixed.mid.list[index]
+            separatedBuffer = [prev, char]
         default:
             break
         }
     }
 }
-
 // MARK: - 프로퍼티 초기화
 
 extension HangeulManager {
@@ -186,14 +175,12 @@ extension HangeulManager {
 // MARK: - 초성/중성/종성을 모아 한 글자로 만드는 메서드
 
 extension HangeulManager {
-    func getCombinedWord(_ cho: String, _ jung: String, _ jong: String) -> String {
-        let choIndex = Int(HGChar.choseong.firstIndex(of: cho) ?? 0)
-        let jungIndex = Int(HGChar.jungseong.firstIndex(of: jung) ?? 0)
-        let jongIndex = Int(HGChar.jongseong.firstIndex(of: jong) ?? 0)
+    func getCombinedWord(_ top: Int, _ mid: Int, _ end: Int) -> Int {
+        let topIndex = Int(HG.fixed.top.list.firstIndex(of: top) ?? 0)
+        let midIndex = Int(HG.fixed.mid.list.firstIndex(of: mid) ?? 0)
+        let endIndex = Int(HG.fixed.end.list.firstIndex(of: end) ?? 0)
         
-        let combinedValue = (choIndex * HGChar.jungCount * HGChar.jongCount) + (jungIndex * HGChar.jongCount) + jongIndex + HGChar.baseCode
-        
-        let combinedWord = String(UnicodeScalar(combinedValue)!)
+        let combinedWord = (topIndex * HG.midCount * HG.endCount) + (midIndex * HG.endCount) + endIndex + HG.baseCode
         
         return combinedWord
     }
@@ -202,17 +189,51 @@ extension HangeulManager {
 // MARK: - 한 글자를 초성, 중성, 종성으로 해체하는 함수
 
 extension HangeulManager {
-    func getSeparatedCharacters(from word: String) -> [String] {
-        let unicode = Int(UnicodeScalar(word)!.value) - HGChar.baseCode
+    func getSeparatedCharacters(from word: Int) -> [Int] {
+        let unicode = word - HG.baseCode
         
-        let choValue = (((unicode - (unicode % HGChar.jongCount)) / HGChar.jongCount) / HGChar.jungCount) + HGChar.firstChoseongUnicodeValue
-        let jungValue = (((unicode - (unicode % HGChar.jongCount)) / HGChar.jongCount) % HGChar.jungCount) + HGChar.firstJungseongUnicodeValue
-        let jongValue = (unicode % HGChar.jongCount) + HGChar.firstJongseongUnicodeValue
-
-        let cho = String(UnicodeScalar(choValue)!)
-        let jung = String(UnicodeScalar(jungValue)!)
-        let jong = String(UnicodeScalar(jongValue)!)
+        let top = (((unicode - (unicode % HG.endCount)) / HG.endCount) / HG.midCount) + HG.fixed.top.list.first!
+        let mid = (((unicode - (unicode % HG.endCount)) / HG.endCount) % HG.midCount) + HG.fixed.mid.list.first!
+        let end = (unicode % HG.endCount) + HG.fixed.end.list.first!
         
-        return [cho, jung, jong]
+        return [top, mid, end]
     }
+}
+
+
+// MARK: - 겹모음인지, 겹받침인지, separatedBuffer에 초성이 있는지 판정
+
+extension HangeulManager {
+    
+    private func isDouble(a prev: Int, b input: Int) -> Bool {
+        
+        if status == .jungseong {
+            
+            let index = HG.compatible.midList.firstIndex(of: input) ?? 0
+            let inputFixedUnicode = HG.fixed.mid.list[index]
+            
+            if HG.fixed.mid.double[prev]?[inputFixedUnicode] != nil {
+                return true
+            } else {
+                return false
+            }
+        } else if status == .jongseong || status == .endCaseTwo {
+            
+            let index = HG.compatible.endList.firstIndex(of: input) ?? 0
+            let inputFixedUnicode = HG.fixed.end.list[index]
+            
+            print(prev, inputFixedUnicode)
+            if HG.fixed.end.double[prev]?[inputFixedUnicode] != nil {
+                return true
+            } else {
+                return false
+            }
+        }
+        return true
+    }
+    
+    private func bufferHasChoseong() -> Bool {
+        return separatedBuffer.count > 1 ? true : false
+    }
+    
 }

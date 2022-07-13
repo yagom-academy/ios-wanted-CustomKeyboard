@@ -11,7 +11,7 @@ import XCTest
 class getSeparatedTests_monica: XCTestCase {
 
     var hangeulManager: HangeulManager!
-    
+
     override func setUpWithError() throws {
         try super.setUpWithError()
         hangeulManager = HangeulManager.shared
@@ -22,70 +22,70 @@ class getSeparatedTests_monica: XCTestCase {
     }
 
     func testGetSeparatedCharacters1() throws {
-        
-        let input = "가"
-        let expectation = [String(UnicodeScalar(HGChar.firstChoseongUnicodeValue)!) ,String(UnicodeScalar(HGChar.firstJungseongUnicodeValue)!) , String(UnicodeScalar(HGChar.firstJongseongUnicodeValue)!)]
+
+        let input = 0xAC00
+        let expectation = [HG.fixed.top.kiyeok, HG.fixed.mid.a, HG.fixed.end.blank]
         let result = hangeulManager.getSeparatedCharacters(from: input)
-        
+
         for i in 0..<result.count {
             XCTAssertEqual(result[i], expectation[i], "초성 + 중성 에러")
         }
-        
+
     }
-    
+
     func testGetSeparatedCharacters2() throws {
-        let input = "감"
-        let expectation = [String(UnicodeScalar(HGChar.firstChoseongUnicodeValue)!), String(UnicodeScalar(HGChar.firstJungseongUnicodeValue)!), String(UnicodeScalar(0x11B7)!)]
+        let input = 0xB2EC
+        let expectation = [HG.fixed.top.digeud, HG.fixed.mid.a, HG.fixed.end.rieul]
         let result = hangeulManager.getSeparatedCharacters(from: input)
-        
+
         for i in 0..<result.count {
             XCTAssertEqual(result[i], expectation[i], "초성 + 중성 + 종성 에러")
         }
-        
+
     }
-    
+
     func testGetSeparatedCharacters3() throws {
-        let input = "굄"
-        let expectation = [String(UnicodeScalar(HGChar.firstChoseongUnicodeValue)!), String(UnicodeScalar(0x116c)!), String(UnicodeScalar(0x11B7)!)]
+        let input = 0xB8B8
+        let expectation = [HG.fixed.top.rieul, HG.fixed.mid.oe, HG.fixed.end.rieul]
         let result = hangeulManager.getSeparatedCharacters(from: input)
-        
+
         for i in 0..<result.count {
             XCTAssertEqual(result[i], expectation[i], "초성 + 겹모음 + 종성 에러")
         }
-        
+
     }
-    
+
     func testGetSeparatedCharacters4() throws {
-        let input = "괾"
-        let expectation = [String(UnicodeScalar(HGChar.firstChoseongUnicodeValue)!), String(UnicodeScalar(0x116c)!), String(UnicodeScalar(0x11B1)!)]
+        let input = 0xB636
+        let expectation = [HG.fixed.top.ssangDigeud, HG.fixed.mid.wa, HG.fixed.end.rieulMieum]
         let result = hangeulManager.getSeparatedCharacters(from: input)
-        
+
         for i in 0..<result.count {
             XCTAssertEqual(result[i], expectation[i], "초성 + 겹모음 + 겹받침 에러")
         }
-        
+
     }
-    
+
     func testGetSeparatedCharacters5() throws {
-        let input = "갊"
-        let expectation = [String(UnicodeScalar(HGChar.firstChoseongUnicodeValue)!) ,String(UnicodeScalar(HGChar.firstJungseongUnicodeValue)!) , String(UnicodeScalar(0x11B1)!)]
+        let input = 0xC62D
+        let expectation = [HG.fixed.top.ieung, HG.fixed.mid.o, HG.fixed.end.rieulKiyeok]
         let result = hangeulManager.getSeparatedCharacters(from: input)
-        
+
         for i in 0..<result.count {
             XCTAssertEqual(result[i], expectation[i], "초성 + 종성 + 겹받침 에러")
         }
-        
+
     }
-    
+
     func testGetSeparatedCharacters6() throws {
-        let input = "괴"
-        let expectation = [String(UnicodeScalar(HGChar.firstChoseongUnicodeValue)!), String(UnicodeScalar(0x116c)!), String(UnicodeScalar(HGChar.firstJongseongUnicodeValue)!)]
+        let input = 0xC020
+        let expectation = [HG.fixed.top.ssangBieub, HG.fixed.mid.wi, HG.fixed.end.blank]
         let result = hangeulManager.getSeparatedCharacters(from: input)
-        
+
         for i in 0..<result.count {
             XCTAssertEqual(result[i], expectation[i], "초성 + 겹모음 에러")
         }
-        
+
     }
 
 }
