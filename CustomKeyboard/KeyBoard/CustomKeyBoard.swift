@@ -20,7 +20,7 @@ class CustomKeyBoard: UIView {
     }
     
     private let mainContainer = UIStackView()
-    private let firstLineDynamicBasicKeys = BasicKeyLine(keys: ["ㅂ", "ㅈ", "ㄷ", "ㄱ", "ㅅ", "ㅛ", "ㅕ", "ㅑ", "ㅐ", "ㅔ"])
+    private let firstLineDynamicBasicKeys = DynamicBasicKeyLine()
     
     private let secondLineBasicKeys = BasicKeyLine(keys: ["ㅁ", "ㄴ", "ㅇ", "ㄹ", "ㅎ", "ㅗ", "ㅓ", "ㅏ", "ㅣ"])
     
@@ -55,6 +55,7 @@ extension CustomKeyBoard {
         thirdLineContainer.distribution = .equalSpacing
         
         shiftButton.setTitle("Shift", for: .normal)
+        shiftButton.addTarget(self, action: #selector(tappedShiftKey), for: .touchUpInside)
         
         backButton.setTitle("Back", for: .normal)
         
@@ -66,6 +67,13 @@ extension CustomKeyBoard {
         
         //temp
         firthLineKeys.backgroundColor = .red
+    }
+}
+
+//MARK: - Shift 버튼 기능
+extension CustomKeyBoard {
+    @objc private func tappedShiftKey() {
+        firstLineDynamicBasicKeys.tappedShiftKey()
     }
 }
 
