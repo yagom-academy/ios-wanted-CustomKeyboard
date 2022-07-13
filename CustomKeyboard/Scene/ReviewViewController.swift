@@ -9,13 +9,16 @@ import UIKit
 
 class ReviewViewController: UIViewController {
     private let reviewTableView = UITableView()
-    private let reviewList: [Review] = []
+    private var reviewList: [Review] = []
+    private var viewModel = ReviewViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         attribute()
         layout()
+        bind(viewModel)
+        reviewList = viewModel.getReview()
     }
 }
 
@@ -42,6 +45,10 @@ extension ReviewViewController {
         reviewTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         reviewTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         reviewTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    
+    private func bind(_ viewModel: ReviewViewModel) {
+        self.viewModel = viewModel
     }
 }
 
@@ -75,6 +82,7 @@ extension ReviewViewController: UITextFieldDelegate {
         
         // TODO: - KeyboardViewController와 연결
         let vc = UIViewController()
-//        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
+        textField.resignFirstResponder()
     }
 }
