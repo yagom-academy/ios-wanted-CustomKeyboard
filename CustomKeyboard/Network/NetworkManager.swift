@@ -29,18 +29,26 @@ class NetworkManager {
             guard error == nil,
                 let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
-                completion(.failure(CustomError.loadError))
+                DispatchQueue.main.async {
+                    completion(.failure(CustomError.loadError))
+                }
                 return
             }
             guard let data = data else {
-                completion(.failure(CustomError.noData))
+                DispatchQueue.main.async {
+                    completion(.failure(CustomError.noData))
+                }
                 return
             }
             do {
                 let hasData = try JSONDecoder().decode(ReviewTypes.self, from: data)
-                completion(.success(hasData))
+                DispatchQueue.main.async {
+                    completion(.success(hasData))
+                }
             } catch {
-                completion(.failure(CustomError.decodingError))
+                DispatchQueue.main.async {
+                    completion(.failure(CustomError.decodingError))
+                }
             }
         }.resume()
     }
@@ -67,14 +75,20 @@ class NetworkManager {
         session.dataTask(with: request) { data, response, error in
             guard error == nil,
                 let httpResponse = response as? HTTPURLResponse else {
-                completion(.failure(CustomError.loadError))
+                DispatchQueue.main.async {
+                    completion(.failure(CustomError.loadError))
+                }
                 return
             }
             guard (200...299).contains(httpResponse.statusCode) else {
-                completion(.failure(CustomError.responseError(code: httpResponse.statusCode)))
+                DispatchQueue.main.async {
+                    completion(.failure(CustomError.responseError(code: httpResponse.statusCode)))
+                }
                 return
             }
-            completion(.success(httpResponse.statusCode))
+            DispatchQueue.main.async {
+                completion(.success(httpResponse.statusCode))
+            }
         }.resume()
     }
 }
