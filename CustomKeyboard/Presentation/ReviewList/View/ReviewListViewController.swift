@@ -20,9 +20,13 @@ class ReviewListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         reviewListView.tableView.dataSource = self
-        reviewListView.reviewInputView.delegate = self
         getDataFromServer()
-        postDataToServer()
+        
+        // test
+        let tap = UITapGestureRecognizer(target: self, action: #selector(pressReviewInput))
+        reviewListView.reviewInputLabel.isUserInteractionEnabled = true
+        reviewListView.reviewInputLabel.addGestureRecognizer(tap)
+//        postDataToServer()
     }
     
     func getDataFromServer() {
@@ -38,18 +42,11 @@ class ReviewListViewController: BaseViewController {
         ReviewDataManager.shared.postData("https://api.plkey.app/tmp/theme/PLKEY0-L-81/review", "hi")
     }
     
-}
-
-extension ReviewListViewController: UITextViewDelegate {
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == "이 테마가 마음에 드시나요?" {
-            textView.text = nil
-            textView.textColor = .black
-        }
+    @IBAction func pressReviewInput(sender: UITapGestureRecognizer) {
         let keyboardViewController = KeyboardViewController()
         present(keyboardViewController, animated: true)
     }
+    
 }
 
 extension ReviewListViewController: UITableViewDataSource {
@@ -60,7 +57,7 @@ extension ReviewListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewListTableViewCell.identifier, for: indexPath) as? ReviewListTableViewCell else {return UITableViewCell()}
         
-        cell.profileImage.image = makeImage(reviewList?.data[indexPath.row].user.profileImage ?? "")
+        cell.profileImage.image = makeStringToImage(reviewList?.data[indexPath.row].user.profileImage ?? "")
         cell.userNameLabel.text = reviewList?.data[indexPath.row].user.userName
         cell.reviewTextLabel.text = reviewList?.data[indexPath.row].content
         cell.timeLabel.text = reviewList?.data[indexPath.row].createdAt
@@ -68,7 +65,7 @@ extension ReviewListViewController: UITableViewDataSource {
         return cell
     }
     
-    func makeImage(_ imageString : String) -> UIImage? {
+    func makeStringToImage(_ imageString : String) -> UIImage? {
         guard let url = URL(string: imageString) else {return nil}
         
         do {

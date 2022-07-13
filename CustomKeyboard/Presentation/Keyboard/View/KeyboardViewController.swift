@@ -11,7 +11,7 @@ let letters = [
     "ㅂ","ㅈ","ㄷ","ㄱ","ㅅ","ㅛ","ㅕ","ㅑ","ㅐ",
     "ㅔ","ㅁ","ㄴ","ㅇ","ㄹ","ㅎ","ㅗ","ㅓ","ㅏ",
     "ㅣ","up","ㅋ","ㅌ","ㅊ","ㅍ","ㅠ","ㅜ","ㅡ",
-    "지움","123","스페이스","엔터"
+    "지움","스페이스","엔터"
 ]
 
 class KeyboardViewController: BaseViewController {
@@ -33,7 +33,7 @@ extension KeyboardViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 31
+        return 30
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -77,5 +77,11 @@ extension KeyboardViewController: UICollectionViewDelegateFlowLayout{
         let section = NSCollectionLayoutSection(group: group)
         
         return UICollectionViewCompositionalLayout(section: section)
+    }
+}
+
+extension KeyboardViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(letters[indexPath.row])
     }
 }
