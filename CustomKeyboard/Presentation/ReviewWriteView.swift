@@ -26,6 +26,8 @@ class ReviewWriteView: UIViewController {
         self.title = " 리뷰 작성 "
         view.backgroundColor = .white
         textView.font = .systemFont(ofSize: 20)
+        
+        customKeyboard.delegate = self
     }
     
     private func layout() {
@@ -43,5 +45,16 @@ class ReviewWriteView: UIViewController {
         textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         textView.bottomAnchor.constraint(equalTo: customKeyboard.topAnchor).isActive = true
+    }
+}
+
+//MARK: - 커스텀키보드 Delegate 메서드
+extension ReviewWriteView: CustomKeyBoardDelegate {
+    func tappedReturnButton() {
+        print("return버튼 클릭!")
+    }
+    
+    func connectTextView() -> UITextView {
+        return self.textView
     }
 }
