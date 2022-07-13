@@ -18,7 +18,13 @@ class ReviewViewController: UIViewController {
         attribute()
         layout()
         bind(viewModel)
-        reviewList = viewModel.getReview()
+        viewModel.getReview { [weak self] reviews in
+            guard let self = self  else { return }
+            self.reviewList = reviews.reviewData
+            DispatchQueue.main.async {
+                self.reviewTableView.reloadData()
+            }
+        }
     }
 }
 
@@ -55,13 +61,14 @@ extension ReviewViewController {
 // MARK: - TableViewDataSource, TableViewDelegate
 extension ReviewViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        return reviewList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewTableViewCell", for: indexPath) as? ReviewTableViewCell else { return UITableViewCell() }
         
-        cell.setup()
+        let review = reviewList[indexPath.row]
+        cell.setup(review)
         
         return cell
     }

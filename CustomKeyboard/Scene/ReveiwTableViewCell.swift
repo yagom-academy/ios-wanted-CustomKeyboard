@@ -11,8 +11,7 @@ class ReviewTableViewCell: UITableViewCell {
     private let profileImage: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 30
-        
-        image.image = UIImage(systemName: "person.circle.fill")
+        image.clipsToBounds = true
         image.tintColor = .lightGray
         
         return image
@@ -22,7 +21,6 @@ class ReviewTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textColor = .label
-        label.text = "NAME"
         
         return label
     }()
@@ -40,7 +38,6 @@ class ReviewTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .medium)
         label.textColor = .label
-        label.text = "별점: "
         
         return label
     }()
@@ -49,7 +46,6 @@ class ReviewTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .medium)
         label.textColor = .label
-        label.text = "리뷰: "
         
         return label
     }()
@@ -58,13 +54,18 @@ class ReviewTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .light)
         label.textColor = .secondaryLabel
-        label.text = "time"
         
         return label
     }()
     
-    func setup() {
+    func setup(_ review: Review) {
         layout()
+        
+        profileImage.image = urlToImage(review.user.profileImage)
+        nameLabel.text = review.user.userName
+        timeLabel.text = dateToTime(review.createdAt)
+        starLabel.text = "별점: "
+        reviewLabel.text = "리뷰: "
     }
 }
 
@@ -91,7 +92,7 @@ extension ReviewTableViewCell {
         
         nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 18).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: inset).isActive = true
-        nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset).isActive = true
+        nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -60).isActive = true
         
         warningLabel.centerYAnchor.constraint(equalTo: nameLabel.centerYAnchor).isActive = true
         warningLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset).isActive = true
@@ -108,5 +109,27 @@ extension ReviewTableViewCell {
         timeLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: inset).isActive = true
         timeLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset).isActive = true
         timeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -inset).isActive = true
+    }
+    
+    private func dateToTime(_ createdAt: String) -> String {
+        return ""
+    }
+    
+    private func separateStarAndReview(_ content: String) -> [String] {
+        let temp = content.components(separatedBy: [":", "\n"])
+        return []
+    }
+    
+    private func urlToImage(_ url: String) -> UIImage {
+        guard let imageURL = URL(string: url) else { return UIImage() }
+        
+        do {
+            let imageData = try Data(contentsOf: imageURL)
+            let image = UIImage(data: imageData)
+            return image ?? UIImage()
+        } catch let error {
+            print("Image Error: \(String(describing: error))")
+            return UIImage()
+        }
     }
 }
