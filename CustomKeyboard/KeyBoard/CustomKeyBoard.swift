@@ -19,6 +19,7 @@ class CustomKeyBoard: UIView {
         static let fontSize: CGFloat = width < 340 ? 13.0 : 19.0
     }
     var delegate: CustomKeyBoardDelegate?
+    private var textView: UITextView?
     
     private let mainContainer = UIStackView()
     
@@ -39,10 +40,18 @@ class CustomKeyBoard: UIView {
         super.init(frame: CGRect.zero)
         attribute()
         layout()
+        connetTextView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+//MARK: - UITextView와 키보드를 연결하는 메서드
+extension CustomKeyBoard {
+    private func connetTextView() {
+        self.textView = delegate?.connectTextView()
     }
 }
 
@@ -98,8 +107,8 @@ extension CustomKeyBoard {
 //MARK: - Space 버튼 기능
 extension CustomKeyBoard {
     @objc private func tappedSpaceButton(_ sender: UIButton) {
-        print(sender.tag)
-        print(String(UnicodeScalar(sender.tag)!))
+        let space = String(UnicodeScalar(sender.tag)!)
+        self.textView?.text = (self.textView?.text) ?? "" + space
     }
 }
 

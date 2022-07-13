@@ -9,4 +9,5 @@ import UIKit
 
 protocol CustomKeyBoardDelegate {
     func tappedReturnButton()
+    func connectTextView() -> UITextView
 }
