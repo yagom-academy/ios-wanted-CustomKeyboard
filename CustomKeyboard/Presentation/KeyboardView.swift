@@ -26,43 +26,58 @@ class KeyboardView: UIView {
         return view
     }()
     
-    private lazy var keyboardVerticalStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        return stackView
-    }()
-    
     private lazy var keyboardFirstLineStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        
+        stackView.alignment = .center
+        stackView.distribution = .equalSpacing
         return stackView
     }()
     
     private lazy var keyboardSecondLineStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        
+        stackView.alignment = .center
+        stackView.distribution = .equalSpacing
         return stackView
     }()
     
     private lazy var keyboardThirdLineStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .equalSpacing
         return stackView
     }()
     
     private lazy var shiftKeyButton: UIButton = {
         let button = UIButton()
+        button.backgroundColor = .systemGray
+        button.layer.cornerRadius = 5
+        button.setImage(UIImage.init(systemName: "circle"), for: .normal)
+        
+        button.heightAnchor.constraint(equalToConstant: self.bounds.height * 0.3 / 4 * 0.8 ) .isActive  = true
+        button.widthAnchor.constraint(equalTo: button.heightAnchor).isActive = true
         return button
     }()
     
     private lazy var deleteKeyButton: UIButton = {
         let button = UIButton()
+        button.backgroundColor = .systemGray
+        button.setImage(UIImage.init(systemName: "square"), for: .normal)
+        button.heightAnchor.constraint(equalToConstant: self.bounds.height * 0.3 / 4 * 0.8 ) .isActive  = true
+        button.widthAnchor.constraint(equalTo: button.heightAnchor).isActive = true
         return button
     }()
     
     private lazy var keyboardFourthLineStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .center
+        stackView.spacing = 7
         return stackView
     }()
     
@@ -80,31 +95,86 @@ class KeyboardView: UIView {
         setupConstraints()
     }
     
+}
+
+extension KeyboardView {
+    
+    // MARK: - UI Methods
+    
+    private func insertKeyboardKeys() {
+        for char in "ㅂㅈㄷㄱㅅㅛㅕㅑㅐㅔ" {
+            let key = makeKeyboardButtons(contents: "\(char)")
+            keyboardFirstLineStackView.addArrangedSubview(key)
+        }
+        
+        for char in "ㅁㄴㅇㄹㅎㅗㅓㅏㅣ" {
+            let key = makeKeyboardButtons(contents: "\(char)")
+            keyboardSecondLineStackView.addArrangedSubview(key)
+        }
+        
+        for char in "ㅋㅌㅊㅍㅠㅜㅡ" {
+            let key = makeKeyboardButtons(contents: "\(char)")
+            keyboardThirdLineStackView.addArrangedSubview(key)
+        }
+        
+        for i in 0...2 {
+            let key = makeKeyboardButtons(contents: "\(i)")
+            keyboardFourthLineStackView.addArrangedSubview(key)
+        }
+        
+    }
+    
+    @objc func keyboardButtonTouched(_ sender: UIButton) {
+        guard let contents = sender.title(for: .normal) else {
+            return
+        }
+        print(contents)
+    }
+    
+    private func makeKeyboardButtons(contents: String) -> UIButton {
+        let button = UIButton()
+        button.setTitle(contents, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(nil, action: #selector(keyboardButtonTouched(_:)), for: .touchUpInside)
+        button.backgroundColor = .systemGray2
+        button.setTitleColor(.black, for: .normal)
+        button.layer.cornerRadius = 5
+        
+        button.heightAnchor.constraint(equalToConstant: self.bounds.height * 0.3 / 4 * 0.8 ) .isActive  = true
+        button.widthAnchor.constraint(equalTo: button.heightAnchor ,multiplier: 0.8).isActive = true
+        
+        return button
+    }
+    
     func setupView() {
-        textLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(textLabel)
+        insertKeyboardKeys()
         
-        keyboardContentsView.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(keyboardContentsView)
+        [textLabel,
+         keyboardContentsView].forEach {
+            self.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
-        keyboardVerticalStackView.translatesAutoresizingMaskIntoConstraints = false
-        keyboardContentsView.addSubview(keyboardVerticalStackView)
-        
-        [
-         keyboardFirstLineStackView,
+        [keyboardFirstLineStackView,
          keyboardSecondLineStackView,
          keyboardThirdLineStackView,
          keyboardFourthLineStackView,
-        ].forEach {
+         shiftKeyButton,
+         deleteKeyButton].forEach {
+            keyboardContentsView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
-            keyboardVerticalStackView.addArrangedSubview($0)
         }
     }
     
     func setupConstraints() {
         setupConstraintsOfTextLabel()
         setupConstraintsOfKeyboardContentsView()
-        setupConstraintsOfKeyboardVerticalStackView()
+        setupConstraintsOfShiftButton()
+        setupConstraintsOfDeleteButton()
+        setupConstraintsOfKeyboardFirstLineStackView()
+        setupConstraintsOfKeyboardSecondLineStackView()
+        setupConstraintsOfKeyboardThirdLineStackView()
+        setupConstraintsOfKeyboardFourthLineStackView()
     }
     
     func setupConstraintsOfTextLabel() {
@@ -129,49 +199,60 @@ class KeyboardView: UIView {
         ])
     }
     
-    func setupConstraintsOfKeyboardVerticalStackView() {
+    func setupConstraintsOfShiftButton() {
+        
         NSLayoutConstraint.activate([
-            keyboardVerticalStackView.leadingAnchor.constraint(equalTo: keyboardContentsView.safeAreaLayoutGuide.leadingAnchor),
-            keyboardVerticalStackView.trailingAnchor.constraint(equalTo: keyboardContentsView.safeAreaLayoutGuide.trailingAnchor),
-            keyboardVerticalStackView.bottomAnchor.constraint(equalTo: keyboardContentsView.safeAreaLayoutGuide.bottomAnchor),
-            keyboardVerticalStackView.topAnchor.constraint(equalTo: keyboardContentsView.safeAreaLayoutGuide.topAnchor)
+            shiftKeyButton.leadingAnchor.constraint(equalTo: keyboardFirstLineStackView.safeAreaLayoutGuide.leadingAnchor),
+            shiftKeyButton.centerYAnchor.constraint(equalTo: keyboardThirdLineStackView.safeAreaLayoutGuide.centerYAnchor)
+        ])
+        
+    }
+    
+    func setupConstraintsOfDeleteButton() {
+        NSLayoutConstraint.activate([
+            deleteKeyButton.trailingAnchor.constraint(equalTo: keyboardFirstLineStackView.safeAreaLayoutGuide.trailingAnchor),
+            deleteKeyButton.centerYAnchor.constraint(equalTo: keyboardThirdLineStackView.safeAreaLayoutGuide.centerYAnchor)
         ])
     }
     
-}
-
-
-// 전처리
-#if DEBUG
-
-import SwiftUI
-@available(iOS 13.0, *)
-
-// UIViewControllerRepresentable을 채택
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    // update
-    // _ uiViewController: UIViewController로 지정
-    func updateUIViewController(_ uiViewController: UIViewController , context: Context) {
+    func setupConstraintsOfKeyboardFirstLineStackView() {
+        NSLayoutConstraint.activate([
+            keyboardFirstLineStackView.widthAnchor.constraint(equalTo: keyboardContentsView.safeAreaLayoutGuide.widthAnchor),
+            keyboardFirstLineStackView.centerXAnchor.constraint(equalTo: keyboardContentsView.safeAreaLayoutGuide.centerXAnchor),
+            keyboardFirstLineStackView.topAnchor.constraint(equalTo: keyboardContentsView.safeAreaLayoutGuide.topAnchor),
+            keyboardFirstLineStackView.heightAnchor.constraint(equalTo: keyboardContentsView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.25)
+        ])
         
     }
-    // makeui
-    func makeUIViewController(context: Context) -> UIViewController {
-    // Preview를 보고자 하는 Viewcontroller 이름
-    // e.g.)
-        return KeyboardViewController()
+    func setupConstraintsOfKeyboardSecondLineStackView() {
+        NSLayoutConstraint.activate([
+            keyboardSecondLineStackView.widthAnchor.constraint(equalTo: keyboardContentsView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            keyboardSecondLineStackView.centerXAnchor.constraint(equalTo: keyboardContentsView.safeAreaLayoutGuide.centerXAnchor),
+            keyboardSecondLineStackView.topAnchor.constraint(equalTo: keyboardFirstLineStackView.safeAreaLayoutGuide.bottomAnchor),
+            keyboardSecondLineStackView.heightAnchor.constraint(equalTo: keyboardContentsView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.25)
+        ])
+        
     }
-}
 
-struct ViewController_Previews: PreviewProvider {
-    
-    @available(iOS 13.0, *)
-    static var previews: some View {
-        // UIViewControllerRepresentable에 지정된 이름.
-        ViewControllerRepresentable()
-
-// 테스트 해보고자 하는 기기
-            .previewDevice("iPhone 11")
+    func setupConstraintsOfKeyboardThirdLineStackView() {
+        NSLayoutConstraint.activate([
+            keyboardThirdLineStackView.centerXAnchor.constraint(equalTo: keyboardContentsView.safeAreaLayoutGuide.centerXAnchor),
+            keyboardThirdLineStackView.topAnchor.constraint(equalTo: keyboardSecondLineStackView.safeAreaLayoutGuide.bottomAnchor),
+            keyboardThirdLineStackView.heightAnchor.constraint(equalTo: keyboardContentsView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.25),
+            
+            keyboardThirdLineStackView.leadingAnchor.constraint(lessThanOrEqualTo: shiftKeyButton.safeAreaLayoutGuide.trailingAnchor, constant: 12),
+            keyboardThirdLineStackView.trailingAnchor.constraint(lessThanOrEqualTo: deleteKeyButton.safeAreaLayoutGuide.leadingAnchor, constant: -12),
+        ])
+        
     }
-}
-#endif
 
+    func setupConstraintsOfKeyboardFourthLineStackView() {
+        NSLayoutConstraint.activate([
+            keyboardFourthLineStackView.widthAnchor.constraint(equalTo: keyboardContentsView.widthAnchor),
+            keyboardFourthLineStackView.centerXAnchor.constraint(equalTo: keyboardContentsView.safeAreaLayoutGuide.centerXAnchor),
+            keyboardFourthLineStackView.topAnchor.constraint(equalTo: keyboardThirdLineStackView.safeAreaLayoutGuide.bottomAnchor),
+            keyboardFourthLineStackView.heightAnchor.constraint(equalTo: keyboardContentsView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.25)
+        ])
+    }
+
+}
