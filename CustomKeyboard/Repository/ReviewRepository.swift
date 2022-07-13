@@ -58,7 +58,7 @@ final class ReviewRepository {
     let URLRequest = URLRequest.makeURLRequest(request: Requset(requestType: .post, body: commentData, endPoint: endPoint))
     network.request(on: URLRequest) { result in
       switch result {
-      case .success(_):
+      case .success(let data):
         completion(.success(true))
       case .failure(let error):
         completion(.failure(error))

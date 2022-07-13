@@ -30,7 +30,7 @@ class ReviewTableViewCell: UITableViewCell {
         let lable = UILabel()
         lable.textColor = .black
         lable.font = UIFont.boldSystemFont(ofSize: 16)
-        lable.text = "o달빔o"
+//        lable.text = "o달빔o"
         lable.translatesAutoresizingMaskIntoConstraints = false
         return lable
     }()
@@ -39,7 +39,6 @@ class ReviewTableViewCell: UITableViewCell {
         let lable = UILabel()
         lable.textColor = .black
         lable.font = UIFont.systemFont(ofSize: 15)
-        lable.text = "Rating : ⭐⭐⭐⭐⭐️"
         lable.translatesAutoresizingMaskIntoConstraints = false
         return lable
     }()
@@ -47,7 +46,7 @@ class ReviewTableViewCell: UITableViewCell {
         let lable = UILabel()
         lable.textColor = .black
         lable.font = UIFont.systemFont(ofSize: 15)
-        lable.text = "Review : "
+//        lable.text = "Review : "
         lable.translatesAutoresizingMaskIntoConstraints = false
         return lable
     }()
@@ -117,15 +116,20 @@ class ReviewTableViewCell: UITableViewCell {
             reportButton.heightAnchor.constraint(equalToConstant: 10)
         ])
     }
-    
-    private func setupCell() {
         
+    public func setupReviewData(_ review : Review) {
+//      guard let rate = review.content["Rating"] else {return}
+      userIdLable.text = review.user.userName
+      reviewRateLable.text = review.content["Rating"] != nil ? "Rating: \(String(describing: review.content["Rating"]!))" : nil
+      contentLable.text = review.content["Review"] != nil ? "Review: \(String(describing: review.content["Review"]!))" : nil
+      lastUpdateTimeLabel.text = review.lastModifiedAt
+    }
+  
+    func setProfileImage(_ data: Data?){
+      guard let data = data else {return}
+      userProfileImageView.image = UIImage(data: data)
     }
     
-    public func setupReviewData(_ review : Review) {
-        userIdLable.text = review.user.id
-        contentLable.text = review.content["content"]
-    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
