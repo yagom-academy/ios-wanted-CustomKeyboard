@@ -17,17 +17,14 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
 
     override func prepareForReuse() {
+        super.prepareForReuse()
+        
         userImageView.image = nil
         nameLabel.text = nil
         contentLabel.text = nil
         timeLabel.text = nil
     }
     
-    override func layoutSubviews() {
-        userImageView.layer.cornerRadius = userImageView.frame.width / 2
-        userImageView.clipsToBounds = true
-    }
-
     func configureCell(_ review: Review) {
         nameLabel.text = review.user.userName
         contentLabel.text = review.content
@@ -35,7 +32,13 @@ class HomeTableViewCell: UITableViewCell {
         ImageManager.shared.download(review.user.profileImage) { data in
             DispatchQueue.main.async {
                 self.userImageView.image = UIImage(data: data)
+                self.configureImageViewCircle()
             }
         }
+    }
+    
+    private func configureImageViewCircle() {
+        userImageView.layer.cornerRadius = userImageView.frame.width / 2
+        userImageView.clipsToBounds = true
     }
 }

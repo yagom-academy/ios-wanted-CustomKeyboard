@@ -11,6 +11,8 @@
 		0142F4D0287C0C9C006F3E48 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4CF287C0C9C006F3E48 /* Review.swift */; };
 		0142F4D4287C2C83006F3E48 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4D3287C2C83006F3E48 /* ImageManager.swift */; };
 		0142F4D6287C3078006F3E48 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4D5287C3078006F3E48 /* HomeViewModel.swift */; };
+		0142F4E0287D539C006F3E48 /* Keyboard_sungeo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0142F4DF287D539C006F3E48 /* Keyboard_sungeo.xib */; };
+		0142F4E8287D62ED006F3E48 /* KeyboardView_sungeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4E7287D62ED006F3E48 /* KeyboardView_sungeo.swift */; };
 		9F5042FC287C144900CDBD9C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5042FB287C144900CDBD9C /* NetworkManager.swift */; };
 		9F5042FF287C467400CDBD9C /* DateFormatter_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5042FE287C467400CDBD9C /* DateFormatter_Extension.swift */; };
 		9F504301287C484900CDBD9C /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F504300287C484900CDBD9C /* TimeManager.swift */; };
@@ -39,6 +41,8 @@
 		0142F4CF287C0C9C006F3E48 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		0142F4D3287C2C83006F3E48 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		0142F4D5287C3078006F3E48 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		0142F4DF287D539C006F3E48 /* Keyboard_sungeo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Keyboard_sungeo.xib; path = CustomKeyboard/Keyboard_sungeo.xib; sourceTree = SOURCE_ROOT; };
+		0142F4E7287D62ED006F3E48 /* KeyboardView_sungeo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView_sungeo.swift; sourceTree = "<group>"; };
 		9F5042FB287C144900CDBD9C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		9F5042FE287C467400CDBD9C /* DateFormatter_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter_Extension.swift; sourceTree = "<group>"; };
 		9F504300287C484900CDBD9C /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
@@ -172,6 +176,8 @@
 				0142F4D9287C34D9006F3E48 /* ViewController */,
 				0142F4D7287C34C3006F3E48 /* ViewModel */,
 				0142F4DC287C3519006F3E48 /* Manager */,
+				0142F4DF287D539C006F3E48 /* Keyboard_sungeo.xib */,
+				0142F4E7287D62ED006F3E48 /* KeyboardView_sungeo.swift */,
 				DE15E66928604279003DD2F5 /* Info.plist */,
 			);
 			path = CustomKeyboard;
@@ -266,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE15E66828604279003DD2F5 /* LaunchScreen.storyboard in Resources */,
+				0142F4E0287D539C006F3E48 /* Keyboard_sungeo.xib in Resources */,
 				DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */,
 				DE15E66328604278003DD2F5 /* Main.storyboard in Resources */,
 			);
@@ -286,6 +293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0142F4E8287D62ED006F3E48 /* KeyboardView_sungeo.swift in Sources */,
 				9F5042FC287C144900CDBD9C /* NetworkManager.swift in Sources */,
 				0142F4D0287C0C9C006F3E48 /* Review.swift in Sources */,
 				0142F4D4287C2C83006F3E48 /* ImageManager.swift in Sources */,
