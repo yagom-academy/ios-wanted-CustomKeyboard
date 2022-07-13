@@ -35,9 +35,10 @@ class KeyFirstLineStackView: UIStackView {
     }
     
     private func configureProperties() {
-        self.axis = .vertical
-        self.distribution = .equalSpacing
-        self.alignment = .center
+        self.axis = .horizontal
+        self.distribution = .fillEqually
+        self.alignment = .fill
+        self.spacing = 10
     }
     
     private func setButtons() {

@@ -7,17 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		68351509287D6F4B0018CEB9 /* KeyFirstLineStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68351508287D6F4B0018CEB9 /* KeyFirstLineStackView.swift */; };
 		04158AD2287D3DA0004F6B9A /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04158AD1287D3DA0004F6B9A /* ReviewViewController.swift */; };
 		04158AD5287D3DB7004F6B9A /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04158AD4287D3DB7004F6B9A /* Review.swift */; };
 		043D075C287D408B0061DCA2 /* ReveiwTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D075B287D408B0061DCA2 /* ReveiwTableViewCell.swift */; };
 		04486783287D4B080004A512 /* ReviewTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04486782287D4B080004A512 /* ReviewTableViewHeader.swift */; };
 		04486785287D51460004A512 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04486784287D51460004A512 /* UITextField+.swift */; };
+		68351509287D6F4B0018CEB9 /* KeyFirstLineStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68351508287D6F4B0018CEB9 /* KeyFirstLineStackView.swift */; };
 		68AE7948287D3B1E003F4426 /* ReviewAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AE7947287D3B1E003F4426 /* ReviewAPIManager.swift */; };
 		68AE794D287D3E5E003F4426 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AE794C287D3E5E003F4426 /* KeyboardViewController.swift */; };
 		68AE794F287D3E87003F4426 /* KeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AE794E287D3E87003F4426 /* KeyboardViewModel.swift */; };
 		68AE7952287D3F8C003F4426 /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AE7951287D3F8C003F4426 /* KeyButton.swift */; };
 		68B9A087287E605E00D09A0A /* ButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B9A086287E605E00D09A0A /* ButtonDelegate.swift */; };
+		68D17D5C287E8C82003E9BAC /* KeySecondStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D17D5B287E8C82003E9BAC /* KeySecondStackView.swift */; };
+		68D17D5E287E8C8E003E9BAC /* KeyThirdStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D17D5D287E8C8E003E9BAC /* KeyThirdStackView.swift */; };
+		68D17D60287E8CC4003E9BAC /* KeyFourthStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D17D5F287E8CC4003E9BAC /* KeyFourthStackView.swift */; };
+		68D17D64287E8CEC003E9BAC /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D17D63287E8CEC003E9BAC /* KeyboardView.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
 		DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66428604279003DD2F5 /* Assets.xcassets */; };
@@ -25,17 +29,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		68351508287D6F4B0018CEB9 /* KeyFirstLineStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyFirstLineStackView.swift; sourceTree = "<group>"; };
 		04158AD1287D3DA0004F6B9A /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		04158AD4287D3DB7004F6B9A /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		043D075B287D408B0061DCA2 /* ReveiwTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReveiwTableViewCell.swift; sourceTree = "<group>"; };
 		04486782287D4B080004A512 /* ReviewTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewHeader.swift; sourceTree = "<group>"; };
 		04486784287D51460004A512 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		68351508287D6F4B0018CEB9 /* KeyFirstLineStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyFirstLineStackView.swift; sourceTree = "<group>"; };
 		68AE7947287D3B1E003F4426 /* ReviewAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAPIManager.swift; sourceTree = "<group>"; };
 		68AE794C287D3E5E003F4426 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		68AE794E287D3E87003F4426 /* KeyboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewModel.swift; sourceTree = "<group>"; };
 		68AE7951287D3F8C003F4426 /* KeyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyButton.swift; sourceTree = "<group>"; };
 		68B9A086287E605E00D09A0A /* ButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDelegate.swift; sourceTree = "<group>"; };
+		68D17D5B287E8C82003E9BAC /* KeySecondStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeySecondStackView.swift; sourceTree = "<group>"; };
+		68D17D5D287E8C8E003E9BAC /* KeyThirdStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyThirdStackView.swift; sourceTree = "<group>"; };
+		68D17D5F287E8CC4003E9BAC /* KeyFourthStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyFourthStackView.swift; sourceTree = "<group>"; };
+		68D17D63287E8CEC003E9BAC /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE15E65D28604278003DD2F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +114,10 @@
 			children = (
 				68AE7951287D3F8C003F4426 /* KeyButton.swift */,
 				68351508287D6F4B0018CEB9 /* KeyFirstLineStackView.swift */,
+				68D17D5B287E8C82003E9BAC /* KeySecondStackView.swift */,
+				68D17D5D287E8C8E003E9BAC /* KeyThirdStackView.swift */,
+				68D17D5F287E8CC4003E9BAC /* KeyFourthStackView.swift */,
+				68D17D63287E8CEC003E9BAC /* KeyboardView.swift */,
 			);
 			path = SubComponents;
 			sourceTree = "<group>";
@@ -217,6 +229,7 @@
 				68AE7952287D3F8C003F4426 /* KeyButton.swift in Sources */,
 				68B9A087287E605E00D09A0A /* ButtonDelegate.swift in Sources */,
 				68AE794F287D3E87003F4426 /* KeyboardViewModel.swift in Sources */,
+				68D17D60287E8CC4003E9BAC /* KeyFourthStackView.swift in Sources */,
 				04486783287D4B080004A512 /* ReviewTableViewHeader.swift in Sources */,
 				68AE7948287D3B1E003F4426 /* ReviewAPIManager.swift in Sources */,
 				04158AD2287D3DA0004F6B9A /* ReviewViewController.swift in Sources */,
@@ -224,7 +237,10 @@
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 				04158AD5287D3DB7004F6B9A /* Review.swift in Sources */,
+				68D17D5E287E8C8E003E9BAC /* KeyThirdStackView.swift in Sources */,
+				68D17D64287E8CEC003E9BAC /* KeyboardView.swift in Sources */,
 				04486785287D51460004A512 /* UITextField+.swift in Sources */,
+				68D17D5C287E8C82003E9BAC /* KeySecondStackView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -24,7 +24,7 @@ class KeyButton: UIButton {
         setTitleColor(.white, for: .normal)
         
         let buttonConstraints = [
-            heightAnchor.constraint(equalToConstant: 20)
+            heightAnchor.constraint(equalToConstant: 50)
         ]
         
         NSLayoutConstraint.activate(buttonConstraints)
@@ -43,9 +43,9 @@ class KeyButton: UIButton {
         
         switch type {
         case .basic:
-            self.backgroundColor = .systemGray5
+            self.backgroundColor = .systemGray3
         case .space:
-            self.backgroundColor = .systemGray5
+            self.backgroundColor = .systemGray3
         case .dark_small:
             self.backgroundColor = .systemGray2
         case .dark_large:
