@@ -1,11 +1,11 @@
 //
-//  ViewController.swift
+//  ReviewListViewController.swift
 //  CustomKeyboard
 //
 
 import UIKit
 
-final class ViewController: BaseViewController {
+final class ReviewListViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -13,4 +13,3 @@ final class ViewController: BaseViewController {
 
 
 }
-
