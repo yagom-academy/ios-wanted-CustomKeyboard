@@ -162,14 +162,11 @@ extension ReviewListView {
 extension ReviewListView {
 
     private enum Text {
-
         static let reviewWritingPlaceHolder: String = "이 테마가 마음에 드시나요?"
         static let uploadButtonTitle: String = "작성"
-
     }
 
     private enum Style {
-
         static let profileImage: UIImage? = UIImage(systemName: "person.fill")
         static let reviewLineLimit: Int = 1
         static let spacing: CGFloat = 10
@@ -180,7 +177,6 @@ extension ReviewListView {
         static let profileImageWidthRatio: CGFloat = 0.15
         static let reviewWritingLabelHeightRatio: CGFloat = 0.8
         static let uploadButtonHeightRatio: CGFloat = 0.8
-
     }
 
 }

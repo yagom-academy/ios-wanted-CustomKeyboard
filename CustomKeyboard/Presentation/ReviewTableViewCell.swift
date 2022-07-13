@@ -9,7 +9,7 @@ import UIKit
 
 final class ReviewTableViewCell: UITableViewCell {
 
-    // MARK: Type property
+    // MARK: - Type property
 
     static let identifier = String(describing: ReviewTableViewCell.self)
 
@@ -108,7 +108,10 @@ extension ReviewTableViewCell {
 
     private func setupConstraintsOfProfileImageView() {
         NSLayoutConstraint.activate([
-            profileImageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: Style.padding),
+            profileImageView.leadingAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.leadingAnchor,
+                constant: Style.padding
+            ),
             profileImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: Style.padding),
             profileImageView.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: Style.widthRatio),
             profileImageView.heightAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.widthAnchor)
@@ -130,22 +133,18 @@ extension ReviewTableViewCell {
 extension ReviewTableViewCell {
 
     private enum Text {
-
         static let userName: String = "o달빔o"
         static let starRating: String = "별점: ⭐️⭐️⭐️⭐️⭐️"
         static let review: String = "리뷰: 아진짜 귀여워요!!!!"
         static let uploadedTime: String = "1분"
-
     }
 
     private enum Style {
-
         static let profileImage: UIImage? = UIImage(systemName: "person.fill")
         static let spacing: CGFloat = 10
         static let padding: CGFloat = 15
         static let widthRatio: CGFloat = 0.15
         static let half: CGFloat = 0.5
-
     }
 
 }
