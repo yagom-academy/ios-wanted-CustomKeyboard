@@ -18,6 +18,7 @@ class CustomKeyBoard: UIView {
         static let buttonWidth = windowWidth / 10.0 - buttonPadding
         static let fontSize: CGFloat = windowWidth < 340 ? 13.0 : 19.0
     }
+    var delegate: CustomKeyBoardDelegate?
     
     private let mainContainer = UIStackView()
     
@@ -32,7 +33,7 @@ class CustomKeyBoard: UIView {
     
     private let firthLineContainer = UIStackView()
     private let spaceButton = UIButton()
-    private let enterButton = UIButton()
+    private let returnButton = UIButton()
     
     init() {
         super.init(frame: CGRect.zero)
@@ -65,7 +66,7 @@ extension CustomKeyBoard {
         
         backButton.setTitle("back", for: .normal)
         
-        [shiftButton, backButton, enterButton].forEach {
+        [shiftButton, backButton, returnButton].forEach {
             $0.backgroundColor = .systemGray
             $0.setTitleColor(.black, for: .normal)
             $0.layer.cornerRadius = 10
@@ -78,9 +79,10 @@ extension CustomKeyBoard {
         spaceButton.tag = Int(UnicodeScalar(" ").value)
         spaceButton.addTarget(self, action: #selector(tappedSpaceButton), for: .touchUpInside)
         
-        enterButton.setTitle("enter", for: .normal)
+        returnButton.setTitle("return", for: .normal)
+        returnButton.addTarget(self, action: #selector(tappedReturnButton), for: .touchUpInside)
         
-        [shiftButton, backButton, spaceButton, enterButton].forEach {
+        [shiftButton, backButton, spaceButton, returnButton].forEach {
             $0.titleLabel?.font = .systemFont(ofSize: Math.fontSize)
         }
     }
@@ -98,6 +100,13 @@ extension CustomKeyBoard {
     @objc private func tappedSpaceButton(_ sender: UIButton) {
         print(sender.tag)
         print(String(UnicodeScalar(sender.tag)!))
+    }
+}
+
+//MARK: - Return 버튼 기능
+extension CustomKeyBoard {
+    @objc private func tappedReturnButton() {
+        delegate?.tappedReturnButton()
     }
 }
 
@@ -137,12 +146,12 @@ extension CustomKeyBoard {
         
         //MARK: 네번쨰줄
         let spaceView = UIView()
-        [spaceView, spaceButton, enterButton].forEach {
+        [spaceView, spaceButton, returnButton].forEach {
             firthLineContainer.addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        [spaceView, enterButton].forEach {
+        [spaceView, returnButton].forEach {
             $0.widthAnchor.constraint(equalToConstant: Math.buttonWidth*2.5).isActive = true
         }
     }
