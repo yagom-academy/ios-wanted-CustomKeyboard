@@ -112,7 +112,7 @@ extension CustomKeyBoard {
             $0.setTitleColor(.black, for: .normal)
             $0.layer.cornerRadius = 10
         }
-        print(Math.width)
+        
         spaceButton.setTitle("space", for: .normal)
         spaceButton.backgroundColor = .white
         spaceButton.setTitleColor(.black, for: .normal)

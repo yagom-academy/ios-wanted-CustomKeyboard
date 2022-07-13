@@ -51,7 +51,6 @@ class DynamicBasicKeyLine: BasicKeyLine {
             super.buttons![8].setTitle("ㅒ", for: .normal)
             super.buttons![9].setTitle("ㅖ", for: .normal)
         }
-        
-        super.buttons!.forEach { $0.tag = Int(UnicodeScalar(($0.titleLabel?.text)!)!.value) }
+        super.buttons!.forEach { $0.tag = Int(UnicodeScalar(($0.currentTitle)!)!.value) }
     }
 }
