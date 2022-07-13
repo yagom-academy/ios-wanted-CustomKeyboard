@@ -72,6 +72,39 @@ class KeyboardView: UIView {
         return button
     }()
     
+    private lazy var numKeyButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .systemGray2
+        button.layer.cornerRadius = 5
+        button.setTitleColor(.black, for: .normal)
+        button.setTitle("123", for: .normal)
+        button.heightAnchor.constraint(equalToConstant: self.bounds.height * 0.3 / 4 * 0.6 ) .isActive  = true
+        button.widthAnchor.constraint(equalToConstant: self.bounds.width * 0.25).isActive = true
+        return button
+    }()
+
+    private lazy var spaceKeyButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .systemGray2
+        button.layer.cornerRadius = 5
+        button.setTitleColor(.black, for: .normal)
+        button.setTitle("스페이스", for: .normal)
+        button.heightAnchor.constraint(equalToConstant: self.bounds.height * 0.3 / 4 * 0.6 ) .isActive  = true
+        button.widthAnchor.constraint(equalToConstant: self.bounds.width * 0.5).isActive = true
+        return button
+    }()
+
+    private lazy var returnKeyButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .systemGray2
+        button.layer.cornerRadius = 5
+        button.setTitleColor(.black, for: .normal)
+        button.setTitle("return", for: .normal)
+        button.heightAnchor.constraint(equalToConstant: self.bounds.height * 0.3 / 4 * 0.6 ) .isActive  = true
+        button.widthAnchor.constraint(equalToConstant: self.bounds.width * 0.25).isActive = true
+        return button
+    }()
+    
     private lazy var keyboardFourthLineStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -117,9 +150,8 @@ extension KeyboardView {
             keyboardThirdLineStackView.addArrangedSubview(key)
         }
         
-        for i in 0...2 {
-            let key = makeKeyboardButtons(contents: "\(i)")
-            keyboardFourthLineStackView.addArrangedSubview(key)
+        for i in [numKeyButton, spaceKeyButton, returnKeyButton] {
+            keyboardFourthLineStackView.addArrangedSubview(i)
         }
         
     }
