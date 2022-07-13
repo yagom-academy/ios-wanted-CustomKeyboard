@@ -9,6 +9,8 @@ import Combine
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var reviewButton: UIButton!
+    @IBOutlet weak var submitButton: UIButton!
     
     private let viewModel = HomeViewModel()
     private var cancellable = Set<AnyCancellable>()
@@ -27,6 +29,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController {
     private func configure() {
         configureTableView()
+        configureButtons()
         bind()
     }
     
@@ -34,6 +37,15 @@ extension HomeViewController {
         tableView.dataSource = self
 //        tableView.allowsSelection = false
 //        tableView.separatorStyle = .none
+    }
+    
+    private func configureButtons() {
+        [reviewButton, submitButton].forEach { button in
+            button?.backgroundColor = UIColor.systemGray6
+            button?.layer.cornerRadius = 15
+            button?.setTitleColor(UIColor.darkGray, for: .normal)
+            button?.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        }
     }
     
     private func bind() {

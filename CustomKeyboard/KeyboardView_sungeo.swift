@@ -7,8 +7,18 @@
 
 import UIKit
 
+protocol KeyboardViewDelegate: AnyObject {
+    func keyboardViewReturn()
+}
+
 class KeyboardView_sungeo: UIView {
+    enum KeyboardConstants {
+        static let NibName = "Keyboard_sungeo"
+    }
+    
     @IBOutlet var changeButtons: [UIButton]!
+    
+    weak var delegate: KeyboardViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,13 +48,17 @@ class KeyboardView_sungeo: UIView {
         changeButtonsIsSelectedToggle()
     }
     
+    @IBAction func touchReturnButton(_ sender: UIButton) {
+        // Delegate 패턴으로 ViewController dismiss 구현
+        delegate?.keyboardViewReturn()
+    }
 }
 
 // MARK: - Private
 
 extension KeyboardView_sungeo {
     private func customInit() {
-        guard let view = Bundle.main.loadNibNamed("Keyboard_sungeo", owner: self, options: nil)?.first as? UIView else {
+        guard let view = Bundle.main.loadNibNamed(KeyboardConstants.NibName, owner: self, options: nil)?.first as? UIView else {
             return
         }
         view.frame = bounds
