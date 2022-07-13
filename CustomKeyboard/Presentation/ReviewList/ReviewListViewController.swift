@@ -36,6 +36,7 @@ class ReviewListViewController: UIViewController {
         textField.layer.cornerRadius = 15
         textField.addLeftPadding()
         textField.backgroundColor = UIColor.systemGray6
+        textField.addTarget(nil, action: #selector(pushReviewWriteViewController), for: .touchDown)
         return textField
     }()
     
@@ -79,6 +80,13 @@ extension ReviewListViewController {
                 print(error.localizedDescription)
             }
         }
+    }
+}
+
+// MARK: - Action Methods
+extension ReviewListViewController {
+    @objc func pushReviewWriteViewController(textField: UITextField) {
+        navigationController?.pushViewController(ViewController(), animated: false)
     }
 }
 
