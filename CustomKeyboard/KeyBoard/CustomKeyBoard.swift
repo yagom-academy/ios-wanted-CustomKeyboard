@@ -75,6 +75,8 @@ extension CustomKeyBoard {
         spaceButton.backgroundColor = .white
         spaceButton.setTitleColor(.black, for: .normal)
         spaceButton.layer.cornerRadius = 10
+        spaceButton.tag = Int(UnicodeScalar(" ").value)
+        spaceButton.addTarget(self, action: #selector(tappedSpaceButton), for: .touchUpInside)
         
         enterButton.setTitle("enter", for: .normal)
         
@@ -88,6 +90,14 @@ extension CustomKeyBoard {
 extension CustomKeyBoard {
     @objc private func tappedShiftKey() {
         firstLineDynamicBasicKeys.tappedShiftKey()
+    }
+}
+
+//MARK: - Space 버튼 기능
+extension CustomKeyBoard {
+    @objc private func tappedSpaceButton(_ sender: UIButton) {
+        print(sender.tag)
+        print(String(UnicodeScalar(sender.tag)!))
     }
 }
 
