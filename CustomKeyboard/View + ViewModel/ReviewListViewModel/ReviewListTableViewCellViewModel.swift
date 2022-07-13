@@ -7,6 +7,7 @@
 
 import UIKit
 
+//MARK: - ReviewListTableViewCellViewModelDelegate
 protocol ReviewListTableViewCellViewModelDelegate: AnyObject {
     func reviewListTableViewCell(didLoadImage image: UIImage?)
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 
+//MARK: - ImageLoaderError
 enum ImageLoaderError: Error {
     case unknown
 }
@@ -22,6 +23,13 @@ struct ImageLoader {
         }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            //TODO: - 에러 핸들링
+//            guard let error = error else {
+//                completion(.failure(.unknown))
+//                return
+//            }
+
             guard (response as? HTTPURLResponse)?.statusCode == 200 else {
                 completion(.failure(.unknown))
                 return

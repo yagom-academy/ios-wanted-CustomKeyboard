@@ -1,5 +1,5 @@
 //
-//  ViewModel.swift
+//  ReviewListViewModel + Delegate.swift
 //  CustomKeyboard
 //
 //  Created by yc on 2022/07/11.
@@ -7,14 +7,16 @@
 
 import Foundation
 
-protocol ViewModelDelegate: AnyObject {
-    func viewModel(didEndFetchReviewList viewModel: ViewModel)
+//MARK: - ReviewListViewModelDelegate
+protocol ReviewListViewModelDelegate: AnyObject {
+    func viewModel(didEndFetchReviewList viewModel: ReviewListViewModel)
     func clearText()
 }
-class ViewModel {
+
+class ReviewListViewModel {
     var reviewList = [ReviewResult]()
     
-    weak var delegate: ViewModelDelegate?
+    weak var delegate: ReviewListViewModelDelegate?
     
     func fetchReviewList() {
         Network(

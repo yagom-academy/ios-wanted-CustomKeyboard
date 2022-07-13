@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct ReviewResponse: Decodable {
     let data: [ReviewResult]
@@ -45,3 +46,5 @@ struct ReviewUser: Decodable {
         case id = "_id"
     }
 }
+
+

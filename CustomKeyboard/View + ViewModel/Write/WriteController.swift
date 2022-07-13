@@ -7,6 +7,7 @@
 
 import UIKit
 
+//MARK: - CommentEditDelegate
 protocol CommentEditDelegate: AnyObject {
     var commentValue: String? { get set }
 }
@@ -28,7 +29,18 @@ class WriteController: UIViewController {
         
         commentEditView.text = delegate?.commentValue
     }
-    
+
+}
+
+//MARK: - UITextViewDelegate
+extension WriteController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        delegate?.commentValue = textView.text
+    }
+}
+
+//MARK: - View Configure
+private extension WriteController {
     func configUI() {
         [commentEditView].forEach {
             view.addSubview($0)
@@ -41,11 +53,5 @@ class WriteController: UIViewController {
             commentEditView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             commentEditView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
         ])
-    }
-}
-
-extension WriteController: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        delegate?.commentValue = textView.text
     }
 }

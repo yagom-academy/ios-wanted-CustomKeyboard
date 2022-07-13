@@ -64,12 +64,14 @@ class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
     }
 }
 
+//MARK: - ReviewListTableViewModel Delegate
 extension ReviewListTableViewCell: ReviewListTableViewCellViewModelDelegate {
     func reviewListTableViewCell(didLoadImage image: UIImage?) {
         profileImageView.image = image
     }
 }
 
+//MARK: - View Configure
 private extension ReviewListTableViewCell {
     func setupProfileImageView(review: ReviewResult) {
         viewModel.loadImage(urlString: review.user.profileImage)

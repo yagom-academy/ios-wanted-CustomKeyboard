@@ -7,6 +7,7 @@
 
 import Foundation
 
+//MARK: - NetworkError
 enum NetworkError: Error {
     //TODO: - Error 세부 만들기
     case unknown
