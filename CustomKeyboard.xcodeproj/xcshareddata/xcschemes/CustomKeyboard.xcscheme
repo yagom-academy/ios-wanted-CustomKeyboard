@@ -41,6 +41,15 @@
                <Test
                   Identifier = "CustomKeyboardTests">
                </Test>
+               <Test
+                  Identifier = "getCombinedTests_monica">
+               </Test>
+               <Test
+                  Identifier = "getSeparatedTests_monica">
+               </Test>
+               <Test
+                  Identifier = "setSeparatedBufferTests">
+               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>
