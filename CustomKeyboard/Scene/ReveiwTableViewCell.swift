@@ -112,7 +112,23 @@ extension ReviewTableViewCell {
     }
     
     private func dateToTime(_ createdAt: String) -> String {
-        return ""
+        let time = createdAt.components(separatedBy: ["-", "T", ":", "Z"]).map{ Int($0) ?? 0 }
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko")
+        formatter.dateFormat = "yyyy_MM_dd_HH_mm_ss"
+        let currentTime = formatter.string(from: Date()).components(separatedBy: "_").map{ Int($0)! }
+        
+        if currentTime[2] > time[2] {
+            if currentTime[2] - time[2] == 1 && time[3] > currentTime[3] {
+                return String(time[3] - currentTime[3]) + "시간"
+            }
+            return String(time[0]) + "년 " + String(time[1]) + "월 " + String(time[2]) + "일"
+        } else {
+            if currentTime[3] - time[3] == 1 && time[4] > currentTime[4] {
+                return String(time[4] - currentTime[4]) + "분"
+            }
+            return String(currentTime[3] - time[3]) + "시간"
+        }
     }
     
     private func separateStarAndReview(_ content: String) -> [String] {
