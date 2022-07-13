@@ -7,6 +7,29 @@
 
 import UIKit
 
-struct Review {
+struct ReviewData: Codable {
+    let reviewData: [Review]
+
+    enum CodingKeys: String, CodingKey {
+        case reviewData = "data"
+    }
+}
+
+struct Review: Codable {
+    let user: User
+    let content: String
+    let createdAt: String
     
+    enum CodingKeys: String, CodingKey {
+        case user, content, createdAt
+    }
+}
+
+struct User: Codable {
+    let userName: String
+    let profileImage: String
+    
+    enum CodingKeys: String, CodingKey {
+        case userName, profileImage
+    }
 }

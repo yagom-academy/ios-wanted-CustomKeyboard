@@ -9,13 +9,22 @@ import UIKit
 
 class ReviewViewController: UIViewController {
     private let reviewTableView = UITableView()
-    private let reviewList: [Review] = []
+    private var reviewList: [Review] = []
+    private var viewModel = ReviewViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         attribute()
         layout()
+        bind(viewModel)
+        viewModel.getReview { [weak self] reviews in
+            guard let self = self  else { return }
+            self.reviewList = reviews.reviewData
+            DispatchQueue.main.async {
+                self.reviewTableView.reloadData()
+            }
+        }
     }
 }
 
@@ -43,18 +52,23 @@ extension ReviewViewController {
         reviewTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         reviewTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
+    
+    private func bind(_ viewModel: ReviewViewModel) {
+        self.viewModel = viewModel
+    }
 }
 
 // MARK: - TableViewDataSource, TableViewDelegate
 extension ReviewViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        return reviewList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewTableViewCell", for: indexPath) as? ReviewTableViewCell else { return UITableViewCell() }
         
-        cell.setup()
+        let review = reviewList[indexPath.row]
+        cell.setup(review)
         
         return cell
     }
@@ -74,7 +88,11 @@ extension ReviewViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         // TODO: - KeyboardViewController와 연결
+<<<<<<< HEAD
+        let vc = UIViewController()
+=======
         let vc = KeyboardViewController()
+>>>>>>> develop
         navigationController?.pushViewController(vc, animated: true)
         textField.resignFirstResponder()
     }
