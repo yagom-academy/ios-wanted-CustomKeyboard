@@ -15,6 +15,12 @@
 		B779BBD4287D4B5300BB8DF5 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBCB287D4B5300BB8DF5 /* Requestable.swift */; };
 		B779BBD5287D4B5300BB8DF5 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBCC287D4B5300BB8DF5 /* EndPoint.swift */; };
 		B779BBD6287D4B5300BB8DF5 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBCE287D4B5300BB8DF5 /* Review.swift */; };
+		B779BBD9287D51CD00BB8DF5 /* ReviewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBD8287D51CD00BB8DF5 /* ReviewRepository.swift */; };
+		B779BBDC287D544300BB8DF5 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBDB287D544300BB8DF5 /* Decoder.swift */; };
+		B779BBDE287D54D700BB8DF5 /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBDD287D54D700BB8DF5 /* Encoder.swift */; };
+		B779BBF3287E4C7B00BB8DF5 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBF2287E4C7B00BB8DF5 /* DateFormatter.swift */; };
+		B779BBF6287E500100BB8DF5 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBF5287E500100BB8DF5 /* String+.swift */; };
+		B779BBF8287E8A5100BB8DF5 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBF7287E8A5100BB8DF5 /* Comment.swift */; };
 		B7F1DCF0287C12EE0065D587 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F1DCEF287C12EE0065D587 /* ReviewTableViewCell.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
@@ -32,6 +38,12 @@
 		B779BBCB287D4B5300BB8DF5 /* Requestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		B779BBCC287D4B5300BB8DF5 /* EndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		B779BBCE287D4B5300BB8DF5 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		B779BBD8287D51CD00BB8DF5 /* ReviewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRepository.swift; sourceTree = "<group>"; };
+		B779BBDB287D544300BB8DF5 /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
+		B779BBDD287D54D700BB8DF5 /* Encoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
+		B779BBF2287E4C7B00BB8DF5 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		B779BBF5287E500100BB8DF5 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		B779BBF7287E8A5100BB8DF5 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		B7F1DCEF287C12EE0065D587 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,10 +70,10 @@
 			children = (
 				B779BBC5287D4B5300BB8DF5 /* ReviewDTO.swift */,
 				B779BBC6287D4B5300BB8DF5 /* NetworkService.swift */,
+				B779BBCC287D4B5300BB8DF5 /* EndPoint.swift */,
 				B779BBC7287D4B5300BB8DF5 /* Request.swift */,
 				B779BBC8287D4B5300BB8DF5 /* NetworkError.swift */,
 				B779BBC9287D4B5300BB8DF5 /* protocols */,
-				B779BBCC287D4B5300BB8DF5 /* EndPoint.swift */,
 			);
 			path = "Network ";
 			sourceTree = "<group>";
@@ -79,8 +91,35 @@
 			isa = PBXGroup;
 			children = (
 				B779BBCE287D4B5300BB8DF5 /* Review.swift */,
+				B779BBF7287E8A5100BB8DF5 /* Comment.swift */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		B779BBD7287D51B000BB8DF5 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				B779BBD8287D51CD00BB8DF5 /* ReviewRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		B779BBDA287D53CD00BB8DF5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B779BBDB287D544300BB8DF5 /* Decoder.swift */,
+				B779BBDD287D54D700BB8DF5 /* Encoder.swift */,
+				B779BBF2287E4C7B00BB8DF5 /* DateFormatter.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B779BBF4287E4FF400BB8DF5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B779BBF5287E500100BB8DF5 /* String+.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		B7F1DCEE287C12D40065D587 /* ReviewTableView */ = {
@@ -110,6 +149,9 @@
 		DE15E65A28604278003DD2F5 /* CustomKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				B779BBF4287E4FF400BB8DF5 /* Extensions */,
+				B779BBDA287D53CD00BB8DF5 /* Helpers */,
+				B779BBD7287D51B000BB8DF5 /* Repository */,
 				B779BBCD287D4B5300BB8DF5 /* Domain */,
 				B779BBC4287D4B5300BB8DF5 /* Network  */,
 				B7F1DCEE287C12D40065D587 /* ReviewTableView */,
@@ -193,10 +235,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B779BBF3287E4C7B00BB8DF5 /* DateFormatter.swift in Sources */,
 				DE15E66028604278003DD2F5 /* HomeViewController.swift in Sources */,
 				B779BBD2287D4B5300BB8DF5 /* NetworkError.swift in Sources */,
+				B779BBDE287D54D700BB8DF5 /* Encoder.swift in Sources */,
 				B779BBD3287D4B5300BB8DF5 /* EndPointable.swift in Sources */,
 				B7F1DCF0287C12EE0065D587 /* ReviewTableViewCell.swift in Sources */,
+				B779BBDC287D544300BB8DF5 /* Decoder.swift in Sources */,
+				B779BBF8287E8A5100BB8DF5 /* Comment.swift in Sources */,
 				B779BBD5287D4B5300BB8DF5 /* EndPoint.swift in Sources */,
 				B779BBD6287D4B5300BB8DF5 /* Review.swift in Sources */,
 				B779BBCF287D4B5300BB8DF5 /* ReviewDTO.swift in Sources */,
@@ -204,6 +250,8 @@
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				B779BBD1287D4B5300BB8DF5 /* Request.swift in Sources */,
 				B779BBD0287D4B5300BB8DF5 /* NetworkService.swift in Sources */,
+				B779BBF6287E500100BB8DF5 /* String+.swift in Sources */,
+				B779BBD9287D51CD00BB8DF5 /* ReviewRepository.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
