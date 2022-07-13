@@ -17,10 +17,11 @@ class KeyboardViewController: UIViewController {
         return textField
     }()
     
-    private let stackView = KeyFirstLineStackView()
+    private let keyboardView = KeyboardView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         layout()
     }
 }
@@ -32,10 +33,10 @@ extension KeyboardViewController {
         view.backgroundColor = .white
         
         reviewTextField.translatesAutoresizingMaskIntoConstraints = false
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        keyboardView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(reviewTextField)
-        view.addSubview(stackView)
+        view.addSubview(keyboardView)
         
         NSLayoutConstraint.activate([
             
@@ -44,10 +45,10 @@ extension KeyboardViewController {
             reviewTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             reviewTextField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
             
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.topAnchor.constraint(equalTo: reviewTextField.bottomAnchor),
-            stackView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            stackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5)
+            keyboardView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            keyboardView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
+            keyboardView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            keyboardView.heightAnchor.constraint(equalToConstant: 220)
         ])
     }
 }

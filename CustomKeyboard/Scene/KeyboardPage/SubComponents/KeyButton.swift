@@ -18,8 +18,9 @@ class KeyButton: UIButton {
     
     var delegate: ButtonEventDelegate?
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: .zero)
+        
         layer.cornerRadius = 5
         setTitleColor(.white, for: .normal)
         
@@ -34,22 +35,18 @@ class KeyButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init() {
-        super.init(frame: .zero)
-    }
-    
     convenience init(type: CSButtonType) {
         self.init()
         
         switch type {
         case .basic:
-            self.backgroundColor = .systemGray3
+            self.backgroundColor = .systemGray2
         case .space:
-            self.backgroundColor = .systemGray3
+            self.backgroundColor = .systemGray2
         case .dark_small:
-            self.backgroundColor = .systemGray2
+            self.backgroundColor = .systemGray
         case .dark_large:
-            self.backgroundColor = .systemGray2
+            self.backgroundColor = .systemGray
         }
     }
 }
