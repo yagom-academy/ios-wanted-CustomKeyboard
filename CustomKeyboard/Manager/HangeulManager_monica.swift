@@ -23,7 +23,13 @@ struct HangeulCharacter {
     static let jongseong: [String] = ["", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
 
     static let splitJongseong: [String] = ["", "ㄱ", "ㄲ", "ㄱㅅ", "ㄴ", "ㄴㅈ", "ㄴㅎ", "ㄷ", "ㄹ", "ㄹㄱ", "ㄹㅁ", "ㄹㅂ", "ㄹㅅ", "ㄹㅌ", "ㄹㅍ", "ㄹㅎ", "ㅁ", "ㅂ", "ㅂㅅ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
-    // 겹자음 자소글자를 두 글자로 나눈 것
+    
+    static let baseCode = 44032
+    static let jungCount = 21
+    static let jongCount = 28
+    static let firstChoseongUnicodeValue = 0x1100
+    static let firstJungseongUnicodeValue = 0x1161
+    static let firstJongseongUnicodeValue = 0x11A7
 }
 
 struct Double {
@@ -159,7 +165,7 @@ extension HangeulManager {
     }
 }
 
-// MARK: - 프로퍼티 리셋
+// MARK: - 프로퍼티 초기화
 
 extension HangeulManager {
     func reset() {
@@ -174,5 +180,39 @@ extension HangeulManager {
 extension HangeulManager {
     func getSeparatedBufferCount() -> Int {
         return self.separatedBuffer.count
+    }
+}
+
+// MARK: - 초성/중성/종성을 모아 한 글자로 만드는 메서드
+
+extension HangeulManager {
+    func getCombinedWord(_ cho: String, _ jung: String, _ jong: String) -> String {
+        let choIndex = Int(HangeulCharacter.choseong.firstIndex(of: cho) ?? 0)
+        let jungIndex = Int(HangeulCharacter.jungseong.firstIndex(of: jung) ?? 0)
+        let jongIndex = Int(HangeulCharacter.jongseong.firstIndex(of: jong) ?? 0)
+        
+        let combinedValue = (choIndex * HangeulCharacter.jungCount * HangeulCharacter.jongCount) + (jungIndex * HangeulCharacter.jongCount) + jongIndex + HangeulCharacter.baseCode
+        
+        let combinedWord = String(UnicodeScalar(combinedValue)!)
+        
+        return combinedWord
+    }
+}
+
+// MARK: - 한 글자를 초성, 중성, 종성으로 해체하는 함수
+
+extension HangeulManager {
+    func getSeparatedCharacters(from word: String) -> [String] {
+        let unicode = Int(UnicodeScalar(word)!.value) - HangeulCharacter.baseCode
+        
+        let choValue = (((unicode - (unicode % HangeulCharacter.jongCount)) / HangeulCharacter.jongCount) / HangeulCharacter.jungCount) + HangeulCharacter.firstChoseongUnicodeValue
+        let jungValue = (((unicode - (unicode % HangeulCharacter.jongCount)) / HangeulCharacter.jongCount) % HangeulCharacter.jungCount) + HangeulCharacter.firstJungseongUnicodeValue
+        let jongValue = (unicode % HangeulCharacter.jongCount) + HangeulCharacter.firstJongseongUnicodeValue
+
+        let cho = String(UnicodeScalar(choValue)!)
+        let jung = String(UnicodeScalar(jungValue)!)
+        let jong = String(UnicodeScalar(jongValue)!)
+        
+        return [cho, jung, jong]
     }
 }

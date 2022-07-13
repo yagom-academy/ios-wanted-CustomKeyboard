@@ -18,6 +18,8 @@
 		9F504301287C484900CDBD9C /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F504300287C484900CDBD9C /* TimeManager.swift */; };
 		9F504303287D5C8F00CDBD9C /* HangeulManager_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F504302287D5C8F00CDBD9C /* HangeulManager_monica.swift */; };
 		9F50431B287E323300CDBD9C /* setSeparatedBufferTests_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F50431A287E323300CDBD9C /* setSeparatedBufferTests_monica.swift */; };
+		9F504322287E4EE200CDBD9C /* getSeparatedTests_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F504321287E4EE200CDBD9C /* getSeparatedTests_monica.swift */; };
+		9FDEAB4D287E596200C0663D /* getCombinedTests_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDEAB4C287E596200C0663D /* getCombinedTests_monica.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
 		DE15E66028604278003DD2F5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65F28604278003DD2F5 /* HomeViewController.swift */; };
@@ -49,6 +51,8 @@
 		9F504302287D5C8F00CDBD9C /* HangeulManager_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulManager_monica.swift; sourceTree = "<group>"; };
 		9F504318287E323300CDBD9C /* CustomKeyboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomKeyboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F50431A287E323300CDBD9C /* setSeparatedBufferTests_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setSeparatedBufferTests_monica.swift; sourceTree = "<group>"; };
+		9F504321287E4EE200CDBD9C /* getSeparatedTests_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getSeparatedTests_monica.swift; sourceTree = "<group>"; };
+		9FDEAB4C287E596200C0663D /* getCombinedTests_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCombinedTests_monica.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE15E65D28604278003DD2F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +148,8 @@
 			isa = PBXGroup;
 			children = (
 				9F50431A287E323300CDBD9C /* setSeparatedBufferTests_monica.swift */,
+				9F504321287E4EE200CDBD9C /* getSeparatedTests_monica.swift */,
+				9FDEAB4C287E596200C0663D /* getCombinedTests_monica.swift */,
 			);
 			path = HangeulManagerTests;
 			sourceTree = "<group>";
@@ -285,6 +291,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F504322287E4EE200CDBD9C /* getSeparatedTests_monica.swift in Sources */,
+				9FDEAB4D287E596200C0663D /* getCombinedTests_monica.swift in Sources */,
 				9F50431B287E323300CDBD9C /* setSeparatedBufferTests_monica.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
