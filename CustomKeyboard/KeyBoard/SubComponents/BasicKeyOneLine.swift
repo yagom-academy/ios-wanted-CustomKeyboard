@@ -77,13 +77,16 @@ extension BasicKeyOneLine {
             btn.layer.cornerRadius = 10
             btn.backgroundColor = .white
             btn.setTitleColor(.black, for: .normal)
+            btn.tag = Int(UnicodeScalar(key)!.value)
             btn.sizeToFit()
-            btn.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
+            btn.addTarget(self, action: #selector(tappedButton(_:)), for: .touchUpInside)
             return btn
         }
     }
     
-    @objc func tappedButton() {
+    @objc func tappedButton(_ sender: UIButton) {
+        print(sender.tag)
+        print(String(UnicodeScalar(sender.tag)!))
 //        guard let textField = textField else { return }
 //        textField.text = (textField.text ?? "") + key
     }
