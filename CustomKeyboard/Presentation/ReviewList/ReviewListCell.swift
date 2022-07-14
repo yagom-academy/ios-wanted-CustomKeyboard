@@ -12,60 +12,20 @@ class ReviewListCell: UICollectionViewCell {
     // MARK: - Properties
     static let identifier = "ReviewListCell"
     
-    var profileImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    var userNameLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    var contentsLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    var timeLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .lightGray
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    var declarationStack: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 5
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    var declarationIcon: UIImageView = {
-        let imageView = UIImageView()
-        let imageIcon = UIImage(systemName: "lightbulb.circle.fill")?.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
-        imageView.image = imageIcon
-        return imageView
-    }()
-    
-    var declarationLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .lightGray
-        label.text = "신고"
-        return label
-    }()
+    let profileImage = UIImageView()
+    let userNameLabel = UILabel()
+    let contentsLabel = UILabel()
+    let timeLabel = UILabel()
+    private let declarationStack = UIStackView()
+    private let declarationIcon = UIImageView()
+    private let declarationLabel = UILabel()
     
     
     // MARK: - Life Cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
+        configureAttribute()
+        configureUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -80,9 +40,35 @@ class ReviewListCell: UICollectionViewCell {
 // MARK: - Setup UI
 extension ReviewListCell {
     
-    private func setupUI() {
+    private func configureAttribute() {
         
-        contentView.addSubview(profileImage)
+        [profileImage, userNameLabel, contentsLabel, timeLabel, declarationStack].forEach {
+            contentView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        //유저네임
+        userNameLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        
+        //시간
+        timeLabel.textColor = .lightGray
+        timeLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        
+        //신고 스택뷰
+        declarationStack.axis = .horizontal
+        declarationStack.spacing = 5
+        
+        //신고 아이콘
+        let imageIcon = UIImage(systemName: "lightbulb.circle.fill")?.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
+        declarationIcon.image = imageIcon
+        
+        //신고 라벨
+        declarationLabel.textColor = .lightGray
+        declarationLabel.text = "신고"
+    }
+    
+    private func configureUI() {
+        
         NSLayoutConstraint.activate([
             profileImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             profileImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
@@ -90,26 +76,22 @@ extension ReviewListCell {
             profileImage.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.3),
         ])
         
-        contentView.addSubview(userNameLabel)
         NSLayoutConstraint.activate([
             userNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             userNameLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 10),
             userNameLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5),
         ])
         
-        contentView.addSubview(contentsLabel)
         NSLayoutConstraint.activate([
             contentsLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 10),
             contentsLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 10),
         ])
         
-        contentView.addSubview(timeLabel)
         NSLayoutConstraint.activate([
             timeLabel.topAnchor.constraint(equalTo: contentsLabel.bottomAnchor, constant: 10),
             timeLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 10),
         ])
         
-        contentView.addSubview(declarationStack)
         declarationStack.addArrangedSubview(declarationIcon)
         declarationStack.addArrangedSubview(declarationLabel)
         NSLayoutConstraint.activate([
