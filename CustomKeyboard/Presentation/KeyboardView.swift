@@ -20,7 +20,6 @@ final class KeyboardView: UIView {
 
     private lazy var textLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .brown
         label.text = Text.textLabelPlaceHolder
         label.numberOfLines = .zero
         return label
@@ -28,7 +27,7 @@ final class KeyboardView: UIView {
 
     private lazy var keyboardContentsView: UIView = {
         let view = UIView()
-        view.backgroundColor = .blue
+        view.backgroundColor = .systemGray4
         return view
     }()
 
@@ -58,11 +57,12 @@ final class KeyboardView: UIView {
 
     private lazy var shiftKeyButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .systemGray
+        button.backgroundColor = .systemGray2
         button.layer.cornerRadius = Style.keyboardKeyCornerRaidus
 
         button.setImage(Style.shiftKeyImage, for: .normal)
         button.setImage(Style.shiftFilledKeyImage, for: .selected)
+        button.tintColor = .black
 
         button.addTarget(
             nil,
@@ -77,15 +77,16 @@ final class KeyboardView: UIView {
 
     private lazy var deleteKeyButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .systemGray
+        button.backgroundColor = .systemGray2
         button.layer.cornerRadius = Style.keyboardKeyCornerRaidus
         button.setImage(Style.deleteKeyImage, for: .normal)
+        button.tintColor = .black
         button.heightAnchor.constraint(equalToConstant: keyboardKeyHeight) .isActive  = true
         button.widthAnchor.constraint(equalTo: button.heightAnchor).isActive = true
         return button
     }()
 
-    private lazy var numKeyButton: UIButton = {
+    private lazy var numberKeyButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemGray2
         button.layer.cornerRadius = Style.keyboardKeyCornerRaidus
@@ -102,7 +103,7 @@ final class KeyboardView: UIView {
 
     private lazy var spaceKeyButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .systemGray2
+        button.backgroundColor = .white
         button.layer.cornerRadius = Style.keyboardKeyCornerRaidus
         button.setTitleColor(.black, for: .normal)
         button.setTitle(Text.spaceKey, for: .normal)
@@ -121,6 +122,8 @@ final class KeyboardView: UIView {
         button.layer.cornerRadius = Style.keyboardKeyCornerRaidus
         button.setTitleColor(.black, for: .normal)
         button.setImage(Style.returnKeyImage, for: .normal)
+        button.tintColor = .black
+
         button.heightAnchor
             .constraint(equalToConstant:keyboardKeyHeight).isActive  = true
         button.widthAnchor.constraint(
@@ -193,7 +196,7 @@ extension KeyboardView {
             keyboardThirdLineStackView.addArrangedSubview(key)
         }
 
-        for i in [numKeyButton, spaceKeyButton, returnKeyButton] {
+        for i in [numberKeyButton, spaceKeyButton, returnKeyButton] {
             keyboardFourthLineStackView.addArrangedSubview(i)
         }
     }
@@ -209,8 +212,8 @@ extension KeyboardView {
         }
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(nil, action: #selector(keyboardButtonTouched(_:)), for: .touchUpInside)
-        button.backgroundColor = .systemGray4
-        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = Style.keyboardKeyCornerRaidus
 
         button.heightAnchor.constraint(equalToConstant: keyboardKeyHeight) .isActive  = true
