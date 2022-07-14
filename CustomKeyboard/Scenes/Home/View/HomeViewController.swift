@@ -13,6 +13,8 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(tapAddButton))
+        
+        NetworkService().request()
     }
         
     @objc func tapAddButton(){

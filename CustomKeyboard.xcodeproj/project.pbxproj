@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C0AFCC0287D683B005F7D50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C0AFCBF287D683B005F7D50 /* GoogleService-Info.plist */; };
+		7C0AFCC4287D6D20005F7D50 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0AFCC3287D6D20005F7D50 /* HomeViewModel.swift */; };
+		7C4CAF4B287F08F600831121 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CAF4A287F08F600831121 /* NetworkService.swift */; };
+		7C67A8D2287FF76400099FC2 /* review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C67A8D1287FF76400099FC2 /* review.swift */; };
 		7CCC5DD6287D5031004E2136 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 7CCC5DD5287D5031004E2136 /* FirebaseStorage */; };
 		7CCC5DDB287D511B004E2136 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC5DDA287D511B004E2136 /* ViewController.swift */; };
 		7CFC6AF7287D4E6F00DDC092 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFC6AF6287D4E6F00DDC092 /* HomeViewController.swift */; };
@@ -17,6 +21,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7C0AFCBF287D683B005F7D50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7C0AFCC3287D6D20005F7D50 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		7C4CAF4A287F08F600831121 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		7C67A8D1287FF76400099FC2 /* review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = review.swift; sourceTree = "<group>"; };
 		7CCC5DDA287D511B004E2136 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7CFC6AF6287D4E6F00DDC092 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,6 +47,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C0AFCC1287D6CD6005F7D50 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7CFC6AF6287D4E6F00DDC092 /* HomeViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7C0AFCC2287D6CF2005F7D50 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7C0AFCC3287D6D20005F7D50 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7C0AFCC5287D6D93005F7D50 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				7C4CAF4A287F08F600831121 /* NetworkService.swift */,
+				7C67A8D1287FF76400099FC2 /* review.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		7CCC5DD7287D50D6004E2136 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -51,7 +84,8 @@
 		7CCC5DD8287D50EB004E2136 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				7CFC6AF6287D4E6F00DDC092 /* HomeViewController.swift */,
+				7C0AFCC1287D6CD6005F7D50 /* View */,
+				7C0AFCC2287D6CF2005F7D50 /* ViewModel */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -83,12 +117,14 @@
 		DE15E65A28604278003DD2F5 /* CustomKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				7C0AFCC5287D6D93005F7D50 /* Network */,
 				7CCC5DD7287D50D6004E2136 /* Scenes */,
 				DE15E65B28604278003DD2F5 /* AppDelegate.swift */,
 				DE15E65D28604278003DD2F5 /* SceneDelegate.swift */,
 				DE15E66428604279003DD2F5 /* Assets.xcassets */,
 				DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */,
 				DE15E66928604279003DD2F5 /* Info.plist */,
+				7C0AFCBF287D683B005F7D50 /* GoogleService-Info.plist */,
 			);
 			path = CustomKeyboard;
 			sourceTree = "<group>";
@@ -159,6 +195,7 @@
 			files = (
 				DE15E66828604279003DD2F5 /* LaunchScreen.storyboard in Resources */,
 				DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */,
+				7C0AFCC0287D683B005F7D50 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,9 +206,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C67A8D2287FF76400099FC2 /* review.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 				7CCC5DDB287D511B004E2136 /* ViewController.swift in Sources */,
+				7C0AFCC4287D6D20005F7D50 /* HomeViewModel.swift in Sources */,
+				7C4CAF4B287F08F600831121 /* NetworkService.swift in Sources */,
 				7CFC6AF7287D4E6F00DDC092 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
