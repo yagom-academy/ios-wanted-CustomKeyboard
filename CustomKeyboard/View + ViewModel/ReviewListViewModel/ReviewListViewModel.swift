@@ -7,32 +7,27 @@
 
 import Foundation
 
-//MARK: - ReviewListViewModelDelegate
-protocol ReviewListViewModelDelegate: AnyObject {
-    func viewModel(didEndFetchReviewList viewModel: ReviewListViewModel)
-    func clearText()
+protocol ReviewListObservable {
+    var reviewList: Observable<[ReviewResult]> { get set }
+    var isSuccess: Observable<Bool> { get set }
 }
 
-class ReviewListViewModel {
-    var reviewList = [ReviewResult]()
-    
-    weak var delegate: ReviewListViewModelDelegate?
+class ReviewListViewModel: ReviewListObservable {
+    var reviewList: Observable<[ReviewResult]> = Observable([])
+    var isSuccess: Observable<Bool> = Observable(false)
     
     func fetchReviewList() {
         Network(
             path: "https://api.plkey.app/theme/review",
             parameters: [
-            "themeId": "PLKEY0-L-81",
-            "start": "0",
-            "count": "20"
+                "themeId": "PLKEY0-L-81",
+                "start": "0",
+                "count": "20"
             ]
         ).get { result in
             switch result {
             case .success(let list):
-                self.reviewList = list
-                DispatchQueue.main.async {
-                    self.delegate?.viewModel(didEndFetchReviewList: self)
-                }
+                self.reviewList.value = list
             case .failure(let error):
                 print("ERROR \(error.localizedDescription)🎉")
             }
@@ -41,9 +36,7 @@ class ReviewListViewModel {
     
     func postComment(_ comment: String) {
         Network(path: "", parameters: [:]).post(comment) { isSuccess in
-            if isSuccess {
-                self.delegate?.clearText()
-            }
+            self.isSuccess.value = isSuccess
         }
     }
 }
