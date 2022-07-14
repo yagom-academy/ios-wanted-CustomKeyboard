@@ -68,5 +68,17 @@ class spaceCaseRefactoringTests_monica: XCTestCase {
         
         XCTAssertEqual(result, expectation, "글자 끝에 백스페이스 믾이 추가해서 스페이스쳤던 것까지 지우는 경우")
     }
+    
+    func testSpaceCase5() throws {
+        ioManager.reset()
+        let input = ["ㅓ", "ㅣ", "ㅓ", "ㅣ", "Back", "ㅏ", "ㅣ", "ㅏ", "ㅣ", "Back", "ㅑ", "ㅣ", "ㅑ", "ㅣ", "Back", "ㅕ", "ㅣ", "ㅕ", "ㅣ", "Back"]
+        let expectation = getString(from: HG.fixed.mid.e) + getString(from: HG.fixed.mid.eo) + getString(from: HG.fixed.mid.ae) + getString(from: HG.fixed.mid.a) + getString(from: HG.fixed.mid.yae) + getString(from: HG.fixed.mid.ya) + getString(from: HG.fixed.mid.ye) + getString(from: HG.fixed.mid.yeo)
+        for char in input {
+            ioManager.process(input: char)
+        }
+        let result = ioManager.getOutput()
+        
+        XCTAssertEqual(result, expectation, "ㅓ + ㅣ, ㅏ + ㅣ, ㅑ + ㅣ, ㅕ + ㅣ 처리 확인")
+    }
 
 }

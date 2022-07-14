@@ -189,3 +189,7 @@ func getSplitPair(_ letter: Int, _ status: HG.Status) -> [Int] {
         return []
     }
 }
+
+func getString(from val: Int) -> String {
+    return String(UnicodeScalar(val)!)
+}
