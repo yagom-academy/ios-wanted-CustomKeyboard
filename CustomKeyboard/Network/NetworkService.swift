@@ -7,59 +7,43 @@
 
 import Foundation
 
+enum Method {
+    case get
+    case post
+}
 protocol Api{
-    
+    var method: Method { get }
 }
 
 class NetworkService{
-    func request(){
-        fetchListAll()
-//        postRequest()
-    }
-    private func fetchListAll(){
-        let urlString = "https://api.plkey.app/theme/review?themeId=PLKEY0-L-81&start=0&count=2"
-        guard let url = URL(string: urlString) else { return }
-        var requestURL = URLRequest(url: url)
-        requestURL.httpMethod = "GET"
-        requestURL.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let session = URLSession(configuration: .default)
-        let dataTask = session.dataTask(with: requestURL) { (data, response, error) in
-            guard error == nil else { return }
-            let successsRange = 200..<300
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode,
-                  successsRange.contains(statusCode) else { return }
-            guard let data = data else { return }
-            do{
-                let resultData = try JSONDecoder().decode(reviewList.self, from: data)
-                print("success")
-//                print(resultData)
-            }catch{
-                print("ERROR: ", error)
+    private let reviewRepository = ReviewRepository()
+    private var reviewList: [ReviewModel] = []
+    
+    func request(method: Method, completion: @escaping ([ReviewModel])->()){
+        switch method {
+        case .get:
+            getRequest { list in
+                completion(list)
             }
+        case .post:
+            postRequest()
         }
-        dataTask.resume()
+    }
+    private func getRequest(completion: @escaping ([ReviewModel])->()){
+        reviewRepository.fetchReview { reviewList in
+            reviewList.data.forEach { reviewInfo in
+                let review = ReviewModel(
+                    userName: reviewInfo.user.userName,
+                    profileImage: reviewInfo.user.profileImage,
+                    content: reviewInfo.content,
+                    createdAt: reviewInfo.createdAt
+                )
+                self.reviewList.append(review)
+            }
+            completion(self.reviewList)
+        }
     }
     private func postRequest(){
-        let review = "Hello World"
-        let data: [String:String] = ["content":review]
-        let jsonData = try! JSONSerialization.data(withJSONObject: data, options: [])
-        
-        let urlString = "https://api.plkey.app/tmp/theme/PLKEY0-L-81/review"
-        guard let url = URL(string: urlString) else { return }
-        var requestURL = URLRequest(url: url)
-        requestURL.httpMethod = "POST"
-        requestURL.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        requestURL.httpBody = jsonData
-
-        let session = URLSession(configuration: .default)
-        let dataTask = session.dataTask(with: requestURL) { (data, response, error) in
-            guard error == nil else { return }
-            let successsRange = 200..<300
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, successsRange.contains(statusCode)
-            else { return }
-//            print(statusCode)
-        }
-        dataTask.resume()
+        reviewRepository.postReview()
     }
 }

@@ -8,5 +8,12 @@
 import Foundation
 
 class HomeViewModel{
+    private let networkService = NetworkService()
+    var reviewList: Observable<[ReviewModel]> = Observable([])
     
+    func reloadReviewList(){
+        networkService.request(method: .get) { list in
+            self.reviewList.value = list
+        }
+    }
 }

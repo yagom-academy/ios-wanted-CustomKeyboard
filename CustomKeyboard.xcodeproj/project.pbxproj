@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C07353828804A79003E5B18 /* CreateReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C07353728804A79003E5B18 /* CreateReviewViewModel.swift */; };
+		7C07353A2880583F003E5B18 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0735392880583F003E5B18 /* Observable.swift */; };
 		7C0AFCC0287D683B005F7D50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C0AFCBF287D683B005F7D50 /* GoogleService-Info.plist */; };
 		7C0AFCC4287D6D20005F7D50 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0AFCC3287D6D20005F7D50 /* HomeViewModel.swift */; };
 		7C4CAF4B287F08F600831121 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CAF4A287F08F600831121 /* NetworkService.swift */; };
-		7C67A8D2287FF76400099FC2 /* review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C67A8D1287FF76400099FC2 /* review.swift */; };
-		7CCC5DD6287D5031004E2136 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 7CCC5DD5287D5031004E2136 /* FirebaseStorage */; };
-		7CCC5DDB287D511B004E2136 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC5DDA287D511B004E2136 /* ViewController.swift */; };
+		7C67A8D2287FF76400099FC2 /* reviewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C67A8D1287FF76400099FC2 /* reviewList.swift */; };
+		7C67A8D52880160700099FC2 /* ReviewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C67A8D42880160700099FC2 /* ReviewRepository.swift */; };
+		7C67A8D728801AD300099FC2 /* ReviewTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C67A8D628801AD200099FC2 /* ReviewTableviewCell.swift */; };
+		7C67A8D92880276800099FC2 /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C67A8D82880276800099FC2 /* ReviewModel.swift */; };
+		7CCC5DDB287D511B004E2136 /* CreateReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC5DDA287D511B004E2136 /* CreateReviewViewController.swift */; };
 		7CFC6AF7287D4E6F00DDC092 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFC6AF6287D4E6F00DDC092 /* HomeViewController.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
@@ -21,11 +25,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7C07353728804A79003E5B18 /* CreateReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewViewModel.swift; sourceTree = "<group>"; };
+		7C0735392880583F003E5B18 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		7C0AFCBF287D683B005F7D50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C0AFCC3287D6D20005F7D50 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		7C4CAF4A287F08F600831121 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		7C67A8D1287FF76400099FC2 /* review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = review.swift; sourceTree = "<group>"; };
-		7CCC5DDA287D511B004E2136 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7C67A8D1287FF76400099FC2 /* reviewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reviewList.swift; sourceTree = "<group>"; };
+		7C67A8D42880160700099FC2 /* ReviewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRepository.swift; sourceTree = "<group>"; };
+		7C67A8D628801AD200099FC2 /* ReviewTableviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableviewCell.swift; sourceTree = "<group>"; };
+		7C67A8D82880276800099FC2 /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
+		7CCC5DDA287D511B004E2136 /* CreateReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewViewController.swift; sourceTree = "<group>"; };
 		7CFC6AF6287D4E6F00DDC092 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,17 +49,49 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7CCC5DD6287D5031004E2136 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C0735332880453A003E5B18 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7C67A8D1287FF76400099FC2 /* reviewList.swift */,
+				7C67A8D82880276800099FC2 /* ReviewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7C07353428804A3A003E5B18 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7C0735392880583F003E5B18 /* Observable.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		7C07353528804A59003E5B18 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7C07353628804A5F003E5B18 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7C07353728804A79003E5B18 /* CreateReviewViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		7C0AFCC1287D6CD6005F7D50 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				7CFC6AF6287D4E6F00DDC092 /* HomeViewController.swift */,
+				7C67A8D628801AD200099FC2 /* ReviewTableviewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -67,7 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				7C4CAF4A287F08F600831121 /* NetworkService.swift */,
-				7C67A8D1287FF76400099FC2 /* review.swift */,
+				7C67A8D42880160700099FC2 /* ReviewRepository.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -93,7 +134,9 @@
 		7CCC5DD9287D50FE004E2136 /* CreateReview */ = {
 			isa = PBXGroup;
 			children = (
-				7CCC5DDA287D511B004E2136 /* ViewController.swift */,
+				7C07353628804A5F003E5B18 /* ViewModel */,
+				7C07353528804A59003E5B18 /* View */,
+				7CCC5DDA287D511B004E2136 /* CreateReviewViewController.swift */,
 			);
 			path = CreateReview;
 			sourceTree = "<group>";
@@ -117,6 +160,8 @@
 		DE15E65A28604278003DD2F5 /* CustomKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				7C07353428804A3A003E5B18 /* Common */,
+				7C0735332880453A003E5B18 /* Model */,
 				7C0AFCC5287D6D93005F7D50 /* Network */,
 				7CCC5DD7287D50D6004E2136 /* Scenes */,
 				DE15E65B28604278003DD2F5 /* AppDelegate.swift */,
@@ -146,7 +191,6 @@
 			);
 			name = CustomKeyboard;
 			packageProductDependencies = (
-				7CCC5DD5287D5031004E2136 /* FirebaseStorage */,
 			);
 			productName = SNPLab;
 			productReference = DE15E65828604278003DD2F5 /* CustomKeyboard.app */;
@@ -177,7 +221,6 @@
 			);
 			mainGroup = DE15E64F28604278003DD2F5;
 			packageReferences = (
-				7CCC5DD4287D5031004E2136 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = DE15E65928604278003DD2F5 /* Products */;
 			projectDirPath = "";
@@ -206,10 +249,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C67A8D2287FF76400099FC2 /* review.swift in Sources */,
+				7C07353828804A79003E5B18 /* CreateReviewViewModel.swift in Sources */,
+				7C07353A2880583F003E5B18 /* Observable.swift in Sources */,
+				7C67A8D2287FF76400099FC2 /* reviewList.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
-				7CCC5DDB287D511B004E2136 /* ViewController.swift in Sources */,
+				7C67A8D52880160700099FC2 /* ReviewRepository.swift in Sources */,
+				7C67A8D728801AD300099FC2 /* ReviewTableviewCell.swift in Sources */,
+				7C67A8D92880276800099FC2 /* ReviewModel.swift in Sources */,
+				7CCC5DDB287D511B004E2136 /* CreateReviewViewController.swift in Sources */,
 				7C0AFCC4287D6D20005F7D50 /* HomeViewModel.swift in Sources */,
 				7C4CAF4B287F08F600831121 /* NetworkService.swift in Sources */,
 				7CFC6AF7287D4E6F00DDC092 /* HomeViewController.swift in Sources */,
@@ -418,25 +466,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		7CCC5DD4287D5031004E2136 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		7CCC5DD5287D5031004E2136 /* FirebaseStorage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7CCC5DD4287D5031004E2136 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseStorage;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DE15E65028604278003DD2F5 /* Project object */;
 }
