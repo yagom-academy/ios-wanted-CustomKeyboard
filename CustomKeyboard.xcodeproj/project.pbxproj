@@ -16,6 +16,8 @@
 		DFC5102C287D4CC8003D26B0 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC5102B287D4CC8003D26B0 /* ReviewTableViewCell.swift */; };
 		DFE6D8D1287EBD2800A45033 /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE6D8D0287EBD2800A45033 /* BasePaddingLabel.swift */; };
 		DFE6D8D3287EBD9C00A45033 /* ReviewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE6D8D2287EBD9C00A45033 /* ReviewListView.swift */; };
+		E11AAD6C287D4E11001B1F96 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11AAD6B287D4E11001B1F96 /* KeyboardViewController.swift */; };
+		E11AAD6E287D5101001B1F96 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11AAD6D287D5101001B1F96 /* KeyboardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		DFC5102B287D4CC8003D26B0 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		DFE6D8D0287EBD2800A45033 /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
 		DFE6D8D2287EBD9C00A45033 /* ReviewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListView.swift; sourceTree = "<group>"; };
+		E11AAD6B287D4E11001B1F96 /* KeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		E11AAD6D287D5101001B1F96 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,9 @@
 				DE15E65F28604278003DD2F5 /* ReviewListViewController.swift */,
 				DFE6D8D2287EBD9C00A45033 /* ReviewListView.swift */,
 				DFC5102B287D4CC8003D26B0 /* ReviewTableViewCell.swift */,
+				E11AAD6B287D4E11001B1F96 /* KeyboardViewController.swift */,
+				DE15E65F28604278003DD2F5 /* ViewController.swift */,
+				E11AAD6D287D5101001B1F96 /* KeyboardView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -189,7 +196,10 @@
 				DE15E66028604278003DD2F5 /* ReviewListViewController.swift in Sources */,
 				DFC5102C287D4CC8003D26B0 /* ReviewTableViewCell.swift in Sources */,
 				DFE6D8D3287EBD9C00A45033 /* ReviewListView.swift in Sources */,
+				DE15E66028604278003DD2F5 /* ViewController.swift in Sources */,
+				E11AAD6C287D4E11001B1F96 /* KeyboardViewController.swift in Sources */,
 				DFC51027287D48CC003D26B0 /* BaseViewController.swift in Sources */,
+				E11AAD6E287D5101001B1F96 /* KeyboardView.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 				DFE6D8D1287EBD2800A45033 /* BasePaddingLabel.swift in Sources */,
