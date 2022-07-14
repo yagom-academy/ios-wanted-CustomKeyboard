@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewWriteView: UIViewController {
+class ReviewWriteViewController: UIViewController {
     private let textView = UITextView()
     private let customKeyboard = CustomKeyBoard()
     private var resultInputField: UITextView?
@@ -26,7 +26,7 @@ class ReviewWriteView: UIViewController {
 }
 
 //MARK: - 커스텀키보드 Delegate 메서드
-extension ReviewWriteView: CustomKeyBoardDelegate {
+extension ReviewWriteViewController: CustomKeyBoardDelegate {
     func tappedReturnButton() {
         guard let message = self.textView.text else { return }
         self.resultInputField?.text = message
@@ -43,7 +43,7 @@ extension ReviewWriteView: CustomKeyBoardDelegate {
 }
 
 //MARK: - attribute
-extension ReviewWriteView {
+extension ReviewWriteViewController {
     private func attribute() {
         self.title = " 리뷰 작성 "
         view.backgroundColor = .white
@@ -54,7 +54,7 @@ extension ReviewWriteView {
 }
 
 //MARK: - layout
-extension ReviewWriteView {
+extension ReviewWriteViewController {
     private func layout() {
         [textView, customKeyboard].forEach {
             view.addSubview($0)

@@ -28,7 +28,7 @@ class TestView: UIViewController {
     }
     
     @objc func didTapView() {
-        let vc = ReviewWriteView(inputField: textView)
+        let vc = ReviewWriteViewController(inputField: textView)
         self.present(vc, animated: true)
     }
     
