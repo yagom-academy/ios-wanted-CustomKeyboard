@@ -8,6 +8,7 @@
 import UIKit
 
 protocol KeyboardViewDelegate: AnyObject {
+    func keyboardViewTouch()
     func keyboardViewReturn()
 }
 
@@ -41,7 +42,8 @@ class KeyboardView_sungeo: UIView {
             title = sender.currentTitle ?? ""
         }
         
-        print(title)
+        HangeulManager.shared.update(title)
+        delegate?.keyboardViewTouch()
     }
     
     @IBAction func touchShiftButton(_ sender: UIButton) {

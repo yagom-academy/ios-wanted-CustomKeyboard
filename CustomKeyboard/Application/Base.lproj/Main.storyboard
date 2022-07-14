@@ -134,17 +134,43 @@
             </objects>
             <point key="canvasLocation" x="192.75362318840581" y="88.392857142857139"/>
         </scene>
-        <!--View Controller-->
+        <!--Review View Controller-->
         <scene sceneID="wBz-Ht-cNg">
             <objects>
-                <viewController id="uYA-pl-ktf" sceneMemberID="viewController">
+                <viewController id="uYA-pl-ktf" customClass="ReviewViewController" customModule="CustomKeyboard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Q9A-Sd-6th">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OdK-8G-RIL" customClass="KeyboardView_sungeo" customModule="CustomKeyboard" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="381" width="414" height="461"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0QF-J4-grq">
+                                <rect key="frame" x="0.0" y="44" width="414" height="337"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="tab-qp-O50"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0QF-J4-grq" firstAttribute="trailing" secondItem="tab-qp-O50" secondAttribute="trailing" id="4E0-Uz-Eb1"/>
+                            <constraint firstItem="0QF-J4-grq" firstAttribute="leading" secondItem="tab-qp-O50" secondAttribute="leading" id="5Rp-gP-0SQ"/>
+                            <constraint firstItem="OdK-8G-RIL" firstAttribute="top" secondItem="0QF-J4-grq" secondAttribute="bottom" id="E5x-0K-Etq"/>
+                            <constraint firstItem="0QF-J4-grq" firstAttribute="height" secondItem="Q9A-Sd-6th" secondAttribute="height" multiplier="0.4" id="EgG-ts-018"/>
+                            <constraint firstItem="OdK-8G-RIL" firstAttribute="trailing" secondItem="tab-qp-O50" secondAttribute="trailing" id="J3E-aL-nUx"/>
+                            <constraint firstItem="0QF-J4-grq" firstAttribute="top" secondItem="tab-qp-O50" secondAttribute="top" id="LYe-Rk-EoI"/>
+                            <constraint firstItem="OdK-8G-RIL" firstAttribute="leading" secondItem="tab-qp-O50" secondAttribute="leading" id="UHd-5T-Tfs"/>
+                            <constraint firstItem="OdK-8G-RIL" firstAttribute="bottom" secondItem="tab-qp-O50" secondAttribute="bottom" id="hk6-wp-Mmc"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="q2v-zJ-dgr"/>
+                    <connections>
+                        <outlet property="keyboardView" destination="OdK-8G-RIL" id="MVg-zr-a60"/>
+                        <outlet property="textView" destination="0QF-J4-grq" id="m3n-My-4ZP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n6M-h7-hMN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -153,6 +179,9 @@
     </scenes>
     <resources>
         <image name="person.circle" catalog="system" width="128" height="121"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

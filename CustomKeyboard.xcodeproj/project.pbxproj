@@ -12,6 +12,7 @@
 		012EDE54287F9B960035C3E6 /* Endpoint_sungeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE53287F9B960035C3E6 /* Endpoint_sungeo.swift */; };
 		012EDE56287FA0BD0035C3E6 /* Provider_sungeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE55287FA0BC0035C3E6 /* Provider_sungeo.swift */; };
 		012EDE5A287FA6FA0035C3E6 /* APIEndpoints_sungeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE59287FA6FA0035C3E6 /* APIEndpoints_sungeo.swift */; };
+		012EDE5C287FAF790035C3E6 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE5B287FAF790035C3E6 /* ReviewViewController.swift */; };
 		0142F4CC287C0A76006F3E48 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4CB287C0A76006F3E48 /* HomeTableViewCell.swift */; };
 		0142F4D0287C0C9C006F3E48 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4CF287C0C9C006F3E48 /* Review.swift */; };
 		0142F4D4287C2C83006F3E48 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4D3287C2C83006F3E48 /* ImageManager.swift */; };
@@ -53,6 +54,7 @@
 		012EDE53287F9B960035C3E6 /* Endpoint_sungeo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint_sungeo.swift; sourceTree = "<group>"; };
 		012EDE55287FA0BC0035C3E6 /* Provider_sungeo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider_sungeo.swift; sourceTree = "<group>"; };
 		012EDE59287FA6FA0035C3E6 /* APIEndpoints_sungeo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints_sungeo.swift; sourceTree = "<group>"; };
+		012EDE5B287FAF790035C3E6 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		0142F4CB287C0A76006F3E48 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		0142F4CF287C0C9C006F3E48 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		0142F4D3287C2C83006F3E48 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				DE15E65F28604278003DD2F5 /* HomeViewController.swift */,
+				012EDE5B287FAF790035C3E6 /* ReviewViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 			files = (
 				0142F4E8287D62ED006F3E48 /* KeyboardView_sungeo.swift in Sources */,
 				012EDE54287F9B960035C3E6 /* Endpoint_sungeo.swift in Sources */,
+				012EDE5C287FAF790035C3E6 /* ReviewViewController.swift in Sources */,
 				9F5042FC287C144900CDBD9C /* NetworkManager.swift in Sources */,
 				012EDE5A287FA6FA0035C3E6 /* APIEndpoints_sungeo.swift in Sources */,
 				012EDE46287EC14C0035C3E6 /* HttpMethod_sungeo.swift in Sources */,
