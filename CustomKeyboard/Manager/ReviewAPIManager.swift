@@ -83,6 +83,12 @@ class ReviewAPIManager {
                 completion(.failure(.failed))
                 return
             }
+            
+            if let data = data, let dataString = String(data: data, encoding: .utf8) {
+                print("\(dataString)")
+                completion(.success(review))
+                return
+            }
         }.resume()
     }
 }

@@ -92,7 +92,21 @@ extension ReviewViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         let vc = KeyboardViewController()
+        vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
         textField.resignFirstResponder()
+    }
+}
+
+// MARK: - TextFieldTextDelegate
+extension ReviewViewController: PassReviewDelegate {
+    func sendReviewData(review: Review) {
+        // 헤더에 문제 있음
+        let header = ReviewTableViewHeader()
+        header.reviewTextField.text = review.content
+        
+        // 작성 버튼으로 옮기기
+        reviewList.append(review)
+        reviewTableView.reloadData()
     }
 }
