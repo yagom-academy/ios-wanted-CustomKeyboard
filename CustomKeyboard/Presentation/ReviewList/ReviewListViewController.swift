@@ -11,45 +11,11 @@ class ReviewListViewController: UIViewController {
     
     // MARK: - Properties
     private var reviewDatas: [ReviewType] = []
-    
     private var collectionView: UICollectionView! = nil
-    
-    private var reviewTextFieldStack: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    private var profileImageView: UIImageView = {
-        let imageView = UIImageView()
-        let imageIcon = UIImage(systemName: "person.crop.circle")?.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
-        imageView.image = imageIcon
-        return imageView
-    }()
-    
+    private let reviewTextFieldStack = UIStackView()
+    private let profileImageView = UIImageView()
     private let reviewTextView = UITextView()
-    
-//    private var reviewTextView: UITextView = {
-//        let textView = UITextView()
-//        textView.text = "이 테마가 마음에 드시나요?"
-//        textView.font = UIFont.boldSystemFont(ofSize: 16)
-//        textView.layer.cornerRadius = 15
-////        textView.addLeftPadding()
-//        textView.backgroundColor = UIColor.systemGray6
-//        let tapGestureRecognizer = UITapGestureRecognizer(target: ReviewListViewController.self, action: #selector(didTapView))
-//
-//        textView.addGestureRecognizer(tapGestureRecognizer)
-//        return textView
-//    }()
-    
-    private var reviewPostButton: UIButton = {
-        var configuration = UIButton.Configuration.tinted()
-        configuration.title = "작성"
-        let button = UIButton(configuration: configuration)
-        return button
-    }()
+    private let reviewPostButton = UIButton()
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -97,7 +63,7 @@ extension ReviewListViewController {
 extension ReviewListViewController {
     @objc func didTapView() {
         let vc = ReviewWriteView(inputField: reviewTextView)
-        navigationController?.pushViewController(vc, animated: false)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -113,10 +79,25 @@ extension ReviewListViewController {
     
     private func configureAttribute() {
         
+        //스택뷰
+        reviewTextFieldStack.axis = .horizontal
+        reviewTextFieldStack.spacing = 10
+        reviewTextFieldStack.translatesAutoresizingMaskIntoConstraints = false
+        
+        //프로필이미지뷰
+        let imageIcon = UIImage(systemName: "person.crop.circle")?.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
+        profileImageView.image = imageIcon
+        
+        //텍스트뷰
         reviewTextView.text = "이 테마가 마음에 드시나요?"
+        reviewTextView.textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 5, right: 5)
         reviewTextView.font = UIFont.boldSystemFont(ofSize: 16)
         reviewTextView.layer.cornerRadius = 15
         reviewTextView.backgroundColor = .systemGray6
+        
+        //버튼
+        reviewPostButton.configuration = UIButton.Configuration.tinted()
+        reviewPostButton.configuration?.title = "작성"
     }
     
     private func configureStackView() {
