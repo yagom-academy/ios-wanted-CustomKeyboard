@@ -26,7 +26,7 @@ class setSeparatedBufferTests: XCTestCase {
         let input = "ㄱ"
         let expectation = 1
         hangeulManager.update(input)
-        let result = hangeulManager.getSeparatedBufferCount()
+        let result = hangeulManager.getLetterBufferCount()
         
         XCTAssertEqual(result, expectation, "초성 입력시 에러")
     }
@@ -38,7 +38,7 @@ class setSeparatedBufferTests: XCTestCase {
         let expectation = 2
         hangeulManager.update(input1)
         hangeulManager.update(input2)
-        let result = hangeulManager.getSeparatedBufferCount()
+        let result = hangeulManager.getLetterBufferCount()
         
         XCTAssertEqual(result, expectation, "초성 -> 중성 입력시 에러")
     }
@@ -52,7 +52,7 @@ class setSeparatedBufferTests: XCTestCase {
         hangeulManager.update(input1)
         hangeulManager.update(input2)
         hangeulManager.update(input3)
-        let result = hangeulManager.getSeparatedBufferCount()
+        let result = hangeulManager.getLetterBufferCount()
         
         XCTAssertEqual(result, expectation, "초성 -> 겹모음 입력시 에러")
     }
@@ -64,7 +64,7 @@ class setSeparatedBufferTests: XCTestCase {
         let expectation = 1
         hangeulManager.update(input1)
         hangeulManager.update(input2)
-        let result = hangeulManager.getSeparatedBufferCount()
+        let result = hangeulManager.getLetterBufferCount()
         
         XCTAssertEqual(result, expectation, "초성 -> 초성 입력시 에러")
     }
@@ -74,7 +74,7 @@ class setSeparatedBufferTests: XCTestCase {
         let input = "ㅑ"
         let expectation = 1
         hangeulManager.update(input)
-        let result = hangeulManager.getSeparatedBufferCount()
+        let result = hangeulManager.getLetterBufferCount()
         
         XCTAssertEqual(result, expectation, "중성 입력시 에러")
     }
@@ -88,7 +88,7 @@ class setSeparatedBufferTests: XCTestCase {
         hangeulManager.update(input1)
         hangeulManager.update(input2)
         hangeulManager.update(input3)
-        let result = hangeulManager.getSeparatedBufferCount()
+        let result = hangeulManager.getLetterBufferCount()
         
         XCTAssertEqual(result, expectation, "초성 -> 중성 -> 종성 입력시 에러")
     }
@@ -104,7 +104,7 @@ class setSeparatedBufferTests: XCTestCase {
         hangeulManager.update(input2)
         hangeulManager.update(input3)
         hangeulManager.update(input4)
-        let result = hangeulManager.getSeparatedBufferCount()
+        let result = hangeulManager.getLetterBufferCount()
         
         XCTAssertEqual(result, expectation, "초성 -> 겹모음 -> 종성 입력시 에러")
     }
@@ -120,7 +120,7 @@ class setSeparatedBufferTests: XCTestCase {
         hangeulManager.update(input2)
         hangeulManager.update(input3)
         hangeulManager.update(input4)
-        let result = hangeulManager.getSeparatedBufferCount()
+        let result = hangeulManager.getLetterBufferCount()
         
         XCTAssertEqual(result, expectation, "초성 -> 중성 -> 겹받침 입력시 에러")
     }
@@ -134,7 +134,7 @@ class setSeparatedBufferTests: XCTestCase {
         hangeulManager.update(input1)
         hangeulManager.update(input2)
         hangeulManager.update(input3)
-        let result = hangeulManager.getSeparatedBufferCount()
+        let result = hangeulManager.getLetterBufferCount()
         
         XCTAssertEqual(result, expectation, "초성 -> 중성 -> 중성 입력시 에러")
     }
@@ -152,7 +152,7 @@ class setSeparatedBufferTests: XCTestCase {
         hangeulManager.update(input3)
         hangeulManager.update(input4)
         hangeulManager.update(input5)
-        let result = hangeulManager.getSeparatedBufferCount()
+        let result = hangeulManager.getLetterBufferCount()
         
         XCTAssertEqual(result, expectation, "초성 -> 겹모음 -> 겹받침 입력시 에러")
     }
@@ -170,7 +170,7 @@ class setSeparatedBufferTests: XCTestCase {
         hangeulManager.update(input3)
         hangeulManager.update(input4)
         hangeulManager.update(input5)
-        let result = hangeulManager.getSeparatedBufferCount()
+        let result = hangeulManager.getLetterBufferCount()
         
         XCTAssertEqual(result, expectation, "초성 -> 중성 -> 겹받침 -> 중성 입력시 에러")
     }
@@ -190,7 +190,7 @@ class setSeparatedBufferTests: XCTestCase {
         hangeulManager.update(input4)
         hangeulManager.update(input5)
         hangeulManager.update(input6)
-        let result = hangeulManager.getSeparatedBufferCount()
+        let result = hangeulManager.getLetterBufferCount()
         
         XCTAssertEqual(result, expectation, "초성 -> 겹모음 -> 겹받침 -> 중성 입력시 에러")
     }
@@ -206,7 +206,7 @@ class setSeparatedBufferTests: XCTestCase {
         hangeulManager.update(input2)
         hangeulManager.update(input3)
         hangeulManager.update(input4)
-        let result = hangeulManager.getSeparatedBufferCount()
+        let result = hangeulManager.getLetterBufferCount()
         
         XCTAssertEqual(result, expectation, "초성 -> 중성 -> 종성 -> 중성 입력시 에러")
     }
@@ -224,7 +224,7 @@ class setSeparatedBufferTests: XCTestCase {
         hangeulManager.update(input3)
         hangeulManager.update(input4)
         hangeulManager.update(input5)
-        let result = hangeulManager.getSeparatedBufferCount()
+        let result = hangeulManager.getLetterBufferCount()
         
         XCTAssertEqual(result, expectation, "초성 -> 겹모음 -> 종성 -> 중성 입력시 에러")
     }
@@ -240,7 +240,7 @@ class setSeparatedBufferTests: XCTestCase {
         hangeulManager.update(input2)
         hangeulManager.update(input3)
         hangeulManager.update(input4)
-        let result = hangeulManager.getSeparatedBufferCount()
+        let result = hangeulManager.getLetterBufferCount()
         
         XCTAssertEqual(result, expectation, "초성 -> 중성 -> 종성 -> 초성 입력시 에러")
     }
@@ -258,7 +258,7 @@ class setSeparatedBufferTests: XCTestCase {
         hangeulManager.update(input3)
         hangeulManager.update(input4)
         hangeulManager.update(input5)
-        let result = hangeulManager.getSeparatedBufferCount()
+        let result = hangeulManager.getLetterBufferCount()
         
         XCTAssertEqual(result, expectation, "초성 -> 중성 -> 겹받침 -> 초성 입력시 에러")
     }
@@ -276,7 +276,7 @@ class setSeparatedBufferTests: XCTestCase {
         hangeulManager.update(input3)
         hangeulManager.update(input4)
         hangeulManager.update(input5)
-        let result = hangeulManager.getSeparatedBufferCount()
+        let result = hangeulManager.getLetterBufferCount()
         
         XCTAssertEqual(result, expectation, "초성 -> 겹모음 -> 중성 -> 초성 입력시 에러")
     }
@@ -296,7 +296,7 @@ class setSeparatedBufferTests: XCTestCase {
         hangeulManager.update(input4)
         hangeulManager.update(input5)
         hangeulManager.update(input6)
-        let result = hangeulManager.getSeparatedBufferCount()
+        let result = hangeulManager.getLetterBufferCount()
         
         XCTAssertEqual(result, expectation, "초성 -> 겹모음 -> 겹받침 -> 초성 입력시 에러")
     }

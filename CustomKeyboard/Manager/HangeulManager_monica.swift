@@ -2,62 +2,59 @@
 //  HangeulManager_monica.swift
 //  CustomKeyboard
 //
-//  Created by hayeon on 2022/07/12.
+//  Created by hayeon on 2022/07/14.
 //
 
-import Foundation
+import UIKit
 
 class HangeulManager {
 
     static let shared = HangeulManager()
     private init() { }
 
-    private var separatedBuffer = [Int]()
-    private var combinedBuffer = [Int]()
+    private var letterBuffer = [Int]()
+    private var wordList = [Int]()
     private var status: HG.Status = .start
     private var statusStack: [HG.Status] = [.start]
     let SPACE = -2
     let BACK = -1
     let NORMAL = 1
-}
-
-// MARK: - 문자 입력시 호출
-
-extension HangeulManager {
+    
+    // MARK: - 문자 입력시 호출
     
     func update(_ inputString: String) {
         var input: Int!
         print("=====================================")
-//        print("입력: \(inputString)")
+        print("입력: \(inputString)")
         if inputString == "Back" && status == .start {
             return
         }
         
         switch inputString {
         case "Back":
-            updateCombinedBuffer(BACK)
-            updateSeparatedBuffer(BACK)
+            updateWordList(BACK)
+            updateLetterBuffer(BACK)
             updateStatus(BACK)
         case "Space":
             updateStatus(SPACE)
-            updateSeparatedBuffer(SPACE)
-            updateCombinedBuffer(SPACE)
+            updateLetterBuffer(SPACE)
+            updateWordList(SPACE)
         default:
             input = Int(UnicodeScalar(inputString)!.value)
             updateStatus(input)
-            updateSeparatedBuffer(input)
-            updateCombinedBuffer(input)
+            updateLetterBuffer(input)
+            updateWordList(input)
             refreshStatus()
         }
         
 //        print("상태스택: \(statusStack)")
 //        print("상태: \(status)")
-//        print("separatedBuffer:")
-//        for ele in separatedBuffer {
+//        print("letterBuffer:")
+//        for ele in letterBuffer {
 //            print(String(UnicodeScalar(ele)!))
 //        }
-//        print("combinedBuffer:")
-//        for ele in combinedBuffer {
+//        print("wordList:")
+//        for ele in wordList {
 //            if ele == SPACE {
 //                print("| |")
 //            } else {
@@ -67,7 +64,6 @@ extension HangeulManager {
     }
 }
 
-
 // MARK: - 문자 조합 상태 결정
 
 extension HangeulManager {
@@ -75,7 +71,7 @@ extension HangeulManager {
     private func refreshStatus() {
         switch status {
         case .finishPassOne:
-            if HG.fixed.mid.list.contains(separatedBuffer.last!) {
+            if HG.fixed.mid.list.contains(letterBuffer.last!) {
                 setStatus(.mid)
             } else {
                 setStatus(.top)
@@ -99,7 +95,7 @@ extension HangeulManager {
 //            for ele in separatedBuffer {
 //                print("    \(String(UnicodeScalar(ele)!))")
 //            }
-            let prev = separatedBuffer.last ?? 0
+            let prev = letterBuffer.last ?? 0
 //            print("    prev: \(String(UnicodeScalar(prev)!))")
             switch status {
             case .start, .space:
@@ -158,46 +154,46 @@ extension HangeulManager {
 // MARK: - separatedBuffer에 문자 추가/삭제
 
 extension HangeulManager {
-    private func updateSeparatedBuffer(_ input: Int) {
+    private func updateLetterBuffer(_ input: Int) {
         if input == SPACE {
-            separatedBuffer = []
+            letterBuffer = []
         } else if input == BACK {
-            if separatedBuffer.isEmpty {
+            if letterBuffer.isEmpty {
                 switch status {
                 case .finishPassOne:
-                    let last = combinedBuffer.last ?? 0
-                    separatedBuffer = getSeparatedCharacters(from: last, mode: NORMAL)
+                    let last = wordList.last ?? 0
+                    letterBuffer = getSeparatedCharacters(from: last, mode: NORMAL)
                 case .finishPassTwo:
-                    let last = combinedBuffer.last ?? 0
+                    let last = wordList.last ?? 0
                     let char = getSeparatedCharacters(from: last, mode: NORMAL)
                     if char[2] == HG.fixed.end.blank {
-                        separatedBuffer = [char[0], char[1]]
+                        letterBuffer = [char[0], char[1]]
                     } else {
-                        separatedBuffer = char
+                        letterBuffer = char
                     }
                 default:
                     break
                 }
             } else {
-                let last = separatedBuffer.removeLast()
-                let prevWord = combinedBuffer.last ?? 0
+                let last = letterBuffer.removeLast()
+                let prevWord = wordList.last ?? 0
                 switch status {
                 case .top:
                     if statusStack[statusStack.count - 2] != .start {
-                        separatedBuffer.append(prevWord)
+                        letterBuffer.append(prevWord)
                     }
                 case .end:
                     let char = getSeparatedCharacters(from: prevWord, mode: BACK)
-                    separatedBuffer = [char[0], char[1]]
+                    letterBuffer = [char[0], char[1]]
                 case .doubleMid:
                     if HG.fixed.mid.list.contains(prevWord) {
-                        separatedBuffer.append(prevWord)
+                        letterBuffer.append(prevWord)
                     } else {
                         let char = getSeparatedCharacters(from: prevWord, mode: BACK)
-                        separatedBuffer = [char[0], char[1]]
+                        letterBuffer = [char[0], char[1]]
                     }
                 case .doubleEnd:
-                    separatedBuffer.append(HG.fixed.end.split[last]?.first ?? 0)
+                    letterBuffer.append(HG.fixed.end.split[last]?.first ?? 0)
                 default:
                     break
                 }
@@ -212,42 +208,42 @@ extension HangeulManager {
             case .top:
                 let index = HG.compatible.topList.firstIndex(of: input) ?? 0
                 let char = HG.fixed.top.list[index]
-                separatedBuffer.append(char)
+                letterBuffer.append(char)
             case .mid:
                 let index = HG.compatible.midList.firstIndex(of: input) ?? 0
                 let char = HG.fixed.mid.list[index]
-                separatedBuffer.append(char)
+                letterBuffer.append(char)
             case .end:
                 let index = HG.compatible.endList.firstIndex(of: input) ?? 0
                 let char = HG.fixed.end.list[index]
-                separatedBuffer.append(char)
+                letterBuffer.append(char)
             case .doubleMid:
                 let index = HG.compatible.midList.firstIndex(of: input) ?? 0
                 let curr = HG.fixed.mid.list[index]
-                let prev = separatedBuffer.removeLast()
+                let prev = letterBuffer.removeLast()
                 let char = HG.fixed.mid.double[prev]?[curr] ?? 0
-                separatedBuffer.append(char)
+                letterBuffer.append(char)
             case .doubleEnd:
                 let index = HG.compatible.endList.firstIndex(of: input) ?? 0
                 let curr = HG.fixed.end.list[index]
-                let prev = separatedBuffer.removeLast()
+                let prev = letterBuffer.removeLast()
                 let char = HG.fixed.end.double[prev]?[curr] ?? 0
-                separatedBuffer.append(char)
+                letterBuffer.append(char)
             case .finishPassOne:
                 if charKind == .vowel {
                     let index = HG.compatible.midList.firstIndex(of: input) ?? 0
                     let char = HG.fixed.mid.list[index]
-                    separatedBuffer = [char]
+                    letterBuffer = [char]
                 } else {
                     let index = HG.compatible.topList.firstIndex(of: input) ?? 0
                     let char = HG.fixed.top.list[index]
-                    separatedBuffer = [char]
+                    letterBuffer = [char]
                 }
             case .finishPassTwo:
-                let prev = separatedBuffer.removeLast()
+                let prev = letterBuffer.removeLast()
                 let index = HG.compatible.midList.firstIndex(of: input) ?? 0
                 let char = HG.fixed.mid.list[index]
-                separatedBuffer = [prev, char]
+                letterBuffer = [prev, char]
             default:
                 break
             }
@@ -261,52 +257,54 @@ extension HangeulManager {
 // MARK: - combinedBuffer에 문자 추가/삭제
 
 extension HangeulManager {
-    private func updateCombinedBuffer(_ input: Int) {
+    private func updateWordList(_ input: Int) {
         if input == SPACE {
-            combinedBuffer.append(SPACE)
+            wordList.append(SPACE)
         } else if input == BACK {
-            updateCombinedBufferWhenBack()
+            updateWordListWhenBack()
         } else {
-            updateCombinedBufferWhenNormal(input)
+            updateWordListWhenNormal(input)
         }
     }
     
-    private func updateCombinedBufferWhenBack() {
+    private func updateWordListWhenBack() {
         var word : Int!
-        let prevWord = combinedBuffer.removeLast()
+        let prevWord = wordList.removeLast()
         
         switch status {
         case .mid:
-            let char = getSeparatedCharacters(from: prevWord, mode: BACK)
-            combinedBuffer.append(char[0])
+            if !HG.fixed.mid.list.contains(prevWord) {
+                let char = getSeparatedCharacters(from: prevWord, mode: BACK)
+                wordList.append(char[0])
+            }
         case .end:
             let char = getSeparatedCharacters(from: prevWord, mode: BACK)
             word = getCombinedWord(char[0], char[1], HG.fixed.end.blank, isDouble: false)
-            combinedBuffer.append(word)
+            wordList.append(word)
         case .doubleMid:
             if statusStack.count > 2 && statusStack[statusStack.count - 3] == .top {
                 let char = getSeparatedCharacters(from: prevWord, mode: BACK)
                 let splitChar = HG.fixed.mid.split[char[1]]
                 word = getCombinedWord(char[0], splitChar?[0] ?? 0, HG.fixed.end.blank, isDouble: false)
-                combinedBuffer.append(word)
+                wordList.append(word)
             } else {
                 let char = HG.fixed.mid.split[prevWord]
-                combinedBuffer.append(char?[0] ?? 0)
+                wordList.append(char?[0] ?? 0)
             }
         case .doubleEnd:
             let char = HG.fixed.end.split[prevWord]
-            combinedBuffer.append(char?[0] ?? 0)
+            wordList.append(char?[0] ?? 0)
         default:
             break
         }
     }
     
-    private func updateCombinedBufferWhenNormal(_ input: Int) {
+    private func updateWordListWhenNormal(_ input: Int) {
         var word : Int!
-        let curr = separatedBuffer.last ?? 0
+        let curr = letterBuffer.last ?? 0
         
         if status != .finishPassOne && status != .top && !(status == .mid && !bufferHasChoseong()){
-            let prevWord = combinedBuffer.removeLast()
+            let prevWord = wordList.removeLast()
             let char = getSeparatedCharacters(from: prevWord, mode: NORMAL)
             switch status {
             case .mid:
@@ -324,12 +322,12 @@ extension HangeulManager {
             case .finishPassTwo:
                 if HG.fixed.end.split[char[2]] != nil {
                     let prevWord = getCombinedWord(char[0], char[1], HG.fixed.end.split[char[2]]?.first ?? 0, isDouble: false)
-                    combinedBuffer.append(prevWord)
+                    wordList.append(prevWord)
                     let prev = HG.fixed.end.split[char[2]]?.last ?? 0
                     word = getCombinedWord(prev, curr, HG.fixed.end.blank, isDouble: true)
                 } else {
                     let prevWord = getCombinedWord(char[0], char[1], HG.fixed.end.blank, isDouble: false)
-                    combinedBuffer.append(prevWord)
+                    wordList.append(prevWord)
                     word = getCombinedWord(char[2], curr, HG.fixed.end.blank, isDouble: true)
                 }
             default:
@@ -348,7 +346,7 @@ extension HangeulManager {
             let index = HG.compatible.midList.firstIndex(of: input) ?? 0
             word = HG.fixed.mid.list[index]
         }
-        combinedBuffer.append(word)
+        wordList.append(word)
     }
 }
 
@@ -358,8 +356,8 @@ extension HangeulManager {
 
 extension HangeulManager {
     func reset() {
-        self.separatedBuffer = []
-        self.combinedBuffer = []
+        self.letterBuffer = []
+        self.wordList = []
         self.status = .start
         self.statusStack = [.start]
     }
@@ -368,8 +366,8 @@ extension HangeulManager {
 // MARK: - SeparatedBuffer 원소 개수 Get(테스트용)
 
 extension HangeulManager {
-    func getSeparatedBufferCount() -> Int {
-        return self.separatedBuffer.count
+    func getLetterBufferCount() -> Int {
+        return self.letterBuffer.count
     }
 }
 
@@ -449,7 +447,7 @@ extension HangeulManager {
     }
     
     private func bufferHasChoseong() -> Bool {
-        return separatedBuffer.count > 1 ? true : false
+        return letterBuffer.count > 1 ? true : false
     }
     
 }
@@ -459,7 +457,7 @@ extension HangeulManager {
 extension HangeulManager {
     func getOutputString() -> String {
         var output = ""
-        for word in combinedBuffer {
+        for word in wordList {
             if word == SPACE {
                 output += " "
             } else {

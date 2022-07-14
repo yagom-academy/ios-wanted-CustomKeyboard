@@ -104,7 +104,20 @@ class BACKSPACEInputTests_monica: XCTestCase {
         
         XCTAssertEqual(result, expectation)
     }
+    
+    func testBACKSPACEInput8() throws {
+        hangeulManager.reset()
+        let input = ["ㅇ", "ㅏ", "ㅏ", "ㅏ", "Back", "Back"]
+        let expectation = "아"
+        for char in input {
+            hangeulManager.update(char)
+        }
+        let result = hangeulManager.getOutputString()
+        
+        XCTAssertEqual(result, expectation)
+    }
 
+    
     
 
 }
