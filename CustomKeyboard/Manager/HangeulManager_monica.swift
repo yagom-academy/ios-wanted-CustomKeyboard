@@ -292,8 +292,10 @@ extension HangeulManager {
                 wordList.append(char?[0] ?? 0)
             }
         case .doubleEnd:
-            let char = HG.fixed.end.split[prevWord]
-            wordList.append(char?[0] ?? 0)
+            let char = getSeparatedCharacters(from: prevWord, mode: BACK)
+            let splitChar = HG.fixed.end.split[char[2]]
+            let word = getCombinedWord(char[0], char[1], splitChar?[0] ?? 0, isDouble: false)
+            wordList.append(word)
         default:
             break
         }
