@@ -20,35 +20,38 @@ class CommentButton: UIStackView {
     lazy var userProfileImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "person.circle.fill"))
         imageView.contentMode = .scaleAspectFit
-        imageView.frame.size = CGSize(width: 40, height: 40)
         return imageView
     }()
-
-    lazy var presentButton: TextField = {
-        let textField = TextField()
-        textField.placeholder = "리뷰를 남겨보세요."
-        textField.layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
-        textField.layer.cornerRadius = 25
-        textField.delegate = self
-        return textField
+    
+    
+    lazy var presentTextView: BasePaddingTextView = {
+        let textView = BasePaddingTextView()
+        textView.textColor = .label
+        textView.layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
+        textView.layer.cornerRadius = 25
+        textView.inputView?.clipsToBounds = true
+        textView.textContainer.lineBreakMode = .byTruncatingTail
+        textView.textContainer.maximumNumberOfLines = 1
+        textView.backgroundColor = .secondarySystemBackground
+        textView.delegate = self
+        return textView
     }()
-
+    
     lazy var sendButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "paperplane.fill"), for: .normal)
         button.addTarget(self, action: #selector(sendComment), for: .touchUpInside)
-        button.frame.size = CGSize(width: 40, height: 40)
         return button
     }()
     
     lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [userProfileImageView, presentButton, sendButton])
+        let stackView = UIStackView(arrangedSubviews: [userProfileImageView, presentTextView, sendButton])
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
         stackView.spacing = 10
         return stackView
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -59,28 +62,42 @@ class CommentButton: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func hideProfileImage() {
-        userProfileImageView.isHidden = true
-        sendButton.isHidden = false
+    func toggleAnimation(_ isSuccess: Bool) {
+        DispatchQueue.main.async {
+            self.userProfileImageView.isHidden = !isSuccess
+            self.sendButton.isHidden = isSuccess
+            if isSuccess {
+                self.clearText()
+            }
+        }
+
+
     }
     
-    func showProfileImage() {
-        userProfileImageView.isHidden = false
-        sendButton.isHidden = true
+    func clearText() {
+        presentTextView.text = ""
     }
 }
 
-//MARK: - UITextField Delegate
-extension CommentButton: UITextFieldDelegate {
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        self.delegate?.present()
+extension CommentButton: UITextViewDelegate {    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        delegate?.present()
         return false
     }
 }
 
+//extension CommentButton: UITextFieldDelegate {
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        textField.resignFirstResponder()
+//        delegate?.present()
+//    }
+//}
+
 //MARK: - Objc Method
 private extension CommentButton {
+    @objc func didTapPresentText() {
+        self.delegate?.present()
+    }
     @objc func sendComment() {
         delegate?.post()
     }
@@ -98,7 +115,9 @@ private extension CommentButton {
             stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             stackView.topAnchor.constraint(equalTo: self.topAnchor),
             stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            
+            presentTextView.widthAnchor.constraint(equalToConstant: 300)
         ])
         
         stackView.arrangedSubviews[2].isHidden = true
