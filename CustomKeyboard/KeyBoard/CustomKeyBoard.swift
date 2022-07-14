@@ -107,6 +107,7 @@ extension CustomKeyBoard {
         shiftButton.addTarget(self, action: #selector(tappedShiftButton), for: .touchUpInside)
         
         backButton.setTitle("back", for: .normal)
+        backButton.addTarget(self, action: #selector(tappedBackButton), for: .touchUpInside)
         
         [shiftButton, backButton, returnButton].forEach {
             $0.backgroundColor = .systemGray

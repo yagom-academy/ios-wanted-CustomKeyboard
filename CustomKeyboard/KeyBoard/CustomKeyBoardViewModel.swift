@@ -6,8 +6,15 @@
 //
 
 import Foundation
+import UIKit
 
 struct CustomKeyBoardViewModel {
+    struct UniCode {
+        var initial: Int
+        var neutral: Int
+        var final: Int
+    }
+    
     func addWord(unicode: Int, to beforeText: String?) -> String {
         let word = String(UnicodeScalar(unicode)!)
         guard let beforeText = beforeText else { return "" }
@@ -23,9 +30,22 @@ struct CustomKeyBoardViewModel {
     func removeWord(from beforeText: String?) -> String {
         //TODO: 지우기버튼 구현
         guard let beforeText = beforeText else { return "" }
-
+        let lastCharUnicode = getLastCharUnicode(from: beforeText)
+        var result = getStringExceptLastChar(from: beforeText)
         
-        return beforeText
+        if (lastCharUnicode >= 44032) {
+            
+        } else {
+            
+        }
+        let image = UIImageView()
+        image.layer.
+        return result
+    }
+    
+    private func separateUniCode(from unicode: Int) -> UniCode? {
+        guard unicode >= 44032 else { return nil }
+        let initial = (unicode - 44032) / (21*28)
     }
     
     private func getLastCharUnicode(from text: String) -> Int {
@@ -36,5 +56,14 @@ struct CustomKeyBoardViewModel {
     private func getStringExceptLastChar(from text: String) -> String {
         let i = text.index(text.endIndex, offsetBy: -1)
         return String(text[text.startIndex..<i])
+    }
+    
+    private func parsingLastWord(from text: String) {
+        let lastCharUnicode = getLastCharUnicode(from: text)
+        if (lastCharUnicode >= 44032) {
+            print("완전언어", lastCharUnicode)
+        } else {
+            print("비완성언어", lastCharUnicode)
+        }
     }
 }
