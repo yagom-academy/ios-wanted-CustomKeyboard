@@ -33,19 +33,27 @@ class KeyFourthLineStackView: UIStackView {
     }
     
     private func setButtons() {
-        numButton.setTitle("123", for: .normal)
-        spaceButton.setTitle("space", for: .normal)
-        returnButton.setTitle("↵", for: .normal)
+        let button = [
+            numButton, spaceButton, returnButton
+        ]
+        let title = [
+            "123", "space", "↵"
+        ]
+        
+        for i in 0..<button.count {
+            button[i].setTitle(title[i], for: .normal)
+        }
     }
     
     private func setLayout() {
-        numButton.translatesAutoresizingMaskIntoConstraints = false
-        spaceButton.translatesAutoresizingMaskIntoConstraints = false
-        returnButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.addArrangedSubview(numButton)
-        self.addArrangedSubview(spaceButton)
-        self.addArrangedSubview(returnButton)
+        [
+            numButton,
+            spaceButton,
+            returnButton
+        ].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            self.addArrangedSubview($0)
+        }
         
         NSLayoutConstraint.activate([
             numButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2),

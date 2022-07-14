@@ -39,36 +39,28 @@ class KeyThirdLineStackView: UIStackView {
     }
     
     private func setButtons() {
-        shiftButton.setTitle("⇧", for: .normal)
-        zButton.setTitle("ㅋ", for: .normal)
-        xButton.setTitle("ㅌ", for: .normal)
-        cButton.setTitle("ㅊ", for: .normal)
-        vButton.setTitle("ㅍ", for: .normal)
-        bButton.setTitle("ㅠ", for: .normal)
-        nButton.setTitle("ㅜ", for: .normal)
-        mButton.setTitle("ㅡ", for: .normal)
-        eraseButton.setTitle("⌫", for: .normal)
+        let button = [
+            shiftButton, zButton, xButton, cButton, vButton,
+            bButton, nButton, mButton, eraseButton
+        ]
+        let title = [
+            "⇧", "ㅋ", "ㅌ", "ㅊ", "ㅍ",
+            "ㅠ", "ㅜ", "ㅡ", "⌫"
+        ]
+        
+        for i in 0..<button.count {
+            button[i].setTitle(title[i], for: .normal)
+        }
     }
     
     private func setLayout() {
-        shiftButton.translatesAutoresizingMaskIntoConstraints = false
-        zButton.translatesAutoresizingMaskIntoConstraints = false
-        xButton.translatesAutoresizingMaskIntoConstraints = false
-        cButton.translatesAutoresizingMaskIntoConstraints = false
-        vButton.translatesAutoresizingMaskIntoConstraints = false
-        bButton.translatesAutoresizingMaskIntoConstraints = false
-        nButton.translatesAutoresizingMaskIntoConstraints = false
-        mButton.translatesAutoresizingMaskIntoConstraints = false
-        eraseButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.addArrangedSubview(shiftButton)
-        self.addArrangedSubview(zButton)
-        self.addArrangedSubview(xButton)
-        self.addArrangedSubview(cButton)
-        self.addArrangedSubview(vButton)
-        self.addArrangedSubview(bButton)
-        self.addArrangedSubview(nButton)
-        self.addArrangedSubview(mButton)
-        self.addArrangedSubview(eraseButton)
+        [
+            shiftButton, zButton, xButton,
+            cButton, vButton, bButton,
+            nButton, mButton, eraseButton,
+        ].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            self.addArrangedSubview($0)
+        }
     }
 }
