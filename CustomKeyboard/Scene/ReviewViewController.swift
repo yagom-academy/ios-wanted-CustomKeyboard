@@ -97,7 +97,12 @@ extension ReviewViewController: UITextFieldDelegate {
 // MARK: - TextFieldTextDelegate
 extension ReviewViewController: PassReviewDelegate {
     func sendReviewData(review: Review) {
+        // 헤더에 문제 있음
         let header = ReviewTableViewHeader()
         header.reviewTextField.text = review.content
+        
+        // 작성 버튼으로 옮기기
+        reviewList.append(review)
+        reviewTableView.reloadData()
     }
 }
