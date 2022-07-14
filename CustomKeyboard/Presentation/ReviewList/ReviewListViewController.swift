@@ -63,7 +63,7 @@ extension ReviewListViewController {
 // MARK: - Objc Methods
 extension ReviewListViewController {
     @objc func didTapView() {
-        let vc = ReviewWriteView(inputField: reviewTextView)
+        let vc = ReviewWriteViewController(inputField: reviewTextView)
         navigationController?.pushViewController(vc, animated: true)
     }
     

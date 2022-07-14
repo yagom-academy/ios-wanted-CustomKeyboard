@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewWriteView: UIViewController {
+class ReviewWriteViewController: UIViewController {
     private let textView = UITextView()
     private let customKeyboard = CustomKeyBoard()
     private var resultInputField: UITextView?
@@ -15,7 +15,7 @@ class ReviewWriteView: UIViewController {
     init(inputField: UITextView) {
         super.init(nibName: nil, bundle: nil)
         self.resultInputField = inputField
-        textView.text = inputField.text
+//        textView.text = inputField.text
         attribute()
         layout()
     }
@@ -23,7 +23,27 @@ class ReviewWriteView: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+//MARK: - 커스텀키보드 Delegate 메서드
+extension ReviewWriteViewController: CustomKeyBoardDelegate {
+    func tappedReturnButton() {
+        guard let message = self.textView.text else { return }
+        self.resultInputField?.text = message
+        if (self.navigationController != nil) {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true)
+        }
+    }
     
+    func connectTextView() -> UITextView {
+        return self.textView
+    }
+}
+
+//MARK: - attribute
+extension ReviewWriteViewController {
     private func attribute() {
         self.title = " 리뷰 작성 "
         view.backgroundColor = .white
@@ -31,7 +51,10 @@ class ReviewWriteView: UIViewController {
         
         customKeyboard.delegate = self
     }
-    
+}
+
+//MARK: - layout
+extension ReviewWriteViewController {
     private func layout() {
         [textView, customKeyboard].forEach {
             view.addSubview($0)
@@ -47,22 +70,5 @@ class ReviewWriteView: UIViewController {
         textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         textView.bottomAnchor.constraint(equalTo: customKeyboard.topAnchor).isActive = true
-    }
-}
-
-//MARK: - 커스텀키보드 Delegate 메서드
-extension ReviewWriteView: CustomKeyBoardDelegate {
-    func tappedReturnButton() {
-        guard let message = self.textView.text else { return }
-        self.resultInputField?.text = message
-        if (self.navigationController != nil) {
-            self.navigationController?.popViewController(animated: true)
-        } else {
-            self.dismiss(animated: true)
-        }
-    }
-    
-    func connectTextView() -> UITextView {
-        return self.textView
     }
 }
