@@ -23,6 +23,18 @@ struct CustomKeyBoardViewModel {
     func removeWord(from beforeText: String?) -> String {
         //TODO: 지우기버튼 구현
         guard let beforeText = beforeText else { return "" }
+
+        
         return beforeText
+    }
+    
+    private func getLastCharUnicode(from text: String) -> Int {
+        let lastChar = String(text.last!)
+        return Int(UnicodeScalar(lastChar)!.value)
+    }
+    
+    private func getStringExceptLastChar(from text: String) -> String {
+        let i = text.index(text.endIndex, offsetBy: -1)
+        return String(text[text.startIndex..<i])
     }
 }
