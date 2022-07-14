@@ -68,6 +68,31 @@ extension ReviewListViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView))
         self.reviewTextView.addGestureRecognizer(tapGestureRecognizer)
     }
+    
+    private func convertDateTime(createdAtTime: String) -> String {
+        
+        //TODO : 날짜 비교해서 보여주는 것 아직 안함
+        // 댓글을 작성한 시간이 1시간 이내일 경우 분 단위로 표시,
+        // 하루 이내일 경우 시간 단위로 표시
+        // 하루 이상일 경우 년월일만 표시
+        
+        //Date형식 설정
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        //2021-10-29T02:14:10.135Z
+        
+        //String을 Date형식으로 바꿔주기
+        let createdAtDateTime = dateFormatter.date(from: createdAtTime)
+        
+        //바꿔줄 원하는 날짜 형식 설정
+        let myDataFormatter = DateFormatter()
+        myDataFormatter.dateFormat = "yyyy년 MM월 dd일"
+        myDataFormatter.locale = Locale(identifier: "ko_KR")
+        
+        //Date를 설정해둔 날짜 형식의 String으로 바꿔주기
+        let convertCreatedAtStringTime = myDataFormatter.string(from: createdAtDateTime!)
+        return convertCreatedAtStringTime
+    }
 }
 
 // MARK: - Objc Methods
@@ -198,11 +223,13 @@ extension ReviewListViewController: UICollectionViewDataSource {
             return ReviewListCell()
         }
         
+        let index = indexPath.row
         cell.backgroundColor = .systemBackground
+        
         cell.profileImage.load(url: url)
-        cell.userNameLabel.text = reviewDatas[indexPath.row].user.userName
-        cell.contentsLabel.text = reviewDatas[indexPath.row].content
-        cell.timeLabel.text = reviewDatas[indexPath.row].updatedAt
+        cell.userNameLabel.text = reviewDatas[index].user.userName
+        cell.contentsLabel.text = reviewDatas[index].content
+        cell.timeLabel.text = convertDateTime(createdAtTime: reviewDatas[index].createdAt)
         
         return cell
     }
