@@ -14,4 +14,10 @@ extension String {
         dateFormatter.dateFormat = "y-MM-dd'T'HH:mm:ss.SSS'Z'"
         return dateFormatter.date(from: self)
     }
+    
+    mutating func appendUnicode(_ code: Int?) {
+        guard let code = code,
+              let unicode = UnicodeScalar(code) else { return }
+        self.append(String(unicode))
+    }
 }

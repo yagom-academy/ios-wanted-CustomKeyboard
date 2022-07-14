@@ -133,7 +133,6 @@ class KeyboardView: UIView {
                //                                                               -> 불가능해 -> 다음 초성으로 적는다.
                //                         -> 중성 -> 지금 종성을 초성으로 변경 후 들어온 글자와 합쳐서 다음글자에 적는다.
     
-    
     var sejongState = SejongState.writeInitialState
     var value = ""
     
@@ -143,14 +142,14 @@ class KeyboardView: UIView {
     @objc func didTapKeyboardButton(_ sender: KeyboardButton) {
         print("didTapKeyboardButton")
         
-        var curr = 0
+        var curr: Int? = 0
         
         switch sejongState {
         case .writeInitialState: // 초성을 적어야 하는 상태
-            curr = sender.chosung?.rawValue ?? 0 // 1. 초성을 적는다
+            curr = sender.chosung?.rawValue // 1. 초성을 적는다
             sejongState = .writeMiddleState
         case .writeMiddleState: // 중성을 적어야 하는 상태
-            curr = sender.jungsung?.rawValue ?? 0 // 1. 중성을 적는다
+            curr = sender.jungsung?.rawValue // 1. 중성을 적는다
             currentJungsung = sender.jungsung
             sejongState = .writeLastState
         case .writeLastState: // 종성을 적어야 하는 상태
@@ -158,18 +157,18 @@ class KeyboardView: UIView {
                 value.unicodeScalars.removeLast()
                 let doubleJungsung = mergeJungsung(currentJungsung, sender.jungsung)
                 currentJungsung = doubleJungsung
-                curr = doubleJungsung?.rawValue ?? 0
+                curr = doubleJungsung?.rawValue
                 sejongState = .writeLastState
             } else {
-                curr = sender.jongsung?.rawValue ?? 0 // 자음이 들어오면
+                curr = sender.jongsung?.rawValue // 자음이 들어오면
                 currentLastJongsung = sender.jongsung
                 sejongState = .alreadyLastState
             }
         case .alreadyLastState:
             if sender.jungsung != nil { // 중성이 들어온 경우                       안 -> 아, ㄴ -> 아ㄴ -> 아니
                 value.unicodeScalars.removeLast()
-                value.append(String(UnicodeScalar(currentLastJongsung!.chosung!.rawValue)!))
-                curr = sender.jungsung?.rawValue ?? 0
+                value.appendUnicode(currentLastJongsung?.chosung?.rawValue)
+                curr = sender.jungsung?.rawValue
                 currentJungsung = sender.jungsung
                 currentLastJongsung = nil
                 sejongState = .writeLastState
@@ -177,11 +176,11 @@ class KeyboardView: UIView {
                 let mergedJongsung = mergeDoubleJongsung(currentLastJongsung, sender.jongsung)
                 if mergedJongsung != nil {
                     value.unicodeScalars.removeLast()
-                    curr = mergedJongsung?.rawValue ?? 0
+                    curr = mergedJongsung?.rawValue
                     currentLastJongsung = mergedJongsung
                     sejongState = .alreadyDoubleLastState
                 } else {
-                    curr = sender.chosung?.rawValue ?? 0
+                    curr = sender.chosung?.rawValue
                     sejongState = .writeMiddleState
                 }
             }
@@ -192,19 +191,19 @@ class KeyboardView: UIView {
                 let jong1 = splitedDoubleJongsung?.0
                 let jong2 = splitedDoubleJongsung?.1
                 
-                value.append(String(UnicodeScalar(jong1?.rawValue ?? 0)!))
-                value.append(String(UnicodeScalar(jong2?.chosung?.rawValue ?? 0)!))
-                curr = sender.jungsung!.rawValue
+                value.appendUnicode(jong1?.rawValue)
+                value.appendUnicode(jong2?.chosung?.rawValue)
+                curr = sender.jungsung?.rawValue
                 currentJungsung = sender.jungsung
                 currentLastJongsung = nil
                 sejongState = .writeLastState
             } else { // 초성, 종성이 들어온 경우                                  않, ㅈ -> 않ㅈ
-                curr = sender.chosung!.rawValue
+                curr = sender.chosung?.rawValue
                 currentLastJongsung = nil
                 sejongState = .writeMiddleState
             }
         }
-        value.append(String(UnicodeScalar(curr)!))
+        value.appendUnicode(curr)
         print(value)
     }
     
@@ -274,12 +273,4 @@ class KeyboardView: UIView {
         default: return nil
         }
     }
-}
-
-enum SejongState {
-    case writeInitialState
-    case writeMiddleState
-    case writeLastState
-    case alreadyLastState
-    case alreadyDoubleLastState
 }

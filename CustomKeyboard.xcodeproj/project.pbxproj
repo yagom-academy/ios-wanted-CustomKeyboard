@@ -25,6 +25,7 @@
 		6B592B4B287C0FB800267FCA /* CellIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B592B4A287C0FB800267FCA /* CellIdentifiable.swift */; };
 		6B592B53287C188B00267FCA /* ReviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B592B52287C188B00267FCA /* ReviewResponse.swift */; };
 		6B592B55287C2CB600267FCA /* ReviewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B592B54287C2CB600267FCA /* ReviewListViewModel.swift */; };
+		6B675984287FB39D009B2E51 /* SejongState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B675983287FB39D009B2E51 /* SejongState.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66428604279003DD2F5 /* Assets.xcassets */; };
 		DE15E66828604279003DD2F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */; };
@@ -49,6 +50,7 @@
 		6B592B4A287C0FB800267FCA /* CellIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellIdentifiable.swift; sourceTree = "<group>"; };
 		6B592B52287C188B00267FCA /* ReviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewResponse.swift; sourceTree = "<group>"; };
 		6B592B54287C2CB600267FCA /* ReviewListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewModel.swift; sourceTree = "<group>"; };
+		6B675983287FB39D009B2E51 /* SejongState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SejongState.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE15E66428604279003DD2F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				6B2D8927287D656D00002AD3 /* KeyboardView.swift */,
+				6B675983287FB39D009B2E51 /* SejongState.swift */,
 				6B1483FE287E52A6009B49FB /* KeyboardButton.swift */,
 				6B2D8929287D674C00002AD3 /* TempViewController.swift */,
 				6B148400287E52C5009B49FB /* KeyboardButtonType.swift */,
@@ -261,6 +264,7 @@
 				6B2D892A287D674C00002AD3 /* TempViewController.swift in Sources */,
 				6B592B4B287C0FB800267FCA /* CellIdentifiable.swift in Sources */,
 				6B1483FF287E52A6009B49FB /* KeyboardButton.swift in Sources */,
+				6B675984287FB39D009B2E51 /* SejongState.swift in Sources */,
 				18A109AA287BF90F00BC2E5C /* CommentButton.swift in Sources */,
 				18A109AC287BFF6200BC2E5C /* TextFieldExtension.swift in Sources */,
 				6B592B47287C0FAE00267FCA /* Network.swift in Sources */,
