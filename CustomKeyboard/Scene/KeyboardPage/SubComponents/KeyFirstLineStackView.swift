@@ -42,43 +42,29 @@ class KeyFirstLineStackView: UIStackView {
     }
     
     private func setButtons() {
-        qButton.setTitle("ㅂ", for: .normal)
-        wButton.setTitle("ㅈ", for: .normal)
-        eButton.setTitle("ㄷ", for: .normal)
-        rButton.setTitle("ㄱ", for: .normal)
-        tButton.setTitle("ㅅ", for: .normal)
-        yButton.setTitle("ㅛ", for: .normal)
-        uButton.setTitle("ㅕ", for: .normal)
-        iButton.setTitle("ㅑ", for: .normal)
-        oButton.setTitle("ㅐ", for: .normal)
-        pButton.setTitle("ㅔ", for: .normal)
+        let button = [
+            qButton, wButton, eButton, rButton, tButton,
+            yButton, uButton, iButton, oButton, pButton
+        ]
+        let title = [
+            "ㅂ", "ㅈ", "ㄷ", "ㄱ", "ㅅ",
+            "ㅛ", "ㅕ", "ㅑ", "ㅐ", "ㅔ"
+        ]
+        
+        for i in 0..<button.count {
+            button[i].setTitle(title[i], for: .normal)
+        }
     }
     
     private func setLayout() {
-        qButton.translatesAutoresizingMaskIntoConstraints = false
-        wButton.translatesAutoresizingMaskIntoConstraints = false
-        eButton.translatesAutoresizingMaskIntoConstraints = false
-        rButton.translatesAutoresizingMaskIntoConstraints = false
-        tButton.translatesAutoresizingMaskIntoConstraints = false
-        yButton.translatesAutoresizingMaskIntoConstraints = false
-        uButton.translatesAutoresizingMaskIntoConstraints = false
-        iButton.translatesAutoresizingMaskIntoConstraints = false
-        oButton.translatesAutoresizingMaskIntoConstraints = false
-        pButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.addArrangedSubview(qButton)
-        self.addArrangedSubview(wButton)
-        self.addArrangedSubview(eButton)
-        self.addArrangedSubview(rButton)
-        self.addArrangedSubview(tButton)
-        self.addArrangedSubview(yButton)
-        self.addArrangedSubview(uButton)
-        self.addArrangedSubview(iButton)
-        self.addArrangedSubview(oButton)
-        self.addArrangedSubview(pButton)
-    }
-    
-    private func mathWidth() {
-        
+        [
+            qButton, wButton, eButton,
+            rButton, tButton, yButton,
+            uButton, iButton, oButton,
+            pButton
+        ].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            self.addArrangedSubview($0)
+        }
     }
 }
