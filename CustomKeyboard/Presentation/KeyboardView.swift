@@ -163,26 +163,7 @@ extension KeyboardView {
     private func insertKeyboardKeys() {
         for char in "ㅂㅈㄷㄱㅅㅛㅕㅑㅐㅔ" {
             let key : UIButton!
-            switch char {
-            case "ㅂ":
-                key = makeKeyboardButtons(contents: "\(char)",converted: "ㅃ")
-            case "ㅈ":
-                key = makeKeyboardButtons(contents: "\(char)",converted: "ㅉ")
-            case "ㄷ":
-                key = makeKeyboardButtons(contents: "\(char)",converted: "ㄸ")
-            case "ㄱ":
-                key = makeKeyboardButtons(contents: "\(char)",converted: "ㄲ")
-            case "ㅅ":
-                key = makeKeyboardButtons(contents: "\(char)",converted: "ㅆ")
-            case "ㅐ":
-                key = makeKeyboardButtons(contents: "\(char)",converted: "ㅒ")
-            case "ㅔ":
-                key = makeKeyboardButtons(contents: "\(char)",converted: "ㅖ")
-            default:
-                key = makeKeyboardButtons(contents: "\(char)")
-                break
-            }
-            
+            key = makeKeyboardButtons(contents: "\(char)")
             keyboardFirstLineStackView.addArrangedSubview(key)
         }
         
@@ -196,32 +177,58 @@ extension KeyboardView {
             keyboardThirdLineStackView.addArrangedSubview(key)
         }
         
-        for button in [numKeyButton, spaceKeyButton, returnKeyButton] {
-            keyboardFourthLineStackView.addArrangedSubview(button)
+        for i in [numKeyButton, spaceKeyButton, returnKeyButton] {
+            keyboardFourthLineStackView.addArrangedSubview(i)
         }
-        
     }
-    
-    private func makeKeyboardButtons(contents: String, converted: String? = nil) -> UIButton {
+
+    private func makeKeyboardButtons(contents: String) -> UIButton {
         let button = UIButton()
         button.setTitle(contents, for: .normal)
-        
-        if let converted = converted {
-            button.setTitle(converted, for: .selected)
+        if checkToBeConverted(contents: contents) {
+            let doubleCharacter = convertToDouble(contents: contents)
+            button.setTitle(doubleCharacter, for: .selected)
             toBeConvertedButtons.append(button)
         }
-        
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(nil, action: #selector(keyboardButtonTouched(_:)), for: .touchUpInside)
         button.backgroundColor = .systemGray2
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 5
-        
         button.heightAnchor.constraint(equalToConstant: self.bounds.height * 0.3 / 4 * 0.8 ) .isActive  = true
         button.widthAnchor.constraint(equalTo: button.heightAnchor ,multiplier: 0.8).isActive = true
         
         return button
     }
+
+    private func checkToBeConverted(contents: String) -> Bool {
+        let toBeConvertedToDoubleCharacter = ["ㅂ", "ㅈ", "ㄷ", "ㄱ", "ㅅ", "ㅐ", "ㅔ"]
+        let isDoubleCharacter = toBeConvertedToDoubleCharacter.contains(contents)
+
+        return isDoubleCharacter
+    }
+
+    private func convertToDouble(contents: String) -> String {
+        switch contents {
+        case "ㅂ":
+            return "ㅃ"
+        case "ㅈ":
+            return "ㅉ"
+        case "ㄷ":
+            return "ㄸ"
+        case "ㄱ":
+            return "ㄲ"
+        case "ㅅ":
+            return "ㅆ"
+        case "ㅐ":
+            return "ㅒ"
+        case "ㅔ":
+            return "ㅖ"
+        default:
+            return contents
+        }
+    }
+
     
     func setupView() {
         insertKeyboardKeys()
