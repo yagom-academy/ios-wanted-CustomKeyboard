@@ -22,6 +22,7 @@ struct HG {
         case doubleEnd
         case finishPassOne
         case finishPassTwo
+        case space
     }
     
     static let baseCode = 44032
