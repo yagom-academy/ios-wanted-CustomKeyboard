@@ -92,7 +92,7 @@ class KeyboardView: UIView {
         button.setTitleColor(.black, for: .normal)
         button.setTitle("스페이스", for: .normal)
         button.heightAnchor.constraint(equalToConstant: self.bounds.height * 0.3 / 4 * 0.6 ) .isActive  = true
-        button.widthAnchor.constraint(equalToConstant: self.bounds.width * 0.5).isActive = true
+        button.widthAnchor.constraint(lessThanOrEqualToConstant: self.bounds.width * 0.5).isActive = true
         return button
     }()
 
@@ -196,8 +196,8 @@ extension KeyboardView {
             keyboardThirdLineStackView.addArrangedSubview(key)
         }
         
-        for i in [numKeyButton, spaceKeyButton, returnKeyButton] {
-            keyboardFourthLineStackView.addArrangedSubview(i)
+        for button in [numKeyButton, spaceKeyButton, returnKeyButton] {
+            keyboardFourthLineStackView.addArrangedSubview(button)
         }
         
     }
