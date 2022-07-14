@@ -9,15 +9,17 @@ import UIKit
 
 class KeySecondLineStackView: UIStackView {
     
-    let aButton = KeyButton(type: .basic)
-    let sButton = KeyButton(type: .basic)
-    let dButton = KeyButton(type: .basic)
-    let fButton = KeyButton(type: .basic)
-    let gButton = KeyButton(type: .basic)
-    let hButton = KeyButton(type: .basic)
-    let jButton = KeyButton(type: .basic)
-    let kButton = KeyButton(type: .basic)
-    let lButton = KeyButton(type: .basic)
+    var delegate: ButtonDelegate?
+    
+    let aButton = KeyButton(type: .consonant)
+    let sButton = KeyButton(type: .consonant)
+    let dButton = KeyButton(type: .consonant)
+    let fButton = KeyButton(type: .consonant)
+    let gButton = KeyButton(type: .consonant)
+    let hButton = KeyButton(type: .vowel)
+    let jButton = KeyButton(type: .vowel)
+    let kButton = KeyButton(type: .vowel)
+    let lButton = KeyButton(type: .vowel)
     
     init() {
         super.init(frame: .zero)
@@ -50,7 +52,12 @@ class KeySecondLineStackView: UIStackView {
         
         for i in 0..<button.count {
             button[i].setTitle(title[i], for: .normal)
+            button[i].addTarget(self, action: #selector(tapButton(sender:)), for: .touchUpInside)
         }
+    }
+    
+    @objc private func tapButton(sender: KeyButton) {
+        delegate?.buttonClickEvent(sender: sender)
     }
     
     private func setLayout() {
