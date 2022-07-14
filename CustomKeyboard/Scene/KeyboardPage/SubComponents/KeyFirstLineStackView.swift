@@ -10,17 +10,18 @@ import UIKit
 class KeyFirstLineStackView: UIStackView {
     
     let width: Float = 0
+    var delegate: ButtonDelegate?
     
-    let qButton = KeyButton(type: .basic)
-    let wButton = KeyButton(type: .basic)
-    let eButton = KeyButton(type: .basic)
-    let rButton = KeyButton(type: .basic)
-    let tButton = KeyButton(type: .basic)
-    let yButton = KeyButton(type: .basic)
-    let uButton = KeyButton(type: .basic)
-    let iButton = KeyButton(type: .basic)
-    let oButton = KeyButton(type: .basic)
-    let pButton = KeyButton(type: .basic)
+    let qButton = KeyButton(type: .consonant)
+    let wButton = KeyButton(type: .consonant)
+    let eButton = KeyButton(type: .consonant)
+    let rButton = KeyButton(type: .consonant)
+    let tButton = KeyButton(type: .consonant)
+    let yButton = KeyButton(type: .vowel)
+    let uButton = KeyButton(type: .vowel)
+    let iButton = KeyButton(type: .vowel)
+    let oButton = KeyButton(type: .vowel)
+    let pButton = KeyButton(type: .vowel)
     
     init() {
         super.init(frame: .zero)
@@ -28,6 +29,7 @@ class KeyFirstLineStackView: UIStackView {
         configureProperties()
         setButtons()
         setLayout()
+        
     }
     
     required init(coder: NSCoder) {
@@ -53,7 +55,12 @@ class KeyFirstLineStackView: UIStackView {
         
         for i in 0..<button.count {
             button[i].setTitle(title[i], for: .normal)
+            button[i].addTarget(self, action: #selector(tapButton(sender:)), for: .touchUpInside)
         }
+    }
+    
+    @objc private func tapButton(sender: KeyButton) {
+        delegate?.buttonClickEvent(sender: sender)
     }
     
     private func setLayout() {

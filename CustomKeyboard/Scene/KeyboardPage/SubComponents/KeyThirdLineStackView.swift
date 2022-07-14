@@ -9,14 +9,16 @@ import UIKit
 
 class KeyThirdLineStackView: UIStackView {
     
+    var delegate: ButtonDelegate?
+    
     let shiftButton = KeyButton(type: .dark_small)
-    let zButton = KeyButton(type: .basic)
-    let xButton = KeyButton(type: .basic)
-    let cButton = KeyButton(type: .basic)
-    let vButton = KeyButton(type: .basic)
-    let bButton = KeyButton(type: .basic)
-    let nButton = KeyButton(type: .basic)
-    let mButton = KeyButton(type: .basic)
+    let zButton = KeyButton(type: .consonant)
+    let xButton = KeyButton(type: .consonant)
+    let cButton = KeyButton(type: .consonant)
+    let vButton = KeyButton(type: .consonant)
+    let bButton = KeyButton(type: .vowel)
+    let nButton = KeyButton(type: .vowel)
+    let mButton = KeyButton(type: .vowel)
     let eraseButton = KeyButton(type: .dark_small)
     
     init() {
@@ -50,7 +52,12 @@ class KeyThirdLineStackView: UIStackView {
         
         for i in 0..<button.count {
             button[i].setTitle(title[i], for: .normal)
+            button[i].addTarget(self, action: #selector(tapButton(sender:)), for: .touchUpInside)
         }
+    }
+    
+    @objc private func tapButton(sender: KeyButton) {
+        delegate?.buttonClickEvent(sender: sender)
     }
     
     private func setLayout() {
