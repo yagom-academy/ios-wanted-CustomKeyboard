@@ -32,13 +32,27 @@ class ReviewListViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupLayout()
-        viewModel.delegate = self
         viewModel.fetchReviewList()
+        bindTableData()
+        bindPostSuccess()
     }
-}
-
-//MARK: - ViewModel Delegate
-extension ReviewListViewController: ReviewListViewModelDelegate {
+    
+    func bindTableData() {
+        viewModel.reviewList.bind { list in
+            DispatchQueue.main.async {
+                self.reviewListTableView.reloadData()
+            }
+        }
+    }
+    
+    func bindPostSuccess() {
+        viewModel.isSuccess.bind { isSuccess in
+            if isSuccess {
+                self.clearText()
+            }
+        }
+    }
+    
     func clearText() {
         DispatchQueue.main.async { [weak self] in
             guard let presentButton = self?.commentButton.stackView.arrangedSubviews[1] as? UITextField else { return }
@@ -50,9 +64,6 @@ extension ReviewListViewController: ReviewListViewModelDelegate {
         }
     }
     
-    func viewModel(didEndFetchReviewList viewModel: ReviewListViewModel) {
-        reviewListTableView.reloadData()
-    }
     
     private func updateClearView() {
         UIView.animate(withDuration: 0.5) {
@@ -103,7 +114,7 @@ extension ReviewListViewController: CommentEditDelegate {
 //MARK: - TableView DataSource
 extension ReviewListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.reviewList.count
+        return viewModel.reviewList.value.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
@@ -111,7 +122,8 @@ extension ReviewListViewController: UITableViewDataSource {
             for: indexPath
         ) as? ReviewListTableViewCell else { return UITableViewCell() }
         
-        let review = viewModel.reviewList[indexPath.row]
+        let review = viewModel.reviewList.value[indexPath.row]
+//        viewModel.reviewList[indexPath.row]
         cell.setupView(review: review)
 
         return cell
