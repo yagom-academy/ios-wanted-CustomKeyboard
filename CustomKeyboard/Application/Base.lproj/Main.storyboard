@@ -146,8 +146,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OdK-8G-RIL" customClass="KeyboardView_sungeo" customModule="CustomKeyboard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="402.5" width="414" height="459.5"/>
+                                <rect key="frame" x="0.0" y="642" width="414" height="220"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="220" id="6wI-31-Lgt"/>
+                                </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0QF-J4-grq">
                                 <rect key="frame" x="0.0" y="44" width="414" height="358.5"/>
@@ -161,7 +164,6 @@
                         <constraints>
                             <constraint firstItem="0QF-J4-grq" firstAttribute="trailing" secondItem="tab-qp-O50" secondAttribute="trailing" id="4E0-Uz-Eb1"/>
                             <constraint firstItem="0QF-J4-grq" firstAttribute="leading" secondItem="tab-qp-O50" secondAttribute="leading" id="5Rp-gP-0SQ"/>
-                            <constraint firstItem="OdK-8G-RIL" firstAttribute="top" secondItem="0QF-J4-grq" secondAttribute="bottom" id="E5x-0K-Etq"/>
                             <constraint firstItem="0QF-J4-grq" firstAttribute="height" secondItem="Q9A-Sd-6th" secondAttribute="height" multiplier="0.4" id="EgG-ts-018"/>
                             <constraint firstItem="OdK-8G-RIL" firstAttribute="trailing" secondItem="tab-qp-O50" secondAttribute="trailing" id="J3E-aL-nUx"/>
                             <constraint firstItem="0QF-J4-grq" firstAttribute="top" secondItem="tab-qp-O50" secondAttribute="top" id="LYe-Rk-EoI"/>

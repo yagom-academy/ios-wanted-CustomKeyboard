@@ -18,6 +18,7 @@ class KeyboardView_sungeo: UIView {
     }
     
     @IBOutlet var changeButtons: [UIButton]!
+    @IBOutlet var allButtons: [UIButton]!
     
     weak var delegate: KeyboardViewDelegate?
     
@@ -28,8 +29,7 @@ class KeyboardView_sungeo: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
-        customInit()
-        changeButtonsSetTitleSelected()
+        configure()
     }
     
     @IBAction func touchKeyButtons(_ sender: UIButton) {
@@ -51,7 +51,6 @@ class KeyboardView_sungeo: UIView {
     }
     
     @IBAction func touchReturnButton(_ sender: UIButton) {
-        // Delegate 패턴으로 ViewController dismiss 구현
         delegate?.keyboardViewReturn()
     }
 }
@@ -59,6 +58,12 @@ class KeyboardView_sungeo: UIView {
 // MARK: - Private
 
 extension KeyboardView_sungeo {
+    private func configure() {
+        customInit()
+        changeAllButtonsCircle()
+        changeButtonsSetTitleSelected()
+    }
+    
     private func customInit() {
         guard let view = Bundle.main.loadNibNamed(KeyboardConstants.NibName, owner: self, options: nil)?.first as? UIView else {
             return
@@ -74,7 +79,14 @@ extension KeyboardView_sungeo {
             .enumerated()
             .forEach { (index, button) in
                 button.setTitle(words[index], for: .selected)
+                button.setTitleColor(.black, for: .selected)
             }
+    }
+    
+    private func changeAllButtonsCircle() {
+        allButtons.forEach {
+            $0.layer.cornerRadius = 5
+        }
     }
     
     private func changeButtonsIsSelectedToggle() {

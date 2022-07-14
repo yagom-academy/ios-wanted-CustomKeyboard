@@ -18,6 +18,37 @@
                 <outletCollection property="changeButtons" destination="9kJ-Lb-bWB" collectionClass="NSMutableArray" id="qE7-rZ-suV"/>
                 <outletCollection property="changeButtons" destination="l1Y-Mh-JWS" collectionClass="NSMutableArray" id="93u-hB-OEo"/>
                 <outletCollection property="changeButtons" destination="jCG-YJ-Tcg" collectionClass="NSMutableArray" id="mYt-2j-yt4"/>
+                <outletCollection property="allButtons" destination="FgD-SN-GYU" collectionClass="NSMutableArray" id="q3s-Ev-Pcj"/>
+                <outletCollection property="allButtons" destination="TcH-bz-G2x" collectionClass="NSMutableArray" id="i6b-5k-Qle"/>
+                <outletCollection property="allButtons" destination="7Ak-Ef-Pti" collectionClass="NSMutableArray" id="UkX-dU-5CT"/>
+                <outletCollection property="allButtons" destination="9kJ-Lb-bWB" collectionClass="NSMutableArray" id="uW9-cg-yc9"/>
+                <outletCollection property="allButtons" destination="l1Y-Mh-JWS" collectionClass="NSMutableArray" id="1Q3-YR-JoC"/>
+                <outletCollection property="allButtons" destination="Tfv-vI-1JV" collectionClass="NSMutableArray" id="fkj-ST-jOy"/>
+                <outletCollection property="allButtons" destination="5if-Uw-iLq" collectionClass="NSMutableArray" id="MJH-it-eIw"/>
+                <outletCollection property="allButtons" destination="vV5-IM-467" collectionClass="NSMutableArray" id="qnV-gp-QGf"/>
+                <outletCollection property="allButtons" destination="L9G-Ok-3YZ" collectionClass="NSMutableArray" id="jb4-r3-iQH"/>
+                <outletCollection property="allButtons" destination="jCG-YJ-Tcg" collectionClass="NSMutableArray" id="rol-S4-0ow"/>
+                <outletCollection property="allButtons" destination="kFr-fB-hhK" collectionClass="NSMutableArray" id="ers-eY-cxD"/>
+                <outletCollection property="allButtons" destination="4qX-sY-2so" collectionClass="NSMutableArray" id="jd1-mm-W3C"/>
+                <outletCollection property="allButtons" destination="ocK-Bc-uTs" collectionClass="NSMutableArray" id="344-Fy-DaZ"/>
+                <outletCollection property="allButtons" destination="Iwx-RW-FAb" collectionClass="NSMutableArray" id="fNX-pQ-9ys"/>
+                <outletCollection property="allButtons" destination="eX6-8C-fwc" collectionClass="NSMutableArray" id="CoF-aL-CTj"/>
+                <outletCollection property="allButtons" destination="Rer-h8-Lqi" collectionClass="NSMutableArray" id="X5n-aX-AxE"/>
+                <outletCollection property="allButtons" destination="eUR-wr-7Vg" collectionClass="NSMutableArray" id="fc8-N5-Xbh"/>
+                <outletCollection property="allButtons" destination="Pp6-BO-Edg" collectionClass="NSMutableArray" id="paq-zk-Vwz"/>
+                <outletCollection property="allButtons" destination="PQQ-iB-rwi" collectionClass="NSMutableArray" id="ter-6N-ggm"/>
+                <outletCollection property="allButtons" destination="47q-UD-1SV" collectionClass="NSMutableArray" id="dui-1j-IVd"/>
+                <outletCollection property="allButtons" destination="4me-OO-nt9" collectionClass="NSMutableArray" id="N7I-VK-C9a"/>
+                <outletCollection property="allButtons" destination="W7t-v6-dFb" collectionClass="NSMutableArray" id="cSo-P8-UrB"/>
+                <outletCollection property="allButtons" destination="tGW-9A-PGA" collectionClass="NSMutableArray" id="89Y-El-YVT"/>
+                <outletCollection property="allButtons" destination="bf4-GQ-0zL" collectionClass="NSMutableArray" id="QgL-oa-Zwd"/>
+                <outletCollection property="allButtons" destination="YCl-iA-0rd" collectionClass="NSMutableArray" id="zhd-g0-Q3L"/>
+                <outletCollection property="allButtons" destination="6qu-F8-mwm" collectionClass="NSMutableArray" id="ON4-jP-lwl"/>
+                <outletCollection property="allButtons" destination="pt7-xT-POk" collectionClass="NSMutableArray" id="9cd-CZ-jYi"/>
+                <outletCollection property="allButtons" destination="Wzo-N4-Ezh" collectionClass="NSMutableArray" id="hXo-oH-YfP"/>
+                <outletCollection property="allButtons" destination="MUt-oY-4gh" collectionClass="NSMutableArray" id="Nlq-6x-bwB"/>
+                <outletCollection property="allButtons" destination="q0n-7P-aPB" collectionClass="NSMutableArray" id="0gE-ne-4d7"/>
+                <outletCollection property="allButtons" destination="yzM-lX-aW6" collectionClass="NSMutableArray" id="PKY-3k-n5O"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -28,174 +59,270 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IeS-Im-Qla" userLabel="KeyboardView">
                     <rect key="frame" x="0.0" y="44" width="490" height="265"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="g6D-1U-mQT" userLabel="FirstStack">
-                            <rect key="frame" x="0.0" y="0.0" width="490" height="66.5"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="g6D-1U-mQT" userLabel="FirstStack">
+                            <rect key="frame" x="0.0" y="4" width="490" height="58.5"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FgD-SN-GYU">
-                                    <rect key="frame" x="0.0" y="0.0" width="49" height="66.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="44.5" height="58.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" title="ㅂ"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅂ"/>
+                                    <state key="normal" title="ㅂ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="8YN-xu-2e4"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TcH-bz-G2x">
-                                    <rect key="frame" x="49" y="0.0" width="49" height="66.5"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅈ"/>
+                                    <rect key="frame" x="49.5" y="0.0" width="44.5" height="58.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅈ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="zVb-HY-c7o"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ak-Ef-Pti">
-                                    <rect key="frame" x="98" y="0.0" width="49" height="66.5"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㄷ"/>
+                                    <rect key="frame" x="99" y="0.0" width="44.5" height="58.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㄷ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="mVc-ow-N9a"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kJ-Lb-bWB">
-                                    <rect key="frame" x="147" y="0.0" width="49" height="66.5"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㄱ"/>
+                                    <rect key="frame" x="148.5" y="0.0" width="44.5" height="58.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㄱ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="ZHt-W8-7dh"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l1Y-Mh-JWS">
-                                    <rect key="frame" x="196" y="0.0" width="49" height="66.5"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅅ"/>
+                                    <rect key="frame" x="198" y="0.0" width="44.5" height="58.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅅ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="vjz-2p-E97"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfv-vI-1JV">
-                                    <rect key="frame" x="245" y="0.0" width="49" height="66.5"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅛ"/>
+                                    <rect key="frame" x="247.5" y="0.0" width="44.5" height="58.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅛ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="wAe-FO-Boq"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5if-Uw-iLq">
-                                    <rect key="frame" x="294" y="0.0" width="49" height="66.5"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅕ"/>
+                                    <rect key="frame" x="297" y="0.0" width="44.5" height="58.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅕ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="A1k-Y0-ssw"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vV5-IM-467">
-                                    <rect key="frame" x="343" y="0.0" width="49" height="66.5"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅑ"/>
+                                    <rect key="frame" x="346.5" y="0.0" width="44.5" height="58.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅑ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="hNR-23-v5l"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L9G-Ok-3YZ">
-                                    <rect key="frame" x="392" y="0.0" width="49" height="66.5"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅐ"/>
+                                    <rect key="frame" x="396" y="0.0" width="44.5" height="58.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅐ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="37X-Cp-3eu"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jCG-YJ-Tcg">
-                                    <rect key="frame" x="441" y="0.0" width="49" height="66.5"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅔ"/>
+                                    <rect key="frame" x="445.5" y="0.0" width="44.5" height="58.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅔ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="SEp-b0-dgK"/>
                                     </connections>
                                 </button>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="vVg-QT-tYf" userLabel="SecondStack">
-                            <rect key="frame" x="0.0" y="74.5" width="490" height="66"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="vVg-QT-tYf" userLabel="SecondStack">
+                            <rect key="frame" x="0.0" y="70.5" width="490" height="58"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kFr-fB-hhK">
-                                    <rect key="frame" x="0.0" y="0.0" width="54.5" height="66"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅁ"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="58"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅁ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="9yc-s2-TAU"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4qX-sY-2so">
-                                    <rect key="frame" x="54.5" y="0.0" width="54.5" height="66"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㄴ"/>
+                                    <rect key="frame" x="55" y="0.0" width="50" height="58"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㄴ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="XiZ-C8-eSd"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ocK-Bc-uTs">
-                                    <rect key="frame" x="109" y="0.0" width="54.5" height="66"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅇ"/>
+                                    <rect key="frame" x="110" y="0.0" width="50" height="58"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅇ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="hha-W7-PHG"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iwx-RW-FAb">
-                                    <rect key="frame" x="163.5" y="0.0" width="54.5" height="66"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㄹ"/>
+                                    <rect key="frame" x="165" y="0.0" width="50" height="58"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㄹ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="Hrf-wa-GVc"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eX6-8C-fwc">
-                                    <rect key="frame" x="218" y="0.0" width="54" height="66"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅎ"/>
+                                    <rect key="frame" x="220" y="0.0" width="50" height="58"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅎ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="I85-gs-kxP"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rer-h8-Lqi">
-                                    <rect key="frame" x="272" y="0.0" width="54.5" height="66"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅗ"/>
+                                    <rect key="frame" x="275" y="0.0" width="50" height="58"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅗ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="RIo-DO-DeG"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eUR-wr-7Vg">
-                                    <rect key="frame" x="326.5" y="0.0" width="54.5" height="66"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅓ"/>
+                                    <rect key="frame" x="330" y="0.0" width="50" height="58"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅓ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="YlP-dM-Bti"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pp6-BO-Edg">
-                                    <rect key="frame" x="381" y="0.0" width="54.5" height="66"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅏ"/>
+                                    <rect key="frame" x="385" y="0.0" width="50" height="58"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅏ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="bWo-yz-x7L"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PQQ-iB-rwi">
-                                    <rect key="frame" x="435.5" y="0.0" width="54.5" height="66"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅣ"/>
+                                    <rect key="frame" x="440" y="0.0" width="50" height="58"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅣ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="6lK-wY-H5t"/>
                                     </connections>
                                 </button>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="eYg-jj-H9g" userLabel="ThirdStack">
-                            <rect key="frame" x="0.0" y="148.5" width="490" height="66.5"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="eYg-jj-H9g" userLabel="ThirdStack">
+                            <rect key="frame" x="0.0" y="136.5" width="490" height="58.5"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="47q-UD-1SV">
-                                    <rect key="frame" x="0.0" y="0.0" width="54.5" height="66.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="58.5"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" title="Shift"/>
                                     <connections>
@@ -203,63 +330,100 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4me-OO-nt9">
-                                    <rect key="frame" x="54.5" y="0.0" width="54.5" height="66.5"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅋ"/>
+                                    <rect key="frame" x="55" y="0.0" width="50" height="58.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅋ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="Y5L-nI-GMY"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W7t-v6-dFb">
-                                    <rect key="frame" x="109" y="0.0" width="54.5" height="66.5"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅌ"/>
+                                    <rect key="frame" x="110" y="0.0" width="50" height="58.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅌ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="I1Y-OA-Us4"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YCl-iA-0rd">
-                                    <rect key="frame" x="163.5" y="0.0" width="54.5" height="66.5"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅊ"/>
+                                    <rect key="frame" x="165" y="0.0" width="50" height="58.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅊ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="vdM-PS-Wbo"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tGW-9A-PGA">
-                                    <rect key="frame" x="218" y="0.0" width="54" height="66.5"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅍ"/>
+                                    <rect key="frame" x="220" y="0.0" width="50" height="58.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅍ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="wth-Ef-Obj"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bf4-GQ-0zL">
-                                    <rect key="frame" x="272" y="0.0" width="54.5" height="66.5"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅠ"/>
+                                    <rect key="frame" x="275" y="0.0" width="50" height="58.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅠ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="LRz-NN-SE0"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6qu-F8-mwm">
-                                    <rect key="frame" x="326.5" y="0.0" width="54.5" height="66.5"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅜ"/>
+                                    <rect key="frame" x="330" y="0.0" width="50" height="58.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅜ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="KRq-4u-iGM"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pt7-xT-POk">
-                                    <rect key="frame" x="381" y="0.0" width="54.5" height="66.5"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="ㅡ"/>
+                                    <rect key="frame" x="385" y="0.0" width="50" height="58.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="ㅡ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="eJV-ho-yro"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wzo-N4-Ezh">
-                                    <rect key="frame" x="435.5" y="0.0" width="54.5" height="66.5"/>
+                                    <rect key="frame" x="440" y="0.0" width="50" height="58.5"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" title="Back"/>
                                     <connections>
@@ -268,23 +432,30 @@
                                 </button>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Y6q-xU-V7K" userLabel="FourthStack">
-                            <rect key="frame" x="0.0" y="223" width="490" height="42"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Y6q-xU-V7K" userLabel="FourthStack">
+                            <rect key="frame" x="0.0" y="203" width="490" height="58"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yzM-lX-aW6">
-                                    <rect key="frame" x="0.0" y="0.0" width="163.5" height="42"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="160" height="58"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUt-oY-4gh">
-                                    <rect key="frame" x="163.5" y="0.0" width="163" height="42"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="Space"/>
+                                    <rect key="frame" x="165" y="0.0" width="160" height="58"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="Space">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="touchKeyButtons:" destination="-1" eventType="touchUpInside" id="bC6-3s-0hi"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0n-7P-aPB">
-                                    <rect key="frame" x="326.5" y="0.0" width="163.5" height="42"/>
+                                    <rect key="frame" x="330" y="0.0" width="160" height="58"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" image="return" catalog="system"/>
                                     <connections>
@@ -294,12 +465,13 @@
                             </subviews>
                         </stackView>
                     </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="Y6q-xU-V7K" firstAttribute="trailing" secondItem="IeS-Im-Qla" secondAttribute="trailing" id="9i6-CF-wIj"/>
-                        <constraint firstItem="Y6q-xU-V7K" firstAttribute="bottom" secondItem="IeS-Im-Qla" secondAttribute="bottom" id="AaB-d7-jdk"/>
+                        <constraint firstItem="Y6q-xU-V7K" firstAttribute="bottom" secondItem="IeS-Im-Qla" secondAttribute="bottom" constant="-4" id="AaB-d7-jdk"/>
                         <constraint firstItem="g6D-1U-mQT" firstAttribute="trailing" secondItem="IeS-Im-Qla" secondAttribute="trailing" id="BF2-DF-hcK"/>
                         <constraint firstItem="vVg-QT-tYf" firstAttribute="top" secondItem="g6D-1U-mQT" secondAttribute="bottom" constant="8" id="BpM-8F-PQB"/>
-                        <constraint firstItem="g6D-1U-mQT" firstAttribute="top" secondItem="IeS-Im-Qla" secondAttribute="top" id="DSk-Zs-2So"/>
+                        <constraint firstItem="g6D-1U-mQT" firstAttribute="top" secondItem="IeS-Im-Qla" secondAttribute="top" constant="4" id="DSk-Zs-2So"/>
                         <constraint firstItem="eYg-jj-H9g" firstAttribute="leading" secondItem="IeS-Im-Qla" secondAttribute="leading" id="FEA-1d-tf4"/>
                         <constraint firstItem="vVg-QT-tYf" firstAttribute="leading" secondItem="IeS-Im-Qla" secondAttribute="leading" id="STw-HB-ciC"/>
                         <constraint firstItem="eYg-jj-H9g" firstAttribute="top" secondItem="vVg-QT-tYf" secondAttribute="bottom" constant="8" id="W4s-AH-L3j"/>
@@ -309,7 +481,7 @@
                         <constraint firstItem="Y6q-xU-V7K" firstAttribute="leading" secondItem="IeS-Im-Qla" secondAttribute="leading" id="k61-xQ-WuK"/>
                         <constraint firstItem="eYg-jj-H9g" firstAttribute="height" secondItem="g6D-1U-mQT" secondAttribute="height" id="ni1-8q-YNN"/>
                         <constraint firstItem="eYg-jj-H9g" firstAttribute="trailing" secondItem="IeS-Im-Qla" secondAttribute="trailing" id="v6D-1r-ZnO"/>
-                        <constraint firstItem="g6D-1U-mQT" firstAttribute="height" secondItem="IeS-Im-Qla" secondAttribute="height" multiplier="0.25" id="wVh-1a-9FU"/>
+                        <constraint firstItem="g6D-1U-mQT" firstAttribute="height" secondItem="IeS-Im-Qla" secondAttribute="height" multiplier="0.22" id="wVh-1a-9FU"/>
                         <constraint firstItem="vVg-QT-tYf" firstAttribute="trailing" secondItem="IeS-Im-Qla" secondAttribute="trailing" id="wts-cD-mUO"/>
                     </constraints>
                 </view>
@@ -330,6 +502,9 @@
         <image name="return" catalog="system" width="128" height="101"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
