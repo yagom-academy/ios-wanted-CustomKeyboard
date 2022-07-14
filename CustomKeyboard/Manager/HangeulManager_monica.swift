@@ -91,12 +91,8 @@ extension HangeulManager {
             status = statusStack.last ?? .start
         } else {
             let charKind: HG.Kind = HG.compatible.midList.contains(input) ? .vowel : .consonant
-//            print("    seperatedBuffer:")
-//            for ele in separatedBuffer {
-//                print("    \(String(UnicodeScalar(ele)!))")
-//            }
             let prev = letterBuffer.last ?? 0
-//            print("    prev: \(String(UnicodeScalar(prev)!))")
+            
             switch status {
             case .start, .space:
                 if charKind == .consonant {

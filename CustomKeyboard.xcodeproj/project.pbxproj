@@ -27,6 +27,13 @@
 		9F504322287E4EE200CDBD9C /* getSeparatedTests_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F504321287E4EE200CDBD9C /* getSeparatedTests_monica.swift */; };
 		9F772502287EF34E009A4EB8 /* BACKSPACEInputTests_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F772501287EF34E009A4EB8 /* BACKSPACEInputTests_monica.swift */; };
 		9F772504287F9F9B009A4EB8 /* SPACEInputTests_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F772503287F9F9B009A4EB8 /* SPACEInputTests_monica.swift */; };
+		9F77251A287FDC50009A4EB8 /* IOManager_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F772519287FDC50009A4EB8 /* IOManager_monica.swift */; };
+		9F77251C287FDE2A009A4EB8 /* StatusManager_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F77251B287FDE2A009A4EB8 /* StatusManager_monica.swift */; };
+		9F772522287FE084009A4EB8 /* Hangeul_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F772521287FE084009A4EB8 /* Hangeul_monica.swift */; };
+		9F772524287FE560009A4EB8 /* HangeulUtils_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F772523287FE560009A4EB8 /* HangeulUtils_monica.swift */; };
+		9F772528287FF46F009A4EB8 /* LetterBufferManager_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F772527287FF46F009A4EB8 /* LetterBufferManager_monica.swift */; };
+		9F77252A287FF9EA009A4EB8 /* WordListManager_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F772529287FF9EA009A4EB8 /* WordListManager_monica.swift */; };
+		9F77252C288008B6009A4EB8 /* normalCaseRefactoringCodeTests_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F77252B288008B6009A4EB8 /* normalCaseRefactoringCodeTests_monica.swift */; };
 		9FDEAB4D287E596200C0663D /* getCombinedTests_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDEAB4C287E596200C0663D /* getCombinedTests_monica.swift */; };
 		9FDEAB51287E94A400C0663D /* HangeulConstants_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDEAB50287E94A400C0663D /* HangeulConstants_monica.swift */; };
 		9FDEAB53287ECFAD00C0663D /* setCombinedTests_monica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDEAB52287ECFAD00C0663D /* setCombinedTests_monica.swift */; };
@@ -70,6 +77,13 @@
 		9F504321287E4EE200CDBD9C /* getSeparatedTests_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getSeparatedTests_monica.swift; sourceTree = "<group>"; };
 		9F772501287EF34E009A4EB8 /* BACKSPACEInputTests_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BACKSPACEInputTests_monica.swift; sourceTree = "<group>"; };
 		9F772503287F9F9B009A4EB8 /* SPACEInputTests_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPACEInputTests_monica.swift; sourceTree = "<group>"; };
+		9F772519287FDC50009A4EB8 /* IOManager_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOManager_monica.swift; sourceTree = "<group>"; };
+		9F77251B287FDE2A009A4EB8 /* StatusManager_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusManager_monica.swift; sourceTree = "<group>"; };
+		9F772521287FE084009A4EB8 /* Hangeul_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hangeul_monica.swift; sourceTree = "<group>"; };
+		9F772523287FE560009A4EB8 /* HangeulUtils_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulUtils_monica.swift; sourceTree = "<group>"; };
+		9F772527287FF46F009A4EB8 /* LetterBufferManager_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterBufferManager_monica.swift; sourceTree = "<group>"; };
+		9F772529287FF9EA009A4EB8 /* WordListManager_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListManager_monica.swift; sourceTree = "<group>"; };
+		9F77252B288008B6009A4EB8 /* normalCaseRefactoringCodeTests_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = normalCaseRefactoringCodeTests_monica.swift; sourceTree = "<group>"; };
 		9FDEAB4C287E596200C0663D /* getCombinedTests_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCombinedTests_monica.swift; sourceTree = "<group>"; };
 		9FDEAB50287E94A400C0663D /* HangeulConstants_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulConstants_monica.swift; sourceTree = "<group>"; };
 		9FDEAB52287ECFAD00C0663D /* setCombinedTests_monica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setCombinedTests_monica.swift; sourceTree = "<group>"; };
@@ -187,8 +201,22 @@
 				9FDEAB52287ECFAD00C0663D /* setCombinedTests_monica.swift */,
 				9F772501287EF34E009A4EB8 /* BACKSPACEInputTests_monica.swift */,
 				9F772503287F9F9B009A4EB8 /* SPACEInputTests_monica.swift */,
+				9F77252B288008B6009A4EB8 /* normalCaseRefactoringCodeTests_monica.swift */,
 			);
 			path = HangeulManagerTests;
+			sourceTree = "<group>";
+		};
+		9F772514287FDAAD009A4EB8 /* Hangeul_monica */ = {
+			isa = PBXGroup;
+			children = (
+				9F772519287FDC50009A4EB8 /* IOManager_monica.swift */,
+				9F77251B287FDE2A009A4EB8 /* StatusManager_monica.swift */,
+				9F772521287FE084009A4EB8 /* Hangeul_monica.swift */,
+				9F772523287FE560009A4EB8 /* HangeulUtils_monica.swift */,
+				9F772527287FF46F009A4EB8 /* LetterBufferManager_monica.swift */,
+				9F772529287FF9EA009A4EB8 /* WordListManager_monica.swift */,
+			);
+			path = Hangeul_monica;
 			sourceTree = "<group>";
 		};
 		DE15E64F28604278003DD2F5 = {
@@ -212,6 +240,7 @@
 		DE15E65A28604278003DD2F5 /* CustomKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				9F772514287FDAAD009A4EB8 /* Hangeul_monica */,
 				9F5042FD287C463300CDBD9C /* Extension */,
 				0142F4DB287C3510006F3E48 /* Application */,
 				0142F4D8287C34CC006F3E48 /* Model */,
@@ -332,6 +361,7 @@
 				9F772504287F9F9B009A4EB8 /* SPACEInputTests_monica.swift in Sources */,
 				9F504322287E4EE200CDBD9C /* getSeparatedTests_monica.swift in Sources */,
 				9FDEAB53287ECFAD00C0663D /* setCombinedTests_monica.swift in Sources */,
+				9F77252C288008B6009A4EB8 /* normalCaseRefactoringCodeTests_monica.swift in Sources */,
 				9FDEAB4D287E596200C0663D /* getCombinedTests_monica.swift in Sources */,
 				9F50431B287E323300CDBD9C /* setSeparatedBufferTests_monica.swift in Sources */,
 				9F772502287EF34E009A4EB8 /* BACKSPACEInputTests_monica.swift in Sources */,
@@ -346,11 +376,16 @@
 				012EDE54287F9B960035C3E6 /* Endpoint_sungeo.swift in Sources */,
 				012EDE5C287FAF790035C3E6 /* ReviewViewController.swift in Sources */,
 				9F5042FC287C144900CDBD9C /* NetworkManager.swift in Sources */,
+				9F772524287FE560009A4EB8 /* HangeulUtils_monica.swift in Sources */,
 				012EDE5A287FA6FA0035C3E6 /* APIEndpoints_sungeo.swift in Sources */,
 				012EDE46287EC14C0035C3E6 /* HttpMethod_sungeo.swift in Sources */,
+				9F77251A287FDC50009A4EB8 /* IOManager_monica.swift in Sources */,
 				012EDE56287FA0BD0035C3E6 /* Provider_sungeo.swift in Sources */,
 				0142F4D0287C0C9C006F3E48 /* Review.swift in Sources */,
+				9F77251C287FDE2A009A4EB8 /* StatusManager_monica.swift in Sources */,
 				012EDE42287EB9FA0035C3E6 /* NetworkManager_sungeo.swift in Sources */,
+				9F77252A287FF9EA009A4EB8 /* WordListManager_monica.swift in Sources */,
+				9F772528287FF46F009A4EB8 /* LetterBufferManager_monica.swift in Sources */,
 				0142F4D4287C2C83006F3E48 /* ImageManager.swift in Sources */,
 				0142F4D6287C3078006F3E48 /* HomeViewModel.swift in Sources */,
 				DE15E66028604278003DD2F5 /* HomeViewController.swift in Sources */,
@@ -361,6 +396,7 @@
 				9F504303287D5C8F00CDBD9C /* HangeulManager_monica.swift in Sources */,
 				9F504301287C484900CDBD9C /* TimeManager.swift in Sources */,
 				9F5042FF287C467400CDBD9C /* DateFormatter_Extension.swift in Sources */,
+				9F772522287FE084009A4EB8 /* Hangeul_monica.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

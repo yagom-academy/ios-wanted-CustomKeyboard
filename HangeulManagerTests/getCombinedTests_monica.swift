@@ -68,5 +68,4 @@ class getCombinedTests_monica: XCTestCase {
         
         XCTAssertEqual(result, expectation, "초성 + 겹모음 + 겹받침 에러")
     }
-
 }
