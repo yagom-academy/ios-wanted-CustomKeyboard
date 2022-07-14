@@ -31,9 +31,10 @@ class ReviewListCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func layoutSubviews() {
-        self.profileImage.layer.cornerRadius = self.frame.size.width / 2.0;
+        self.profileImage.layer.cornerRadius =  self.profileImage.frame.height / 2
+        self.profileImage.clipsToBounds = true
     }
 }
 
@@ -41,12 +42,12 @@ class ReviewListCell: UICollectionViewCell {
 extension ReviewListCell {
     
     private func configureAttribute() {
-        
+
         [profileImage, userNameLabel, contentsLabel, timeLabel, declarationStack].forEach {
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        
+
         //유저네임
         userNameLabel.font = UIFont.boldSystemFont(ofSize: 16)
         
@@ -100,4 +101,3 @@ extension ReviewListCell {
         ])
     }
 }
-

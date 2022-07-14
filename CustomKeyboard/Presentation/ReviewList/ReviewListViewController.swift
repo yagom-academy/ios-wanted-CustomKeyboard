@@ -227,6 +227,7 @@ extension ReviewListViewController: UICollectionViewDataSource {
         cell.backgroundColor = .systemBackground
         
         cell.profileImage.load(url: url)
+        
         cell.userNameLabel.text = reviewDatas[index].user.userName
         cell.contentsLabel.text = reviewDatas[index].content
         cell.timeLabel.text = convertDateTime(createdAtTime: reviewDatas[index].createdAt)
