@@ -154,25 +154,19 @@ class KeyboardView: UIView {
     // MARK: - objc Methods
     
     @objc func keyboardButtonTouched(_ sender: UIButton) {
-        var isShiftedState = sender.state
-        if sender.state.rawValue == 5 {
-            isShiftedState = UIControl.State.selected
-        }
-        
-        guard let contents = sender.title(for: isShiftedState) else {
+        guard let contents = sender.titleLabel?.text else {
             return
         }
-        
+
         print(contents)
     }
-    
+
     @objc func shiftButtonTouched(_ sender: UIButton) {
-        sender.isSelected.toggle()
         toBeConvertedButtons.forEach {
-            $0.isSelected = sender.isSelected
+            $0.isSelected.toggle()
         }
     }
-    
+
 }
 
 extension KeyboardView {
@@ -207,6 +201,7 @@ extension KeyboardView {
         if checkToBeConverted(contents: contents) {
             let doubleCharacter = convertToDouble(contents: contents)
             button.setTitle(doubleCharacter, for: .selected)
+            button.setTitle(doubleCharacter, for: .init(rawValue: Style.selectedAndHighlighted))
             toBeConvertedButtons.append(button)
         }
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -439,6 +434,7 @@ extension KeyboardView {
         static let spaceKeyText = "스페이스"
         static let returnKeyImage = UIImage(systemName: "return")
         
+        static let selectedAndHighlighted: UInt = UIControl.State.selected.rawValue | UIControl.State.highlighted.rawValue
         static let keyboardKeyWidthRatio = CGFloat(0.09)
         static let keyboardContentsViewRatio = 0.3
         static let numberOfStackView = 4.0
