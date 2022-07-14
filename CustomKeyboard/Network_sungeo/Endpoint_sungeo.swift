@@ -16,12 +16,14 @@ struct Endpoint_sungeo {
     private let method: HttpMethod_sungeo
     private let headers: [String: String]
     private let queryItems: [String: String]
+    private let bodyData: Data?
     
-    init(urlString: String, method: HttpMethod_sungeo, headers: [String: String], queryItems: [String: String]) {
+    init(urlString: String, method: HttpMethod_sungeo, headers: [String: String], queryItems: [String: String], bodyData: Data?) {
         self.urlString = urlString
         self.method = method
         self.headers = headers
         self.queryItems = queryItems
+        self.bodyData = bodyData
     }
     
     func urlRequest() throws -> URLRequest {
@@ -32,6 +34,8 @@ struct Endpoint_sungeo {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
         urlRequest.allHTTPHeaderFields = headers
+        urlRequest.httpBody = bodyData
+        
         return urlRequest
     }
     
