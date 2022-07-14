@@ -23,6 +23,7 @@
 		FF66E251287ECCD8008DF303 /* ReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E250287ECCD8008DF303 /* ReviewListViewController.swift */; };
 		FF66E254287ECEAD008DF303 /* ReviewListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E253287ECEAD008DF303 /* ReviewListCell.swift */; };
 		FF66E259287ED6EC008DF303 /* UIImageView+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E258287ED6EC008DF303 /* UIImageView+Custom.swift */; };
+		FF66E25C287FF5D3008DF303 /* ReviewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E25B287FF5D3008DF303 /* ReviewListViewModel.swift */; };
 		FFE4229A287D1F2A00EA04AF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE42299287D1F2A00EA04AF /* NetworkManager.swift */; };
 		FFE4229C287D215200EA04AF /* ReviewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE4229B287D215200EA04AF /* ReviewType.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 		FF66E250287ECCD8008DF303 /* ReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewController.swift; sourceTree = "<group>"; };
 		FF66E253287ECEAD008DF303 /* ReviewListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListCell.swift; sourceTree = "<group>"; };
 		FF66E258287ED6EC008DF303 /* UIImageView+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Custom.swift"; sourceTree = "<group>"; };
+		FF66E25B287FF5D3008DF303 /* ReviewListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewModel.swift; sourceTree = "<group>"; };
 		FFE42299287D1F2A00EA04AF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		FFE4229B287D215200EA04AF /* ReviewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,6 +129,7 @@
 			children = (
 				FF66E250287ECCD8008DF303 /* ReviewListViewController.swift */,
 				FF66E253287ECEAD008DF303 /* ReviewListCell.swift */,
+				FF66E25B287FF5D3008DF303 /* ReviewListViewModel.swift */,
 			);
 			path = ReviewList;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				FF66E251287ECCD8008DF303 /* ReviewListViewController.swift in Sources */,
 				FF66E259287ED6EC008DF303 /* UIImageView+Custom.swift in Sources */,
 				FFE4229C287D215200EA04AF /* ReviewType.swift in Sources */,
+				FF66E25C287FF5D3008DF303 /* ReviewListViewModel.swift in Sources */,
 				FF66E254287ECEAD008DF303 /* ReviewListCell.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 				FEF67F8E287D2A29008E9A97 /* NetworkAPI.swift in Sources */,

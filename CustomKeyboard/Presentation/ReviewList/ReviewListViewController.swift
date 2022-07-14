@@ -10,7 +10,7 @@ import UIKit
 class ReviewListViewController: UIViewController {
     
     // MARK: - Properties
-    private var reviewDatas: [ReviewType] = []
+    private let viewModel = ReviewListViewModel()
     private var collectionView: UICollectionView! = nil
     private let reviewTextFieldStack = UIStackView()
     private let profileImageView = UIImageView()
@@ -38,23 +38,13 @@ class ReviewListViewController: UIViewController {
 // MARK: - Methods
 extension ReviewListViewController {
     private func fetchData() {
-        NetworkManager.shared.fetchReview { result in
-            switch result {
-            case .success(let result):
-                self.reviewDatas = result.data
-                
-                DispatchQueue.main.async { [unowned self] in
-                    collectionView.reloadData()
-                }
-                
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
+        viewModel.fetchData { [weak self] in
+            self?.collectionView.reloadData()
         }
     }
     
     private func postData() {
-        NetworkManager.shared.postReview(message: reviewTextView.text) { result in
+        viewModel.postData(text: reviewTextView.text) { result in
             switch result {
             case .success(let result):
                 print(result)
@@ -67,31 +57,6 @@ extension ReviewListViewController {
     private func addTapGesture() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView))
         self.reviewTextView.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    private func convertDateTime(createdAtTime: String) -> String {
-        
-        //TODO : 날짜 비교해서 보여주는 것 아직 안함
-        // 댓글을 작성한 시간이 1시간 이내일 경우 분 단위로 표시,
-        // 하루 이내일 경우 시간 단위로 표시
-        // 하루 이상일 경우 년월일만 표시
-        
-        //Date형식 설정
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        //2021-10-29T02:14:10.135Z
-        
-        //String을 Date형식으로 바꿔주기
-        let createdAtDateTime = dateFormatter.date(from: createdAtTime)
-        
-        //바꿔줄 원하는 날짜 형식 설정
-        let myDataFormatter = DateFormatter()
-        myDataFormatter.dateFormat = "yyyy년 MM월 dd일"
-        myDataFormatter.locale = Locale(identifier: "ko_KR")
-        
-        //Date를 설정해둔 날짜 형식의 String으로 바꿔주기
-        let convertCreatedAtStringTime = myDataFormatter.string(from: createdAtDateTime!)
-        return convertCreatedAtStringTime
     }
 }
 
@@ -208,8 +173,7 @@ extension ReviewListViewController: UICollectionViewDataSource {
     
     //각 세션에 들어가는 아이템 갯수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("셀 갯수:", reviewDatas.count)
-        return reviewDatas.count
+        return viewModel.getCellTotalCount()
     }
     
     //셀에 대한 설정
@@ -219,18 +183,7 @@ extension ReviewListViewController: UICollectionViewDataSource {
             return ReviewListCell()
         }
         
-        guard let url = URL(string: self.reviewDatas[indexPath.row].user.profileImage) else {
-            return ReviewListCell()
-        }
-        
-        let index = indexPath.row
-        cell.backgroundColor = .systemBackground
-        
-        cell.profileImage.load(url: url)
-        
-        cell.userNameLabel.text = reviewDatas[index].user.userName
-        cell.contentsLabel.text = reviewDatas[index].content
-        cell.timeLabel.text = convertDateTime(createdAtTime: reviewDatas[index].createdAt)
+        cell.setData(data: viewModel.getCellData(indexPath: indexPath))
         
         return cell
     }

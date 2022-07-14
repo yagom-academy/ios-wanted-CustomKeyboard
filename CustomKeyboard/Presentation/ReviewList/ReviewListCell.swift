@@ -31,6 +31,18 @@ class ReviewListCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setData(data: ReviewListViewModel.CellType?) {
+        guard let data = data else {
+            return
+        }
+        
+        profileImage.load(url: data.profileURL)
+        userNameLabel.text = data.userName
+        contentsLabel.text = data.contents
+        timeLabel.text = data.createdAt
+        
+    }
 
     override func layoutSubviews() {
         self.profileImage.layer.cornerRadius =  self.profileImage.frame.height / 2
