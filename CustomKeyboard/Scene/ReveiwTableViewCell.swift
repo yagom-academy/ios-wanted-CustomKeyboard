@@ -64,8 +64,8 @@ class ReviewTableViewCell: UITableViewCell {
         profileImage.image = urlToImage(review.user.profileImage)
         nameLabel.text = review.user.userName
         timeLabel.text = dateToTime(review.createdAt)
-        starLabel.text = "별점: "
-        reviewLabel.text = "리뷰: "
+        starLabel.text = separateStarAndReview(review.content).0.replacingOccurrences(of: "Rating", with: "별점")
+        reviewLabel.text = separateStarAndReview(review.content).1.replacingOccurrences(of: "Review", with: "리뷰")
     }
 }
 
@@ -131,9 +131,20 @@ extension ReviewTableViewCell {
         }
     }
     
-    private func separateStarAndReview(_ content: String) -> [String] {
-        let temp = content.components(separatedBy: [":", "\n"])
-        return []
+    private func separateStarAndReview(_ content: String) -> (String, String) {
+        let temp = content.components(separatedBy: "\n")
+        switch temp.count {
+        case 1:
+            if temp[0].components(separatedBy: ":").count == 1 {
+                return ("별점: ", "리뷰: " + temp[0])
+            } else {
+                return ("별점: ⭐️⭐️⭐️⭐️⭐️", "리뷰: ")
+            }
+        case 2:
+            return (temp[0], temp[1])
+        default:
+            return ("별점: ", "리뷰: ")
+        }
     }
     
     private func urlToImage(_ url: String) -> UIImage {
