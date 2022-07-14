@@ -32,11 +32,13 @@ extension KeyboardViewController {
     private func layout() {
         view.backgroundColor = .white
         
-        reviewTextField.translatesAutoresizingMaskIntoConstraints = false
-        keyboardView.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(reviewTextField)
-        view.addSubview(keyboardView)
+        [
+            reviewTextField,
+            keyboardView
+        ].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        }
         
         NSLayoutConstraint.activate([
             

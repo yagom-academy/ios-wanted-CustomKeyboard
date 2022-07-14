@@ -28,15 +28,15 @@ class KeyboardView: UIView {
 extension KeyboardView {
     
     private func layout() {
-        keyFirstLine.translatesAutoresizingMaskIntoConstraints = false
-        keySecondLine.translatesAutoresizingMaskIntoConstraints = false
-        keyThirdLine.translatesAutoresizingMaskIntoConstraints = false
-        keyFourthLine.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.addSubview(keyFirstLine)
-        self.addSubview(keySecondLine)
-        self.addSubview(keyThirdLine)
-        self.addSubview(keyFourthLine)
+        [
+            keyFirstLine,
+            keySecondLine,
+            keyThirdLine,
+            keyFourthLine
+        ].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview($0)
+        }
         
         NSLayoutConstraint.activate([
             
