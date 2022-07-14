@@ -8,99 +8,68 @@
 import UIKit
 
 class KeyboardView: UIView {
-    let topButton1 = KeyboardButton(type: .text, text: "ㅂ", chosung: .ㅂ, jongsung: .ㅂ)
-    let topButton2 = KeyboardButton(type: .text, text: "ㅈ", chosung: .ㅈ, jongsung: .ㅈ)
-    let topButton3 = KeyboardButton(type: .text, text: "ㄷ", chosung: .ㄷ, jongsung: .ㄷ)
-    let topButton4 = KeyboardButton(type: .text, text: "ㄱ", chosung: .ㄱ, jongsung: .ㄱ)
-    let topButton5 = KeyboardButton(type: .text, text: "ㅅ", chosung: .ㅅ, jongsung: .ㅅ)
-    let topButton6 = KeyboardButton(type: .text, text: "ㅛ", jungsung: .ㅛ)
-    let topButton7 = KeyboardButton(type: .text, text: "ㅕ", jungsung: .ㅕ)
-    let topButton8 = KeyboardButton(type: .text, text: "ㅑ", jungsung: .ㅑ)
-    let topButton9 = KeyboardButton(type: .text, text: "ㅐ", jungsung: .ㅐ)
-    let topButton10 = KeyboardButton(type: .text, text: "ㅔ", jungsung: .ㅔ)
     
+    let topLetterValues: [Any] = [
+        Chosung.ㅂ,Chosung.ㅈ,Chosung.ㄷ,Chosung.ㄱ,Chosung.ㅅ,
+        Jungsung.ㅛ,Jungsung.ㅕ,Jungsung.ㅑ,Jungsung.ㅐ,Jungsung.ㅔ
+    ]
+    let middleLetterValues:[Any] = [
+        Chosung.ㅁ,Chosung.ㄴ,Chosung.ㅇ,Chosung.ㄹ,Chosung.ㅎ,
+        Jungsung.ㅗ,Jungsung.ㅓ,Jungsung.ㅏ,Jungsung.ㅣ
+    ]
+    let lastLetterValues:[Any] = [
+        Chosung.ㅋ,Chosung.ㅌ,Chosung.ㅊ,Chosung.ㅍ,
+        Jungsung.ㅠ,Jungsung.ㅜ,Jungsung.ㅡ
+    ]
+
     private lazy var topStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = 6.0
-        [
-            topButton1, topButton2, topButton3, topButton4,
-            topButton5, topButton6, topButton7, topButton8,
-            topButton9, topButton10
-        ].forEach { stackView.addArrangedSubview($0) }
+        configureButton(topLetterValues, stackView: stackView)
         return stackView
     }()
-    
-    let midButton1 = KeyboardButton(type: .text, text: "ㅁ", chosung: .ㅁ, jongsung: .ㅁ)
-    let midButton2 = KeyboardButton(type: .text, text: "ㄴ", chosung: .ㄴ, jongsung: .ㄴ)
-    let midButton3 = KeyboardButton(type: .text, text: "ㅇ", chosung: .ㅇ, jongsung: .ㅇ)
-    let midButton4 = KeyboardButton(type: .text, text: "ㄹ", chosung: .ㄹ, jongsung: .ㄹ)
-    let midButton5 = KeyboardButton(type: .text, text: "ㅎ", chosung: .ㅎ, jongsung: .ㅎ)
-    let midButton6 = KeyboardButton(type: .text, text: "ㅗ", jungsung: .ㅗ)
-    let midButton7 = KeyboardButton(type: .text, text: "ㅓ", jungsung: .ㅓ)
-    let midButton8 = KeyboardButton(type: .text, text: "ㅏ", jungsung: .ㅏ)
-    let midButton9 = KeyboardButton(type: .text, text: "ㅣ", jungsung: .ㅣ)
     
     private lazy var midStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
         stackView.spacing = 6.0
-        [
-            midButton1, midButton2, midButton3, midButton4,
-            midButton5, midButton6, midButton7, midButton8,
-            midButton9
-        ].forEach { stackView.addArrangedSubview($0) }
+        
+        configureButton(middleLetterValues, stackView: stackView)
         return stackView
     }()
-    
-    let bottomButton1 = KeyboardButton(type: .text, text: "ㅋ", chosung: .ㅋ, jongsung: .ㅋ)
-    let bottomButton2 = KeyboardButton(type: .text, text: "ㅌ", chosung: .ㅌ, jongsung: .ㅌ)
-    let bottomButton3 = KeyboardButton(type: .text, text: "ㅊ", chosung: .ㅊ, jongsung: .ㅊ)
-    let bottomButton4 = KeyboardButton(type: .text, text: "ㅍ", chosung: .ㅍ, jongsung: .ㅍ)
-    let bottomButton5 = KeyboardButton(type: .text, text: "ㅠ", jungsung: .ㅠ)
-    let bottomButton6 = KeyboardButton(type: .text, text: "ㅜ", jungsung: .ㅜ)
-    let bottomButton7 = KeyboardButton(type: .text, text: "ㅡ", jungsung: .ㅡ)
     
     private lazy var bottomStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = 6.0
-        [
-            bottomButton1, bottomButton2, bottomButton3, bottomButton4,
-            bottomButton5, bottomButton6, bottomButton7
-        ].forEach { stackView.addArrangedSubview($0) }
+        configureButton(lastLetterValues, stackView: stackView)
         return stackView
     }()
     
     private lazy var spaceButton: UIButton = {
         let button = UIButton()
         button.setTitle("space", for: .normal)
+        button.setTitleColor(UIColor.label, for: .normal)
         button.addTarget(self, action: #selector(didTapSpace), for: .touchUpInside)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 4.0
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowRadius = 1.0
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowOffset = .init(width: 0.0, height: 1.0)
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderWidth = 0.1
+        button.layer.cornerRadius = 5
         return button
     }()
     
     @objc func didTapSpace() {
         value.append(" ")
     }
-    
-    private lazy var totalStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.distribution = .fillEqually
-        stackView.spacing = 8.0
-        [
-            topStackView,
-            midStackView,
-            bottomStackView,
-            spaceButton
-        ].forEach { stackView.addArrangedSubview($0) }
-        
-        return stackView
-    }()
     
     init() {
         super.init(frame: .zero)
@@ -111,31 +80,58 @@ class KeyboardView: UIView {
     }
     
     func setupView() {
-        self.addSubview(totalStackView)
-        totalStackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            totalStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            totalStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            totalStackView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
-            totalStackView.heightAnchor.constraint(equalToConstant: 250)
-        ])
         
         [
-            topButton1, topButton2, topButton3, topButton4,
-            topButton5, topButton6, topButton7, topButton8,
-            topButton9, topButton10, midButton1, midButton2,
-            midButton3, midButton4, midButton5, midButton6,
-            midButton7, midButton8, midButton9, bottomButton1,
-            bottomButton2, bottomButton3, bottomButton4, bottomButton5,
-            bottomButton6, bottomButton7
+            topStackView,
+            midStackView,
+            bottomStackView,
+            spaceButton
         ].forEach {
-            $0.addTarget(
-                self,
-                action: #selector(didTapKeyboardButton(_:)),
-                for: .touchUpInside
-            )
+            self.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        NSLayoutConstraint.activate([
+            topStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 10),
+            topStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -10),
+            topStackView.topAnchor.constraint(equalTo: self.topAnchor,constant: 10),
+            
+            midStackView.topAnchor.constraint(equalTo: topStackView.bottomAnchor,constant: 10),
+            midStackView.leadingAnchor.constraint(equalTo: topStackView.leadingAnchor,constant: 10),
+            midStackView.trailingAnchor.constraint(equalTo: topStackView.trailingAnchor,constant: -10),
+            
+            bottomStackView.topAnchor.constraint(equalTo: midStackView.bottomAnchor,constant: 10),
+            bottomStackView.leadingAnchor.constraint(equalTo: midStackView.leadingAnchor,constant: 25),
+            bottomStackView.trailingAnchor.constraint(equalTo: midStackView.trailingAnchor,constant: -25),
+            
+            spaceButton.leadingAnchor.constraint(equalTo: bottomStackView.leadingAnchor),
+            spaceButton.trailingAnchor.constraint(equalTo: bottomStackView.trailingAnchor),
+            spaceButton.topAnchor.constraint(equalTo: bottomStackView.bottomAnchor,constant: 10)
+        ])
+    }
+    
+    func configureButton(_ letters: [Any], stackView: UIStackView) {
+        letters.forEach { letterValue in
+            if let value = letterValue as? Chosung {
+                let button = KeyboardButton(type: .text,
+                                            text: value.description,
+                                            chosung: value,
+                                            jongsung: value.jongsung)
+                button.addTarget(self, action: #selector(didTapKeyboardButton(_:)), for: .touchUpInside)
+                stackView.addArrangedSubview(button)
+                
+            }
+            
+            if let value = letterValue as? Jungsung {
+                let button = KeyboardButton(type: .text,
+                                            text: value.description,
+                                            jungsung: value)
+                button.addTarget(self, action: #selector(didTapKeyboardButton(_:)), for: .touchUpInside)
+                stackView.addArrangedSubview(button)
+            }
         }
     }
+    
     // 초성 : 초성을 적어야 하는 상태
                // 중성 : 초성 적혀있는 경우, 중성을 적어야하는 상태 -> 초성이 들어왔다 -> 다음 글자에 적는다.
    //                                                   -> 종성이 들어왔다 -> 다음 글자에 적는다.
@@ -152,8 +148,6 @@ class KeyboardView: UIView {
     var currentLastJongsung: Jongsung? = nil
     
     @objc func didTapKeyboardButton(_ sender: KeyboardButton) {
-        print("didTapKeyboardButton")
-        
         var curr: Int? = 0
         
         switch sejongState {

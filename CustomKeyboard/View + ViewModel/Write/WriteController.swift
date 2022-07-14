@@ -24,7 +24,7 @@ class WriteController: UIViewController {
     
     lazy var keyBoardView: KeyboardView = {
         let keyboard = KeyboardView()
-        keyboard.frame = CGRect(x: 0, y: 0, width: 0, height: 300)
+        keyboard.frame = CGRect(x: 0, y: 0, width: 0, height: 250)
         keyboard.backgroundColor = .gray
         return keyboard
     }()
@@ -43,6 +43,7 @@ class WriteController: UIViewController {
 //MARK: - UITextViewDelegate
 extension WriteController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.becomeFirstResponder()
         print("begin")
 //        textView.inputView.re
     }
