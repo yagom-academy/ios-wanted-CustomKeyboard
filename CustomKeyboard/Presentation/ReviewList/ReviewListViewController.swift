@@ -53,6 +53,17 @@ extension ReviewListViewController {
         }
     }
     
+    private func postData() {
+        NetworkManager.shared.postReview(message: reviewTextView.text) { result in
+            switch result {
+            case .success(let result):
+                print(result)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     private func addTapGesture() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView))
         self.reviewTextView.addGestureRecognizer(tapGestureRecognizer)
@@ -64,6 +75,10 @@ extension ReviewListViewController {
     @objc func didTapView() {
         let vc = ReviewWriteView(inputField: reviewTextView)
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func didTapWriteButton() {
+        postData()
     }
 }
 
@@ -98,6 +113,7 @@ extension ReviewListViewController {
         //버튼
         reviewPostButton.configuration = UIButton.Configuration.tinted()
         reviewPostButton.configuration?.title = "작성"
+        reviewPostButton.addTarget(self, action: #selector(didTapWriteButton) , for: .touchUpInside)
     }
     
     private func configureStackView() {
