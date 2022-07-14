@@ -122,12 +122,14 @@ extension ReviewTableViewCell {
         
         if currentTime[2] > time[2] {
             if currentTime[2] - time[2] == 1 && time[3] > currentTime[3] {
-                return String(time[3] - currentTime[3]) + "시간"
+                return String(24 - (time[3] - currentTime[3])) + "시간"
             }
             return String(time[0]) + "년 " + String(time[1]) + "월 " + String(time[2]) + "일"
         } else {
             if currentTime[3] - time[3] == 1 && time[4] > currentTime[4] {
-                return String(time[4] - currentTime[4]) + "분"
+                return String(60 - (time[4] - currentTime[4])) + "분"
+            } else if currentTime[3] == time[3] {
+                return String(currentTime[4] - time[4]) + "분"
             }
             return String(currentTime[3] - time[3]) + "시간"
         }

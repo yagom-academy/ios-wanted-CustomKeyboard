@@ -10,6 +10,11 @@ import UIKit
 class ReviewViewController: UIViewController {
     private let reviewTableView = UITableView()
     private var reviewList: [Review] = []
+    private var myReview: [Review] = [] {
+        didSet {
+            reviewTableView.reloadData()
+        }
+    }
     private var viewModel = ReviewViewModel()
     
     override func viewDidLoad() {
@@ -21,6 +26,9 @@ class ReviewViewController: UIViewController {
         viewModel.getReview { [weak self] reviews in
             guard let self = self  else { return }
             self.reviewList = reviews.reviewData
+            self.reviewList = self.reviewList.sorted(by: { r1, r2 in
+                r1.createdAt.compare(r2.createdAt) == .orderedDescending
+            })
             DispatchQueue.main.async {
                 self.reviewTableView.reloadData()
             }
@@ -81,6 +89,10 @@ extension ReviewViewController: UITableViewDataSource, UITableViewDelegate {
         header.setup()
         header.reviewTextField.delegate = self
         
+        if !myReview.isEmpty {
+            header.reviewTextField.text = myReview.last!.content
+        }
+        
         return header
     }
     
@@ -104,11 +116,13 @@ extension ReviewViewController: UITextFieldDelegate {
 extension ReviewViewController: PassReviewDelegate {
     func sendReviewData(review: Review) {
         // 헤더에 문제 있음
-        let header = ReviewTableViewHeader()
-        header.reviewTextField.text = review.content
-        
+        myReview.append(review)
+
         // 작성 버튼으로 옮기기
-        reviewList.append(review)
-        reviewTableView.reloadData()
+//        reviewList.append(review)
+//        reviewList = reviewList.sorted(by: { r1, r2 in
+//            r1.createdAt.compare(r2.createdAt) == .orderedDescending
+//        })
+//        reviewTableView.reloadData()
     }
 }
