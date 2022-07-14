@@ -88,7 +88,16 @@ extension ReviewViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         let vc = KeyboardViewController()
+        vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
         textField.resignFirstResponder()
+    }
+}
+
+// MARK: - TextFieldTextDelegate
+extension ReviewViewController: PassReviewDelegate {
+    func sendReviewData(review: Review) {
+        let header = ReviewTableViewHeader()
+        header.reviewTextField.text = review.content
     }
 }
