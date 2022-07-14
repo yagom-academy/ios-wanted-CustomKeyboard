@@ -75,6 +75,17 @@ class KeyboardView: UIView {
         return stackView
     }()
     
+    private lazy var spaceButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("space", for: .normal)
+        button.addTarget(self, action: #selector(didTapSpace), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func didTapSpace() {
+        value.append(" ")
+    }
+    
     private lazy var totalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -84,7 +95,8 @@ class KeyboardView: UIView {
         [
             topStackView,
             midStackView,
-            bottomStackView
+            bottomStackView,
+            spaceButton
         ].forEach { stackView.addArrangedSubview($0) }
         
         return stackView
@@ -105,7 +117,7 @@ class KeyboardView: UIView {
             totalStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             totalStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             totalStackView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
-            totalStackView.heightAnchor.constraint(equalToConstant: 160.0)
+            totalStackView.heightAnchor.constraint(equalToConstant: 250)
         ])
         
         [
