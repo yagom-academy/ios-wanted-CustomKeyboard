@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36081E06287FFC0200A933AE /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36081E05287FFC0200A933AE /* Date+.swift */; };
+		36081E08288003CC00A933AE /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36081E07288003CC00A933AE /* String+.swift */; };
 		36431EB8287D4D79003C99B4 /* ReviewListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36431EB7287D4D79003C99B4 /* ReviewListHeaderView.swift */; };
 		36431EBB287D9582003C99B4 /* CustomKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36431EBA287D9581003C99B4 /* CustomKeyboardView.swift */; };
 		36431EBD287D9598003C99B4 /* CustomKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36431EBC287D9598003C99B4 /* CustomKeyboard.xib */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		36081E05287FFC0200A933AE /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		36081E07288003CC00A933AE /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		36431EB7287D4D79003C99B4 /* ReviewListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListHeaderView.swift; sourceTree = "<group>"; };
 		36431EBA287D9581003C99B4 /* CustomKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyboardView.swift; sourceTree = "<group>"; };
 		36431EBC287D9598003C99B4 /* CustomKeyboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomKeyboard.xib; sourceTree = "<group>"; };
@@ -51,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36081E0928800B1500A933AE /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				36081E05287FFC0200A933AE /* Date+.swift */,
+				36081E07288003CC00A933AE /* String+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		36431EB5287D46C3003C99B4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +112,7 @@
 		DE15E65A28604278003DD2F5 /* CustomKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				36081E0928800B1500A933AE /* Extension */,
 				F0D4B434287D56410083E8AE /* Model */,
 				F035E559287D3BFB002DA8F9 /* Network */,
 				DE15E65B28604278003DD2F5 /* AppDelegate.swift */,
@@ -207,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36081E06287FFC0200A933AE /* Date+.swift in Sources */,
 				F0D4B436287D564D0083E8AE /* ReviewData.swift in Sources */,
 				DE15E66028604278003DD2F5 /* ReviewListViewController.swift in Sources */,
 				F0D480D3287D97BD00D9425C /* CreateReviewViewController.swift in Sources */,
@@ -216,6 +231,7 @@
 				F035E55D287D3E41002DA8F9 /* Repository.swift in Sources */,
 				F035E55B287D3C09002DA8F9 /* HttpClient.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
+				36081E08288003CC00A933AE /* String+.swift in Sources */,
 				36431EBB287D9582003C99B4 /* CustomKeyboardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
