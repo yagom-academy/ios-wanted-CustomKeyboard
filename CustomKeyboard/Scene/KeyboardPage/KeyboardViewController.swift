@@ -42,13 +42,8 @@ extension KeyboardViewController {
             reviewTextField,
             keyboardView
         ].forEach {
-<<<<<<< HEAD
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview($0)
-=======
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
->>>>>>> 52298977bea22e2a98f5cb1b27741589bfde43d7
         }
         
         NSLayoutConstraint.activate([

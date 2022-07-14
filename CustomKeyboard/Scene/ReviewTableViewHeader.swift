@@ -56,19 +56,21 @@ extension ReviewTableViewHeader {
         
         let inset: CGFloat = 12
         
-        profileImage.topAnchor.constraint(equalTo: self.topAnchor, constant: inset).isActive = true
-        profileImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset).isActive = true
-        profileImage.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        profileImage.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        
-        reviewTextField.centerYAnchor.constraint(equalTo: profileImage.centerYAnchor).isActive = true
-        reviewTextField.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: inset).isActive = true
-        reviewTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -74).isActive = true
-        reviewTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
-        writeButton.centerYAnchor.constraint(equalTo: profileImage.centerYAnchor).isActive = true
-        writeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset).isActive = true
-        writeButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        writeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        NSLayoutConstraint.activate([
+            profileImage.topAnchor.constraint(equalTo: self.topAnchor, constant: inset),
+            profileImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
+            profileImage.widthAnchor.constraint(equalToConstant: 60),
+            profileImage.heightAnchor.constraint(equalToConstant: 60),
+            
+            reviewTextField.centerYAnchor.constraint(equalTo: profileImage.centerYAnchor),
+            reviewTextField.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: inset),
+            reviewTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -74),
+            reviewTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            writeButton.centerYAnchor.constraint(equalTo: profileImage.centerYAnchor),
+            writeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
+            writeButton.widthAnchor.constraint(equalToConstant: 50),
+            writeButton.heightAnchor.constraint(equalToConstant: 40),
+        ])
     }
 }
