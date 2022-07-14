@@ -12,9 +12,11 @@
 		DE15E66028604278003DD2F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65F28604278003DD2F5 /* ViewController.swift */; };
 		DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66428604279003DD2F5 /* Assets.xcassets */; };
 		DE15E66828604279003DD2F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */; };
+		FE2346F1287F02C000D332E5 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2346F0287F02C000D332E5 /* TestView.swift */; };
 		FE439987287D6B1D00BFF841 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE439986287D6B1D00BFF841 /* CustomError.swift */; };
 		FE43998A287D766D00BFF841 /* CustomKeyBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE439989287D766D00BFF841 /* CustomKeyBoard.swift */; };
 		FE43998D287D908C00BFF841 /* BasicKeyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE43998C287D908C00BFF841 /* BasicKeyLine.swift */; };
+		FE532CBB287F945F00397D33 /* CustomKeyBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE532CBA287F945F00397D33 /* CustomKeyBoardViewModel.swift */; };
 		FE574865287E9FAB0001B8A2 /* CustomKeyBoardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE574864287E9FAB0001B8A2 /* CustomKeyBoardDelegate.swift */; };
 		FE831580287EC8640039A56B /* ReviewWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE83157F287EC8640039A56B /* ReviewWriteView.swift */; };
 		FE831582287ED8A10039A56B /* BasicKeyLineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE831581287ED8A10039A56B /* BasicKeyLineDelegate.swift */; };
@@ -32,9 +34,11 @@
 		DE15E66428604279003DD2F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DE15E66728604279003DD2F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DE15E66928604279003DD2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE2346F0287F02C000D332E5 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		FE439986287D6B1D00BFF841 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		FE439989287D766D00BFF841 /* CustomKeyBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyBoard.swift; sourceTree = "<group>"; };
 		FE43998C287D908C00BFF841 /* BasicKeyLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicKeyLine.swift; sourceTree = "<group>"; };
+		FE532CBA287F945F00397D33 /* CustomKeyBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyBoardViewModel.swift; sourceTree = "<group>"; };
 		FE574864287E9FAB0001B8A2 /* CustomKeyBoardDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyBoardDelegate.swift; sourceTree = "<group>"; };
 		FE83157F287EC8640039A56B /* ReviewWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewWriteView.swift; sourceTree = "<group>"; };
 		FE831581287ED8A10039A56B /* BasicKeyLineDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicKeyLineDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				FE439989287D766D00BFF841 /* CustomKeyBoard.swift */,
+				FE532CBA287F945F00397D33 /* CustomKeyBoardViewModel.swift */,
 				FE574864287E9FAB0001B8A2 /* CustomKeyBoardDelegate.swift */,
 				FE43998B287D902200BFF841 /* SubComponents */,
 			);
@@ -137,6 +142,7 @@
 			children = (
 				DE15E65F28604278003DD2F5 /* ViewController.swift */,
 				FE83157F287EC8640039A56B /* ReviewWriteView.swift */,
+				FE2346F0287F02C000D332E5 /* TestView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -220,11 +226,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE2346F1287F02C000D332E5 /* TestView.swift in Sources */,
 				FEB79C88287E83E500B5168A /* DynamicBasicKeyLine.swift in Sources */,
 				FE439987287D6B1D00BFF841 /* CustomError.swift in Sources */,
 				FFE4229A287D1F2A00EA04AF /* NetworkManager.swift in Sources */,
 				FE43998D287D908C00BFF841 /* BasicKeyLine.swift in Sources */,
 				FE831582287ED8A10039A56B /* BasicKeyLineDelegate.swift in Sources */,
+				FE532CBB287F945F00397D33 /* CustomKeyBoardViewModel.swift in Sources */,
 				FE574865287E9FAB0001B8A2 /* CustomKeyBoardDelegate.swift in Sources */,
 				DE15E66028604278003DD2F5 /* ViewController.swift in Sources */,
 				FE43998A287D766D00BFF841 /* CustomKeyBoard.swift in Sources */,

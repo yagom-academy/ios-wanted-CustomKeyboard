@@ -8,5 +8,5 @@
 import Foundation
 
 protocol BasicKeyLineDelegate {
-    func tappedKey(unicode: Int)
+    func tappedBasicKeyButton(unicode: Int)
 }

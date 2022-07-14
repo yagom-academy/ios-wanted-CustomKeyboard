@@ -8,7 +8,6 @@
 import Foundation
 
 struct CustomKeyBoardViewModel {
-    
     func addWord(unicode: Int, to beforeText: String?) -> String {
         let word = String(UnicodeScalar(unicode)!)
         guard let beforeText = beforeText else { return "" }

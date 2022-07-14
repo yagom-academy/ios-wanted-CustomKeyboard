@@ -10,10 +10,12 @@ import UIKit
 class ReviewWriteView: UIViewController {
     private let textView = UITextView()
     private let customKeyboard = CustomKeyBoard()
+    private var resultInputField: UITextView?
     
-    init() {
+    init(inputField: UITextView) {
         super.init(nibName: nil, bundle: nil)
-        
+        self.resultInputField = inputField
+        textView.text = inputField.text
         attribute()
         layout()
     }
@@ -39,7 +41,7 @@ class ReviewWriteView: UIViewController {
         customKeyboard.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         customKeyboard.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         customKeyboard.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        customKeyboard.heightAnchor.constraint(equalToConstant: CustomKeyBoard.Math.width*3/4).isActive = true
+        customKeyboard.heightAnchor.constraint(equalToConstant: CustomKeyBoard.Math.keyboardWidth*3/4).isActive = true
         
         textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
@@ -51,7 +53,11 @@ class ReviewWriteView: UIViewController {
 //MARK: - 커스텀키보드 Delegate 메서드
 extension ReviewWriteView: CustomKeyBoardDelegate {
     func tappedReturnButton() {
-        print("return버튼 클릭!")
+        guard let message = self.textView.text else { return }
+        self.dismiss(animated: true) { [weak self] in
+            guard let self = self else { return }
+            self.resultInputField?.text = message
+        }
     }
     
     func connectTextView() -> UITextView {

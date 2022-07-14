@@ -69,6 +69,6 @@ extension BasicKeyLine {
     }
     
     @objc func tappedButton(_ sender: UIButton) {
-        delegate?.tappedKey(unicode: sender.tag)
+        delegate?.tappedBasicKeyButton(unicode: sender.tag)
     }
 }
