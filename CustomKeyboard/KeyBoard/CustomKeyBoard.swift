@@ -9,32 +9,30 @@ import UIKit
 
 class CustomKeyBoard: UIView {
     struct Math {
-        static var width: CGFloat {
+        static var keyboardWidth: CGFloat {
             let sceneDelegate = UIApplication.shared.connectedScenes
                     .first!.delegate as! SceneDelegate
             return sceneDelegate.windowWidth!
         }
         static let buttonPadding = 5.0
-        static let buttonWidth = width / 10.0 - buttonPadding
-        static let fontSize: CGFloat = width < 340 ? 13.0 : 19.0
+        static let buttonWidth = keyboardWidth / 10.0 - buttonPadding
+        static let fontSize: CGFloat = keyboardWidth < 340 ? 13.0 : 19.0
     }
-    var delegate: CustomKeyBoardDelegate?
-    private var textView: UITextView?
-    
     private let mainContainer = UIStackView()
-    
     private let firstLineDynamicBasicKeys = DynamicBasicKeyLine()
-    
     private let secondLineBasicKeys = BasicKeyLine(keys: ["ㅁ", "ㄴ", "ㅇ", "ㄹ", "ㅎ", "ㅗ", "ㅓ", "ㅏ", "ㅣ"])
     
     private let thirdLineContainer = UIStackView()
-    private let thirdLineBasicKeys = BasicKeyLine(keys: ["ㅋ", "ㅌ", "ㅊ", "ㅍ", "ㅠ", "ㅜ", "ㅡ"])
     private let shiftButton = UIButton()
+    private let thirdLineBasicKeys = BasicKeyLine(keys: ["ㅋ", "ㅌ", "ㅊ", "ㅍ", "ㅠ", "ㅜ", "ㅡ"])
     private let backButton = UIButton()
     
     private let firthLineContainer = UIStackView()
     private let spaceButton = UIButton()
     private let returnButton = UIButton()
+    
+    var delegate: CustomKeyBoardDelegate?
+    private let viewModel = CustomKeyBoardViewModel()
     
     init() {
         super.init(frame: CGRect.zero)
@@ -55,16 +53,14 @@ extension CustomKeyBoard: BasicKeyLineDelegate {
         }
     }
     
-    func tappedKey(unicode: Int) {
-        let word = String(UnicodeScalar(unicode)!)
-        guard let beforeWord = delegate?.connectTextView().text else { return }
-        delegate?.connectTextView().text = beforeWord + word
+    func tappedBasicKeyButton(unicode: Int) {
+        delegate?.connectTextView().text = viewModel.addWord(unicode: unicode, to: delegate?.connectTextView().text)
     }
 }
 
 //MARK: - Shift 버튼 기능
 extension CustomKeyBoard {
-    @objc private func tappedShiftKey() {
+    @objc private func tappedShiftButton() {
         firstLineDynamicBasicKeys.tappedShiftKey()
     }
 }
@@ -72,9 +68,7 @@ extension CustomKeyBoard {
 //MARK: - Space 버튼 기능
 extension CustomKeyBoard {
     @objc private func tappedSpaceButton(_ sender: UIButton) {
-        let space = String(UnicodeScalar(sender.tag)!)
-        guard let beforeWord = delegate?.connectTextView().text else { return }
-        delegate?.connectTextView().text = beforeWord + space
+        delegate?.connectTextView().text = viewModel.addSpace(unicode: sender.tag, to: delegate?.connectTextView().text)
     }
 }
 
@@ -82,6 +76,13 @@ extension CustomKeyBoard {
 extension CustomKeyBoard {
     @objc private func tappedReturnButton() {
         delegate?.tappedReturnButton()
+    }
+}
+
+//MARK: - Back 버튼 기능
+extension CustomKeyBoard {
+    @objc private func tappedBackButton() {
+        delegate?.connectTextView().text = viewModel.removeWord(from: delegate?.connectTextView().text)
     }
 }
 
@@ -103,7 +104,7 @@ extension CustomKeyBoard {
         firthLineContainer.spacing = 10
         
         shiftButton.setTitle("shift", for: .normal)
-        shiftButton.addTarget(self, action: #selector(tappedShiftKey), for: .touchUpInside)
+        shiftButton.addTarget(self, action: #selector(tappedShiftButton), for: .touchUpInside)
         
         backButton.setTitle("back", for: .normal)
         
@@ -148,17 +149,17 @@ extension CustomKeyBoard {
         [firstLineDynamicBasicKeys, secondLineBasicKeys, thirdLineContainer, firthLineContainer].forEach {
             $0.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1/6).isActive = true
         }
-        firstLineDynamicBasicKeys.widthAnchor.constraint(equalToConstant: Math.width-Math.buttonPadding*2).isActive = true
-        secondLineBasicKeys.widthAnchor.constraint(equalToConstant: Math.width-Math.buttonWidth-Math.buttonPadding*2).isActive = true
-        thirdLineContainer.widthAnchor.constraint(equalToConstant: Math.width-Math.buttonPadding*2).isActive = true
-        firthLineContainer.widthAnchor.constraint(equalToConstant: Math.width-Math.buttonPadding*2).isActive = true
+        firstLineDynamicBasicKeys.widthAnchor.constraint(equalToConstant: Math.keyboardWidth-Math.buttonPadding*2).isActive = true
+        secondLineBasicKeys.widthAnchor.constraint(equalToConstant: Math.keyboardWidth-Math.buttonWidth-Math.buttonPadding*2).isActive = true
+        thirdLineContainer.widthAnchor.constraint(equalToConstant: Math.keyboardWidth-Math.buttonPadding*2).isActive = true
+        firthLineContainer.widthAnchor.constraint(equalToConstant: Math.keyboardWidth-Math.buttonPadding*2).isActive = true
         
         //MARK: 세번째줄
         [shiftButton, thirdLineBasicKeys, backButton].forEach {
             thirdLineContainer.addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        thirdLineBasicKeys.widthAnchor.constraint(equalToConstant: Math.width-Math.buttonWidth*3-Math.buttonPadding*2).isActive = true
+        thirdLineBasicKeys.widthAnchor.constraint(equalToConstant: Math.keyboardWidth-Math.buttonWidth*3-Math.buttonPadding*2).isActive = true
         [shiftButton, backButton].forEach {
             $0.widthAnchor.constraint(equalToConstant: Math.buttonWidth*1.3).isActive = true
         }
