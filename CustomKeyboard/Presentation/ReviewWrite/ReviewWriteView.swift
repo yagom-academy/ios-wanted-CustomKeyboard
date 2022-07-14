@@ -54,9 +54,11 @@ class ReviewWriteView: UIViewController {
 extension ReviewWriteView: CustomKeyBoardDelegate {
     func tappedReturnButton() {
         guard let message = self.textView.text else { return }
-        self.dismiss(animated: true) { [weak self] in
-            guard let self = self else { return }
-            self.resultInputField?.text = message
+        self.resultInputField?.text = message
+        if (self.navigationController != nil) {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true)
         }
     }
     

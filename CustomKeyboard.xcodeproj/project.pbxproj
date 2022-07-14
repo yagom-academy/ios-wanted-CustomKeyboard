@@ -17,9 +17,9 @@
 		FE43998D287D908C00BFF841 /* BasicKeyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE43998C287D908C00BFF841 /* BasicKeyLine.swift */; };
 		FE532CBB287F945F00397D33 /* CustomKeyBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE532CBA287F945F00397D33 /* CustomKeyBoardViewModel.swift */; };
 		FE574865287E9FAB0001B8A2 /* CustomKeyBoardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE574864287E9FAB0001B8A2 /* CustomKeyBoardDelegate.swift */; };
-		FE831580287EC8640039A56B /* ReviewWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE83157F287EC8640039A56B /* ReviewWriteView.swift */; };
 		FE831582287ED8A10039A56B /* BasicKeyLineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE831581287ED8A10039A56B /* BasicKeyLineDelegate.swift */; };
 		FEB79C88287E83E500B5168A /* DynamicBasicKeyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB79C87287E83E500B5168A /* DynamicBasicKeyLine.swift */; };
+		FEEE314E287FBAE000345176 /* ReviewWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEE314D287FBAE000345176 /* ReviewWriteView.swift */; };
 		FEF67F8E287D2A29008E9A97 /* NetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF67F8D287D2A29008E9A97 /* NetworkAPI.swift */; };
 		FF66E251287ECCD8008DF303 /* ReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E250287ECCD8008DF303 /* ReviewListViewController.swift */; };
 		FF66E254287ECEAD008DF303 /* ReviewListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E253287ECEAD008DF303 /* ReviewListCell.swift */; };
@@ -41,9 +41,9 @@
 		FE43998C287D908C00BFF841 /* BasicKeyLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicKeyLine.swift; sourceTree = "<group>"; };
 		FE532CBA287F945F00397D33 /* CustomKeyBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyBoardViewModel.swift; sourceTree = "<group>"; };
 		FE574864287E9FAB0001B8A2 /* CustomKeyBoardDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyBoardDelegate.swift; sourceTree = "<group>"; };
-		FE83157F287EC8640039A56B /* ReviewWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewWriteView.swift; sourceTree = "<group>"; };
 		FE831581287ED8A10039A56B /* BasicKeyLineDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicKeyLineDelegate.swift; sourceTree = "<group>"; };
 		FEB79C87287E83E500B5168A /* DynamicBasicKeyLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicBasicKeyLine.swift; sourceTree = "<group>"; };
+		FEEE314D287FBAE000345176 /* ReviewWriteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewWriteView.swift; sourceTree = "<group>"; };
 		FEF67F8D287D2A29008E9A97 /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
 		FF66E250287ECCD8008DF303 /* ReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewController.swift; sourceTree = "<group>"; };
 		FF66E253287ECEAD008DF303 /* ReviewListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListCell.swift; sourceTree = "<group>"; };
@@ -144,7 +144,7 @@
 		FF66E25A287FAFF7008DF303 /* ReviewWrite */ = {
 			isa = PBXGroup;
 			children = (
-				FE83157F287EC8640039A56B /* ReviewWriteView.swift */,
+				FEEE314D287FBAE000345176 /* ReviewWriteView.swift */,
 			);
 			path = ReviewWrite;
 			sourceTree = "<group>";
@@ -172,7 +172,6 @@
 			children = (
 				FF66E25A287FAFF7008DF303 /* ReviewWrite */,
 				FF66E252287ECE78008DF303 /* ReviewList */,
-				FE83157F287EC8640039A56B /* ReviewWriteView.swift */,
 				FE2346F0287F02C000D332E5 /* TestView.swift */,
 			);
 			path = Presentation;
@@ -262,6 +261,7 @@
 				FE439987287D6B1D00BFF841 /* CustomError.swift in Sources */,
 				FFE4229A287D1F2A00EA04AF /* NetworkManager.swift in Sources */,
 				FE43998D287D908C00BFF841 /* BasicKeyLine.swift in Sources */,
+				FEEE314E287FBAE000345176 /* ReviewWriteView.swift in Sources */,
 				FE831582287ED8A10039A56B /* BasicKeyLineDelegate.swift in Sources */,
 				FE532CBB287F945F00397D33 /* CustomKeyBoardViewModel.swift in Sources */,
 				FE574865287E9FAB0001B8A2 /* CustomKeyBoardDelegate.swift in Sources */,
@@ -269,7 +269,6 @@
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				FF66E251287ECCD8008DF303 /* ReviewListViewController.swift in Sources */,
 				FF66E259287ED6EC008DF303 /* UIImageView+Custom.swift in Sources */,
-				FE831580287EC8640039A56B /* ReviewWriteView.swift in Sources */,
 				FFE4229C287D215200EA04AF /* ReviewType.swift in Sources */,
 				FF66E254287ECEAD008DF303 /* ReviewListCell.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
