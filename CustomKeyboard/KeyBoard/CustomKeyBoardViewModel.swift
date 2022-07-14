@@ -30,40 +30,18 @@ struct CustomKeyBoardViewModel {
     func removeWord(from beforeText: String?) -> String {
         //TODO: 지우기버튼 구현
         guard let beforeText = beforeText else { return "" }
-        let lastCharUnicode = getLastCharUnicode(from: beforeText)
-        var result = getStringExceptLastChar(from: beforeText)
-        
-        if (lastCharUnicode >= 44032) {
-            
-        } else {
-            
-        }
-        let image = UIImageView()
-        image.layer.
-        return result
+        return beforeText
     }
     
-    private func separateUniCode(from unicode: Int) -> UniCode? {
-        guard unicode >= 44032 else { return nil }
-        let initial = (unicode - 44032) / (21*28)
-    }
-    
+    // 맨마지막 단어 유니코드 추출
     private func getLastCharUnicode(from text: String) -> Int {
         let lastChar = String(text.last!)
         return Int(UnicodeScalar(lastChar)!.value)
     }
     
+    // 맨마지막 단어를 뺀 문자열 반환
     private func getStringExceptLastChar(from text: String) -> String {
         let i = text.index(text.endIndex, offsetBy: -1)
         return String(text[text.startIndex..<i])
-    }
-    
-    private func parsingLastWord(from text: String) {
-        let lastCharUnicode = getLastCharUnicode(from: text)
-        if (lastCharUnicode >= 44032) {
-            print("완전언어", lastCharUnicode)
-        } else {
-            print("비완성언어", lastCharUnicode)
-        }
     }
 }
