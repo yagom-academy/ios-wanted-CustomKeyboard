@@ -107,6 +107,7 @@ final class KeyboardView: UIView {
         button.layer.cornerRadius = Style.keyboardKeyCornerRaidus
         button.setTitleColor(.black, for: .normal)
         button.setTitle(Text.spaceKey, for: .normal)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .subheadline)
 
         button.heightAnchor.constraint(equalToConstant: keyboardKeyHeight) .isActive  = true
         button.widthAnchor.constraint(
@@ -137,6 +138,7 @@ final class KeyboardView: UIView {
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
         stackView.alignment = .center
+        stackView.spacing = Style.basicPadding
         return stackView
     }()
 
@@ -168,6 +170,7 @@ final class KeyboardView: UIView {
     }
 
     @objc func shiftButtonTouched(_ sender: UIButton) {
+        sender.isSelected.toggle()
         toBeConvertedButtons.forEach {
             $0.isSelected.toggle()
         }
@@ -207,13 +210,14 @@ extension KeyboardView {
         if checkToBeConverted(contents: contents) {
             let doubleCharacter = convertToDouble(contents: contents)
             button.setTitle(doubleCharacter, for: .selected)
-            button.setTitle(doubleCharacter, for: .init(rawValue: Style.selectedAndHighlighted))
+            button.setTitle(doubleCharacter, for: Style.selectedAndHighlighted)
             toBeConvertedButtons.append(button)
         }
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(nil, action: #selector(keyboardButtonTouched(_:)), for: .touchUpInside)
         button.backgroundColor = .white
         button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .title3)
         button.layer.cornerRadius = Style.keyboardKeyCornerRaidus
 
         button.heightAnchor.constraint(equalToConstant: keyboardKeyHeight) .isActive  = true
@@ -349,11 +353,13 @@ extension KeyboardView {
 
     private func setupConstraintsOfKeyboardFirstLineStackView() {
         NSLayoutConstraint.activate([
-            keyboardFirstLineStackView.widthAnchor.constraint(
-                equalTo: keyboardContentsView.safeAreaLayoutGuide.widthAnchor
+            keyboardFirstLineStackView.leadingAnchor.constraint(
+                equalTo: keyboardContentsView.safeAreaLayoutGuide.leadingAnchor,
+                constant: Style.keyboardPadding
             ),
-            keyboardFirstLineStackView.centerXAnchor.constraint(
-                equalTo: keyboardContentsView.safeAreaLayoutGuide.centerXAnchor
+            keyboardFirstLineStackView.trailingAnchor.constraint(
+                equalTo: keyboardContentsView.safeAreaLayoutGuide.trailingAnchor,
+                constant: -Style.keyboardPadding
             ),
             keyboardFirstLineStackView.topAnchor.constraint(
                 equalTo: keyboardContentsView.safeAreaLayoutGuide.topAnchor
@@ -409,11 +415,11 @@ extension KeyboardView {
 
     private func setupConstraintsOfKeyboardFourthLineStackView() {
         NSLayoutConstraint.activate([
-            keyboardFourthLineStackView.widthAnchor.constraint(
-                equalTo: keyboardContentsView.widthAnchor
+            keyboardFourthLineStackView.leadingAnchor.constraint(
+                equalTo: keyboardFirstLineStackView.safeAreaLayoutGuide.leadingAnchor
             ),
-            keyboardFourthLineStackView.centerXAnchor.constraint(
-                equalTo: keyboardContentsView.safeAreaLayoutGuide.centerXAnchor
+            keyboardFourthLineStackView.trailingAnchor.constraint(
+                equalTo: keyboardFirstLineStackView.safeAreaLayoutGuide.trailingAnchor
             ),
             keyboardFourthLineStackView.topAnchor.constraint(
                 equalTo: keyboardThirdLineStackView.safeAreaLayoutGuide.bottomAnchor
@@ -433,29 +439,32 @@ extension KeyboardView {
 
     private enum Text {
         static let textLabelPlaceHolder: String = "ㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaa"
-        static let functionKey = "123"
-        static let spaceKey = "스페이스"
+        static let functionKey: String = "123"
+        static let spaceKey: String = "스페이스"
     }
 
     private enum Style {
-        static let shiftKeyImage = UIImage(systemName: "shift")
-        static let shiftFilledKeyImage = UIImage(systemName: "shift.fill")
-        static let deleteKeyImage = UIImage(systemName: "delete.left")
-        static let returnKeyImage = UIImage(systemName: "return")
+        static let shiftKeyImage: UIImage? = .init(systemName: "shift")
+        static let shiftFilledKeyImage: UIImage? = .init(systemName: "shift.fill")
+        static let deleteKeyImage: UIImage? = .init(systemName: "delete.left")
+        static let returnKeyImage: UIImage? = .init(systemName: "return")
         
-        static let selectedAndHighlighted: UInt = UIControl.State.selected.rawValue | UIControl.State.highlighted.rawValue
+        static let selectedAndHighlighted: UIControl.State = .init(
+            rawValue: UIControl.State.selected.rawValue | UIControl.State.highlighted.rawValue
+        )
         static let textLabelHeight: CGFloat = 30
         static let textLabelPriority: UILayoutPriority = .init(rawValue: 250)
-        static let keyboardKeyWidthRatio = CGFloat(0.09)
-        static let keyboardContentsViewRatio = 0.3
-        static let numberOfStackView = 4.0
-        static let keyboardKeyHeightRatio = 0.8
-        static let functionKeyWidthRatio = 0.24
-        static let spaceKeyWdithRatio = 0.49
-        static let horizontalStackViewHeightRatio = 0.25
-        static let secondStackViewWidthRatio = 0.9
+        static let keyboardContentsViewRatio: Double = 0.3
+        static let numberOfStackView: Double = 4.0
+        static let keyboardKeyHeightRatio: Double = 0.8
+        static let functionKeyWidthRatio: Double = 0.24
+        static let spaceKeyWdithRatio: Double = 0.49
+        static let horizontalStackViewHeightRatio: Double = 0.25
+        static let secondStackViewWidthRatio: Double = 0.9
+        static let keyboardKeyWidthRatio: CGFloat = 0.085
         static let keyboardKeyCornerRaidus: CGFloat = 5
-        static let basicPadding: CGFloat = 16
+        static let keyboardPadding: CGFloat = 5
+        static let basicPadding: CGFloat = 10
     }
 
 }
