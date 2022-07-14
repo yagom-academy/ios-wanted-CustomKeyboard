@@ -13,7 +13,8 @@ protocol Api{
 
 class NetworkService{
     func request(){
-        fetchListAll()
+//        fetchListAll()
+        postRequest()
     }
     private func fetchListAll(){
         let urlString = "https://api.plkey.app/theme/review?themeId=PLKEY0-L-81&start=0&count=2"
@@ -36,6 +37,24 @@ class NetworkService{
         dataTask.resume()
     }
     private func postRequest(){
+        let review = "Hello World"
+        let data: [String:String] = ["content":review]
+        let jsonData = try! JSONSerialization.data(withJSONObject: data, options: [])
         
+        let urlString = "https://api.plkey.app/tmp/theme/PLKEY0-L-81/review"
+        guard let url = URL(string: urlString) else { return }
+        var requestURL = URLRequest(url: url)
+        requestURL.httpMethod = "POST"
+        requestURL.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        requestURL.httpBody = jsonData
+
+        let dataTask = URLSession.shared.dataTask(with: requestURL) { (data, response, error) in
+            guard error == nil else { return }
+            let successsRange = 200..<300
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, successsRange.contains(statusCode)
+            else { return }
+            print(statusCode)
+        }
+        dataTask.resume()
     }
 }
