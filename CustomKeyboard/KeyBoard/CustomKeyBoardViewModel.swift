@@ -16,20 +16,20 @@ struct CustomKeyBoardViewModel {
     }
     
     func addWord(inputUniCode: Int, to beforeText: String?) -> String {
-        let inputChar = String(UnicodeScalar(inputUniCode)!)
         guard let beforeText = beforeText else { return "" }
-        let lastCharUnicode = getLastCharUnicode(from: beforeText)
+        let inputChar = String(UnicodeScalar(inputUniCode)!)
         if beforeText == "" {
             return inputChar
         }
+        let lastCharUnicode = getLastCharUnicode(from: beforeText)
         let beforeTextExceptLastChar = getStringExceptLastChar(from: beforeText)
         let lastChar = engine.addWord(inputUniCode: inputUniCode, lastUniCode: lastCharUnicode)
         return beforeTextExceptLastChar + lastChar
     }
     
     func addSpace(inputUniCode: Int, to beforeText: String?) -> String {
-        let space = String(UnicodeScalar(inputUniCode)!)
         guard let beforeText = beforeText else { return "" }
+        let space = String(UnicodeScalar(inputUniCode)!)
         return beforeText + space
     }
     
