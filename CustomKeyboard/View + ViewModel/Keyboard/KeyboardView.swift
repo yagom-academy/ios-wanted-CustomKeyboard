@@ -78,12 +78,66 @@ class KeyboardView: UIView {
     private lazy var spaceButton: UIButton = {
         let button = UIButton()
         button.setTitle("space", for: .normal)
+        button.backgroundColor = .red
+        button.setTitleColor(.blue, for: .normal)
         button.addTarget(self, action: #selector(didTapSpace), for: .touchUpInside)
         return button
     }()
     
+    private lazy var shiftButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("shift", for: .normal)
+        button.backgroundColor = .red
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didTapShift), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var returnButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("return", for: .normal)
+        button.backgroundColor = .red
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didTapReturn), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var utilButtonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 6.0
+        [
+            shiftButton,
+            spaceButton,
+            returnButton
+        ].forEach { stackView.addArrangedSubview($0) }
+        return stackView
+    }()
+    
+    var isShift = false
+    
     @objc func didTapSpace() {
         value.append(" ")
+    }
+    @objc func didTapShift() {
+        print("didTapShift")
+        isShift = !isShift
+        changeShiftMode(isShift)
+    }
+    @objc func didTapReturn() {
+        print("didTapReturn")
+        // TODO: - 첫번째 화면으로 나가기
+    }
+    
+    func changeShiftMode(_ bool: Bool) {
+        [
+            topButton1, topButton2,
+            topButton3, topButton4,
+            topButton5
+        ].forEach {
+            $0.isShift = bool
+        }
     }
     
     private lazy var totalStackView: UIStackView = {
@@ -96,7 +150,7 @@ class KeyboardView: UIView {
             topStackView,
             midStackView,
             bottomStackView,
-            spaceButton
+            utilButtonStackView
         ].forEach { stackView.addArrangedSubview($0) }
         
         return stackView
@@ -216,6 +270,10 @@ class KeyboardView: UIView {
             }
         }
         value.appendUnicode(curr)
+        
+        isShift = false
+        changeShiftMode(isShift)
+        
         print(value)
     }
     
