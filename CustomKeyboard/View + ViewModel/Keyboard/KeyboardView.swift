@@ -137,6 +137,7 @@ class KeyboardView: UIView {
     var sejongState = SejongState.writeInitialState
     var value = ""
     
+    var currentJungsung: Jungsung? = nil
     var currentLastJongsung: Jongsung? = nil
     
     @objc func didTapKeyboardButton(_ sender: KeyboardButton) {
@@ -150,29 +151,35 @@ class KeyboardView: UIView {
             sejongState = .writeMiddleState
         case .writeMiddleState: // 중성을 적어야 하는 상태
             curr = sender.jungsung?.rawValue ?? 0 // 1. 중성을 적는다
+            currentJungsung = sender.jungsung
             sejongState = .writeLastState
         case .writeLastState: // 종성을 적어야 하는 상태
-            curr = sender.jongsung?.rawValue ?? 0 // 1. 종성을 적는다
-            currentLastJongsung = sender.jongsung
-            sejongState = .alreadyLastState
+            if sender.jungsung != nil { // 중성이 들어온다면
+                value.unicodeScalars.removeLast()
+                let doubleJungsung = mergeJungsung(currentJungsung, sender.jungsung)
+                currentJungsung = doubleJungsung
+                curr = doubleJungsung?.rawValue ?? 0
+                sejongState = .writeLastState
+            } else {
+                curr = sender.jongsung?.rawValue ?? 0 // 자음이 들어오면
+                currentLastJongsung = sender.jongsung
+                sejongState = .alreadyLastState
+            }
         case .alreadyLastState:
             if sender.jungsung != nil { // 중성이 들어온 경우                       안 -> 아, ㄴ -> 아ㄴ -> 아니
                 value.unicodeScalars.removeLast()
                 value.append(String(UnicodeScalar(currentLastJongsung!.chosung!.rawValue)!))
                 curr = sender.jungsung?.rawValue ?? 0
+                currentJungsung = sender.jungsung
                 currentLastJongsung = nil
                 sejongState = .writeLastState
             } else { // 초성, 종성이 들어온 경우                                      안, ㅎ -> 아, ㄴ, ㅎ -> 않
-                if doubleDict[currentLastJongsung!] != nil {
-                    if doubleDict[currentLastJongsung!]![sender.jongsung!] != nil {
-                        value.unicodeScalars.removeLast()
-                        curr = doubleDict[currentLastJongsung!]![sender.jongsung!]!.rawValue
-                        currentLastJongsung = doubleDict[currentLastJongsung!]![sender.jongsung!]
-                        sejongState = .alreadyDoubleLastState
-                    } else {
-                        curr = sender.chosung?.rawValue ?? 0
-                        sejongState = .writeMiddleState
-                    }
+                let mergedJongsung = mergeDoubleJongsung(currentLastJongsung, sender.jongsung)
+                if mergedJongsung != nil {
+                    value.unicodeScalars.removeLast()
+                    curr = mergedJongsung?.rawValue ?? 0
+                    currentLastJongsung = mergedJongsung
+                    sejongState = .alreadyDoubleLastState
                 } else {
                     curr = sender.chosung?.rawValue ?? 0
                     sejongState = .writeMiddleState
@@ -181,9 +188,14 @@ class KeyboardView: UIView {
         case .alreadyDoubleLastState: // 종성이 겹받침인 경우                    않, ㅣ -> 아, ㄶ, ㅣ -> 안, ㄶ, ㅣ -> 안ㅎ, ㅣ -> 안히
             if sender.jungsung != nil { // 중성이 들어온 경우
                 value.unicodeScalars.removeLast()
-                value.append(String(UnicodeScalar(doubleReverseDict[currentLastJongsung!]!.first!.value.rawValue)!))
-                value.append(String(UnicodeScalar(doubleReverseDict[currentLastJongsung!]!.first!.key.chosung!.rawValue)!))
+                let splitedDoubleJongsung = splitDoubleJongsungReverse(currentLastJongsung)
+                let jong1 = splitedDoubleJongsung?.0
+                let jong2 = splitedDoubleJongsung?.1
+                
+                value.append(String(UnicodeScalar(jong1?.rawValue ?? 0)!))
+                value.append(String(UnicodeScalar(jong2?.chosung?.rawValue ?? 0)!))
                 curr = sender.jungsung!.rawValue
+                currentJungsung = sender.jungsung
                 currentLastJongsung = nil
                 sejongState = .writeLastState
             } else { // 초성, 종성이 들어온 경우                                  않, ㅈ -> 않ㅈ
@@ -196,25 +208,72 @@ class KeyboardView: UIView {
         print(value)
     }
     
-    var doubleDict: [Jongsung: [Jongsung: Jongsung]] = [
-        .ㄱ: [.ㅅ: .ㄳ],
-        .ㄴ: [.ㅈ: .ㄵ, .ㅎ: .ㄶ],
-        .ㄹ: [.ㄱ: .ㄺ, .ㅁ: .ㄻ, .ㅂ: .ㄼ, .ㅅ: .ㄽ, .ㅌ: .ㄾ, .ㅍ: .ㄿ, .ㅎ: .ㅀ],
-        .ㅂ: [.ㅅ: .ㅄ]
-    ]
-    var doubleReverseDict: [Jongsung: [Jongsung: Jongsung]] = [
-        .ㄳ: [.ㅅ: .ㄱ],
-        .ㄵ: [.ㅈ: .ㄴ],
-        .ㄶ: [.ㅎ: .ㄴ],
-        .ㄺ: [.ㄱ: .ㄹ],
-        .ㄻ: [.ㅁ: .ㄹ],
-        .ㄼ: [.ㅂ: .ㄹ],
-        .ㄽ: [.ㅅ: .ㄹ],
-        .ㄾ: [.ㅌ: .ㄹ],
-        .ㄿ: [.ㅍ: .ㄹ],
-        .ㅀ: [.ㅎ: .ㄹ],
-        .ㅄ: [.ㅅ: .ㅂ]
-    ]
+    func mergeDoubleJongsung(_ jong1: Jongsung?, _ jong2: Jongsung?) -> Jongsung? {
+        switch jong1 {
+        case .ㄱ:
+            if jong2 == .ㅅ { return .ㄱㅅ }
+            return nil
+        case .ㄴ:
+            if jong2 == .ㅈ { return .ㄴㅈ }
+            else if jong2 == .ㅎ { return .ㄴㅎ }
+            return nil
+        case .ㄹ:
+            switch jong2 {
+            case .ㄱ: return .ㄹㄱ
+            case .ㅁ: return .ㄹㅁ
+            case .ㅂ: return .ㄹㅂ
+            case .ㅅ: return .ㄹㅅ
+            case .ㅌ: return .ㄹㅌ
+            case .ㅍ: return .ㄹㅍ
+            case .ㅎ: return .ㄹㅎ
+            default: return nil
+            }
+        case .ㅂ:
+            if jong2 == .ㅅ { return .ㅂㅅ }
+            return nil
+        default: return nil
+        }
+    }
+    
+    func splitDoubleJongsungReverse(_ jong: Jongsung?) -> (Jongsung, Jongsung)? {
+        switch jong {
+        case .ㄱㅅ: return (.ㄱ, .ㅅ)
+        case .ㄴㅈ: return (.ㄴ, .ㅈ)
+        case .ㄴㅎ: return (.ㄴ, .ㅎ)
+        case .ㄹㄱ: return (.ㄹ, .ㄱ)
+        case .ㄹㅁ: return (.ㄹ, .ㅁ)
+        case .ㄹㅂ: return (.ㄹ, .ㅂ)
+        case .ㄹㅅ: return (.ㄹ, .ㅅ)
+        case .ㄹㅌ: return (.ㄹ, .ㅌ)
+        case .ㄹㅍ: return (.ㄹ, .ㅍ)
+        case .ㄹㅎ: return (.ㄹ, .ㅎ)
+        case .ㅂㅅ: return (.ㅂ, .ㅅ)
+        default: return nil
+        }
+    }
+    
+    func mergeJungsung(_ jung1: Jungsung?, _ jung2: Jungsung?) -> Jungsung? {
+        switch jung1 {
+        case .ㅗ:
+            switch jung2 {
+            case .ㅏ: return .ㅘ
+            case .ㅐ: return .ㅙ
+            case .ㅣ: return .ㅚ
+            default: return nil
+            }
+        case .ㅜ:
+            switch jung2 {
+            case .ㅓ: return .ㅝ
+            case .ㅔ: return .ㅞ
+            case .ㅣ: return .ㅟ
+            default: return nil
+            }
+        case .ㅡ:
+            if jung2 == .ㅣ { return .ㅢ }
+            return nil
+        default: return nil
+        }
+    }
 }
 
 enum SejongState {
