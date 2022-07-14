@@ -89,4 +89,26 @@ enum Jongsung: Int {
     case ㅌ = 0x11C0
     case ㅍ = 0x11C1
     case ㅎ = 0x11C2
+    
+    var chosung: Chosung? {
+        switch self {
+        case .ㄱ: return .ㄱ
+        case .ㄲ: return .ㄲ
+        case .ㄴ: return .ㄴ
+        case .ㄷ: return .ㄷ
+        case .ㄹ: return .ㄹ
+        case .ㅁ: return .ㅁ
+        case .ㅂ: return .ㅂ
+        case .ㅅ: return .ㅅ
+        case .ㅆ: return .ㅆ
+        case .ㅇ: return .ㅇ
+        case .ㅈ: return .ㅈ
+        case .ㅊ: return .ㅊ
+        case .ㅋ: return .ㅋ
+        case .ㅌ: return .ㅌ
+        case .ㅍ: return .ㅍ
+        case .ㅎ: return .ㅎ
+        default: return nil
+        }
+    }
 }
