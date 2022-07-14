@@ -20,8 +20,37 @@ class HomeViewModel {
     }
     
     func fetch() {
-        NetworkManager.shared.downloadReview(completion: { reviewData in
-            self.reviewList = reviewData.data
-        })
+        let reviewsEndpoint = APIEndpoints_sungeo.getReviews()
+        Provider_sungeo.shared.request(endpoint: reviewsEndpoint) { (result: Result<ReviewList, Error>) in
+            switch result {
+            case .success(let reviewList):
+                self.reviewList = reviewList.data
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func submit(contentString: String) {
+        let content = Content(content: contentString)
+        
+        guard let data = try? JSONEncoder().encode(content) else {
+            print("JSONEncoder Error")
+            return
+        }
+        
+        let postEndpoint = APIEndpoints_sungeo.postReview(bodyData: data)
+        Provider_sungeo.shared.request(endpoint: postEndpoint) { (result: Result<Content, Error>) in
+            switch result {
+            case .success(let content):
+                let review = Review(user: User(userName: "", profileImage: ""),
+                                    content: content.content,
+                                    createdAt: "")
+                self.reviewList.insert(review, at: 0)
+                // 성공하면 button empty 및 button enabled false
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }

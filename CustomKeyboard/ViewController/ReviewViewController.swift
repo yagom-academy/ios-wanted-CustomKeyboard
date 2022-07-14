@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol ReviewViewControllerDelegate: AnyObject {
+    func reviewViewControllerDismiss(_ text: String)
+}
+
 class ReviewViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var keyboardView: KeyboardView_sungeo!
+    
+    weak var delegate: ReviewViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +31,7 @@ extension ReviewViewController: KeyboardViewDelegate {
     }
     
     func keyboardViewReturn() {
-        //
+        delegate?.reviewViewControllerDismiss(textView.text)
+        dismiss(animated: true)
     }
 }

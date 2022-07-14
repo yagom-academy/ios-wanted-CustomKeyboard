@@ -22,6 +22,6 @@ struct User: Decodable {
     let profileImage: String
 }
 
-struct Content: Encodable {
+struct Content: Codable {
     let content: String
 }

@@ -22,6 +22,19 @@ class HomeViewController: UIViewController {
         
         viewModel.fetch()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showReviewViewController" {
+            guard let reviewViewController = segue.destination as? ReviewViewController else {
+                return
+            }
+            reviewViewController.delegate = self
+        }
+    }
+    
+    @IBAction func touchSubmitButton(_ sender: UIButton) {
+        viewModel.submit(contentString: reviewButton.currentTitle ?? "")
+    }
 }
 
 // MARK: - Private
@@ -35,17 +48,16 @@ extension HomeViewController {
     
     private func configureTableView() {
         tableView.dataSource = self
-//        tableView.allowsSelection = false
-//        tableView.separatorStyle = .none
+        tableView.allowsSelection = false
     }
     
     private func configureButtons() {
         [reviewButton, submitButton].forEach { button in
             button?.backgroundColor = UIColor.systemGray6
             button?.layer.cornerRadius = 15
-            button?.setTitleColor(UIColor.darkGray, for: .normal)
             button?.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         }
+        submitButton.isEnabled = false
     }
     
     private func bind() {
@@ -73,5 +85,14 @@ extension HomeViewController: UITableViewDataSource {
         let review = viewModel.review(at: indexPath.row)
         cell.configureCell(review)
         return cell
+    }
+}
+
+// MARK: - ReviewViewControllerDelegate
+
+extension HomeViewController: ReviewViewControllerDelegate {
+    func reviewViewControllerDismiss(_ text: String) {
+        reviewButton.setTitle(text, for: .normal)
+        submitButton.isEnabled = text.isEmpty ? false : true
     }
 }
