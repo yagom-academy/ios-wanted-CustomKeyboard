@@ -47,10 +47,12 @@ extension ReviewViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        reviewTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        reviewTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        reviewTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        reviewTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            reviewTableView.topAnchor.constraint(equalTo: view.topAnchor),
+            reviewTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            reviewTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            reviewTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     private func bind(_ viewModel: ReviewViewModel) {

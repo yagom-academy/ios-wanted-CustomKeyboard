@@ -85,30 +85,32 @@ extension ReviewTableViewCell {
         
         let inset: CGFloat = 12
         
-        profileImage.topAnchor.constraint(equalTo: self.topAnchor, constant: inset).isActive = true
-        profileImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset).isActive = true
-        profileImage.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        profileImage.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        
-        nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 18).isActive = true
-        nameLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: inset).isActive = true
-        nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -60).isActive = true
-        
-        warningLabel.centerYAnchor.constraint(equalTo: nameLabel.centerYAnchor).isActive = true
-        warningLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset).isActive = true
-        
-        starLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: inset).isActive = true
-        starLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: inset).isActive = true
-        starLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset).isActive = true
-        
-        reviewLabel.topAnchor.constraint(equalTo: starLabel.bottomAnchor, constant: 8).isActive = true
-        reviewLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: inset).isActive = true
-        reviewLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset).isActive = true
-        
-        timeLabel.topAnchor.constraint(equalTo: reviewLabel.bottomAnchor, constant: 8).isActive = true
-        timeLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: inset).isActive = true
-        timeLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset).isActive = true
-        timeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -inset).isActive = true
+        NSLayoutConstraint.activate([
+            profileImage.topAnchor.constraint(equalTo: self.topAnchor, constant: inset),
+            profileImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
+            profileImage.widthAnchor.constraint(equalToConstant: 60),
+            profileImage.heightAnchor.constraint(equalToConstant: 60),
+            
+            nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 18),
+            nameLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: inset),
+            nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -60),
+            
+            warningLabel.centerYAnchor.constraint(equalTo: nameLabel.centerYAnchor),
+            warningLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
+            
+            starLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: inset),
+            starLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: inset),
+            starLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
+            
+            reviewLabel.topAnchor.constraint(equalTo: starLabel.bottomAnchor, constant: 8),
+            reviewLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: inset),
+            reviewLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
+            
+            timeLabel.topAnchor.constraint(equalTo: reviewLabel.bottomAnchor, constant: 8),
+            timeLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: inset),
+            timeLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
+            timeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -inset),
+        ])
     }
     
     private func dateToTime(_ createdAt: String) -> String {
