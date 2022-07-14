@@ -7,8 +7,12 @@
 
 import UIKit
 
+protocol KeyboardViewDelegate: AnyObject {
+    var reviewText: String { get set }
+}
+
 class KeyboardView: UIView {
-    
+    weak var delegate: KeyboardViewDelegate?
     let topLetterValues: [Any] = [
         Chosung.ㅂ,Chosung.ㅈ,Chosung.ㄷ,Chosung.ㄱ,Chosung.ㅅ,
         Jungsung.ㅛ,Jungsung.ㅕ,Jungsung.ㅑ,Jungsung.ㅐ,Jungsung.ㅔ
@@ -68,7 +72,8 @@ class KeyboardView: UIView {
     }()
     
     @objc func didTapSpace() {
-        value.append(" ")
+        value += " "
+        self.sejongState = .writeInitialState
     }
     
     init() {
@@ -142,7 +147,11 @@ class KeyboardView: UIView {
                //                         -> 중성 -> 지금 종성을 초성으로 변경 후 들어온 글자와 합쳐서 다음글자에 적는다.
     
     var sejongState = SejongState.writeInitialState
-    var value = ""
+    var value = "" {
+        didSet {
+            delegate?.reviewText = value
+        }
+    }
     
     var currentJungsung: Jungsung? = nil
     var currentLastJongsung: Jongsung? = nil

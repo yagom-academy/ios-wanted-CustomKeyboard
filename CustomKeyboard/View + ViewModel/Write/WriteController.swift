@@ -24,6 +24,7 @@ class WriteController: UIViewController {
     
     lazy var keyBoardView: KeyboardView = {
         let keyboard = KeyboardView()
+        keyboard.delegate = self
         keyboard.frame = CGRect(x: 0, y: 0, width: 0, height: 250)
         keyboard.backgroundColor = .gray
         return keyboard
@@ -42,16 +43,22 @@ class WriteController: UIViewController {
 
 //MARK: - UITextViewDelegate
 extension WriteController: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        textView.becomeFirstResponder()
-        print("begin")
-//        textView.inputView.re
-    }
-    func textViewDidChange(_ textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         delegate?.commentValue = textView.text
     }
 }
 
+//MARK: - KeyboardViewDelegate
+extension WriteController: KeyboardViewDelegate {
+    var reviewText: String {
+        get {
+            return commentEditView.text
+        }
+        set {
+            commentEditView.text = newValue
+        }
+    }
+}
 
 //MARK: - View Configure
 private extension WriteController {
