@@ -18,49 +18,90 @@ class WordListManager {
         wordList = []
     }
     
-    func update(_ buffer: [Int], _ new: Int, status: HG.Status, mode: HG.Mode) -> [Int] {
-        var word : Int!
-        let curr = buffer.last ?? 0
+    func update(_ hasTop: Bool, _ new: Int, _ status: HG.Status, _ mode: HG.Mode) {
+        switch mode {
+        case .normal:
+            updateWhenNormal(hasTop, new, status)
+        case .back:
+            updateWhenBack(hasTop, new, status)
+        case .space:
+            wordList.append(HG.SPACE)
+        }
+    }
+    
+    private func updateWhenBack(_ hasTop: Bool, _ new: Int, _ status: HG.Status) {
+        let prev = wordList.removeLast()
+        let blank = HG.fixed.end.blank
         
-        if status != .finishPassOne && status != .top && !(status == .mid && !(buffer.count > 1)){
+        switch status {
+        case .mid:
+            if !isMid(prev, .fixed) {
+                let char = getSplit(from: prev, .mid, .back)
+                wordList.append(char.first!)
+            }
+        case .end:
+            let char = getSplit(from: prev, .end, .back)
+            let word = getCombine(char[0], char[1], blank, false)
+            wordList.append(word)
+        case .doubleMid:
+            if hasTop {
+                let char = getSplit(from: prev, .mid, .back)
+                let splitChar = getSplitPair(char[1], .doubleMid)
+                let word = getCombine(char.first!, splitChar.first!, blank, false)
+                wordList.append(word)
+            } else {
+                let splitChar = getSplitPair(prev, .doubleMid)
+                wordList.append(splitChar.first!)
+            }
+        case .doubleEnd:
+            let char = getSplit(from: prev, .doubleEnd, .back)
+            let splitChar = getSplitPair(char.last!, .doubleEnd)
+            let word = getCombine(char.first!, char[1], splitChar.first!, false)
+            wordList.append(word)
+        default:
+            break
+        }
+    }
+    
+    
+    
+    private func updateWhenNormal(_ hasTop: Bool, _ new: Int, _ status: HG.Status) {
+        var word = new
+        
+        if status != .finishPassOne && status != .top && !(status == .mid && !hasTop){
             let prev = wordList.removeLast()
-            let char = getSplit(from: prev, status, mode)
+            let char = getSplit(from: prev, status, .normal)
             let top = char[0], mid = char[1], end = char[2]
             
             switch status {
             case .mid:
-                word = getCombine(top, curr, HG.fixed.end.blank, false)
+                word = getCombine(top, new, HG.fixed.end.blank, false)
             case .end, .doubleEnd:
-                word = getCombine(top, mid, curr, false)
+                word = getCombine(top, mid, new, false)
             case .doubleMid:
-                if buffer.count > 1 {
-                    word = getCombine(top, curr, HG.fixed.end.blank, false)
-                } else {
-                    word = curr
+                if hasTop {
+                    word = getCombine(top, new, HG.fixed.end.blank, false)
                 }
             case .finishPassTwo:
                 if isDouble(end, .end) {
                     let splitEnd = getSplitPair(end, .doubleEnd)
                     word = getCombine(top, mid, splitEnd.first!, false)
                     wordList.append(word)
-                    word = getCombine(splitEnd.last!, curr, HG.fixed.end.blank, true)
+                    word = getCombine(splitEnd.last!, new, HG.fixed.end.blank, true)
                 } else {
                     word = getCombine(top, mid, HG.fixed.end.blank, false)
                     wordList.append(word)
-                    word = getCombine(end, curr, HG.fixed.end.blank, true)
+                    word = getCombine(end, new, HG.fixed.end.blank, true)
                 }
             default:
                 break
             }
-        } else if status == .finishPassOne || status == .top {
-            let tempStat: HG.Status = isMid(new, .compatible) ? .mid : .top
-            let index = getIndex(of: new, .compatible, tempStat)
-            word = getUnicode(of: index, .fixed, tempStat)
-        } else {
-            let index = getIndex(of: new, .compatible, .mid)
-            word = getUnicode(of: index, .fixed, .mid)
         }
         wordList.append(word)
+    }
+    
+    func getWordList() -> [Int] {
         return wordList
     }
 }
+

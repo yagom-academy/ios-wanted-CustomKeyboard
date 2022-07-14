@@ -39,7 +39,25 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "BACKSPACEInputTests_monica">
+               </Test>
+               <Test
                   Identifier = "CustomKeyboardTests">
+               </Test>
+               <Test
+                  Identifier = "SPACEInputTests_monica">
+               </Test>
+               <Test
+                  Identifier = "getCombinedTests_monica">
+               </Test>
+               <Test
+                  Identifier = "getSeparatedTests_monica">
+               </Test>
+               <Test
+                  Identifier = "setCombinedTests">
+               </Test>
+               <Test
+                  Identifier = "setSeparatedBufferTests">
                </Test>
             </SkippedTests>
          </TestableReference>

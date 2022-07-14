@@ -15,23 +15,24 @@ class StatusManager {
     private var status: HG.Status = .start
     private var statusStack: [HG.Status] = [.start]
     
-    func update(_ history: [Int], _ new: Int, mode: HG.Mode) -> HG.Status {
+    func update(_ buffer: [Int], _ new: Int, _ mode: HG.Mode) {
         
         var prev = -1
         var mostPrev = -1
         
-        if !history.isEmpty {
-            prev = history.last!
+        if !buffer.isEmpty {
+            prev = buffer.last!
         }
         
-        if history.count > 1 {
-            mostPrev = history[history.count - 2]
+        if buffer.count > 1 {
+            mostPrev = buffer[buffer.count - 2]
         }
         
         if mode == .space {
-            //
+            setStatus(.space)
         } else if mode == .back {
-            //
+            statusStack.removeLast()
+            status = statusStack.last ?? .start
         } else {
             let charKind: HG.Kind = isMid(new, .compatible) ? .vowel : .consonant
             
@@ -85,8 +86,8 @@ class StatusManager {
                 break
             }
         }
-        return status
     }
+    
     
     func refresh(_ input: Int) {
         switch status {
@@ -102,7 +103,6 @@ class StatusManager {
         default:
             break
         }
-        print("after status: \(status)")
     }
     
     private func setStatus(_ status: HG.Status) {
@@ -110,8 +110,19 @@ class StatusManager {
         statusStack.append(status)
     }
     
+    func getStatus() -> HG.Status {
+        return status
+    }
+    
     func close() {
         status = .start
         statusStack = []
+    }
+    
+    func doesDoubleMidHaveTop() -> Bool {
+        if statusStack.count > 2 && statusStack[statusStack.count - 3] == .top {
+            return true
+        }
+        return false
     }
 }
