@@ -29,16 +29,20 @@ class ReviewListViewController: UIViewController {
         return imageView
     }()
     
-    private var reviewTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "이 테마가 마음에 드시나요?"
-        textField.font = UIFont.boldSystemFont(ofSize: 16)
-        textField.layer.cornerRadius = 15
-        textField.addLeftPadding()
-        textField.backgroundColor = UIColor.systemGray6
-        textField.addTarget(nil, action: #selector(pushReviewWriteViewController), for: .touchDown)
-        return textField
-    }()
+    private let reviewTextView = UITextView()
+    
+//    private var reviewTextView: UITextView = {
+//        let textView = UITextView()
+//        textView.text = "이 테마가 마음에 드시나요?"
+//        textView.font = UIFont.boldSystemFont(ofSize: 16)
+//        textView.layer.cornerRadius = 15
+////        textView.addLeftPadding()
+//        textView.backgroundColor = UIColor.systemGray6
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: ReviewListViewController.self, action: #selector(didTapView))
+//
+//        textView.addGestureRecognizer(tapGestureRecognizer)
+//        return textView
+//    }()
     
     private var reviewPostButton: UIButton = {
         var configuration = UIButton.Configuration.tinted()
@@ -52,6 +56,7 @@ class ReviewListViewController: UIViewController {
         super.viewDidLoad()
         fetchData()
         configureUI()
+        addTapGesture()
     }
     
     init() {
@@ -81,12 +86,18 @@ extension ReviewListViewController {
             }
         }
     }
+    
+    private func addTapGesture() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView))
+        self.reviewTextView.addGestureRecognizer(tapGestureRecognizer)
+    }
 }
 
-// MARK: - Action Methods
+// MARK: - Objc Methods
 extension ReviewListViewController {
-    @objc func pushReviewWriteViewController(textField: UITextField) {
-        navigationController?.pushViewController(ViewController(), animated: false)
+    @objc func didTapView() {
+        let vc = ReviewWriteView(inputField: reviewTextView)
+        navigationController?.pushViewController(vc, animated: false)
     }
 }
 
@@ -95,8 +106,17 @@ extension ReviewListViewController {
     private func configureUI() {
         view.backgroundColor = .systemBackground
         title = "CustomKeyboard"
+        configureAttribute()
         configureStackView()
         configureCollectionViewLayout()
+    }
+    
+    private func configureAttribute() {
+        
+        reviewTextView.text = "이 테마가 마음에 드시나요?"
+        reviewTextView.font = UIFont.boldSystemFont(ofSize: 16)
+        reviewTextView.layer.cornerRadius = 15
+        reviewTextView.backgroundColor = .systemGray6
     }
     
     private func configureStackView() {
@@ -114,7 +134,7 @@ extension ReviewListViewController {
             profileImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.1),
         ])
         
-        reviewTextFieldStack.addArrangedSubview(reviewTextField)
+        reviewTextFieldStack.addArrangedSubview(reviewTextView)
         reviewTextFieldStack.addArrangedSubview(reviewPostButton)
         
     }
