@@ -17,12 +17,11 @@ class KeyboardViewController: UIViewController {
     private let manager = KeyboardManager.shared
     private var state = 0
     
-    private let reviewTextField: UITextField = {
-        var textField = UITextField()
-        textField.placeholder = "리뷰를 입력해주세요."
-        textField.font = .systemFont(ofSize: 20, weight: .medium)
+    private let reviewTextView: UITextView = {
+        var textView = UITextView()
+        textView.font = .systemFont(ofSize: 20, weight: .medium)
         
-        return textField
+        return textView
     }()
     
     private let keyboardView = KeyboardView()
@@ -44,7 +43,7 @@ extension KeyboardViewController {
         view.backgroundColor = .white
         
         [
-            reviewTextField,
+            reviewTextView,
             keyboardView
         ].forEach {
             view.addSubview($0)
@@ -52,10 +51,10 @@ extension KeyboardViewController {
         }
         
         NSLayoutConstraint.activate([
-            reviewTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            reviewTextField.topAnchor.constraint(equalTo: view.topAnchor),
-            reviewTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            reviewTextField.bottomAnchor.constraint(equalTo: keyboardView.topAnchor),
+            reviewTextView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            reviewTextView.topAnchor.constraint(equalTo: view.topAnchor),
+            reviewTextView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            reviewTextView.bottomAnchor.constraint(equalTo: keyboardView.topAnchor),
             
             keyboardView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             keyboardView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
@@ -73,7 +72,7 @@ extension KeyboardViewController {
     }
     
     @objc private func returnButtonEvent() {
-        if let content = reviewTextField.text {
+        if let content = reviewTextView.text {
             
             let review = viewModel.postReview(content: content) { result in
                 switch result {
@@ -94,7 +93,7 @@ extension KeyboardViewController {
 extension KeyboardViewController: ButtonDelegate {
     func buttonClickEvent(sender: KeyButton) {
         if state == 0 {
-            reviewTextField.text! += sender.title(for: .normal)!
+            reviewTextView.text! += sender.title(for: .normal)!
             if sender.type == .consonant {
                 state = 1
             } else {
@@ -102,10 +101,11 @@ extension KeyboardViewController: ButtonDelegate {
                 state = 2
             }
         } else {
-            let text = reviewTextField.text?.last!
-            reviewTextField.text?.removeLast()
-            reviewTextField.text! += manager.makeString(state, text!, sender).0
-            state = manager.makeString(state, text!, sender).1
+            let text = reviewTextView.text?.last!
+            reviewTextView.text?.removeLast()
+            let managerString = manager.makeString(state, text!, sender)
+            reviewTextView.text! += managerString.0
+            state = managerString.1
         }
     }
 }
