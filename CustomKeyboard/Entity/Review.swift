@@ -7,6 +7,7 @@
 
 import UIKit
 
+// DTO : Data Transfer Object
 struct ReviewData: Codable {
     let reviewData: [Review]
 
@@ -18,26 +19,15 @@ struct ReviewData: Codable {
 struct Review: Codable {
     let user: User
     let content: String
+    /// 2022-07-22T19:00:00.000Z
     let createdAt: String
-    
-    enum CodingKeys: String, CodingKey {
-        case user, content, createdAt
-    }
 }
 
 struct User: Codable {
     let userName: String
     let profileImage: String
-    
-    enum CodingKeys: String, CodingKey {
-        case userName, profileImage
-    }
 }
 
 struct Post: Codable {
     let content: String
-    
-    enum CodingKeys: String, CodingKey {
-        case content
-    }
 }

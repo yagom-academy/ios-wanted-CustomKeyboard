@@ -24,13 +24,9 @@ class KeyButton: UIButton {
         super.init(frame: .zero)
         
         switch self.type {
-        case .consonant, .vowel:
+        case .consonant, .vowel, .space:
             self.backgroundColor = .systemGray2
-        case .space:
-            self.backgroundColor = .systemGray2
-        case .dark_small:
-            self.backgroundColor = .systemGray
-        case .dark_large:
+        case .dark_small, .dark_large:
             self.backgroundColor = .systemGray
         }
         

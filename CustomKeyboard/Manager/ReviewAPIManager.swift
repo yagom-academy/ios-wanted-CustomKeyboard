@@ -8,6 +8,7 @@
 import UIKit
 
 enum APIError: Error {
+    case unexpectedStatusCode(statusCode: String)
     case invalidResponse
     case noData
     case failed
@@ -63,7 +64,12 @@ class ReviewAPIManager {
             return
         }
         
-        URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
+        let uploadTask = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
+            guard error == nil else {
+                completion(.failure(.failed))
+                return
+            }
+            
             guard data != nil else {
                 completion(.failure(.invalidData))
                 return
@@ -75,12 +81,7 @@ class ReviewAPIManager {
             }
             
             guard response.statusCode == 200 else {
-                completion(.failure(.failed))
-                return
-            }
-            
-            guard error == nil else {
-                completion(.failure(.failed))
+                completion(.failure(.unexpectedStatusCode(statusCode: "\(response.statusCode)")))
                 return
             }
             
@@ -89,6 +90,7 @@ class ReviewAPIManager {
                 completion(.success(review))
                 return
             }
-        }.resume()
+        }
+        uploadTask.resume()
     }
 }
