@@ -19,7 +19,7 @@ class HomeTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        userImageView.image = nil
+        userImageView.image = UIImage(systemName: "person.circle")
         nameLabel.text = nil
         contentLabel.text = nil
         timeLabel.text = nil

@@ -33,7 +33,10 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func touchSubmitButton(_ sender: UIButton) {
-        viewModel.submit(contentString: reviewButton.currentTitle ?? "")
+        guard let reviewTitle = reviewButton.currentTitle else {
+            return
+        }
+        viewModel.submit(contentString: reviewTitle)
     }
 }
 
@@ -68,6 +71,21 @@ extension HomeViewController {
                 self.tableView.reloadData()
             }
             .store(in: &cancellable)
+        
+        viewModel.$isUploaded
+            .receive(on: DispatchQueue.main)
+            .sink { isUploaded in
+                if isUploaded {
+                    self.buttonsReset()
+                }
+            }
+            .store(in: &cancellable)
+    }
+    
+    private func buttonsReset() {
+        reviewButton.setTitle("이 테마가 마음에 드시나요?", for: .normal)
+        reviewButton.setTitleColor(.lightGray, for: .normal)
+        submitButton.isEnabled = false
     }
 }
 
@@ -94,9 +112,7 @@ extension HomeViewController: UITableViewDataSource {
 extension HomeViewController: ReviewViewControllerDelegate {
     func reviewViewControllerDismiss(_ text: String) {
         if text.isEmpty {
-            reviewButton.setTitle("이 테마가 마음에 드시나요?", for: .normal)
-            reviewButton.setTitleColor(.lightGray, for: .normal)
-            submitButton.isEnabled = false
+            buttonsReset()
         } else {
             reviewButton.setTitle(text, for: .normal)
             reviewButton.setTitleColor(.label, for: .normal)

@@ -32,6 +32,22 @@ class Provider {
         }
     }
     
+    func postRequest(endpoint: Endpoint, completion: @escaping (Result<Data, Error>) -> Void) {
+        do {
+            let urlRequest = try endpoint.urlRequest()
+            NetworkManager.shared.request(urlRequest) { result in
+                switch result {
+                case .success(let data):
+                    completion(.success(data))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        } catch let error {
+            completion(.failure(error))
+        }
+    }
+    
     private func decode<T: Decodable>(_ data: Data) -> Result<T, Error> {
         do {
             let result: T = try JSONDecoder().decode(T.self, from: data)
