@@ -42,7 +42,7 @@ class KeyboardView_sungeo: UIView {
             title = sender.currentTitle ?? ""
         }
         
-        HangeulManager.shared.update(title)
+        IOManager.shared.process(input: title)
         delegate?.keyboardViewTouch()
     }
     

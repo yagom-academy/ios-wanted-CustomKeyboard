@@ -45,7 +45,7 @@ extension ReviewViewController {
     }
     
     private func updateHangeulManagerString() {
-        textView.text = HangeulManager.shared.getOutputString()
+        textView.text = IOManager.shared.getOutput()
     }
 }
 
