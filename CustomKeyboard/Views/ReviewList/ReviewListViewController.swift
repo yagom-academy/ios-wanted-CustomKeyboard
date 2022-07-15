@@ -24,11 +24,20 @@ class ReviewListViewController: UIViewController {
         super.viewDidLoad()
         
         setLayout()
-        
+        setNavigationLayout()
         reviewTableView.delegate = self
         reviewTableView.dataSource = self
         
         getData()
+    }
+    
+    private func setNavigationLayout() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .white
+        navigationItem.title = "ReviewList"
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
     private func setLayout() {

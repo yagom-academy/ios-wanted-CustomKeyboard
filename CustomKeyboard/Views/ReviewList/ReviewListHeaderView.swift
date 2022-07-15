@@ -17,7 +17,8 @@ class ReviewListHeaderView: UITableViewHeaderFooterView {
 
     private let profileImageView: UIImageView = {
         let profileImageVIew = UIImageView()
-        profileImageVIew.image = UIImage(systemName: "person.fill")
+        profileImageVIew.image = UIImage(systemName: "person.crop.circle.fill")
+        profileImageVIew.tintColor = .systemGray4
         return profileImageVIew
     }()
     
@@ -48,7 +49,7 @@ class ReviewListHeaderView: UITableViewHeaderFooterView {
     }
     
     func setLayout() {
-        
+        contentView.backgroundColor = .white
         contentView.addSubview(profileImageView)
         contentView.addSubview(reviewTextField)
         contentView.addSubview(presentButton)
