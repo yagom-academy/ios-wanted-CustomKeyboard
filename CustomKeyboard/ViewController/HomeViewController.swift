@@ -58,6 +58,7 @@ extension HomeViewController {
             button?.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         }
         submitButton.isEnabled = false
+        reviewButton.titleLabel?.lineBreakMode = .byCharWrapping
     }
     
     private func bind() {
@@ -92,7 +93,14 @@ extension HomeViewController: UITableViewDataSource {
 
 extension HomeViewController: ReviewViewControllerDelegate {
     func reviewViewControllerDismiss(_ text: String) {
-        reviewButton.setTitle(text, for: .normal)
-        submitButton.isEnabled = text.isEmpty ? false : true
+        if text.isEmpty {
+            reviewButton.setTitle("이 테마가 마음에 드시나요?", for: .normal)
+            reviewButton.setTitleColor(.lightGray, for: .normal)
+            submitButton.isEnabled = false
+        } else {
+            reviewButton.setTitle(text, for: .normal)
+            reviewButton.setTitleColor(.black, for: .normal)
+            submitButton.isEnabled = true
+        }
     }
 }

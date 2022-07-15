@@ -29,10 +29,16 @@ class HomeTableViewCell: UITableViewCell {
         nameLabel.text = review.user.userName
         contentLabel.text = review.content
         timeLabel.text = TimeManager.shared.getTimeInterval(review.createdAt)
-        ImageManager.shared.download(review.user.profileImage) { data in
-            DispatchQueue.main.async {
-                self.userImageView.image = UIImage(data: data)
-                self.configureImageViewCircle()
+        
+        NetworkManager_sungeo.shared.request(review.user.profileImage) { result in
+            switch result {
+            case .success(let data):
+                DispatchQueue.main.async {
+                    self.userImageView.image = UIImage(data: data)
+                    self.configureImageViewCircle()
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }

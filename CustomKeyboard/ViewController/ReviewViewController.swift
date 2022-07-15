@@ -20,14 +20,38 @@ class ReviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        keyboardView.delegate = self
+        configure()
     }
     
 }
 
+extension ReviewViewController {
+    private func configure() {
+        configureTextView()
+        configureDelegate()
+        updateHangeulManagerString()
+    }
+    
+    private func configureTextView() {
+        textView.layer.borderWidth = 1.0
+        textView.layer.borderColor = UIColor.gray.cgColor
+        textView.layer.cornerRadius = 5
+        
+        textView.isUserInteractionEnabled = false
+    }
+    
+    private func configureDelegate() {
+        keyboardView.delegate = self
+    }
+    
+    private func updateHangeulManagerString() {
+        textView.text = HangeulManager.shared.getOutputString()
+    }
+}
+
 extension ReviewViewController: KeyboardViewDelegate {
     func keyboardViewTouch() {
-        textView.text = HangeulManager.shared.getOutputString()
+        updateHangeulManagerString()
     }
     
     func keyboardViewReturn() {
