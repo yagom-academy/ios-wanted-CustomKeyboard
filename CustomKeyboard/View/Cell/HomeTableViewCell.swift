@@ -30,15 +30,10 @@ class HomeTableViewCell: UITableViewCell {
         contentLabel.text = review.content
         timeLabel.text = TimeManager.shared.getTimeInterval(review.createdAt)
         
-        NetworkManager.shared.request(review.user.profileImage) { result in
-            switch result {
-            case .success(let data):
-                DispatchQueue.main.async {
-                    self.userImageView.image = UIImage(data: data)
-                    self.configureImageViewCircle()
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
+        ImageLoader.shared.load(review.user.profileImage) { data in
+            DispatchQueue.main.async {
+                self.userImageView.image = UIImage(data: data)
+                self.configureImageViewCircle()
             }
         }
     }
