@@ -15,8 +15,9 @@ class TempViewController: UIViewController {
         keyboardView.translatesAutoresizingMaskIntoConstraints = false
         
         keyboardView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        keyboardView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         keyboardView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        keyboardView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        keyboardView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        keyboardView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+
     }
 }

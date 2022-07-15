@@ -10,10 +10,17 @@ import UIKit
 class KeyboardButton: UIButton {
     
     let type: KeyboardButtonType
-    let text: String?
-    let chosung: Chosung?
-    let jungsung: Jungsung?
-    let jongsung: Jongsung?
+    var text: String?
+    var chosung: Chosung?
+    var jungsung: Jungsung?
+    var jongsung: Jongsung?
+    var isShift: Bool = false {
+        willSet {
+            setupShiftMode(newValue)
+            setupButton()
+        }
+    }
+    
     
     init(
         type: KeyboardButtonType,
@@ -48,5 +55,51 @@ class KeyboardButton: UIButton {
         translatesAutoresizingMaskIntoConstraints = false
         let width = (UIScreen.main.bounds.width - 54.0) / 10
         widthAnchor.constraint(equalToConstant: width).isActive = true
+    }
+    
+    func setupShiftMode(_ isShift: Bool) {
+        if isShift {
+            switch chosung {
+            case .ㅂ:
+                chosung = .ㅃ
+                text = "ㅃ"
+            case .ㅈ:
+                chosung = .ㅉ
+                text = "ㅉ"
+            case .ㄷ:
+                chosung = .ㄸ
+                text = "ㄸ"
+            case .ㄱ:
+                chosung = .ㄲ
+                text = "ㄲ"
+                jongsung = .ㄲ
+            case .ㅅ:
+                chosung = .ㅆ
+                text = "ㅆ"
+                jongsung = .ㅆ
+            default: break
+            }
+        } else {
+            switch chosung {
+            case .ㅃ:
+                chosung = .ㅂ
+                text = "ㅂ"
+            case .ㅉ:
+                chosung = .ㅈ
+                text = "ㅈ"
+            case .ㄸ:
+                chosung = .ㄷ
+                text = "ㄷ"
+            case .ㄲ:
+                chosung = .ㄱ
+                text = "ㄱ"
+                jongsung = .ㄱ
+            case .ㅆ:
+                chosung = .ㅅ
+                text = "ㅅ"
+                jongsung = .ㅅ
+            default: break
+            }
+        }
     }
 }
