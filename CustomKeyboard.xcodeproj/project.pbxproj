@@ -7,19 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		012EDE42287EB9FA0035C3E6 /* NetworkManager_sungeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE40287EB9FA0035C3E6 /* NetworkManager_sungeo.swift */; };
-		012EDE46287EC14C0035C3E6 /* HttpMethod_sungeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE45287EC14C0035C3E6 /* HttpMethod_sungeo.swift */; };
-		012EDE54287F9B960035C3E6 /* Endpoint_sungeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE53287F9B960035C3E6 /* Endpoint_sungeo.swift */; };
-		012EDE56287FA0BD0035C3E6 /* Provider_sungeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE55287FA0BC0035C3E6 /* Provider_sungeo.swift */; };
-		012EDE5A287FA6FA0035C3E6 /* APIEndpoints_sungeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE59287FA6FA0035C3E6 /* APIEndpoints_sungeo.swift */; };
+		012EDE42287EB9FA0035C3E6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE40287EB9FA0035C3E6 /* NetworkManager.swift */; };
+		012EDE46287EC14C0035C3E6 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE45287EC14C0035C3E6 /* HttpMethod.swift */; };
+		012EDE54287F9B960035C3E6 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE53287F9B960035C3E6 /* Endpoint.swift */; };
+		012EDE56287FA0BD0035C3E6 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE55287FA0BC0035C3E6 /* Provider.swift */; };
+		012EDE5A287FA6FA0035C3E6 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE59287FA6FA0035C3E6 /* APIEndpoints.swift */; };
 		012EDE5C287FAF790035C3E6 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE5B287FAF790035C3E6 /* ReviewViewController.swift */; };
+		012EDEAB288135430035C3E6 /* KeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 012EDEAA288135430035C3E6 /* KeyboardView.xib */; };
 		0142F4CC287C0A76006F3E48 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4CB287C0A76006F3E48 /* HomeTableViewCell.swift */; };
 		0142F4D0287C0C9C006F3E48 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4CF287C0C9C006F3E48 /* Review.swift */; };
-		0142F4D4287C2C83006F3E48 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4D3287C2C83006F3E48 /* ImageManager.swift */; };
 		0142F4D6287C3078006F3E48 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4D5287C3078006F3E48 /* HomeViewModel.swift */; };
-		0142F4E0287D539C006F3E48 /* Keyboard_sungeo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0142F4DF287D539C006F3E48 /* Keyboard_sungeo.xib */; };
-		0142F4E8287D62ED006F3E48 /* KeyboardView_sungeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4E7287D62ED006F3E48 /* KeyboardView_sungeo.swift */; };
-		9F5042FC287C144900CDBD9C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5042FB287C144900CDBD9C /* NetworkManager.swift */; };
+		0142F4E8287D62ED006F3E48 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4E7287D62ED006F3E48 /* KeyboardView.swift */; };
 		9F5042FF287C467400CDBD9C /* DateFormatter_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5042FE287C467400CDBD9C /* DateFormatter_Extension.swift */; };
 		9F504301287C484900CDBD9C /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F504300287C484900CDBD9C /* TimeManager.swift */; };
 		9F77251A287FDC50009A4EB8 /* IOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F772519287FDC50009A4EB8 /* IOManager.swift */; };
@@ -50,19 +48,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		012EDE40287EB9FA0035C3E6 /* NetworkManager_sungeo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager_sungeo.swift; sourceTree = "<group>"; };
-		012EDE45287EC14C0035C3E6 /* HttpMethod_sungeo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod_sungeo.swift; sourceTree = "<group>"; };
-		012EDE53287F9B960035C3E6 /* Endpoint_sungeo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint_sungeo.swift; sourceTree = "<group>"; };
-		012EDE55287FA0BC0035C3E6 /* Provider_sungeo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider_sungeo.swift; sourceTree = "<group>"; };
-		012EDE59287FA6FA0035C3E6 /* APIEndpoints_sungeo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints_sungeo.swift; sourceTree = "<group>"; };
+		012EDE40287EB9FA0035C3E6 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		012EDE45287EC14C0035C3E6 /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
+		012EDE53287F9B960035C3E6 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		012EDE55287FA0BC0035C3E6 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		012EDE59287FA6FA0035C3E6 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		012EDE5B287FAF790035C3E6 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+		012EDEAA288135430035C3E6 /* KeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardView.xib; sourceTree = "<group>"; };
 		0142F4CB287C0A76006F3E48 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		0142F4CF287C0C9C006F3E48 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
-		0142F4D3287C2C83006F3E48 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		0142F4D5287C3078006F3E48 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		0142F4DF287D539C006F3E48 /* Keyboard_sungeo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Keyboard_sungeo.xib; path = CustomKeyboard/Keyboard_sungeo.xib; sourceTree = SOURCE_ROOT; };
-		0142F4E7287D62ED006F3E48 /* KeyboardView_sungeo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView_sungeo.swift; sourceTree = "<group>"; };
-		9F5042FB287C144900CDBD9C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		0142F4E7287D62ED006F3E48 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		9F5042FE287C467400CDBD9C /* DateFormatter_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter_Extension.swift; sourceTree = "<group>"; };
 		9F504300287C484900CDBD9C /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		9F504318287E323300CDBD9C /* CustomKeyboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomKeyboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,16 +99,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		012EDE3E287EB9FA0035C3E6 /* Network_sungeo */ = {
+		012EDE3E287EB9FA0035C3E6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				012EDE45287EC14C0035C3E6 /* HttpMethod_sungeo.swift */,
-				012EDE53287F9B960035C3E6 /* Endpoint_sungeo.swift */,
-				012EDE59287FA6FA0035C3E6 /* APIEndpoints_sungeo.swift */,
-				012EDE55287FA0BC0035C3E6 /* Provider_sungeo.swift */,
-				012EDE40287EB9FA0035C3E6 /* NetworkManager_sungeo.swift */,
+				012EDE45287EC14C0035C3E6 /* HttpMethod.swift */,
+				012EDE53287F9B960035C3E6 /* Endpoint.swift */,
+				012EDE59287FA6FA0035C3E6 /* APIEndpoints.swift */,
+				012EDE55287FA0BC0035C3E6 /* Provider.swift */,
+				012EDE40287EB9FA0035C3E6 /* NetworkManager.swift */,
 			);
-			path = Network_sungeo;
+			path = Network;
+			sourceTree = "<group>";
+		};
+		012EDEA9288135180035C3E6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0142F4DA287C34E5006F3E48 /* Cell */,
+				012EDEAA288135430035C3E6 /* KeyboardView.xib */,
+				0142F4E7287D62ED006F3E48 /* KeyboardView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		0142F4D7287C34C3006F3E48 /* ViewModel */ = {
@@ -163,8 +169,6 @@
 		0142F4DC287C3519006F3E48 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				9F5042FB287C144900CDBD9C /* NetworkManager.swift */,
-				0142F4D3287C2C83006F3E48 /* ImageManager.swift */,
 				9F504300287C484900CDBD9C /* TimeManager.swift */,
 			);
 			path = Manager;
@@ -226,13 +230,11 @@
 				9F5042FD287C463300CDBD9C /* Extension */,
 				0142F4DB287C3510006F3E48 /* Application */,
 				0142F4D8287C34CC006F3E48 /* Model */,
-				0142F4DA287C34E5006F3E48 /* Cell */,
+				012EDEA9288135180035C3E6 /* View */,
 				0142F4D9287C34D9006F3E48 /* ViewController */,
 				0142F4D7287C34C3006F3E48 /* ViewModel */,
 				0142F4DC287C3519006F3E48 /* Manager */,
-				0142F4DF287D539C006F3E48 /* Keyboard_sungeo.xib */,
-				0142F4E7287D62ED006F3E48 /* KeyboardView_sungeo.swift */,
-				012EDE3E287EB9FA0035C3E6 /* Network_sungeo */,
+				012EDE3E287EB9FA0035C3E6 /* Network */,
 				DE15E66928604279003DD2F5 /* Info.plist */,
 			);
 			path = CustomKeyboard;
@@ -327,7 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE15E66828604279003DD2F5 /* LaunchScreen.storyboard in Resources */,
-				0142F4E0287D539C006F3E48 /* Keyboard_sungeo.xib in Resources */,
+				012EDEAB288135430035C3E6 /* KeyboardView.xib in Resources */,
 				DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */,
 				DE15E66328604278003DD2F5 /* Main.storyboard in Resources */,
 			);
@@ -350,21 +352,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0142F4E8287D62ED006F3E48 /* KeyboardView_sungeo.swift in Sources */,
-				012EDE54287F9B960035C3E6 /* Endpoint_sungeo.swift in Sources */,
+				0142F4E8287D62ED006F3E48 /* KeyboardView.swift in Sources */,
+				012EDE54287F9B960035C3E6 /* Endpoint.swift in Sources */,
 				012EDE5C287FAF790035C3E6 /* ReviewViewController.swift in Sources */,
-				9F5042FC287C144900CDBD9C /* NetworkManager.swift in Sources */,
 				9F772524287FE560009A4EB8 /* HangeulUtils.swift in Sources */,
-				012EDE5A287FA6FA0035C3E6 /* APIEndpoints_sungeo.swift in Sources */,
-				012EDE46287EC14C0035C3E6 /* HttpMethod_sungeo.swift in Sources */,
+				012EDE5A287FA6FA0035C3E6 /* APIEndpoints.swift in Sources */,
+				012EDE46287EC14C0035C3E6 /* HttpMethod.swift in Sources */,
 				9F77251A287FDC50009A4EB8 /* IOManager.swift in Sources */,
-				012EDE56287FA0BD0035C3E6 /* Provider_sungeo.swift in Sources */,
+				012EDE56287FA0BD0035C3E6 /* Provider.swift in Sources */,
 				0142F4D0287C0C9C006F3E48 /* Review.swift in Sources */,
 				9F77251C287FDE2A009A4EB8 /* StatusManager.swift in Sources */,
-				012EDE42287EB9FA0035C3E6 /* NetworkManager_sungeo.swift in Sources */,
+				012EDE42287EB9FA0035C3E6 /* NetworkManager.swift in Sources */,
 				9F77252A287FF9EA009A4EB8 /* WordListManager.swift in Sources */,
 				9F772528287FF46F009A4EB8 /* LetterBufferManager.swift in Sources */,
-				0142F4D4287C2C83006F3E48 /* ImageManager.swift in Sources */,
 				0142F4D6287C3078006F3E48 /* HomeViewModel.swift in Sources */,
 				DE15E66028604278003DD2F5 /* HomeViewController.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,

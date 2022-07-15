@@ -147,7 +147,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OdK-8G-RIL" customClass="KeyboardView_sungeo" customModule="CustomKeyboard" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OdK-8G-RIL" customClass="KeyboardView" customModule="CustomKeyboard" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="642" width="414" height="220"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>

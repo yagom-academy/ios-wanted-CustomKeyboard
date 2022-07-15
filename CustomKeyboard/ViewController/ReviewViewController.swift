@@ -13,7 +13,7 @@ protocol ReviewViewControllerDelegate: AnyObject {
 
 class ReviewViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var keyboardView: KeyboardView_sungeo!
+    @IBOutlet weak var keyboardView: KeyboardView!
     
     weak var delegate: ReviewViewControllerDelegate?
     

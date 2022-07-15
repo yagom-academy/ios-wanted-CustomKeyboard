@@ -7,18 +7,18 @@
 
 import Foundation
 
-class Provider_sungeo {
+class Provider {
     enum ProviderError: Error {
         case decode(Error)
     }
     
-    static let shared = Provider_sungeo()
+    static let shared = Provider()
     private init() { }
     
-    func request<T: Decodable>(endpoint: Endpoint_sungeo, completion: @escaping (Result<T, Error>) -> Void) {
+    func request<T: Decodable>(endpoint: Endpoint, completion: @escaping (Result<T, Error>) -> Void) {
         do {
             let urlRequest = try endpoint.urlRequest()
-            NetworkManager_sungeo.shared.request(urlRequest) { result in
+            NetworkManager.shared.request(urlRequest) { result in
                 switch result {
                 case .success(let data):
                     let result: Result<T, Error> = self.decode(data)

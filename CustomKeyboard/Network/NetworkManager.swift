@@ -1,5 +1,5 @@
 //
-//  NetworkManager_sungeo.swift
+//  NetworkManager.swift
 //  CustomKeyboard
 //
 //  Created by rae on 2022/07/13.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NetworkManager_sungeo {
+class NetworkManager {
     enum NetworkError: Error {
         case serverError(_ statusCode: Int)
         case noData
@@ -16,7 +16,7 @@ class NetworkManager_sungeo {
         case invalidURLError
     }
     
-    static let shared = NetworkManager_sungeo()
+    static let shared = NetworkManager()
     private init() { }
     
     func request(_ urlRequest: URLRequest, completion: @escaping (Result<Data, NetworkError>) -> Void) {

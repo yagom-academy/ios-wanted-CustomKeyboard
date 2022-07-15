@@ -30,7 +30,7 @@ class HomeTableViewCell: UITableViewCell {
         contentLabel.text = review.content
         timeLabel.text = TimeManager.shared.getTimeInterval(review.createdAt)
         
-        NetworkManager_sungeo.shared.request(review.user.profileImage) { result in
+        NetworkManager.shared.request(review.user.profileImage) { result in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {

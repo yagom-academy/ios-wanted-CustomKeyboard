@@ -20,8 +20,8 @@ class HomeViewModel {
     }
     
     func fetch() {
-        let reviewsEndpoint = APIEndpoints_sungeo.getReviews()
-        Provider_sungeo.shared.request(endpoint: reviewsEndpoint) { (result: Result<ReviewList, Error>) in
+        let reviewsEndpoint = APIEndpoints.getReviews()
+        Provider.shared.request(endpoint: reviewsEndpoint) { (result: Result<ReviewList, Error>) in
             switch result {
             case .success(let reviewList):
                 self.reviewList = reviewList.data
@@ -39,8 +39,8 @@ class HomeViewModel {
             return
         }
         
-        let postEndpoint = APIEndpoints_sungeo.postReview(bodyData: data)
-        Provider_sungeo.shared.request(endpoint: postEndpoint) { (result: Result<Content, Error>) in
+        let postEndpoint = APIEndpoints.postReview(bodyData: data)
+        Provider.shared.request(endpoint: postEndpoint) { (result: Result<Content, Error>) in
             switch result {
             case .success(let content):
                 let review = Review(user: User(userName: "", profileImage: ""),

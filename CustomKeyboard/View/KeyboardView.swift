@@ -1,5 +1,5 @@
 //
-//  KeyboardView_sungeo.swift
+//  KeyboardView.swift
 //  CustomKeyboard
 //
 //  Created by rae on 2022/07/12.
@@ -12,9 +12,9 @@ protocol KeyboardViewDelegate: AnyObject {
     func keyboardViewReturn()
 }
 
-class KeyboardView_sungeo: UIView {
+class KeyboardView: UIView {
     enum KeyboardConstants {
-        static let NibName = "Keyboard_sungeo"
+        static let NibName = "KeyboardView"
     }
     
     @IBOutlet var changeButtons: [UIButton]!
@@ -57,7 +57,7 @@ class KeyboardView_sungeo: UIView {
 
 // MARK: - Private
 
-extension KeyboardView_sungeo {
+extension KeyboardView {
     private func configure() {
         customInit()
         changeAllButtonsCircle()

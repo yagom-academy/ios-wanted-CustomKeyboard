@@ -99,7 +99,7 @@ extension HomeViewController: ReviewViewControllerDelegate {
             submitButton.isEnabled = false
         } else {
             reviewButton.setTitle(text, for: .normal)
-            reviewButton.setTitleColor(.black, for: .normal)
+            reviewButton.setTitleColor(.label, for: .normal)
             submitButton.isEnabled = true
         }
     }
