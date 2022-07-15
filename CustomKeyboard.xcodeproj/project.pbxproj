@@ -70,11 +70,8 @@
 		04158AD0287D3D8E004F6B9A /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				68A3B4C52881336200DD1631 /* ReviewPage */,
 				68AE794B287D3E38003F4426 /* KeyboardPage */,
-				04158AD1287D3DA0004F6B9A /* ReviewViewController.swift */,
-				043D075B287D408B0061DCA2 /* ReveiwTableViewCell.swift */,
-				04486782287D4B080004A512 /* ReviewTableViewHeader.swift */,
-				04FE9E92287E6A0E0002EE50 /* ReviewViewModel.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -93,6 +90,25 @@
 				04486784287D51460004A512 /* UITextField+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		68A3B4C52881336200DD1631 /* ReviewPage */ = {
+			isa = PBXGroup;
+			children = (
+				68A3B4C62881338600DD1631 /* SubComponents */,
+				04158AD1287D3DA0004F6B9A /* ReviewViewController.swift */,
+				04FE9E92287E6A0E0002EE50 /* ReviewViewModel.swift */,
+			);
+			path = ReviewPage;
+			sourceTree = "<group>";
+		};
+		68A3B4C62881338600DD1631 /* SubComponents */ = {
+			isa = PBXGroup;
+			children = (
+				04486782287D4B080004A512 /* ReviewTableViewHeader.swift */,
+				043D075B287D408B0061DCA2 /* ReveiwTableViewCell.swift */,
+			);
+			path = SubComponents;
 			sourceTree = "<group>";
 		};
 		68AE7946287D3AD5003F4426 /* Manager */ = {
