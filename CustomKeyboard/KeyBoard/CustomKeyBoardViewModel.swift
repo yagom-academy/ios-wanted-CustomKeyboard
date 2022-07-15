@@ -19,7 +19,7 @@ struct CustomKeyBoardViewModel {
         guard let beforeText = beforeText else { return "" }
         let inputChar = String(UnicodeScalar(inputUniCode)!)
         guard let lastCharUnicode = getLastCharUnicode(from: beforeText),
-              let beforeTextExceptLastChar = getStringExceptLastChar(from: beforeText) else { return "" }
+              let beforeTextExceptLastChar = getStringExceptLastChar(from: beforeText) else { return inputChar }
         let lastChar = engine.addWord(inputUniCode: inputUniCode, lastUniCode: lastCharUnicode)
         return beforeTextExceptLastChar + lastChar
     }
@@ -42,14 +42,14 @@ struct CustomKeyBoardViewModel {
     }
     
     // 맨마지막 단어 유니코드 추출
-    private func getLastCharUnicode(from text: String) -> Int? {
+    func getLastCharUnicode(from text: String) -> Int? {
         guard text != "" else { return nil }
         let lastChar = String(text.last!)
         return Int(UnicodeScalar(lastChar)!.value)
     }
     
     // 맨마지막 단어를 뺀 문자열 반환
-    private func getStringExceptLastChar(from text: String) -> String? {
+    func getStringExceptLastChar(from text: String) -> String? {
         guard text != "" else { return nil }
         let i = text.index(text.endIndex, offsetBy: -1)
         return String(text[text.startIndex..<i])

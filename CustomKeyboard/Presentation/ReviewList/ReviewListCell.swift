@@ -20,7 +20,6 @@ class ReviewListCell: UICollectionViewCell {
     private let declarationIcon = UIImageView()
     private let declarationLabel = UILabel()
     
-    
     // MARK: - Life Cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,7 +43,12 @@ class ReviewListCell: UICollectionViewCell {
         
     }
 
-    override func layoutSubviews() {
+//    override func layoutSubviews() {
+//        self.profileImage.layer.cornerRadius =  self.profileImage.frame.height / 2
+//        self.profileImage.clipsToBounds = true
+//    }
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         self.profileImage.layer.cornerRadius =  self.profileImage.frame.height / 2
         self.profileImage.clipsToBounds = true
     }

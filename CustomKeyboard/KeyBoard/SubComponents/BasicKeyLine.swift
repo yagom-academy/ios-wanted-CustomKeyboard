@@ -9,7 +9,7 @@ import UIKit
 
 class BasicKeyLine: UIStackView {
     var buttons: [UIButton]?
-    var delegate: BasicKeyLineDelegate?
+    weak var delegate: BasicKeyLineDelegate?
     
     init(keys:[String]) {
         super.init(frame: CGRect.zero)

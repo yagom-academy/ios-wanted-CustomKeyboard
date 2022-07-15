@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol KeyBoardEngine {
+protocol KeyBoardEngine: Any {
     func addWord(inputUniCode: Int, lastUniCode: Int) -> String
     func removeWord(lastUniCode: Int) -> String
 }

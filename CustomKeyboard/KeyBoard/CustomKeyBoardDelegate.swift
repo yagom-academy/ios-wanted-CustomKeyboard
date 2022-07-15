@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol CustomKeyBoardDelegate {
+protocol CustomKeyBoardDelegate: AnyObject {
     func tappedReturnButton()
     func connectTextView() -> UITextView
 }
