@@ -20,7 +20,8 @@
 		FE574865287E9FAB0001B8A2 /* CustomKeyBoardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE574864287E9FAB0001B8A2 /* CustomKeyBoardDelegate.swift */; };
 		FE831582287ED8A10039A56B /* BasicKeyLineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE831581287ED8A10039A56B /* BasicKeyLineDelegate.swift */; };
 		FE9E344D2881837300AFE308 /* CustomKeyBoardViewModelTest_kirkim.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E344C2881837300AFE308 /* CustomKeyBoardViewModelTest_kirkim.swift */; };
-		FE9E345A28818D8F00AFE308 /* KeyBoardEngineTest_kirkim.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E345928818D8F00AFE308 /* KeyBoardEngineTest_kirkim.swift */; };
+		FE9E345A28818D8F00AFE308 /* KeyBoardEngine_addWord_Test_kirkim.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E345928818D8F00AFE308 /* KeyBoardEngine_addWord_Test_kirkim.swift */; };
+		FE9E34612881A56200AFE308 /* KeyBoardEngine_removeWord_Test_kirkim.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E34602881A56200AFE308 /* KeyBoardEngine_removeWord_Test_kirkim.swift */; };
 		FEB79C88287E83E500B5168A /* DynamicBasicKeyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB79C87287E83E500B5168A /* DynamicBasicKeyLine.swift */; };
 		FEEE314E287FBAE000345176 /* ReviewWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEE314D287FBAE000345176 /* ReviewWriteViewController.swift */; };
 		FEF67F8E287D2A29008E9A97 /* NetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF67F8D287D2A29008E9A97 /* NetworkAPI.swift */; };
@@ -67,7 +68,8 @@
 		FE9E344A2881837300AFE308 /* CustomKeyBoardViewModelTest_kirkim.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomKeyBoardViewModelTest_kirkim.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE9E344C2881837300AFE308 /* CustomKeyBoardViewModelTest_kirkim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyBoardViewModelTest_kirkim.swift; sourceTree = "<group>"; };
 		FE9E345728818D8F00AFE308 /* KeyBoardEngineTest_kirkim.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeyBoardEngineTest_kirkim.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FE9E345928818D8F00AFE308 /* KeyBoardEngineTest_kirkim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardEngineTest_kirkim.swift; sourceTree = "<group>"; };
+		FE9E345928818D8F00AFE308 /* KeyBoardEngine_addWord_Test_kirkim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardEngine_addWord_Test_kirkim.swift; sourceTree = "<group>"; };
+		FE9E34602881A56200AFE308 /* KeyBoardEngine_removeWord_Test_kirkim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardEngine_removeWord_Test_kirkim.swift; sourceTree = "<group>"; };
 		FEB79C87287E83E500B5168A /* DynamicBasicKeyLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicBasicKeyLine.swift; sourceTree = "<group>"; };
 		FEEE314D287FBAE000345176 /* ReviewWriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewWriteViewController.swift; sourceTree = "<group>"; };
 		FEF67F8D287D2A29008E9A97 /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
@@ -181,7 +183,8 @@
 		FE9E345828818D8F00AFE308 /* KeyBoardEngineTest_kirkim */ = {
 			isa = PBXGroup;
 			children = (
-				FE9E345928818D8F00AFE308 /* KeyBoardEngineTest_kirkim.swift */,
+				FE9E345928818D8F00AFE308 /* KeyBoardEngine_addWord_Test_kirkim.swift */,
+				FE9E34602881A56200AFE308 /* KeyBoardEngine_removeWord_Test_kirkim.swift */,
 			);
 			path = KeyBoardEngineTest_kirkim;
 			sourceTree = "<group>";
@@ -421,7 +424,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE9E345A28818D8F00AFE308 /* KeyBoardEngineTest_kirkim.swift in Sources */,
+				FE9E345A28818D8F00AFE308 /* KeyBoardEngine_addWord_Test_kirkim.swift in Sources */,
+				FE9E34612881A56200AFE308 /* KeyBoardEngine_removeWord_Test_kirkim.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
