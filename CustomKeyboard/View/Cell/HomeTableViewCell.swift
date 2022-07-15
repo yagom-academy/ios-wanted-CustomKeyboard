@@ -15,7 +15,7 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         
@@ -30,7 +30,7 @@ class HomeTableViewCell: UITableViewCell {
         contentLabel.text = review.content
         timeLabel.text = TimeManager.shared.getTimeInterval(review.createdAt)
         
-        ImageLoader.shared.load(review.user.profileImage) { data in
+        ImageLoadManager.shared.load(review.user.profileImage) { data in
             DispatchQueue.main.async {
                 self.userImageView.image = UIImage(data: data)
                 self.configureImageViewCircle()

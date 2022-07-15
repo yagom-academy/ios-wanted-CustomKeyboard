@@ -1,5 +1,5 @@
 //
-//  ImageLoader.swift
+//  ImageLoadManager.swift
 //  CustomKeyboard
 //
 //  Created by rae on 2022/07/15.
@@ -7,8 +7,9 @@
 
 import Foundation
 
-class ImageLoader {
-    static let shared = ImageLoader()
+class ImageLoadManager {
+    static let shared = ImageLoadManager()
+    private init() { }
     
     private let imageCacheManager = ImageCacheManager.shared
     

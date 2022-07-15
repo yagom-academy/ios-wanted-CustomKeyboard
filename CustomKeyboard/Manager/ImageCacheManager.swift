@@ -9,10 +9,9 @@ import Foundation
 
 class ImageCacheManager {
     static let shared = ImageCacheManager()
+    private init() { }
     
     private var memory = NSCache<NSURL, NSData>()
-    
-    private init() { }
     
     func save(_ key: NSURL, _ data: Data) {
         self.memory.setObject(NSData(data: data), forKey: key)

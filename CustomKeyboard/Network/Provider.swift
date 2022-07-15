@@ -18,7 +18,7 @@ class Provider {
     func request<T: Decodable>(endpoint: Endpoint, completion: @escaping (Result<T, Error>) -> Void) {
         do {
             let urlRequest = try endpoint.urlRequest()
-            NetworkManager.shared.request(urlRequest) { result in
+            NetworkManager().request(urlRequest) { result in
                 switch result {
                 case .success(let data):
                     let result: Result<T, Error> = self.decode(data)
@@ -35,7 +35,7 @@ class Provider {
     func postRequest(endpoint: Endpoint, completion: @escaping (Result<Data, Error>) -> Void) {
         do {
             let urlRequest = try endpoint.urlRequest()
-            NetworkManager.shared.request(urlRequest) { result in
+            NetworkManager().request(urlRequest) { result in
                 switch result {
                 case .success(let data):
                     completion(.success(data))
