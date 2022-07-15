@@ -12,6 +12,7 @@ protocol KeyboardViewDelegate: AnyObject {
 }
 
 class KeyboardView: UIView {
+
     let topLetterValues: [Any] = [
         Chosung.ㅂ,Chosung.ㅈ,Chosung.ㄷ,Chosung.ㄱ,Chosung.ㅅ,
         Jungsung.ㅛ,Jungsung.ㅕ,Jungsung.ㅑ,Jungsung.ㅐ,Jungsung.ㅔ
@@ -24,6 +25,7 @@ class KeyboardView: UIView {
         Chosung.ㅋ,Chosung.ㅌ,Chosung.ㅊ,Chosung.ㅍ,
         Jungsung.ㅠ,Jungsung.ㅜ,Jungsung.ㅡ
     ]
+
     private lazy var shiftButton: UIButton = {
         let button = UIButton()
         button.setupUtilButton(
@@ -52,6 +54,7 @@ class KeyboardView: UIView {
         return button
     }()
     
+
     private lazy var topStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -69,6 +72,7 @@ class KeyboardView: UIView {
         configureButton(middleLetterValues, stackView: stackView)
         return stackView
     }()
+
     private lazy var bottomStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -78,17 +82,19 @@ class KeyboardView: UIView {
         return stackView
     }()
     
+
     var sejongState: SejongState = .writeInitialState
     var value = "" {
         didSet {
             delegate?.reviewText = value
         }
+
     }
     var currentJungsung: Jungsung? = nil
     var currentLastJongsung: Jongsung? = nil
     var isShift = false
     weak var delegate: KeyboardViewDelegate?
-    
+
     func configureButton(_ letters: [Any], stackView: UIStackView) {
         letters.forEach { letterValue in
             if let value = letterValue as? Chosung {
@@ -123,6 +129,7 @@ class KeyboardView: UIView {
     }
     
     // MARK: - INIT
+
     init() {
         super.init(frame: .zero)
         setupView()
@@ -133,8 +140,10 @@ class KeyboardView: UIView {
     
     // MARK: - SETUP
     func setupView() {
+
         setupLayout()
     }
+
     
     func changeShiftMode(_ bool: Bool) {
         topStackView.arrangedSubviews
@@ -148,8 +157,6 @@ class KeyboardView: UIView {
 // MARK: - @objc Methods
 private extension KeyboardView {
     @objc func didTapKeyboardButton(_ sender: KeyboardButton) {
-        print("didTapKeyboardButton")
-        
         var curr: Int? = 0
         
         switch sejongState {
