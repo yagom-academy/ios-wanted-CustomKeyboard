@@ -8,8 +8,12 @@
 import Foundation
 
 class KeyboardIOManager {
+    
+    var hangulAutomata = HangulAutomata()
+    
     var input: String = "" {
         didSet {
+            hangulAutomata.hangulAutomata(key: input)
             updateTextView(input)
         }
     }
