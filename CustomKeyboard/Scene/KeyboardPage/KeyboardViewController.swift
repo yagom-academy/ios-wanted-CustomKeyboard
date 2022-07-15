@@ -31,6 +31,15 @@ class KeyboardViewController: UIViewController {
         layout()
         addTarget()
         bind(viewModel)
+        
+        let precomposed: Character = "\u{D55C}"
+        print(precomposed, "here")
+        
+        let unicode: String = String(UnicodeScalar(4352)!)
+        print(unicode)
+        
+        let unicode2: String = "\u{1100}" // 0x1100 = 4352
+        print(unicode2)                 // ㄱ
     }
 }
 
@@ -55,7 +64,7 @@ extension KeyboardViewController {
             keyboardView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             keyboardView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
             keyboardView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            keyboardView.heightAnchor.constraint(equalToConstant: 220)
+            keyboardView.heightAnchor.constraint(equalToConstant: 220),
         ])
     }
     
