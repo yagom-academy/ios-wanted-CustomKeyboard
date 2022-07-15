@@ -155,6 +155,7 @@ extension ReviewTableViewCell {
         guard let imageURL = URL(string: url) else { return UIImage() }
         
         do {
+            // TODO: - DataTask로 바꿔보기
             let imageData = try Data(contentsOf: imageURL)
             let image = UIImage(data: imageData)
             return image ?? UIImage()
