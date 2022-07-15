@@ -8,6 +8,11 @@ import Combine
 
 class HomeViewController: UIViewController {
     
+    enum HomeConstants {
+        static let segueReviewViewController = "showReviewViewController"
+        static let reviewButtonPlaceholder = "이 테마가 마음에 드시나요?"
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var reviewButton: UIButton!
     @IBOutlet weak var submitButton: UIButton!
@@ -24,7 +29,7 @@ class HomeViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showReviewViewController" {
+        if segue.identifier == HomeConstants.segueReviewViewController {
             guard let reviewViewController = segue.destination as? ReviewViewController else {
                 return
             }
@@ -33,10 +38,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func touchSubmitButton(_ sender: UIButton) {
-        guard let reviewTitle = reviewButton.currentTitle else {
-            return
-        }
-        viewModel.submit(contentString: reviewTitle)
+        viewModel.submit(contentString: reviewButton.currentTitle ?? "")
     }
 }
 
@@ -83,7 +85,7 @@ extension HomeViewController {
     }
     
     private func buttonsReset() {
-        reviewButton.setTitle("이 테마가 마음에 드시나요?", for: .normal)
+        reviewButton.setTitle(HomeConstants.reviewButtonPlaceholder, for: .normal)
         reviewButton.setTitleColor(.lightGray, for: .normal)
         submitButton.isEnabled = false
     }

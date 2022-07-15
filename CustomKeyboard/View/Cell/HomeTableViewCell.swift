@@ -37,7 +37,11 @@ class HomeTableViewCell: UITableViewCell {
             }
         }
     }
-    
+}
+
+// MARK: - Private
+
+extension HomeTableViewCell {
     private func configureImageViewCircle() {
         userImageView.layer.cornerRadius = userImageView.frame.width / 2
         userImageView.clipsToBounds = true

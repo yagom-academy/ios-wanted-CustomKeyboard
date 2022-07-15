@@ -14,7 +14,7 @@ protocol KeyboardViewDelegate: AnyObject {
 
 class KeyboardView: UIView {
     enum KeyboardConstants {
-        static let NibName = "KeyboardView"
+        static let NibName = String(describing: KeyboardView.self)
     }
     
     @IBOutlet var changeButtons: [UIButton]!
