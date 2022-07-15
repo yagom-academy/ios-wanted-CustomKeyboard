@@ -62,7 +62,7 @@ extension HomeViewController {
     }
     
     private func bind() {
-        viewModel.$reviewList
+        viewModel.$reviews
             .receive(on: DispatchQueue.main)
             .sink { _ in
                 self.tableView.reloadData()
@@ -75,7 +75,7 @@ extension HomeViewController {
 
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.reviewListCount()
+        return viewModel.reviewsCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

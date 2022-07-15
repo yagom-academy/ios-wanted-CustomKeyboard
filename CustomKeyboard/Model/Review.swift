@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ReviewList: Decodable {
+struct ReviewResponse: Decodable {
     let data: [Review]
 }
 

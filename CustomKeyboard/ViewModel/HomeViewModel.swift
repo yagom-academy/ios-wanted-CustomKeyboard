@@ -9,22 +9,22 @@ import Foundation
 import Combine
 
 class HomeViewModel {
-    @Published var reviewList: [Review] = []
+    @Published var reviews: [Review] = []
     
-    func reviewListCount() -> Int {
-        return reviewList.count
+    func reviewsCount() -> Int {
+        return reviews.count
     }
     
     func review(at index: Int) -> Review {
-        return reviewList[index]
+        return reviews[index]
     }
     
     func fetch() {
         let reviewsEndpoint = APIEndpoints.getReviews()
-        Provider.shared.request(endpoint: reviewsEndpoint) { (result: Result<ReviewList, Error>) in
+        Provider.shared.request(endpoint: reviewsEndpoint) { (result: Result<ReviewResponse, Error>) in
             switch result {
-            case .success(let reviewList):
-                self.reviewList = reviewList.data
+            case .success(let reviewResponse):
+                self.reviews = reviewResponse.data
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -46,7 +46,7 @@ class HomeViewModel {
                 let review = Review(user: User(userName: "", profileImage: ""),
                                     content: content.content,
                                     createdAt: "")
-                self.reviewList.insert(review, at: 0)
+                self.reviews.insert(review, at: 0)
                 // 성공하면 button empty 및 button enabled false
             case .failure(let error):
                 print(error.localizedDescription)
