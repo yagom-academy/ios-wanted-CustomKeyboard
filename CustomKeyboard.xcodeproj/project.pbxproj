@@ -12,6 +12,7 @@
 		043D075C287D408B0061DCA2 /* ReveiwTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D075B287D408B0061DCA2 /* ReveiwTableViewCell.swift */; };
 		04486783287D4B080004A512 /* ReviewTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04486782287D4B080004A512 /* ReviewTableViewHeader.swift */; };
 		04486785287D51460004A512 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04486784287D51460004A512 /* UITextField+.swift */; };
+		04C523F2287FE93A008488CF /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C523F1287FE93A008488CF /* KeyboardManager.swift */; };
 		04FE9E93287E6A0E0002EE50 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FE9E92287E6A0E0002EE50 /* ReviewViewModel.swift */; };
 		68351509287D6F4B0018CEB9 /* KeyFirstLineStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68351508287D6F4B0018CEB9 /* KeyFirstLineStackView.swift */; };
 		68AE7948287D3B1E003F4426 /* ReviewAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AE7947287D3B1E003F4426 /* ReviewAPIManager.swift */; };
@@ -35,6 +36,7 @@
 		043D075B287D408B0061DCA2 /* ReveiwTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReveiwTableViewCell.swift; sourceTree = "<group>"; };
 		04486782287D4B080004A512 /* ReviewTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewHeader.swift; sourceTree = "<group>"; };
 		04486784287D51460004A512 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		04C523F1287FE93A008488CF /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 		04FE9E92287E6A0E0002EE50 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 		68351508287D6F4B0018CEB9 /* KeyFirstLineStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyFirstLineStackView.swift; sourceTree = "<group>"; };
 		68AE7947287D3B1E003F4426 /* ReviewAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAPIManager.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				68AE7947287D3B1E003F4426 /* ReviewAPIManager.swift */,
+				04C523F1287FE93A008488CF /* KeyboardManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				68AE794F287D3E87003F4426 /* KeyboardViewModel.swift in Sources */,
 				04486783287D4B080004A512 /* ReviewTableViewHeader.swift in Sources */,
 				04FE9E93287E6A0E0002EE50 /* ReviewViewModel.swift in Sources */,
+				04C523F2287FE93A008488CF /* KeyboardManager.swift in Sources */,
 				68AE7948287D3B1E003F4426 /* ReviewAPIManager.swift in Sources */,
 				04158AD2287D3DA0004F6B9A /* ReviewViewController.swift in Sources */,
 				043D075C287D408B0061DCA2 /* ReveiwTableViewCell.swift in Sources */,

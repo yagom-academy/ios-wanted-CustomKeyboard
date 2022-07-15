@@ -8,7 +8,8 @@
 import UIKit
 
 public enum CSButtonType {
-    case basic
+    case consonant
+    case vowel
     case space
     case dark_small
     case dark_large
@@ -16,10 +17,22 @@ public enum CSButtonType {
 
 class KeyButton: UIButton {
     
-    var delegate: ButtonEventDelegate?
+    let type: CSButtonType
     
-    init() {
+    init(type: CSButtonType) {
+        self.type = type
         super.init(frame: .zero)
+        
+        switch self.type {
+        case .consonant, .vowel:
+            self.backgroundColor = .systemGray2
+        case .space:
+            self.backgroundColor = .systemGray2
+        case .dark_small:
+            self.backgroundColor = .systemGray
+        case .dark_large:
+            self.backgroundColor = .systemGray
+        }
         
         layer.cornerRadius = 5
         setTitleColor(.white, for: .normal)
@@ -35,18 +48,18 @@ class KeyButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(type: CSButtonType) {
-        self.init()
-        
-        switch type {
-        case .basic:
-            self.backgroundColor = .systemGray2
-        case .space:
-            self.backgroundColor = .systemGray2
-        case .dark_small:
-            self.backgroundColor = .systemGray
-        case .dark_large:
-            self.backgroundColor = .systemGray
-        }
-    }
+//    override init(type: CSButtonType) {
+//        self.init()
+//
+//        switch type {
+//        case .consonant, .vowel:
+//            self.backgroundColor = .systemGray2
+//        case .space:
+//            self.backgroundColor = .systemGray2
+//        case .dark_small:
+//            self.backgroundColor = .systemGray
+//        case .dark_large:
+//            self.backgroundColor = .systemGray
+//        }
+//    }
 }

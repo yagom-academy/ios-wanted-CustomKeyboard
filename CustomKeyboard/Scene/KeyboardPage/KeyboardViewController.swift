@@ -14,6 +14,8 @@ protocol PassReviewDelegate {
 class KeyboardViewController: UIViewController {
     var delegate: PassReviewDelegate?
     private var viewModel = KeyboardViewModel()
+    private let manager = KeyboardManager.shared
+    private var state = 0
     
     private let reviewTextField: UITextField = {
         var textField = UITextField()
@@ -31,15 +33,9 @@ class KeyboardViewController: UIViewController {
         layout()
         addTarget()
         bind(viewModel)
-        
-        let precomposed: Character = "\u{D55C}"
-        print(precomposed, "here")
-        
-        let unicode: String = String(UnicodeScalar(4352)!)
-        print(unicode)
-        
-        let unicode2: String = "\u{1100}" // 0x1100 = 4352
-        print(unicode2)                 // ㄱ
+        keyboardView.keyFirstLine.delegate = self
+        keyboardView.keySecondLine.delegate = self
+        keyboardView.keyThirdLine.delegate = self
     }
 }
 
@@ -92,5 +88,24 @@ extension KeyboardViewController {
         }
         
         self.navigationController?.popViewController(animated: true)
+    }
+}
+
+extension KeyboardViewController: ButtonDelegate {
+    func buttonClickEvent(sender: KeyButton) {
+        if state == 0 {
+            reviewTextField.text! += sender.title(for: .normal)!
+            if sender.type == .consonant {
+                state = 1
+            } else {
+                // 이중 모음
+                state = 2
+            }
+        } else {
+            let text = reviewTextField.text?.last!
+            reviewTextField.text?.removeLast()
+            reviewTextField.text! += manager.makeString(state, text!, sender).0
+            state = manager.makeString(state, text!, sender).1
+        }
     }
 }
