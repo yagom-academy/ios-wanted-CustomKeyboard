@@ -14,7 +14,7 @@ class KeyboardIOManager {
     var input: String = "" {
         didSet {
             hangulAutomata.hangulAutomata(key: input)
-            updateTextView(input)
+            updateTextView(hangulAutomata.buffer.reduce("", { $0 + $1}))
         }
     }
     
