@@ -7,15 +7,13 @@
 
 import UIKit
 
-class CommentButton: UIStackView {
+class CommentButton: UIView {
     
     lazy var userProfileImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "person.circle.fill"))
         imageView.contentMode = .scaleAspectFit
-        imageView.frame.size = CGSize(width: 40, height: 40)
         return imageView
     }()
-    
     
     lazy var presentTextView: BasePaddingTextView = {
         let textView = BasePaddingTextView()
@@ -32,7 +30,10 @@ class CommentButton: UIStackView {
     
     lazy var sendButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "paperplane.fill"), for: .normal)
+        
+        let config = UIImage.SymbolConfiguration(pointSize: 26, weight: .bold, scale: .medium)
+        let imageview = UIImage(systemName: "paperplane.fill", withConfiguration: config)
+        button.setImage(imageview, for: .normal)
         return button
     }()
     
@@ -78,11 +79,11 @@ private extension CommentButton {
         }
         
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            stackView.topAnchor.constraint(equalTo: self.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            presentTextView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.7)
+            stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            stackView.heightAnchor.constraint(equalToConstant: 48),
+            userProfileImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.2),
+            presentTextView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.7),
+            sendButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.2)
         ])
         
         stackView.arrangedSubviews[2].isHidden = true

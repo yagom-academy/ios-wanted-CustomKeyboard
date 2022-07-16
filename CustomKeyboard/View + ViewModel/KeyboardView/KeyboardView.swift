@@ -172,26 +172,23 @@ private extension KeyboardView {
         }
         
         NSLayoutConstraint.activate([
-            topStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-            topStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-            topStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+            topStackView.topAnchor.constraint(equalTo: self.topAnchor,constant: 8),
+            topStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            midStackView.topAnchor.constraint(equalTo: topStackView.bottomAnchor, constant: 10),
-            midStackView.leadingAnchor.constraint(equalTo: topStackView.leadingAnchor, constant: 10),
-            midStackView.trailingAnchor.constraint(equalTo: topStackView.trailingAnchor, constant: -10),
+            midStackView.topAnchor.constraint(equalTo: topStackView.bottomAnchor,constant: 8),
+            midStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            bottomStackView.topAnchor.constraint(equalTo: midStackView.bottomAnchor, constant: 10),
-            bottomStackView.leadingAnchor.constraint(equalTo: midStackView.leadingAnchor, constant: 25),
-            bottomStackView.trailingAnchor.constraint(equalTo: midStackView.trailingAnchor, constant: -25),
-            
+            bottomStackView.topAnchor.constraint(equalTo: midStackView.bottomAnchor,constant: 8),
+            bottomStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+
             shiftButton.leadingAnchor.constraint(equalTo: topStackView.leadingAnchor),
             shiftButton.topAnchor.constraint(equalTo: spaceButton.topAnchor),
             shiftButton.widthAnchor.constraint(lessThanOrEqualToConstant: 60.0),
-            
+
             spaceButton.leadingAnchor.constraint(equalTo: shiftButton.trailingAnchor, constant: 6),
             spaceButton.topAnchor.constraint(equalTo: bottomStackView.bottomAnchor, constant: 10),
             spaceButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            
+
             returnButton.leadingAnchor.constraint(equalTo: spaceButton.trailingAnchor, constant: 6),
             returnButton.topAnchor.constraint(equalTo: spaceButton.topAnchor),
             returnButton.trailingAnchor.constraint(equalTo: topStackView.trailingAnchor),
