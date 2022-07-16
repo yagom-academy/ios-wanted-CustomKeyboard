@@ -6,15 +6,24 @@
 //
 
 import Foundation
+import UIKit
 
-protocol ReviewListObservable {
-    var reviewList: Observable<[ReviewResult]> { get set }
-    var isSuccess: Observable<Bool> { get set }
-}
 
-class ReviewListViewModel: ReviewListObservable {
+class ReviewListViewModel {
     var reviewList: Observable<[ReviewResult]> = Observable([])
     var isSuccess: Observable<Bool> = Observable(false)
+    var present: Observable<UIViewController?> = Observable(nil)
+    
+    let keyboardViewModel: KeyboardViewModel
+    let writeViewModel: WriteViewModel
+    var resultText: Observable<String>
+    
+    init() {
+        self.keyboardViewModel = KeyboardViewModel()
+        self.writeViewModel = WriteViewModel(keyboardViewModel: self.keyboardViewModel)
+        
+        resultText = writeViewModel.resultText
+    }
     
     func fetchReviewList() {
         Network(
@@ -36,7 +45,16 @@ class ReviewListViewModel: ReviewListObservable {
     
     func postComment(_ comment: String) {
         Network(path: "", parameters: [:]).post(comment) { isSuccess in
+            if isSuccess {
+                let user = ReviewUser(id: "", userName: "익명", profileImage: "")
+                let review = ReviewResult(id: "", user: user, content: comment, createdAt: Date().intervalCurrentTime)
+                self.reviewList.value.insert(review, at: 0)
+            }
             self.isSuccess.value = isSuccess
         }
+    }
+    
+    func presentWriteController() {
+        self.present.value = WriteController(viewModel: writeViewModel)
     }
 }

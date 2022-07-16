@@ -18,6 +18,13 @@ struct ReviewResult: Decodable {
     private let content: String
     private let createdAt: String
     
+    init(id: String, user: ReviewUser, content: String, createdAt: String) {
+        self.id = id
+        self.user = user
+        self.content = content
+        self.createdAt = createdAt
+    }
+    
     var rate: String {
         let rateStr = content.split(separator: "\n").map { String($0) }[0]
         return rateStr.contains("⭐️") ? rateStr : "Rating: 내용없음"

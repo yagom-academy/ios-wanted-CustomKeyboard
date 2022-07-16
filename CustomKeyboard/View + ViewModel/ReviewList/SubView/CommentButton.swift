@@ -7,14 +7,7 @@
 
 import UIKit
 
-//MARK: - CommentButtonDelegate
-protocol CommentButtonDelegate: AnyObject {
-    func present()
-    func post()
-}
-
 class CommentButton: UIStackView {
-    weak var delegate: CommentButtonDelegate?
     
     lazy var userProfileImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "person.circle.fill"))
@@ -32,14 +25,12 @@ class CommentButton: UIStackView {
         textView.textContainer.lineBreakMode = .byTruncatingTail
         textView.textContainer.maximumNumberOfLines = 1
         textView.backgroundColor = .secondarySystemBackground
-        textView.delegate = self
         return textView
     }()
     
     lazy var sendButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "paperplane.fill"), for: .normal)
-        button.addTarget(self, action: #selector(sendComment), for: .touchUpInside)
         return button
     }()
     
@@ -73,24 +64,6 @@ class CommentButton: UIStackView {
     
     func clearText() {
         presentTextView.text = ""
-    }
-}
-
-//MARK: - UITextViewDelegate
-extension CommentButton: UITextViewDelegate {    
-    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        delegate?.present()
-        return false
-    }
-}
-
-//MARK: - Objc Method
-private extension CommentButton {
-    @objc func didTapPresentText() {
-        self.delegate?.present()
-    }
-    @objc func sendComment() {
-        delegate?.post()
     }
 }
 
