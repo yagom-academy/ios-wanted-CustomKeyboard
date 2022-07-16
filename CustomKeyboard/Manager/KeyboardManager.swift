@@ -52,7 +52,7 @@ class KeyboardManager {
                 }
                 return ("", 0)
             }
-            // TODO: - 이중 모음의 경우 구현 : ㅏ+ㅣ = ㅐ (ㅗ+ㅏ = ㅘ 경우는 구현 함)
+            // TODO: - 이중 모음의 경우 구현 : 초기 상태만 문제 있음
         case 2:
             // 모음이 입력되어 있는 상태 (ex ㅏ, ㅑ, ㅜ, ㅗ ...)
             print("2")
@@ -62,13 +62,13 @@ class KeyboardManager {
                 return (String(currentText) + addString, 1)
             } else {
                 let doubleMid = lastWord + addString
-                let idx1 = secondDouble.firstIndex(of: doubleMid) ?? 0
-                if idx1 == 0 {
+                let idx = secondDouble.firstIndex(of: doubleMid) ?? 0
+                if idx == 0 {
                     lastWord = addString
                     return (String(currentText) + addString, 2)
                 } else {
                     lastWord = doubleMid
-                    let str = second[idx1]
+                    let str = second[idx]
                     return (str, 2)
                 }
             }
@@ -85,8 +85,20 @@ class KeyboardManager {
                 }
                 return ("", 0)
             } else {
-                lastWord = addString
-                return (String(currentText) + addString, 2)
+                let doubleMid = lastWord + addString
+                let idx1 = secondDouble.firstIndex(of: doubleMid) ?? 0
+                let idx2 = second.firstIndex(of: lastWord) ?? 0
+                if idx1 == 0 {
+                    lastWord = addString
+                    return (String(currentText) + addString, 2)
+                } else {
+                    let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - (idx2 * 28) + (idx1 * 28)
+                    if let scalarValue = UnicodeScalar(str) {
+                        lastWord = doubleMid
+                        return (String(scalarValue), 3)
+                    }
+                    return ("", 0)
+                }
             }
         case 4:
             // 자음 + 모음 + 자음으로 받침이 있는 상태 (ex 언, 젠, 간, 끝 ...)
