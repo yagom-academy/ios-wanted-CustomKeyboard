@@ -25,6 +25,7 @@ struct InpStack{
     var curhanst: HangulStatus //상태
     var key : UInt32 //방금 입력된 키 코드
     var charCode : String //조합된 코드
+    var chKind : HangulCHKind
 }
 
 import Foundation
@@ -39,7 +40,7 @@ class HangulAutomata{
     var inpStack : [InpStack] = []
     var inpSP : Int = 0
     
-    var outStack : [Int] = []
+    var outStack : [String] = []
     var outSp : Int = 0
     
     var currentHangulState : HangulStatus?
@@ -48,6 +49,7 @@ class HangulAutomata{
     
     var charCode : String!
     var oldKey : UInt32!
+    var oldChKind : HangulCHKind?
     var keyCode : UInt32!
     
     var chosungTable : [String] = ["ㄱ","ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
@@ -143,6 +145,7 @@ extension HangulAutomata{
         }
         if currentHangulState != nil{
             oldKey = inpStack[inpSP-1].key
+            oldChKind = inpStack[inpSP-1].chKind
         }else{
             currentHangulState = .start
             buffer.append("")
@@ -216,14 +219,14 @@ extension HangulAutomata{
             charCode = String(Unicode.Scalar(combinationHangul(chosung: currentChosung, joongsung: keyCode))! )
             break
         case .jongsung:
+            //해당 자음이 받침이 될 수 있는 경우
             if canBeJongsung{
                 keyCode = UInt32(jongsungTable.firstIndex(of: key)!)
                 let currentCharCode =  Unicode.Scalar(charCode)!.value
                 charCode = String(Unicode.Scalar(decompositionChosungJoongsung(charCode: currentCharCode))!)
-            }else if joongsungPair(){
-                currentHangulState = .dJoongsung
             }else{
-                currentHangulState = .endOne
+                //바로 모음이 오는 경우
+                charCode = key
             }
             break
         case .dJongsung:
@@ -237,22 +240,29 @@ extension HangulAutomata{
             return
             break
         case.endTwo:
-            if chKind == .vowel{
+            //자음만 있는 경우 ex) ㅝ + ㅈ -> ㅢㅈ
+            //받침이 있는 경우 ex) 각 -> 가거
+            //oldkey가 자음인 경우
+            if oldChKind == .consonant{
+                //받침과 분리
+                oldKey = UInt32(chosungTable.firstIndex(of: jongsungTable[Int(oldKey)])!)
+                charCode =  String(Unicode.Scalar(combinationHangul(chosung: oldKey, joongsung: keyCode))!)
+                print(oldKey)
+                print(charCode)
+                currentHangulState = .joongsung
+            }else{
                 joongsungPair()
                 charCode = joongsungTable[Int(keyCode)]
+                currentHangulState = nil
+                hangulAutomata(key: charCode)
+                return
             }
             break
         default:
             break
         }
-        if currentHangulState == .endOne || currentHangulState == .endTwo{
-            inpStack.append(InpStack(curhanst: currentHangulState!, key: keyCode, charCode: String(Unicode.Scalar(charCode)!)))
-            currentHangulState = nil
+        inpStack.append(InpStack(curhanst: currentHangulState!, key: keyCode, charCode: String(Unicode.Scalar(charCode)!), chKind: chKind))
             inpSP += 1
-        }else{
-            inpStack.append(InpStack(curhanst: currentHangulState!, key: keyCode, charCode: String(Unicode.Scalar(charCode)!)))
-            inpSP += 1
-        }
         print(inpStack)
     }
 }
