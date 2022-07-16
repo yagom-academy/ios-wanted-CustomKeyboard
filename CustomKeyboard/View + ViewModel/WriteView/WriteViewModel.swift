@@ -11,6 +11,7 @@ class WriteViewModel {
     let keyboardViewModel: KeyboardViewModel
     var resultText: Observable<String>
     
+    var sendedText: Observable<String> = Observable("")
     
     init(keyboardViewModel: KeyboardViewModel) {
         self.keyboardViewModel = keyboardViewModel
