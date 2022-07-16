@@ -13,6 +13,7 @@ class KeyboardViewModel {
     var currentLastJongsung: Jongsung? = nil
     var value = ""
     var result: Observable<String> = Observable("")
+    var returnButtonTapped: Observable<Bool> = Observable(false)
     
     var isShift: Observable<Bool> = Observable(false)
     

@@ -117,7 +117,6 @@ class KeyboardView: UIView {
             }
     }
     
-    
     func bindShiftMode() {
         viewModel.isShift.bind { isShift in
             self.isShift = isShift
@@ -146,6 +145,7 @@ private extension KeyboardView {
     }
     @objc func didTapReturn() {
         debugPrint("didTapReturn")
+        viewModel.returnButtonTapped.value = true
     }
     @objc func didTapBack() {
         viewModel.value.unicodeScalars.removeLast()

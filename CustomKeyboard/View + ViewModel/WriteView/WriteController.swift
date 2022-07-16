@@ -41,6 +41,7 @@ class WriteController: UIViewController {
         configUI()
         
         bindResult()
+        bindReturnButtonTapped()
     }
     
     func bindResult() {
@@ -49,6 +50,12 @@ class WriteController: UIViewController {
             self?.viewModel.sendedText.value = result
         }
     }
+    func bindReturnButtonTapped() {
+        viewModel.returnButtonTapped.bind { _ in
+            self.dismiss(animated: true)
+        }
+    }
+    
     func keyboardView(_ keyboard: KeyboardView, didEndEditing: Bool, text: String) {
         delegate?.commentValue = text
         dismiss(animated: true)

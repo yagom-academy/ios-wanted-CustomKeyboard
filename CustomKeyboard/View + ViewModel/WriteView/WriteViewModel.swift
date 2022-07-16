@@ -12,11 +12,13 @@ class WriteViewModel {
     var resultText: Observable<String>
     
     var sendedText: Observable<String> = Observable("")
+    var returnButtonTapped: Observable<Bool>
     
     init(keyboardViewModel: KeyboardViewModel) {
         self.keyboardViewModel = keyboardViewModel
         
         resultText = keyboardViewModel.result
+        returnButtonTapped = keyboardViewModel.returnButtonTapped
     }
     
     lazy var keyBoardView: KeyboardView = {
