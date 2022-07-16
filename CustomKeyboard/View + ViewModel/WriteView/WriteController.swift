@@ -16,7 +16,7 @@ class WriteController: UIViewController {
     weak var delegate: CommentEditDelegate?
     lazy var commentEditView: UITextView = {
         let textView = UITextView()
-        textView.delegate = self
+//        textView.delegate = self
         textView.font = UIFont.systemFont(ofSize: 20)
         textView.textContainer.maximumNumberOfLines = 0
         return textView
@@ -41,12 +41,12 @@ class WriteController: UIViewController {
 
 }
 
-//MARK: - UITextViewDelegate
-extension WriteController: UITextViewDelegate {
-    func textViewDidEndEditing(_ textView: UITextView) {
-        delegate?.commentValue = textView.text
-    }
-}
+////MARK: - UITextViewDelegate
+//extension WriteController: UITextViewDelegate {
+//    func textViewDidEndEditing(_ textView: UITextView) {
+//        delegate?.commentValue = textView.text
+//    }
+//}
 
 //MARK: - KeyboardViewDelegate
 extension WriteController: KeyboardViewDelegate {
@@ -57,6 +57,10 @@ extension WriteController: KeyboardViewDelegate {
         set {
             commentEditView.text = newValue
         }
+    }
+    func keyboardView(_ keyboard: KeyboardView, didEndEditing: Bool, text: String) {
+        delegate?.commentValue = text
+        dismiss(animated: true)
     }
 }
 

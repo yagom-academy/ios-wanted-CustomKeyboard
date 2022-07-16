@@ -9,6 +9,7 @@ import UIKit
 
 protocol KeyboardViewDelegate: AnyObject {
     var reviewText: String { get set }
+    func keyboardView(_ keyboard: KeyboardView, didEndEditing: Bool, text: String)
 }
 
 class KeyboardView: UIView {
@@ -19,7 +20,6 @@ class KeyboardView: UIView {
     var currentJungsung: Jungsung? = nil
     var currentLastJongsung: Jongsung? = nil
     var isShift = false
-
     
     let topLetterValues: [Any] = [
         Chosung.ㅂ,Chosung.ㅈ,Chosung.ㄷ,Chosung.ㄱ,Chosung.ㅅ,
@@ -162,7 +162,7 @@ private extension KeyboardView {
     }
     @objc func didTapReturn() {
         debugPrint("didTapReturn")
-        // TODO: - 첫번째 화면으로 나가기
+        delegate?.keyboardView(self, didEndEditing: true, text: viewModel.result.value)
     }
     @objc func didTapBack() {
         viewModel.value.unicodeScalars.removeLast()
