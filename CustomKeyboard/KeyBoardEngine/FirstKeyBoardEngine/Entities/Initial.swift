@@ -13,4 +13,4 @@ enum Initial:Int {
         return self.rawValue
     }
 }
-Initial.ㄱ.code = 0
+

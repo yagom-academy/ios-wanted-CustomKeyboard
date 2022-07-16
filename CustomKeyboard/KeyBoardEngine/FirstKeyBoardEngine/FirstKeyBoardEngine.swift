@@ -20,7 +20,11 @@ struct FirstKeyBoardEngine: KeyBoardEngine {
         let parsedLastUnicode: SeparatedUnicode = parsingUniCode(unicode: lastUniCode)
         switch parsedLastUnicode {
         case .perfect(let initial, let neutral, let support):
-            return ""
+            let output:CombinedToPerfactCharOutput = combineToSupportWithLetter(support: support, inputLetter: inputUniCode)
+            let firstCharUnicode = makeWord(initial: initial, neutral: neutral, support: output.support)
+            let firstChar = makeCharFromUnicode(firstCharUnicode)
+            let secondChar = makeCharFromUnicode(output.secondCharUnicode)
+            return firstChar + secondChar
         case .perfectNoSupport(let initial, let neutral):
             return ""
         case .onlyInitial(let value):
@@ -41,8 +45,8 @@ extension FirstKeyBoardEngine {
     private func parsingUniCode(unicode: Int) -> SeparatedUnicode {
         if (unicode >= 44032) {
             let value:Int = unicode - 44032
-            let initial:Int = Int(floor(Double(value / 21*28)))
-            let neutral:Int = (value % 21*28) / 28
+            let initial:Int = Int(floor(Double(value / (21*28))))
+            let neutral:Int = (value % (21*28)) / 28
             let support:Int = value % 28
             if (support == 0) {
                 return .perfectNoSupport(initial: initial, neutral: neutral)
@@ -57,11 +61,15 @@ extension FirstKeyBoardEngine {
     }
     
     private func makeWord(initial: Int, neutral: Int, support: Int) -> Int {
-        return 44032 + initial*21*28 + neutral*28 + support
+        return 44032 + (initial*21*28) + (neutral*28) + support
     }
     
     private func makeCharFromUnicode(_ unicode: Int) -> String {
-        return String(UnicodeScalar(unicode)!)
+        guard let unicodeScalar = UnicodeScalar(unicode) else {
+            print("fail parsing to String!, input: ", unicode)
+            return ""
+        }
+        return String(unicodeScalar)
     }
     
     private func makeUnicodeFromChar(_ char: String) -> Int {
@@ -71,8 +79,8 @@ extension FirstKeyBoardEngine {
 
 //MARK: - 받침 + 글자
 extension FirstKeyBoardEngine {
-    typealias CombinedToSupportOutput = (support:Int, next:Int)
-    private func combineToSupportWithLetter(support:Int, inputLetter:Int) -> CombinedToSupportOutput {
+    typealias CombinedToPerfactCharOutput = (support:Int, secondCharUnicode:Int)
+    private func combineToSupportWithLetter(support:Int, inputLetter:Int) -> CombinedToPerfactCharOutput {
         if (inputLetter <= 12622) {
             return combineSupportWithConsonant(support: support, consonant: inputLetter)
         } else {
@@ -80,7 +88,7 @@ extension FirstKeyBoardEngine {
         }
     }
     
-    private func combineSupportWithConsonant(support:Int, consonant:Int) -> CombinedToSupportOutput {
+    private func combineSupportWithConsonant(support:Int, consonant:Int) -> CombinedToPerfactCharOutput {
         switch support {
         case Support.ㄱ.code:
             return consonant == 12613 ? (Support.ㄳ.code,0) : (support,0)
@@ -120,32 +128,33 @@ extension FirstKeyBoardEngine {
         return (support, consonant)
     }
     
-    private func combineSupportWithVowel(support:Int, vowel:Int) -> CombinedToSupportOutput {
+    private func combineSupportWithVowel(support:Int, vowel:Int) -> CombinedToPerfactCharOutput {
+        let parsedVowel = vowel - 12623
         switch support {
         case Support.ㄳ.code:
-            return (Support.ㄱ.code, makeWord(initial: Initial.ㅅ.code, neutral: vowel, support: 0))
+            return (Support.ㄱ.code, makeWord(initial: Initial.ㅅ.code, neutral: parsedVowel, support: 0))
         case Support.ㄵ.code:
-            return (Support.ㄴ.code, makeWord(initial: Initial.ㅈ.code, neutral: vowel, support: 0))
+            return (Support.ㄴ.code, makeWord(initial: Initial.ㅈ.code, neutral: parsedVowel, support: 0))
         case Support.ㄶ.code:
-            return (Support.ㄴ.code, makeWord(initial: Initial.ㅎ.code, neutral: vowel, support: 0))
+            return (Support.ㄴ.code, makeWord(initial: Initial.ㅎ.code, neutral: parsedVowel, support: 0))
         case Support.ㄺ.code:
-            return (Support.ㄹ.code, makeWord(initial: Initial.ㄱ.code, neutral: vowel, support: 0))
+            return (Support.ㄹ.code, makeWord(initial: Initial.ㄱ.code, neutral: parsedVowel, support: 0))
         case Support.ㄻ.code:
-            return (Support.ㄹ.code, makeWord(initial: Initial.ㅁ.code, neutral: vowel, support: 0))
+            return (Support.ㄹ.code, makeWord(initial: Initial.ㅁ.code, neutral: parsedVowel, support: 0))
         case Support.ㄼ.code:
-            return (Support.ㄹ.code, makeWord(initial: Initial.ㅂ.code, neutral: vowel, support: 0))
+            return (Support.ㄹ.code, makeWord(initial: Initial.ㅂ.code, neutral: parsedVowel, support: 0))
         case Support.ㄽ.code:
-            return (Support.ㄹ.code, makeWord(initial: Initial.ㅅ.code, neutral: vowel, support: 0))
+            return (Support.ㄹ.code, makeWord(initial: Initial.ㅅ.code, neutral: parsedVowel, support: 0))
         case Support.ㄾ.code:
-            return (Support.ㄹ.code, makeWord(initial: Initial.ㅌ.code, neutral: vowel, support: 0))
+            return (Support.ㄹ.code, makeWord(initial: Initial.ㅌ.code, neutral: parsedVowel, support: 0))
         case Support.ㄿ.code:
-            return (Support.ㄹ.code, makeWord(initial: Initial.ㅍ.code, neutral: vowel, support: 0))
+            return (Support.ㄹ.code, makeWord(initial: Initial.ㅍ.code, neutral: parsedVowel, support: 0))
         case Support.ㅀ.code:
-            return (Support.ㄹ.code, makeWord(initial: Initial.ㅎ.code, neutral: vowel, support: 0))
+            return (Support.ㄹ.code, makeWord(initial: Initial.ㅎ.code, neutral: parsedVowel, support: 0))
         case Support.ㅄ.code:
-            return (Support.ㅂ.code, makeWord(initial: Initial.ㅅ.code, neutral: vowel, support: 0))
+            return (Support.ㅂ.code, makeWord(initial: Initial.ㅅ.code, neutral: parsedVowel, support: 0))
         default:
-            break
+            return (0, makeWord(initial: Support.parsingtoInitialCode(by: support), neutral: parsedVowel, support: 0))
         }
     }
 }
