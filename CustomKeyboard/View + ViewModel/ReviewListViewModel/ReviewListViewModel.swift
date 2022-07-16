@@ -29,7 +29,7 @@ class ReviewListViewModel: ReviewListObservable {
             case .success(let list):
                 self.reviewList.value = list
             case .failure(let error):
-                print("ERROR \(error.localizedDescription)🎉")
+                debugPrint("ERROR \(error.localizedDescription)🎉")
             }
         }
     }

@@ -48,12 +48,12 @@ class ReviewListViewController: UIViewController {
     func bindPostSuccess() {
         viewModel.isSuccess.bind { isSuccess in
             if isSuccess {
-                self.commentButton.toggleAnimation(isSuccess)
+                DispatchQueue.main.async {
+                    self.commentButton.toggleAnimation(isSuccess)
+                }
             }
         }
     }
-    
-
 }
 
 //MARK: - CommentButton Delegate

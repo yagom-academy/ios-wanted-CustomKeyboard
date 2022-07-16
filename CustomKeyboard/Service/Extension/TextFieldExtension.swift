@@ -7,24 +7,6 @@
 
 import UIKit
 
-
-class TextField: UITextField {
-    private let padding = UIEdgeInsets(top: 3, left: 10, bottom: 3, right: 10)
-    
-    override open func textRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: padding)
-    }
-    
-    override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: padding)
-    }
-    
-    override open func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: padding)
-    }
-}
-
-
 class BasePaddingTextView: UITextView {
     
     override var contentSize: CGSize {

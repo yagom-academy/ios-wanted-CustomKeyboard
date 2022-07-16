@@ -15,11 +15,7 @@ class Observable<T> {
         }
     }
 
-    private var listener: ((T) -> Void)? {
-        didSet {
-            print("listener")
-        }
-    }
+    private var listener: ((T) -> Void)?
 
     init(_ value: T) {
         self.value = value

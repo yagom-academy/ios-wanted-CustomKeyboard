@@ -24,7 +24,7 @@ class ReviewListTableViewCellViewModel {
                     self.delegate?.reviewListTableViewCell(didLoadImage: image)
                 }
             case .failure(let error):
-                print("ERROR \(error.localizedDescription)🐸")
+                debugPrint("ERROR \(error.localizedDescription)🐸")
             }
         }
     }

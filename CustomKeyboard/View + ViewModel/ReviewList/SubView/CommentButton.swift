@@ -13,7 +13,6 @@ protocol CommentButtonDelegate: AnyObject {
     func post()
 }
 
-
 class CommentButton: UIStackView {
     weak var delegate: CommentButtonDelegate?
     
@@ -63,15 +62,13 @@ class CommentButton: UIStackView {
     }
     
     func toggleAnimation(_ isSuccess: Bool) {
-        DispatchQueue.main.async {
+        UIView.animate(withDuration: 1) {
             self.userProfileImageView.isHidden = !isSuccess
             self.sendButton.isHidden = isSuccess
             if isSuccess {
                 self.clearText()
             }
         }
-
-
     }
     
     func clearText() {
@@ -79,19 +76,13 @@ class CommentButton: UIStackView {
     }
 }
 
+//MARK: - UITextViewDelegate
 extension CommentButton: UITextViewDelegate {    
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         delegate?.present()
         return false
     }
 }
-
-//extension CommentButton: UITextFieldDelegate {
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        textField.resignFirstResponder()
-//        delegate?.present()
-//    }
-//}
 
 //MARK: - Objc Method
 private extension CommentButton {

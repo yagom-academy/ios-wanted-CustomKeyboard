@@ -30,6 +30,7 @@ struct ImageLoader {
 //                return
 //            }
 
+            //TODO: - 프로필 이미지가 없는 경우, 예외처리 하기
             guard (response as? HTTPURLResponse)?.statusCode == 200 else {
                 completion(.failure(.unknown))
                 return

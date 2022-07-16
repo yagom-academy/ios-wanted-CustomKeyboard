@@ -66,7 +66,7 @@ struct Network {
             let jsonData = try JSONEncoder().encode(value)
             request.httpBody = jsonData
         } catch {
-            print(error)
+            debugPrint(error)
         }
         
         URLSession.shared.dataTask(with: request) { data, response, error in

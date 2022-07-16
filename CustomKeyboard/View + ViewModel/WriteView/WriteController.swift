@@ -16,9 +16,9 @@ class WriteController: UIViewController {
     weak var delegate: CommentEditDelegate?
     lazy var commentEditView: UITextView = {
         let textView = UITextView()
-        textView.isEditable = true
         textView.delegate = self
         textView.font = UIFont.systemFont(ofSize: 20)
+        textView.textContainer.maximumNumberOfLines = 0
         return textView
     }()
     
