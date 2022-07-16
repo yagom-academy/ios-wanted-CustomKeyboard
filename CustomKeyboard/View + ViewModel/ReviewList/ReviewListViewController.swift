@@ -63,6 +63,10 @@ class ReviewListViewController: UIViewController {
             if isSuccess {
                 DispatchQueue.main.async {
                     self.commentButton.toggleAnimation(isSuccess)
+                    
+                    self.viewModel.resultText.value = ""
+                    self.viewModel.keyboardViewModel.clearAll()
+                    self.viewModel.writeViewModel.clearAll()
                 }
             }
         }
@@ -80,6 +84,7 @@ class ReviewListViewController: UIViewController {
     func bindResultText() {
         viewModel.resultText.bind { result in
             self.commentButton.presentTextView.text = result
+            self.commentButton.toggleAnimation(result.isEmpty)
         }
     }
 }
@@ -129,9 +134,9 @@ private extension ReviewListViewController {
         }
         
         NSLayoutConstraint.activate([
-            commentButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            commentButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            commentButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            commentButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: 10),
+            commentButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -16.0),
+            commentButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 10),
             commentButton.heightAnchor.constraint(equalToConstant: 50),
             
             reviewListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),

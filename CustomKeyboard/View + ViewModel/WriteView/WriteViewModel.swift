@@ -29,4 +29,8 @@ class WriteViewModel {
     }()
     
     
+    func clearAll() {
+        self.resultText.value = ""
+        self.sendedText.value = ""
+    }
 }

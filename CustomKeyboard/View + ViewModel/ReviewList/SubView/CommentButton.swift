@@ -12,6 +12,7 @@ class CommentButton: UIStackView {
     lazy var userProfileImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "person.circle.fill"))
         imageView.contentMode = .scaleAspectFit
+        imageView.frame.size = CGSize(width: 40, height: 40)
         return imageView
     }()
     
@@ -25,6 +26,7 @@ class CommentButton: UIStackView {
         textView.textContainer.lineBreakMode = .byTruncatingTail
         textView.textContainer.maximumNumberOfLines = 1
         textView.backgroundColor = .secondarySystemBackground
+        textView.isEditable = false
         return textView
     }()
     
@@ -80,8 +82,7 @@ private extension CommentButton {
             stackView.topAnchor.constraint(equalTo: self.topAnchor),
             stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            
-            presentTextView.widthAnchor.constraint(equalToConstant: 300)
+            presentTextView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.7)
         ])
         
         stackView.arrangedSubviews[2].isHidden = true

@@ -108,6 +108,11 @@ class KeyboardViewModel {
         debugPrint(value)
     }
     
+    func clearAll() {
+        self.result.value = ""
+        self.value = ""
+    }
+    
     func mergeDoubleJongsung(_ jong1: Jongsung?, _ jong2: Jongsung?) -> Jongsung? {
         switch jong1 {
         case .ㄱ:
