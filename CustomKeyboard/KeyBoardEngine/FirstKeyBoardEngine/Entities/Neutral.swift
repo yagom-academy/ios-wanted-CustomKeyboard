@@ -12,4 +12,7 @@ enum Neutral:Int {
     var code: Int {
         return self.rawValue
     }
+    static func parsingFromVowel(from vowel: Int) -> Int {
+        return vowel - 12623
+    }
 }

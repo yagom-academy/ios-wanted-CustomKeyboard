@@ -50,9 +50,9 @@ extension FirstKeyBoardEngine {
                 return .perfect(initial: initial, neutral: neutral, support: support)
             }
         } else if (unicode <= 12622) {
-            return .onlyConsonant(value: unicode)
+            return .onlyConsonant(value: Initial.parsingFromConsonant(from: unicode))
         } else {
-            return .onlyVowel(value: unicode)
+            return .onlyVowel(value: Neutral.parsingFromVowel(from: unicode))
         }
     }
     
@@ -134,7 +134,7 @@ extension FirstKeyBoardEngine {
     }
     
     private func combineSupportWithVowel(support:Int, vowel:Int) -> CombinedToPerfactCharOutput {
-        let parsedVowel = vowel - 12623
+        let parsedVowel = Neutral.parsingFromVowel(from: vowel)
         switch support {
         case Support.ㄳ.code:
             return (Support.ㄱ.code, makeWord(initial: Initial.ㅅ.code, neutral: parsedVowel, support: 0))
@@ -171,7 +171,7 @@ extension FirstKeyBoardEngine {
             let resultUnicode = makeWord(initial: initial, neutral: neutral, support: Support.parsingFromConsonant(from: inputLetter))
             return makeCharFromUnicode(resultUnicode)
         } else {
-            let parsedIntput = inputLetter - 12623
+            let parsedIntput = Neutral.parsingFromVowel(from: inputLetter)
             switch (neutral, parsedIntput) {
             case (Neutral.ㅏ.code, Neutral.ㅣ.code):
                 return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅐ.code, support: 0))
@@ -195,6 +195,10 @@ extension FirstKeyBoardEngine {
                 return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅟ.code, support: 0))
             case (Neutral.ㅡ.code, Neutral.ㅣ.code):
                 return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅢ.code, support: 0))
+            case (Neutral.ㅝ.code, Neutral.ㅣ.code):
+                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅞ.code, support: 0))
+            case (Neutral.ㅘ.code, Neutral.ㅣ.code):
+                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅙ.code, support: 0))
             default:
                 break
             }
@@ -209,7 +213,7 @@ extension FirstKeyBoardEngine {
         if (inputLetter <= 12622) {
             return makeCharFromUnicode(lastUnicode) + makeCharFromUnicode(inputLetter)
         } else {
-            return makeCharFromUnicode(makeWord(initial: consonant, neutral: inputLetter, support: 0))
+            return makeCharFromUnicode(makeWord(initial: consonant, neutral: Neutral.parsingFromVowel(from: inputLetter), support: 0))
         }
     }
 }
@@ -243,6 +247,10 @@ extension FirstKeyBoardEngine {
                 return "ㅟ"
             case (Neutral.ㅡ.code, Neutral.ㅣ.code):
                 return "ㅢ"
+            case (Neutral.ㅝ.code, Neutral.ㅣ.code):
+                return "ㅞ"
+            case (Neutral.ㅘ.code, Neutral.ㅣ.code):
+                return "ㅙ"
             default:
                 break
             }

@@ -82,7 +82,7 @@ class KeyBoardEngine_addWord_Test_kirkim: XCTestCase {
         XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
     }
     func test_addWord호출시_ㅕ에_ㅣ_입력시_ㅖ가반환되는지() {
-        let input2 = 12623
+        let input2 = 12629
         let input1 = 12643
         let result = "ㅖ"
         
@@ -317,6 +317,34 @@ class KeyBoardEngine_addWord_Test_kirkim: XCTestCase {
         let input2 = 44032
         let input1 = 12622
         let result = "갛"
+        
+        XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
+    }
+    func test_addWord호출시_ㅂ에_ㅗ_입력시_보가반환되는지() {
+        let input2 = 12610
+        let input1 = 12631
+        let result = "보"
+        
+        XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
+    }
+    func test_addWord호출시_보에_ㅐ_입력시_봬가반환되는지() {
+        let input2 = 48372
+        let input1 = 12624
+        let result = "봬"
+        
+        XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
+    }
+    func test_addWord호출시_궈에_ㅣ_입력시_궤가반환되는지() {
+        let input2 = 44424
+        let input1 = 12643
+        let result = "궤"
+        
+        XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
+    }
+    func test_addWord호출시_과에_ㅣ_입력시_괘가반환되는지() {
+        let input2 = 44284
+        let input1 = 12643
+        let result = "괘"
         
         XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
     }
