@@ -10,9 +10,14 @@ import Foundation
 class CreateReviewViewModel{
     private let networkService = NetworkService()
     
-    func uploadReview(condent: String){
-//        networkService.request(method: .post) { <#[ReviewModel]#> in
-//            <#code#>
-//        }
+    func uploadReview(condent: String, completion: @escaping ()->()){
+        networkService.request(httpMethod: .post, condent: condent) { result in
+            switch result {
+            case .success(_):
+                completion()
+            case .failure(_):
+                completion()
+            }
+        }
     }
 }

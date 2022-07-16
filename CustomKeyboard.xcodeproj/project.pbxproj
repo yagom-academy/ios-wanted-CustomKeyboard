@@ -12,8 +12,7 @@
 		7C0AFCC0287D683B005F7D50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C0AFCBF287D683B005F7D50 /* GoogleService-Info.plist */; };
 		7C0AFCC4287D6D20005F7D50 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0AFCC3287D6D20005F7D50 /* HomeViewModel.swift */; };
 		7C4CAF4B287F08F600831121 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CAF4A287F08F600831121 /* NetworkService.swift */; };
-		7C67A8D2287FF76400099FC2 /* reviewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C67A8D1287FF76400099FC2 /* reviewList.swift */; };
-		7C67A8D52880160700099FC2 /* ReviewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C67A8D42880160700099FC2 /* ReviewRepository.swift */; };
+		7C67A8D2287FF76400099FC2 /* reviewListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C67A8D1287FF76400099FC2 /* reviewListModel.swift */; };
 		7C67A8D728801AD300099FC2 /* ReviewTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C67A8D628801AD200099FC2 /* ReviewTableviewCell.swift */; };
 		7C67A8D92880276800099FC2 /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C67A8D82880276800099FC2 /* ReviewModel.swift */; };
 		7CCC5DDB287D511B004E2136 /* CreateReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC5DDA287D511B004E2136 /* CreateReviewViewController.swift */; };
@@ -30,8 +29,7 @@
 		7C0AFCBF287D683B005F7D50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C0AFCC3287D6D20005F7D50 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		7C4CAF4A287F08F600831121 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		7C67A8D1287FF76400099FC2 /* reviewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reviewList.swift; sourceTree = "<group>"; };
-		7C67A8D42880160700099FC2 /* ReviewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRepository.swift; sourceTree = "<group>"; };
+		7C67A8D1287FF76400099FC2 /* reviewListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reviewListModel.swift; sourceTree = "<group>"; };
 		7C67A8D628801AD200099FC2 /* ReviewTableviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableviewCell.swift; sourceTree = "<group>"; };
 		7C67A8D82880276800099FC2 /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
 		7CCC5DDA287D511B004E2136 /* CreateReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewViewController.swift; sourceTree = "<group>"; };
@@ -58,7 +56,7 @@
 		7C0735332880453A003E5B18 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7C67A8D1287FF76400099FC2 /* reviewList.swift */,
+				7C67A8D1287FF76400099FC2 /* reviewListModel.swift */,
 				7C67A8D82880276800099FC2 /* ReviewModel.swift */,
 			);
 			path = Model;
@@ -108,7 +106,6 @@
 			isa = PBXGroup;
 			children = (
 				7C4CAF4A287F08F600831121 /* NetworkService.swift */,
-				7C67A8D42880160700099FC2 /* ReviewRepository.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -251,10 +248,9 @@
 			files = (
 				7C07353828804A79003E5B18 /* CreateReviewViewModel.swift in Sources */,
 				7C07353A2880583F003E5B18 /* Observable.swift in Sources */,
-				7C67A8D2287FF76400099FC2 /* reviewList.swift in Sources */,
+				7C67A8D2287FF76400099FC2 /* reviewListModel.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
-				7C67A8D52880160700099FC2 /* ReviewRepository.swift in Sources */,
 				7C67A8D728801AD300099FC2 /* ReviewTableviewCell.swift in Sources */,
 				7C67A8D92880276800099FC2 /* ReviewModel.swift in Sources */,
 				7CCC5DDB287D511B004E2136 /* CreateReviewViewController.swift in Sources */,

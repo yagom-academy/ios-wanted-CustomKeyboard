@@ -10,9 +10,11 @@ import UIKit
 class CreateReviewViewController: UIViewController {
     
     let createReviewViewModel = CreateReviewViewModel()
+    let homeViewModel = HomeViewModel(networkService: NetworkService())
     
     lazy var textfield: UITextField = {
         var textfield = UITextField()
+        textfield.backgroundColor = .gray
         textfield.translatesAutoresizingMaskIntoConstraints = false
         return textfield
     }()
@@ -37,7 +39,10 @@ class CreateReviewViewController: UIViewController {
     }
     @objc func tapDoneButton(){
         guard let condent = textfield.text else { return }
-        createReviewViewModel.uploadReview(condent: condent)
-        self.navigationController?.popViewController(animated: true)
+        createReviewViewModel.uploadReview(condent: condent) {
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
     }
 }

@@ -7,43 +7,84 @@
 
 import Foundation
 
-enum Method {
+enum HttpMethod {
     case get
     case post
 }
+
 protocol Api{
-    var method: Method { get }
+    func request(httpMethod: HttpMethod, condent: String, completion: @escaping (Result<Codable?, Error>)->())
 }
 
-class NetworkService{
-    private let reviewRepository = ReviewRepository()
-    private var reviewList: [ReviewModel] = []
-    
-    func request(method: Method, completion: @escaping ([ReviewModel])->()){
-        switch method {
+class NetworkService: Api{
+    func request(httpMethod: HttpMethod, condent: String, completion: @escaping (Result<Codable?, Error>)->()){
+        switch httpMethod {
         case .get:
-            getRequest { list in
-                completion(list)
+            getRequest { result in
+                switch result {
+                case .success(let data):
+                    completion(.success(data))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
         case .post:
-            postRequest()
-        }
-    }
-    private func getRequest(completion: @escaping ([ReviewModel])->()){
-        reviewRepository.fetchReview { reviewList in
-            reviewList.data.forEach { reviewInfo in
-                let review = ReviewModel(
-                    userName: reviewInfo.user.userName,
-                    profileImage: reviewInfo.user.profileImage,
-                    content: reviewInfo.content,
-                    createdAt: reviewInfo.createdAt
-                )
-                self.reviewList.append(review)
+            postRequest(condent: condent) { result in
+                switch result {
+                case .success(let data):
+                    completion(.success(data))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
-            completion(self.reviewList)
         }
     }
-    private func postRequest(){
-        reviewRepository.postReview()
+    private func getRequest(completion: @escaping (Result<Codable?, Error>)->()){
+        let urlString = "https://api.plkey.app/theme/review?themeId=PLKEY0-L-81&start=0&count=20"
+        guard let url = URL(string: urlString) else { return }
+        var requestURL = URLRequest(url: url)
+        requestURL.httpMethod = "GET"
+        requestURL.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let session = URLSession(configuration: .default)
+        let dataTask = session.dataTask(with: requestURL) { (data, response, error) in
+            guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode,
+                  (200..<300).contains(statusCode), let data = data else {
+                completion(.failure(error!))
+                return
+            }
+            do{
+                let resultData = try JSONDecoder().decode(reviewListModel.self, from: data)
+                print(">>>>>>get>>>>>>>Success")
+                completion(.success(resultData))
+            }catch{
+                completion(.failure(error))
+                return
+            }
+        }
+        dataTask.resume()
     }
 }
+    private func postRequest(condent: String, completion: @escaping (Result<Int, Error>)->()){
+        let data: [String:String] = ["content":condent]
+        let jsonData = try! JSONSerialization.data(withJSONObject: data, options: [])
+        
+        let urlString = "https://api.plkey.app/tmp/theme/PLKEY0-L-81/review"
+        guard let url = URL(string: urlString) else { return }
+        var requestURL = URLRequest(url: url)
+        requestURL.httpMethod = "POST"
+        requestURL.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        requestURL.httpBody = jsonData
+
+        let session = URLSession(configuration: .default)
+        let dataTask = session.dataTask(with: requestURL) { (data, response, error) in
+            guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode, (200..<300).contains(statusCode) else {
+                completion(.failure(error!))
+                return
+            }
+            print(">>>>>statusCode: ", statusCode)
+            completion(.success(statusCode))
+        }
+        dataTask.resume()
+}
+

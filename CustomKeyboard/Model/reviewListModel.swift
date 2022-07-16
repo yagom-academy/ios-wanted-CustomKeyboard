@@ -20,7 +20,7 @@ import Foundation
 //    let profileImage: String
 //}
 
-struct reviewList: Codable {
+struct reviewListModel: Codable { // 대문자
     let data: [review]
 }
 
