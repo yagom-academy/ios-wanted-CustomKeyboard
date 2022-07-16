@@ -23,6 +23,9 @@
 		FE9E345A28818D8F00AFE308 /* KeyBoardEngine_addWord_Test_kirkim.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E345928818D8F00AFE308 /* KeyBoardEngine_addWord_Test_kirkim.swift */; };
 		FE9E34612881A56200AFE308 /* KeyBoardEngine_removeWord_Test_kirkim.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E34602881A56200AFE308 /* KeyBoardEngine_removeWord_Test_kirkim.swift */; };
 		FEB79C88287E83E500B5168A /* DynamicBasicKeyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB79C87287E83E500B5168A /* DynamicBasicKeyLine.swift */; };
+		FED1A80A28822E79007CA79E /* Initial.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED1A80928822E79007CA79E /* Initial.swift */; };
+		FED1A80C28823039007CA79E /* Neutral.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED1A80B28823039007CA79E /* Neutral.swift */; };
+		FED1A80E28823133007CA79E /* Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED1A80D28823133007CA79E /* Support.swift */; };
 		FEEE314E287FBAE000345176 /* ReviewWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEE314D287FBAE000345176 /* ReviewWriteViewController.swift */; };
 		FEF67F8E287D2A29008E9A97 /* NetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF67F8D287D2A29008E9A97 /* NetworkAPI.swift */; };
 		FF66E251287ECCD8008DF303 /* ReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E250287ECCD8008DF303 /* ReviewListViewController.swift */; };
@@ -71,6 +74,9 @@
 		FE9E345928818D8F00AFE308 /* KeyBoardEngine_addWord_Test_kirkim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardEngine_addWord_Test_kirkim.swift; sourceTree = "<group>"; };
 		FE9E34602881A56200AFE308 /* KeyBoardEngine_removeWord_Test_kirkim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardEngine_removeWord_Test_kirkim.swift; sourceTree = "<group>"; };
 		FEB79C87287E83E500B5168A /* DynamicBasicKeyLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicBasicKeyLine.swift; sourceTree = "<group>"; };
+		FED1A80928822E79007CA79E /* Initial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initial.swift; sourceTree = "<group>"; };
+		FED1A80B28823039007CA79E /* Neutral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neutral.swift; sourceTree = "<group>"; };
+		FED1A80D28823133007CA79E /* Support.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Support.swift; sourceTree = "<group>"; };
 		FEEE314D287FBAE000345176 /* ReviewWriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewWriteViewController.swift; sourceTree = "<group>"; };
 		FEF67F8D287D2A29008E9A97 /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
 		FF66E250287ECCD8008DF303 /* ReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewController.swift; sourceTree = "<group>"; };
@@ -146,7 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				FE148A342880514C007AAF1C /* KeyBoardEngine.swift */,
-				FE148A36288053BC007AAF1C /* FirstKeyBoardEngine.swift */,
+				FED1A80828822E64007CA79E /* FirstKeyBoardEngine */,
 			);
 			path = KeyBoardEngine;
 			sourceTree = "<group>";
@@ -187,6 +193,25 @@
 				FE9E34602881A56200AFE308 /* KeyBoardEngine_removeWord_Test_kirkim.swift */,
 			);
 			path = KeyBoardEngineTest_kirkim;
+			sourceTree = "<group>";
+		};
+		FED1A80728822E53007CA79E /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				FED1A80928822E79007CA79E /* Initial.swift */,
+				FED1A80B28823039007CA79E /* Neutral.swift */,
+				FED1A80D28823133007CA79E /* Support.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		FED1A80828822E64007CA79E /* FirstKeyBoardEngine */ = {
+			isa = PBXGroup;
+			children = (
+				FE148A36288053BC007AAF1C /* FirstKeyBoardEngine.swift */,
+				FED1A80728822E53007CA79E /* Entities */,
+			);
+			path = FirstKeyBoardEngine;
 			sourceTree = "<group>";
 		};
 		FEF67F8C287D2661008E9A97 /* Network */ = {
@@ -399,7 +424,10 @@
 				FE831582287ED8A10039A56B /* BasicKeyLineDelegate.swift in Sources */,
 				FE532CBB287F945F00397D33 /* CustomKeyBoardViewModel.swift in Sources */,
 				FE574865287E9FAB0001B8A2 /* CustomKeyBoardDelegate.swift in Sources */,
+				FED1A80C28823039007CA79E /* Neutral.swift in Sources */,
 				FE43998A287D766D00BFF841 /* CustomKeyBoard.swift in Sources */,
+				FED1A80E28823133007CA79E /* Support.swift in Sources */,
+				FED1A80A28822E79007CA79E /* Initial.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				FF66E251287ECCD8008DF303 /* ReviewListViewController.swift in Sources */,
 				FF66E259287ED6EC008DF303 /* UIImageView+Custom.swift in Sources */,

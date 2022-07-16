@@ -45,6 +45,7 @@ class KeyBoardEngine_addWord_Test_kirkim: XCTestCase {
         
         XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
     }
+
     func test_addWord호출시_ㄱ_ㄱ_입력시_ㄲ가반환되는지() {
         let input1 = 12593
         let input2 = 12593
