@@ -43,11 +43,12 @@ class ReviewListCell: UICollectionViewCell {
         timeLabel.text = data.createdAt
         
     }
-
-    override func layoutSubviews() {
+    
+    override func draw(_ rect: CGRect) {
         self.profileImage.layer.cornerRadius =  self.profileImage.frame.height / 2
         self.profileImage.clipsToBounds = true
     }
+    
 }
 
 // MARK: - Setup UI
