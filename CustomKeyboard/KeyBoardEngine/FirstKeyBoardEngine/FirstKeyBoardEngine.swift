@@ -211,6 +211,21 @@ extension FirstKeyBoardEngine {
 extension FirstKeyBoardEngine {
     private func combineToOnlyInitialChar(lastUnicode:Int, consonant:Int, inputLetter:Int) -> String {
         if (inputLetter <= 12622) {
+            let parsedInputLetter = Initial.parsingFromConsonant(from: inputLetter)
+            switch (consonant, parsedInputLetter) {
+            case (Initial.ㅂ.code,Initial.ㅂ.code):
+                return "ㅃ"
+            case (Initial.ㅈ.code,Initial.ㅈ.code):
+                return "ㅉ"
+            case (Initial.ㄷ.code,Initial.ㄷ.code):
+                return "ㄸ"
+            case (Initial.ㄱ.code,Initial.ㄱ.code):
+                return "ㄲ"
+            case (Initial.ㅅ.code,Initial.ㅅ.code):
+                return "ㅆ"
+            default:
+                break
+            }
             return makeCharFromUnicode(lastUnicode) + makeCharFromUnicode(inputLetter)
         } else {
             return makeCharFromUnicode(makeWord(initial: consonant, neutral: Neutral.parsingFromVowel(from: inputLetter), support: 0))
