@@ -18,6 +18,7 @@ struct FirstKeyBoardEngine: KeyBoardEngine {
     
     func addWord(inputUniCode:Int, lastUniCode:Int) -> String {
         let parsedLastUnicode: SeparatedUnicode = parsingUniCode(unicode: lastUniCode)
+        print(parsedLastUnicode)
         switch parsedLastUnicode {
         case .perfect(let initial, let neutral, let support):
             return combineToPerfactChar(initial:initial, neutral: neutral, support: support, inputLetter: inputUniCode)
@@ -172,18 +173,26 @@ extension FirstKeyBoardEngine {
         } else {
             let parsedIntput = inputLetter - 12623
             switch (neutral, parsedIntput) {
+            case (Neutral.ㅏ.code, Neutral.ㅣ.code):
+                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅐ.code, support: 0))
             case (Neutral.ㅑ.code, Neutral.ㅣ.code):
                 return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅒ.code, support: 0))
+            case (Neutral.ㅓ.code, Neutral.ㅣ.code):
+                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅔ.code, support: 0))
             case (Neutral.ㅕ.code, Neutral.ㅣ.code):
                 return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅖ.code, support: 0))
             case (Neutral.ㅗ.code, Neutral.ㅏ.code):
                 return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅘ.code, support: 0))
+            case (Neutral.ㅗ.code, Neutral.ㅐ.code):
+                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅙ.code, support: 0))
             case (Neutral.ㅗ.code, Neutral.ㅣ.code):
                 return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅚ.code, support: 0))
-            case (Neutral.ㅜ.code, Neutral.ㅣ.code):
-                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅟ.code, support: 0))
+            case (Neutral.ㅜ.code, Neutral.ㅓ.code):
+                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅝ.code, support: 0))
             case (Neutral.ㅜ.code, Neutral.ㅔ.code):
                 return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅞ.code, support: 0))
+            case (Neutral.ㅜ.code, Neutral.ㅣ.code):
+                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅟ.code, support: 0))
             case (Neutral.ㅡ.code, Neutral.ㅣ.code):
                 return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅢ.code, support: 0))
             default:
@@ -210,19 +219,28 @@ extension FirstKeyBoardEngine {
     private func combineToOnlyVowelChar(lastUnicode:Int, vowel:Int, inputLetter:Int) -> String {
         if (inputLetter > 12622) {
             let parsedIntput = inputLetter - 12623
+            print(vowel, parsedIntput)
             switch (vowel, parsedIntput) {
+            case (Neutral.ㅏ.code, Neutral.ㅣ.code):
+                return "ㅐ"
             case (Neutral.ㅑ.code, Neutral.ㅣ.code):
                 return "ㅒ"
+            case (Neutral.ㅓ.code, Neutral.ㅣ.code):
+                return "ㅔ"
             case (Neutral.ㅕ.code, Neutral.ㅣ.code):
                 return "ㅖ"
             case (Neutral.ㅗ.code, Neutral.ㅏ.code):
                 return "ㅘ"
+            case (Neutral.ㅗ.code, Neutral.ㅐ.code):
+                return "ㅙ"
             case (Neutral.ㅗ.code, Neutral.ㅣ.code):
                 return "ㅚ"
-            case (Neutral.ㅜ.code, Neutral.ㅣ.code):
-                return "ㅟ"
+            case (Neutral.ㅜ.code, Neutral.ㅓ.code):
+                return "ㅝ"
             case (Neutral.ㅜ.code, Neutral.ㅔ.code):
                 return "ㅞ"
+            case (Neutral.ㅜ.code, Neutral.ㅣ.code):
+                return "ㅟ"
             case (Neutral.ㅡ.code, Neutral.ㅣ.code):
                 return "ㅢ"
             default:
