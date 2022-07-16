@@ -46,6 +46,7 @@ class WriteController: UIViewController {
     func bindResult() {
         viewModel.resultText.bind { [weak self] result in
             self?.commentEditView.text = result
+            self?.viewModel.sendedText.value = result
         }
     }
     func keyboardView(_ keyboard: KeyboardView, didEndEditing: Bool, text: String) {

@@ -22,7 +22,7 @@ class ReviewListViewModel {
         self.keyboardViewModel = KeyboardViewModel()
         self.writeViewModel = WriteViewModel(keyboardViewModel: self.keyboardViewModel)
         
-        resultText = writeViewModel.resultText
+        resultText = writeViewModel.sendedText
     }
     
     func fetchReviewList() {
