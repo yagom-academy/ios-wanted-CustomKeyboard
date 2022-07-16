@@ -16,6 +16,7 @@ class KeyboardManager {
     private let second = [
         "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"
     ]
+    private let secondDouble = ["ㅏ", "ㅏㅣ", "ㅑ", "ㅑㅣ", "ㅓ", "ㅓㅣ", "ㅕ", "ㅕㅣ", "ㅗ", "ㅗㅏ", "ㅗㅐ", "ㅗㅣ", "ㅛ", "ㅜ", "ㅜㅓ", "ㅜㅔ", "ㅜㅣ", "ㅠ", "ㅡ", "ㅡㅣ", "ㅣ"]
     private let third = [
         "", "ㄱ", "ㄱㄱ", "ㄱㅅ", "ㄴ", "ㄴㅈ", "ㄴㅎ", "ㄷ", "ㄹ", "ㄹㄱ", "ㄹㅁ", "ㄹㅂ", "ㄹㅅ", "ㄹㅌ", "ㄹㅍ", "ㄹㅎ", "ㅁ", "ㅂ", "ㅂㅅ",
         "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"
@@ -32,7 +33,7 @@ class KeyboardManager {
             if tappedButton.type == .consonant {
                 return (addString, 1)
             } else {
-                return (addString, 0)
+                return (addString, 2)
             }
         case 1:
             // 자음이 입력되어 있는 상태 (ex ㄷ, ㅇ, ㅈ, ㄱ ...)
@@ -51,12 +52,26 @@ class KeyboardManager {
                 }
                 return ("", 0)
             }
-            // TODO: - 이중 모음의 경우 구현
+            // TODO: - 이중 모음의 경우 구현 : 초기 상태만 문제 있음, ㅘ + ㅣ = ㅙ 구현 X
         case 2:
             // 모음이 입력되어 있는 상태 (ex ㅏ, ㅑ, ㅜ, ㅗ ...)
             print("2")
             allWord.append(addString)
-            return (String(currentText) + addString, 0)
+            if tappedButton.type == .consonant {
+                lastWord = addString
+                return (String(currentText) + addString, 1)
+            } else {
+                let doubleMid = lastWord + addString
+                let idx = secondDouble.firstIndex(of: doubleMid) ?? 0
+                if idx == 0 {
+                    lastWord = addString
+                    return (String(currentText) + addString, 2)
+                } else {
+                    lastWord = doubleMid
+                    let str = second[idx]
+                    return (str, 2)
+                }
+            }
         case 3:
             // 자음 + 모음이 입력되어 있는 상태 (ex 하, 기, 시, 러 ...)
             print("3")
@@ -70,8 +85,20 @@ class KeyboardManager {
                 }
                 return ("", 0)
             } else {
-                lastWord = addString
-                return (String(currentText) + addString, 2)
+                let doubleMid = lastWord + addString
+                let idx1 = secondDouble.firstIndex(of: doubleMid) ?? 0
+                let idx2 = second.firstIndex(of: lastWord) ?? 0
+                if idx1 == 0 {
+                    lastWord = addString
+                    return (String(currentText) + addString, 2)
+                } else {
+                    let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - (idx2 * 28) + (idx1 * 28)
+                    if let scalarValue = UnicodeScalar(str) {
+                        lastWord = doubleMid
+                        return (String(scalarValue), 3)
+                    }
+                    return ("", 0)
+                }
             }
         case 4:
             // 자음 + 모음 + 자음으로 받침이 있는 상태 (ex 언, 젠, 간, 끝 ...)
