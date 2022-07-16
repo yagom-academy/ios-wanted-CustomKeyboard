@@ -7,13 +7,9 @@
 
 import UIKit
 
-protocol KeyboardViewDelegate: AnyObject {
-    var reviewText: String { get set }
-}
 
 class KeyboardView: UIView {
-    private let viewModel = KeyboardViewModel()
-    weak var delegate: KeyboardViewDelegate?
+    let viewModel: KeyboardViewModel
     
     var sejongState: SejongState = .writeInitialState
     var currentJungsung: Jungsung? = nil
@@ -99,22 +95,17 @@ class KeyboardView: UIView {
         return stackView
     }()
 
-    init() {
+    init(viewModel: KeyboardViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         setupLayout()
         
         //Binding
         bindShiftMode()
-        bindResult()
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupLayout()
-        
-        //Binding
-        bindShiftMode()
-        bindResult()
+        fatalError("init(coder:) has not been implemented")
     }
     
     func changeShiftMode(_ bool: Bool) {
@@ -128,11 +119,6 @@ class KeyboardView: UIView {
             }
     }
     
-    func bindResult() {
-        viewModel.result.bind { value in
-            self.delegate?.reviewText = value
-        }
-    }
     
     func bindShiftMode() {
         viewModel.isShift.bind { isShift in

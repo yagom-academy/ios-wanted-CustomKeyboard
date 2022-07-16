@@ -168,7 +168,24 @@ class KeyboardViewModel {
         case .ㅡ:
             if jung2 == .ㅣ { return .ㅢ }
             return nil
+        case .ㅕ:
+            if jung2 == .ㅣ { return .ㅖ }
+            return nil
+        case .ㅓ:
+            if jung2 == .ㅣ { return .ㅔ }
+            return nil
+        case .ㅏ:
+            if jung2 == .ㅣ { return .ㅐ }
+            return nil
+        case .ㅑ:
+            if jung2 == .ㅣ { return .ㅒ }
+            return nil
         default: return nil
         }
     }
 }
+
+// ㅕ ㅣ ㅖ
+// ㅓ ㅣ ㅔ
+// ㅏ ㅣ ㅐ
+// ㅑ ㅣ ㅒ

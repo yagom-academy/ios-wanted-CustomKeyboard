@@ -22,9 +22,20 @@ class ReviewListViewController: UIViewController {
     
     lazy var commentButton: CommentButton = {
         let button = CommentButton()
-        button.delegate = self
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(presentTapped))
+        button.presentTextView.addGestureRecognizer(tapGesture)
+        
+        button.sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
         return button
     }()
+    
+    @objc func presentTapped() {
+        viewModel.presentWriteController()
+    }
+    
+    @objc func sendButtonTapped() {
+        viewModel.postComment(commentButton.presentTextView.text)
+    }
     
     let viewModel = ReviewListViewModel()
     
@@ -35,6 +46,8 @@ class ReviewListViewController: UIViewController {
         viewModel.fetchReviewList()
         bindTableData()
         bindPostSuccess()
+        bindPresentController()
+        bindResultText()
     }
     
     func bindTableData() {
@@ -54,21 +67,20 @@ class ReviewListViewController: UIViewController {
             }
         }
     }
-}
-
-//MARK: - CommentButton Delegate
-extension ReviewListViewController: CommentButtonDelegate {
-    func present() {
-        let controller = WriteController()
-        controller.delegate = self
-        self.present(controller, animated: true)
+    
+    func bindPresentController() {
+        viewModel.present.bind { vc in
+            guard let vc = vc as? WriteController else {
+                return
+            }
+            self.present(vc, animated: true)
+        }
     }
     
-    func post() {
-        guard let commentView = commentButton.stackView.arrangedSubviews[1] as? UITextView,
-              let comment = commentView.text else { return }
-        viewModel.postComment(comment)
-        
+    func bindResultText() {
+        viewModel.resultText.bind { result in
+            self.commentButton.presentTextView.text = result
+        }
     }
 }
 
@@ -100,7 +112,6 @@ extension ReviewListViewController: UITableViewDataSource {
         ) as? ReviewListTableViewCell else { return UITableViewCell() }
         
         let review = viewModel.reviewList.value[indexPath.row]
-//        viewModel.reviewList[indexPath.row]
         cell.setupView(review: review)
 
         return cell

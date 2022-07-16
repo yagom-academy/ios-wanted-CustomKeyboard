@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1802A710287FDCDC00D10F46 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1802A70F287FDCDC00D10F46 /* Observable.swift */; };
 		180EC613287BEECB008430FB /* ReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180EC612287BEECB008430FB /* ReviewListViewController.swift */; };
+		18107A6E288289FB006D35A8 /* WriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18107A6D288289FB006D35A8 /* WriteViewModel.swift */; };
 		186F33932881413800F72364 /* CustomKeyboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186F33922881413800F72364 /* CustomKeyboardTests.swift */; };
 		186F3399288141D900F72364 /* KeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B675987288027A5009B2E51 /* KeyboardViewModel.swift */; };
 		186F339A2881426700F72364 /* SejongState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B675983287FB39D009B2E51 /* SejongState.swift */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		1802A70F287FDCDC00D10F46 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		180EC612287BEECB008430FB /* ReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewController.swift; sourceTree = "<group>"; };
+		18107A6D288289FB006D35A8 /* WriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewModel.swift; sourceTree = "<group>"; };
 		186F33902881413800F72364 /* CustomKeyboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomKeyboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		186F33922881413800F72364 /* CustomKeyboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyboardTests.swift; sourceTree = "<group>"; };
 		18A109A9287BF90F00BC2E5C /* CommentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentButton.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				18A109AD287C03C400BC2E5C /* WriteController.swift */,
+				18107A6D288289FB006D35A8 /* WriteViewModel.swift */,
 			);
 			path = WriteView;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				6B592B49287C0FB400267FCA /* ReviewListTableViewCell.swift in Sources */,
 				6B592B4B287C0FB800267FCA /* CellIdentifiable.swift in Sources */,
 				6B1483FF287E52A6009B49FB /* KeyboardButton.swift in Sources */,
+				18107A6E288289FB006D35A8 /* WriteViewModel.swift in Sources */,
 				6B675984287FB39D009B2E51 /* SejongState.swift in Sources */,
 				18A109AA287BF90F00BC2E5C /* CommentButton.swift in Sources */,
 				18A109AC287BFF6200BC2E5C /* TextFieldExtension.swift in Sources */,

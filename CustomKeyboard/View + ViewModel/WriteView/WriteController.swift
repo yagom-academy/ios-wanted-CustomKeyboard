@@ -14,51 +14,42 @@ protocol CommentEditDelegate: AnyObject {
 
 class WriteController: UIViewController {
     weak var delegate: CommentEditDelegate?
+    let viewModel: WriteViewModel
+    
     lazy var commentEditView: UITextView = {
         let textView = UITextView()
-        textView.delegate = self
         textView.font = UIFont.systemFont(ofSize: 20)
         textView.textContainer.maximumNumberOfLines = 0
         return textView
     }()
     
-    lazy var keyBoardView: KeyboardView = {
-        let keyboard = KeyboardView()
-        keyboard.delegate = self
-        keyboard.frame = CGRect(x: 0, y: 0, width: 0, height: 250)
-        keyboard.backgroundColor = .gray
-        return keyboard
-    }()
+    init(viewModel: WriteViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        self.commentEditView.inputView = keyBoardView
+        self.commentEditView.inputView = viewModel.keyBoardView
         
         commentEditView.text = delegate?.commentValue
         configUI()
+        
+        bindResult()
     }
-
-}
-
-//MARK: - UITextViewDelegate
-extension WriteController: UITextViewDelegate {
-    func textViewDidEndEditing(_ textView: UITextView) {
-        delegate?.commentValue = textView.text
-    }
-}
-
-//MARK: - KeyboardViewDelegate
-extension WriteController: KeyboardViewDelegate {
-    var reviewText: String {
-        get {
-            return commentEditView.text
-        }
-        set {
-            commentEditView.text = newValue
+    
+    func bindResult() {
+        viewModel.resultText.bind { [weak self] result in
+            self?.commentEditView.text = result
         }
     }
 }
+
 
 //MARK: - View Configure
 private extension WriteController {
