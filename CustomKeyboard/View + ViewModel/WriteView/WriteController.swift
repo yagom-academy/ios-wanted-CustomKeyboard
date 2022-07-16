@@ -48,6 +48,10 @@ class WriteController: UIViewController {
             self?.commentEditView.text = result
         }
     }
+    func keyboardView(_ keyboard: KeyboardView, didEndEditing: Bool, text: String) {
+        delegate?.commentValue = text
+        dismiss(animated: true)
+    }
 }
 
 

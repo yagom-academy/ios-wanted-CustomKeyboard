@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class KeyboardView: UIView {
     let viewModel: KeyboardViewModel
     
@@ -15,7 +14,6 @@ class KeyboardView: UIView {
     var currentJungsung: Jungsung? = nil
     var currentLastJongsung: Jongsung? = nil
     var isShift = false
-
     
     let topLetterValues: [Any] = [
         Chosung.ㅂ,Chosung.ㅈ,Chosung.ㄷ,Chosung.ㄱ,Chosung.ㅅ,
@@ -148,7 +146,6 @@ private extension KeyboardView {
     }
     @objc func didTapReturn() {
         debugPrint("didTapReturn")
-        // TODO: - 첫번째 화면으로 나가기
     }
     @objc func didTapBack() {
         viewModel.value.unicodeScalars.removeLast()

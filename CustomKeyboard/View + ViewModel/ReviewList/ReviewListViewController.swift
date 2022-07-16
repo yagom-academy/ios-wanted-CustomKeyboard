@@ -95,7 +95,6 @@ extension ReviewListViewController: CommentEditDelegate {
             guard let textfield = commentButton.stackView.arrangedSubviews[1] as? UITextView else { return }
             textfield.text = newValue
             commentButton.toggleAnimation(false)
-            
         }
     }
 }
