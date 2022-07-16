@@ -20,13 +20,9 @@ struct FirstKeyBoardEngine: KeyBoardEngine {
         let parsedLastUnicode: SeparatedUnicode = parsingUniCode(unicode: lastUniCode)
         switch parsedLastUnicode {
         case .perfect(let initial, let neutral, let support):
-            let output:CombinedToPerfactCharOutput = combineToSupportWithLetter(support: support, inputLetter: inputUniCode)
-            let firstCharUnicode = makeWord(initial: initial, neutral: neutral, support: output.support)
-            let firstChar = makeCharFromUnicode(firstCharUnicode)
-            let secondChar = makeCharFromUnicode(output.secondCharUnicode)
-            return firstChar + secondChar
+            return combineToPerfactChar(initial:initial, neutral: neutral, support: support, inputLetter: inputUniCode)
         case .perfectNoSupport(let initial, let neutral):
-            return ""
+            return combineToPerfactCharNoSupport(perfectUnicode: lastUniCode, initial: initial, neutral: neutral, inputLetter: inputUniCode)
         case .onlyInitial(let value):
             return ""
         case .onlyNeutral(let value):
@@ -80,12 +76,17 @@ extension FirstKeyBoardEngine {
 //MARK: - 받침 + 글자
 extension FirstKeyBoardEngine {
     typealias CombinedToPerfactCharOutput = (support:Int, secondCharUnicode:Int)
-    private func combineToSupportWithLetter(support:Int, inputLetter:Int) -> CombinedToPerfactCharOutput {
+    private func combineToPerfactChar(initial:Int, neutral:Int, support:Int, inputLetter:Int) -> String {
+        var combinedData: CombinedToPerfactCharOutput
         if (inputLetter <= 12622) {
-            return combineSupportWithConsonant(support: support, consonant: inputLetter)
+            combinedData = combineSupportWithConsonant(support: support, consonant: inputLetter)
         } else {
-            return combineSupportWithVowel(support: support, vowel: inputLetter)
+            combinedData = combineSupportWithVowel(support: support, vowel: inputLetter)
         }
+        let firstCharUnicode = makeWord(initial: initial, neutral: neutral, support: combinedData.support)
+        let firstChar = makeCharFromUnicode(firstCharUnicode)
+        let secondChar = makeCharFromUnicode(combinedData.secondCharUnicode)
+        return firstChar + secondChar
     }
     
     private func combineSupportWithConsonant(support:Int, consonant:Int) -> CombinedToPerfactCharOutput {
@@ -154,7 +155,19 @@ extension FirstKeyBoardEngine {
         case Support.ㅄ.code:
             return (Support.ㅂ.code, makeWord(initial: Initial.ㅅ.code, neutral: parsedVowel, support: 0))
         default:
-            return (0, makeWord(initial: Support.parsingtoInitialCode(by: support), neutral: parsedVowel, support: 0))
+            return (0, makeWord(initial: Initial.parsingFromSupport(from: support), neutral: parsedVowel, support: 0))
+        }
+    }
+}
+
+//MARK: - 받침X + 글자
+extension FirstKeyBoardEngine {
+    private func combineToPerfactCharNoSupport(perfectUnicode:Int , initial:Int, neutral:Int, inputLetter:Int) -> String {
+        if (inputLetter <= 12622 || [12600, 12611, 12617].contains(inputLetter)) {
+            let resultUnicode = makeWord(initial: initial, neutral: neutral, support: Support.parsingFromConsonant(from: inputLetter))
+            return makeCharFromUnicode(resultUnicode)
+        } else {
+            return makeCharFromUnicode(perfectUnicode) + makeCharFromUnicode(inputLetter)
         }
     }
 }
