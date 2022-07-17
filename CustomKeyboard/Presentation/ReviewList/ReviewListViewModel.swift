@@ -53,31 +53,48 @@ class ReviewListViewModel {
         return CellType(profileURL: url, userName: userName, contents: content, createdAt: createdAt)
     }
     
+    
+    
     private func convertDateTime(createdAtTime: String) -> String {
         
-        //TODO : 날짜 비교해서 보여주는 것 아직 안함
-        // 댓글을 작성한 시간이 1시간 이내일 경우 분 단위로 표시,
-        // 하루 이내일 경우 시간 단위로 표시
-        // 하루 이상일 경우 년월일만 표시
+        enum IntervalRange: Int {
+            case in60MinutesRange
+            case in24HoursRange
+            
+            var range: PartialRangeUpTo<Int> {
+                switch self {
+                case .in60MinutesRange : return ..<3600
+                case .in24HoursRange : return ..<86400
+                }
+            }
+        }
         
-        //Date형식 설정
+        let createdDateString: String
+        let now = Date()
+        
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        //2021-10-29T02:14:10.135Z
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        guard let createdDate = dateFormatter.date(from: createdAtTime) else { return "" }
         
-        //String을 Date형식으로 바꿔주기
-        let createdAtDateTime = dateFormatter.date(from: createdAtTime)
+        //현재날짜와 생성된 날짜의 시간차의 초단위
+        let interval = Int(now.timeIntervalSince(createdDate))
+        let minutes = interval/60
+        let hours = interval/3600
         
-        //바꿔줄 원하는 날짜 형식 설정
-        let myDataFormatter = DateFormatter()
-        myDataFormatter.dateFormat = "yyyy년 MM월 dd일"
-        myDataFormatter.locale = Locale(identifier: "ko_KR")
-        
-        //Date를 설정해둔 날짜 형식의 String으로 바꿔주기
-        let convertCreatedAtStringTime = myDataFormatter.string(from: createdAtDateTime!)
-        return convertCreatedAtStringTime
+        switch interval {
+            
+        //1시간 이내
+        case IntervalRange.in60MinutesRange.range :
+            createdDateString = "\(minutes)분 전"
+        //하루 이내
+        case IntervalRange.in24HoursRange.range :
+            createdDateString = "\(hours)시간 전"
+        //하루 이상
+        default:
+            dateFormatter.dateFormat = "yyyy년 MM월 dd일"
+            createdDateString = dateFormatter.string(from: createdDate)
+        }
+        return createdDateString
     }
-    
-    
 }
 
