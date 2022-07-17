@@ -48,16 +48,25 @@
                   Identifier = "SPACEInputTests_monica">
                </Test>
                <Test
+                  Identifier = "backCaseRefactoringTests_monica">
+               </Test>
+               <Test
                   Identifier = "getCombinedTests_monica">
                </Test>
                <Test
                   Identifier = "getSeparatedTests_monica">
                </Test>
                <Test
+                  Identifier = "normalCaseRefactoringCodeTests_monica">
+               </Test>
+               <Test
                   Identifier = "setCombinedTests">
                </Test>
                <Test
                   Identifier = "setSeparatedBufferTests">
+               </Test>
+               <Test
+                  Identifier = "spaceCaseRefactoringTests_monica">
                </Test>
             </SkippedTests>
          </TestableReference>

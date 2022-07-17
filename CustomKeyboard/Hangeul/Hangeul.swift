@@ -93,7 +93,9 @@ struct HG {
             static let i = 0x1175
 
             static let list: [Int] = [a, ae, ya, yae, eo, e, yeo, ye, o, wa, wae, oe, yo, u, wo, we, wi, yu, eu, eui, i]
-            static let double: [Int: [Int: Int]] = [a: [i: ae], eo: [i: e], yeo: [i: ye] , ya: [i: yae],o: [a: wa, ae: wae, i: oe], u: [eo: wo, e: we, i: wi], eu: [i: eui]]
+            static let double: [Int: [Int: Int]] = [a: [i: ae], eo: [i: e], yeo: [i: ye] , ya: [i: yae], o: [a: wa, ae: wae, i: oe], u: [eo: wo, e: we, i: wi], eu: [i: eui]]
+            
+            // double[ㅏ][ㅣ] = ㅐ
             static let split: [Int: [Int]] = [wa: [o, a], wae: [o, ae], oe: [o, i], wo: [u, eo], we: [u, e], wi: [u, i], eui: [eu, i], ae: [a, i], e: [eo, i], ye: [yeo, i], yae: [ya, i]]
 
             /*

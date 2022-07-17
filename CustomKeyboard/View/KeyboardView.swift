@@ -21,6 +21,7 @@ class KeyboardView: UIView {
     @IBOutlet var allButtons: [UIButton]!
     
     weak var delegate: KeyboardViewDelegate?
+    let IOManager = HangeulIOManger()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,7 +43,8 @@ class KeyboardView: UIView {
             title = sender.currentTitle ?? ""
         }
         
-        IOManager.shared.process(input: title)
+        IOManager.process(input: title)
+        print("결과: \(IOManager.getOutput())")
         delegate?.keyboardViewTouch()
     }
     
