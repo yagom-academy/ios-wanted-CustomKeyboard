@@ -25,7 +25,7 @@ struct InpStack{
     var curhanst: HangulStatus //상태
     var key : UInt32 //방금 입력된 키 코드
     var charCode : String //조합된 코드
-    var chKind : HangulCHKind
+    var chKind : HangulCHKind // 입력된 키가 자음인지 모임인지
 }
 
 import Foundation
@@ -221,11 +221,15 @@ extension HangulAutomata{
             keyCode = UInt32(jongsungTable.firstIndex(of: key)!)
             break
         case .endOne:
+            //중성 -> 모음 입력시 이전에 입력한 키가 그대로 입력되는 문제
             if chKind == .consonant{
                 charCode = chosungTable[Int(keyCode)]
+                currentHangulState = .chosung
+            }else{
+                charCode = joongsungTable[Int(keyCode)]
+                currentHangulState = .jongsung
             }
-            currentHangulState = .chosung
-            print("END")
+            
             buffer.append("")
             cursor += 1
             break
@@ -238,11 +242,14 @@ extension HangulAutomata{
                 buffer.append("")
                 cursor += 1
             }else{
-                joongsungPair()
+                // 모음 + 모음 일경우 뒤에 빈 배열 한칸 생성되는 문제 해결
+                if !joongsungPair(){
+                    cursor += 1
+                    buffer.append("")
+                }
                 charCode = joongsungTable[Int(keyCode)]
                 currentHangulState = nil
-                hangulAutomata(key: charCode)
-                return
+                currentHangulState = .jongsung
             }
             break
         default:
@@ -251,6 +258,5 @@ extension HangulAutomata{
         inpStack.append(InpStack(curhanst: currentHangulState!, key: keyCode, charCode: String(Unicode.Scalar(charCode)!), chKind: chKind))
         inpSP += 1
         buffer[cursor] = charCode
-        print(buffer)
     }
 }
