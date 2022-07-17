@@ -19,7 +19,6 @@ class KeyboardIOManager {
                 hangulAutomata.inpStack.removeAll()
                 hangulAutomata.inpSP = 0
                 hangulAutomata.currentHangulState = nil
-                print(hangulAutomata.buffer)
             }else{
                 hangulAutomata.hangulAutomata(key: input)
             }

@@ -238,7 +238,7 @@ extension HangulAutomata{
                 oldKey = UInt32(chosungTable.firstIndex(of: jongsungTable[Int(oldKey)])!)
                 charCode =  String(Unicode.Scalar(combinationHangul(chosung: oldKey, joongsung: keyCode))!)
                 currentHangulState = .joongsung
-                buffer[cursor] = inpStack[inpSP-2].charCode
+                buffer[buffer.count-1] = inpStack[inpSP-2].charCode
                 buffer.append("")
                 cursor += 1
             }else{
