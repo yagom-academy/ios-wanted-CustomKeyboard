@@ -9,6 +9,7 @@ import UIKit
 
 class CreateReviewViewController: UIViewController {
 
+    private let keyboadMaker = KeyboardMaker()
     
     private let reviewTextView: UITextView = {
         var textView = UITextView()
@@ -48,21 +49,20 @@ class CreateReviewViewController: UIViewController {
 }
 
 extension CreateReviewViewController: KeyboardInfoReceivable {
+    
     func customKeyboardView(pressedKeyboardButton: UIButton) {
-        let hungul = pressedKeyboardButton.titleLabel!.text!
         
+        let hangul = pressedKeyboardButton.titleLabel!.text!
         
-        
-        
-        let keyboadMaker = KeyboardMaker()
-
-        
-        keyboadMaker.putHangul(input: hungul)
-        
-        
+        guard !keyboadMaker.confirmEnterPressed(input: hangul) else {
+            self.dismiss(animated: true)
+            return
+        }
+        reviewTextView.text = keyboadMaker.putHangul(input: hangul)
     }
+    
     func customKeyboardView(pressedDeleteButton: UIButton) {
-        
+        reviewTextView.text = keyboadMaker.putHangul(input: pressedDeleteButton.titleLabel!.text!)
     }
 }
 
