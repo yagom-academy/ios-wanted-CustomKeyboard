@@ -257,6 +257,6 @@ extension HangulAutomata{
         }
         inpStack.append(InpStack(curhanst: currentHangulState!, key: keyCode, charCode: String(Unicode.Scalar(charCode)!), chKind: chKind))
         inpSP += 1
-        buffer[cursor] = charCode
+        buffer[buffer.count-1] = charCode
     }
 }

@@ -13,7 +13,16 @@ class KeyboardIOManager {
     
     var input: String = "" {
         didSet {
-            hangulAutomata.hangulAutomata(key: input)
+            if input == " "{
+                hangulAutomata.buffer.append(" ")
+                hangulAutomata.cursor += 1
+                hangulAutomata.inpStack.removeAll()
+                hangulAutomata.inpSP = 0
+                hangulAutomata.currentHangulState = nil
+                print(hangulAutomata.buffer)
+            }else{
+                hangulAutomata.hangulAutomata(key: input)
+            }
             updateTextView(hangulAutomata.buffer.reduce("", { $0 + $1}))
         }
     }
@@ -37,7 +46,7 @@ extension KeyboardIOManager: CustomKeyboardDelegate {
     }
     
     func spaceKeypadTap() {
-        
+        self.input = " "
     }
     
     
