@@ -12,6 +12,12 @@ class HomeViewModel {
     @Published var reviews: [Review] = []
     @Published var isUploaded = false
     
+    private let provider: Provider
+    
+    init() {
+        self.provider = Provider()
+    }
+    
     func reviewsCount() -> Int {
         return reviews.count
     }
@@ -22,7 +28,7 @@ class HomeViewModel {
     
     func fetch() {
         let reviewsEndpoint = APIEndpoints.getReviews()
-        Provider.shared.request(endpoint: reviewsEndpoint) { (result: Result<ReviewResponse, Error>) in
+        provider.request(endpoint: reviewsEndpoint) { (result: Result<ReviewResponse, Error>) in
             switch result {
             case .success(let reviewResponse):
                 self.reviews = reviewResponse.data
@@ -42,7 +48,7 @@ class HomeViewModel {
         
         let postEndpoint = APIEndpoints.postReview(bodyData: data)
         
-        Provider.shared.postRequest(endpoint: postEndpoint) { result in
+        provider.postRequest(endpoint: postEndpoint) { result in
             switch result {
             case .success(let data):
                 let content = String(decoding: data, as: UTF8.self)

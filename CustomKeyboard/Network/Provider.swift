@@ -12,9 +12,6 @@ class Provider {
         case decode(Error)
     }
     
-    static let shared = Provider()
-    private init() { }
-    
     func request<T: Decodable>(endpoint: Endpoint, completion: @escaping (Result<T, Error>) -> Void) {
         do {
             let urlRequest = try endpoint.urlRequest()
