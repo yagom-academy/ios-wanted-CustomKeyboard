@@ -167,7 +167,10 @@ extension FirstKeyBoardEngine {
 //MARK: - 받침X + 입력값(글자)
 extension FirstKeyBoardEngine {
     private func combineToPerfactCharNoSupport(lastUnicode:Int , initial:Int, neutral:Int, inputLetter:Int) -> String {
-        if (inputLetter <= 12622 || [12600, 12611, 12617].contains(inputLetter)) {
+        if (inputLetter <= 12622) {
+            if ([12600, 12611, 12617].contains(inputLetter)) {
+                return makeCharFromUnicode(lastUnicode) + makeCharFromUnicode(inputLetter)
+            }
             let resultUnicode = makeWord(initial: initial, neutral: neutral, support: Support.parsingFromConsonant(from: inputLetter))
             return makeCharFromUnicode(resultUnicode)
         } else {
