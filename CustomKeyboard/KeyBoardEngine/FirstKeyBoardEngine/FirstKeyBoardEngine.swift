@@ -17,7 +17,7 @@ struct FirstKeyBoardEngine: KeyBoardEngine {
     }
     
     func addWord(inputUniCode:Int, lastUniCode:Int) -> String {
-        let parsedLastUnicode: SeparatedUnicode = parsingUniCode(unicode: lastUniCode)
+        let parsedLastUnicode: SeparatedUnicode = SeparatingUnicode(unicode: lastUniCode)
         switch parsedLastUnicode {
         case .perfect(let initial, let neutral, let support):
             return combineToPerfactChar(initial:initial, neutral: neutral, support: support, inputLetter: inputUniCode)
@@ -31,7 +31,7 @@ struct FirstKeyBoardEngine: KeyBoardEngine {
     }
     
     func removeWord(lastUniCode:Int) -> String {
-        let parsedLastUnicode: SeparatedUnicode = parsingUniCode(unicode: lastUniCode)
+        let parsedLastUnicode: SeparatedUnicode = SeparatingUnicode(unicode: lastUniCode)
         switch parsedLastUnicode {
         case .perfect(let initial, let neutral, let support):
             return removeFromPerfactChar(initial: initial, neutral: neutral, support: support)
@@ -48,7 +48,7 @@ struct FirstKeyBoardEngine: KeyBoardEngine {
 
 //MARK: - 기본Tool 메서드: 1.유니코드를 분리, 2.결합, 3.Int->String, 4.String->Int 메서드
 extension FirstKeyBoardEngine {
-    private func parsingUniCode(unicode:Int) -> SeparatedUnicode {
+    private func SeparatingUnicode(unicode:Int) -> SeparatedUnicode {
         if (unicode >= 44032) {
             let value:Int = unicode - 44032
             let initial:Int = Int(floor(Double(value / (21*28))))
@@ -59,14 +59,14 @@ extension FirstKeyBoardEngine {
             } else {
                 return .perfect(initial: initial, neutral: neutral, support: support)
             }
-        } else if (unicode <= 12622) {
+        } else if (unicode <= CharUnicode.ㅎ.code) {
             return .onlyConsonant(consonant: Initial.parsingFromConsonant(from: unicode))
         } else {
             return .onlyVowel(vowel: Neutral.parsingFromVowel(from: unicode))
         }
     }
     
-    private func makeWord(initial:Int, neutral:Int, support:Int) -> Int {
+    private func makePerfectCharUnicode(initial:Int, neutral:Int, support:Int) -> Int {
         return 44032 + (initial*21*28) + (neutral*28) + support
     }
     
@@ -92,12 +92,12 @@ extension FirstKeyBoardEngine {
     typealias CombinedToPerfactCharOutput = (support:Int, secondCharUnicode:Int)
     private func combineToPerfactChar(initial:Int, neutral:Int, support:Int, inputLetter:Int) -> String {
         var combinedData: CombinedToPerfactCharOutput
-        if (inputLetter <= 12622) {
+        if (inputLetter <= CharUnicode.ㅎ.code) {
             combinedData = combineSupportWithConsonant(support: support, consonant: inputLetter)
         } else {
             combinedData = combineSupportWithVowel(support: support, vowel: inputLetter)
         }
-        let firstChar = makeCharFromUnicode(makeWord(initial: initial, neutral: neutral, support: combinedData.support))
+        let firstChar = makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: neutral, support: combinedData.support))
         let secondChar = combinedData.secondCharUnicode == 0 ? "" : makeCharFromUnicode(combinedData.secondCharUnicode)
         return firstChar + secondChar
     }
@@ -105,35 +105,35 @@ extension FirstKeyBoardEngine {
     private func combineSupportWithConsonant(support:Int, consonant:Int) -> CombinedToPerfactCharOutput {
         switch support {
         case Support.ㄱ.code:
-            return consonant == 12613 ? (Support.ㄳ.code,0) : (support,0)
+            return consonant == CharUnicode.ㅅ.code ? (Support.ㄳ.code,0) : (support,0)
         case Support.ㄴ.code:
-            if consonant == 12616 {
+            if consonant == CharUnicode.ㅈ.code {
                 return (Support.ㄵ.code,0)
-            } else if consonant == 12622 {
+            } else if consonant == CharUnicode.ㅎ.code {
                 return (Support.ㄶ.code,0)
             }
             break
         case Support.ㄹ.code:
             switch consonant {
-            case 12593:
+            case CharUnicode.ㄱ.code:
                 return (Support.ㄺ.code,0)
-            case 12609:
+            case CharUnicode.ㅁ.code:
                 return (Support.ㄻ.code,0)
-            case 12610:
+            case CharUnicode.ㅂ.code:
                 return (Support.ㄼ.code,0)
-            case 12613:
+            case CharUnicode.ㅅ.code:
                 return (Support.ㄽ.code,0)
-            case 12620:
+            case CharUnicode.ㅌ.code:
                 return (Support.ㄾ.code,0)
-            case 12621:
+            case CharUnicode.ㅍ.code:
                 return (Support.ㄿ.code,0)
-            case 12622:
+            case CharUnicode.ㅎ.code:
                 return (Support.ㅀ.code,0)
             default:
                 break
             }
         case Support.ㅂ.code:
-            if consonant == 12613 {
+            if consonant == CharUnicode.ㅅ.code {
                 return (Support.ㅄ.code,0)
             }
         default:
@@ -146,29 +146,29 @@ extension FirstKeyBoardEngine {
         let parsedVowel = Neutral.parsingFromVowel(from: vowel)
         switch support {
         case Support.ㄳ.code:
-            return (Support.ㄱ.code, makeWord(initial: Initial.ㅅ.code, neutral: parsedVowel, support: 0))
+            return (Support.ㄱ.code, makePerfectCharUnicode(initial: Initial.ㅅ.code, neutral: parsedVowel, support: 0))
         case Support.ㄵ.code:
-            return (Support.ㄴ.code, makeWord(initial: Initial.ㅈ.code, neutral: parsedVowel, support: 0))
+            return (Support.ㄴ.code, makePerfectCharUnicode(initial: Initial.ㅈ.code, neutral: parsedVowel, support: 0))
         case Support.ㄶ.code:
-            return (Support.ㄴ.code, makeWord(initial: Initial.ㅎ.code, neutral: parsedVowel, support: 0))
+            return (Support.ㄴ.code, makePerfectCharUnicode(initial: Initial.ㅎ.code, neutral: parsedVowel, support: 0))
         case Support.ㄺ.code:
-            return (Support.ㄹ.code, makeWord(initial: Initial.ㄱ.code, neutral: parsedVowel, support: 0))
+            return (Support.ㄹ.code, makePerfectCharUnicode(initial: Initial.ㄱ.code, neutral: parsedVowel, support: 0))
         case Support.ㄻ.code:
-            return (Support.ㄹ.code, makeWord(initial: Initial.ㅁ.code, neutral: parsedVowel, support: 0))
+            return (Support.ㄹ.code, makePerfectCharUnicode(initial: Initial.ㅁ.code, neutral: parsedVowel, support: 0))
         case Support.ㄼ.code:
-            return (Support.ㄹ.code, makeWord(initial: Initial.ㅂ.code, neutral: parsedVowel, support: 0))
+            return (Support.ㄹ.code, makePerfectCharUnicode(initial: Initial.ㅂ.code, neutral: parsedVowel, support: 0))
         case Support.ㄽ.code:
-            return (Support.ㄹ.code, makeWord(initial: Initial.ㅅ.code, neutral: parsedVowel, support: 0))
+            return (Support.ㄹ.code, makePerfectCharUnicode(initial: Initial.ㅅ.code, neutral: parsedVowel, support: 0))
         case Support.ㄾ.code:
-            return (Support.ㄹ.code, makeWord(initial: Initial.ㅌ.code, neutral: parsedVowel, support: 0))
+            return (Support.ㄹ.code, makePerfectCharUnicode(initial: Initial.ㅌ.code, neutral: parsedVowel, support: 0))
         case Support.ㄿ.code:
-            return (Support.ㄹ.code, makeWord(initial: Initial.ㅍ.code, neutral: parsedVowel, support: 0))
+            return (Support.ㄹ.code, makePerfectCharUnicode(initial: Initial.ㅍ.code, neutral: parsedVowel, support: 0))
         case Support.ㅀ.code:
-            return (Support.ㄹ.code, makeWord(initial: Initial.ㅎ.code, neutral: parsedVowel, support: 0))
+            return (Support.ㄹ.code, makePerfectCharUnicode(initial: Initial.ㅎ.code, neutral: parsedVowel, support: 0))
         case Support.ㅄ.code:
-            return (Support.ㅂ.code, makeWord(initial: Initial.ㅅ.code, neutral: parsedVowel, support: 0))
+            return (Support.ㅂ.code, makePerfectCharUnicode(initial: Initial.ㅅ.code, neutral: parsedVowel, support: 0))
         default:
-            return (0, makeWord(initial: Initial.parsingFromSupport(from: support), neutral: parsedVowel, support: 0))
+            return (0, makePerfectCharUnicode(initial: Initial.parsingFromSupport(from: support), neutral: parsedVowel, support: 0))
         }
     }
 }
@@ -176,41 +176,41 @@ extension FirstKeyBoardEngine {
 //MARK: - Add: 받침x + 입력값(글자)
 extension FirstKeyBoardEngine {
     private func combineToPerfactCharNoSupport(lastUnicode:Int , initial:Int, neutral:Int, inputLetter:Int) -> String {
-        if (inputLetter <= 12622) {
-            if ([12600, 12611, 12617].contains(inputLetter)) {
+        if (inputLetter <= CharUnicode.ㅎ.code) {
+            if ([CharUnicode.ㄸ.code, CharUnicode.ㅃ.code, CharUnicode.ㅉ.code].contains(inputLetter)) {
                 return makeCharFromUnicode(lastUnicode) + makeCharFromUnicode(inputLetter)
             }
-            let resultUnicode = makeWord(initial: initial, neutral: neutral, support: Support.parsingFromConsonant(from: inputLetter))
+            let resultUnicode = makePerfectCharUnicode(initial: initial, neutral: neutral, support: Support.parsingFromConsonant(from: inputLetter))
             return makeCharFromUnicode(resultUnicode)
         } else {
             let parsedIntput = Neutral.parsingFromVowel(from: inputLetter)
             switch (neutral, parsedIntput) {
             case (Neutral.ㅏ.code, Neutral.ㅣ.code):
-                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅐ.code, support: 0))
+                return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: Neutral.ㅐ.code, support: 0))
             case (Neutral.ㅑ.code, Neutral.ㅣ.code):
-                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅒ.code, support: 0))
+                return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: Neutral.ㅒ.code, support: 0))
             case (Neutral.ㅓ.code, Neutral.ㅣ.code):
-                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅔ.code, support: 0))
+                return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: Neutral.ㅔ.code, support: 0))
             case (Neutral.ㅕ.code, Neutral.ㅣ.code):
-                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅖ.code, support: 0))
+                return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: Neutral.ㅖ.code, support: 0))
             case (Neutral.ㅗ.code, Neutral.ㅏ.code):
-                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅘ.code, support: 0))
+                return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: Neutral.ㅘ.code, support: 0))
             case (Neutral.ㅗ.code, Neutral.ㅐ.code):
-                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅙ.code, support: 0))
+                return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: Neutral.ㅙ.code, support: 0))
             case (Neutral.ㅗ.code, Neutral.ㅣ.code):
-                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅚ.code, support: 0))
+                return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: Neutral.ㅚ.code, support: 0))
             case (Neutral.ㅜ.code, Neutral.ㅓ.code):
-                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅝ.code, support: 0))
+                return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: Neutral.ㅝ.code, support: 0))
             case (Neutral.ㅜ.code, Neutral.ㅔ.code):
-                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅞ.code, support: 0))
+                return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: Neutral.ㅞ.code, support: 0))
             case (Neutral.ㅜ.code, Neutral.ㅣ.code):
-                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅟ.code, support: 0))
+                return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: Neutral.ㅟ.code, support: 0))
             case (Neutral.ㅡ.code, Neutral.ㅣ.code):
-                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅢ.code, support: 0))
+                return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: Neutral.ㅢ.code, support: 0))
             case (Neutral.ㅝ.code, Neutral.ㅣ.code):
-                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅞ.code, support: 0))
+                return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: Neutral.ㅞ.code, support: 0))
             case (Neutral.ㅘ.code, Neutral.ㅣ.code):
-                return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅙ.code, support: 0))
+                return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: Neutral.ㅙ.code, support: 0))
             default:
                 break
             }
@@ -222,7 +222,7 @@ extension FirstKeyBoardEngine {
 //MARK: - Add: only자음 + 입력값(글자)
 extension FirstKeyBoardEngine {
     private func combineToOnlyConsonantChar(lastUnicode:Int, consonant:Int, inputLetter:Int) -> String {
-        if (inputLetter <= 12622) {
+        if (inputLetter <= CharUnicode.ㅎ.code) {
             let parsedInputLetter = Initial.parsingFromConsonant(from: inputLetter)
             switch (consonant, parsedInputLetter) {
             case (Initial.ㅂ.code,Initial.ㅂ.code):
@@ -240,7 +240,7 @@ extension FirstKeyBoardEngine {
             }
             return makeCharFromUnicode(lastUnicode) + makeCharFromUnicode(inputLetter)
         } else {
-            return makeCharFromUnicode(makeWord(initial: consonant, neutral: Neutral.parsingFromVowel(from: inputLetter), support: 0))
+            return makeCharFromUnicode(makePerfectCharUnicode(initial: consonant, neutral: Neutral.parsingFromVowel(from: inputLetter), support: 0))
         }
     }
 }
@@ -248,8 +248,8 @@ extension FirstKeyBoardEngine {
 //MARK: - Add: only모음 + 입력값(글자)
 extension FirstKeyBoardEngine {
     private func combineToOnlyVowelChar(lastUnicode:Int, vowel:Int, inputLetter:Int) -> String {
-        if (inputLetter > 12622) {
-            let parsedIntput = inputLetter - 12623
+        if (inputLetter > CharUnicode.ㅎ.code) {
+            let parsedIntput = Neutral.parsingFromVowel(from: inputLetter)
             print(vowel, parsedIntput)
             switch (vowel, parsedIntput) {
             case (Neutral.ㅏ.code, Neutral.ㅣ.code):
@@ -302,7 +302,7 @@ extension FirstKeyBoardEngine {
         default:
             parsedSupport = 0
         }
-        return makeCharFromUnicode(makeWord(initial: initial, neutral: neutral, support: parsedSupport))
+        return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: neutral, support: parsedSupport))
     }
 }
 
@@ -311,13 +311,13 @@ extension FirstKeyBoardEngine {
     private func removeFromPerfactCharNoSupport(initial:Int, neutral:Int) -> String {
         switch neutral {
         case Neutral.ㅘ.code, Neutral.ㅙ.code, Neutral.ㅚ.code:
-            return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅗ.code, support: 0))
+            return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: Neutral.ㅗ.code, support: 0))
         case Neutral.ㅝ.code, Neutral.ㅞ.code, Neutral.ㅟ.code:
-            return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅜ.code, support: 0))
+            return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: Neutral.ㅜ.code, support: 0))
         case Neutral.ㅢ.code:
-            return makeCharFromUnicode(makeWord(initial: initial, neutral: Neutral.ㅡ.code, support: 0))
+            return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: Neutral.ㅡ.code, support: 0))
         default:
-            return makeCharFromUnicode(Initial.parsingToConsonant(from: initial))
+            return makeCharFromUnicode(CharUnicode.parsingFromInitial(from: initial))
         }
     }
 }
@@ -334,11 +334,11 @@ extension FirstKeyBoardEngine {
     private func removeFromOnlyVowelChar(vowel:Int) -> String {
         switch vowel {
         case Neutral.ㅘ.code, Neutral.ㅙ.code, Neutral.ㅚ.code:
-            return makeCharFromUnicode(Neutral.parsingToVowel(from: Neutral.ㅗ.code))
+            return makeCharFromUnicode(CharUnicode.parsingFromNeutral(from: Neutral.ㅗ.code))
         case Neutral.ㅝ.code, Neutral.ㅞ.code, Neutral.ㅟ.code:
-            return makeCharFromUnicode(Neutral.parsingToVowel(from: Neutral.ㅜ.code))
+            return makeCharFromUnicode(CharUnicode.parsingFromNeutral(from: Neutral.ㅜ.code))
         case Neutral.ㅢ.code:
-            return makeCharFromUnicode(Neutral.parsingToVowel(from: Neutral.ㅡ.code))
+            return makeCharFromUnicode(CharUnicode.parsingFromNeutral(from: Neutral.ㅡ.code))
         default:
             return ""
         }

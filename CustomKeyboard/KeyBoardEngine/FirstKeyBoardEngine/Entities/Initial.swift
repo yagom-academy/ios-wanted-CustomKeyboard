@@ -58,31 +58,5 @@ enum Initial:Int {
         default: return 0
         }
     }
-    static func parsingToConsonant(from initial: Int) -> Int {
-        var consonant:Int
-        switch initial {
-        case 0: consonant = 1
-        case 1: consonant = 2
-        case 2: consonant = 4
-        case 3: consonant = 7
-        case 4: consonant = 8
-        case 5: consonant = 9
-        case 6: consonant = 17
-        case 7: consonant = 18
-        case 8: consonant = 19
-        case 9: consonant = 21
-        case 10: consonant = 22
-        case 11: consonant = 23
-        case 12: consonant = 24
-        case 13: consonant = 25
-        case 14: consonant = 26
-        case 15: consonant = 27
-        case 16: consonant = 28
-        case 17: consonant = 29
-        case 18: consonant = 30
-        default: consonant = 0
-        }
-        return consonant + 12592
-    }
 }
 

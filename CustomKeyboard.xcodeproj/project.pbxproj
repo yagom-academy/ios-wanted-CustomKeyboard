@@ -11,6 +11,7 @@
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
 		DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66428604279003DD2F5 /* Assets.xcassets */; };
 		DE15E66828604279003DD2F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */; };
+		FE0C2A8328842B6D009ADEB8 /* CharUnicode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0C2A8228842B6D009ADEB8 /* CharUnicode.swift */; };
 		FE148A352880514C007AAF1C /* KeyBoardEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE148A342880514C007AAF1C /* KeyBoardEngine.swift */; };
 		FE148A37288053BC007AAF1C /* FirstKeyBoardEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE148A36288053BC007AAF1C /* FirstKeyBoardEngine.swift */; };
 		FE439987287D6B1D00BFF841 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE439986287D6B1D00BFF841 /* CustomError.swift */; };
@@ -60,6 +61,7 @@
 		DE15E66428604279003DD2F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DE15E66728604279003DD2F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DE15E66928604279003DD2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE0C2A8228842B6D009ADEB8 /* CharUnicode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharUnicode.swift; sourceTree = "<group>"; };
 		FE148A342880514C007AAF1C /* KeyBoardEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardEngine.swift; sourceTree = "<group>"; };
 		FE148A36288053BC007AAF1C /* FirstKeyBoardEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstKeyBoardEngine.swift; sourceTree = "<group>"; };
 		FE439986287D6B1D00BFF841 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				FED1A80928822E79007CA79E /* Initial.swift */,
 				FED1A80B28823039007CA79E /* Neutral.swift */,
 				FED1A80D28823133007CA79E /* Support.swift */,
+				FE0C2A8228842B6D009ADEB8 /* CharUnicode.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				FED1A80C28823039007CA79E /* Neutral.swift in Sources */,
 				FE43998A287D766D00BFF841 /* CustomKeyBoard.swift in Sources */,
 				FED1A80E28823133007CA79E /* Support.swift in Sources */,
+				FE0C2A8328842B6D009ADEB8 /* CharUnicode.swift in Sources */,
 				FED1A80A28822E79007CA79E /* Initial.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				FF66E251287ECCD8008DF303 /* ReviewListViewController.swift in Sources */,
