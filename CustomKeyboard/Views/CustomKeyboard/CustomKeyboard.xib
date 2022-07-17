@@ -344,7 +344,7 @@
                                     <color key="backgroundColor" red="0.32430873247599046" green="0.32363062071817383" blue="0.33641616923292883" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" image="delete.left" catalog="system">
+                                    <state key="normal" title="⌫">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <connections>
@@ -371,7 +371,7 @@
                                     <rect key="frame" x="102" y="0.0" width="204" height="46"/>
                                     <color key="backgroundColor" systemColor="systemGrayColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" title="스페이스">
+                                    <state key="normal" title=" ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <connections>
@@ -448,7 +448,6 @@
         </view>
     </objects>
     <resources>
-        <image name="delete.left" catalog="system" width="128" height="104"/>
         <image name="shift" catalog="system" width="128" height="106"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
