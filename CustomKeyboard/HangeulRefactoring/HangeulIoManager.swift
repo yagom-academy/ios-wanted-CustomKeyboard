@@ -49,20 +49,20 @@ class HangeulIOManger {
                 tail.position.removeLast()
             }
             let result = combiner.combine(tail, editMode: .remove)
-            updateOutput(with: result.newString, mode: .changeCharacter)
+            updateOutputList(with: result.newString, mode: .changeCharacter)
         case "Space":
             inputList.tail?.status = .finished
             inputList.append(data: "Space")
-            updateOutput(with: " ", mode: .addCharacter)
+            updateOutputList(with: " ", mode: .addCharacter)
         default:
             inputList.append(data: input)
             specifier.specify(inputList.tail!)
             let result = combiner.combine(inputList.tail!, editMode: .add)
-            updateOutput(with: result.newString, mode: result.mode)
+            updateOutputList(with: result.newString, mode: result.mode)
         }
     }
     
-    private func updateOutput(with character: String, mode: HangeulOutputEditMode) {
+    private func updateOutputList(with character: String, mode: HangeulOutputEditMode) {
         
         if mode == .changeCharacter {
             outputList.removeLast()

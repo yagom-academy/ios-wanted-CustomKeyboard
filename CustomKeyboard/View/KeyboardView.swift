@@ -8,7 +8,7 @@
 import UIKit
 
 protocol KeyboardViewDelegate: AnyObject {
-    func keyboardViewTouch()
+    func keyboardViewTouch(text: String)
     func keyboardViewReturn()
 }
 
@@ -44,8 +44,7 @@ class KeyboardView: UIView {
         }
         
         IOManager.process(input: title)
-        print("결과: \(IOManager.getOutput())")
-        delegate?.keyboardViewTouch()
+        delegate?.keyboardViewTouch(text: IOManager.getOutput())
     }
     
     @IBAction func touchShiftButton(_ sender: UIButton) {

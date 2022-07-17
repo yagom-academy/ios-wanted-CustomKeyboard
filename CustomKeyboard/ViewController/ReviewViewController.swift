@@ -29,7 +29,6 @@ extension ReviewViewController {
     private func configure() {
         configureTextView()
         configureDelegate()
-        updateHangeulManagerString()
     }
     
     private func configureTextView() {
@@ -38,20 +37,18 @@ extension ReviewViewController {
         textView.layer.cornerRadius = 5
         
         textView.isUserInteractionEnabled = false
+        textView.text = ""
     }
     
     private func configureDelegate() {
         keyboardView.delegate = self
     }
-    
-    private func updateHangeulManagerString() {
-        textView.text = IOManager.shared.getOutput()
-    }
+
 }
 
 extension ReviewViewController: KeyboardViewDelegate {
-    func keyboardViewTouch() {
-        updateHangeulManagerString()
+    func keyboardViewTouch(text: String) {
+        textView.text = text
     }
     
     func keyboardViewReturn() {
