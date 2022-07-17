@@ -20,7 +20,6 @@ class ReviewListCell: UICollectionViewCell {
     private let declarationIcon = UIImageView()
     private let declarationLabel = UILabel()
     
-    
     // MARK: - Life Cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,12 +54,13 @@ class ReviewListCell: UICollectionViewCell {
 extension ReviewListCell {
     
     private func configureAttribute() {
-
+        contentView.layer.addBorder(arrEdge: [.bottom], color: .systemGray5, width: 1)
+        
         [profileImage, userNameLabel, contentsLabel, timeLabel, declarationStack].forEach {
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-
+        
         //유저네임
         userNameLabel.font = UIFont.boldSystemFont(ofSize: 16)
         
@@ -87,7 +87,7 @@ extension ReviewListCell {
             profileImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             profileImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             profileImage.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.15),
-            profileImage.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.3),
+            profileImage.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.15),
         ])
         
         NSLayoutConstraint.activate([
