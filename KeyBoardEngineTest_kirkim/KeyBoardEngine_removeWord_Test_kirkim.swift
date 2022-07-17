@@ -47,25 +47,25 @@ class KeyBoardEngine_removeWord_Test_kirkim: XCTestCase {
     }
     func test_removeWord호출시_ㅝ_입력시_ㅜ반환되는지() {
         let input = 12637
-        let result = ""
+        let result = "ㅜ"
         
         XCTAssertEqual(sut?.removeWord(lastUniCode: input), result)
     }
     func test_removeWord호출시_ㅞ_입력시_ㅜ반환되는지() {
         let input = 12638
-        let result = ""
+        let result = "ㅜ"
         
         XCTAssertEqual(sut?.removeWord(lastUniCode: input), result)
     }
     func test_removeWord호출시_ㅟ_입력시_ㅜ반환되는지() {
         let input = 12639
-        let result = ""
+        let result = "ㅜ"
         
         XCTAssertEqual(sut?.removeWord(lastUniCode: input), result)
     }
     func test_removeWord호출시_ㅢ_입력시_ㅡ반환되는지() {
         let input = 12642
-        let result = ""
+        let result = "ㅡ"
         
         XCTAssertEqual(sut?.removeWord(lastUniCode: input), result)
     }
@@ -135,4 +135,73 @@ class KeyBoardEngine_removeWord_Test_kirkim: XCTestCase {
         
         XCTAssertEqual(sut?.removeWord(lastUniCode: input), result)
     }
+    
+    func test_removeWord호출시_합_입력시_하반환되는지() {
+        let input = 54633
+        let result = "하"
+        
+        XCTAssertEqual(sut?.removeWord(lastUniCode: input), result)
+    }
+    func test_removeWord호출시_하_입력시_ㅎ반환되는지() {
+        let input = 54616
+        let result = "ㅎ"
+        
+        XCTAssertEqual(sut?.removeWord(lastUniCode: input), result)
+    }
+    func test_removeWord호출시_안_입력시_아반환되는지() {
+        let input = 50504
+        let result = "아"
+        
+        XCTAssertEqual(sut?.removeWord(lastUniCode: input), result)
+    }
+    
+    func test_removeWord호출시_와_입력시_오반환되는지() {
+        let input = 50752
+        let result = "오"
+        
+        XCTAssertEqual(sut?.removeWord(lastUniCode: input), result)
+    }
+    func test_removeWord호출시_워_입력시_우반환되는지() {
+        let input = 50892
+        let result = "우"
+        
+        XCTAssertEqual(sut?.removeWord(lastUniCode: input), result)
+    }
+    func test_removeWord호출시_위_입력시_우반환되는지() {
+        let input = 50948
+        let result = "우"
+        
+        XCTAssertEqual(sut?.removeWord(lastUniCode: input), result)
+    }
+    func test_removeWord호출시_왜_입력시_오반환되는지() {
+        let input = 50780
+        let result = "오"
+        
+        XCTAssertEqual(sut?.removeWord(lastUniCode: input), result)
+    }
+    func test_removeWord호출시_웨_입력시_우반환되는지() {
+        let input = 50920
+        let result = "우"
+        
+        XCTAssertEqual(sut?.removeWord(lastUniCode: input), result)
+    }
+    func test_removeWord호출시_외_입력시_오반환되는지() {
+        let input = 50808
+        let result = "오"
+        
+        XCTAssertEqual(sut?.removeWord(lastUniCode: input), result)
+    }
+    func test_removeWord호출시_에_입력시_ㅇ반환되는지() {
+        let input = 50640
+        let result = "ㅇ"
+        
+        XCTAssertEqual(sut?.removeWord(lastUniCode: input), result)
+    }
+    func test_removeWord호출시_예_입력시_ㅇ반환되는지() {
+        let input = 50696
+        let result = "ㅇ"
+        
+        XCTAssertEqual(sut?.removeWord(lastUniCode: input), result)
+    }
+
 }

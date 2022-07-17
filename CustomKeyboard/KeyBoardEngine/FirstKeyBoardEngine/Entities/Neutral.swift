@@ -15,4 +15,7 @@ enum Neutral:Int {
     static func parsingFromVowel(from vowel: Int) -> Int {
         return vowel - 12623
     }
+    static func parsingToVowel(from neutral: Int) -> Int {
+        return neutral + 12623
+    }
 }
