@@ -207,6 +207,62 @@ class KeyBoardEngine_addWord_Test_kirkim: XCTestCase {
         
         XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
     }
+    func test_addWord호출시_간에_ㅃ_입력시_간ㅃ반환되는지() {
+        let input2 = 44036
+        let input1 = 12611
+        let result = "간ㅃ"
+        
+        XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
+    }
+    func test_addWord호출시_간에_ㅉ_입력시_간ㅉ반환되는지() {
+        let input2 = 44036
+        let input1 = 12617
+        let result = "간ㅉ"
+        
+        XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
+    }
+    func test_addWord호출시_간에_ㄸ_입력시_간ㄸ반환되는지() {
+        let input2 = 44036
+        let input1 = 12600
+        let result = "간ㄸ"
+        
+        XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
+    }
+    func test_addWord호출시_간에_ㅆ_입력시_간ㅆ반환되는지() {
+        let input2 = 44036
+        let input1 = 12614
+        let result = "간ㅆ"
+        
+        XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
+    }
+    func test_addWord호출시_간에_ㄷ_입력시_간ㄷ반환되는지() {
+        let input2 = 44036
+        let input1 = 12599
+        let result = "간ㄷ"
+        
+        XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
+    }
+    func test_addWord호출시_간에_ㅣ_입력시_가니반환되는지() {
+        let input2 = 44036
+        let input1 = 12643
+        let result = "가니"
+        
+        XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
+    }
+    func test_addWord호출시_갈에_ㅗ_입력시_가로반환되는지() {
+        let input2 = 44040
+        let input1 = 12631
+        let result = "가로"
+        
+        XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
+    }
+    func test_addWord호출시_갈에_ㅐ_입력시_가래반환되는지() {
+        let input2 = 44040
+        let input1 = 12624
+        let result = "가래"
+        
+        XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
+    }
     
     func test_addWord호출시_가에_ㄱ_입력시_각반환되는지() {
         let input2 = 44032

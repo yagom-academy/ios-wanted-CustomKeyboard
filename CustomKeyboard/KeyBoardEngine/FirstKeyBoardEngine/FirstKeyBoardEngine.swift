@@ -87,9 +87,8 @@ extension FirstKeyBoardEngine {
         } else {
             combinedData = combineSupportWithVowel(support: support, vowel: inputLetter)
         }
-        let firstCharUnicode = makeWord(initial: initial, neutral: neutral, support: combinedData.support)
-        let firstChar = makeCharFromUnicode(firstCharUnicode)
-        let secondChar = makeCharFromUnicode(combinedData.secondCharUnicode)
+        let firstChar = makeCharFromUnicode(makeWord(initial: initial, neutral: neutral, support: combinedData.support))
+        let secondChar = combinedData.secondCharUnicode == 0 ? "" : makeCharFromUnicode(combinedData.secondCharUnicode)
         return firstChar + secondChar
     }
     
