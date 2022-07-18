@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -11,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KeyboardView" customModule="CustomKeyboard" customModuleProvider="target">
             <connections>
+                <outlet property="nextKeyboardButton" destination="yzM-lX-aW6" id="KPI-iV-ABG"/>
                 <outletCollection property="changeButtons" destination="L9G-Ok-3YZ" collectionClass="NSMutableArray" id="GdW-um-ZiW"/>
                 <outletCollection property="changeButtons" destination="FgD-SN-GYU" collectionClass="NSMutableArray" id="Rbo-G7-T16"/>
                 <outletCollection property="changeButtons" destination="TcH-bz-G2x" collectionClass="NSMutableArray" id="R3j-R0-wZc"/>
@@ -437,7 +437,10 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yzM-lX-aW6">
                                     <rect key="frame" x="0.0" y="0.0" width="160" height="58"/>
+                                    <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" image="globe" catalog="system"/>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUt-oY-4gh">
                                     <rect key="frame" x="165" y="0.0" width="160" height="58"/>
@@ -499,6 +502,7 @@
         </view>
     </objects>
     <resources>
+        <image name="globe" catalog="system" width="128" height="121"/>
         <image name="return" catalog="system" width="128" height="101"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

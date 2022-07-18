@@ -19,9 +19,10 @@ class KeyboardView: UIView {
     
     @IBOutlet var changeButtons: [UIButton]!
     @IBOutlet var allButtons: [UIButton]!
+    @IBOutlet weak var nextKeyboardButton: UIButton!
     
     weak var delegate: KeyboardViewDelegate?
-    let IOManager = HangeulIOManger()
+    private let IOManager = HangeulIOManger()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -92,5 +93,19 @@ extension KeyboardView {
     
     private func changeButtonsIsSelectedToggle() {
         changeButtons.forEach { $0.isSelected.toggle() }
+    }
+}
+
+// MARK: - Public
+
+extension KeyboardView {
+    func setNextKeyboardVisible(_ visible: Bool) {
+        if !visible {
+            nextKeyboardButton.setImage(nil, for: .normal)
+            nextKeyboardButton.isEnabled = false
+        } else {
+            nextKeyboardButton.setImage(UIImage(systemName: "globe"), for: .normal)
+            nextKeyboardButton.isEnabled = true
+        }
     }
 }
