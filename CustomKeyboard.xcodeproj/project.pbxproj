@@ -85,7 +85,6 @@
 			children = (
 				965B4290287BF7F800E304E4 /* Cell */,
 				965B4282287BF5C900E304E4 /* View */,
-				965B4283287BF5D000E304E4 /* ViewModel */,
 			);
 			path = ReviewList;
 			sourceTree = "<group>";
@@ -95,7 +94,6 @@
 			children = (
 				965B4298287C3EA500E304E4 /* Cell */,
 				965B4284287BF5DF00E304E4 /* View */,
-				965B4285287BF5E400E304E4 /* ViewModel */,
 			);
 			path = Keyboard;
 			sourceTree = "<group>";
@@ -109,13 +107,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		965B4283287BF5D000E304E4 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		965B4284287BF5DF00E304E4 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,13 +114,6 @@
 				965B4296287C3BCA00E304E4 /* KeyboardViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		965B4285287BF5E400E304E4 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		965B4286287BF62D00E304E4 /* Data */ = {
