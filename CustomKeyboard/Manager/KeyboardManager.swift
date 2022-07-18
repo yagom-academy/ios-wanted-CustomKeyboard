@@ -116,6 +116,11 @@ class KeyboardManager {
             // 자음 + 모음이 입력되어 있는 상태 (ex 하, 기, 시, 러 ...)
             if tappedButton.type == .consonant {
                 let idx = third.firstIndex(of: addString) ?? 0
+                if idx == 0 {
+                    lastWord = addString
+                    allWord.append(lastWord)
+                    return (currentText+addString, 1)
+                }
                 let str = currentText.utf16.map{ Int($0) }.reduce(0, +) + idx
                 if let scalarValue = UnicodeScalar(str) {
                     lastWord = addString
