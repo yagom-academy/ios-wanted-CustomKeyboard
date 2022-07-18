@@ -9,6 +9,8 @@ import UIKit
 
 class KeyFourthLineStackView: UIStackView {
     
+    var delegate: ButtonDelegate?
+    
     let numButton = KeyButton(type: .dark_large)
     let spaceButton = KeyButton(type: .space)
     let returnButton = KeyButton(type: .dark_large)
@@ -42,7 +44,14 @@ class KeyFourthLineStackView: UIStackView {
         
         for i in 0..<button.count {
             button[i].setTitle(title[i], for: .normal)
+            if button[i].type == .space {
+                button[i].addTarget(self, action: #selector(tapButton(sender:)), for: .touchUpInside)
+            }
         }
+    }
+    
+    @objc private func tapButton(sender: KeyButton) {
+        delegate?.buttonClickEvent(sender: sender)
     }
     
     private func setLayout() {
