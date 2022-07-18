@@ -42,7 +42,6 @@ struct FirstKeyBoardEngine: KeyBoardEngine {
         case .onlyVowel(let vowel):
             return removeFromOnlyVowelChar(vowel: vowel)
         }
-
     }
 }
 
