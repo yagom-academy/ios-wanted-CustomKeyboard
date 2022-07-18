@@ -21,12 +21,21 @@ class KeyboardManager {
         "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"
     ]
     
+    func pressSpace(_ tappedButton: KeyButton) -> (String, Int) {
+        lastWord = " "
+        return (" ", 0)
+    }
+    
     func makeString(_ state: Int, _ currentText: String, _ tappedButton: KeyButton) -> (String, Int) {
         guard let addString = tappedButton.title(for: .normal) else { return ("", 0) }
+        allWord.append(addString)
         switch state {
         case 0:
             // 초기 상태
-            allWord.append(addString)
+            if tappedButton.type == .space {
+                return pressSpace(tappedButton)
+            }
+            
             lastWord = addString
             if tappedButton.type == .consonant {
                 return (addString, 1)
@@ -35,7 +44,10 @@ class KeyboardManager {
             }
         case 1:
             // 자음이 입력되어 있는 상태 (ex ㄷ, ㅇ, ㅈ, ㄱ ...)
-            allWord.append(addString)
+            if tappedButton.type == .space {
+                return pressSpace(tappedButton)
+            }
+            
             if tappedButton.type == .consonant {
                 lastWord = addString
                 return (currentText + addString, 1)
@@ -49,10 +61,13 @@ class KeyboardManager {
                 }
                 return ("", 0)
             }
-            // TODO: - 이중 모음의 경우 구현 : 초기 상태만 문제 있음, ㅘ + ㅣ = ㅙ 구현 X
+            // TODO: - 이중 모음의 경우 구현 : ㅘ + ㅣ = ㅙ 구현 X
         case 2:
             // 모음이 입력되어 있는 상태 (ex ㅏ, ㅑ, ㅜ, ㅗ ...)
-            allWord.append(addString)
+            if tappedButton.type == .space {
+                return pressSpace(tappedButton)
+            }
+            
             if tappedButton.type == .consonant {
                 lastWord = addString
                 return (currentText + addString, 1)
@@ -70,7 +85,10 @@ class KeyboardManager {
             }
         case 3:
             // 자음 + 모음이 입력되어 있는 상태 (ex 하, 기, 시, 러 ...)
-            allWord.append(addString)
+            if tappedButton.type == .space {
+                return pressSpace(tappedButton)
+            }
+            
             if tappedButton.type == .consonant {
                 let idx = third.firstIndex(of: addString) ?? 0
                 let str = currentText.utf16.map{ Int($0) }.reduce(0, +) + idx
@@ -97,7 +115,10 @@ class KeyboardManager {
             }
         case 4:
             // 자음 + 모음 + 자음으로 받침이 있는 상태 (ex 언, 젠, 간, 끝 ...)
-            allWord.append(addString)
+            if tappedButton.type == .space {
+                return pressSpace(tappedButton)
+            }
+            
             if tappedButton.type == .consonant {
                 let doubleEnd = lastWord + addString
                 let idx1 = third.firstIndex(of: doubleEnd) ?? 0
