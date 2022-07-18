@@ -57,11 +57,15 @@ class KeyThirdLineStackView: UIStackView {
             }
         }
         
-        
+        eraseButton.addTarget(self, action: #selector(tapEraseButton(sender:)), for: .touchUpInside)
     }
     
     @objc private func tapButton(sender: KeyButton) {
         delegate?.buttonClickEvent(sender: sender)
+    }
+    
+    @objc private func tapEraseButton(sender: KeyButton) {
+        delegate?.eraseButtonClickEvent(sender: sender)
     }
     
     private func setLayout() {

@@ -82,10 +82,30 @@ extension KeyboardViewController {
 }
 
 extension KeyboardViewController: ButtonDelegate {
+    func eraseButtonClickEvent(sender: KeyButton) {
+        guard let text = reviewTextView.text?.last else {
+            return
+        }
+        
+        if state == 3 && reviewTextView.text.count >= 2 {
+            let currentText = String(reviewTextView.text.suffix(2))
+            reviewTextView.text = String(reviewTextView.text.prefix(reviewTextView.text.count - 2))
+            
+            let managerString = manager.deleteString(1, currentText)
+            reviewTextView.text += managerString.0
+            state = managerString.1
+        } else {
+            reviewTextView.text.removeLast()
+            let managerString = manager.deleteString(state, String(text))
+            reviewTextView.text += managerString.0
+            state = managerString.1
+        }
+    }
+    
     func buttonClickEvent(sender: KeyButton) {
         guard let text = reviewTextView.text?.last else {
             let managerString = manager.makeString(state, "", sender)
-            reviewTextView.text! += managerString.0
+            reviewTextView.text! = managerString.0
             state = managerString.1
             return
         }
