@@ -59,6 +59,7 @@ class KeyThirdLineStackView: UIStackView {
         }
         
         shiftButton.addTarget(self, action: #selector(tapShiftButton(sender:)), for: .touchUpInside)
+        eraseButton.addTarget(self, action: #selector(tapEraseButton(sender:)), for: .touchUpInside)
     }
     
     @objc private func tapButton(sender: KeyButton) {
@@ -68,6 +69,10 @@ class KeyThirdLineStackView: UIStackView {
     @objc private func tapShiftButton(sender: KeyButton) {
         sender.isSelected = !sender.isSelected
         shiftDelegate?.shiftClickEvent(isShift: sender.isSelected)
+    }
+    
+    @objc private func tapEraseButton(sender: KeyButton) {
+        delegate?.eraseButtonClickEvent(sender: sender)
     }
     
     private func setLayout() {

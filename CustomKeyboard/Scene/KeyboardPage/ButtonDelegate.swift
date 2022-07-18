@@ -7,19 +7,7 @@
 
 import UIKit
 
-protocol PassContentDelegate {
-    func sendReviewData(content: String)
-}
-
 protocol ButtonDelegate {
     func buttonClickEvent(sender: KeyButton)
     func eraseButtonClickEvent(sender: KeyButton)
-}
-
-protocol ShiftDelegate {
-    func shiftClickEvent(isShift: Bool)
-}
-
-protocol AnyButtonDelegate {
-    func anyButtonClickEvent(sender: KeyButton)
 }
