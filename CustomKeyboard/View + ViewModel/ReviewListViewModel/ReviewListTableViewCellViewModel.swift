@@ -13,20 +13,20 @@ protocol ReviewListTableViewCellViewModelDelegate: AnyObject {
 }
 
 class ReviewListTableViewCellViewModel {
-    private let imageCache = ImageCacheManager.shared
     weak var delegate: ReviewListTableViewCellViewModelDelegate?
     
     func loadImage(urlString: String) {
-        let url = NSString(string: urlString)
-        if let cachedImage = imageCache.object(forKey: url) {
-            self.delegate?.reviewListTableViewCell(didLoadImage: cachedImage)
-            return
+        if let cacheData = UserDefaults.standard.object(forKey: urlString) as? Data {
+            if let cacheImage = UIImage(data: cacheData) {
+                self.delegate?.reviewListTableViewCell(didLoadImage: cacheImage)
+                return
+            }
         }
         
         ImageLoader.loadImage(urlString: urlString) { result in
             switch result {
             case .success(let image):
-                self.imageCache.setObject(image, forKey: url)
+                UserDefaults.standard.set(image.pngData(), forKey: urlString)
                 DispatchQueue.main.async {
                     self.delegate?.reviewListTableViewCell(didLoadImage: image)
                 }

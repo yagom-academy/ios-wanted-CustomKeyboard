@@ -11,10 +11,12 @@ class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
     
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .lightGray
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 35.0
         imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFill
+        imageView.backgroundColor = UIColor(red: 247 / 255, green: 37 / 255, blue: 133 / 255, alpha: 0.5)
+        imageView.layer.borderColor = UIColor.separator.cgColor
+        imageView.layer.borderWidth = 0.5
         return imageView
     }()
     private lazy var nameLabel: UILabel = {
@@ -61,6 +63,10 @@ class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
         rateLabel.text = review.rate
         contentLabel.text = review.reviewContent
         dateLabel.text = review.date
+    }
+    
+    override func prepareForReuse() {
+        profileImageView.image = nil
     }
 }
 
