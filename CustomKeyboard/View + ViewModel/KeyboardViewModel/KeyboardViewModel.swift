@@ -85,7 +85,7 @@ class KeyboardViewModel {
         case .alreadyDoubleLastState: // 종성이 겹받침인 경우      ex => 않, ㅣ -> 아, ㄶ, ㅣ -> 안, ㄶ, ㅣ -> 안ㅎ, ㅣ -> 안히
             if buffer.jungsung != nil { // 모음이 들어온 경우
                 value.unicodeScalars.removeLast()
-                let splitedDoubleJongsung = splitDoubleJongsungReverse(currentLastJongsung)
+                let splitedDoubleJongsung = splitDoubleJongsung(currentLastJongsung)
                 let jong1 = splitedDoubleJongsung?.0
                 let jong2 = splitedDoubleJongsung?.1
                 
@@ -111,6 +111,36 @@ class KeyboardViewModel {
     func clearAll() {
         self.result.value = ""
         self.value = ""
+    }
+    
+    var isRemovePhoneme = true
+    
+    func didTapBack() {
+        if !result.value.isEmpty {
+            if isRemovePhoneme {
+                let removed = result.value.unicodeScalars.removeLast()
+                if removed == " " {
+                    isRemovePhoneme = false
+                }
+                
+                let splitedJongsung = splitDoubleJongsung(Jongsung(rawValue: Int(removed.value)))
+                let splitedJungsung = splitJungsung(Jungsung(rawValue: Int(removed.value)))
+                
+                if let splited = splitedJongsung {
+                    result.value.appendUnicode(splited.0.rawValue)
+                } else if let splited = splitedJungsung {
+                    result.value.appendUnicode(splited.0.rawValue)
+                }
+                
+                value = result.value
+            } else {
+                result.value.removeLast()
+                value = result.value
+                if result.value.isEmpty {
+                    isRemovePhoneme = true
+                }
+            }
+        }
     }
     
     func mergeDoubleJongsung(_ jong1: Jongsung?, _ jong2: Jongsung?) -> Jongsung? {
@@ -139,7 +169,7 @@ class KeyboardViewModel {
         default: return nil
         }
     }
-    func splitDoubleJongsungReverse(_ jong: Jongsung?) -> (Jongsung, Jongsung)? {
+    func splitDoubleJongsung(_ jong: Jongsung?) -> (Jongsung, Jongsung)? {
         switch jong {
         case .ㄱㅅ: return (.ㄱ, .ㅅ)
         case .ㄴㅈ: return (.ㄴ, .ㅈ)
@@ -189,9 +219,21 @@ class KeyboardViewModel {
         default: return nil
         }
     }
+    
+    func splitJungsung(_ jung: Jungsung?) -> (Jungsung, Jungsung)? {
+        switch jung {
+        case .ㅖ: return (.ㅕ, .ㅣ)
+        case .ㅔ: return (.ㅓ, .ㅣ)
+        case .ㅐ: return (.ㅏ, .ㅣ)
+        case .ㅒ: return (.ㅑ, .ㅣ)
+        case .ㅘ: return (.ㅗ, .ㅏ)
+        case .ㅙ: return (.ㅗ, .ㅐ)
+        case .ㅚ: return (.ㅗ, .ㅣ)
+        case .ㅝ: return (.ㅜ, .ㅓ)
+        case .ㅞ: return (.ㅜ, .ㅔ)
+        case .ㅟ: return (.ㅜ, .ㅣ)
+        case .ㅢ: return (.ㅡ, .ㅣ)
+        default: return nil
+        }
+    }
 }
-
-// ㅕ ㅣ ㅖ
-// ㅓ ㅣ ㅔ
-// ㅏ ㅣ ㅐ
-// ㅑ ㅣ ㅒ

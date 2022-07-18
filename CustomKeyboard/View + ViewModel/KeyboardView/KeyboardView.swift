@@ -10,9 +10,6 @@ import UIKit
 class KeyboardView: UIView {
     let viewModel: KeyboardViewModel
     
-    var sejongState: SejongState = .writeInitialState
-    var currentJungsung: Jungsung? = nil
-    var currentLastJongsung: Jongsung? = nil
     var isShift = false
     
     let topLetterValues: [Any] = [
@@ -135,7 +132,7 @@ private extension KeyboardView {
     
     @objc func didTapSpace() {
         viewModel.value.append(" ")
-        sejongState = .writeInitialState
+        viewModel.sejongState = .writeInitialState
     }
     @objc func didTapShift() {
         debugPrint("didTapShift")
@@ -148,8 +145,7 @@ private extension KeyboardView {
         viewModel.returnButtonTapped.value = true
     }
     @objc func didTapBack() {
-        viewModel.result.value.unicodeScalars.removeLast()
-        viewModel.value = viewModel.result.value
+        viewModel.didTapBack()
     }
 }
 
