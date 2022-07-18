@@ -37,27 +37,30 @@ class HangeulIOManger {
             
             
             if tail.status == .finished {
+                tail.status = .ongoing
                 outputList.removeLast()
                 return
             }
-
+            
+            
+            
             if tail.position.count > 1 {
                 outputList.removeLast()
-                tail.prev?.update(newType: tail.prev!.unicodeType, newStatus: .ongoing, newPosition: (tail.prev?.position.last!)!)
-                tail.update(newType: .fixed, newStatus: .ongoing, newPosition: (tail.position.first!))
+                tail.prev?.update(status: .ongoing)
+                tail.update(type: .fixed, status: .ongoing, position: (tail.position.first!))
                 tail.position.removeLast()
                 tail.position.removeLast()
             }
-            let result = combiner.combine(tail, editMode: .remove)
+            let result = combiner.combine(tail, inputMode: .remove)
             updateOutputList(with: result.newString, mode: .changeCharacter)
         case "Space":
+            specifier.specify(inputList.tail!, inputMode: .space)
             inputList.append(data: input)
-            inputList.tail?.prev?.status = .finished // 이 부분이 specifier에서 처리 되어야 함.
             updateOutputList(with: " ", mode: .addCharacter)
         default:
             inputList.append(data: input)
-            specifier.specify(inputList.tail!)
-            let result = combiner.combine(inputList.tail!, editMode: .add)
+            specifier.specify(inputList.tail!, inputMode: .add)
+            let result = combiner.combine(inputList.tail!, inputMode: .add)
             updateOutputList(with: result.newString, mode: result.mode)
         }
     }

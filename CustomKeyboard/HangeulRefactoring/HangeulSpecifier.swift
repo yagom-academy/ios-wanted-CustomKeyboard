@@ -9,116 +9,96 @@ import Foundation
 
 class HangeulSpecifier {
     
-    func specify(_ curr: Hangeul) {
-        let judgingMachine = HangeulJudgingMachine()
-        let dictionary = HangeulDictionary()
+    func specify(_ curr: Hangeul, inputMode: HangeulInputMode) {
         
-        if curr.prev == nil || curr.prev?.status == .finished {
-            if curr.phoneme == .vowel {
-                if judgingMachine.isDoubleMid(unicode: curr.unicode) {
-                    curr.update(newType: .fixed, newStatus: .finished, newPosition: .mid2)
+        switch inputMode {
+        case .space:
+            curr.update(status: .finished)
+        case .remove:
+            break
+        default:
+            specifyInAddMode(curr)
+        }
+    }
+    
+    private func specifyInAddMode(_ curr: Hangeul) {
+        guard !(curr.prev == nil || curr.prev?.status == .finished) else {
+            if curr.isMid() {
+                if curr.isDoubleMid() {
+                    curr.update(type: .fixed, status: .finished, position: .mid2)
                 } else {
-                    curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid1)
+                    curr.update(type: .fixed, position: .mid1)
                 }
             } else {
-                curr.update(newType: .fixed, newStatus: curr.status, newPosition: .top)
+                curr.update(type: .fixed, position: .top)
             }
             return
         }
         
         let prev = curr.prev!
+        let dictionary = HangeulDictionary()
         
         switch prev.position.last {
         case .top :
-            if curr.phoneme == .vowel {
-                if judgingMachine.isDoubleMid(unicode: curr.unicode) {
-                    curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid2)
+            if curr.isMid() {
+                if curr.isDoubleMid() {
+                    curr.update(type: .fixed, position: .mid2)
                 } else {
-                    curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid1)
+                    curr.update(type: .fixed, position: .mid1)
                 }
             } else {
-                prev.update(newType: prev.unicodeType, newStatus: .finished, newPosition: prev.position.last!)
-                curr.update(newType: .fixed, newStatus: curr.status, newPosition: .top)
+                prev.update(status: .finished)
+                curr.update(type: .fixed, position: .top)
             }
-        case .mid1:
-            if curr.phoneme == .vowel {
-                if judgingMachine.isDoubleMid(unicode: curr.unicode) {
-                    prev.update(newType: prev.unicodeType, newStatus: .finished, newPosition: prev.position.last!)
-                    curr.update(newType: .fixed, newStatus: .finished, newPosition: .mid2)
-                } else if dictionary.getDoubleUnicode(prev, curr) > 0 {
-                    if prev.prev == nil || prev.prev?.status == .finished { // ex. ㅓ ㅔ 의 상태일 때
-                        curr.update(newType: .fixed, newStatus: .finished, newPosition: .mid2)
+        case .mid1, .mid2:
+            if curr.isMid() {
+                if curr.isDoubleMid() {
+                    prev.update(status: .finished)
+                    curr.update(type: .fixed, status: .finished, position: .mid2)
+                } else if prev.position.last! == .mid1 && dictionary.getDoubleUnicode(prev, curr) > 0 {
+                    if prev.prev == nil || prev.prev?.status == .finished {
+                        curr.update(type: .fixed, status: .finished, position: .mid2)
                     } else {
-                        curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid2)
+                        curr.update(type: .fixed, position: .mid2)
                     }
                 } else {
-                    prev.update(newType: prev.unicodeType, newStatus: .finished, newPosition: prev.position.last!)
-                    curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid1)
+                    prev.update(status: .finished)
+                    curr.update(type: .fixed, position: .mid1)
                 }
             } else {
-                if prev.prev == nil || prev.prev?.status == .finished {
-                    prev.update(newType: prev.unicodeType, newStatus: .finished, newPosition: prev.position.last!)
-                    curr.update(newType: .fixed, newStatus: curr.status, newPosition: .top)
+                if prev.cannotHaveEnd() {
+                    prev.update(status: .finished)
+                    curr.update(type: .fixed, position: .top)
+                } else if curr.isEnd() {
+                    curr.update(type: .fixed, position: .end1)
                 } else {
-                    if judgingMachine.isEnd(unicode: curr.unicode) {
-                        curr.update(newType: .fixed, newStatus: curr.status, newPosition: .end1)
-                    } else {
-                        prev.update(newType: prev.unicodeType, newStatus: .finished, newPosition: prev.position.last!)
-                        curr.update(newType: .fixed, newStatus: curr.status, newPosition: .top)
-                    }
+                    prev.update(status: .finished)
+                    curr.update(type: .fixed, position: .top)
                 }
             }
-        case .mid2:
-            if curr.phoneme == .vowel {
-                prev.update(newType: prev.unicodeType, newStatus: .finished, newPosition: prev.position.last!)
-                if judgingMachine.isDoubleMid(unicode: curr.unicode) {
-                    curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid2)
+        case .end1, .end2:
+            if curr.isMid() {
+                prev.prev!.update(status: .finished)
+                prev.update(type: prev.unicodeType, status: prev.status, position: .top)
+                if curr.isDoubleMid() {
+                    curr.update(type: .fixed, position: .mid2)
                 } else {
-                    curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid1)
+                    curr.update(type: .fixed, position: .mid1)
                 }
             } else {
-                if judgingMachine.isEnd(unicode: curr.unicode) {
-                    curr.update(newType: .fixed, newStatus: curr.status, newPosition: .end1)
+                if prev.position.last! == .end1 && dictionary.getDoubleUnicode(prev, curr) > 0 {
+                    curr.update(type: .fixed, position: .end2)
                 } else {
-                    prev.update(newType: prev.unicodeType, newStatus: .finished, newPosition: prev.position.last!)
-                    curr.update(newType: .fixed, newStatus: curr.status, newPosition: .top)
+                    prev.update(status: .finished)
+                    curr.update(type: .fixed, position: .top)
                 }
-            }
-        case .end1:
-            if curr.phoneme == .vowel {
-                prev.prev!.update(newType: prev.prev!.unicodeType, newStatus: .finished, newPosition: (prev.prev?.position.last!)!)
-                prev.update(newType: prev.unicodeType, newStatus: prev.status, newPosition: .top)
-                if judgingMachine.isDoubleMid(unicode: curr.unicode) {
-                    curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid2)
-                } else {
-                    curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid1)
-                }
-            } else {
-                if dictionary.getDoubleUnicode(prev, curr) > 0 {
-                    curr.update(newType: .fixed, newStatus: curr.status, newPosition: .end2)
-                } else {
-                    prev.update(newType: prev.unicodeType, newStatus: .finished, newPosition: prev.position.last!)
-                    curr.update(newType: .fixed, newStatus: curr.status, newPosition: .top)
-                }
-            }
-        case .end2:
-            if curr.phoneme == .vowel {
-                prev.prev!.update(newType: prev.prev!.unicodeType, newStatus: .finished, newPosition: prev.prev!.position.last!)
-                prev.update(newType: prev.unicodeType, newStatus: prev.status, newPosition: .top)
-                if judgingMachine.isDoubleMid(unicode: curr.unicode) {
-                    curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid2)
-                } else {
-                    curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid1)
-                }
-            } else {
-                prev.update(newType: prev.unicodeType, newStatus: .finished, newPosition: prev.position.last!)
-                curr.update(newType: .fixed, newStatus: .ongoing, newPosition: .top)
             }
         default:
             break
         }
-        
     }
+    
+    
     
     deinit {
         print("close specifier")

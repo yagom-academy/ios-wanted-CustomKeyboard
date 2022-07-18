@@ -13,32 +13,32 @@ struct HangeulDictionary {
     let endCount = 28
     let baseCode = 44032
     
-    func getIndex(of character: Hangeul) -> Int {
+    func getIndex(unicode: Int, position: HangeulCombinationPosition, unicodeType: HangeulUnicodeType) -> Int {
         var index = 0
         
-        guard character.value != "none" else {
+        guard unicode > 0 else {
             return 0
         }
         
-        if character.unicodeType == .fixed {
-            switch character.position.last! {
+        if unicodeType == .fixed {
+            switch position {
             case .top:
                 for hangeul in HangeulDictionary.fixed.top.allCases {
-                    if hangeul.rawValue == character.unicode {
+                    if hangeul.rawValue == unicode {
                         break
                     }
                     index += 1
                 }
             case .mid1, .mid2:
                 for hangeul in HangeulDictionary.fixed.mid.allCases {
-                    if hangeul.rawValue == character.unicode {
+                    if hangeul.rawValue == unicode {
                         break
                     }
                     index += 1
                 }
             case .end1, .end2:
                 for hangeul in HangeulDictionary.fixed.end.allCases {
-                    if hangeul.rawValue == character.unicode {
+                    if hangeul.rawValue == unicode {
                         break
                     }
                     index += 1
@@ -47,24 +47,24 @@ struct HangeulDictionary {
                 break
             }
         } else {
-            switch character.position.last! {
+            switch position {
             case .top:
                 for hangeul in HangeulDictionary.compatible.top.allCases {
-                    if hangeul.rawValue == character.unicode {
+                    if hangeul.rawValue == unicode {
                         break
                     }
                     index += 1
                 }
             case .mid1, .mid2:
                 for hangeul in HangeulDictionary.compatible.mid.allCases {
-                    if hangeul.rawValue == character.unicode {
+                    if hangeul.rawValue == unicode {
                         break
                     }
                     index += 1
                 }
             case .end1, .end2:
                 for hangeul in HangeulDictionary.compatible.end.allCases {
-                    if hangeul.rawValue == character.unicode {
+                    if hangeul.rawValue == unicode {
                         break
                     }
                     index += 1
@@ -76,7 +76,7 @@ struct HangeulDictionary {
         return index
     }
     
-    func getUnicode(index: Int, in position: HangeulCombinationPosition, unicodeType: HangeulUnicodeType) -> Int {
+    func getUnicode(index: Int, position: HangeulCombinationPosition, unicodeType: HangeulUnicodeType) -> Int {
         var i = 0
         var unicode = 0
         
@@ -388,38 +388,6 @@ struct HangeulDictionary {
             case ㅍ = 0x11C1
             case ㅎ = 0x11C2
         }
-        
-        
+
     }
-    
-    
 }
-        
-//
-//            static let double: [Int: [Int: Int]] = [a: [i: ae], eo: [i: e], yeo: [i: ye] , ya: [i: yae],o: [a: wa, ae: wae, i: oe], u: [eo: wo, e: we, i: wi], eu: [i: eui]]
-//            static let split: [Int: [Int]] = [wa: [o, a], wae: [o, ae], oe: [o, i], wo: [u, eo], we: [u, e], wi: [u, i], eui: [eu, i], ae: [a, i], e: [eo, i], ye: [yeo, i], yae: [ya, i]]
-
-            /*
-                                 double                split
-             - ㅏ + ㅣ → ㅐ     a -> i -> ae         ae: [a, i]
-             - ㅓ + ㅣ → ㅔ     eo -> i -> e         e: [eo, i]
-             - ㅕ + ㅣ → ㅖ     yeo -> i -> ye       ye: [yeo, i]
-             - ㅑ + ㅣ → ㅒ     ya -> i -> yae       yae: [ya, i]
-             
-             - `ㅠ + ㅣ → ㅝ`
-             
-             */
-            
-        
-
-       
-//
-//            static let list: [Int] = [blank, kiyeok, sssangKiyeok, kiyeokSios, nieun, nieunJieuj, nieunHieuh, digeud, rieul, rieulKiyeok, rieulMieum, rieulBieub, rieulSios, rieulTieut, rieulPieup, rieulHieuh, mieum, bieub, bieubSios, sios, ssangSios, ieung, jieuj, chieuch, kieuk, tieut, pieup, hieuh]
-//            static let double: [Int: [Int: Int]] = [kiyeok: [sios: kiyeokSios], nieun: [jieuj: nieunJieuj, hieuh: nieunHieuh], rieul: [kiyeok: rieulKiyeok, mieum: rieulMieum, bieub: rieulBieub, sios: rieulSios, tieut: rieulTieut, pieup: rieulPieup, hieuh: rieulHieuh]]
-//            static let split: [Int: [Int]] = [kiyeokSios: [kiyeok, sios], nieunJieuj: [nieun, jieuj], nieunHieuh: [nieun, hieuh], rieulKiyeok: [rieul, kiyeok], rieulMieum: [rieul, mieum], rieulBieub: [rieul, bieub], rieulSios: [rieul, sios], rieulTieut: [rieul, tieut], rieulPieup: [rieul, pieup], rieulHieuh: [rieul, hieuh]]
-//
-//        }
-//    }
-//
-//
-//}

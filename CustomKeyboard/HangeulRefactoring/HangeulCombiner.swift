@@ -12,7 +12,7 @@ enum HangeulOutputEditMode {
 }
 
 enum HangeulInputMode {
-    case add, remove
+    case add, remove, space
 }
 
 class HangeulCombineBuffer {
@@ -41,6 +41,8 @@ class HangeulCombineBuffer {
                 self.end.insert(curr!, at: 0)
             case .end2:
                 self.end.append(curr!)
+            default:
+                break
             }
             let prev = curr!.prev ?? nil
             curr = prev
@@ -51,8 +53,7 @@ class HangeulCombineBuffer {
 
 class HangeulCombiner {
     
-    func combine(_ last: Hangeul, editMode: HangeulInputMode) -> (newString: String, mode: HangeulOutputEditMode) {
-        
+    func combine(_ last: Hangeul, inputMode: HangeulInputMode) -> (newString: String, mode: HangeulOutputEditMode) {
         let buffer = HangeulCombineBuffer()
         buffer.append(last)
         
@@ -67,7 +68,7 @@ class HangeulCombiner {
         } else if buffer.end.isEmpty {
             var newString = ""
             let topPos = buffer.top.first!.position
-            if editMode == .add && buffer.mid.count == 1 && topPos.count > 1 {
+            if inputMode == .add && buffer.mid.count == 1 && topPos.count > 1 {
                 let prevBuffer = HangeulCombineBuffer()
                 let prevLast = buffer.top.first!.prev!
                 prevBuffer.append(prevLast)
@@ -85,64 +86,44 @@ class HangeulCombiner {
         let converter = HangeulConverter()
         let dictionary = HangeulDictionary()
         
-        guard solo.unicode == -1 else {
+        guard solo.value == "none" else {
             return converter.toString(from: solo.unicode)
         }
         
-        if buffer.top.isEmpty && buffer.mid.count == 2 {
+        guard !(buffer.top.isEmpty && buffer.mid.count == 2) else {
             let doubleUnicode = dictionary.getDoubleUnicode(buffer.mid[0], buffer.mid[1])
             return converter.toString(from: doubleUnicode)
         }
         
-        let topIndex = dictionary.getIndex(of: buffer.top.first!)
-        var midIndex: Int
-        var endIndex: Int
-        
-        if buffer.mid.count == 1 {
-            midIndex = dictionary.getIndex(of: buffer.mid.first!)
-        } else {
-            let doubleMid = combineDouble(buffer.mid[0], buffer.mid[1])
-            midIndex = dictionary.getIndex(of: doubleMid)
-        }
-        
-        if buffer.end.isEmpty {
-            endIndex = dictionary.getIndex(of: Hangeul("none"))
-        } else if buffer.end.count == 1 {
-            endIndex = dictionary.getIndex(of: buffer.end.first!)
-        } else {
-            let doubleEnd = combineDouble(buffer.end[0], buffer.end[1])
-            endIndex = dictionary.getIndex(of: doubleEnd)
-        }
-        
-        let combineUnicode = (topIndex * dictionary.midCount * dictionary.endCount) + (midIndex * dictionary.endCount) + endIndex + dictionary.baseCode
+        let index = getIndexArrayForCombine(with: buffer)
+        let combineUnicode = (index.top * dictionary.midCount * dictionary.endCount) + (index.mid * dictionary.endCount) + index.end + dictionary.baseCode
         
         return converter.toString(from: combineUnicode)
     }
     
     
-    private func combineDouble(_ first: Hangeul, _ second: Hangeul) -> Hangeul {
+    private func getIndexArrayForCombine(with buffer: HangeulCombineBuffer) -> (top: Int, mid: Int, end: Int) {
         let dictionary = HangeulDictionary()
-        let new = Hangeul("none")
-        new.value = "some"
-        new.unicode = dictionary.getDoubleUnicode(first, second)
-        new.unicodeType = .fixed
-        if first.position.last! == .end1 {
-            new.position.append(.end2)
+        var topIndex = 0, midIndex = 0, endIndex = 0
+        
+        topIndex = buffer.top.first!.unicodeIndex
+        
+        if buffer.mid.count == 1 {
+            midIndex = buffer.mid.first!.unicodeIndex
         } else {
-            new.position.append(.mid2)
+            let doubleMidUnicode = dictionary.getDoubleUnicode(buffer.mid.first!, buffer.mid.last!)
+            midIndex = dictionary.getIndex(unicode: doubleMidUnicode, position: .mid2, unicodeType: .fixed)
         }
         
-        return new
+        if buffer.end.isEmpty {
+            endIndex = dictionary.getIndex(unicode: -1, position: .end1, unicodeType: .fixed)
+        } else if buffer.end.count == 1 {
+            endIndex = buffer.end.first!.unicodeIndex
+        } else {
+            let doubleEndUnicode = dictionary.getDoubleUnicode(buffer.end.first!, buffer.end.last!)
+            endIndex = dictionary.getIndex(unicode: doubleEndUnicode, position: .end2, unicodeType: .fixed)
+        }
+        
+        return (topIndex, midIndex, endIndex)
     }
-    
 }
-
-
-
-/*
- 
- 
- 
- 
- 
- */
