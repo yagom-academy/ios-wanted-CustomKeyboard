@@ -53,6 +53,14 @@ class CustomKeyboardView: UIView {
     @IBOutlet weak var spaceButton: UIButton!
     @IBOutlet weak var returnButton: UIButton!
     
+    @IBOutlet weak var topStackView: UIStackView!
+    @IBOutlet weak var middleStackView: UIStackView!
+    @IBOutlet weak var bottomStackView: UIStackView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setCornerRadius()
+    }
     
     @IBAction func keyboardPressed(_ sender: UIButton) {
         guard let delegate = delegate else { return }
@@ -64,10 +72,20 @@ class CustomKeyboardView: UIView {
         delegate.customKeyboardView(pressedKeyboardButton: sender)
     }
     
-    
     @IBAction func pressShiftButton(_ sender: UIButton) {
         isShiftPressed.toggle()
         changeDoubleChar()
+    }
+    
+    private func setCornerRadius() {
+        topStackView.subviews.forEach { $0.layer.cornerRadius = $0.frame.height * 0.1 }
+        middleStackView.subviews.forEach { $0.layer.cornerRadius = $0.frame.height * 0.1 }
+        bottomStackView.subviews.forEach { $0.layer.cornerRadius = $0.frame.height * 0.1 }
+        shiftButton.layer.cornerRadius = shiftButton.frame.height * 0.1
+        deleteButton.layer.cornerRadius = deleteButton.frame.height * 0.1
+        switchButton.layer.cornerRadius = switchButton.frame.height * 0.1
+        spaceButton.layer.cornerRadius = spaceButton.frame.height * 0.1
+        returnButton.layer.cornerRadius = returnButton.frame.height * 0.1
     }
     
     private func changeDoubleChar() {
