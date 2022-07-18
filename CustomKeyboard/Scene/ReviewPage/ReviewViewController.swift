@@ -10,7 +10,7 @@ import UIKit
 class ReviewViewController: UIViewController {
     private let reviewTableView = UITableView()
     private var reviewList: [Review] = []
-    private var myReview: [Review] = [] {
+    private var myContent: [String] = [] {
         didSet {
             reviewTableView.reloadData()
         }
@@ -88,9 +88,10 @@ extension ReviewViewController: UITableViewDataSource, UITableViewDelegate {
         
         header.setup()
         header.reviewTextField.delegate = self
+        header.delegate = self
         
-        if !myReview.isEmpty {
-            header.reviewTextField.text = myReview.last!.content
+        if !myContent.isEmpty {
+            header.reviewTextField.text = myContent.last!
         }
         
         return header
@@ -113,16 +114,18 @@ extension ReviewViewController: UITextFieldDelegate {
 }
 
 // MARK: - TextFieldTextDelegate
+extension ReviewViewController: PassContentDelegate {
+    func sendReviewData(content: String) {
+        myContent.append(content)
+    }
+}
+
 extension ReviewViewController: PassReviewDelegate {
     func sendReviewData(review: Review) {
-        // 헤더에 문제 있음
-        myReview.append(review)
-
-        // 작성 버튼으로 옮기기
-//        reviewList.append(review)
-//        reviewList = reviewList.sorted(by: { r1, r2 in
-//            r1.createdAt.compare(r2.createdAt) == .orderedDescending
-//        })
-//        reviewTableView.reloadData()
+        reviewList.append(review)
+        reviewList = reviewList.sorted(by: { r1, r2 in
+            r1.createdAt.compare(r2.createdAt) == .orderedDescending
+        })
+        reviewTableView.reloadData()
     }
 }

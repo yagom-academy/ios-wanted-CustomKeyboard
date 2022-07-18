@@ -8,7 +8,6 @@
 import UIKit
 
 class KeyboardManager {
-    static let shared = KeyboardManager()
     private var lastWord = ""
     private var allWord: [String] = []
     
@@ -22,12 +21,11 @@ class KeyboardManager {
         "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"
     ]
     
-    func makeString(_ state: Int, _ currentText: Character, _ tappedButton: KeyButton) -> (String, Int) {
+    func makeString(_ state: Int, _ currentText: String, _ tappedButton: KeyButton) -> (String, Int) {
         guard let addString = tappedButton.title(for: .normal) else { return ("", 0) }
         switch state {
         case 0:
             // 초기 상태
-            print("0")
             allWord.append(addString)
             lastWord = addString
             if tappedButton.type == .consonant {
@@ -37,13 +35,12 @@ class KeyboardManager {
             }
         case 1:
             // 자음이 입력되어 있는 상태 (ex ㄷ, ㅇ, ㅈ, ㄱ ...)
-            print("1")
             allWord.append(addString)
             if tappedButton.type == .consonant {
                 lastWord = addString
-                return (String(currentText) + addString, 1)
+                return (currentText + addString, 1)
             } else {
-                let idx1 = first.firstIndex(of: String(currentText)) ?? 0
+                let idx1 = first.firstIndex(of: currentText) ?? 0
                 let idx2 = second.firstIndex(of: addString) ?? 0
                 let str = 44032 + (idx1 * 588) + (idx2 * 28)
                 if let scalarValue = UnicodeScalar(str) {
@@ -55,17 +52,16 @@ class KeyboardManager {
             // TODO: - 이중 모음의 경우 구현 : 초기 상태만 문제 있음, ㅘ + ㅣ = ㅙ 구현 X
         case 2:
             // 모음이 입력되어 있는 상태 (ex ㅏ, ㅑ, ㅜ, ㅗ ...)
-            print("2")
             allWord.append(addString)
             if tappedButton.type == .consonant {
                 lastWord = addString
-                return (String(currentText) + addString, 1)
+                return (currentText + addString, 1)
             } else {
                 let doubleMid = lastWord + addString
                 let idx = secondDouble.firstIndex(of: doubleMid) ?? 0
                 if idx == 0 {
                     lastWord = addString
-                    return (String(currentText) + addString, 2)
+                    return (currentText + addString, 2)
                 } else {
                     lastWord = doubleMid
                     let str = second[idx]
@@ -74,7 +70,6 @@ class KeyboardManager {
             }
         case 3:
             // 자음 + 모음이 입력되어 있는 상태 (ex 하, 기, 시, 러 ...)
-            print("3")
             allWord.append(addString)
             if tappedButton.type == .consonant {
                 let idx = third.firstIndex(of: addString) ?? 0
@@ -90,7 +85,7 @@ class KeyboardManager {
                 let idx2 = second.firstIndex(of: lastWord) ?? 0
                 if idx1 == 0 {
                     lastWord = addString
-                    return (String(currentText) + addString, 2)
+                    return (currentText + addString, 2)
                 } else {
                     let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - (idx2 * 28) + (idx1 * 28)
                     if let scalarValue = UnicodeScalar(str) {
@@ -102,7 +97,6 @@ class KeyboardManager {
             }
         case 4:
             // 자음 + 모음 + 자음으로 받침이 있는 상태 (ex 언, 젠, 간, 끝 ...)
-            print("4")
             allWord.append(addString)
             if tappedButton.type == .consonant {
                 let doubleEnd = lastWord + addString
@@ -110,7 +104,7 @@ class KeyboardManager {
                 let idx2 = third.firstIndex(of: lastWord) ?? 0
                 if idx1 == 0 {
                     lastWord = addString
-                    return (String(currentText) + addString, 1)
+                    return (currentText + addString, 1)
                 } else {
                     let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - idx2 + idx1
                     if let scalarValue = UnicodeScalar(str) {
@@ -143,19 +137,6 @@ class KeyboardManager {
                 }
                 return ("", 0)
             }
-//        case 5:
-//            print("5")
-//            allWord.append(addString)
-//            if tappedButton.type == .consonant {
-//                allWord.append(addString)
-//                return (String(currentText) + addString, 0)
-//            } else {
-//
-//            }
-//            return ("", 0)
-//        case 6:
-//        case 7:
-//        case 8:
         default:
             return ("", 0)
         }

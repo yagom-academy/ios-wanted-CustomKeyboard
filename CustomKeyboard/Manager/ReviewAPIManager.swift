@@ -16,8 +16,6 @@ enum APIError: Error {
 }
 
 class ReviewAPIManager {
-    static let shared = ReviewAPIManager()
-    
     func getReview(_ completion: @escaping ((ReviewData) -> Void)) {
         guard let url = URL(string: "https://api.plkey.app/theme/review?themeId=PLKEY0-L-81&start=0&count=20") else {
             print("URL Error")
