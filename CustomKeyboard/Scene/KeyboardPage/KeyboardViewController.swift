@@ -19,7 +19,7 @@ class KeyboardViewController: UIViewController {
     
     private let reviewTextView: UITextView = {
         var textView = UITextView()
-        textView.font = .systemFont(ofSize: 20, weight: .medium)
+        textView.font = .systemFont(ofSize: 50, weight: .medium)
         
         return textView
     }()
@@ -35,6 +35,7 @@ class KeyboardViewController: UIViewController {
         keyboardView.keyFirstLine.delegate = self
         keyboardView.keySecondLine.delegate = self
         keyboardView.keyThirdLine.delegate = self
+        keyboardView.keyFourthLine.delegate = self
     }
 }
 
@@ -91,7 +92,10 @@ extension KeyboardViewController: ButtonDelegate {
         
         let managerString = manager.makeString(state, String(text), sender)
         
-        reviewTextView.text.removeLast()
+        if managerString.1 != 0 {
+            reviewTextView.text.removeLast()
+        }
+        
         reviewTextView.text! += managerString.0
         state = managerString.1
     }
