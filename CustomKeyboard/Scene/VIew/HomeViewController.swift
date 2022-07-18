@@ -13,6 +13,8 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         setTableView()
         setConstraints()
+      view.isUserInteractionEnabled = true
+        setupKeyboardActions()
         setData()
         reviewTextField.done = { text in
             print(text)
@@ -73,6 +75,16 @@ class HomeViewController: UIViewController {
             reviewTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+  
+  private func setupKeyboardActions() {
+    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    gestureRecognizer.cancelsTouchesInView = false
+    view.addGestureRecognizer(gestureRecognizer)
+  }
+  
+  @objc func dismissKeyboard() {
+    view.endEditing(true)
+  }
 }
 
 extension HomeViewController : UITableViewDataSource {
@@ -100,4 +112,5 @@ extension HomeViewController : UITableViewDelegate {
         return UITableView.automaticDimension
     }
 }
+
 
