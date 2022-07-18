@@ -91,16 +91,23 @@ class KeyboardMaker {
             
             let spaceKeyboardData = KeyboardData(char: " ", state: processingBuffer.currentState)
             
-            processingBuffer.alphaRepository.append(spaceKeyboardData)
+            processingBuffer.alphaRepository.removeAll()
             processingBuffer.isCompleted = false
+            processingBuffer.currentState = .empty
+            
             combineBuffer = ["", "", ""]
-            isEditing = false
+            
             releaseTextField.append(spaceKeyboardData.hangul)
             
             return releaseTextField.reduce(into: "") { $0 += $1 }
         }
         
-        isEditing = true
+        if inputData.unicode == SpecialCharSet.delete && processingBuffer.alphaRepository.count == 0 {
+            processingBuffer.currentState = .empty
+            combineBuffer = ["", "", ""]
+            releaseTextField.removeLast()
+            return releaseTextField.reduce(into: ""){ $0 += $1 }
+        }
         
         switch processingBuffer.currentState {
         case .empty:
@@ -118,8 +125,6 @@ class KeyboardMaker {
         case .doubleJong:
             processingBuffer = doubleJongStage(status: processingBuffer, input: inputData)
         }
-        // ㄱ ㅏ ㅂ ㅅ ㄱ ㅏ
-        // 값가
         
         if isdeleting && !releaseTextField.isEmpty && !processingBuffer.alphaRepository.isEmpty {
             
@@ -194,7 +199,14 @@ class KeyboardMaker {
                 releaseTextField[0] = newHangul.hangul
             }
         } else if releaseTextField.count > 1 {
-            
+            if releaseTextField.last == " " {
+                let combinedHagul = combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState)
+                
+                releaseTextField.append(combinedHagul.hangul)
+                processingBuffer.isCompleted = false
+                
+                return releaseTextField.reduce(into: ""){ $0 += $1 }
+            }
             releaseTextField[releaseTextField.count - 1] = combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState).hangul
             
         }
@@ -497,7 +509,7 @@ class KeyboardMaker {
             
         } else if currentKeyboardData.unicode == SpecialCharSet.delete {
             
-            currentStatus.alphaRepository.removeLast()
+            currentStatus.alphaRepository.removeLast()// repo에 들어온 delete 값을 지워 줌
             isdeleting = true
             currentStatus.isCompleted = false
             
