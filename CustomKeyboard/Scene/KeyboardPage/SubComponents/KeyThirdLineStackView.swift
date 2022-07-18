@@ -53,7 +53,7 @@ class KeyThirdLineStackView: UIStackView {
         
         for i in 0..<button.count {
             button[i].setTitle(title[i], for: .normal)
-            if button[i].type != .dark {
+            if button[i].type != .dark && button[i].type != .shift {
                 button[i].addTarget(self, action: #selector(tapButton(sender:)), for: .touchUpInside)
             }
         }
