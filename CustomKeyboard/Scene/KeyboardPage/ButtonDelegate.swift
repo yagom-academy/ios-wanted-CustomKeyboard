@@ -10,3 +10,7 @@ import UIKit
 protocol ButtonDelegate {
     func buttonClickEvent(sender: KeyButton)
 }
+
+protocol ShiftDelegate {
+    func shiftClickEvent(isShift: Bool)
+}

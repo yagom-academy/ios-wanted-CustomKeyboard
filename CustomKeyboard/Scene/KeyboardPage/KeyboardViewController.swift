@@ -89,7 +89,7 @@ extension KeyboardViewController: ButtonDelegate {
             state = managerString.1
             return
         }
-        
+
         let managerString = manager.makeString(state, String(text), sender)
         
         if managerString.1 != 0 {

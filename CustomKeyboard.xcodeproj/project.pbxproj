@@ -15,6 +15,7 @@
 		04C523F2287FE93A008488CF /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C523F1287FE93A008488CF /* KeyboardManager.swift */; };
 		04FE9E93287E6A0E0002EE50 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FE9E92287E6A0E0002EE50 /* ReviewViewModel.swift */; };
 		68351509287D6F4B0018CEB9 /* KeyFirstLineStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68351508287D6F4B0018CEB9 /* KeyFirstLineStackView.swift */; };
+		68A3B4C82885570900DD1631 /* KeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A3B4C72885570900DD1631 /* KeyboardViewModel.swift */; };
 		68AE7948287D3B1E003F4426 /* ReviewAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AE7947287D3B1E003F4426 /* ReviewAPIManager.swift */; };
 		68AE794D287D3E5E003F4426 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AE794C287D3E5E003F4426 /* KeyboardViewController.swift */; };
 		68AE794F287D3E87003F4426 /* ReviewTableViewHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AE794E287D3E87003F4426 /* ReviewTableViewHeaderViewModel.swift */; };
@@ -39,6 +40,7 @@
 		04C523F1287FE93A008488CF /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 		04FE9E92287E6A0E0002EE50 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 		68351508287D6F4B0018CEB9 /* KeyFirstLineStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyFirstLineStackView.swift; sourceTree = "<group>"; };
+		68A3B4C72885570900DD1631 /* KeyboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewModel.swift; sourceTree = "<group>"; };
 		68AE7947287D3B1E003F4426 /* ReviewAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAPIManager.swift; sourceTree = "<group>"; };
 		68AE794C287D3E5E003F4426 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		68AE794E287D3E87003F4426 /* ReviewTableViewHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewHeaderViewModel.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			children = (
 				68AE7950287D3F31003F4426 /* SubComponents */,
 				68AE794C287D3E5E003F4426 /* KeyboardViewController.swift */,
+				68A3B4C72885570900DD1631 /* KeyboardViewModel.swift */,
 				68B9A086287E605E00D09A0A /* ButtonDelegate.swift */,
 			);
 			path = KeyboardPage;
@@ -257,6 +260,7 @@
 				04FE9E93287E6A0E0002EE50 /* ReviewViewModel.swift in Sources */,
 				04C523F2287FE93A008488CF /* KeyboardManager.swift in Sources */,
 				68AE7948287D3B1E003F4426 /* ReviewAPIManager.swift in Sources */,
+				68A3B4C82885570900DD1631 /* KeyboardViewModel.swift in Sources */,
 				04158AD2287D3DA0004F6B9A /* ReviewViewController.swift in Sources */,
 				043D075C287D408B0061DCA2 /* ReveiwTableViewCell.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
