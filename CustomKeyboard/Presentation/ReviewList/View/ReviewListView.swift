@@ -34,6 +34,7 @@ final class ReviewListView: UIView {
         button.backgroundColor = .systemCyan
         button.tintColor = .white
         button.layer.cornerRadius = 10
+        button.widthAnchor.constraint(equalToConstant: 50).isActive = true
         return button
     }()
     
@@ -95,6 +96,8 @@ final class ReviewListView: UIView {
         NSLayoutConstraint.activate([
             profileImage.centerYAnchor.constraint(equalTo: reviewInputHorizontalStackView.centerYAnchor),
             reviewInputLabel.centerYAnchor.constraint(equalTo: reviewInputHorizontalStackView.centerYAnchor),
+            reviewInputLabel.trailingAnchor.constraint(equalTo: postButton.leadingAnchor, constant: -20),
+            postButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             reviewInputHorizontalStackView.leadingAnchor.constraint(equalTo: verticalStackView.leadingAnchor),
             reviewInputHorizontalStackView.trailingAnchor.constraint(equalTo: verticalStackView.trailingAnchor),
             verticalStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
