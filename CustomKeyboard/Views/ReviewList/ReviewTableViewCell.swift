@@ -11,7 +11,8 @@ class ReviewTableViewCell: UITableViewCell {
     
     private let profileImageView: UIImageView = {
         let profileImageVIew = UIImageView()
-        profileImageVIew.image = UIImage(systemName: "person.fill")
+        profileImageVIew.image = UIImage(systemName: "person.crop.circle.fill")
+        profileImageVIew.tintColor = .systemGray4
         return profileImageVIew
     }()
     
@@ -56,6 +57,10 @@ class ReviewTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
+    }
+    
     private func setLayout() {
         contentView.addSubview(profileImageView)
         contentView.addSubview(labelStackView)
@@ -85,36 +90,22 @@ class ReviewTableViewCell: UITableViewCell {
     }
     
     func fetchDataFromTableView(data: ReviewData1) {
-        // imageView 통신
-
-//        do {
-//            if let url = URL(string: data.user.profileImage) {
-//                let imgData = try Data(contentsOf: url)
-//                DispatchQueue.main.async {
-//                    self.profileImageView.image = UIImage(data: imgData)
-//                }
-//            }
-//        } catch {
-//
-//        }
         ImageLoder().leadImage(url: data.user.profileImage) { result in
             switch result {
-            case .success(let imgae):
-                self.profileImageView.image = imgae
+            case .success(let profileImage):
+                self.profileImageView.image = profileImage
             case .failure(let error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
-        nickNameLabel.text = data.user.userName
-        rateLabel.text = data.content
-        
         guard let reviewDate = data.createdAt.stringToDate else { return }
         if reviewDate > Date(timeIntervalSinceNow: -86400) {
             timeLabel.text = reviewDate.dateToRelativeTimeString
         } else {
             timeLabel.text = reviewDate.dateToOverTimeString
         }
+        nickNameLabel.text = data.user.userName
+        rateLabel.text = data.content
     }
-    
 }
 
