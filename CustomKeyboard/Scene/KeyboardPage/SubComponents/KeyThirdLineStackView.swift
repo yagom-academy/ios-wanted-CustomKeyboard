@@ -56,6 +56,8 @@ class KeyThirdLineStackView: UIStackView {
                 button[i].addTarget(self, action: #selector(tapButton(sender:)), for: .touchUpInside)
             }
         }
+        
+        
     }
     
     @objc private func tapButton(sender: KeyButton) {
