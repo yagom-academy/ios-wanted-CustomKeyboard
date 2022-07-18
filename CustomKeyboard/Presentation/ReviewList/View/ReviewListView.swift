@@ -20,10 +20,21 @@ final class ReviewListView: UIView {
     lazy var reviewInputLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = UIColor(red: 242/255, green: 243/255, blue: 247/255, alpha: 1)
-        label.text = "이 테마가 마음에 드시나요?"
+        label.text = "  이 테마가 마음에 드시나요?"
         label.textColor = .gray
         label.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        label.clipsToBounds = true
+        label.layer.cornerRadius = 20
         return label
+    }()
+    
+    lazy var postButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("전송", for: .normal)
+        button.backgroundColor = .systemCyan
+        button.tintColor = .white
+        button.layer.cornerRadius = 10
+        return button
     }()
     
     lazy var reviewInputHorizontalStackView: UIStackView = {
@@ -59,7 +70,8 @@ final class ReviewListView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+//        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
     }
     
     func setupView() {
@@ -71,7 +83,7 @@ final class ReviewListView: UIView {
             verticalStackView.addArrangedSubview($0)
         }
         
-        [profileImage,reviewInputLabel].forEach {
+        [profileImage,reviewInputLabel, postButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             reviewInputHorizontalStackView.addArrangedSubview($0)
         }

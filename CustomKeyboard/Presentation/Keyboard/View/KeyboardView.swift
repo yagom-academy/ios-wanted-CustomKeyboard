@@ -9,14 +9,19 @@ import UIKit
 
 class KeyboardView: UIView {
     
-    lazy var reviewTextView: UITextView = {
-        let textView = UITextView()
-        textView.backgroundColor = UIColor(red: 242/255, green: 243/255, blue: 247/255, alpha: 1)
-        return textView
+    lazy var reviewTextLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = UIColor(red: 242/255, green: 243/255, blue: 247/255, alpha: 1)
+        label.text = ""
+        return label
     }()
     
     lazy var verticalStackView: UIStackView = {
         let stackView = UIStackView()
+        stackView.spacing = 20
+        stackView.distribution = .fill
+        stackView.axis = .vertical
+        stackView.alignment = .center
         return stackView
     }()
     
@@ -32,18 +37,22 @@ class KeyboardView: UIView {
         super.init(frame: frame)
         setupView()
         setupConstraints()
-        backgroundColor = .red
     }
+    
+//    init(image : UIImage, frame : CGRect) { // custom initialize
+//        super.init(frame: frame)
+//    }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        fatalError("init(coder:) has not been implemented")
+//        fatalError("init(coder:) has not been implemented")
     }
     
     func setupView() {
+        verticalStackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(verticalStackView)
         
-        [reviewTextView, collectionView].forEach {
+        [reviewTextLabel, collectionView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             verticalStackView.addArrangedSubview($0)
         }
@@ -51,6 +60,7 @@ class KeyboardView: UIView {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
+            reviewTextLabel.leadingAnchor.constraint(equalTo: verticalStackView.leadingAnchor),
             verticalStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             verticalStackView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor,constant: 20),
             verticalStackView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor,constant: -20),
