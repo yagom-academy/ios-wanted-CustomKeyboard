@@ -11,8 +11,8 @@ public enum CSButtonType {
     case consonant
     case vowel
     case space
-    case dark_small
-    case dark_large
+    case shift
+    case dark
 }
 
 class KeyButton: UIButton {
@@ -26,7 +26,7 @@ class KeyButton: UIButton {
         switch self.type {
         case .consonant, .vowel, .space:
             self.backgroundColor = .systemGray2
-        case .dark_small, .dark_large:
+        case .shift, .dark:
             self.backgroundColor = .systemGray
         }
         
@@ -43,19 +43,4 @@ class KeyButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-//    override init(type: CSButtonType) {
-//        self.init()
-//
-//        switch type {
-//        case .consonant, .vowel:
-//            self.backgroundColor = .systemGray2
-//        case .space:
-//            self.backgroundColor = .systemGray2
-//        case .dark_small:
-//            self.backgroundColor = .systemGray
-//        case .dark_large:
-//            self.backgroundColor = .systemGray
-//        }
-//    }
 }

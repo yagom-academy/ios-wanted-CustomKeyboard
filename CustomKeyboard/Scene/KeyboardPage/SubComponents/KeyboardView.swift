@@ -9,15 +9,20 @@ import UIKit
 
 class KeyboardView: UIView {
     
+    let viewModel = KeyboardViewModel()
+    
     let keyFirstLine = KeyFirstLineStackView()
     let keySecondLine = KeySecondLineStackView()
     let keyThirdLine = KeyThirdLineStackView()
     let keyFourthLine = KeyFourthLineStackView()
     
+    lazy var buttons = keyFirstLine.passButtons()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         layout()
+        keyThirdLine.shiftDelegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -60,5 +65,16 @@ extension KeyboardView {
             keyFourthLine.widthAnchor.constraint(equalTo: self.widthAnchor),
             keyFourthLine.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.25),
         ])
+    }
+}
+
+extension KeyboardView: ShiftDelegate {
+    
+    func shiftClickEvent(isShift: Bool) {
+        if isShift {
+            viewModel.changeShift(buttons)
+        } else {
+            viewModel.resetShift(buttons)
+        }
     }
 }

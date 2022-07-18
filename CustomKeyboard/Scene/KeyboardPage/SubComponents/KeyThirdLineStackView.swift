@@ -10,8 +10,9 @@ import UIKit
 class KeyThirdLineStackView: UIStackView {
     
     var delegate: ButtonDelegate?
+    var shiftDelegate: ShiftDelegate?
     
-    let shiftButton = KeyButton(type: .dark_small)
+    let shiftButton = KeyButton(type: .shift)
     let zButton = KeyButton(type: .consonant)
     let xButton = KeyButton(type: .consonant)
     let cButton = KeyButton(type: .consonant)
@@ -19,7 +20,7 @@ class KeyThirdLineStackView: UIStackView {
     let bButton = KeyButton(type: .vowel)
     let nButton = KeyButton(type: .vowel)
     let mButton = KeyButton(type: .vowel)
-    let eraseButton = KeyButton(type: .dark_small)
+    let eraseButton = KeyButton(type: .dark)
     
     init() {
         super.init(frame: .zero)
@@ -52,16 +53,22 @@ class KeyThirdLineStackView: UIStackView {
         
         for i in 0..<button.count {
             button[i].setTitle(title[i], for: .normal)
-            if button[i].type != .dark_small {
+            if button[i].type != .dark {
                 button[i].addTarget(self, action: #selector(tapButton(sender:)), for: .touchUpInside)
             }
         }
         
+        shiftButton.addTarget(self, action: #selector(tapShiftButton(sender:)), for: .touchUpInside)
         eraseButton.addTarget(self, action: #selector(tapEraseButton(sender:)), for: .touchUpInside)
     }
     
     @objc private func tapButton(sender: KeyButton) {
         delegate?.buttonClickEvent(sender: sender)
+    }
+    
+    @objc private func tapShiftButton(sender: KeyButton) {
+        sender.isSelected = !sender.isSelected
+        shiftDelegate?.shiftClickEvent(isShift: sender.isSelected)
     }
     
     @objc private func tapEraseButton(sender: KeyButton) {

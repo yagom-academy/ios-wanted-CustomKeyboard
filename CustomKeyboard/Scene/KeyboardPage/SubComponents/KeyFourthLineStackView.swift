@@ -11,9 +11,9 @@ class KeyFourthLineStackView: UIStackView {
     
     var delegate: ButtonDelegate?
     
-    let numButton = KeyButton(type: .dark_large)
+    let numButton = KeyButton(type: .dark)
     let spaceButton = KeyButton(type: .space)
-    let returnButton = KeyButton(type: .dark_large)
+    let returnButton = KeyButton(type: .dark)
     
     init() {
         super.init(frame: .zero)

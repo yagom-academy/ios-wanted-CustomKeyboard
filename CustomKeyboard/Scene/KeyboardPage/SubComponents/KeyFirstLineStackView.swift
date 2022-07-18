@@ -9,7 +9,6 @@ import UIKit
 
 class KeyFirstLineStackView: UIStackView {
     
-    let width: Float = 0
     var delegate: ButtonDelegate?
     
     let qButton = KeyButton(type: .consonant)
@@ -29,11 +28,19 @@ class KeyFirstLineStackView: UIStackView {
         configureProperties()
         setButtons()
         setLayout()
-        
     }
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func passButtons() -> [UIButton] {
+        let button = [
+            qButton, wButton, eButton, rButton, tButton,
+            yButton, uButton, iButton, oButton, pButton
+        ]
+        
+        return button
     }
     
     private func configureProperties() {
@@ -48,6 +55,7 @@ class KeyFirstLineStackView: UIStackView {
             qButton, wButton, eButton, rButton, tButton,
             yButton, uButton, iButton, oButton, pButton
         ]
+        
         let title = [
             "ㅂ", "ㅈ", "ㄷ", "ㄱ", "ㅅ",
             "ㅛ", "ㅕ", "ㅑ", "ㅐ", "ㅔ"
