@@ -20,7 +20,7 @@
 		68AE794D287D3E5E003F4426 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AE794C287D3E5E003F4426 /* KeyboardViewController.swift */; };
 		68AE794F287D3E87003F4426 /* ReviewTableViewHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AE794E287D3E87003F4426 /* ReviewTableViewHeaderViewModel.swift */; };
 		68AE7952287D3F8C003F4426 /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AE7951287D3F8C003F4426 /* KeyButton.swift */; };
-		68B9A087287E605E00D09A0A /* ButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B9A086287E605E00D09A0A /* ButtonDelegate.swift */; };
+		68B9A087287E605E00D09A0A /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B9A086287E605E00D09A0A /* Delegate.swift */; };
 		68D17D5C287E8C82003E9BAC /* KeySecondLineStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D17D5B287E8C82003E9BAC /* KeySecondLineStackView.swift */; };
 		68D17D64287E8CEC003E9BAC /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D17D63287E8CEC003E9BAC /* KeyboardView.swift */; };
 		68D17D66287E8F5A003E9BAC /* KeyThirdLineStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D17D65287E8F5A003E9BAC /* KeyThirdLineStackView.swift */; };
@@ -45,7 +45,7 @@
 		68AE794C287D3E5E003F4426 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		68AE794E287D3E87003F4426 /* ReviewTableViewHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewHeaderViewModel.swift; sourceTree = "<group>"; };
 		68AE7951287D3F8C003F4426 /* KeyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyButton.swift; sourceTree = "<group>"; };
-		68B9A086287E605E00D09A0A /* ButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDelegate.swift; sourceTree = "<group>"; };
+		68B9A086287E605E00D09A0A /* Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegate.swift; sourceTree = "<group>"; };
 		68D17D5B287E8C82003E9BAC /* KeySecondLineStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeySecondLineStackView.swift; sourceTree = "<group>"; };
 		68D17D63287E8CEC003E9BAC /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		68D17D65287E8F5A003E9BAC /* KeyThirdLineStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyThirdLineStackView.swift; sourceTree = "<group>"; };
@@ -114,6 +114,14 @@
 			path = SubComponents;
 			sourceTree = "<group>";
 		};
+		68A3B4C928858C9200DD1631 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				68B9A086287E605E00D09A0A /* Delegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
 		68AE7946287D3AD5003F4426 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,7 +137,6 @@
 				68AE7950287D3F31003F4426 /* SubComponents */,
 				68AE794C287D3E5E003F4426 /* KeyboardViewController.swift */,
 				68A3B4C72885570900DD1631 /* KeyboardViewModel.swift */,
-				68B9A086287E605E00D09A0A /* ButtonDelegate.swift */,
 			);
 			path = KeyboardPage;
 			sourceTree = "<group>";
@@ -166,6 +173,7 @@
 		DE15E65A28604278003DD2F5 /* CustomKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				68A3B4C928858C9200DD1631 /* Delegate */,
 				04486787287D51550004A512 /* Extension */,
 				68AE7946287D3AD5003F4426 /* Manager */,
 				04158AD3287D3DA8004F6B9A /* Entity */,
@@ -254,7 +262,7 @@
 				68D17D68287E8F6A003E9BAC /* KeyFourthLineStackView.swift in Sources */,
 				68AE7952287D3F8C003F4426 /* KeyButton.swift in Sources */,
 				68D17D66287E8F5A003E9BAC /* KeyThirdLineStackView.swift in Sources */,
-				68B9A087287E605E00D09A0A /* ButtonDelegate.swift in Sources */,
+				68B9A087287E605E00D09A0A /* Delegate.swift in Sources */,
 				68AE794F287D3E87003F4426 /* ReviewTableViewHeaderViewModel.swift in Sources */,
 				04486783287D4B080004A512 /* ReviewTableViewHeader.swift in Sources */,
 				04FE9E93287E6A0E0002EE50 /* ReviewViewModel.swift in Sources */,

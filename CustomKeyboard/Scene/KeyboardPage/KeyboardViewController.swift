@@ -7,13 +7,9 @@
 
 import UIKit
 
-protocol PassContentDelegate {
-    func sendReviewData(content: String)
-}
-
 class KeyboardViewController: UIViewController {
     var delegate: PassContentDelegate?
-    private var viewModel = ReviewTableViewHeaderViewModel()
+    private var viewModel = KeyboardViewModel()
     private let manager = KeyboardManager()
     private var state = 0
     
@@ -68,7 +64,7 @@ extension KeyboardViewController {
         keyboardView.keyFourthLine.returnButton.addTarget(self, action: #selector(returnButtonEvent), for: .touchUpInside)
     }
     
-    private func bind(_ viewModel: ReviewTableViewHeaderViewModel) {
+    private func bind(_ viewModel: KeyboardViewModel) {
         self.viewModel = viewModel
     }
     
