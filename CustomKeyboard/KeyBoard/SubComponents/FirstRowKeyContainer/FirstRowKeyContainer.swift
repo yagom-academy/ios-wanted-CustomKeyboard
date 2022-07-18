@@ -43,6 +43,5 @@ extension FirstRowKeyContainer {
     private func layout() {
         self.addArrangedSubview(firstLineDynamicBasicKeys)
         firstLineDynamicBasicKeys.translatesAutoresizingMaskIntoConstraints = false
-//     firstLineDynamicBasicKeys.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
     }
 }

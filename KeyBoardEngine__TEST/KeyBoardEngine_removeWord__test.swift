@@ -8,7 +8,7 @@
 import XCTest
 @testable import CustomKeyboard
 
-class KeyBoardEngine_removeWord_Test_kirkim: XCTestCase {
+class KeyBoardEngine_removeWord__test: XCTestCase {
     var sut:KeyBoardEngine?
     
     override func setUpWithError() throws {
@@ -27,6 +27,14 @@ class KeyBoardEngine_removeWord_Test_kirkim: XCTestCase {
         
         XCTAssertEqual(sut?.removeWord(lastUniCode: input), result)
     }
+    
+    func test_removeWord호출시_ㅣ_입력시_공백반환되는지() {
+        let input = 12643
+        let result = ""
+        
+        XCTAssertEqual(sut?.removeWord(lastUniCode: input), result)
+    }
+    
     func test_removeWord호출시_ㅘ_입력시_ㅗ반환되는지() {
         let input = 12632
         let result = "ㅗ"

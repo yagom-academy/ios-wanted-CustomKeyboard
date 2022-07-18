@@ -33,8 +33,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FE9E34492881837300AFE308"
-               BuildableName = "CustomKeyBoardViewModelTest_kirkim.xctest"
-               BlueprintName = "CustomKeyBoardViewModelTest_kirkim"
+               BuildableName = "CustomKeyBoardViewModel__TEST.xctest"
+               BlueprintName = "CustomKeyBoardViewModel__TEST"
                ReferencedContainer = "container:CustomKeyboard.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -43,8 +43,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FE9E345628818D8F00AFE308"
-               BuildableName = "KeyBoardEngineTest_kirkim.xctest"
-               BlueprintName = "KeyBoardEngineTest_kirkim"
+               BuildableName = "KeyBoardEngineTest__TEST.xctest"
+               BlueprintName = "KeyBoardEngineTest__TEST"
                ReferencedContainer = "container:CustomKeyboard.xcodeproj">
             </BuildableReference>
          </TestableReference>

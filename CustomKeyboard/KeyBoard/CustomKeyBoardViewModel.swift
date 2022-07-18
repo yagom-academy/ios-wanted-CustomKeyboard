@@ -24,7 +24,7 @@ struct CustomKeyBoardViewModel {
         return beforeTextExceptLastChar + lastChar
     }
     
-    func addSpace(inputUniCode: Int, to beforeText: String?) -> String {
+    func addSpace(inputUniCode: Int = 32, to beforeText: String?) -> String {
         guard let beforeText = beforeText else { return "" }
         let space = String(UnicodeScalar(inputUniCode)!)
         return beforeText + space

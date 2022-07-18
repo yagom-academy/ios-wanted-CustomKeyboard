@@ -36,7 +36,8 @@ class CustomKeyBoard: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
 }
-//MARK - CustomKeyBoard: private 메서드
+
+//MARK: - CustomKeyBoard: private 메서드
 extension CustomKeyBoard {
     private func tappedBasicKey(unicode: Int) {
         delegate?.connectTextView().text = viewModel.addWord(inputUniCode: unicode, to: delegate?.connectTextView().text)

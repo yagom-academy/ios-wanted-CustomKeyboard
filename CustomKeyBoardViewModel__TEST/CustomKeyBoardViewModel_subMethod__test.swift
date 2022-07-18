@@ -8,7 +8,7 @@
 import XCTest
 @testable import CustomKeyboard
 
-class CustomKeyBoardViewModelTest_kirkim: XCTestCase {
+class CustomKeyBoardViewModel_subMethod__test: XCTestCase {
     var sut: CustomKeyBoardViewModel?
     override func setUpWithError() throws {
         try super.setUpWithError()

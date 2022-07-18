@@ -27,10 +27,11 @@
 		FE7A7E6828852EF0004315C3 /* FirstRowKeyContainerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7A7E6728852EF0004315C3 /* FirstRowKeyContainerDelegate.swift */; };
 		FE7A7E6A2885300C004315C3 /* SecondRowKeyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7A7E692885300C004315C3 /* SecondRowKeyContainer.swift */; };
 		FE7A7E6C28853028004315C3 /* SecondRowKeyContainerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7A7E6B28853028004315C3 /* SecondRowKeyContainerDelegate.swift */; };
+		FE7A7E6E288558EB004315C3 /* CustomKeyBoardViewModel_publicMethod__test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7A7E6D288558EB004315C3 /* CustomKeyBoardViewModel_publicMethod__test.swift */; };
 		FE831582287ED8A10039A56B /* BasicKeyLineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE831581287ED8A10039A56B /* BasicKeyLineDelegate.swift */; };
-		FE9E344D2881837300AFE308 /* CustomKeyBoardViewModelTest_kirkim.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E344C2881837300AFE308 /* CustomKeyBoardViewModelTest_kirkim.swift */; };
-		FE9E345A28818D8F00AFE308 /* KeyBoardEngine_addWord_Test_kirkim.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E345928818D8F00AFE308 /* KeyBoardEngine_addWord_Test_kirkim.swift */; };
-		FE9E34612881A56200AFE308 /* KeyBoardEngine_removeWord_Test_kirkim.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E34602881A56200AFE308 /* KeyBoardEngine_removeWord_Test_kirkim.swift */; };
+		FE9E344D2881837300AFE308 /* CustomKeyBoardViewModel_subMethod__test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E344C2881837300AFE308 /* CustomKeyBoardViewModel_subMethod__test.swift */; };
+		FE9E345A28818D8F00AFE308 /* KeyBoardEngine_addWord__test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E345928818D8F00AFE308 /* KeyBoardEngine_addWord__test.swift */; };
+		FE9E34612881A56200AFE308 /* KeyBoardEngine_removeWord__test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E34602881A56200AFE308 /* KeyBoardEngine_removeWord__test.swift */; };
 		FEB79C88287E83E500B5168A /* DynamicBasicKeyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB79C87287E83E500B5168A /* DynamicBasicKeyLine.swift */; };
 		FED1A80A28822E79007CA79E /* Initial.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED1A80928822E79007CA79E /* Initial.swift */; };
 		FED1A80C28823039007CA79E /* Neutral.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED1A80B28823039007CA79E /* Neutral.swift */; };
@@ -86,12 +87,13 @@
 		FE7A7E6728852EF0004315C3 /* FirstRowKeyContainerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRowKeyContainerDelegate.swift; sourceTree = "<group>"; };
 		FE7A7E692885300C004315C3 /* SecondRowKeyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondRowKeyContainer.swift; sourceTree = "<group>"; };
 		FE7A7E6B28853028004315C3 /* SecondRowKeyContainerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondRowKeyContainerDelegate.swift; sourceTree = "<group>"; };
+		FE7A7E6D288558EB004315C3 /* CustomKeyBoardViewModel_publicMethod__test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyBoardViewModel_publicMethod__test.swift; sourceTree = "<group>"; };
 		FE831581287ED8A10039A56B /* BasicKeyLineDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicKeyLineDelegate.swift; sourceTree = "<group>"; };
-		FE9E344A2881837300AFE308 /* CustomKeyBoardViewModelTest_kirkim.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomKeyBoardViewModelTest_kirkim.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FE9E344C2881837300AFE308 /* CustomKeyBoardViewModelTest_kirkim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyBoardViewModelTest_kirkim.swift; sourceTree = "<group>"; };
-		FE9E345728818D8F00AFE308 /* KeyBoardEngineTest_kirkim.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeyBoardEngineTest_kirkim.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FE9E345928818D8F00AFE308 /* KeyBoardEngine_addWord_Test_kirkim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardEngine_addWord_Test_kirkim.swift; sourceTree = "<group>"; };
-		FE9E34602881A56200AFE308 /* KeyBoardEngine_removeWord_Test_kirkim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardEngine_removeWord_Test_kirkim.swift; sourceTree = "<group>"; };
+		FE9E344A2881837300AFE308 /* CustomKeyBoardViewModel__TEST.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomKeyBoardViewModel__TEST.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE9E344C2881837300AFE308 /* CustomKeyBoardViewModel_subMethod__test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyBoardViewModel_subMethod__test.swift; sourceTree = "<group>"; };
+		FE9E345728818D8F00AFE308 /* KeyBoardEngineTest__TEST.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeyBoardEngineTest__TEST.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE9E345928818D8F00AFE308 /* KeyBoardEngine_addWord__test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardEngine_addWord__test.swift; sourceTree = "<group>"; };
+		FE9E34602881A56200AFE308 /* KeyBoardEngine_removeWord__test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardEngine_removeWord__test.swift; sourceTree = "<group>"; };
 		FEB79C87287E83E500B5168A /* DynamicBasicKeyLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicBasicKeyLine.swift; sourceTree = "<group>"; };
 		FED1A80928822E79007CA79E /* Initial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initial.swift; sourceTree = "<group>"; };
 		FED1A80B28823039007CA79E /* Neutral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neutral.swift; sourceTree = "<group>"; };
@@ -136,8 +138,8 @@
 			isa = PBXGroup;
 			children = (
 				DE15E65A28604278003DD2F5 /* CustomKeyboard */,
-				FE9E344B2881837300AFE308 /* CustomKeyBoardViewModelTest_kirkim */,
-				FE9E345828818D8F00AFE308 /* KeyBoardEngineTest_kirkim */,
+				FE9E344B2881837300AFE308 /* CustomKeyBoardViewModel__TEST */,
+				FE9E345828818D8F00AFE308 /* KeyBoardEngine__TEST */,
 				DE15E65928604278003DD2F5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -146,8 +148,8 @@
 			isa = PBXGroup;
 			children = (
 				DE15E65828604278003DD2F5 /* CustomKeyboard.app */,
-				FE9E344A2881837300AFE308 /* CustomKeyBoardViewModelTest_kirkim.xctest */,
-				FE9E345728818D8F00AFE308 /* KeyBoardEngineTest_kirkim.xctest */,
+				FE9E344A2881837300AFE308 /* CustomKeyBoardViewModel__TEST.xctest */,
+				FE9E345728818D8F00AFE308 /* KeyBoardEngineTest__TEST.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -246,21 +248,22 @@
 			path = FirstRowKeyContainer;
 			sourceTree = "<group>";
 		};
-		FE9E344B2881837300AFE308 /* CustomKeyBoardViewModelTest_kirkim */ = {
+		FE9E344B2881837300AFE308 /* CustomKeyBoardViewModel__TEST */ = {
 			isa = PBXGroup;
 			children = (
-				FE9E344C2881837300AFE308 /* CustomKeyBoardViewModelTest_kirkim.swift */,
+				FE7A7E6D288558EB004315C3 /* CustomKeyBoardViewModel_publicMethod__test.swift */,
+				FE9E344C2881837300AFE308 /* CustomKeyBoardViewModel_subMethod__test.swift */,
 			);
-			path = CustomKeyBoardViewModelTest_kirkim;
+			path = CustomKeyBoardViewModel__TEST;
 			sourceTree = "<group>";
 		};
-		FE9E345828818D8F00AFE308 /* KeyBoardEngineTest_kirkim */ = {
+		FE9E345828818D8F00AFE308 /* KeyBoardEngine__TEST */ = {
 			isa = PBXGroup;
 			children = (
-				FE9E345928818D8F00AFE308 /* KeyBoardEngine_addWord_Test_kirkim.swift */,
-				FE9E34602881A56200AFE308 /* KeyBoardEngine_removeWord_Test_kirkim.swift */,
+				FE9E345928818D8F00AFE308 /* KeyBoardEngine_addWord__test.swift */,
+				FE9E34602881A56200AFE308 /* KeyBoardEngine_removeWord__test.swift */,
 			);
-			path = KeyBoardEngineTest_kirkim;
+			path = KeyBoardEngine__TEST;
 			sourceTree = "<group>";
 		};
 		FED1A80728822E53007CA79E /* Entities */ = {
@@ -375,9 +378,9 @@
 			productReference = DE15E65828604278003DD2F5 /* CustomKeyboard.app */;
 			productType = "com.apple.product-type.application";
 		};
-		FE9E34492881837300AFE308 /* CustomKeyBoardViewModelTest_kirkim */ = {
+		FE9E34492881837300AFE308 /* CustomKeyBoardViewModel__TEST */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FE9E34522881837300AFE308 /* Build configuration list for PBXNativeTarget "CustomKeyBoardViewModelTest_kirkim" */;
+			buildConfigurationList = FE9E34522881837300AFE308 /* Build configuration list for PBXNativeTarget "CustomKeyBoardViewModel__TEST" */;
 			buildPhases = (
 				FE9E34462881837300AFE308 /* Sources */,
 				FE9E34472881837300AFE308 /* Frameworks */,
@@ -388,14 +391,14 @@
 			dependencies = (
 				FE9E344F2881837300AFE308 /* PBXTargetDependency */,
 			);
-			name = CustomKeyBoardViewModelTest_kirkim;
+			name = CustomKeyBoardViewModel__TEST;
 			productName = CustomKeyBoardViewModelTest_kirkim;
-			productReference = FE9E344A2881837300AFE308 /* CustomKeyBoardViewModelTest_kirkim.xctest */;
+			productReference = FE9E344A2881837300AFE308 /* CustomKeyBoardViewModel__TEST.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		FE9E345628818D8F00AFE308 /* KeyBoardEngineTest_kirkim */ = {
+		FE9E345628818D8F00AFE308 /* KeyBoardEngineTest__TEST */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FE9E345D28818D8F00AFE308 /* Build configuration list for PBXNativeTarget "KeyBoardEngineTest_kirkim" */;
+			buildConfigurationList = FE9E345D28818D8F00AFE308 /* Build configuration list for PBXNativeTarget "KeyBoardEngineTest__TEST" */;
 			buildPhases = (
 				FE9E345328818D8F00AFE308 /* Sources */,
 				FE9E345428818D8F00AFE308 /* Frameworks */,
@@ -406,9 +409,9 @@
 			dependencies = (
 				FE9E345C28818D8F00AFE308 /* PBXTargetDependency */,
 			);
-			name = KeyBoardEngineTest_kirkim;
+			name = KeyBoardEngineTest__TEST;
 			productName = KeyBoardEngineTest_kirkim;
-			productReference = FE9E345728818D8F00AFE308 /* KeyBoardEngineTest_kirkim.xctest */;
+			productReference = FE9E345728818D8F00AFE308 /* KeyBoardEngineTest__TEST.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -448,8 +451,8 @@
 			projectRoot = "";
 			targets = (
 				DE15E65728604278003DD2F5 /* CustomKeyboard */,
-				FE9E34492881837300AFE308 /* CustomKeyBoardViewModelTest_kirkim */,
-				FE9E345628818D8F00AFE308 /* KeyBoardEngineTest_kirkim */,
+				FE9E34492881837300AFE308 /* CustomKeyBoardViewModel__TEST */,
+				FE9E345628818D8F00AFE308 /* KeyBoardEngineTest__TEST */,
 			);
 		};
 /* End PBXProject section */
@@ -524,7 +527,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE9E344D2881837300AFE308 /* CustomKeyBoardViewModelTest_kirkim.swift in Sources */,
+				FE7A7E6E288558EB004315C3 /* CustomKeyBoardViewModel_publicMethod__test.swift in Sources */,
+				FE9E344D2881837300AFE308 /* CustomKeyBoardViewModel_subMethod__test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,8 +536,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE9E345A28818D8F00AFE308 /* KeyBoardEngine_addWord_Test_kirkim.swift in Sources */,
-				FE9E34612881A56200AFE308 /* KeyBoardEngine_removeWord_Test_kirkim.swift in Sources */,
+				FE9E345A28818D8F00AFE308 /* KeyBoardEngine_addWord__test.swift in Sources */,
+				FE9E34612881A56200AFE308 /* KeyBoardEngine_removeWord__test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -831,7 +835,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FE9E34522881837300AFE308 /* Build configuration list for PBXNativeTarget "CustomKeyBoardViewModelTest_kirkim" */ = {
+		FE9E34522881837300AFE308 /* Build configuration list for PBXNativeTarget "CustomKeyBoardViewModel__TEST" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FE9E34502881837300AFE308 /* Debug */,
@@ -840,7 +844,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FE9E345D28818D8F00AFE308 /* Build configuration list for PBXNativeTarget "KeyBoardEngineTest_kirkim" */ = {
+		FE9E345D28818D8F00AFE308 /* Build configuration list for PBXNativeTarget "KeyBoardEngineTest__TEST" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FE9E345E28818D8F00AFE308 /* Debug */,
