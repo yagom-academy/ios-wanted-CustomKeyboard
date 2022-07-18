@@ -132,6 +132,7 @@ private extension KeyboardView {
     
     @objc func didTapSpace() {
         viewModel.value.append(" ")
+        viewModel.result.value = viewModel.value
         viewModel.sejongState = .writeInitialState
     }
     @objc func didTapShift() {

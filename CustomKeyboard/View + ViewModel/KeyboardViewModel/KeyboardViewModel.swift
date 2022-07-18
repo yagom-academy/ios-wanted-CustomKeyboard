@@ -18,6 +18,7 @@ class KeyboardViewModel {
     var isShift: Observable<Bool> = Observable(false)
     
     let doubleJaum: [Chosung] = [.ㄲ,.ㄸ,.ㅃ,.ㅆ,.ㅉ]
+    var isRemovePhoneme = true
     
     typealias Buffer = (chosung: Chosung?, jungsung: Jungsung?, jongsung: Jongsung?)
     
@@ -26,8 +27,14 @@ class KeyboardViewModel {
         
         switch sejongState {
         case .writeInitialState: // 초성을 적어야 하는 상태
-            curr = buffer.chosung?.rawValue // 1. 초성을 적는다
-            sejongState = .writeMiddleState
+            if buffer.jungsung != nil {
+                curr = buffer.jungsung?.rawValue
+                sejongState = .writeInitialState
+            } else {
+                curr = buffer.chosung?.rawValue // 1. 초성을 적는다
+                sejongState = .writeMiddleState
+            }
+
         case .writeMiddleState: // 중성을 적어야 하는 상태
             if buffer.jungsung != nil {
                 curr = buffer.jungsung?.rawValue // 1. 중성을 적는다
@@ -107,6 +114,7 @@ class KeyboardViewModel {
         value.appendUnicode(curr)
         result.value = value
         isShift.value = false
+        isRemovePhoneme = true
         
         debugPrint(value)
     }
@@ -116,7 +124,6 @@ class KeyboardViewModel {
         self.value = ""
     }
     
-    var isRemovePhoneme = true
     
     func didTapBack() {
         if !result.value.isEmpty {
