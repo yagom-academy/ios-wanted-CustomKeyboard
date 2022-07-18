@@ -15,11 +15,11 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        userImageView.image = nil
+        userImageView.image = UIImage(systemName: "person.circle")
         nameLabel.text = nil
         contentLabel.text = nil
         timeLabel.text = nil
@@ -30,19 +30,18 @@ class HomeTableViewCell: UITableViewCell {
         contentLabel.text = review.content
         timeLabel.text = TimeManager.shared.getTimeInterval(review.createdAt)
         
-        NetworkManager.shared.request(review.user.profileImage) { result in
-            switch result {
-            case .success(let data):
-                DispatchQueue.main.async {
-                    self.userImageView.image = UIImage(data: data)
-                    self.configureImageViewCircle()
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
+        ImageLoadManager.shared.load(review.user.profileImage) { data in
+            DispatchQueue.main.async {
+                self.userImageView.image = UIImage(data: data)
+                self.configureImageViewCircle()
             }
         }
     }
-    
+}
+
+// MARK: - Private
+
+extension HomeTableViewCell {
     private func configureImageViewCircle() {
         userImageView.layer.cornerRadius = userImageView.frame.width / 2
         userImageView.clipsToBounds = true

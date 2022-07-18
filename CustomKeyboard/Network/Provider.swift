@@ -12,17 +12,30 @@ class Provider {
         case decode(Error)
     }
     
-    static let shared = Provider()
-    private init() { }
-    
     func request<T: Decodable>(endpoint: Endpoint, completion: @escaping (Result<T, Error>) -> Void) {
         do {
             let urlRequest = try endpoint.urlRequest()
-            NetworkManager.shared.request(urlRequest) { result in
+            NetworkManager().request(urlRequest) { result in
                 switch result {
                 case .success(let data):
                     let result: Result<T, Error> = self.decode(data)
                     completion(result)
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        } catch let error {
+            completion(.failure(error))
+        }
+    }
+    
+    func postRequest(endpoint: Endpoint, completion: @escaping (Result<Data, Error>) -> Void) {
+        do {
+            let urlRequest = try endpoint.urlRequest()
+            NetworkManager().request(urlRequest) { result in
+                switch result {
+                case .success(let data):
+                    completion(.success(data))
                 case .failure(let error):
                     completion(.failure(error))
                 }

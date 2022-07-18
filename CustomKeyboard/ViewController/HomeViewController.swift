@@ -8,6 +8,11 @@ import Combine
 
 class HomeViewController: UIViewController {
     
+    enum HomeConstants {
+        static let segueReviewViewController = "showReviewViewController"
+        static let reviewButtonPlaceholder = "이 테마가 마음에 드시나요?"
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var reviewButton: UIButton!
     @IBOutlet weak var submitButton: UIButton!
@@ -24,7 +29,7 @@ class HomeViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showReviewViewController" {
+        if segue.identifier == HomeConstants.segueReviewViewController {
             guard let reviewViewController = segue.destination as? ReviewViewController else {
                 return
             }
@@ -68,6 +73,21 @@ extension HomeViewController {
                 self.tableView.reloadData()
             }
             .store(in: &cancellable)
+        
+        viewModel.$isUploaded
+            .receive(on: DispatchQueue.main)
+            .sink { isUploaded in
+                if isUploaded {
+                    self.buttonsReset()
+                }
+            }
+            .store(in: &cancellable)
+    }
+    
+    private func buttonsReset() {
+        reviewButton.setTitle(HomeConstants.reviewButtonPlaceholder, for: .normal)
+        reviewButton.setTitleColor(.lightGray, for: .normal)
+        submitButton.isEnabled = false
     }
 }
 
@@ -94,9 +114,7 @@ extension HomeViewController: UITableViewDataSource {
 extension HomeViewController: ReviewViewControllerDelegate {
     func reviewViewControllerDismiss(_ text: String) {
         if text.isEmpty {
-            reviewButton.setTitle("이 테마가 마음에 드시나요?", for: .normal)
-            reviewButton.setTitleColor(.lightGray, for: .normal)
-            submitButton.isEnabled = false
+            buttonsReset()
         } else {
             reviewButton.setTitle(text, for: .normal)
             reviewButton.setTitleColor(.label, for: .normal)

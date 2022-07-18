@@ -10,6 +10,13 @@ import Combine
 
 class HomeViewModel {
     @Published var reviews: [Review] = []
+    @Published var isUploaded = false
+    
+    private let provider: Provider
+    
+    init() {
+        self.provider = Provider()
+    }
     
     func reviewsCount() -> Int {
         return reviews.count
@@ -21,7 +28,7 @@ class HomeViewModel {
     
     func fetch() {
         let reviewsEndpoint = APIEndpoints.getReviews()
-        Provider.shared.request(endpoint: reviewsEndpoint) { (result: Result<ReviewResponse, Error>) in
+        provider.request(endpoint: reviewsEndpoint) { (result: Result<ReviewResponse, Error>) in
             switch result {
             case .success(let reviewResponse):
                 self.reviews = reviewResponse.data
@@ -40,16 +47,19 @@ class HomeViewModel {
         }
         
         let postEndpoint = APIEndpoints.postReview(bodyData: data)
-        Provider.shared.request(endpoint: postEndpoint) { (result: Result<Content, Error>) in
+        
+        provider.postRequest(endpoint: postEndpoint) { result in
             switch result {
-            case .success(let content):
-                let review = Review(user: User(userName: "", profileImage: ""),
-                                    content: content.content,
+            case .success(let data):
+                let content = String(decoding: data, as: UTF8.self)
+                let review = Review(user: User(userName: "User", profileImage: ""),
+                                    content: content,
                                     createdAt: "")
                 self.reviews.insert(review, at: 0)
-                // 성공하면 button empty 및 button enabled false
+                self.isUploaded = true
             case .failure(let error):
                 print(error.localizedDescription)
+                self.isUploaded = false
             }
         }
     }
