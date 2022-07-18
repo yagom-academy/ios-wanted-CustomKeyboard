@@ -59,7 +59,7 @@ enum Chosung: Int {
         }
     }
     
-    var jongsung: Jongsung {
+    var jongsung: Jongsung? {
         switch self {
         case .ㄱ: return.ㄱ
         case .ㄲ: return.ㄲ
@@ -77,7 +77,7 @@ enum Chosung: Int {
         case .ㅌ: return.ㅌ
         case .ㅍ: return.ㅍ
         case .ㅎ: return.ㅎ
-        default: return .empty
+        default: return nil
         }
     }
 }

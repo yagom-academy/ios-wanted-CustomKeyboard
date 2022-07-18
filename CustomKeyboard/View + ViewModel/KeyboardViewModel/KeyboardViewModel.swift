@@ -17,6 +17,8 @@ class KeyboardViewModel {
     
     var isShift: Observable<Bool> = Observable(false)
     
+    let doubleJaum: [Chosung] = [.ㄲ,.ㄸ,.ㅃ,.ㅆ,.ㅉ]
+    
     typealias Buffer = (chosung: Chosung?, jungsung: Jungsung?, jongsung: Jongsung?)
     
     func didTapKeyboardButton(buffer: Buffer) {
@@ -47,7 +49,7 @@ class KeyboardViewModel {
                 }
                 sejongState = .writeLastState
             } else {
-                if isShift.value && buffer.jongsung != .ㄲ && buffer.jongsung != .ㅆ {
+                if buffer.jongsung != .ㄲ && buffer.jongsung != .ㅆ && doubleJaum.contains(buffer.chosung!) {
                     curr = buffer.chosung?.rawValue
                     sejongState = .writeMiddleState
                 } else {
@@ -65,7 +67,8 @@ class KeyboardViewModel {
                 currentLastJongsung = nil
                 sejongState = .writeLastState
             } else { // 자음이 들어오는 경우                                     안, ㅎ -> 아, ㄴ, ㅎ -> 않
-                if isShift.value {
+                if let chosung = buffer.chosung,
+                   doubleJaum.contains(chosung) {
                     curr = buffer.chosung?.rawValue
                     sejongState = .writeMiddleState
                 } else {
@@ -126,9 +129,11 @@ class KeyboardViewModel {
                 let splitedJongsung = splitDoubleJongsung(Jongsung(rawValue: Int(removed.value)))
                 let splitedJungsung = splitJungsung(Jungsung(rawValue: Int(removed.value)))
                 
-                if let splited = splitedJongsung {
+                if let splited = splitedJongsung { // 이중 종성이 들어왔을 경우
                     result.value.appendUnicode(splited.0.rawValue)
-                } else if let splited = splitedJungsung {
+                }
+                
+                if let splited = splitedJungsung { // 이중 중성이 들어왔을 경우
                     result.value.appendUnicode(splited.0.rawValue)
                 }
                 
