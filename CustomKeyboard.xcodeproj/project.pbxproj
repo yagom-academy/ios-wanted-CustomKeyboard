@@ -25,16 +25,7 @@
 		9F4652752884201D008D26D2 /* space_input_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4652742884201D008D26D2 /* space_input_Tests.swift */; };
 		9F5042FF287C467400CDBD9C /* DateFormatter_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5042FE287C467400CDBD9C /* DateFormatter_Extension.swift */; };
 		9F504301287C484900CDBD9C /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F504300287C484900CDBD9C /* TimeManager.swift */; };
-		9F77251A287FDC50009A4EB8 /* IOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F772519287FDC50009A4EB8 /* IOManager.swift */; };
-		9F77251C287FDE2A009A4EB8 /* StatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F77251B287FDE2A009A4EB8 /* StatusManager.swift */; };
-		9F772522287FE084009A4EB8 /* Hangeul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F772521287FE084009A4EB8 /* Hangeul.swift */; };
-		9F772524287FE560009A4EB8 /* HangeulUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F772523287FE560009A4EB8 /* HangeulUtils.swift */; };
-		9F772528287FF46F009A4EB8 /* LetterBufferManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F772527287FF46F009A4EB8 /* LetterBufferManager.swift */; };
-		9F77252A287FF9EA009A4EB8 /* WordListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F772529287FF9EA009A4EB8 /* WordListManager.swift */; };
-		9F77252C288008B6009A4EB8 /* normalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F77252B288008B6009A4EB8 /* normalTests.swift */; };
-		9F77252E288027C1009A4EB8 /* backTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F77252D288027C1009A4EB8 /* backTests.swift */; };
-		9F77253028803252009A4EB8 /* spaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F77252F28803252009A4EB8 /* spaceTests.swift */; };
-		9FB695462881A3AA00F6AE87 /* HangeulR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB695452881A3AA00F6AE87 /* HangeulR.swift */; };
+		9FB695462881A3AA00F6AE87 /* Hangeul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB695452881A3AA00F6AE87 /* Hangeul.swift */; };
 		9FB6954A288219F100F6AE87 /* HangeulCombiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB69549288219F100F6AE87 /* HangeulCombiner.swift */; };
 		9FB6954C28821A3300F6AE87 /* HangeulSpecifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954B28821A3300F6AE87 /* HangeulSpecifier.swift */; };
 		9FB6954E28821D8300F6AE87 /* HangeulConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954D28821D8300F6AE87 /* HangeulConverter.swift */; };
@@ -79,16 +70,7 @@
 		9F5042FE287C467400CDBD9C /* DateFormatter_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter_Extension.swift; sourceTree = "<group>"; };
 		9F504300287C484900CDBD9C /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		9F504318287E323300CDBD9C /* CustomKeyboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomKeyboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9F772519287FDC50009A4EB8 /* IOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOManager.swift; sourceTree = "<group>"; };
-		9F77251B287FDE2A009A4EB8 /* StatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusManager.swift; sourceTree = "<group>"; };
-		9F772521287FE084009A4EB8 /* Hangeul.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hangeul.swift; sourceTree = "<group>"; };
-		9F772523287FE560009A4EB8 /* HangeulUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulUtils.swift; sourceTree = "<group>"; };
-		9F772527287FF46F009A4EB8 /* LetterBufferManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterBufferManager.swift; sourceTree = "<group>"; };
-		9F772529287FF9EA009A4EB8 /* WordListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListManager.swift; sourceTree = "<group>"; };
-		9F77252B288008B6009A4EB8 /* normalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = normalTests.swift; sourceTree = "<group>"; };
-		9F77252D288027C1009A4EB8 /* backTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = backTests.swift; sourceTree = "<group>"; };
-		9F77252F28803252009A4EB8 /* spaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = spaceTests.swift; sourceTree = "<group>"; };
-		9FB695452881A3AA00F6AE87 /* HangeulR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulR.swift; sourceTree = "<group>"; };
+		9FB695452881A3AA00F6AE87 /* Hangeul.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hangeul.swift; sourceTree = "<group>"; };
 		9FB69549288219F100F6AE87 /* HangeulCombiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulCombiner.swift; sourceTree = "<group>"; };
 		9FB6954B28821A3300F6AE87 /* HangeulSpecifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulSpecifier.swift; sourceTree = "<group>"; };
 		9FB6954D28821D8300F6AE87 /* HangeulConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulConverter.swift; sourceTree = "<group>"; };
@@ -211,9 +193,6 @@
 		9F504319287E323300CDBD9C /* HangeulManagerTests */ = {
 			isa = PBXGroup;
 			children = (
-				9F77252B288008B6009A4EB8 /* normalTests.swift */,
-				9F77252D288027C1009A4EB8 /* backTests.swift */,
-				9F77252F28803252009A4EB8 /* spaceTests.swift */,
 				9F4652702883D722008D26D2 /* normal_input_Tests.swift */,
 				9F4652722884101A008D26D2 /* back_input_Tests.swift */,
 				9F4652742884201D008D26D2 /* space_input_Tests.swift */,
@@ -221,23 +200,10 @@
 			path = HangeulManagerTests;
 			sourceTree = "<group>";
 		};
-		9F772514287FDAAD009A4EB8 /* Hangeul */ = {
-			isa = PBXGroup;
-			children = (
-				9F772519287FDC50009A4EB8 /* IOManager.swift */,
-				9F77251B287FDE2A009A4EB8 /* StatusManager.swift */,
-				9F772521287FE084009A4EB8 /* Hangeul.swift */,
-				9F772523287FE560009A4EB8 /* HangeulUtils.swift */,
-				9F772527287FF46F009A4EB8 /* LetterBufferManager.swift */,
-				9F772529287FF9EA009A4EB8 /* WordListManager.swift */,
-			);
-			path = Hangeul;
-			sourceTree = "<group>";
-		};
 		9FB6954228818C4C00F6AE87 /* HangeulRefactoring */ = {
 			isa = PBXGroup;
 			children = (
-				9FB695452881A3AA00F6AE87 /* HangeulR.swift */,
+				9FB695452881A3AA00F6AE87 /* Hangeul.swift */,
 				9FB69549288219F100F6AE87 /* HangeulCombiner.swift */,
 				9FB6954B28821A3300F6AE87 /* HangeulSpecifier.swift */,
 				9FB6954D28821D8300F6AE87 /* HangeulConverter.swift */,
@@ -270,7 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				9FB6954228818C4C00F6AE87 /* HangeulRefactoring */,
-				9F772514287FDAAD009A4EB8 /* Hangeul */,
 				9F5042FD287C463300CDBD9C /* Extension */,
 				0142F4DB287C3510006F3E48 /* Application */,
 				0142F4D8287C34CC006F3E48 /* Model */,
@@ -386,11 +351,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F77252E288027C1009A4EB8 /* backTests.swift in Sources */,
 				9F4652712883D722008D26D2 /* normal_input_Tests.swift in Sources */,
-				9F77252C288008B6009A4EB8 /* normalTests.swift in Sources */,
 				9F4652732884101A008D26D2 /* back_input_Tests.swift in Sources */,
-				9F77253028803252009A4EB8 /* spaceTests.swift in Sources */,
 				9F4652752884201D008D26D2 /* space_input_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -400,21 +362,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FB695542882265900F6AE87 /* HangeulDictionary.swift in Sources */,
-				9FB695462881A3AA00F6AE87 /* HangeulR.swift in Sources */,
+				9FB695462881A3AA00F6AE87 /* Hangeul.swift in Sources */,
 				0142F4E8287D62ED006F3E48 /* KeyboardView.swift in Sources */,
 				012EDE54287F9B960035C3E6 /* Endpoint.swift in Sources */,
 				012EDE5C287FAF790035C3E6 /* ReviewViewController.swift in Sources */,
-				9F772524287FE560009A4EB8 /* HangeulUtils.swift in Sources */,
 				012EDE5A287FA6FA0035C3E6 /* APIEndpoints.swift in Sources */,
 				012EDE46287EC14C0035C3E6 /* HttpMethod.swift in Sources */,
-				9F77251A287FDC50009A4EB8 /* IOManager.swift in Sources */,
 				9FB695522882248B00F6AE87 /* HangeulJudgingMachine.swift in Sources */,
 				012EDE56287FA0BD0035C3E6 /* Provider.swift in Sources */,
 				0142F4D0287C0C9C006F3E48 /* Review.swift in Sources */,
-				9F77251C287FDE2A009A4EB8 /* StatusManager.swift in Sources */,
 				012EDE42287EB9FA0035C3E6 /* NetworkManager.swift in Sources */,
-				9F77252A287FF9EA009A4EB8 /* WordListManager.swift in Sources */,
-				9F772528287FF46F009A4EB8 /* LetterBufferManager.swift in Sources */,
 				9FB6955028821F4F00F6AE87 /* HangeulIoManager.swift in Sources */,
 				0142F4D6287C3078006F3E48 /* HomeViewModel.swift in Sources */,
 				9FB6954E28821D8300F6AE87 /* HangeulConverter.swift in Sources */,
@@ -426,7 +383,6 @@
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 				9F504301287C484900CDBD9C /* TimeManager.swift in Sources */,
 				9F5042FF287C467400CDBD9C /* DateFormatter_Extension.swift in Sources */,
-				9F772522287FE084009A4EB8 /* Hangeul.swift in Sources */,
 				012EDEAF288139480035C3E6 /* ImageCacheManager.swift in Sources */,
 				9FB6954C28821A3300F6AE87 /* HangeulSpecifier.swift in Sources */,
 			);
