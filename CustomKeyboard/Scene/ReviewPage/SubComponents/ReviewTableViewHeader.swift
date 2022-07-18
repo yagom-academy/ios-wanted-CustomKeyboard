@@ -7,7 +7,14 @@
 
 import UIKit
 
+protocol PassReviewDelegate {
+    func sendReviewData(review: Review)
+}
+
 class ReviewTableViewHeader: UITableViewHeaderFooterView {
+    private var viewModel = ReviewTableViewHeaderViewModel()
+    var delegate: PassReviewDelegate?
+    
     private let profileImage: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 30
@@ -28,15 +35,32 @@ class ReviewTableViewHeader: UITableViewHeaderFooterView {
         return textField
     }()
     
-    private let writeButton: UIButton = {
+    private lazy var writeButton: UIButton = {
         let button = UIButton()
         button.setTitle("작성", for: .normal)
         button.tintColor = .label
         button.layer.cornerRadius = 10
         button.backgroundColor = .systemGray
         
+        button.addTarget(self, action: #selector(tapWriteButton), for: .touchUpInside)
+        
         return button
     }()
+    
+    @objc func tapWriteButton() {
+        if let content = reviewTextField.text {
+            
+            let review = viewModel.postReview(content: content) { result in
+                switch result {
+                case .success(let post):
+                    print(post)
+                case .failure(_):
+                    print(Error.self)
+                }
+            }
+            delegate?.sendReviewData(review: review)
+        }
+    }
     
     func setup() {
         layout()

@@ -7,14 +7,14 @@
 
 import UIKit
 
-protocol PassReviewDelegate {
-    func sendReviewData(review: Review)
+protocol PassContentDelegate {
+    func sendReviewData(content: String)
 }
 
 class KeyboardViewController: UIViewController {
-    var delegate: PassReviewDelegate?
-    private var viewModel = KeyboardViewModel()
-    private let manager = KeyboardManager.shared
+    var delegate: PassContentDelegate?
+    private var viewModel = ReviewTableViewHeaderViewModel()
+    private let manager = KeyboardManager()
     private var state = 0
     
     private let reviewTextView: UITextView = {
@@ -67,23 +67,13 @@ extension KeyboardViewController {
         keyboardView.keyFourthLine.returnButton.addTarget(self, action: #selector(returnButtonEvent), for: .touchUpInside)
     }
     
-    private func bind(_ viewModel: KeyboardViewModel) {
+    private func bind(_ viewModel: ReviewTableViewHeaderViewModel) {
         self.viewModel = viewModel
     }
     
     @objc private func returnButtonEvent() {
         if let content = reviewTextView.text {
-            
-            let review = viewModel.postReview(content: content) { result in
-                switch result {
-                case .success(let post):
-                    print(post)
-                case .failure(_):
-                    print(Error.self)
-                }
-            }
-            
-            delegate?.sendReviewData(review: review)
+            delegate?.sendReviewData(content: content)
         }
         
         self.navigationController?.popViewController(animated: true)
@@ -92,16 +82,16 @@ extension KeyboardViewController {
 
 extension KeyboardViewController: ButtonDelegate {
     func buttonClickEvent(sender: KeyButton) {
-        let str: String = ""
-        var text: Character = Character(str)
-        
-        if !reviewTextView.text.isEmpty {
-            text = (reviewTextView.text?.last)!
-            reviewTextView.text.removeLast()
+        guard let text = reviewTextView.text?.last else {
+            let managerString = manager.makeString(state, "", sender)
+            reviewTextView.text! += managerString.0
+            state = managerString.1
+            return
         }
         
-        let managerString = manager.makeString(state, text, sender)
+        let managerString = manager.makeString(state, String(text), sender)
         
+        reviewTextView.text.removeLast()
         reviewTextView.text! += managerString.0
         state = managerString.1
     }

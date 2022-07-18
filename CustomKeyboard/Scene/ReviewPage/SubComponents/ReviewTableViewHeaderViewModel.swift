@@ -1,5 +1,5 @@
 //
-//  KeyboardViewModel.swift
+//  ReviewTableViewHeaderViewModel.swift
 //  CustomKeyboard
 //
 //  Created by 백유정 on 2022/07/12.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-class KeyboardViewModel {
-    private let networkManager = ReviewAPIManager.shared
+class ReviewTableViewHeaderViewModel {
+    private let networkManager = ReviewAPIManager()
     
     func postReview(content: String, _ completion: @escaping (Result<Post, APIError>) -> Void) -> Review {
         networkManager.postReview(content: content, completion)
