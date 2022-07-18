@@ -65,7 +65,11 @@ class HangulAutomata{
         ["ㅜ","ㅓ","ㅝ"],
         ["ㅜ","ㅔ","ㅞ"],
         ["ㅜ","ㅣ","ㅟ"],
-        ["ㅡ","ㅣ","ㅢ"]
+        ["ㅡ","ㅣ","ㅢ"],
+        ["ㅏ","ㅣ","ㅐ"],
+        ["ㅓ","ㅣ","ㅔ"],
+        ["ㅕ","ㅣ","ㅖ"],
+        ["ㅑ","ㅣ","ㅒ"]
     ]
     
     var dJongTable : [[String]] = [
@@ -102,6 +106,15 @@ class HangulAutomata{
         return false
     }
     
+    func isJoongSungPair(first : String, result : String)->Bool{
+        for i in 0..<dJoongTable.count{
+            if dJoongTable[i][0] == first && dJoongTable[i][2] == result{
+                return true
+            }
+        }
+        return false
+    }
+    
     func decompositionChosung(charCode : UInt32)->UInt32{
         let unicodeHangul = charCode-0xAC00
         let jongsung = (unicodeHangul) % 28
@@ -121,6 +134,54 @@ class HangulAutomata{
     func combinationHangul(chosung : UInt32 = 0, joongsung : UInt32, jongsung : UInt32 = 0)->UInt32{
         return (((chosung*21)+joongsung)*28)+jongsung+0xAC00
     }
+    
+    func deleteBuffer(){
+        if inpStack.count == 0{
+            if buffer.count > 0{
+                buffer.removeLast()
+            }
+        }else{
+            if let popHanguel = inpStack.popLast(){
+                if popHanguel.curhanst == .chosung{
+                    buffer.removeLast()
+                }
+                else if popHanguel.curhanst == .joongsung || popHanguel.curhanst == .dJoongsung{
+                    if inpStack[inpStack.count-1].curhanst == .jongsung{
+                        buffer.removeLast()
+                    }
+                        buffer[buffer.count-1] = inpStack[inpStack.count-1].charCode
+                }
+                else{
+                    if inpStack.isEmpty{
+                        buffer.removeLast()
+                    }
+                    else if popHanguel.chKind == .vowel{
+                        if inpStack[inpStack.count-1].curhanst == .jongsung{
+                            if inpStack[inpStack.count-1].chKind == .vowel{
+                                if isJoongSungPair(first: joongsungTable[Int(inpStack[inpStack.count-1].key)] , result: joongsungTable[Int(popHanguel.key)]){
+                                    buffer[buffer.count-1] = inpStack[inpStack.count-1].charCode
+                                }
+                            }
+                        }else{
+                            buffer.removeLast()
+                        }
+                    }
+                    else{
+                        buffer[buffer.count-1] = inpStack[inpStack.count-1].charCode
+                    }
+                }
+                if inpStack.isEmpty{
+                    currentHangulState = nil
+                }else{
+                    currentHangulState = inpStack[inpStack.count-1].curhanst
+                    oldKey = inpStack[inpStack.count-1].key
+                    oldChKind = inpStack[inpStack.count-1].chKind
+                    charCode = inpStack[inpStack.count-1].charCode
+                }
+            }
+        print(inpStack)
+    }
+    }
 }
 
 extension HangulAutomata{
@@ -137,8 +198,8 @@ extension HangulAutomata{
             }
         }
         if currentHangulState != nil{
-            oldKey = inpStack[inpSP-1].key
-            oldChKind = inpStack[inpSP-1].chKind
+            oldKey = inpStack[inpStack.count-1].key
+            oldChKind = inpStack[inpStack.count-1].chKind
         }else{
             currentHangulState = .start
             buffer.append("")
@@ -169,7 +230,10 @@ extension HangulAutomata{
             }
             break
         case .dJoongsung:
-            if canBeJongsung{
+            //추가
+            if joongsungPair(){
+                currentHangulState = .dJoongsung
+            }else if canBeJongsung{
                 currentHangulState = .jongsung
             }else{
                 currentHangulState = .endOne
@@ -221,7 +285,6 @@ extension HangulAutomata{
             keyCode = UInt32(jongsungTable.firstIndex(of: key)!)
             break
         case .endOne:
-            //중성 -> 모음 입력시 이전에 입력한 키가 그대로 입력되는 문제
             if chKind == .consonant{
                 charCode = chosungTable[Int(keyCode)]
                 currentHangulState = .chosung
@@ -238,11 +301,10 @@ extension HangulAutomata{
                 oldKey = UInt32(chosungTable.firstIndex(of: jongsungTable[Int(oldKey)])!)
                 charCode =  String(Unicode.Scalar(combinationHangul(chosung: oldKey, joongsung: keyCode))!)
                 currentHangulState = .joongsung
-                buffer[buffer.count-1] = inpStack[inpSP-2].charCode
+                buffer[buffer.count-1] = inpStack[inpStack.count-2].charCode
                 buffer.append("")
                 cursor += 1
             }else{
-                // 모음 + 모음 일경우 뒤에 빈 배열 한칸 생성되는 문제 해결
                 if !joongsungPair(){
                     cursor += 1
                     buffer.append("")

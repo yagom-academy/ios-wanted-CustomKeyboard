@@ -37,7 +37,8 @@ extension KeyboardIOManager: CustomKeyboardDelegate {
     }
     
     func backKeypadTap() {
-        
+        hangulAutomata.deleteBuffer()
+        updateTextView(hangulAutomata.buffer.reduce("", { $0 + $1}))
     }
     
     func enterKeypadTap() {
