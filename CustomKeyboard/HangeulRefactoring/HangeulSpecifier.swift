@@ -15,7 +15,7 @@ class HangeulSpecifier {
         
         if curr.prev == nil || curr.prev?.status == .finished {
             if curr.phoneme == .vowel {
-                if judgingMachine.isDoubleMid(unicode: curr.unicode, unicodeType: curr.unicodeType) {
+                if judgingMachine.isDoubleMid(unicode: curr.unicode) {
                     curr.update(newType: .fixed, newStatus: .finished, newPosition: .mid2)
                 } else {
                     curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid1)
@@ -31,7 +31,7 @@ class HangeulSpecifier {
         switch prev.position.last {
         case .top :
             if curr.phoneme == .vowel {
-                if judgingMachine.isDoubleMid(unicode: curr.unicode, unicodeType: curr.unicodeType) {
+                if judgingMachine.isDoubleMid(unicode: curr.unicode) {
                     curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid2)
                 } else {
                     curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid1)
@@ -42,7 +42,7 @@ class HangeulSpecifier {
             }
         case .mid1:
             if curr.phoneme == .vowel {
-                if judgingMachine.isDoubleMid(unicode: curr.unicode, unicodeType: curr.unicodeType) {
+                if judgingMachine.isDoubleMid(unicode: curr.unicode) {
                     prev.update(newType: prev.unicodeType, newStatus: .finished, newPosition: prev.position.last!)
                     curr.update(newType: .fixed, newStatus: .finished, newPosition: .mid2)
                 } else if dictionary.getDoubleUnicode(prev, curr) > 0 {
@@ -60,7 +60,7 @@ class HangeulSpecifier {
                     prev.update(newType: prev.unicodeType, newStatus: .finished, newPosition: prev.position.last!)
                     curr.update(newType: .fixed, newStatus: curr.status, newPosition: .top)
                 } else {
-                    if judgingMachine.isEnd(unicode: curr.unicode, unicodeType: curr.unicodeType) {
+                    if judgingMachine.isEnd(unicode: curr.unicode) {
                         curr.update(newType: .fixed, newStatus: curr.status, newPosition: .end1)
                     } else {
                         prev.update(newType: prev.unicodeType, newStatus: .finished, newPosition: prev.position.last!)
@@ -71,13 +71,13 @@ class HangeulSpecifier {
         case .mid2:
             if curr.phoneme == .vowel {
                 prev.update(newType: prev.unicodeType, newStatus: .finished, newPosition: prev.position.last!)
-                if judgingMachine.isDoubleMid(unicode: curr.unicode, unicodeType: curr.unicodeType) {
+                if judgingMachine.isDoubleMid(unicode: curr.unicode) {
                     curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid2)
                 } else {
                     curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid1)
                 }
             } else {
-                if judgingMachine.isEnd(unicode: curr.unicode, unicodeType: curr.unicodeType) {
+                if judgingMachine.isEnd(unicode: curr.unicode) {
                     curr.update(newType: .fixed, newStatus: curr.status, newPosition: .end1)
                 } else {
                     prev.update(newType: prev.unicodeType, newStatus: .finished, newPosition: prev.position.last!)
@@ -88,7 +88,7 @@ class HangeulSpecifier {
             if curr.phoneme == .vowel {
                 prev.prev!.update(newType: prev.prev!.unicodeType, newStatus: .finished, newPosition: (prev.prev?.position.last!)!)
                 prev.update(newType: prev.unicodeType, newStatus: prev.status, newPosition: .top)
-                if judgingMachine.isDoubleMid(unicode: curr.unicode, unicodeType: curr.unicodeType) {
+                if judgingMachine.isDoubleMid(unicode: curr.unicode) {
                     curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid2)
                 } else {
                     curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid1)
@@ -105,7 +105,7 @@ class HangeulSpecifier {
             if curr.phoneme == .vowel {
                 prev.prev!.update(newType: prev.prev!.unicodeType, newStatus: .finished, newPosition: prev.prev!.position.last!)
                 prev.update(newType: prev.unicodeType, newStatus: prev.status, newPosition: .top)
-                if judgingMachine.isDoubleMid(unicode: curr.unicode, unicodeType: curr.unicodeType) {
+                if judgingMachine.isDoubleMid(unicode: curr.unicode) {
                     curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid2)
                 } else {
                     curr.update(newType: .fixed, newStatus: curr.status, newPosition: .mid1)

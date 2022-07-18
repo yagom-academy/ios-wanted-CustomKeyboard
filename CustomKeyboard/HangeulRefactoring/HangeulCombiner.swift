@@ -60,16 +60,16 @@ class HangeulCombiner {
             if buffer.mid.count == 2 {
                 return (getCombinedString(with: buffer), .changeCharacter)
             } else {
-                return (getCombinedString(buffer.mid[0]), .addCharacter)
+                return (getCombinedString(buffer.mid.first!), .addCharacter)
             }
         } else if buffer.mid.isEmpty && buffer.end.isEmpty {
-            return (getCombinedString(buffer.top[0]), .addCharacter)
+            return (getCombinedString(buffer.top.first!), .addCharacter)
         } else if buffer.end.isEmpty {
             var newString = ""
-            let topPos = buffer.top[0].position
+            let topPos = buffer.top.first!.position
             if editMode == .add && buffer.mid.count == 1 && topPos.count > 1 {
                 let prevBuffer = HangeulCombineBuffer()
-                let prevLast = buffer.top[0].prev!
+                let prevLast = buffer.top.first!.prev!
                 prevBuffer.append(prevLast)
                 newString += getCombinedString(with: prevBuffer)
             }

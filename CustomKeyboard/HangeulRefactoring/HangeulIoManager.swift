@@ -18,12 +18,11 @@ class HangeulIOManger {
         
         switch input {
         case "Back":
-            print("back")
-            if inputList.isEmpty()  {
+            if inputList.isEmpty()  { 
                 return
             }
             
-            if inputList.tail!.unicode == -2 {
+            if inputList.tail!.value == "Space" {
                 outputList.removeLast()
                 inputList.removeLast()
                 return
@@ -41,6 +40,7 @@ class HangeulIOManger {
                 outputList.removeLast()
                 return
             }
+
             if tail.position.count > 1 {
                 outputList.removeLast()
                 tail.prev?.update(newType: tail.prev!.unicodeType, newStatus: .ongoing, newPosition: (tail.prev?.position.last!)!)
@@ -51,8 +51,8 @@ class HangeulIOManger {
             let result = combiner.combine(tail, editMode: .remove)
             updateOutputList(with: result.newString, mode: .changeCharacter)
         case "Space":
-            inputList.tail?.status = .finished
-            inputList.append(data: "Space")
+            inputList.append(data: input)
+            inputList.tail?.prev?.status = .finished // 이 부분이 specifier에서 처리 되어야 함.
             updateOutputList(with: " ", mode: .addCharacter)
         default:
             inputList.append(data: input)

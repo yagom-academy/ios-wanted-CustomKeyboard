@@ -43,6 +43,8 @@ struct HangeulDictionary {
                     }
                     index += 1
                 }
+            default:
+                break
             }
         } else {
             switch character.position.last! {
@@ -67,6 +69,8 @@ struct HangeulDictionary {
                     }
                     index += 1
                 }
+            default:
+                break
             }
         }
         return index
@@ -102,6 +106,8 @@ struct HangeulDictionary {
                     }
                     i += 1
                 }
+            default:
+                break
             }
         } else {
             switch position {
@@ -129,6 +135,8 @@ struct HangeulDictionary {
                     }
                     i += 1
                 }
+            default:
+                break
             }
         }
         return unicode
@@ -158,6 +166,8 @@ struct HangeulDictionary {
                 return HangeulDictionary.fixed.mid.ㅟ.rawValue
             } else if prev.value == "ㅡ" && curr.value == "ㅣ" {
                 return HangeulDictionary.fixed.mid.ㅢ.rawValue
+            } else if prev.value == "ㅠ" && curr.value == "ㅣ" {
+                return HangeulDictionary.fixed.mid.ㅝ.rawValue
             }
         } else if prev.position.last! == .end1 {
             if prev.value == "ㄱ" && curr.value == "ㅅ" {

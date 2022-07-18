@@ -53,7 +53,7 @@ class Hangeul {
     var unicode: Int
     var unicodeType: HangeulUnicodeType
     var status: HangeulCombinationStatus
-    let phoneme: HangeulPhoneme // 한번 정해지면 고정
+    let phoneme: HangeulPhoneme
     var position: [HangeulCombinationPosition]
     
     init(_ input: String) {
@@ -84,7 +84,7 @@ class Hangeul {
         self.unicode = converter.toUnicode(from: input)
        
         
-        if judgingMachine.isMid(unicode: self.unicode, unicodeType: .compatible) {
+        if judgingMachine.isMid(unicode: self.unicode) {
             self.phoneme = .vowel
         } else {
             self.phoneme = .consonant
