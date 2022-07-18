@@ -8,7 +8,7 @@
 import UIKit
 
 protocol KeyboardViewDelegate: AnyObject {
-    func keyboardViewTouch()
+    func keyboardViewTouch(text: String)
     func keyboardViewReturn()
 }
 
@@ -21,6 +21,7 @@ class KeyboardView: UIView {
     @IBOutlet var allButtons: [UIButton]!
     
     weak var delegate: KeyboardViewDelegate?
+    let IOManager = HangeulIOManger()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,8 +43,8 @@ class KeyboardView: UIView {
             title = sender.currentTitle ?? ""
         }
         
-        IOManager.shared.process(input: title)
-        delegate?.keyboardViewTouch()
+        IOManager.process(input: title)
+        delegate?.keyboardViewTouch(text: IOManager.getOutput())
     }
     
     @IBAction func touchShiftButton(_ sender: UIButton) {
