@@ -44,6 +44,7 @@ class ReviewListCell: UICollectionViewCell {
     }
     
     override func draw(_ rect: CGRect) {
+        super.draw(rect)
         self.profileImage.layer.cornerRadius =  self.profileImage.frame.height / 2
         self.profileImage.clipsToBounds = true
     }

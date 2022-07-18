@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol BasicKeyLineDelegate {
+protocol BasicKeyLineDelegate: AnyObject {
     func tappedBasicKeyButton(unicode: Int)
 }

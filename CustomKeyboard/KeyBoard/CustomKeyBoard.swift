@@ -31,8 +31,8 @@ class CustomKeyBoard: UIView {
     private let spaceButton = UIButton()
     private let returnButton = UIButton()
     
-    var delegate: CustomKeyBoardDelegate?
-    private let viewModel = CustomKeyBoardViewModel()
+    weak var delegate: CustomKeyBoardDelegate?
+    private let viewModel = CustomKeyBoardViewModel(engine: FirstKeyBoardEngine())
     
     init() {
         super.init(frame: CGRect.zero)
@@ -54,7 +54,7 @@ extension CustomKeyBoard: BasicKeyLineDelegate {
     }
     
     func tappedBasicKeyButton(unicode: Int) {
-        delegate?.connectTextView().text = viewModel.addWord(unicode: unicode, to: delegate?.connectTextView().text)
+        delegate?.connectTextView().text = viewModel.addWord(inputUniCode: unicode, to: delegate?.connectTextView().text)
     }
 }
 
@@ -68,7 +68,7 @@ extension CustomKeyBoard {
 //MARK: - Space 버튼 기능
 extension CustomKeyBoard {
     @objc private func tappedSpaceButton(_ sender: UIButton) {
-        delegate?.connectTextView().text = viewModel.addSpace(unicode: sender.tag, to: delegate?.connectTextView().text)
+        delegate?.connectTextView().text = viewModel.addSpace(inputUniCode: sender.tag, to: delegate?.connectTextView().text)
     }
 }
 
