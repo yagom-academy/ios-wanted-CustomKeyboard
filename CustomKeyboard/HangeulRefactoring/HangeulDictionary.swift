@@ -29,14 +29,14 @@ struct HangeulDictionary {
                     }
                     index += 1
                 }
-            case .mid1, .mid2:
+            case .mid:
                 for hangeul in HangeulDictionary.fixed.mid.allCases {
                     if hangeul.rawValue == unicode {
                         break
                     }
                     index += 1
                 }
-            case .end1, .end2:
+            case .end:
                 for hangeul in HangeulDictionary.fixed.end.allCases {
                     if hangeul.rawValue == unicode {
                         break
@@ -55,14 +55,14 @@ struct HangeulDictionary {
                     }
                     index += 1
                 }
-            case .mid1, .mid2:
+            case .mid:
                 for hangeul in HangeulDictionary.compatible.mid.allCases {
                     if hangeul.rawValue == unicode {
                         break
                     }
                     index += 1
                 }
-            case .end1, .end2:
+            case .end:
                 for hangeul in HangeulDictionary.compatible.end.allCases {
                     if hangeul.rawValue == unicode {
                         break
@@ -90,7 +90,7 @@ struct HangeulDictionary {
                     }
                     i += 1
                 }
-            case .mid1, .mid2:
+            case .mid:
                 for hangeul in HangeulDictionary.fixed.mid.allCases {
                     if i == index {
                         unicode = hangeul.rawValue
@@ -98,7 +98,7 @@ struct HangeulDictionary {
                     }
                     i += 1
                 }
-            case .end1, .end2:
+            case .end:
                 for hangeul in HangeulDictionary.fixed.end.allCases {
                     if i == index {
                         unicode = hangeul.rawValue
@@ -119,7 +119,7 @@ struct HangeulDictionary {
                     }
                     i += 1
                 }
-            case .mid1, .mid2:
+            case .mid:
                 for hangeul in HangeulDictionary.compatible.mid.allCases {
                     if i == index {
                         unicode = hangeul.rawValue
@@ -127,7 +127,7 @@ struct HangeulDictionary {
                     }
                     i += 1
                 }
-            case .end1, .end2:
+            case .end:
                 for hangeul in HangeulDictionary.compatible.end.allCases {
                     if i == index {
                         unicode = hangeul.rawValue
@@ -143,7 +143,7 @@ struct HangeulDictionary {
     }
     
     func getDoubleUnicode(_ prev: Hangeul, _ curr: Hangeul) -> Int {
-        if prev.position.last! == .mid1 {
+        if prev.position.last! == .mid {
             if prev.value == "ㅏ" && curr.value == "ㅣ" {
                 return HangeulDictionary.fixed.mid.ㅐ.rawValue
             } else if prev.value == "ㅑ" && curr.value == "ㅣ" {
@@ -169,7 +169,7 @@ struct HangeulDictionary {
             } else if prev.value == "ㅠ" && curr.value == "ㅣ" {
                 return HangeulDictionary.fixed.mid.ㅝ.rawValue
             }
-        } else if prev.position.last! == .end1 {
+        } else if prev.position.last! == .end {
             if prev.value == "ㄱ" && curr.value == "ㅅ" {
                 return HangeulDictionary.fixed.end.ㄱㅅ.rawValue
             } else if prev.value == "ㄴ" && curr.value == "ㅈ" {

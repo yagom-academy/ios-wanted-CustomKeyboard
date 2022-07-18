@@ -80,7 +80,7 @@ class space_input_Tests: XCTestCase {
     func testExample5() throws {
         ioManager.reset()
         let c = HangeulConverter()
-        let input = ["ㅓ", "ㅣ", "ㅓ", "ㅣ", "Back", "ㅏ", "ㅣ", "ㅏ", "ㅣ", "Back", "ㅑ", "ㅣ", "ㅑ", "ㅣ", "Back", "ㅕ", "ㅣ", "ㅕ", "ㅣ", "Back"]
+        let input = ["ㅓ", "ㅣ", "ㅓ", "ㅣ", "Back", "ㅏ", "ㅣ", "ㅏ", "ㅣ", "Back", "ㅑ", "ㅣ", "ㅑ", "ㅣ", "Back", "ㅕ", "ㅣ", "ㅕ", "ㅣ", "Back"] // ㅔㅓㅐㅏㅒㅑㅖㅕ
         let expectation = c.toString(from: HangeulDictionary.fixed.mid.ㅔ.rawValue) + c.toString(from: HangeulDictionary.fixed.mid.ㅓ.rawValue) + c.toString(from: HangeulDictionary.fixed.mid.ㅐ.rawValue) + c.toString(from: HangeulDictionary.fixed.mid.ㅏ.rawValue) + c.toString(from: HangeulDictionary.fixed.mid.ㅒ.rawValue) + c.toString(from: HangeulDictionary.fixed.mid.ㅑ.rawValue) + c.toString(from: HangeulDictionary.fixed.mid.ㅖ.rawValue) + c.toString(from: HangeulDictionary.fixed.mid.ㅕ.rawValue)
         
         for ele in input {

@@ -20,7 +20,7 @@ enum HangeulCombinationStatus {
 }
 
 enum HangeulCombinationPosition {
-    case none, top, mid1, mid2, end1, end2
+    case none, top, mid, end
 }
 
 class Hangeul {
@@ -69,7 +69,10 @@ class Hangeul {
             }
         }
     }
-    
+}
+
+extension Hangeul {
+
     func update(type: HangeulUnicodeType = .none, status: HangeulCombinationStatus = .none, position: HangeulCombinationPosition = .none) {
         
         guard !(type == .none && position == .none) else {
@@ -77,17 +80,40 @@ class Hangeul {
             return
         }
         
+        let dictionary = HangeulDictionary()
+        
         if status != .none {
             self.status = status
+        }
+        
+        if type == .none && status == .none {
+            let oldCompatibleUnicode = dictionary.getUnicode(index: self.unicodeIndex, position: self.position.last!, unicodeType: .compatible)
+
+            if self.position.count > 1 && self.position.first! == position {
+                self.position.removeLast()
+            } else {
+                self.position.append(position)
+            }
+            
+            let newIndex = dictionary.getIndex(unicode: oldCompatibleUnicode, position: self.position.last!, unicodeType: .compatible)
+            let newUnicode = dictionary.getUnicode(index: newIndex, position: position, unicodeType: self.unicodeType)
+            
+            self.unicodeIndex = newIndex
+            self.unicode = newUnicode
+            
+            return
         }
         
         if self.position.isEmpty {
             self.position.append(position)
         }
         
-        let dictionary = HangeulDictionary()
+        var oldIndex = self.unicodeIndex
         
-        let oldIndex = dictionary.getIndex(unicode: self.unicode, position: self.position.last!, unicodeType: self.unicodeType)
+        if self.unicodeIndex < 0 {
+            oldIndex = dictionary.getIndex(unicode: self.unicode, position: self.position.last!, unicodeType: self.unicodeType)
+        }
+        
         let oldCompatibleUnicode = dictionary.getUnicode(index: oldIndex, position: self.position.last!, unicodeType: .compatible)
         
         self.unicode = oldCompatibleUnicode
@@ -105,6 +131,9 @@ class Hangeul {
         self.unicodeType = type
         
     }
+}
+
+extension Hangeul {
     
     func isMid() -> Bool {
         if self.phoneme == .vowel {
@@ -132,19 +161,53 @@ class Hangeul {
         return false
     }
     
-    func cannotHaveEnd() -> Bool {
+    func canHaveEnd() -> Bool {
+        if self.isAtStartingLine() {
+            return false
+        } else if self.position.last! == .mid && self.prev?.position.last! == .mid {
+            if self.prev?.prev == nil {
+                return false
+            } else if self.prev?.position.last! == .mid && self.prev?.prev?.status == .finished {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
+    func canBeDoubleMid() -> Bool {
+        let dictionary = HangeulDictionary()
+
+        if !(self.prev?.status == .finished || self.prev?.position.last! != .mid) {
+            return false
+        } else if self.isDoubleMid() {
+            return false
+        } else if dictionary.getDoubleUnicode(self, self.next!) < 0 {
+            return false
+        }
+        
+        return true
+    }
+    
+    func canBeDoubleEnd() -> Bool {
+        let dictionary = HangeulDictionary()
+
+        if self.prev?.position.last! == .end  {
+            return false
+        } else if dictionary.getDoubleUnicode(self, self.next!) < 0 {
+            return false
+        }
+        
+        return true
+    }
+    
+    func isAtStartingLine() -> Bool {
         if self.prev == nil {
             return true
         } else if self.prev?.status == .finished {
             return true
-        } else if self.position.last! == .mid2 {
-            if self.prev?.prev == nil {
-                return true
-            } else if self.prev?.position.last! == .mid1 && self.prev?.prev?.status == .finished {
-                return true
-            }
         }
-        
+    
         return false
     }
     

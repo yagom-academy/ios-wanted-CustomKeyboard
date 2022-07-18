@@ -33,14 +33,10 @@ class HangeulCombineBuffer {
             switch curr!.position.last! {
             case .top:
                 self.top.append(curr!)
-            case .mid1:
+            case .mid:
                 self.mid.insert(curr!, at: 0)
-            case .mid2:
-                self.mid.append(curr!)
-            case .end1:
+            case .end:
                 self.end.insert(curr!, at: 0)
-            case .end2:
-                self.end.append(curr!)
             default:
                 break
             }
@@ -112,16 +108,16 @@ class HangeulCombiner {
             midIndex = buffer.mid.first!.unicodeIndex
         } else {
             let doubleMidUnicode = dictionary.getDoubleUnicode(buffer.mid.first!, buffer.mid.last!)
-            midIndex = dictionary.getIndex(unicode: doubleMidUnicode, position: .mid2, unicodeType: .fixed)
+            midIndex = dictionary.getIndex(unicode: doubleMidUnicode, position: .mid, unicodeType: .fixed)
         }
         
         if buffer.end.isEmpty {
-            endIndex = dictionary.getIndex(unicode: -1, position: .end1, unicodeType: .fixed)
+            endIndex = dictionary.getIndex(unicode: -1, position: .end, unicodeType: .fixed)
         } else if buffer.end.count == 1 {
             endIndex = buffer.end.first!.unicodeIndex
         } else {
             let doubleEndUnicode = dictionary.getDoubleUnicode(buffer.end.first!, buffer.end.last!)
-            endIndex = dictionary.getIndex(unicode: doubleEndUnicode, position: .end2, unicodeType: .fixed)
+            endIndex = dictionary.getIndex(unicode: doubleEndUnicode, position: .end, unicodeType: .fixed)
         }
         
         return (topIndex, midIndex, endIndex)

@@ -13,7 +13,7 @@ class HangeulSpecifier {
         
         switch inputMode {
         case .space:
-            curr.update(status: .finished)
+            curr.prev?.update(status: .finished)
         case .remove:
             break
         default:
@@ -22,12 +22,12 @@ class HangeulSpecifier {
     }
     
     private func specifyInAddMode(_ curr: Hangeul) {
-        guard !(curr.prev == nil || curr.prev?.status == .finished) else {
+        guard !curr.isAtStartingLine() else {
             if curr.isMid() {
                 if curr.isDoubleMid() {
-                    curr.update(type: .fixed, status: .finished, position: .mid2)
+                    curr.update(type: .fixed, status: .finished, position: .mid)
                 } else {
-                    curr.update(type: .fixed, position: .mid1)
+                    curr.update(type: .fixed, position: .mid)
                 }
             } else {
                 curr.update(type: .fixed, position: .top)
@@ -36,58 +36,46 @@ class HangeulSpecifier {
         }
         
         let prev = curr.prev!
-        let dictionary = HangeulDictionary()
         
         switch prev.position.last {
         case .top :
             if curr.isMid() {
-                if curr.isDoubleMid() {
-                    curr.update(type: .fixed, position: .mid2)
-                } else {
-                    curr.update(type: .fixed, position: .mid1)
-                }
+                curr.update(type: .fixed, position: .mid)
             } else {
                 prev.update(status: .finished)
                 curr.update(type: .fixed, position: .top)
             }
-        case .mid1, .mid2:
+        case .mid:
             if curr.isMid() {
                 if curr.isDoubleMid() {
                     prev.update(status: .finished)
-                    curr.update(type: .fixed, status: .finished, position: .mid2)
-                } else if prev.position.last! == .mid1 && dictionary.getDoubleUnicode(prev, curr) > 0 {
-                    if prev.prev == nil || prev.prev?.status == .finished {
-                        curr.update(type: .fixed, status: .finished, position: .mid2)
+                    curr.update(type: .fixed, status: .finished, position: .mid)
+                } else if prev.canBeDoubleMid() {
+                    if prev.isAtStartingLine() {
+                        curr.update(type: .fixed, status: .finished, position: .mid)
                     } else {
-                        curr.update(type: .fixed, position: .mid2)
+                        curr.update(type: .fixed, position: .mid)
                     }
                 } else {
                     prev.update(status: .finished)
-                    curr.update(type: .fixed, position: .mid1)
+                    curr.update(type: .fixed, position: .mid)
                 }
             } else {
-                if prev.cannotHaveEnd() {
-                    prev.update(status: .finished)
-                    curr.update(type: .fixed, position: .top)
-                } else if curr.isEnd() {
-                    curr.update(type: .fixed, position: .end1)
+                if prev.canHaveEnd() && curr.isEnd() {
+                    curr.update(type: .fixed, position: .end)
                 } else {
                     prev.update(status: .finished)
                     curr.update(type: .fixed, position: .top)
                 }
             }
-        case .end1, .end2:
+        case .end:
             if curr.isMid() {
                 prev.prev!.update(status: .finished)
                 prev.update(type: prev.unicodeType, status: prev.status, position: .top)
-                if curr.isDoubleMid() {
-                    curr.update(type: .fixed, position: .mid2)
-                } else {
-                    curr.update(type: .fixed, position: .mid1)
-                }
+                curr.update(type: .fixed, position: .mid)
             } else {
-                if prev.position.last! == .end1 && dictionary.getDoubleUnicode(prev, curr) > 0 {
-                    curr.update(type: .fixed, position: .end2)
+                if prev.canBeDoubleEnd() {
+                    curr.update(type: .fixed, position: .end)
                 } else {
                     prev.update(status: .finished)
                     curr.update(type: .fixed, position: .top)

@@ -43,7 +43,6 @@ class HangeulIOManger {
             }
             
             
-            
             if tail.position.count > 1 {
                 outputList.removeLast()
                 tail.prev?.update(status: .ongoing)
@@ -54,8 +53,8 @@ class HangeulIOManger {
             let result = combiner.combine(tail, inputMode: .remove)
             updateOutputList(with: result.newString, mode: .changeCharacter)
         case "Space":
-            specifier.specify(inputList.tail!, inputMode: .space)
             inputList.append(data: input)
+            specifier.specify(inputList.tail!, inputMode: .space)
             updateOutputList(with: " ", mode: .addCharacter)
         default:
             inputList.append(data: input)
