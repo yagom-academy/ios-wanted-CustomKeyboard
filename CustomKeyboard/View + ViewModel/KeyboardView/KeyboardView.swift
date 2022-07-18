@@ -148,7 +148,8 @@ private extension KeyboardView {
         viewModel.returnButtonTapped.value = true
     }
     @objc func didTapBack() {
-        viewModel.value.unicodeScalars.removeLast()
+        viewModel.result.value.unicodeScalars.removeLast()
+        viewModel.value = viewModel.result.value
     }
 }
 

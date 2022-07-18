@@ -59,14 +59,7 @@ class CommentButton: UIView {
         UIView.animate(withDuration: 1) {
             self.userProfileImageView.isHidden = !isSuccess
             self.sendButton.isHidden = isSuccess
-            if isSuccess {
-                self.clearText()
-            }
         }
-    }
-    
-    func clearText() {
-        presentTextView.text = ""
     }
 }
 

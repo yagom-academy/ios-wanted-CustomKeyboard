@@ -84,22 +84,9 @@ class ReviewListViewController: UIViewController {
     func bindResultText() {
         viewModel.resultText.bind { result in
             self.commentButton.presentTextView.text = result
-            self.commentButton.toggleAnimation(result.isEmpty)
-        }
-    }
-}
-
-//MARK: - CommentEditDelegate
-extension ReviewListViewController: CommentEditDelegate {
-    var commentValue: String? {
-        get {
-            guard let textfield = commentButton.stackView.arrangedSubviews[1] as? UITextView else { return "" }
-            return textfield.text
-        }
-        set {
-            guard let textfield = commentButton.stackView.arrangedSubviews[1] as? UITextView else { return }
-            textfield.text = newValue
-            commentButton.toggleAnimation(false)
+            DispatchQueue.main.async {
+                self.commentButton.toggleAnimation(result.isEmpty)
+            }
         }
     }
 }
