@@ -43,20 +43,19 @@ class KeyboardManager {
                 return (addString, 2)
             }
         case 1:
+            lastWord = addString
             // 자음이 입력되어 있는 상태 (ex ㄷ, ㅇ, ㅈ, ㄱ ...)
             if tappedButton.type == .space {
                 return pressSpace(tappedButton)
             }
             
             if tappedButton.type == .consonant {
-                lastWord = addString
                 return (currentText + addString, 1)
             } else {
                 let idx1 = first.firstIndex(of: currentText) ?? 0
                 let idx2 = second.firstIndex(of: addString) ?? 0
                 let str = 44032 + (idx1 * 588) + (idx2 * 28)
                 if let scalarValue = UnicodeScalar(str) {
-                    lastWord = addString
                     return (String(scalarValue), 3)
                 }
                 return ("", 0)
@@ -155,6 +154,75 @@ class KeyboardManager {
                    let newScalarValue = UnicodeScalar(newStr) {
                     lastWord = addString
                     return (String(oldScalarValue) + String(newScalarValue), 3)
+                }
+                return ("", 0)
+            }
+        default:
+            return ("", 0)
+        }
+    }
+    
+    func deleteString(_ state: Int, _ currentText: String) -> (String, Int) {
+        if !allWord.isEmpty {
+            allWord.removeLast()
+        }
+        switch state {
+        case 1:
+            // 쌍자음만 입력되어 있는 상태 (ex ㄱㄱ, ㄷㄷ, ㅂㅂ ...)
+            if lastWord.count == 2 {
+                lastWord = allWord[allWord.count - 1]
+                return (allWord[allWord.count - 1], 1)
+            } else {
+                lastWord = allWord[allWord.count - 1]
+                return ("", 0)
+            }
+        case 2:
+            // 이중 모음이 입력되어 있는 상태 (ex ㅏㅣ, ㅓㅣ, ㅡㅣ ...)
+            if lastWord.count == 2 {
+                lastWord = allWord[allWord.count - 1]
+                return (allWord[allWord.count - 1], 2)
+            } else {
+                lastWord = allWord[allWord.count - 1]
+                return ("", 0)
+            }
+        case 3:
+            // 자음 + 이중모음이 입력되어 있는 상태 (ex 왜, 내, 의 ...)
+            if lastWord.count == 2 {
+                let idx1 = secondDouble.firstIndex(of: lastWord) ?? 0
+                let idx2 = second.firstIndex(of: allWord[allWord.count - 1]) ?? 0
+                let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - idx1 + idx2
+                lastWord = allWord[allWord.count - 1]
+                if let scalarValue = UnicodeScalar(str) {
+                    return (String(scalarValue), 3)
+                }
+                return ("", 0)
+            } else {
+                // TODO: - 가, 야, .. (앞글자의 받침으로 들어갈수 있는지 확인)
+                let idx = second.firstIndex(of: lastWord) ?? 0
+                let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - idx
+                lastWord = allWord[allWord.count - 1]
+                if let scalarValue = UnicodeScalar(str) {
+                    return (String(scalarValue), 1)
+                }
+                return ("", 0)
+            }
+        case 4:
+            // 겹받침이 있는 상태 (ex 핥, 삷, 겠, 찲 ...)
+            if lastWord.count == 2 {
+                let idx1 = third.firstIndex(of: lastWord) ?? 0
+                let idx2 = third.firstIndex(of: allWord[allWord.count - 1]) ?? 0
+                let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - idx1 + idx2
+                lastWord = allWord[allWord.count - 1]
+                if let scalarValue = UnicodeScalar(str) {
+                    return (String(scalarValue), 4)
+                }
+                return ("", 0)
+            } else {
+                let idx = third.firstIndex(of: lastWord) ?? 0
+                let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - idx
+                lastWord = allWord[allWord.count - 1]
+                if let scalarValue = UnicodeScalar(str) {
+                    return (String(scalarValue), 3)
                 }
                 return ("", 0)
             }
