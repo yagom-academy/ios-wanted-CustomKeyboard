@@ -24,7 +24,7 @@ class KeyboardViewModel {
     
     func didTapKeyboardButton(buffer: Buffer) {
         var curr: Int? = 0
-        
+        print(sejongState)
         switch sejongState {
         case .writeInitialState: // 초성을 적어야 하는 상태
             if buffer.jungsung != nil {
@@ -55,6 +55,7 @@ class KeyboardViewModel {
                     curr = buffer.jungsung?.rawValue
                 }
                 sejongState = .writeLastState
+
             } else {
                 if buffer.jongsung != .ㄲ && buffer.jongsung != .ㅆ && doubleJaum.contains(buffer.chosung!) {
                     curr = buffer.chosung?.rawValue
@@ -133,18 +134,61 @@ class KeyboardViewModel {
                     isRemovePhoneme = false
                 }
                 
-                let splitedJongsung = splitDoubleJongsung(Jongsung(rawValue: Int(removed.value)))
-                let splitedJungsung = splitJungsung(Jungsung(rawValue: Int(removed.value)))
-                
-                if let splited = splitedJongsung { // 이중 종성이 들어왔을 경우
-                    result.value.appendUnicode(splited.0.rawValue)
+                if let jungsung = Jungsung.init(rawValue: Int(removed.value)) { // 중성을 지웠을때
+                    if let doubleJunsung = splitJungsung(jungsung) { // 이중 종성이 되는 경우
+                        // 이중 종성에서 단종성으로 변경하는 경우
+                        result.value.appendUnicode(doubleJunsung.0.rawValue)
+                        currentJungsung = doubleJunsung.0
+                        sejongState = .writeLastState
+                    } else {
+                        // 단중성을 지우는 경우
+                        currentJungsung = nil
+                        currentLastJongsung = nil
+                        sejongState = .writeMiddleState
+                        
+                    }
                 }
                 
-                if let splited = splitedJungsung { // 이중 중성이 들어왔을 경우
-                    result.value.appendUnicode(splited.0.rawValue)
+                if Chosung.init(rawValue: Int(removed.value)) != nil { // 초성을 지웠을때
+                    // 단초성과 쌍초성 모두 뒤에를 지운다.
+                    if let current = result.value.unicodeScalars.last {
+                        
+                        if let jongsung = Jongsung.init(rawValue: Int(current.value)) {
+                            if splitDoubleJongsung(jongsung) != nil {
+                                currentLastJongsung = jongsung
+                                sejongState = .alreadyDoubleLastState
+                            } else {
+                                currentLastJongsung = jongsung
+                                sejongState = .alreadyLastState
+                            }
+                        }
+                        
+                        if let jungsung = Jungsung.init(rawValue: Int(current.value)) {
+                            currentJungsung = jungsung
+                            sejongState = .writeLastState
+                        }
+
+                    } else {
+                        currentJungsung = nil
+                        currentLastJongsung = nil
+                        sejongState = .writeInitialState
+                    }
+                    
+                } else if let jongsung = Jongsung.init(rawValue: Int(removed.value)) { // 종성을 지웠을때
+                    if let doubleJongsung = splitDoubleJongsung(jongsung) {
+                        // 이중 종성이 들어와서 단종성으로 변환하는 경우
+                        result.value.appendUnicode(doubleJongsung.0.rawValue)
+                        currentLastJongsung = doubleJongsung.0
+                        sejongState = .alreadyLastState
+                    } else if let current = result.value.unicodeScalars.last {
+                        // 단 종성이 들어와서 지우는 경우
+                        let jongsung = Jongsung.init(rawValue: Int(current.value))
+                        currentLastJongsung = jongsung
+                        sejongState = .writeLastState
+                    }
                 }
-                
                 value = result.value
+                
             } else {
                 result.value.removeLast()
                 value = result.value

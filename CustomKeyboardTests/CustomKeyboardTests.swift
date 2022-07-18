@@ -330,4 +330,39 @@ class CustomKeyboardTests: XCTestCase {
         
         XCTAssertEqual(expected, viewModel.result.value)
     }
+    
+    func test_지우는경우() {
+        
+        viewModel.result.value = "없어없다없을걸"
+        viewModel.value = "없어없다없을걸"
+        let expected = ""
+        let buffers: [Buffer] = [
+            (.ㅇ, nil, .ㅇ),
+            (nil, .ㅓ, nil),
+            (.ㅂ, nil, .ㅂㅅ),
+            (.ㅇ, nil, .ㅇ),
+            (nil, .ㅓ, nil),
+            (.ㅇ, nil, .ㅇ),
+            (nil, .ㅓ, nil),
+            (.ㅂ, nil, .ㅂㅅ),
+            (.ㄷ, nil, .ㄷ),
+            (nil, .ㅏ, nil),
+            (.ㅇ, nil, .ㅇ),
+            (nil, .ㅓ, nil),
+            (.ㅂ, nil, .ㅂㅅ),
+            (.ㅇ, nil, .ㅇ),
+            (nil, .ㅡ, nil),
+            (.ㄹ, nil, .ㄹ),
+            (.ㄱ, nil, .ㄱ),
+            (nil, .ㅓ, nil),
+            (.ㄹ, nil, .ㄹ),
+        ]
+        let result: String = ""
+//        viewModel.result.value = expected
+        buffers.forEach { _ in
+            viewModel.didTapBack()
+        }
+        
+        XCTAssertEqual(result, viewModel.result.value)
+    }
 }
