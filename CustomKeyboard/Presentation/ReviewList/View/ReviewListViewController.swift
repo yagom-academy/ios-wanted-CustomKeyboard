@@ -2,7 +2,7 @@
 //  ReviewListViewController.swift
 //  CustomKeyboard
 //
-//  Created by 오국원 on 2022/07/11.
+//  Created by 서초 on 2022/07/11.
 //
 
 import UIKit
@@ -81,14 +81,8 @@ extension ReviewListViewController: UITableViewDataSource {
         let reviewDate = splitReviewDate[0]
         let reviewTime = splitReviewDate[1]
         let splitReviewTime = reviewTime.split(separator: ":")
-        let reviewHour = splitReviewTime[0]
-        let reviewMinute : String = {
-            if splitReviewTime[1].first == "0" {
-                return String(splitReviewTime[1].dropFirst())
-            } else {
-                return String(splitReviewTime[1])
-            }
-        }()
+        let reviewHour = isFirstZero(String(splitReviewTime[0]))
+        let reviewMinute = isFirstZero(String(splitReviewTime[1]))
         
         if currentDate != reviewDate {
             return String(reviewDate)
@@ -100,6 +94,14 @@ extension ReviewListViewController: UITableViewDataSource {
                 // 시간 단위 표시
                  return ("\(reviewHour)시간 전")
             }
+        }
+    }
+    
+    func isFirstZero(_ timeString : String) -> String {
+        if timeString.first == "0" {
+            return String(timeString.dropFirst())
+        } else {
+            return String(timeString)
         }
     }
     

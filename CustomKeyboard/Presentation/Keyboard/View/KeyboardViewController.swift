@@ -2,7 +2,7 @@
 //  KeyboardViewController.swift
 //  CustomKeyboard
 //
-//  Created by 오국원 on 2022/07/11.
+//  Created by 서초 on 2022/07/11.
 //
 
 import UIKit
@@ -80,13 +80,14 @@ extension KeyboardViewController: UICollectionViewDelegateFlowLayout{
         return CGSize(width: 35, height: 45)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {//cell 옆 간격을 지정해 줄 수 있는 함수 minimumInteritemSpacingForSectionAt
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {// 옆 간격을 지정해 줄 수 있는 함수 minimumInteritemSpacingForSectionAt
         return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat { //minimumLineSpacingForSectionAt 세로 간격을 지정해주는
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat { // 위 아래 세로 간격을 지정해주는
         return 6
     }
+    
     static func createLayout() -> UICollectionViewCompositionalLayout {
         // Item
         let item = NSCollectionLayoutItem(
@@ -138,15 +139,13 @@ extension KeyboardViewController: UICollectionViewDelegate {
         print("buffer : \(buffer)")
         if consonant[indexPath.row] == "지움" || doubleConsonant[indexPath.row] == "지움" {
             erase()
-        }
-        if consonant[indexPath.row] == "up" || doubleConsonant[indexPath.row] == "up" {
+        } else if consonant[indexPath.row] == "up" || doubleConsonant[indexPath.row] == "up" {
             pressUp()
-        }
-        if consonant[indexPath.row] == "엔터" || doubleConsonant[indexPath.row] == "엔터" {
+        } else if consonant[indexPath.row] == "엔터" || doubleConsonant[indexPath.row] == "엔터" {
             // 첫번째 화면의 label에 내용 담고 모달 닫기
             pressEnter()
         }
-        keyboardView.reviewTextLabel.text = automata().joined(separator: "")
+        keyboardView.reviewTextLabel.text = automata().joined(separator: "") // convert array to string
     }
     
     func pressEnter() {

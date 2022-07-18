@@ -2,21 +2,24 @@
 //  KeyboardView.swift
 //  CustomKeyboard
 //
-//  Created by 오국원 on 2022/07/11.
+//  Created by 서초 on 2022/07/11.
 //
 
 import UIKit
 
 class KeyboardView: UIView {
     
-    lazy var reviewTextLabel: UILabel = {
+    let reviewTextLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor(red: 242/255, green: 243/255, blue: 247/255, alpha: 1)
+        label.backgroundColor = .white
+        label.layer.cornerRadius = 30
+        label.layer.borderWidth = 3
+        label.layer.borderColor = UIColor.systemCyan.cgColor
         label.text = ""
         return label
     }()
     
-    lazy var verticalStackView: UIStackView = {
+    let verticalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 20
         stackView.distribution = .fill
@@ -25,7 +28,7 @@ class KeyboardView: UIView {
         return stackView
     }()
     
-    lazy var collectionView: UICollectionView = {
+    let collectionView: UICollectionView = {
         lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout.init())
         collectionView.register(KeyboadCollectionViewCell.self, forCellWithReuseIdentifier: KeyboadCollectionViewCell.identifier)
         collectionView.collectionViewLayout.invalidateLayout()
@@ -61,6 +64,7 @@ class KeyboardView: UIView {
     func setupConstraints() {
         NSLayoutConstraint.activate([
             reviewTextLabel.leadingAnchor.constraint(equalTo: verticalStackView.leadingAnchor),
+            reviewTextLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
             verticalStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             verticalStackView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor,constant: 20),
             verticalStackView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor,constant: -20),
