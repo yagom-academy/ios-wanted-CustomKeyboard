@@ -64,6 +64,8 @@ extension ReviewListCell {
         //유저네임
         userNameLabel.font = UIFont.boldSystemFont(ofSize: 16)
         
+        contentsLabel.numberOfLines = 3
+        
         //시간
         timeLabel.textColor = .lightGray
         timeLabel.font = UIFont.boldSystemFont(ofSize: 14)
@@ -99,6 +101,7 @@ extension ReviewListCell {
         NSLayoutConstraint.activate([
             contentsLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 10),
             contentsLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 10),
+            contentsLabel.trailingAnchor.constraint(equalTo: declarationStack.leadingAnchor, constant: -5)
         ])
         
         NSLayoutConstraint.activate([
@@ -110,6 +113,7 @@ extension ReviewListCell {
         declarationStack.addArrangedSubview(declarationLabel)
         NSLayoutConstraint.activate([
             declarationStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            declarationStack.leadingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -65),
             declarationStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
         ])
     }

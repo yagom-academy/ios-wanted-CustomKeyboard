@@ -153,7 +153,7 @@ extension ReviewListViewController {
         
         //그룹
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .absolute(100))
+                                               heightDimension: .absolute(140))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
                                                      subitem: item, count: 1)
         
