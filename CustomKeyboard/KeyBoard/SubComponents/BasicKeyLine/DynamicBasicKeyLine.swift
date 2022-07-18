@@ -22,7 +22,7 @@ class DynamicBasicKeyLine: BasicKeyLine {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func tappedShiftKey() {
+    func toggleDynamicBasicKeyState() {
         if (self.state == .single) {
             self.state = .double
             toggleKey(to: .double)
