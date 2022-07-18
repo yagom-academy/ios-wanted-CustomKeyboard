@@ -44,12 +44,6 @@ class Hangeul {
         self.prev = nil
         self.next = nil
         
-        guard input != "none" else {
-            self.unicode = -1
-            self.phoneme = .vowel
-            return
-        }
-        
         guard input != "Space" else {
             self.unicode = -2
             self.phoneme = .vowel
@@ -119,7 +113,9 @@ extension Hangeul {
         self.unicode = oldCompatibleUnicode
         self.unicodeType = .compatible
         
-        if self.position.last! != position {
+        if self.position.count > 1 && self.position.first! == position {
+            self.position.removeLast()
+        } else if self.position.last! != position {
             self.position.append(position)
         }
         

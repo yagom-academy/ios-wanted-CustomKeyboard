@@ -17,6 +17,10 @@ class HangeulList {
     }
     
     func append(data: String) {
+        guard data != "Back" else {
+            return
+        }
+        
        if head == nil || tail == nil {
            head = Hangeul.init(data)
            tail = head

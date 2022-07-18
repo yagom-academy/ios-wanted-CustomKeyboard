@@ -16,57 +16,47 @@ class HangeulIOManger {
         let specifier = HangeulSpecifier()
         let combiner = HangeulCombiner()
         
+        inputList.append(data: input)
+        
         switch input {
         case "Back":
             if inputList.isEmpty()  { 
                 return
             }
             
-            if inputList.tail!.value == "Space" {
-                outputList.removeLast()
-                inputList.removeLast()
-                return
-            }
-            
             inputList.removeLast()
             
-            guard let tail = inputList.tail else {
-                outputList.removeLast()
+            guard inputList.tail != nil && inputList.tail!.status != .finished else {
+                specifier.specify(inputList.tail, inputMode: .remove)
+                updateOutputList(with: "", mode: .remove)
                 return
             }
             
-            
-            if tail.status == .finished {
-                tail.status = .ongoing
-                outputList.removeLast()
-                return
+            if inputList.tail!.position.count > 1 {
+                specifier.specify(inputList.tail, inputMode: .remove)
+                updateOutputList(with: "", mode: .remove)
             }
             
-            
-            if tail.position.count > 1 {
-                outputList.removeLast()
-                tail.prev?.update(status: .ongoing)
-                tail.update(type: .fixed, status: .ongoing, position: (tail.position.first!))
-                tail.position.removeLast()
-                tail.position.removeLast()
-            }
-            let result = combiner.combine(tail, inputMode: .remove)
-            updateOutputList(with: result.newString, mode: .changeCharacter)
+            let result = combiner.combine(inputList.tail!, inputMode: .remove)
+            updateOutputList(with: result.newString, mode: .change)
         case "Space":
-            inputList.append(data: input)
-            specifier.specify(inputList.tail!, inputMode: .space)
-            updateOutputList(with: " ", mode: .addCharacter)
+            specifier.specify(inputList.tail, inputMode: .space)
+            updateOutputList(with: " ", mode: .add)
         default:
-            inputList.append(data: input)
-            specifier.specify(inputList.tail!, inputMode: .add)
+            specifier.specify(inputList.tail, inputMode: .add)
             let result = combiner.combine(inputList.tail!, inputMode: .add)
             updateOutputList(with: result.newString, mode: result.mode)
         }
     }
     
     private func updateOutputList(with character: String, mode: HangeulOutputEditMode) {
+
+        guard mode != .remove else {
+            outputList.removeLast()
+            return
+        }
         
-        if mode == .changeCharacter {
+        if mode == .change {
             outputList.removeLast()
         }
         

@@ -9,16 +9,40 @@ import Foundation
 
 class HangeulSpecifier {
     
-    func specify(_ curr: Hangeul, inputMode: HangeulInputMode) {
-        
+    func specify(_ curr: Hangeul?, inputMode: HangeulInputMode) {
         switch inputMode {
         case .space:
-            curr.prev?.update(status: .finished)
+            specifyInSpaceMode(curr!)
         case .remove:
-            break
+            specifyInRemoveMode(curr)
         default:
-            specifyInAddMode(curr)
+            specifyInAddMode(curr!)
         }
+    }
+    
+    private func specifyInSpaceMode(_ curr: Hangeul) {
+        guard !curr.isAtStartingLine() else {
+            return
+        }
+        
+        curr.prev?.update(status: .finished)
+    }
+    
+    private func specifyInRemoveMode(_ curr: Hangeul?) {
+        guard curr != nil else {
+            return
+        }
+        
+        guard curr?.status != .finished else {
+            curr?.update(status: .ongoing)
+            return
+        }
+        
+        if (curr?.position.count)! > 1 {
+            curr?.prev?.update(status: .ongoing)
+            curr?.update(status: .ongoing, position: (curr?.position.first)!)
+        }
+        
     }
     
     private func specifyInAddMode(_ curr: Hangeul) {
@@ -71,7 +95,7 @@ class HangeulSpecifier {
         case .end:
             if curr.isMid() {
                 prev.prev!.update(status: .finished)
-                prev.update(type: prev.unicodeType, status: prev.status, position: .top)
+                prev.update(position: .top)
                 curr.update(type: .fixed, position: .mid)
             } else {
                 if prev.canBeDoubleEnd() {

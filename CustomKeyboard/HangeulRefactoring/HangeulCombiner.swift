@@ -8,7 +8,7 @@
 import Foundation
 
 enum HangeulOutputEditMode {
-    case addCharacter, changeCharacter
+    case add, change, remove
 }
 
 enum HangeulInputMode {
@@ -44,7 +44,6 @@ class HangeulCombineBuffer {
             curr = prev
         } while curr != nil && curr!.status != .finished
     }
-    
 }
 
 class HangeulCombiner {
@@ -55,12 +54,12 @@ class HangeulCombiner {
         
         if buffer.top.isEmpty {
             if buffer.mid.count == 2 {
-                return (getCombinedString(with: buffer), .changeCharacter)
+                return (getCombinedString(with: buffer), .change)
             } else {
-                return (getCombinedString(buffer.mid.first!), .addCharacter)
+                return (getCombinedString(buffer.mid.first!), .add)
             }
         } else if buffer.mid.isEmpty && buffer.end.isEmpty {
-            return (getCombinedString(buffer.top.first!), .addCharacter)
+            return (getCombinedString(buffer.top.first!), .add)
         } else if buffer.end.isEmpty {
             var newString = ""
             let topPos = buffer.top.first!.position
@@ -71,19 +70,19 @@ class HangeulCombiner {
                 newString += getCombinedString(with: prevBuffer)
             }
             newString += getCombinedString(with: buffer)
-            return (newString, .changeCharacter)
+            return (newString, .change)
         } else {
-            return (getCombinedString(with: buffer), .changeCharacter)
+            return (getCombinedString(with: buffer), .change)
         }
     }
         
     
-    private func getCombinedString(_ solo: Hangeul = Hangeul("none"), with buffer: HangeulCombineBuffer = HangeulCombineBuffer()) -> String {
+    private func getCombinedString(_ solo: Hangeul? = nil, with buffer: HangeulCombineBuffer = HangeulCombineBuffer()) -> String {
         let converter = HangeulConverter()
         let dictionary = HangeulDictionary()
         
-        guard solo.value == "none" else {
-            return converter.toString(from: solo.unicode)
+        guard solo == nil else {
+            return converter.toString(from: solo!.unicode)
         }
         
         guard !(buffer.top.isEmpty && buffer.mid.count == 2) else {
