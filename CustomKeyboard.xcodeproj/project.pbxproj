@@ -13,6 +13,11 @@
 		36431EBB287D9582003C99B4 /* CustomKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36431EBA287D9581003C99B4 /* CustomKeyboardView.swift */; };
 		36431EBD287D9598003C99B4 /* CustomKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36431EBC287D9598003C99B4 /* CustomKeyboard.xib */; };
 		36F646D0287D39E8007288C7 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F646CF287D39E8007288C7 /* ReviewTableViewCell.swift */; };
+		36FCAC0B28825C50003AF9AF /* ReviewData1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FCAC0A28825C50003AF9AF /* ReviewData1.swift */; };
+		36FCAC0D28825D0B003AF9AF /* PostReviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FCAC0C28825D0B003AF9AF /* PostReviewData.swift */; };
+		36FCAC0F28825D60003AF9AF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FCAC0E28825D60003AF9AF /* NetworkManager.swift */; };
+		36FCAC1128828ED8003AF9AF /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FCAC1028828ED8003AF9AF /* EndPoint.swift */; };
+		36FEC399288534C800F2C39B /* ImageLoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FEC398288534C800F2C39B /* ImageLoder.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
 		DE15E66028604278003DD2F5 /* ReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65F28604278003DD2F5 /* ReviewListViewController.swift */; };
@@ -31,6 +36,11 @@
 		36431EBA287D9581003C99B4 /* CustomKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyboardView.swift; sourceTree = "<group>"; };
 		36431EBC287D9598003C99B4 /* CustomKeyboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomKeyboard.xib; sourceTree = "<group>"; };
 		36F646CF287D39E8007288C7 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
+		36FCAC0A28825C50003AF9AF /* ReviewData1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewData1.swift; sourceTree = "<group>"; };
+		36FCAC0C28825D0B003AF9AF /* PostReviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReviewData.swift; sourceTree = "<group>"; };
+		36FCAC0E28825D60003AF9AF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		36FCAC1028828ED8003AF9AF /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		36FEC398288534C800F2C39B /* ImageLoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoder.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE15E65D28604278003DD2F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +103,18 @@
 			path = CustomKeyboard;
 			sourceTree = "<group>";
 		};
+		36CC2A75288142D5006C3089 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				36FCAC1028828ED8003AF9AF /* EndPoint.swift */,
+				36FCAC0E28825D60003AF9AF /* NetworkManager.swift */,
+				36FCAC0A28825C50003AF9AF /* ReviewData1.swift */,
+				36FCAC0C28825D0B003AF9AF /* PostReviewData.swift */,
+				36FEC398288534C800F2C39B /* ImageLoder.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
 		DE15E64F28604278003DD2F5 = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +134,7 @@
 		DE15E65A28604278003DD2F5 /* CustomKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				36CC2A75288142D5006C3089 /* NetworkManager */,
 				36081E0928800B1500A933AE /* Extension */,
 				F0D4B434287D56410083E8AE /* Model */,
 				F035E559287D3BFB002DA8F9 /* Network */,
@@ -226,11 +249,16 @@
 				DE15E66028604278003DD2F5 /* ReviewListViewController.swift in Sources */,
 				F0D480D3287D97BD00D9425C /* CreateReviewViewController.swift in Sources */,
 				36F646D0287D39E8007288C7 /* ReviewTableViewCell.swift in Sources */,
+				36FEC399288534C800F2C39B /* ImageLoder.swift in Sources */,
 				36431EB8287D4D79003C99B4 /* ReviewListHeaderView.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
+				36FCAC0D28825D0B003AF9AF /* PostReviewData.swift in Sources */,
 				F035E55D287D3E41002DA8F9 /* Repository.swift in Sources */,
+				36FCAC0B28825C50003AF9AF /* ReviewData1.swift in Sources */,
+				36FCAC1128828ED8003AF9AF /* EndPoint.swift in Sources */,
 				F035E55B287D3C09002DA8F9 /* HttpClient.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
+				36FCAC0F28825D60003AF9AF /* NetworkManager.swift in Sources */,
 				36081E08288003CC00A933AE /* String+.swift in Sources */,
 				36431EBB287D9582003C99B4 /* CustomKeyboardView.swift in Sources */,
 			);

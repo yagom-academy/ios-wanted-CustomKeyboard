@@ -84,20 +84,27 @@ class ReviewTableViewCell: UITableViewCell {
         ])
     }
     
-    func fetchDataFromTableView(data: ReviewData) {
+    func fetchDataFromTableView(data: ReviewData1) {
         // imageView 통신
 
-        do {
-            if let url = URL(string: data.user.profileImage) {
-                let imgData = try Data(contentsOf: url)
-                DispatchQueue.main.async {
-                    self.profileImageView.image = UIImage(data: imgData)
-                }
+//        do {
+//            if let url = URL(string: data.user.profileImage) {
+//                let imgData = try Data(contentsOf: url)
+//                DispatchQueue.main.async {
+//                    self.profileImageView.image = UIImage(data: imgData)
+//                }
+//            }
+//        } catch {
+//
+//        }
+        ImageLoder().leadImage(url: data.user.profileImage) { result in
+            switch result {
+            case .success(let imgae):
+                self.profileImageView.image = imgae
+            case .failure(let error):
+                print(error)
             }
-        } catch {
-            
         }
-        
         nickNameLabel.text = data.user.userName
         rateLabel.text = data.content
         

@@ -13,22 +13,22 @@ enum RepositoryError {
 
 class Repository {
     
-    private let httpClient = HttpClient(baseUrl: "https://api.plkey.app/theme/review?themeId=PLKEY0-L-81&start=0&count=20")
+    let getDataManager = GetReviewData()
     
-    func getReviewData(completion: @escaping (Result<ModelData, Error>) -> Void) {
-        httpClient.getJson { result in
+    func getReviewData(request: GetRequest, completion: @escaping (Result<Data1, Error>) -> Void) {
+        guard let request = request.getUrlRequest else { return }
+        getDataManager.getReviewList(request: request) { result in
             switch result {
             case .success(let data):
-                let decoder = JSONDecoder()
                 do {
-                    let reviewData = try decoder.decode(ModelData.self, from: data)
-                    completion(.success(reviewData))
-                } catch let error {
-                    completion(.failure(error))
+                    let decoder = JSONDecoder()
+                    let decodedData = try decoder.decode(Data1.self, from: data)
+                    completion(.success(decodedData))
+                } catch {
+                    completion(.failure(NetworkError.decodeError))
                 }
-                
             case .failure(let error):
-                print(error.localizedDescription)
+                completion(.failure(error))
             }
         }
     }

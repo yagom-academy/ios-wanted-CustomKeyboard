@@ -7,8 +7,8 @@ import UIKit
 
 class ReviewListViewController: UIViewController {
 
-    private let repo = Repository()
-    private var dataList = ModelData()
+    private let endPoint = EndPoint()
+    private var dataList = Data1(data: [])
     
     private var reviewTableView: UITableView = {
         let reviewTableView = UITableView()
@@ -56,13 +56,22 @@ class ReviewListViewController: UIViewController {
         
     }
     private func getData() {
-        repo.getReviewData { result in
+        endPoint.getReview { [self] result in
             switch result {
             case .success(let data):
-                self.dataList = data
-                self.reviewTableView.reloadData()
-            case .failure(let error):
-                print(error)
+                dataList = data
+                DispatchQueue.main.async {
+                    self.reviewTableView.reloadData()
+                }
+            case .failure(let error as NetworkError):
+                switch error {
+                case .decodeError:
+                    print(error)
+                default:
+                    break
+                }
+            case .failure(_):
+                break
             }
         }
     }
