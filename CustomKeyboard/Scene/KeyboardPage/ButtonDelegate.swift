@@ -9,4 +9,5 @@ import UIKit
 
 protocol ButtonDelegate {
     func buttonClickEvent(sender: KeyButton)
+    func eraseButtonClickEvent(sender: KeyButton)
 }
