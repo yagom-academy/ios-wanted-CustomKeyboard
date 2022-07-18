@@ -34,14 +34,7 @@ class HangulAutomata{
     
     var buffer : [String] = []
     
-    var cursor : Int = 0
-    
-    //input스택 해당 스택이 현재 조합중인 한글을 보여주는 역할을 함
     var inpStack : [InpStack] = []
-    var inpSP : Int = 0
-    
-    var outStack : [String] = []
-    var outSp : Int = 0
     
     var currentHangulState : HangulStatus?
     
@@ -69,7 +62,8 @@ class HangulAutomata{
         ["ㅏ","ㅣ","ㅐ"],
         ["ㅓ","ㅣ","ㅔ"],
         ["ㅕ","ㅣ","ㅖ"],
-        ["ㅑ","ㅣ","ㅒ"]
+        ["ㅑ","ㅣ","ㅒ"],
+        ["ㅘ","ㅣ","ㅙ"]
     ]
     
     var dJongTable : [[String]] = [
@@ -146,7 +140,7 @@ class HangulAutomata{
                     buffer.removeLast()
                 }
                 else if popHanguel.curhanst == .joongsung || popHanguel.curhanst == .dJoongsung{
-                    if inpStack[inpStack.count-1].curhanst == .jongsung{
+                    if inpStack[inpStack.count-1].curhanst == .jongsung || inpStack[inpStack.count-1].curhanst == .dJongsung{
                         buffer.removeLast()
                     }
                         buffer[buffer.count-1] = inpStack[inpStack.count-1].charCode
@@ -160,6 +154,8 @@ class HangulAutomata{
                             if inpStack[inpStack.count-1].chKind == .vowel{
                                 if isJoongSungPair(first: joongsungTable[Int(inpStack[inpStack.count-1].key)] , result: joongsungTable[Int(popHanguel.key)]){
                                     buffer[buffer.count-1] = inpStack[inpStack.count-1].charCode
+                                }else{
+                                    buffer.removeLast()
                                 }
                             }
                         }else{
@@ -179,7 +175,6 @@ class HangulAutomata{
                     charCode = inpStack[inpStack.count-1].charCode
                 }
             }
-        print(inpStack)
     }
     }
 }
@@ -294,7 +289,6 @@ extension HangulAutomata{
             }
             
             buffer.append("")
-            cursor += 1
             break
         case.endTwo:
             if oldChKind == .consonant{
@@ -303,10 +297,8 @@ extension HangulAutomata{
                 currentHangulState = .joongsung
                 buffer[buffer.count-1] = inpStack[inpStack.count-2].charCode
                 buffer.append("")
-                cursor += 1
             }else{
                 if !joongsungPair(){
-                    cursor += 1
                     buffer.append("")
                 }
                 charCode = joongsungTable[Int(keyCode)]
@@ -318,7 +310,6 @@ extension HangulAutomata{
             break
         }
         inpStack.append(InpStack(curhanst: currentHangulState!, key: keyCode, charCode: String(Unicode.Scalar(charCode)!), chKind: chKind))
-        inpSP += 1
         buffer[buffer.count-1] = charCode
     }
 }
