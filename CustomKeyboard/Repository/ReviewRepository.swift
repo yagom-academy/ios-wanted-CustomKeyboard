@@ -34,18 +34,20 @@ final class ReviewRepository {
     }
   }
   
-  func loadImage(url:URL, completion: @escaping (Result<Data,Error>) -> Void) {
-    if let data = imageCache.object(forKey: url as NSURL) {
+  func loadImage(url:URL?, completion: @escaping (Result<Data,Error>) -> Void) {
+
+    
+    if let data = imageCache.object(forKey: url! as NSURL) {
       completion(.success(data as Data))
       return
     }
     
-    let URLRequest = URLRequest(url: url)
+    let URLRequest = URLRequest(url: url!)
     network.request(on: URLRequest) {[weak self] result in
       switch result{
       case .success(let data):
         completion(.success(data))
-        self?.imageCache.setObject(data as NSData, forKey: url as NSURL)
+        self?.imageCache.setObject(data as NSData, forKey: url! as NSURL)
       case .failure(let error):
         completion(.failure(error))
         print(error)

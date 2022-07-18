@@ -85,10 +85,10 @@ extension HomeViewController : UITableViewDataSource {
         guard let cell = reviewTableView.dequeueReusableCell(withIdentifier: ReviewTableViewCell.cellID, for: indexPath) as? ReviewTableViewCell else { return UITableViewCell() }
         
         let model = viewModel[indexPath]
-        
         cell.selectionStyle = .none
         cell.setupReviewData(model)
-        viewModel.showImage(url: model.user.profileImage, completion: { data in
+        guard let url = URL(string: model.user.profileImage) else {return cell}
+        viewModel.showImage(url: url, completion: { data in
             DispatchQueue.main.async {
                 cell.setProfileImage(data)
             }})

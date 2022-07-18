@@ -70,7 +70,7 @@ extension ReviewDTO {
 struct User: Codable {
   let id: String
   let userName: String
-  let profileImage: URL
+  let profileImage: String
   
   enum CodingKeys: String, CodingKey {
     case id = "_id"
