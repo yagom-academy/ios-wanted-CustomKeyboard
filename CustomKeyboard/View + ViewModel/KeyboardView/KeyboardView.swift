@@ -12,17 +12,14 @@ class KeyboardView: UIView {
     
     var isShift = false
     
-    let topLetterValues: [Any] = [
-        Chosung.ㅂ,Chosung.ㅈ,Chosung.ㄷ,Chosung.ㄱ,Chosung.ㅅ,
-        Jungsung.ㅛ,Jungsung.ㅕ,Jungsung.ㅑ,Jungsung.ㅐ,Jungsung.ㅔ
+    let topLetterValues: [Compatibility] = [
+        .ㅂ,.ㅈ,.ㄷ,.ㄱ,.ㅅ,.ㅛ,.ㅕ,.ㅑ,.ㅐ,.ㅔ
     ]
-    let middleLetterValues:[Any] = [
-        Chosung.ㅁ,Chosung.ㄴ,Chosung.ㅇ,Chosung.ㄹ,Chosung.ㅎ,
-        Jungsung.ㅗ,Jungsung.ㅓ,Jungsung.ㅏ,Jungsung.ㅣ
+    let middleLetterValues: [Compatibility] = [
+        .ㅁ,.ㄴ,.ㅇ,.ㄹ,.ㅎ,.ㅗ,.ㅓ,.ㅏ,.ㅣ
     ]
-    let lastLetterValues:[Any] = [
-        Chosung.ㅋ,Chosung.ㅌ,Chosung.ㅊ,Chosung.ㅍ,
-        Jungsung.ㅠ,Jungsung.ㅜ,Jungsung.ㅡ
+    let lastLetterValues:[Compatibility] = [
+        .ㅋ,.ㅌ,.ㅊ,.ㅍ,.ㅠ,.ㅜ,.ㅡ
     ]
 
     private lazy var shiftButton: UIButton = {
@@ -120,19 +117,17 @@ class KeyboardView: UIView {
             self.changeShiftMode(isShift)
         }
     }
-    
 }
 
 // MARK: - @objc Methods
 private extension KeyboardView {
     @objc func didTapKeyboardButton(_ sender: KeyboardButton) {
-        let buffer = (sender.chosung, sender.jungsung, sender.jongsung)
+        let buffer = sender.compatibility
         viewModel.didTapKeyboardButton(buffer: buffer)
     }
     
     @objc func didTapSpace() {
-        viewModel.value.append(" ")
-        viewModel.result.value = viewModel.value
+        viewModel.result.value.append(" ")
         viewModel.sejongState = .writeInitialState
     }
     @objc func didTapShift() {
@@ -195,36 +190,15 @@ private extension KeyboardView {
         ])
     }
     
-    func configureButton(_ letters: [Any], stackView: UIStackView) {
-        letters.forEach { letterValue in
-            if let value = letterValue as? Chosung {
-                let button = KeyboardButton(
-                    type: .text,
-                    text: value.description,
-                    chosung: value,
-                    jongsung: value.jongsung
-                )
-                button.addTarget(
-                    self,
-                    action: #selector(didTapKeyboardButton(_:)),
-                    for: .touchUpInside
-                )
-                stackView.addArrangedSubview(button)
-            }
-            
-            if let value = letterValue as? Jungsung {
-                let button = KeyboardButton(
-                    type: .text,
-                    text: value.description,
-                    jungsung: value
-                )
-                button.addTarget(
-                    self,
-                    action: #selector(didTapKeyboardButton(_:)),
-                    for: .touchUpInside
-                )
-                stackView.addArrangedSubview(button)
-            }
+    func configureButton(_ letters: [Compatibility], stackView: UIStackView) {
+        letters.forEach {
+            let button = KeyboardButton(text: $0.text, compatibility: $0)
+            button.addTarget(
+                self,
+                action: #selector(didTapKeyboardButton(_:)),
+                for: .touchUpInside
+            )
+            stackView.addArrangedSubview(button)
         }
     }
 }

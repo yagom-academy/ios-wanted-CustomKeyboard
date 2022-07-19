@@ -9,11 +9,8 @@ import UIKit
 
 class KeyboardButton: UIButton {
     
-    let type: KeyboardButtonType
     var text: String?
-    var chosung: Chosung?
-    var jungsung: Jungsung?
-    var jongsung: Jongsung?
+    var compatibility: Compatibility
     var isShift: Bool = false {
         willSet {
             setupShiftMode(newValue)
@@ -23,17 +20,11 @@ class KeyboardButton: UIButton {
     
     
     init(
-        type: KeyboardButtonType,
         text: String? = nil,
-        chosung: Chosung? = nil,
-        jungsung: Jungsung? = nil,
-        jongsung: Jongsung? = nil
+        compatibility: Compatibility
     ) {
-        self.type = type
         self.text = text
-        self.chosung = chosung
-        self.jungsung = jungsung
-        self.jongsung = jongsung
+        self.compatibility = compatibility
         super.init(frame: .zero)
         setupButton()
     }
@@ -58,48 +49,37 @@ class KeyboardButton: UIButton {
     }
     
     func setupShiftMode(_ isShift: Bool) {
-        if isShift {
-            switch chosung {
-            case .ㅂ:
-                chosung = .ㅃ
-                text = "ㅃ"
-            case .ㅈ:
-                chosung = .ㅉ
-                text = "ㅉ"
-            case .ㄷ:
-                chosung = .ㄸ
-                text = "ㄸ"
-            case .ㄱ:
-                chosung = .ㄲ
-                text = "ㄲ"
-                jongsung = .ㄲ
-            case .ㅅ:
-                chosung = .ㅆ
-                text = "ㅆ"
-                jongsung = .ㅆ
-            default: break
-            }
-        } else {
-            switch chosung {
-            case .ㅃ:
-                chosung = .ㅂ
-                text = "ㅂ"
-            case .ㅉ:
-                chosung = .ㅈ
-                text = "ㅈ"
-            case .ㄸ:
-                chosung = .ㄷ
-                text = "ㄷ"
-            case .ㄲ:
-                chosung = .ㄱ
-                text = "ㄱ"
-                jongsung = .ㄱ
-            case .ㅆ:
-                chosung = .ㅅ
-                text = "ㅅ"
-                jongsung = .ㅅ
-            default: break
-            }
+        switch compatibility {
+        case .ㄱ:
+            if isShift { compatibility = .ㄲ }
+        case .ㄲ:
+            if !isShift { compatibility = .ㄱ }
+        case .ㄷ:
+            if isShift { compatibility = .ㄸ }
+        case .ㄸ:
+            if !isShift { compatibility = .ㄷ }
+        case .ㅂ:
+            if isShift { compatibility = .ㅃ }
+        case .ㅃ:
+            if !isShift { compatibility = .ㅂ }
+        case .ㅅ:
+            if isShift { compatibility = .ㅆ }
+        case .ㅆ:
+            if !isShift { compatibility = .ㅅ }
+        case .ㅈ:
+            if isShift { compatibility = .ㅉ }
+        case .ㅉ:
+            if !isShift { compatibility = .ㅈ }
+        case .ㅐ:
+            if isShift { compatibility = .ㅒ }
+        case .ㅒ:
+            if !isShift { compatibility = .ㅐ }
+        case .ㅔ:
+            if isShift { compatibility = .ㅖ }
+        case .ㅖ:
+            if !isShift { compatibility = .ㅔ }
+        default: break
         }
+        text = compatibility.text
     }
 }

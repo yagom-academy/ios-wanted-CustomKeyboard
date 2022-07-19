@@ -15,7 +15,7 @@ extension String {
         return dateFormatter.date(from: self)
     }
     
-    mutating func appendUnicode(_ code: Int?) {
+    mutating func appendUnicode(_ code: UInt32?) {
         guard let code = code,
               let unicode = UnicodeScalar(code) else { return }
         self.append(String(unicode))
