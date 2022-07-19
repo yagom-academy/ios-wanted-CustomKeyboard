@@ -10,6 +10,7 @@ import UIKit
 class KeyboardManager {
     private var lastWord = ""
     private var allWord: [String] = []
+    private var allState: [Int] = []
     
     private let first = [
         "ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"
@@ -35,6 +36,8 @@ class KeyboardManager {
     
     func pressSpace(_ tappedButton: KeyButton) -> (String, Int) {
         lastWord = " "
+        allWord.append(lastWord)
+        allState.append(0)
         return (" ", 0)
     }
     
@@ -45,7 +48,7 @@ class KeyboardManager {
             print("space")
             return pressSpace(tappedButton)
         }
-        
+        print(allWord)
         guard let addString = tappedButton.title(for: .normal) else { return ("", 0) }
         switch state {
         case 0:
@@ -53,8 +56,10 @@ class KeyboardManager {
             lastWord = addString
             allWord.append(addString)
             if tappedButton.type == .consonant {
+                allState.append(1)
                 return (addString, 1)
             } else {
+                allState.append(2)
                 return (addString, 2)
             }
         case 1:
@@ -65,12 +70,14 @@ class KeyboardManager {
                 if idx == 0 {
                     lastWord = addString
                     allWord.append(lastWord)
+                    allState.append(1)
                     return (currentText + addString, 1)
                 } else {
                     lastWord = doubleFirst
                     allWord.removeLast()
                     allWord.append(lastWord)
                     let str = first[idx]
+                    allState.append(1)
                     return (str, 1)
                 }
             } else {
@@ -80,6 +87,7 @@ class KeyboardManager {
                 if let scalarValue = UnicodeScalar(str) {
                     lastWord = addString
                     allWord.append(lastWord)
+                    allState.append(3)
                     return (String(scalarValue), 3)
                 }
                 return ("", 0)
@@ -90,6 +98,7 @@ class KeyboardManager {
             if tappedButton.type == .consonant {
                 lastWord = addString
                 allWord.append(lastWord)
+                allState.append(1)
                 return (currentText + addString, 1)
             } else {
                 let doubleMid = lastWord + addString
@@ -97,12 +106,14 @@ class KeyboardManager {
                 if idx == 0 {
                     lastWord = addString
                     allWord.append(lastWord)
+                    allState.append(2)
                     return (currentText + addString, 2)
                 } else {
                     lastWord = doubleMid
                     allWord.removeLast()
                     allWord.append(lastWord)
                     let str = second[idx]
+                    allState.append(2)
                     return (str, 2)
                 }
             }
@@ -113,12 +124,14 @@ class KeyboardManager {
                 if idx == 0 {
                     lastWord = addString
                     allWord.append(lastWord)
+                    allState.append(1)
                     return (currentText+addString, 1)
                 }
                 let str = currentText.utf16.map{ Int($0) }.reduce(0, +) + idx
                 if let scalarValue = UnicodeScalar(str) {
                     lastWord = addString
                     allWord.append(lastWord)
+                    allState.append(4)
                     return (String(scalarValue), 4)
                 }
                 return ("", 0)
@@ -129,6 +142,7 @@ class KeyboardManager {
                 if idx1 == 0 {
                     lastWord = addString
                     allWord.append(lastWord)
+                    allState.append(2)
                     return (currentText + addString, 2)
                 } else {
                     let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - (idx2 * 28) + (idx1 * 28)
@@ -136,6 +150,7 @@ class KeyboardManager {
                         lastWord = doubleMid
                         allWord.removeLast()
                         allWord.append(lastWord)
+                        allState.append(3)
                         return (String(scalarValue), 3)
                     }
                     return ("", 0)
@@ -150,6 +165,7 @@ class KeyboardManager {
                 if idx1 == 0 {
                     lastWord = addString
                     allWord.append(lastWord)
+                    allState.append(1)
                     return (currentText + addString, 1)
                 } else {
                     let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - idx2 + idx1
@@ -157,6 +173,7 @@ class KeyboardManager {
                         lastWord = doubleEnd
                         allWord.removeLast()
                         allWord.append(lastWord)
+                        allState.append(4)
                         return (String(scalarValue), 4)
                     }
                     return ("", 0)
@@ -187,6 +204,7 @@ class KeyboardManager {
                    let newScalarValue = UnicodeScalar(newStr) {
                     lastWord = addString
                     allWord.append(lastWord)
+                    allState.append(3)
                     return (String(oldScalarValue) + String(newScalarValue), 3)
                 }
                 return ("", 0)
@@ -204,6 +222,10 @@ class KeyboardManager {
         }
         
         let deleteText = allWord.removeLast()
+        let deleteState = allState.removeLast()
+        print(allWord)
+        print(allState)
+        print(lastWord, state)
         switch state {
         case 1:
             // 쌍자음만 입력되어 있는 상태 (ex ㄱㄱ, ㄷㄷ, ㅂㅂ ...)
@@ -212,8 +234,12 @@ class KeyboardManager {
                 allWord.append(lastWord)
                 return (lastWord, 1)
             } else {
+                if allWord.isEmpty {
+                    lastWord = ""
+                    return ("", 0)
+                }
                 lastWord = allWord[allWord.count - 1]
-                return ("", 0)
+                return ("", allState[allState.count - 1])
             }
         case 2:
             // 이중 모음이 입력되어 있는 상태 (ex ㅏㅣ, ㅓㅣ, ㅡㅣ ...)
@@ -221,8 +247,12 @@ class KeyboardManager {
                 lastWord = String(lastWord.prefix(1))
                 return (lastWord, 2)
             } else {
-                lastWord = allWord[allWord.count - 1]
-                return ("", 0)
+                if allWord.isEmpty {
+                    lastWord = ""
+                    return ("", 0)
+                }
+                lastWord = deleteText
+                return ("", deleteState)
             }
         case 3:
             // 자음 + 이중모음이 입력되어 있는 상태 (ex 왜, 내, 의 ...)
@@ -237,7 +267,45 @@ class KeyboardManager {
                 return ("", 0)
             } else {
                 // TODO: - 가, 야, .. (앞글자의 받침으로 들어갈수 있는지 확인)
-                let frontText = String(currentText.prefix(1)) // ["ㅏ"]
+                if currentText.count == 1 {
+                    let text = allWord[allWord.count - 1]
+                    lastWord = text
+//                    allState.append(1)
+                    return (text, 1)
+                }
+                let frontText = String(currentText.prefix(1))
+                let addText = allWord[allWord.count - 1]
+                if deleteState == 3 {
+                    let idx = third.firstIndex(of: addText) ?? thirdDouble.firstIndex(of: addText) ?? 0
+                    let str = frontText.utf16.map{ Int($0) }.reduce(0, +) + idx
+                    lastWord = addText
+                    if let scalarValue = UnicodeScalar(str) {
+//                        allState.append(4)
+                        print(String(scalarValue))
+                        return (String(scalarValue), 4)
+                    }
+                    return ("", 0)
+                } else if deleteState == 4 {
+                    let text = allWord[allWord.count - 2] + addText
+                    let idx = thirdDouble.firstIndex(of: text) ?? 0
+                    if idx == 0 {
+                        lastWord = addText
+//                        allState.append(1)
+                        return (frontText + addText, 1)
+                    } else {
+                        let idx2 = thirdDouble.firstIndex(of: allWord[allWord.count - 2]) ?? 0
+                        let str = frontText.utf16.map{ Int($0) }.reduce(0, +) - idx2 + idx
+                        lastWord = text
+                        if let scalarValue = UnicodeScalar(str) {
+//                            allState.append(4)
+                            return (String(scalarValue), 4)
+                        }
+                    }
+                } else {
+                    lastWord = addText
+//                    allState.append(1)
+                    return (frontText + addText, 1)
+                }
                 return ("", 0)
             }
         case 4:
@@ -247,7 +315,7 @@ class KeyboardManager {
                 let idx2 = third.firstIndex(of: String(lastWord.prefix(1))) ?? 0
                 let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - idx1 + idx2
                 lastWord = String(lastWord.prefix(1))
-                allWord.append(lastWord)
+//                allWord.append(lastWord)
                 if let scalarValue = UnicodeScalar(str) {
                     return (String(scalarValue), 4)
                 }
