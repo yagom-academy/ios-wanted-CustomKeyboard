@@ -21,6 +21,7 @@
 		E17122F52886785E00FDAF6C /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17122F42886785E00FDAF6C /* HTTPMethod.swift */; };
 		E17122F72886787C00FDAF6C /* ReviewEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17122F62886787C00FDAF6C /* ReviewEndPoint.swift */; };
 		E17122F92886791100FDAF6C /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17122F82886791100FDAF6C /* EndPointType.swift */; };
+		E17122FB288683E800FDAF6C /* NetworkRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17122FA288683E800FDAF6C /* NetworkRequester.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		E17122F42886785E00FDAF6C /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		E17122F62886787C00FDAF6C /* ReviewEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewEndPoint.swift; sourceTree = "<group>"; };
 		E17122F82886791100FDAF6C /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
+		E17122FA288683E800FDAF6C /* NetworkRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequester.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 				E17122F42886785E00FDAF6C /* HTTPMethod.swift */,
 				E17122F62886787C00FDAF6C /* ReviewEndPoint.swift */,
 				E17122F82886791100FDAF6C /* EndPointType.swift */,
+				E17122FA288683E800FDAF6C /* NetworkRequester.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 				E17122F72886787C00FDAF6C /* ReviewEndPoint.swift in Sources */,
 				DFE6D8D1287EBD2800A45033 /* BasePaddingLabel.swift in Sources */,
+				E17122FB288683E800FDAF6C /* NetworkRequester.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

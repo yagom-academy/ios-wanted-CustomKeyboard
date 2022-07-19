@@ -14,19 +14,19 @@ protocol EndPointType {
     var method: HTTPMethod { get }
     var query: [URLQueryItem]? { get }
     
-    func asURLRequest() throws -> URLRequest
+    func asURLRequest() -> URLRequest?
     
 }
 
 extension EndPointType {
     
-    func asURLRequest() throws -> URLRequest {
+    func asURLRequest() -> URLRequest? {
         var components = URLComponents(string: baseURL)
         components?.path = path
         components?.queryItems = query
         
         guard let url = components?.url else {
-            throw URLError(.badURL)
+            return nil
         }
         
         var urlRequest = URLRequest(url: url)
@@ -36,4 +36,3 @@ extension EndPointType {
     }
     
 }
-
