@@ -61,7 +61,7 @@ final class ReviewListCell: UITableViewCell {
         userNameLabel.text = reviewModel.name
         reviewLabel.text = reviewModel.content
         timeLabel.text = reviewModel.createDate
-        profileImageView.load(url: reviewModel.profileImage)
+        profileImageView.load(urlString: reviewModel.profileImage)
     }
 }
 

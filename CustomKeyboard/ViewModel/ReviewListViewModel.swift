@@ -77,8 +77,8 @@ struct ReviewViewModel {
         return reviewModel.user.userName
     }
     
-    var profileImage: URL {
-        return URL(string: reviewModel.user.profileImage)!
+    var profileImage: String {
+        return reviewModel.user.profileImage
     }
     
     var content: String {

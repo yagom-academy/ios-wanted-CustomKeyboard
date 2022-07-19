@@ -19,6 +19,7 @@
 		0EECF418287D57190094171E /* CustomKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EECF417287D57190094171E /* CustomKeyboardView.xib */; };
 		0EECF41A287D57230094171E /* CustomKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EECF419287D57230094171E /* CustomKeyboardView.swift */; };
 		1207F848287E4C9A00F064C3 /* KeyboardIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1207F847287E4C9A00F064C3 /* KeyboardIOManager.swift */; };
+		125C7E3328869F8200E80A1E /* ProfileImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C7E3228869F8200E80A1E /* ProfileImageCacheManager.swift */; };
 		12744E2E287C300700C0AD4A /* ReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12744E2D287C300700C0AD4A /* ReviewListViewController.swift */; };
 		12744E30287C305D00C0AD4A /* ReviewListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12744E2F287C305C00C0AD4A /* ReviewListCell.swift */; };
 		C717525D287BF7040017487F /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C717525C287BF7040017487F /* ReviewModel.swift */; };
@@ -66,6 +67,7 @@
 		0EECF417287D57190094171E /* CustomKeyboardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomKeyboardView.xib; sourceTree = "<group>"; };
 		0EECF419287D57230094171E /* CustomKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyboardView.swift; sourceTree = "<group>"; };
 		1207F847287E4C9A00F064C3 /* KeyboardIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardIOManager.swift; sourceTree = "<group>"; };
+		125C7E3228869F8200E80A1E /* ProfileImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageCacheManager.swift; sourceTree = "<group>"; };
 		12744E2D287C300700C0AD4A /* ReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewListViewController.swift; path = CustomKeyboard/Controller/ReviewListViewController.swift; sourceTree = SOURCE_ROOT; };
 		12744E2F287C305C00C0AD4A /* ReviewListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewListCell.swift; path = CustomKeyboard/Controller/View/ReviewListCell.swift; sourceTree = SOURCE_ROOT; };
 		C717525C287BF7040017487F /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			children = (
 				1207F847287E4C9A00F064C3 /* KeyboardIOManager.swift */,
 				C717525E287BF8320017487F /* NetworkManager.swift */,
+				125C7E3228869F8200E80A1E /* ProfileImageCacheManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -169,7 +172,6 @@
 				DE15E65D28604278003DD2F5 /* SceneDelegate.swift */,
 				DE15E66428604279003DD2F5 /* Assets.xcassets */,
 				DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */,
-				DE15E66928604279003DD2F5 /* Info.plist */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -212,6 +214,7 @@
 		DE15E65A28604278003DD2F5 /* CustomKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				DE15E66928604279003DD2F5 /* Info.plist */,
 				C76F58082880015C00CD3BAE /* Automata */,
 				0E323CFD287C411600392AA6 /* Controller */,
 				0E20AB8C287BFEC500C60D7C /* Extension */,
@@ -346,6 +349,7 @@
 				C7175265287D3D9A0017487F /* PostReviewModel.swift in Sources */,
 				C717525F287BF8320017487F /* NetworkManager.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
+				125C7E3328869F8200E80A1E /* ProfileImageCacheManager.swift in Sources */,
 				C7175263287C43CE0017487F /* WriteReviewButtonView.swift in Sources */,
 				12744E30287C305D00C0AD4A /* ReviewListCell.swift in Sources */,
 				1207F848287E4C9A00F064C3 /* KeyboardIOManager.swift in Sources */,
