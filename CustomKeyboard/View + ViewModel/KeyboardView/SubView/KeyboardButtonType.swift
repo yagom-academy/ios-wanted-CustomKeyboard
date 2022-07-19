@@ -234,6 +234,30 @@ enum Chosung: UInt32 {
         default: return nil
         }
     }
+    
+    var compatibility: Compatibility {
+        switch self {
+        case .ㄱ: return .ㄱ
+        case .ㄲ: return .ㄲ
+        case .ㄴ: return .ㄴ
+        case .ㄷ: return .ㄷ
+        case .ㄸ: return .ㄸ
+        case .ㄹ: return .ㄹ
+        case .ㅁ: return .ㅁ
+        case .ㅂ: return .ㅂ
+        case .ㅃ: return .ㅃ
+        case .ㅅ: return .ㅅ
+        case .ㅆ: return .ㅆ
+        case .ㅇ: return .ㅇ
+        case .ㅈ: return .ㅈ
+        case .ㅉ: return .ㅉ
+        case .ㅊ: return .ㅊ
+        case .ㅋ: return .ㅋ
+        case .ㅌ: return .ㅌ
+        case .ㅍ: return .ㅍ
+        case .ㅎ: return .ㅎ
+        }
+    }
 }
 
 enum Jungsung: UInt32 {
@@ -258,6 +282,32 @@ enum Jungsung: UInt32 {
     case ㅡ = 0x1173
     case ㅢ = 0x1174
     case ㅣ = 0x1175
+    
+    var compatibility: Compatibility {
+        switch self {
+        case .ㅏ: return .ㅏ
+        case .ㅐ: return .ㅐ
+        case .ㅑ: return .ㅑ
+        case .ㅒ: return .ㅒ
+        case .ㅓ: return .ㅓ
+        case .ㅔ: return .ㅔ
+        case .ㅕ: return .ㅕ
+        case .ㅖ: return .ㅖ
+        case .ㅗ: return .ㅗ
+        case .ㅘ: return .ㅘ
+        case .ㅙ: return .ㅙ
+        case .ㅚ: return .ㅚ
+        case .ㅛ: return .ㅛ
+        case .ㅜ: return .ㅜ
+        case .ㅝ: return .ㅝ
+        case .ㅞ: return .ㅞ
+        case .ㅟ: return .ㅟ
+        case .ㅠ: return .ㅠ
+        case .ㅡ: return .ㅡ
+        case .ㅢ: return .ㅢ
+        case .ㅣ: return .ㅣ
+        }
+    }
 }
 
 enum Jongsung: UInt32 {

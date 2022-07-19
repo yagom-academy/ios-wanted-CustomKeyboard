@@ -27,7 +27,7 @@ class KeyboardViewModel {
         case .writeInitialState:
             curr = buffer.rawValue
             if buffer.jungsung != nil {
-                sejongState = .writeInitialState
+                sejongState = .writeLastState
             } else {
                 sejongState = .writeMiddleState
             }
@@ -44,9 +44,13 @@ class KeyboardViewModel {
         case .writeLastState: // 아
             if buffer.jungsung != nil { // 아 + ㅏ or ㅣ(이중모음)
                 // 이중 모음 체크
-                let last = result.value.unicodeScalars.last // ㅏ
-                if let lastValue = last?.value,
-                    let doubleJungsung = mergeJungsung(Jungsung(rawValue: lastValue), buffer.jungsung) { // 이중모음 가능
+                guard let last = result.value.unicodeScalars.last else { return } // ㅏ
+                
+                if let doubleJungsung = mergeJungsung(Jungsung(rawValue: last.value), buffer.jungsung) { // 이중모음 가능
+                    result.value.unicodeScalars.removeLast()
+                    curr = doubleJungsung.rawValue
+                    sejongState = .writeLastState
+                } else if let doubleJungsung = mergeJungsung(Compatibility(rawValue: last.value)?.jungsung, buffer.jungsung) {
                     result.value.unicodeScalars.removeLast()
                     curr = doubleJungsung.rawValue
                     sejongState = .writeLastState
@@ -112,75 +116,74 @@ class KeyboardViewModel {
     }
     
     func clearAll() {
+        sejongState = .writeInitialState
         self.result.value = ""
     }
     
     func didTapBack() {
+        
         if !result.value.isEmpty {
             if isRemovePhoneme {
-                let removed = result.value.unicodeScalars.removeLast()
-                if removed == " " {
+                guard let willRemove = result.value.unicodeScalars.last else {
+                    return
+                }
+
+                if willRemove == " " {
                     isRemovePhoneme = false
+                    result.value.unicodeScalars.removeLast()
+                    return
                 }
                 
-                if let jungsung = Jungsung.init(rawValue: removed.value) { // 중성을 지웠을때
-                    if let doubleJunsung = splitJungsung(jungsung) { // 이중 종성이 되는 경우
-                        // 이중 종성에서 단종성으로 변경하는 경우
-                        result.value.appendUnicode(doubleJunsung.0.rawValue)
-                        currentJungsung = doubleJunsung.0
-                        sejongState = .writeLastState
-                    } else {
-                        // 단중성을 지우는 경우
-                        currentJungsung = nil
-                        currentLastJongsung = nil
-                        sejongState = .writeMiddleState
-                        
-                    }
-                }
+                // 공백이 아닐 경우의 메서드
                 
-                if Chosung.init(rawValue: removed.value) != nil { // 초성을 지웠을때
-                    // 단초성과 쌍초성 모두 뒤에를 지운다.
-                    if let current = result.value.unicodeScalars.last {
+                // 모음을 지우는 경우
+                if let jungsung = Jungsung.init(rawValue: willRemove.value) { // 중성
+                    // 이중 중성
+                    if let doubleJungsung = splitJungsung(jungsung) { // 과 -> 고 ㅘ -> ㅗ
+                        result.value.unicodeScalars.removeLast() // ㄱ
                         
-                        if let jongsung = Jongsung.init(rawValue: current.value) {
-                            if splitDoubleJongsung(jongsung) != nil {
-                                currentLastJongsung = jongsung
-                                sejongState = .alreadyDoubleLastState
-                            } else {
-                                currentLastJongsung = jongsung
-                                sejongState = .alreadyLastState
-                            }
-                        }
-                        
-                        if let jungsung = Jungsung.init(rawValue: current.value) {
-                            currentJungsung = jungsung
+                        if let chosungValue = result.value.unicodeScalars.last?.value,
+                           let _ = Chosung(rawValue: chosungValue) {
+                            result.value.appendUnicode(doubleJungsung.0.rawValue) //
+                            sejongState = .writeLastState
+                        } else {
+                            result.value.appendUnicode(doubleJungsung.0.compatibility.rawValue)
                             sejongState = .writeLastState
                         }
-
-                    } else {
-                        currentJungsung = nil
-                        currentLastJongsung = nil
-                        sejongState = .writeInitialState
+                    } else { // 단 중성 -> 고,ㅗ
+                        result.value.unicodeScalars.removeLast() // 고 -> ㄱ
+                        // 초성이 있는 경우  // ㄱ
+                        if let chosungValue = result.value.unicodeScalars.last?.value,
+                           let chosung = Chosung(rawValue: chosungValue)?.compatibility {
+                            result.value.unicodeScalars.removeLast()
+                            result.value.appendUnicode(chosung.rawValue)
+                            sejongState = .writeMiddleState
+                        }
                     }
-                    
-                } else if let jongsung = Jongsung.init(rawValue: removed.value) { // 종성을 지웠을때
+                }
+                
+                // 2. 자음을 지우는 경우
+                if let jongsung = Jongsung(rawValue: willRemove.value) {
+                    //이중 자음인 경우
                     if let doubleJongsung = splitDoubleJongsung(jongsung) {
-                        // 이중 종성이 들어와서 단종성으로 변환하는 경우
+                        result.value.unicodeScalars.removeLast()
                         result.value.appendUnicode(doubleJongsung.0.rawValue)
-                        currentLastJongsung = doubleJongsung.0
                         sejongState = .alreadyLastState
-                    } else if let current = result.value.unicodeScalars.last {
-                        // 단 종성이 들어와서 지우는 경우
-                        let jongsung = Jongsung.init(rawValue: current.value)
-                        currentLastJongsung = jongsung
+                    } else { // 단자음
+                        result.value.unicodeScalars.removeLast()
                         sejongState = .writeLastState
                     }
                 }
+
+                // 호환성인 경우
+                if Compatibility(rawValue: willRemove.value) != nil {
+                    result.value.unicodeScalars.removeLast()
+                    sejongState = .writeInitialState
+                }
+                
             } else {
                 result.value.removeLast()
-                if result.value.isEmpty {
-                    isRemovePhoneme = true
-                }
+                sejongState = .writeInitialState
             }
         }
     }
