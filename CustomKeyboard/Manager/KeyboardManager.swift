@@ -40,7 +40,6 @@ class KeyboardManager {
     
     func makeString(_ state: Int, _ currentText: String, _ tappedButton: KeyButton) -> (String, Int) {
         print(allWord, "insert")
-        print(state, "insert")
         
         if tappedButton.type == .space {
             print("space")
@@ -164,7 +163,7 @@ class KeyboardManager {
                 }
             } else {
                 // 자음 + 모음 + 자음으로 받침이 있는 상태 (ex 언, 젠, 간, 끝, 밟 ...)
-                let idx1 = thirdDouble.firstIndex(of: lastWord) ?? 0
+                let idx1 = third.firstIndex(of: lastWord) ?? thirdDouble.firstIndex(of: lastWord) ?? 0
                 let idx2 = second.firstIndex(of: addString) ?? 0
                 var oldStr = 0
                 var newStr = 0
@@ -199,7 +198,6 @@ class KeyboardManager {
     
     func deleteString(_ state: Int, _ currentText: String) -> (String, Int) {
         print(allWord, "delete")
-        print(state, "delete")
         
         if allWord.isEmpty {
             return ("", 0)
