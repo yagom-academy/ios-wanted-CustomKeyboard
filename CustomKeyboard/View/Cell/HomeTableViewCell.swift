@@ -27,7 +27,7 @@ final class HomeTableViewCell: UITableViewCell {
     func configureCell(_ review: Review) {
         nameLabel.text = review.user.userName
         contentLabel.text = review.content
-        timeLabel.text = TimeManager.shared.getTimeInterval(review.createdAt)
+        timeLabel.text = TimeManager().getTimeInterval(review.createdAt)
         userImageView.loadImage(review.user.profileImage)
     }
 }

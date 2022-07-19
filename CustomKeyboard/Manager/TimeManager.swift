@@ -8,8 +8,6 @@
 import Foundation
 
 final class TimeManager {
-    static let shared = TimeManager()
-    private init() { }
     
     func getTimeInterval(_ timeString: String) -> String {
         
