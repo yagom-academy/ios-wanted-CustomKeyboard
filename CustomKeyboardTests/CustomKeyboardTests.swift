@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import CustomKeyboard
 
 class CustomKeyboardTests: XCTestCase {
     var viewModel: KeyboardViewModel!
@@ -331,39 +332,62 @@ class CustomKeyboardTests: XCTestCase {
         XCTAssertEqual(expected, viewModel.result.value)
     }
     
-    func test_지우는경우() {
+    func test_지웠다쓰는경우() {
+        make()
+        viewModel.isRemovePhoneme = true
+        let expected = "없어없다없을"
+//        viewModel.result.value = expected
+        (0..<3).forEach { _ in
+            viewModel.didTapBack()
+        }
+        [(.ㅇ, nil, .ㅇ),(nil, .ㅡ, nil),(.ㄹ, nil, .ㄹ)].forEach { buffer in
+            viewModel.didTapKeyboardButton(buffer: buffer)
+        }
         
-        viewModel.result.value = "없어없다없을걸"
-        viewModel.value = "없어없다없을걸"
-        let expected = ""
+        XCTAssertEqual(expected, viewModel.result.value)
+    }
+    
+    func test_지우는경우() {
+        make()
+        viewModel.isRemovePhoneme = true
+        let expected = "없어없다없"
+//        viewModel.result.value = expected
+        (0..<3).forEach { _ in
+            viewModel.didTapBack()
+        }
+        
+        XCTAssertEqual(expected, viewModel.result.value)
+    }
+    
+    //viewModel에 기본 데이터를 만드는 함수
+    func make() {
         let buffers: [Buffer] = [
             (.ㅇ, nil, .ㅇ),
             (nil, .ㅓ, nil),
-            (.ㅂ, nil, .ㅂㅅ),
+            (.ㅂ, nil, .ㅂ),
+            (.ㅅ, nil, .ㅅ),
             (.ㅇ, nil, .ㅇ),
             (nil, .ㅓ, nil),
             (.ㅇ, nil, .ㅇ),
             (nil, .ㅓ, nil),
-            (.ㅂ, nil, .ㅂㅅ),
+            (.ㅂ, nil, .ㅂ),
+            (.ㅅ, nil, .ㅅ),
             (.ㄷ, nil, .ㄷ),
             (nil, .ㅏ, nil),
             (.ㅇ, nil, .ㅇ),
             (nil, .ㅓ, nil),
-            (.ㅂ, nil, .ㅂㅅ),
+            (.ㅂ, nil, .ㅂ),
+            (.ㅅ, nil, .ㅅ),
             (.ㅇ, nil, .ㅇ),
             (nil, .ㅡ, nil),
-            (.ㄹ, nil, .ㄹ),
-            (.ㄱ, nil, .ㄱ),
-            (nil, .ㅓ, nil),
-            (.ㄹ, nil, .ㄹ),
+            (.ㄹ, nil, .ㄹ)
         ]
-        let result: String = ""
-        //        viewModel.result.value = expected
-        buffers.forEach { _ in
-            viewModel.didTapBack()
+
+        buffers.forEach { buffer in
+            viewModel.didTapKeyboardButton(buffer: buffer)
         }
         
-        XCTAssertEqual(result, viewModel.result.value)
+        print(viewModel.result.value)
     }
     
     func test_지우는경우2() {
