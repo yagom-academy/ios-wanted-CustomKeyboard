@@ -258,14 +258,16 @@ class KeyboardManager {
             // 겹받침이 있는 상태 (ex 핥, 삷, 겠, 찲 ...)
             if lastWord.count == 2 {
                 let idx1 = thirdDouble.firstIndex(of: lastWord) ?? 0
-                let idx2 = thirdDouble.firstIndex(of: allWord[allWord.count - 1]) ?? 0
+                let idx2 = third.firstIndex(of: String(lastWord.prefix(1))) ?? 0
                 let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - idx1 + idx2
-                lastWord = allWord[allWord.count - 1]
+                lastWord = String(lastWord.prefix(1))
+                allWord.append(lastWord)
                 if let scalarValue = UnicodeScalar(str) {
                     return (String(scalarValue), 4)
                 }
                 return ("", 0)
             } else {
+                // 홀받침이 있는 상태 (ex 박, 살, 깃 ...)
                 let idx = thirdDouble.firstIndex(of: lastWord) ?? 0
                 let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - idx
                 lastWord = allWord[allWord.count - 1]
