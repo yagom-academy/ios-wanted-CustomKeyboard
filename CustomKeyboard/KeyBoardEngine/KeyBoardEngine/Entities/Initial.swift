@@ -9,10 +9,13 @@ import Foundation
 
 enum Initial:Int {
     case ㄱ,ㄲ,ㄴ,ㄷ,ㄸ,ㄹ,ㅁ,ㅂ,ㅃ,ㅅ,ㅆ,ㅇ,ㅈ,ㅉ,ㅊ,ㅋ,ㅌ,ㅍ,ㅎ
+    
     var code: Int {
         return self.rawValue
     }
+    
     static func parsingFromSupport(from support: Int) -> Int {
+        
         switch support {
         case 1: return 0
         case 2: return 1
@@ -33,8 +36,11 @@ enum Initial:Int {
         default: return 0
         }
     }
+    
     static func parsingFromConsonant(from consonant: Int) -> Int {
+        
         let parsedConsonant = consonant - 12592
+        
         switch parsedConsonant {
         case 1: return 0
         case 2: return 1

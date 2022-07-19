@@ -8,15 +8,15 @@
 import UIKit
 
 class SecondRowKeyContainer: UIStackView {
+    
+    // MARK: - Properties
     private let secondLineBasicKeys = BasicKeyLine(keys: ["ㅁ", "ㄴ", "ㅇ", "ㄹ", "ㅎ", "ㅗ", "ㅓ", "ㅏ", "ㅣ"])
 
     weak var delegate: SecondRowKeyContainerDelegate?
     
     init() {
         super.init(frame: CGRect.zero)
-        
-        attribute()
-        layout()
+        configureUI()
     }
     
     required init(coder: NSCoder) {
@@ -26,18 +26,29 @@ class SecondRowKeyContainer: UIStackView {
 
 extension SecondRowKeyContainer: BasicKeyLineDelegate {
     func tappedBasicKeyButton(unicode: Int) {
+        
         delegate?.tappedSecondrowBasicKey(unicode: unicode)
     }
 }
 
+// MARK: - ConfigureUI
 extension SecondRowKeyContainer {
-    private func attribute() {
+    
+    private func configureUI() {
+        
+        configureAttribute()
+        configureLayout()
+    }
+    
+    private func configureAttribute() {
+        
         secondLineBasicKeys.delegate = self
         self.axis = .horizontal
         self.distribution = .equalSpacing
     }
     
-    private func layout() {
+    private func configureLayout() {
+        
         [UIView(), secondLineBasicKeys, UIView()].forEach {
             self.addArrangedSubview($0)
         }

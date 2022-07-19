@@ -38,12 +38,14 @@ class ReviewListViewController: UIViewController {
 // MARK: - Methods
 extension ReviewListViewController {
     private func fetchData() {
+        
         viewModel.fetchData { [weak self] in
             self?.collectionView.reloadData()
         }
     }
     
     private func postData() {
+        
         viewModel.postData(text: reviewTextView.text) { result in
             switch result {
             case .success(let result):
@@ -55,19 +57,22 @@ extension ReviewListViewController {
     }
     
     private func addTapGesture() {
+        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView))
         self.reviewTextView.addGestureRecognizer(tapGestureRecognizer)
     }
 }
 
-// MARK: - Objc Methods
+// MARK: - @objc Methods
 extension ReviewListViewController {
     @objc func didTapView() {
+        
         let vc = ReviewWriteViewController(inputField: reviewTextView)
         navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func didTapWriteButton() {
+        
         postData()
     }
 }
@@ -75,6 +80,7 @@ extension ReviewListViewController {
 // MARK: - ConfigureUI
 extension ReviewListViewController {
     private func configureUI() {
+        
         view.backgroundColor = .systemBackground
         title = "CustomKeyboard"
         configureAttribute()
@@ -107,6 +113,7 @@ extension ReviewListViewController {
     }
     
     private func configureStackView() {
+        
         view.addSubview(reviewTextFieldStack)
         NSLayoutConstraint.activate([
             reviewTextFieldStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -127,6 +134,7 @@ extension ReviewListViewController {
     }
     
     private func configureCollectionViewLayout() {
+        
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
         collectionView.dataSource = self
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -171,12 +179,11 @@ extension ReviewListViewController {
 // MARK: - CollectionView DataSource
 extension ReviewListViewController: UICollectionViewDataSource {
     
-    //각 세션에 들어가는 아이템 갯수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return viewModel.getCellTotalCount()
     }
     
-    //셀에 대한 설정
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewListCell.identifier, for: indexPath) as? ReviewListCell else {

@@ -8,28 +8,30 @@
 import UIKit
 
 class CustomKeyBoard: UIStackView {
+    
     struct Math {
         static var keyboardWidth: CGFloat {
             let sceneDelegate = UIApplication.shared.connectedScenes
-                    .first!.delegate as! SceneDelegate
+                .first!.delegate as! SceneDelegate
             return sceneDelegate.windowWidth!
         }
         static let buttonPadding = 5.0
         static let buttonWidth = keyboardWidth / 10.0 - buttonPadding
         static let fontSize: CGFloat = keyboardWidth < 340 ? 13.0 : 19.0
     }
+    
+    // MARK: - Properties
     private let firstLineContainer = FirstRowKeyContainer()
     private let secondLineContainer = SecondRowKeyContainer()
     private let thirdLineContainer = ThirdRowKeyContainer()
     private let firthLineContainer = FirthRowKeyContainer()
-        
+    
     weak var delegate: CustomKeyBoardDelegate?
-    private let viewModel = CustomKeyBoardViewModel(engine: FirstKeyBoardEngine())
+    private let viewModel = CustomKeyBoardViewModel(engine: KeyBoardEngine())
     
     init() {
         super.init(frame: CGRect.zero)
-        attribute()
-        layout()
+        configureUI()
     }
     
     required init(coder: NSCoder) {
@@ -40,6 +42,7 @@ class CustomKeyBoard: UIStackView {
 //MARK: - CustomKeyBoard: private 메서드
 extension CustomKeyBoard {
     private func tappedBasicKey(unicode: Int) {
+        
         delegate?.connectTextView().text = viewModel.addWord(inputUniCode: unicode, to: delegate?.connectTextView().text)
     }
 }
@@ -47,6 +50,7 @@ extension CustomKeyBoard {
 //MARK: - FirstRowKeyContainerDelegate(첫번째줄컨테이너) 이벤트 메서드
 extension CustomKeyBoard: FirstRowKeyContainerDelegate {
     func tappedFirstrowBasicKey(unicode: Int) {
+        
         tappedBasicKey(unicode: unicode)
     }
 }
@@ -54,6 +58,7 @@ extension CustomKeyBoard: FirstRowKeyContainerDelegate {
 //MARK: - SecondRowKeyContainerDelegate(두번째줄컨테이너) 이벤트 메서드
 extension CustomKeyBoard: SecondRowKeyContainerDelegate {
     func tappedSecondrowBasicKey(unicode: Int) {
+        
         tappedBasicKey(unicode: unicode)
     }
 }
@@ -61,14 +66,17 @@ extension CustomKeyBoard: SecondRowKeyContainerDelegate {
 //MARK: - ThirdRowKeyContainerDelegate(세번째줄컨테이너) 이벤트 메서드
 extension CustomKeyBoard: ThirdRowKeyContainerDelegate {
     func tappedShiftButton() {
+        
         firstLineContainer.toggleDynamicBasicKeyState()
     }
     
     func tappedBackButton() {
+        
         delegate?.connectTextView().text = viewModel.removeWord(from: delegate?.connectTextView().text)
     }
     
     func tappedThirdrowBasicKey(unicode: Int) {
+        
         tappedBasicKey(unicode: unicode)
     }
 }
@@ -76,19 +84,27 @@ extension CustomKeyBoard: ThirdRowKeyContainerDelegate {
 //MARK: - FirthRowKeyContainerDelegate(네번째줄컨테이너) 이벤트 메서드
 extension CustomKeyBoard: FirthRowKeyContainerDelegate {
     func tappedReturnButton() {
+        
         delegate?.tappedReturnButton()
     }
     
     func tappedSpaceButton(_ inputUniCode: Int) {
+        
         delegate?.connectTextView().text = viewModel.addSpace(inputUniCode: inputUniCode, to: delegate?.connectTextView().text)
     }
 }
 
-//MARK: - attribute
+//MARK: - ConfigureUI
 extension CustomKeyBoard {
-    private func attribute() {
-        self.backgroundColor = .systemGray3
+    private func configureUI() {
         
+        configureAttribute()
+        configureLayout()
+    }
+    
+    private func configureAttribute() {
+        
+        self.backgroundColor = .systemGray3
         self.axis = .vertical
         self.distribution = .equalSpacing
         self.alignment = .center
@@ -98,11 +114,9 @@ extension CustomKeyBoard {
         thirdLineContainer.delegate = self
         firthLineContainer.delegate = self
     }
-}
-
-//MARK: - layout
-extension CustomKeyBoard {
-    private func layout() {
+    
+    private func configureLayout() {
+        
         let topPaddingView = UIView()
         let bottomPaddingView = UIView()
         
@@ -110,6 +124,7 @@ extension CustomKeyBoard {
             self.addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+        
         topPaddingView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0).isActive = true
         bottomPaddingView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1/8).isActive = true
         [firstLineContainer, secondLineContainer, thirdLineContainer, firthLineContainer].forEach {

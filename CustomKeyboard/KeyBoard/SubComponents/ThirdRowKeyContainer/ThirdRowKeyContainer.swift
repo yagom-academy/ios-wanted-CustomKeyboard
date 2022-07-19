@@ -8,6 +8,8 @@
 import UIKit
 
 class ThirdRowKeyContainer: UIStackView {
+    
+    // MARK: - Properties
     private let shiftButton = UIButton()
     private let thirdLineBasicKeys = BasicKeyLine(keys: ["ㅋ", "ㅌ", "ㅊ", "ㅍ", "ㅠ", "ㅜ", "ㅡ"])
     private let backButton = UIButton()
@@ -16,8 +18,7 @@ class ThirdRowKeyContainer: UIStackView {
     init() {
         super.init(frame: CGRect.zero)
         
-        attribute()
-        layout()
+        configureUI()
     }
     
     required init(coder: NSCoder) {
@@ -27,25 +28,33 @@ class ThirdRowKeyContainer: UIStackView {
 
 extension ThirdRowKeyContainer: BasicKeyLineDelegate {
     func tappedBasicKeyButton(unicode: Int) {
+        
         delegate?.tappedThirdrowBasicKey(unicode: unicode)
     }
 }
 
-//MARK: - Shift 버튼 기능
+//MARK: - @objc Methods
 extension ThirdRowKeyContainer {
     @objc private func tappedShiftButton() {
+        
         delegate?.tappedShiftButton()
+    }
+    
+    @objc private func tappedBackButton() {
+        
+        delegate?.tappedBackButton()
     }
 }
 
-//MARK: - Back 버튼 기능
 extension ThirdRowKeyContainer {
-    @objc private func tappedBackButton() {
-        delegate?.tappedBackButton()
-            }
-}
-extension ThirdRowKeyContainer {
-    private func attribute() {
+    private func configureUI() {
+        
+        configureAttribute()
+        configureLayout()
+    }
+    
+    private func configureAttribute() {
+        
         self.axis = .horizontal
         self.distribution = .equalSpacing
         
@@ -65,7 +74,8 @@ extension ThirdRowKeyContainer {
         }
     }
     
-    private func layout() {
+    private func configureLayout() {
+        
         [shiftButton, thirdLineBasicKeys, backButton].forEach {
             self.addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false

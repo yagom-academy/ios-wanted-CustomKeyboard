@@ -8,10 +8,13 @@
 import Foundation
 
 struct NetworkAPI {
+    
+    // MARK: - Properties
     static let schema = "https"
     static let host = "api.plkey.app"
     
     func getGetReviewAPI() -> URLComponents {
+        
         var components = URLComponents()
         components.scheme = NetworkAPI.schema
         components.host = NetworkAPI.host
@@ -26,6 +29,7 @@ struct NetworkAPI {
     }
     
     func getPostReviewAPI() -> URLComponents {
+        
         var components = URLComponents()
         components.scheme = NetworkAPI.schema
         components.host = NetworkAPI.host

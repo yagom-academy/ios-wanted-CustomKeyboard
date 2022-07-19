@@ -1,5 +1,5 @@
 //
-//  FirstKeyBoardEngine.swift
+//  KeyBoardEngine.swift
 //  CustomKeyboard
 //
 //  Created by 김기림 on 2022/07/14.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FirstKeyBoardEngine: KeyBoardEngine {
+struct KeyBoardEngine: KeyBoardEngineProtocol {
     
     enum SeparatedUnicode {
         case perfect(initial:Int, neutral:Int, support:Int)
@@ -17,7 +17,9 @@ struct FirstKeyBoardEngine: KeyBoardEngine {
     }
     
     func addWord(inputUniCode:Int, lastUniCode:Int) -> String {
+        
         let parsedLastUnicode: SeparatedUnicode = SeparatingUnicode(unicode: lastUniCode)
+        
         switch parsedLastUnicode {
         case .perfect(let initial, let neutral, let support):
             return combineToPerfactChar(initial:initial, neutral: neutral, support: support, inputLetter: inputUniCode)
@@ -31,7 +33,9 @@ struct FirstKeyBoardEngine: KeyBoardEngine {
     }
     
     func removeWord(lastUniCode:Int) -> String {
+        
         let parsedLastUnicode: SeparatedUnicode = SeparatingUnicode(unicode: lastUniCode)
+        
         switch parsedLastUnicode {
         case .perfect(let initial, let neutral, let support):
             return removeFromPerfactChar(initial: initial, neutral: neutral, support: support)
@@ -46,8 +50,9 @@ struct FirstKeyBoardEngine: KeyBoardEngine {
 }
 
 //MARK: - 기본Tool 메서드: 1.유니코드를 분리, 2.결합, 3.Int->String, 4.String->Int 메서드
-extension FirstKeyBoardEngine {
+extension KeyBoardEngine {
     private func SeparatingUnicode(unicode:Int) -> SeparatedUnicode {
+        
         if (unicode >= 44032) {
             let value:Int = unicode - 44032
             let initial:Int = Int(floor(Double(value / (21*28))))
@@ -66,10 +71,12 @@ extension FirstKeyBoardEngine {
     }
     
     private func makePerfectCharUnicode(initial:Int, neutral:Int, support:Int) -> Int {
+        
         return 44032 + (initial*21*28) + (neutral*28) + support
     }
     
     private func makeCharFromUnicode(_ unicode:Int) -> String {
+        
         guard let unicodeScalar = UnicodeScalar(unicode) else {
             print("fail parsing to String!, input: ", unicode)
             return ""
@@ -78,6 +85,7 @@ extension FirstKeyBoardEngine {
     }
     
     private func makeUnicodeFromChar(_ char:String) -> Int {
+        
         guard let unicodeScalar = UnicodeScalar(char) else {
             print("fail parsing to String!, input: ", char)
             return 0
@@ -87,21 +95,26 @@ extension FirstKeyBoardEngine {
 }
 
 //MARK: - Add: 받침o + 입력값(글자)
-extension FirstKeyBoardEngine {
+extension KeyBoardEngine {
     typealias CombinedToPerfactCharOutput = (support:Int, secondCharUnicode:Int)
+    
     private func combineToPerfactChar(initial:Int, neutral:Int, support:Int, inputLetter:Int) -> String {
+        
         var combinedData: CombinedToPerfactCharOutput
+        
         if (inputLetter <= CharUnicode.ㅎ.code) {
             combinedData = combineSupportWithConsonant(support: support, consonant: inputLetter)
         } else {
             combinedData = combineSupportWithVowel(support: support, vowel: inputLetter)
         }
+        
         let firstChar = makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: neutral, support: combinedData.support))
         let secondChar = combinedData.secondCharUnicode == 0 ? "" : makeCharFromUnicode(combinedData.secondCharUnicode)
         return firstChar + secondChar
     }
     
     private func combineSupportWithConsonant(support:Int, consonant:Int) -> CombinedToPerfactCharOutput {
+        
         switch support {
         case Support.ㄱ.code:
             return consonant == CharUnicode.ㅅ.code ? (Support.ㄳ.code,0) : (support,0)
@@ -142,7 +155,9 @@ extension FirstKeyBoardEngine {
     }
     
     private func combineSupportWithVowel(support:Int, vowel:Int) -> CombinedToPerfactCharOutput {
+        
         let parsedVowel = Neutral.parsingFromVowel(from: vowel)
+        
         switch support {
         case Support.ㄳ.code:
             return (Support.ㄱ.code, makePerfectCharUnicode(initial: Initial.ㅅ.code, neutral: parsedVowel, support: 0))
@@ -173,12 +188,14 @@ extension FirstKeyBoardEngine {
 }
 
 //MARK: - Add: 받침x + 입력값(글자)
-extension FirstKeyBoardEngine {
+extension KeyBoardEngine {
     private func combineToPerfactCharNoSupport(lastUnicode:Int , initial:Int, neutral:Int, inputLetter:Int) -> String {
+        
         if (inputLetter <= CharUnicode.ㅎ.code) {
             if ([CharUnicode.ㄸ.code, CharUnicode.ㅃ.code, CharUnicode.ㅉ.code].contains(inputLetter)) {
                 return makeCharFromUnicode(lastUnicode) + makeCharFromUnicode(inputLetter)
             }
+            
             let resultUnicode = makePerfectCharUnicode(initial: initial, neutral: neutral, support: Support.parsingFromConsonant(from: inputLetter))
             return makeCharFromUnicode(resultUnicode)
         } else {
@@ -219,10 +236,12 @@ extension FirstKeyBoardEngine {
 }
 
 //MARK: - Add: only자음 + 입력값(글자)
-extension FirstKeyBoardEngine {
+extension KeyBoardEngine {
     private func combineToOnlyConsonantChar(lastUnicode:Int, consonant:Int, inputLetter:Int) -> String {
+        
         if (inputLetter <= CharUnicode.ㅎ.code) {
             let parsedInputLetter = Initial.parsingFromConsonant(from: inputLetter)
+            
             switch (consonant, parsedInputLetter) {
             case (Initial.ㅂ.code,Initial.ㅂ.code):
                 return "ㅃ"
@@ -245,11 +264,12 @@ extension FirstKeyBoardEngine {
 }
 
 //MARK: - Add: only모음 + 입력값(글자)
-extension FirstKeyBoardEngine {
+extension KeyBoardEngine {
     private func combineToOnlyVowelChar(lastUnicode:Int, vowel:Int, inputLetter:Int) -> String {
+        
         if (inputLetter > CharUnicode.ㅎ.code) {
             let parsedIntput = Neutral.parsingFromVowel(from: inputLetter)
-            print(vowel, parsedIntput)
+            
             switch (vowel, parsedIntput) {
             case (Neutral.ㅏ.code, Neutral.ㅣ.code):
                 return "ㅐ"
@@ -286,9 +306,11 @@ extension FirstKeyBoardEngine {
 }
 
 //MARK: - Remove: 받침o
-extension FirstKeyBoardEngine {
+extension KeyBoardEngine {
     private func removeFromPerfactChar(initial:Int, neutral:Int, support:Int) -> String {
+        
         var parsedSupport:Int
+        
         switch support {
         case Support.ㄳ.code:
             parsedSupport = Support.ㄱ.code
@@ -306,8 +328,9 @@ extension FirstKeyBoardEngine {
 }
 
 //MARK: - Remove: 받침x
-extension FirstKeyBoardEngine {
+extension KeyBoardEngine {
     private func removeFromPerfactCharNoSupport(initial:Int, neutral:Int) -> String {
+        
         switch neutral {
         case Neutral.ㅘ.code, Neutral.ㅙ.code, Neutral.ㅚ.code:
             return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: Neutral.ㅗ.code, support: 0))
@@ -322,15 +345,17 @@ extension FirstKeyBoardEngine {
 }
 
 //MARK: - Remove: only자음
-extension FirstKeyBoardEngine {
+extension KeyBoardEngine {
     private func removeFromOnlyConsonantChar(consonant:Int) -> String {
+        
         return ""
     }
 }
 
 //MARK: - Remove: only모음
-extension FirstKeyBoardEngine {
+extension KeyBoardEngine {
     private func removeFromOnlyVowelChar(vowel:Int) -> String {
+        
         switch vowel {
         case Neutral.ㅘ.code, Neutral.ㅙ.code, Neutral.ㅚ.code:
             return makeCharFromUnicode(CharUnicode.parsingFromNeutral(from: Neutral.ㅗ.code))

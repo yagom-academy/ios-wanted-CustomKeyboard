@@ -8,6 +8,8 @@
 import UIKit
 
 class BasicKeyLine: UIStackView {
+    
+    // MARK: - Properties
     var buttons: [UIButton]?
     weak var delegate: BasicKeyLineDelegate?
     
@@ -15,8 +17,7 @@ class BasicKeyLine: UIStackView {
         super.init(frame: CGRect.zero)
         
         makeKeyButton(keys)
-        attribute()
-        layout()
+        configureUI()
     }
     
     required init(coder: NSCoder) {
@@ -24,17 +25,23 @@ class BasicKeyLine: UIStackView {
     }
 }
 
-//MARK: - attibute()
+//MARK: - ConfigureUI
 extension BasicKeyLine {
-    private func attribute() {
+    private func configureUI() {
+        
+        configureAttribute()
+        configureLayout()
+    }
+    
+    
+    private func configureAttribute() {
+        
         self.axis = .horizontal
         self.distribution = .equalSpacing
     }
-}
-
-//MARK: - layout
-extension BasicKeyLine {
-    private func layout() {
+    
+    private func configureLayout() {
+        
         guard let buttons = buttons else {
             return
         }
@@ -52,6 +59,7 @@ extension BasicKeyLine {
 //MARK: - 키버튼을 만드는 메서드
 extension BasicKeyLine {
     private func makeKeyButton(_ keys: [String]) {
+        
         self.buttons = keys.map { key in
             let btn = UIButton(type: .system)
             btn.setTitle("\(key)", for: .normal)

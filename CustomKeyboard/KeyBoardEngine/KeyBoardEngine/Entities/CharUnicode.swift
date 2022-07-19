@@ -10,16 +10,20 @@ import Foundation
 enum CharUnicode:Int {
     case ㄱ = 12593
     case ㄲ,ㄳ,ㄴ,ㄵ,ㄶ,ㄷ,ㄸ,ㄹ,ㄺ,ㄻ,ㄼ,ㄽ,ㄾ,ㄿ,ㅀ,ㅁ,ㅂ,ㅃ,ㅄ,ㅅ,ㅆ,ㅇ,ㅈ,ㅉ,ㅊ,ㅋ,ㅌ,ㅍ,ㅎ,ㅏ,ㅐ,ㅑ,ㅒ,ㅓ,ㅔ,ㅕ,ㅖ,ㅗ,ㅘ,ㅙ,ㅚ,ㅛ,ㅜ,ㅝ,ㅞ,ㅟ,ㅠ,ㅡ,ㅢ,ㅣ
+    
     var code: Int {
         return self.rawValue
     }
     
     static func parsingFromNeutral(from neutral: Int) -> Int {
+        
         return neutral + 12623
     }
     
     static func parsingFromInitial(from initial: Int) -> Int {
+        
         var consonant:Int
+        
         switch initial {
         case 0: consonant = 1
         case 1: consonant = 2

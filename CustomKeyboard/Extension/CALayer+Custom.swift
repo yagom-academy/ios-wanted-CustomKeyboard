@@ -11,6 +11,7 @@ extension CALayer {
     func addBorder( arrEdge: [UIRectEdge],
                     color: UIColor,
                     width: CGFloat) {
+        
         for edge in arrEdge {
             let border = CALayer()
             switch edge {

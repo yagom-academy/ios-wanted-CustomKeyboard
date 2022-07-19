@@ -8,7 +8,10 @@
 import Foundation
 
 class NetworkManager {
+    
     typealias ResponseCode = Int
+    
+    // MARK: - Properties
     static let shared = NetworkManager()
     private let api = NetworkAPI()
     private let session: URLSession
@@ -18,16 +21,18 @@ class NetworkManager {
     }
     
     func fetchReview(completion: @escaping (Result<ReviewTypes, CustomError>) -> ()) {
+        
         guard let url = api.getGetReviewAPI().url else {
             completion(.failure(CustomError.makeURLError))
             return
         }
+        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
         session.dataTask(with: request) { data, response, error in
             guard error == nil,
-                let httpResponse = response as? HTTPURLResponse,
+                  let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
                 DispatchQueue.main.async {
                     completion(.failure(CustomError.loadError))
@@ -62,7 +67,7 @@ class NetworkManager {
             completion(.failure(CustomError.makeURLError))
             return
         }
-
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
@@ -74,7 +79,7 @@ class NetworkManager {
         
         session.dataTask(with: request) { data, response, error in
             guard error == nil,
-                let httpResponse = response as? HTTPURLResponse else {
+                  let httpResponse = response as? HTTPURLResponse else {
                 DispatchQueue.main.async {
                     completion(.failure(CustomError.loadError))
                 }

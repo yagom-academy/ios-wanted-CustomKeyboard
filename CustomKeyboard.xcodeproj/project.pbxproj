@@ -12,8 +12,8 @@
 		DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66428604279003DD2F5 /* Assets.xcassets */; };
 		DE15E66828604279003DD2F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */; };
 		FE0C2A8328842B6D009ADEB8 /* CharUnicode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0C2A8228842B6D009ADEB8 /* CharUnicode.swift */; };
-		FE148A352880514C007AAF1C /* KeyBoardEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE148A342880514C007AAF1C /* KeyBoardEngine.swift */; };
-		FE148A37288053BC007AAF1C /* FirstKeyBoardEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE148A36288053BC007AAF1C /* FirstKeyBoardEngine.swift */; };
+		FE148A352880514C007AAF1C /* KeyBoardEngineProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE148A342880514C007AAF1C /* KeyBoardEngineProtocol.swift */; };
+		FE148A37288053BC007AAF1C /* KeyBoardEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE148A36288053BC007AAF1C /* KeyBoardEngine.swift */; };
 		FE439987287D6B1D00BFF841 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE439986287D6B1D00BFF841 /* CustomError.swift */; };
 		FE43998A287D766D00BFF841 /* CustomKeyBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE439989287D766D00BFF841 /* CustomKeyBoard.swift */; };
 		FE43998D287D908C00BFF841 /* BasicKeyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE43998C287D908C00BFF841 /* BasicKeyLine.swift */; };
@@ -29,7 +29,6 @@
 		FE7A7E6C28853028004315C3 /* SecondRowKeyContainerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7A7E6B28853028004315C3 /* SecondRowKeyContainerDelegate.swift */; };
 		FE7A7E6E288558EB004315C3 /* CustomKeyBoardViewModel_publicMethod__test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7A7E6D288558EB004315C3 /* CustomKeyBoardViewModel_publicMethod__test.swift */; };
 		FE831582287ED8A10039A56B /* BasicKeyLineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE831581287ED8A10039A56B /* BasicKeyLineDelegate.swift */; };
-		FE9E344D2881837300AFE308 /* CustomKeyBoardViewModel_subMethod__test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E344C2881837300AFE308 /* CustomKeyBoardViewModel_subMethod__test.swift */; };
 		FE9E345A28818D8F00AFE308 /* KeyBoardEngine_addWord__test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E345928818D8F00AFE308 /* KeyBoardEngine_addWord__test.swift */; };
 		FE9E34612881A56200AFE308 /* KeyBoardEngine_removeWord__test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E34602881A56200AFE308 /* KeyBoardEngine_removeWord__test.swift */; };
 		FEB79C88287E83E500B5168A /* DynamicBasicKeyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB79C87287E83E500B5168A /* DynamicBasicKeyLine.swift */; };
@@ -72,8 +71,8 @@
 		DE15E66728604279003DD2F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DE15E66928604279003DD2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE0C2A8228842B6D009ADEB8 /* CharUnicode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharUnicode.swift; sourceTree = "<group>"; };
-		FE148A342880514C007AAF1C /* KeyBoardEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardEngine.swift; sourceTree = "<group>"; };
-		FE148A36288053BC007AAF1C /* FirstKeyBoardEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstKeyBoardEngine.swift; sourceTree = "<group>"; };
+		FE148A342880514C007AAF1C /* KeyBoardEngineProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardEngineProtocol.swift; sourceTree = "<group>"; };
+		FE148A36288053BC007AAF1C /* KeyBoardEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardEngine.swift; sourceTree = "<group>"; };
 		FE439986287D6B1D00BFF841 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		FE439989287D766D00BFF841 /* CustomKeyBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyBoard.swift; sourceTree = "<group>"; };
 		FE43998C287D908C00BFF841 /* BasicKeyLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicKeyLine.swift; sourceTree = "<group>"; };
@@ -90,7 +89,6 @@
 		FE7A7E6D288558EB004315C3 /* CustomKeyBoardViewModel_publicMethod__test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyBoardViewModel_publicMethod__test.swift; sourceTree = "<group>"; };
 		FE831581287ED8A10039A56B /* BasicKeyLineDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicKeyLineDelegate.swift; sourceTree = "<group>"; };
 		FE9E344A2881837300AFE308 /* CustomKeyBoardViewModel__TEST.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomKeyBoardViewModel__TEST.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FE9E344C2881837300AFE308 /* CustomKeyBoardViewModel_subMethod__test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyBoardViewModel_subMethod__test.swift; sourceTree = "<group>"; };
 		FE9E345728818D8F00AFE308 /* KeyBoardEngineTest__TEST.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeyBoardEngineTest__TEST.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE9E345928818D8F00AFE308 /* KeyBoardEngine_addWord__test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardEngine_addWord__test.swift; sourceTree = "<group>"; };
 		FE9E34602881A56200AFE308 /* KeyBoardEngine_removeWord__test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardEngine_removeWord__test.swift; sourceTree = "<group>"; };
@@ -162,9 +160,9 @@
 				FE439988287D765100BFF841 /* KeyBoard */,
 				FFE422A0287D42A700EA04AF /* Entities */,
 				FFE4229F287D427200EA04AF /* Presentation */,
+				FEF67F8C287D2661008E9A97 /* Network */,
 				FFE4229E287D425000EA04AF /* Application */,
 				FFE4229D287D422A00EA04AF /* Resource */,
-				FEF67F8C287D2661008E9A97 /* Network */,
 				DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */,
 			);
 			path = CustomKeyboard;
@@ -173,8 +171,8 @@
 		FE148A33288050FD007AAF1C /* KeyBoardEngine */ = {
 			isa = PBXGroup;
 			children = (
-				FE148A342880514C007AAF1C /* KeyBoardEngine.swift */,
-				FED1A80828822E64007CA79E /* FirstKeyBoardEngine */,
+				FE148A342880514C007AAF1C /* KeyBoardEngineProtocol.swift */,
+				FED1A80828822E64007CA79E /* KeyBoardEngine */,
 			);
 			path = KeyBoardEngine;
 			sourceTree = "<group>";
@@ -252,7 +250,6 @@
 			isa = PBXGroup;
 			children = (
 				FE7A7E6D288558EB004315C3 /* CustomKeyBoardViewModel_publicMethod__test.swift */,
-				FE9E344C2881837300AFE308 /* CustomKeyBoardViewModel_subMethod__test.swift */,
 			);
 			path = CustomKeyBoardViewModel__TEST;
 			sourceTree = "<group>";
@@ -277,13 +274,13 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		FED1A80828822E64007CA79E /* FirstKeyBoardEngine */ = {
+		FED1A80828822E64007CA79E /* KeyBoardEngine */ = {
 			isa = PBXGroup;
 			children = (
-				FE148A36288053BC007AAF1C /* FirstKeyBoardEngine.swift */,
+				FE148A36288053BC007AAF1C /* KeyBoardEngine.swift */,
 				FED1A80728822E53007CA79E /* Entities */,
 			);
-			path = FirstKeyBoardEngine;
+			path = KeyBoardEngine;
 			sourceTree = "<group>";
 		};
 		FEF67F8C287D2661008E9A97 /* Network */ = {
@@ -494,7 +491,7 @@
 				FE7A7E6C28853028004315C3 /* SecondRowKeyContainerDelegate.swift in Sources */,
 				FE7A7E62288527B4004315C3 /* FirthRowKeyContainerDelegate.swift in Sources */,
 				FE439987287D6B1D00BFF841 /* CustomError.swift in Sources */,
-				FE148A37288053BC007AAF1C /* FirstKeyBoardEngine.swift in Sources */,
+				FE148A37288053BC007AAF1C /* KeyBoardEngine.swift in Sources */,
 				FE7A7E6628852D9F004315C3 /* FirstRowKeyContainer.swift in Sources */,
 				FFE4229A287D1F2A00EA04AF /* NetworkManager.swift in Sources */,
 				FE43998D287D908C00BFF841 /* BasicKeyLine.swift in Sources */,
@@ -518,7 +515,7 @@
 				FE7A7E5C28852469004315C3 /* ThirdRowKeyContainerDelegate.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 				FF20EEA92883F89700B79460 /* CALayer+Custom.swift in Sources */,
-				FE148A352880514C007AAF1C /* KeyBoardEngine.swift in Sources */,
+				FE148A352880514C007AAF1C /* KeyBoardEngineProtocol.swift in Sources */,
 				FEF67F8E287D2A29008E9A97 /* NetworkAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -528,7 +525,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE7A7E6E288558EB004315C3 /* CustomKeyBoardViewModel_publicMethod__test.swift in Sources */,
-				FE9E344D2881837300AFE308 /* CustomKeyBoardViewModel_subMethod__test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,8 @@
 import UIKit
 
 class FirthRowKeyContainer: UIStackView {
+    
+    // MARK: - Properties
     private let spaceButton = UIButton()
     private let returnButton = UIButton()
     
@@ -16,30 +18,41 @@ class FirthRowKeyContainer: UIStackView {
     init() {
         super.init(frame: CGRect.zero)
         
-        attribute()
-        layout()
+        configureUI()
     }
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+}
+
+// MARK: - @objc Methods
+extension FirthRowKeyContainer {
     @objc private func tappedReturnButton() {
+        
         delegate?.tappedReturnButton()
     }
 
     @objc private func tappedSpaceButton(_ sender: UIButton) {
+        
         delegate?.tappedSpaceButton(sender.tag)
     }
 }
 
-//MARK: - attribute, layout 메서드
+//MARK: - ConfigureUI
 extension FirthRowKeyContainer {
-    private func attribute() {
+    private func configureUI() {
+        
+        configureAttribute()
+        configureLayout()
+    }
+    
+    private func configureAttribute() {
+        
         self.axis = .horizontal
         self.spacing = 10
 
-        
         [returnButton].forEach {
             $0.backgroundColor = .systemGray
             $0.setTitleColor(.black, for: .normal)
@@ -61,7 +74,8 @@ extension FirthRowKeyContainer {
         }
     }
     
-    private func layout() {
+    private func configureLayout() {
+        
         let spaceView = UIView()
         [spaceView, spaceButton, returnButton].forEach {
             self.addArrangedSubview($0)

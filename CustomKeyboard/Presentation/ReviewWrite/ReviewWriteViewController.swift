@@ -8,6 +8,8 @@
 import UIKit
 
 class ReviewWriteViewController: UIViewController {
+    
+    // MARK: - Properties
     private let textView = UITextView()
     private let customKeyboard = CustomKeyBoard()
     private var resultInputField: UITextView?
@@ -15,9 +17,7 @@ class ReviewWriteViewController: UIViewController {
     init(inputField: UITextView) {
         super.init(nibName: nil, bundle: nil)
         self.resultInputField = inputField
-//        textView.text = inputField.text
-        attribute()
-        layout()
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -28,6 +28,7 @@ class ReviewWriteViewController: UIViewController {
 //MARK: - 커스텀키보드 Delegate 메서드
 extension ReviewWriteViewController: CustomKeyBoardDelegate {
     func tappedReturnButton() {
+        
         guard let message = self.textView.text else { return }
         self.resultInputField?.text = message
         if (self.navigationController != nil) {
@@ -38,24 +39,29 @@ extension ReviewWriteViewController: CustomKeyBoardDelegate {
     }
     
     func connectTextView() -> UITextView {
+        
         return self.textView
     }
 }
 
-//MARK: - attribute
+//MARK: - ConfigureUI
 extension ReviewWriteViewController {
-    private func attribute() {
+    private func configureUI() {
+        
+        configureAttribute()
+        configureLayout()
+    }
+    
+    private func configureAttribute() {
+        
         self.title = " 리뷰 작성 "
         view.backgroundColor = .white
         textView.font = .systemFont(ofSize: 20)
         
         customKeyboard.delegate = self
     }
-}
-
-//MARK: - layout
-extension ReviewWriteViewController {
-    private func layout() {
+    
+    private func configureLayout() {
         [textView, customKeyboard].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false

@@ -14,6 +14,7 @@ enum CustomError: Error {
     case decodingError
     case encodingError
     case responseError(code:Int)
+    
     var description: String {
         switch self {
         case .makeURLError:

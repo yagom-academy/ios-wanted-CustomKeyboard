@@ -8,14 +8,14 @@
 import UIKit
 
 class FirstRowKeyContainer: UIStackView {
+    
+    // MARK: - Properties
     private let firstLineDynamicBasicKeys = DynamicBasicKeyLine()
     weak var delegate: FirstRowKeyContainerDelegate?
     
     init() {
         super.init(frame: CGRect.zero)
-        
-        attribute()
-        layout()
+        configureUI()
     }
     
     required init(coder: NSCoder) {
@@ -29,18 +29,29 @@ extension FirstRowKeyContainer: BasicKeyLineDelegate {
     }
 }
 
+// MARK: - Methods
 extension FirstRowKeyContainer {
     func toggleDynamicBasicKeyState() {
         firstLineDynamicBasicKeys.toggleDynamicBasicKeyState()
     }
-    
-    private func attribute() {
-        firstLineDynamicBasicKeys.delegate = self
+}
+
+// MARK: - ConfigureUI
+extension FirstRowKeyContainer {
+    private func configureUI() {
         
+        configureAttribute()
+        configureLayout()
+    }
+    
+    private func configureAttribute() {
+        
+        firstLineDynamicBasicKeys.delegate = self
         self.axis = .horizontal
     }
     
-    private func layout() {
+    private func configureLayout() {
+        
         self.addArrangedSubview(firstLineDynamicBasicKeys)
         firstLineDynamicBasicKeys.translatesAutoresizingMaskIntoConstraints = false
     }

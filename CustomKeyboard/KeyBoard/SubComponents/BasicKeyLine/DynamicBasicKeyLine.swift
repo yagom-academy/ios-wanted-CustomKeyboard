@@ -8,10 +8,13 @@
 import Foundation
 
 class DynamicBasicKeyLine: BasicKeyLine {
+    
+    // MARK: - Properties
     enum State {
         case single
         case double
     }
+    
     private var state: State = .single
     
     init() {
@@ -23,6 +26,7 @@ class DynamicBasicKeyLine: BasicKeyLine {
     }
     
     func toggleDynamicBasicKeyState() {
+        
         if (self.state == .single) {
             self.state = .double
             toggleKey(to: .double)
@@ -33,7 +37,9 @@ class DynamicBasicKeyLine: BasicKeyLine {
     }
     
     func toggleKey(to state: State) {
+        
         guard super.buttons != nil else { return }
+        
         if (state == .single) {
             super.buttons![0].setTitle("ㅂ", for: .normal)
             super.buttons![1].setTitle("ㅈ", for: .normal)

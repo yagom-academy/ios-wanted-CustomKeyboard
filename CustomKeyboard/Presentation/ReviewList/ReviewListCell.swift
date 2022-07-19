@@ -23,7 +23,6 @@ class ReviewListCell: UICollectionViewCell {
     // MARK: - Life Cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureAttribute()
         configureUI()
     }
     
@@ -32,6 +31,7 @@ class ReviewListCell: UICollectionViewCell {
     }
     
     func setData(data: ReviewListViewModel.CellType?) {
+        
         guard let data = data else {
             return
         }
@@ -40,7 +40,6 @@ class ReviewListCell: UICollectionViewCell {
         userNameLabel.text = data.userName
         contentsLabel.text = data.contents
         timeLabel.text = data.createdAt
-        
     }
     
     override func draw(_ rect: CGRect) {
@@ -51,10 +50,16 @@ class ReviewListCell: UICollectionViewCell {
     
 }
 
-// MARK: - Setup UI
+// MARK: - ConfigureUI
 extension ReviewListCell {
+    private func configureUI() {
+        
+        configureAttribute()
+        configureLayout()
+    }
     
     private func configureAttribute() {
+        
         contentView.layer.addBorder(arrEdge: [.bottom], color: .systemGray5, width: 1)
         
         [profileImage, userNameLabel, contentsLabel, timeLabel, declarationStack].forEach {
@@ -84,7 +89,7 @@ extension ReviewListCell {
         declarationLabel.text = "신고"
     }
     
-    private func configureUI() {
+    private func configureLayout() {
         
         NSLayoutConstraint.activate([
             profileImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
