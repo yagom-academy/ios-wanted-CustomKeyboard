@@ -11,7 +11,7 @@ final class HomeTableViewCell: UITableViewCell {
     
     static let identifier = String(describing: HomeTableViewCell.self)
 
-    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var userImageView: LazyImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -19,7 +19,6 @@ final class HomeTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        userImageView.image = UIImage(systemName: "person.circle")
         nameLabel.text = nil
         contentLabel.text = nil
         timeLabel.text = nil
@@ -29,13 +28,7 @@ final class HomeTableViewCell: UITableViewCell {
         nameLabel.text = review.user.userName
         contentLabel.text = review.content
         timeLabel.text = TimeManager.shared.getTimeInterval(review.createdAt)
-        
-        ImageLoadManager.shared.load(review.user.profileImage) { data in
-            DispatchQueue.main.async {
-                self.userImageView.image = UIImage(data: data)
-                self.configureImageViewCircle()
-            }
-        }
+        userImageView.loadImage(review.user.profileImage)
     }
 }
 

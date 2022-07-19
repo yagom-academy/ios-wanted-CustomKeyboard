@@ -14,7 +14,6 @@
 		012EDE5A287FA6FA0035C3E6 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE59287FA6FA0035C3E6 /* APIEndpoints.swift */; };
 		012EDE5C287FAF790035C3E6 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE5B287FAF790035C3E6 /* ReviewViewController.swift */; };
 		012EDEAB288135430035C3E6 /* KeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 012EDEAA288135430035C3E6 /* KeyboardView.xib */; };
-		012EDEAD288139420035C3E6 /* ImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDEAC288139420035C3E6 /* ImageLoadManager.swift */; };
 		012EDEAF288139480035C3E6 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDEAE288139480035C3E6 /* ImageCacheManager.swift */; };
 		0141A8572884F1F300EEB918 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141A8562884F1F300EEB918 /* KeyboardViewController.swift */; };
 		0141A85B2884F1F300EEB918 /* MyKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0141A8542884F1F300EEB918 /* MyKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -27,6 +26,7 @@
 		0142F4E8287D62ED006F3E48 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4E7287D62ED006F3E48 /* KeyboardView.swift */; };
 		01A45B8128867C1A001F44D6 /* HangeulList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC4B34B2885606400F15B2D /* HangeulList.swift */; };
 		01A45B8328867D1B001F44D6 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A45B8228867D1B001F44D6 /* Content.swift */; };
+		01A45B852886DC6F001F44D6 /* LazyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A45B842886DC6F001F44D6 /* LazyImageView.swift */; };
 		01EA7CB5288538430006A23B /* HangeulIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954F28821F4F00F6AE87 /* HangeulIOManager.swift */; };
 		01EA7CB6288538500006A23B /* HangeulSpecifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954B28821A3300F6AE87 /* HangeulSpecifier.swift */; };
 		01EA7CB7288538500006A23B /* HangeulCombiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB69549288219F100F6AE87 /* HangeulCombiner.swift */; };
@@ -93,7 +93,6 @@
 		012EDE59287FA6FA0035C3E6 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		012EDE5B287FAF790035C3E6 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		012EDEAA288135430035C3E6 /* KeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardView.xib; sourceTree = "<group>"; };
-		012EDEAC288139420035C3E6 /* ImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadManager.swift; sourceTree = "<group>"; };
 		012EDEAE288139480035C3E6 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		0141A8542884F1F300EEB918 /* MyKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MyKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0141A8562884F1F300EEB918 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +103,7 @@
 		0142F4D5287C3078006F3E48 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		0142F4E7287D62ED006F3E48 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		01A45B8228867D1B001F44D6 /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
+		01A45B842886DC6F001F44D6 /* LazyImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyImageView.swift; sourceTree = "<group>"; };
 		9F4652702883D722008D26D2 /* normal_input_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = normal_input_Tests.swift; sourceTree = "<group>"; };
 		9F4652722884101A008D26D2 /* back_input_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = back_input_Tests.swift; sourceTree = "<group>"; };
 		9F4652742884201D008D26D2 /* space_input_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = space_input_Tests.swift; sourceTree = "<group>"; };
@@ -171,6 +171,7 @@
 				0142F4DA287C34E5006F3E48 /* Cell */,
 				012EDEAA288135430035C3E6 /* KeyboardView.xib */,
 				0142F4E7287D62ED006F3E48 /* KeyboardView.swift */,
+				01A45B842886DC6F001F44D6 /* LazyImageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -235,7 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				9F504300287C484900CDBD9C /* TimeManager.swift */,
-				012EDEAC288139420035C3E6 /* ImageLoadManager.swift */,
 				012EDEAE288139480035C3E6 /* ImageCacheManager.swift */,
 			);
 			path = Manager;
@@ -488,8 +488,8 @@
 				9FB6954E28821D8300F6AE87 /* HangeulConverter.swift in Sources */,
 				DE15E66028604278003DD2F5 /* HomeViewController.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
-				012EDEAD288139420035C3E6 /* ImageLoadManager.swift in Sources */,
 				9FB6954A288219F100F6AE87 /* HangeulCombiner.swift in Sources */,
+				01A45B852886DC6F001F44D6 /* LazyImageView.swift in Sources */,
 				0142F4CC287C0A76006F3E48 /* HomeTableViewCell.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 				9F504301287C484900CDBD9C /* TimeManager.swift in Sources */,

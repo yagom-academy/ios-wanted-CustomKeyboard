@@ -11,13 +11,13 @@ final class ImageCacheManager {
     static let shared = ImageCacheManager()
     private init() { }
     
-    private var memory = NSCache<NSURL, NSData>()
+    private var memory = NSCache<NSString, NSData>()
     
-    func save(_ key: NSURL, _ data: Data) {
+    func save(_ key: NSString, _ data: Data) {
         self.memory.setObject(NSData(data: data), forKey: key)
     }
     
-    func load(_ key: NSURL) -> Data? {
+    func load(_ key: NSString) -> Data? {
         if let data = self.memory.object(forKey: key) {
             return Data(referencing: data)
         }
