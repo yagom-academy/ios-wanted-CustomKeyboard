@@ -10,7 +10,7 @@ import Foundation
 class HangeulIOManger {
     
     private var inputList = HangeulList()
-    private var outputList = [String]()
+    private var output = ""
     
     func process(input: String) {
         let specifier = HangeulSpecifier()
@@ -28,52 +28,48 @@ class HangeulIOManger {
             
             guard inputList.tail != nil && inputList.tail!.status != .finished else {
                 specifier.specify(inputList.tail, inputMode: .remove)
-                updateOutputList(with: "", outputMode: .remove)
+                updateOutput(with: "", outputMode: .remove)
                 return
             }
             
             if inputList.tail!.position.count > 1 {
                 specifier.specify(inputList.tail, inputMode: .remove)
-                updateOutputList(with: "", outputMode: .remove)
+                updateOutput(with: "", outputMode: .remove)
             }
             
             combiner.combine(inputList.tail!, inputMode: .remove)
-            updateOutputList(with: combiner.getCombinedString(), outputMode: .change)
+            updateOutput(with: combiner.getCombinedString(), outputMode: .change)
         case "Space":
             specifier.specify(inputList.tail!, inputMode: .space)
-            updateOutputList(with: " ", outputMode: .add)
+            updateOutput(with: " ", outputMode: .add)
         default:
             specifier.specify(inputList.tail!, inputMode: .add)
             combiner.combine(inputList.tail!, inputMode: .add)
-            updateOutputList(with: combiner.getCombinedString(), outputMode: combiner.getOutputMode())
+            updateOutput(with: combiner.getCombinedString(), outputMode: combiner.getOutputMode())
         }
     }
     
   
-    private func updateOutputList(with character: String, outputMode: HangeulOutputMode) {
+    private func updateOutput(with character: String, outputMode: HangeulOutputMode) {
 
         guard outputMode != .remove else {
-            outputList.removeLast()
+            output.unicodeScalars.removeLast()
             return
         }
         
-        if outputMode == .change && !outputList.isEmpty {
-            outputList.removeLast()
+        if outputMode == .change && !output.isEmpty {
+            output.unicodeScalars.removeLast()
         }
         
-        let characterArray = Array(character)
-        for ele in characterArray {
-            outputList.append(String(ele))
-        }
-        
+        output += character
     }
     
     func getOutput() -> String {
-        return outputList.map{$0}.reduce("",+)
+        return output
     }
     
     func reset() {
         inputList = HangeulList()
-        outputList = []
+        output = ""
     }
 }
