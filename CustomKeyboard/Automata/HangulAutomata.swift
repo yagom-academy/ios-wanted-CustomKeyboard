@@ -311,5 +311,6 @@ extension HangulAutomata{
         }
         inpStack.append(InpStack(curhanst: currentHangulState!, key: keyCode, charCode: String(Unicode.Scalar(charCode)!), chKind: chKind))
         buffer[buffer.count-1] = charCode
+        print(buffer)
     }
 }
