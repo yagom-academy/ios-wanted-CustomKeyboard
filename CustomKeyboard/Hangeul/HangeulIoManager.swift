@@ -28,35 +28,36 @@ class HangeulIOManger {
             
             guard inputList.tail != nil && inputList.tail!.status != .finished else {
                 specifier.specify(inputList.tail, inputMode: .remove)
-                updateOutputList(with: "", mode: .remove)
+                updateOutputList(with: "", outputMode: .remove)
                 return
             }
             
             if inputList.tail!.position.count > 1 {
                 specifier.specify(inputList.tail, inputMode: .remove)
-                updateOutputList(with: "", mode: .remove)
+                updateOutputList(with: "", outputMode: .remove)
             }
             
-            let result = combiner.combine(inputList.tail!, inputMode: .remove)
-            updateOutputList(with: result.newString, mode: .change)
+            combiner.combine(inputList.tail!, inputMode: .remove)
+            updateOutputList(with: combiner.getCombinedString(), outputMode: .change)
         case "Space":
-            specifier.specify(inputList.tail, inputMode: .space)
-            updateOutputList(with: " ", mode: .add)
+            specifier.specify(inputList.tail!, inputMode: .space)
+            updateOutputList(with: " ", outputMode: .add)
         default:
-            specifier.specify(inputList.tail, inputMode: .add)
-            let result = combiner.combine(inputList.tail!, inputMode: .add)
-            updateOutputList(with: result.newString, mode: result.mode)
+            specifier.specify(inputList.tail!, inputMode: .add)
+            combiner.combine(inputList.tail!, inputMode: .add)
+            updateOutputList(with: combiner.getCombinedString(), outputMode: combiner.getOutputMode())
         }
     }
     
-    private func updateOutputList(with character: String, mode: HangeulOutputMode) {
+  
+    private func updateOutputList(with character: String, outputMode: HangeulOutputMode) {
 
-        guard mode != .remove else {
+        guard outputMode != .remove else {
             outputList.removeLast()
             return
         }
         
-        if mode == .change {
+        if outputMode == .change && !outputList.isEmpty {
             outputList.removeLast()
         }
         

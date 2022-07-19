@@ -48,51 +48,62 @@ class HangeulCombineBuffer {
 
 class HangeulCombiner {
     
-    func combine(_ last: Hangeul, inputMode: HangeulInputMode) -> (newString: String, mode: HangeulOutputMode) {
+    private var combinedString: String = ""
+    private var outputMode: HangeulOutputMode!
+    
+    func combine(_ last: Hangeul, inputMode: HangeulInputMode) {
         let buffer = HangeulCombineBuffer()
         buffer.append(last)
         
         if buffer.top.isEmpty {
             if buffer.mid.count > 1 {
-                return (getCombinedString(with: buffer), .change)
+                combinedString = getCombinedString(with: buffer)
+                outputMode = .change
             } else {
-                return (getCombinedString(buffer.mid.first!), .add)
+                combinedString = getCombinedString(buffer.mid.first!)
+                outputMode = .add
             }
         } else if buffer.mid.isEmpty && buffer.end.isEmpty {
-            return (getCombinedString(buffer.top.first!), .add)
+            combinedString = getCombinedString(buffer.top.first!)
+            outputMode = .add
         } else if buffer.end.isEmpty {
-            var newString = ""
             let topPos = buffer.top.first!.position
             if inputMode == .add && buffer.mid.count == 1 && topPos.count > 1 {
                 let prevBuffer = HangeulCombineBuffer()
                 let prevLast = buffer.top.first!.prev!
                 prevBuffer.append(prevLast)
-                newString += getCombinedString(with: prevBuffer)
+                combinedString += getCombinedString(with: prevBuffer)
             }
-            newString += getCombinedString(with: buffer)
-            return (newString, .change)
+            combinedString += getCombinedString(with: buffer)
+            outputMode = .change
         } else {
-            return (getCombinedString(with: buffer), .change)
+            combinedString += getCombinedString(with: buffer)
+            outputMode = .change
         }
     }
         
     
-    private func getCombinedString(_ solo: Hangeul? = nil, with buffer: HangeulCombineBuffer = HangeulCombineBuffer()) -> String {
+    private func getCombinedString(_ solo: Hangeul? = nil, with buffer: HangeulCombineBuffer? = nil) -> String {
         let converter = HangeulConverter()
-        let dictionary = HangeulDictionary()
-        
+    
         guard solo == nil else {
             return converter.toString(from: solo!.unicode)
         }
         
-        guard !(buffer.top.isEmpty && buffer.mid.count == 2) else {
-            let doubleUnicode = dictionary.getDoubleUnicode(buffer.mid[0], buffer.mid[1])
-            return converter.toString(from: doubleUnicode)
+        guard let buffer = buffer else {
+            return ""
         }
         
-        guard !(buffer.top.isEmpty && buffer.mid.count == 3) else {
-            let tripleUnicode = dictionary.getTripleMidUnicode(buffer.mid[0], buffer.mid[1], buffer.mid[2])
-            return converter.toString(from: tripleUnicode)
+        let dictionary = HangeulDictionary()
+        
+        if buffer.top.isEmpty {
+            if buffer.mid.count == 2 {
+                let doubleUnicode = dictionary.getDoubleUnicode(buffer.mid[0], buffer.mid[1])
+                return converter.toString(from: doubleUnicode)
+            } else if buffer.mid.count == 3 {
+                let tripleUnicode = dictionary.getTripleMidUnicode(buffer.mid[0], buffer.mid[1], buffer.mid[2])
+                return converter.toString(from: tripleUnicode)
+            }
         }
         
         let index = getIndexArrayForCombine(with: buffer)
@@ -128,5 +139,13 @@ class HangeulCombiner {
         }
         
         return (topIndex, midIndex, endIndex)
+    }
+    
+    func getOutputMode() -> HangeulOutputMode {
+        return outputMode
+    }
+    
+    func getCombinedString() -> String {
+        return combinedString
     }
 }
