@@ -137,22 +137,41 @@ class KeyboardMaker {
             let newHangul = combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState)
             
             if releaseTextField.isEmpty {
+                
                 releaseTextField.append(newHangul.hangul)
+                
             } else {
+                
+                if processingBuffer.alphaRepository.count == 1 {
+                    
+                    releaseTextField.append(newHangul.hangul)
+                    
+                    return releaseTextField
+                }
                 
                 releaseTextField[0] = newHangul.hangul
             }
+            
         } else if releaseTextField.count > 1 {
+            
             if releaseTextField.last == " " {
-                let combinedHagul = combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState)
                 
+                let combinedHagul = combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState)
+                releaseTextField.append(combinedHagul.hangul)
+                processingBuffer.isCompleted = false
+                
+                return releaseTextField
+                
+            } else if processingBuffer.alphaRepository.count == 1 {
+                
+                let combinedHagul = combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState)
                 releaseTextField.append(combinedHagul.hangul)
                 processingBuffer.isCompleted = false
                 
                 return releaseTextField
             }
-            releaseTextField[releaseTextField.count - 1] = combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState).hangul
             
+            releaseTextField[releaseTextField.count - 1] = combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState).hangul
         }
         
         return releaseTextField
