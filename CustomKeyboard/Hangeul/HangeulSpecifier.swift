@@ -33,7 +33,7 @@ class HangeulSpecifier {
             return
         }
         
-        guard curr.status != .finished else {
+        guard curr.status != .finished || curr.value == "Space" else {
             curr.update(status: .ongoing)
             return
         }

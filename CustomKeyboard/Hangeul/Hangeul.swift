@@ -12,7 +12,7 @@ enum HangeulPhoneme {
 }
 
 enum HangeulUnicodeType {
-    case none, fixed, compatible
+    case fixed, compatible
 }
 
 enum HangeulCombinationStatus {
