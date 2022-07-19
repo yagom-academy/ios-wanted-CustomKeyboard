@@ -39,6 +39,9 @@ class KeyboardManager {
     }
     
     func makeString(_ state: Int, _ currentText: String, _ tappedButton: KeyButton) -> (String, Int) {
+        print(allWord, "insert")
+        print(state, "insert")
+        
         if tappedButton.type == .space {
             print("space")
             return pressSpace(tappedButton)
@@ -195,6 +198,9 @@ class KeyboardManager {
     }
     
     func deleteString(_ state: Int, _ currentText: String) -> (String, Int) {
+        print(allWord, "delete")
+        print(state, "delete")
+        
         if allWord.isEmpty {
             return ("", 0)
         }
@@ -249,8 +255,8 @@ class KeyboardManager {
                 }
                 return ("", 0)
             } else {
-                // 홀받침이 있는 상태 (ex 박, 살, 깃 ...)
-                let idx = thirdDouble.firstIndex(of: lastWord) ?? 0
+                // shift 받침 or 홀받침 (ex 밖, 갔, 입, 깃 ...)
+                let idx = third.firstIndex(of: lastWord) ?? 0
                 let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - idx
                 lastWord = allWord[allWord.count - 1]
                 if let scalarValue = UnicodeScalar(str) {
