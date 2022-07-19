@@ -9,4 +9,11 @@ import Foundation
 
 class KeyboardIOManager {
     
+    func stringToKeyboardData(input: String) -> HangulKeyboardData {
+        return HangulKeyboardData(char: input, state: .empty)
+    }
+    
+    func keyboardDataToString(outputKeyboardData: [String]) -> String {
+        return outputKeyboardData.reduce(into: ""){ $0 += $1 }
+    }
 }

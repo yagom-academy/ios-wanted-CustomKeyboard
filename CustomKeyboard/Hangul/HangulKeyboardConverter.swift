@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AutomataKits {
+class HangulKeyboardConverter {
     func convertStr2Unicode(char: String) -> Int {
         if let unicodeScalar = UnicodeScalar(char) {
             return Int(unicodeScalar.value)

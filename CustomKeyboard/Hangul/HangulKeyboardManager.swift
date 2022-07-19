@@ -7,19 +7,33 @@
 
 import Foundation
 
-protocol KeyboardStatusReceivable {
-    func keyboard(pressedEnter: String)
+protocol HangulKeyboardDataReceivable {
+    func hangulKeyboard(enterPressed: HangulKeyboardData)
+    func hangulKeyboard(updatedResult text: String)
 }
 
-class KeyboardManager {
+class HangulKeyboardManager {
     
-    let keyboardIOManager = KeyboardIOManager()
-    var keyboardMaker = KeyboardMaker()
+    var delegate: HangulKeyboardDataReceivable!
     
-    func enterText(text: String) -> String {
+    private let keyboardIOManager = KeyboardIOManager()
+    private let keyboardMaker = KeyboardMaker()
+    
+    func enterText(text: String) {
         
         let keyboardData = keyboardIOManager.stringToKeyboardData(input: text)
-        return keyboardMaker.putKeyboardData(data: keyboardData)
+        
+        guard !isEnter(inputData: keyboardData) else { return }
+        
+        let result = keyboardMaker.putKeyboardData(data: keyboardData)
+        
+        delegate.hangulKeyboard(updatedResult: keyboardIOManager.keyboardDataToString(outputKeyboardData: result))
+    }
+    
+    private func isEnter(inputData: HangulKeyboardData) -> Bool {
+        guard inputData.unicode == SpecialCharSet.enter else { return false }
+        delegate.hangulKeyboard(enterPressed: inputData)
+        return true
     }
     
 }

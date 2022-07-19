@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct KeyboardData {
+struct HangulKeyboardData {
     
     var hangul: String = ""
     var unicode: Int = 0

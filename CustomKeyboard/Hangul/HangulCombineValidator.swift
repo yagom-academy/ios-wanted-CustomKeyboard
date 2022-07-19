@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HangulKeyboardValidator {
+class HangulCombineValidator {
     
     func canMakeDoubleCho(onProcessing: String, input: String) -> Bool { // 쌍자음 체크
         if HangulSet.checkingDoubleChos.contains(where: { $0 == (onProcessing, input) }) {
