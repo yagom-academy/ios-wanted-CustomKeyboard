@@ -79,6 +79,7 @@ extension HomeViewController {
             .sink { isUploaded in
                 if isUploaded {
                     self.buttonsReset()
+                    self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
                 }
             }
             .store(in: &cancellable)
