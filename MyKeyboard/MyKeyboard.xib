@@ -19,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="psm-bj-86g" customClass="KeyboardView" customModule="MyKeyboard" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
+                    <rect key="frame" x="0.0" y="44" width="320" height="116"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
             </subviews>
@@ -28,8 +28,8 @@
             <constraints>
                 <constraint firstItem="psm-bj-86g" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="0mX-T2-9j0"/>
                 <constraint firstItem="psm-bj-86g" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="8nu-Up-MMx"/>
-                <constraint firstItem="psm-bj-86g" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="G4g-0y-Be6"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="psm-bj-86g" secondAttribute="bottom" id="yig-nF-9zm"/>
+                <constraint firstItem="psm-bj-86g" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="G4g-0y-Be6"/>
+                <constraint firstItem="psm-bj-86g" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="yig-nF-9zm"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="131.8840579710145" y="-49.553571428571423"/>
