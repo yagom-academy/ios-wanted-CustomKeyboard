@@ -12,10 +12,10 @@
 		0E55485E287D3A35000F328D /* WriteReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E55485D287D3A35000F328D /* WriteReviewViewController.swift */; };
 		0EDC537A28868570002764CE /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDC537928868570002764CE /* KeyboardViewController.swift */; };
 		0EDC537E28868570002764CE /* CustomKeyboardExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EDC537728868570002764CE /* CustomKeyboardExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		0EDC5384288685A7002764CE /* KeyboardIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1207F847287E4C9A00F064C3 /* KeyboardIOManager.swift */; };
 		0EDC5385288685C5002764CE /* HangulAutomata.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76F58092880018000CD3BAE /* HangulAutomata.swift */; };
 		0EDC5386288685C8002764CE /* CustomKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EECF417287D57190094171E /* CustomKeyboardView.xib */; };
 		0EDC5387288685CC002764CE /* CustomKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EECF419287D57230094171E /* CustomKeyboardView.swift */; };
+		0EDC538828869CC2002764CE /* KeyboardIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1207F847287E4C9A00F064C3 /* KeyboardIOManager.swift */; };
 		0EECF418287D57190094171E /* CustomKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EECF417287D57190094171E /* CustomKeyboardView.xib */; };
 		0EECF41A287D57230094171E /* CustomKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EECF419287D57230094171E /* CustomKeyboardView.swift */; };
 		1207F848287E4C9A00F064C3 /* KeyboardIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1207F847287E4C9A00F064C3 /* KeyboardIOManager.swift */; };
@@ -149,7 +149,6 @@
 			children = (
 				0EECF417287D57190094171E /* CustomKeyboardView.xib */,
 				0EECF419287D57230094171E /* CustomKeyboardView.swift */,
-				1207F847287E4C9A00F064C3 /* KeyboardIOManager.swift */,
 			);
 			path = CustomKeyboardView;
 			sourceTree = "<group>";
@@ -157,6 +156,7 @@
 		C7175258287BF6890017487F /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				1207F847287E4C9A00F064C3 /* KeyboardIOManager.swift */,
 				C717525E287BF8320017487F /* NetworkManager.swift */,
 			);
 			path = Manager;
@@ -167,6 +167,9 @@
 			children = (
 				DE15E65B28604278003DD2F5 /* AppDelegate.swift */,
 				DE15E65D28604278003DD2F5 /* SceneDelegate.swift */,
+				DE15E66428604279003DD2F5 /* Assets.xcassets */,
+				DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */,
+				DE15E66928604279003DD2F5 /* Info.plist */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -216,9 +219,6 @@
 				C717525A287BF6D80017487F /* Model */,
 				C7175259287BF6A60017487F /* Application */,
 				C7175258287BF6890017487F /* Manager */,
-				DE15E66428604279003DD2F5 /* Assets.xcassets */,
-				DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */,
-				DE15E66928604279003DD2F5 /* Info.plist */,
 			);
 			path = CustomKeyboard;
 			sourceTree = "<group>";
@@ -325,9 +325,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EDC5384288685A7002764CE /* KeyboardIOManager.swift in Sources */,
 				0EDC5385288685C5002764CE /* HangulAutomata.swift in Sources */,
 				0EDC5387288685CC002764CE /* CustomKeyboardView.swift in Sources */,
+				0EDC538828869CC2002764CE /* KeyboardIOManager.swift in Sources */,
 				0EDC537A28868570002764CE /* KeyboardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

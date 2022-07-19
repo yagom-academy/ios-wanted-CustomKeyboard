@@ -13,19 +13,20 @@ class KeyboardIOManager {
     
     var input: String = "" {
         didSet {
-            if input == " "{
+            if input == " " {
                 hangulAutomata.buffer.append(" ")
                 hangulAutomata.inpStack.removeAll()
                 hangulAutomata.currentHangulState = nil
-            }else{
+            } else {
                 hangulAutomata.hangulAutomata(key: input)
             }
-            updateTextView(hangulAutomata.buffer.reduce("", { $0 + $1}))
+            updateTextView(hangulAutomata.buffer.reduce("", { $0 + $1 }))
         }
     }
     
     var updateTextView: ((String) -> Void)!
-
+    var dismiss: (() -> Void)?
+    
 }
 
 extension KeyboardIOManager: CustomKeyboardDelegate {
@@ -39,7 +40,7 @@ extension KeyboardIOManager: CustomKeyboardDelegate {
     }
     
     func enterKeypadTap() {
-        
+        dismiss?()
     }
     
     func spaceKeypadTap() {

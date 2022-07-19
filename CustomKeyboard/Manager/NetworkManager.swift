@@ -9,14 +9,14 @@ import Foundation
 
 enum NetworkError : Error {
     case url
-    case network
-    case decode
+    case network(error: Error)
+    case decode(error: Error)
 }
 
 class NetworkManager{
     
     func fetchReviews(start: Int, completion : @escaping (Result<[ReviewModel], NetworkError>) -> Void){
-        let urlStr = "https://api.plkey.app/theme/review?themeld=6&start=\(start)&count=10"
+        let urlStr = "https://api.plkey.app/theme/review?themeId=6&start=\(start)&count=10"
         guard let url = URL(string: urlStr) else {
             completion(.failure(.url))
             return
@@ -25,12 +25,12 @@ class NetworkManager{
         let session = URLSession(configuration: .default)
         session.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil else {
-                completion(.failure(.network))
+                completion(.failure(.network(error: error!)))
                 return
             }
             let decorder = JSONDecoder()
             guard let data = try? decorder.decode(ReviewList.self, from: data) else {
-                completion(.failure(.decode))
+                completion(.failure(.decode(error: error!)))
                 return
             }
             completion(.success(data.data))

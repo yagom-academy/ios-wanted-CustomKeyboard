@@ -18,13 +18,19 @@ class WriteReviewViewController: UIViewController {
     let keyboardIOManager = KeyboardIOManager()
     
     // MARK: - ViewProperties
+    private lazy var customKeyboard: CustomKeyboardView = {
+        guard let customKeyboard = Bundle.main.loadNibNamed("CustomKeyboardView", owner: nil)?.first as? CustomKeyboardView else { return CustomKeyboardView() }
+        customKeyboard.delegate = keyboardIOManager
+        
+        return customKeyboard
+    }()
+    
     private lazy var writeReviewTextView: UITextView = {
         let textView = UITextView()
         textView.layer.borderColor = UIColor.lightGray.cgColor
         textView.layer.borderWidth = 1
-        guard let loadNib = Bundle.main.loadNibNamed("CustomKeyboardView", owner: nil)?.first as? CustomKeyboardView else { return textView}
-        loadNib.delegate = keyboardIOManager
-        textView.inputView = loadNib
+        
+        textView.inputView = customKeyboard
         textView.becomeFirstResponder()
         
         return textView
@@ -34,13 +40,7 @@ class WriteReviewViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        keyboardIOManager.updateTextView = { [weak self] in
-            
-            while !(self!.writeReviewTextView.text.isEmpty){
-                self!.writeReviewTextView.deleteBackward()
-            }
-            self?.writeReviewTextView.insertText($0)
-        }
+        bindingKeyboardManager()
         view.backgroundColor = .systemBackground
         configureSubViews()
         setConstraintsOfWriteReviewTextView()
@@ -49,6 +49,20 @@ class WriteReviewViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         delegate?.sendReviewMessage(review: writeReviewTextView.text)
+    }
+    
+    private func bindingKeyboardManager() {
+        keyboardIOManager.updateTextView = { [weak self] in
+            guard let self = self else { return }
+            while !(self.writeReviewTextView.text.isEmpty) {
+                self.writeReviewTextView.deleteBackward()
+            }
+            self.writeReviewTextView.insertText($0)
+        }
+        
+        keyboardIOManager.dismiss = { [weak self] in
+            self?.dismiss(animated: true)
+        }
     }
 }
 

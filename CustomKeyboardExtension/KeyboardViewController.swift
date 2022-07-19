@@ -33,10 +33,15 @@ class KeyboardViewController: UIInputViewController {
     private func bindingKeyboardManager() {
         keyboardIOManager.updateTextView = { [weak self] in
             guard let self = self else { return }
+            
             while self.textDocumentProxy.hasText {
                 self.textDocumentProxy.deleteBackward()
             }
             self.textDocumentProxy.insertText($0)
+        }
+        
+        keyboardIOManager.dismiss = { [weak self] in
+            self?.dismissKeyboard()
         }
     }
 }

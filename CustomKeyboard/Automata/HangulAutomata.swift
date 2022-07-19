@@ -6,7 +6,7 @@
 //
 
 //오토마타의 상태를 정의
-enum HangulStatus{
+enum HangulStatus {
     case start //s0
     case chosung //s1
     case joongsung, dJoongsung //s2,s3
@@ -15,7 +15,7 @@ enum HangulStatus{
 }
 
 //입력된 키의 종류 판별 정의
-enum HangulCHKind{
+enum HangulCHKind {
     case consonant //자음
     case vowel  //모음
 }
@@ -125,8 +125,8 @@ class HangulAutomata{
         return combinationHangul(chosung: chosung, joongsung: joongsung, jongsung: keyCode)
     }
     
-    func combinationHangul(chosung : UInt32 = 0, joongsung : UInt32, jongsung : UInt32 = 0)->UInt32{
-        return (((chosung*21)+joongsung)*28)+jongsung+0xAC00
+    func combinationHangul(chosung: UInt32 = 0, joongsung: UInt32, jongsung: UInt32 = 0)->UInt32{
+        return (((chosung*21) + joongsung) * 28) + jongsung + 0xAC00
     }
     
     func deleteBuffer(){
@@ -175,7 +175,7 @@ class HangulAutomata{
                     charCode = inpStack[inpStack.count-1].charCode
                 }
             }
-    }
+        }
     }
 }
 
@@ -199,6 +199,7 @@ extension HangulAutomata{
             currentHangulState = .start
             buffer.append("")
         }
+        
         //MARK: - 오토마타 전이 알고리즘
         switch currentHangulState{
         case .start:
@@ -207,14 +208,12 @@ extension HangulAutomata{
             }else{
                 currentHangulState = .jongsung
             }
-            break
         case .chosung:
             if chKind == .vowel{
                 currentHangulState = .joongsung
             }else{
                 currentHangulState = .endOne
             }
-            break
         case .joongsung:
             if canBeJongsung{
                 currentHangulState = .jongsung
@@ -223,7 +222,6 @@ extension HangulAutomata{
             }else{
                 currentHangulState = .endOne
             }
-            break
         case .dJoongsung:
             //추가
             if joongsungPair(){
@@ -233,7 +231,6 @@ extension HangulAutomata{
             }else{
                 currentHangulState = .endOne
             }
-            break
         case .jongsung:
             if (chKind == .consonant) && jongsungPair(){
                 currentHangulState = .dJongsung
@@ -242,14 +239,12 @@ extension HangulAutomata{
             }else{
                 currentHangulState = .endOne
             }
-            break
         case .dJongsung:
             if chKind == .vowel{
                 currentHangulState = .endTwo
             }else{
                 currentHangulState = .endOne
             }
-            break
         default:
             break
         }
@@ -291,11 +286,11 @@ extension HangulAutomata{
             buffer.append("")
             break
         case.endTwo:
-            if oldChKind == .consonant{
+            if oldChKind == .consonant {
                 oldKey = UInt32(chosungTable.firstIndex(of: jongsungTable[Int(oldKey)])!)
                 charCode =  String(Unicode.Scalar(combinationHangul(chosung: oldKey, joongsung: keyCode))!)
                 currentHangulState = .joongsung
-                buffer[buffer.count-1] = inpStack[inpStack.count-2].charCode
+                buffer[buffer.count - 1] = inpStack[inpStack.count - 2].charCode
                 buffer.append("")
             }else{
                 if !joongsungPair(){
