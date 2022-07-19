@@ -25,9 +25,12 @@
 		DE15E66828604279003DD2F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */; };
 		F035E55B287D3C09002DA8F9 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F035E55A287D3C09002DA8F9 /* HttpClient.swift */; };
 		F035E55D287D3E41002DA8F9 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F035E55C287D3E41002DA8F9 /* Repository.swift */; };
-		F039F8A8288669C200E7B637 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F039F8A7288669C200E7B637 /* KeyboardManager.swift */; };
-		F039F8AA28866A2500E7B637 /* KeyboardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F039F8A928866A2500E7B637 /* KeyboardData.swift */; };
+		F039F8A8288669C200E7B637 /* HangulKeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F039F8A7288669C200E7B637 /* HangulKeyboardManager.swift */; };
+		F039F8AA28866A2500E7B637 /* HangulKeyboardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F039F8A928866A2500E7B637 /* HangulKeyboardData.swift */; };
 		F039F8AE28866F0C00E7B637 /* KeyboardIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F039F8AD28866F0C00E7B637 /* KeyboardIOManager.swift */; };
+		F039F8B028868F2000E7B637 /* HangulKeyboardConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F039F8AF28868F2000E7B637 /* HangulKeyboardConverter.swift */; };
+		F039F8B2288690C800E7B637 /* HangulCombineValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F039F8B1288690C800E7B637 /* HangulCombineValidator.swift */; };
+		F039F8B4288692A900E7B637 /* HangulCombinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F039F8B3288692A900E7B637 /* HangulCombinator.swift */; };
 		F0D480D3287D97BD00D9425C /* CreateReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D480D2287D97BD00D9425C /* CreateReviewViewController.swift */; };
 		F0D480D5287E532000D9425C /* HangulSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D480D4287E532000D9425C /* HangulSet.swift */; };
 		F0D480D7287E658300D9425C /* KeyboardMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D480D6287E658300D9425C /* KeyboardMaker.swift */; };
@@ -55,9 +58,12 @@
 		DE15E66928604279003DD2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F035E55A287D3C09002DA8F9 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		F035E55C287D3E41002DA8F9 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
-		F039F8A7288669C200E7B637 /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
-		F039F8A928866A2500E7B637 /* KeyboardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardData.swift; sourceTree = "<group>"; };
+		F039F8A7288669C200E7B637 /* HangulKeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangulKeyboardManager.swift; sourceTree = "<group>"; };
+		F039F8A928866A2500E7B637 /* HangulKeyboardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangulKeyboardData.swift; sourceTree = "<group>"; };
 		F039F8AD28866F0C00E7B637 /* KeyboardIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardIOManager.swift; sourceTree = "<group>"; };
+		F039F8AF28868F2000E7B637 /* HangulKeyboardConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangulKeyboardConverter.swift; sourceTree = "<group>"; };
+		F039F8B1288690C800E7B637 /* HangulCombineValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangulCombineValidator.swift; sourceTree = "<group>"; };
+		F039F8B3288692A900E7B637 /* HangulCombinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangulCombinator.swift; sourceTree = "<group>"; };
 		F0D480D2287D97BD00D9425C /* CreateReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewViewController.swift; sourceTree = "<group>"; };
 		F0D480D4287E532000D9425C /* HangulSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangulSet.swift; sourceTree = "<group>"; };
 		F0D480D6287E658300D9425C /* KeyboardMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardMaker.swift; sourceTree = "<group>"; };
@@ -171,9 +177,12 @@
 		F039F8A62886698300E7B637 /* Hangul */ = {
 			isa = PBXGroup;
 			children = (
-				F039F8A7288669C200E7B637 /* KeyboardManager.swift */,
-				F039F8A928866A2500E7B637 /* KeyboardData.swift */,
+				F039F8A7288669C200E7B637 /* HangulKeyboardManager.swift */,
+				F039F8A928866A2500E7B637 /* HangulKeyboardData.swift */,
+				F039F8AF28868F2000E7B637 /* HangulKeyboardConverter.swift */,
 				F039F8AD28866F0C00E7B637 /* KeyboardIOManager.swift */,
+				F039F8B1288690C800E7B637 /* HangulCombineValidator.swift */,
+				F039F8B3288692A900E7B637 /* HangulCombinator.swift */,
 			);
 			path = Hangul;
 			sourceTree = "<group>";
@@ -269,7 +278,7 @@
 			files = (
 				36081E06287FFC0200A933AE /* Date+.swift in Sources */,
 				F0D4B436287D564D0083E8AE /* ReviewData.swift in Sources */,
-				F039F8AA28866A2500E7B637 /* KeyboardData.swift in Sources */,
+				F039F8AA28866A2500E7B637 /* HangulKeyboardData.swift in Sources */,
 				DE15E66028604278003DD2F5 /* ReviewListViewController.swift in Sources */,
 				F0D480D3287D97BD00D9425C /* CreateReviewViewController.swift in Sources */,
 				36F646D0287D39E8007288C7 /* ReviewTableViewCell.swift in Sources */,
@@ -281,7 +290,9 @@
 				F035E55D287D3E41002DA8F9 /* Repository.swift in Sources */,
 				36FCAC0B28825C50003AF9AF /* ReviewData1.swift in Sources */,
 				36FCAC1128828ED8003AF9AF /* EndPoint.swift in Sources */,
-				F039F8A8288669C200E7B637 /* KeyboardManager.swift in Sources */,
+				F039F8B2288690C800E7B637 /* HangulCombineValidator.swift in Sources */,
+				F039F8A8288669C200E7B637 /* HangulKeyboardManager.swift in Sources */,
+				F039F8B028868F2000E7B637 /* HangulKeyboardConverter.swift in Sources */,
 				F0D480D5287E532000D9425C /* HangulSet.swift in Sources */,
 				F035E55B287D3C09002DA8F9 /* HttpClient.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
@@ -289,6 +300,7 @@
 				36081E08288003CC00A933AE /* String+.swift in Sources */,
 				36431EBB287D9582003C99B4 /* CustomKeyboardView.swift in Sources */,
 				F0D480D7287E658300D9425C /* KeyboardMaker.swift in Sources */,
+				F039F8B4288692A900E7B637 /* HangulCombinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
