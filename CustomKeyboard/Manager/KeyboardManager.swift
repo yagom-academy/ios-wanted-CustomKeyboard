@@ -25,6 +25,10 @@ class KeyboardManager {
         "ㅛ", "ㅜ", "ㅜㅓ", "ㅜㅔ", "ㅜㅣ", "ㅠ", "ㅡ", "ㅡㅣ", "ㅣ"
     ]
     private let third = [
+        "", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ",
+        "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"
+    ]
+    private let thirdDouble = [
         "", "ㄱ", "ㄱㄱ", "ㄱㅅ", "ㄴ", "ㄴㅈ", "ㄴㅎ", "ㄷ", "ㄹ", "ㄹㄱ", "ㄹㅁ", "ㄹㅂ", "ㄹㅅ", "ㄹㅌ",
         "ㄹㅍ", "ㄹㅎ", "ㅁ", "ㅂ", "ㅂㅅ", "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"
     ]
@@ -155,8 +159,8 @@ class KeyboardManager {
             // 자음 + 모음 + 자음으로 받침이 있는 상태 (ex 언, 젠, 간, 끝 ...)
             if tappedButton.type == .consonant {
                 let doubleEnd = lastWord + addString
-                let idx1 = third.firstIndex(of: doubleEnd) ?? 0
-                let idx2 = third.firstIndex(of: lastWord) ?? 0
+                let idx1 = thirdDouble.firstIndex(of: doubleEnd) ?? 0
+                let idx2 = thirdDouble.firstIndex(of: lastWord) ?? 0
                 if idx1 == 0 {
                     lastWord = addString
                     allWord.append(lastWord)
@@ -173,7 +177,7 @@ class KeyboardManager {
                 }
             } else {
                 // 자음 + 모음 + 자음으로 받침이 있는 상태 (ex 언, 젠, 간, 끝, 밟 ...)
-                let idx1 = third.firstIndex(of: lastWord) ?? 0
+                let idx1 = thirdDouble.firstIndex(of: lastWord) ?? 0
                 let idx2 = second.firstIndex(of: addString) ?? 0
                 var oldStr = 0
                 var newStr = 0
@@ -186,7 +190,7 @@ class KeyboardManager {
                     let thirdText = allWord.removeLast()
                     let separateText1 = String(thirdText.prefix(1))
                     let separateText2 = String(thirdText.suffix(1))
-                    let idx3 = third.firstIndex(of: separateText1) ?? 0
+                    let idx3 = thirdDouble.firstIndex(of: separateText1) ?? 0
                     let idx4 = first.firstIndex(of: separateText2) ?? 0
                     allWord.append(separateText1)
                     allWord.append(separateText2)
@@ -253,8 +257,8 @@ class KeyboardManager {
         case 4:
             // 겹받침이 있는 상태 (ex 핥, 삷, 겠, 찲 ...)
             if lastWord.count == 2 {
-                let idx1 = third.firstIndex(of: lastWord) ?? 0
-                let idx2 = third.firstIndex(of: allWord[allWord.count - 1]) ?? 0
+                let idx1 = thirdDouble.firstIndex(of: lastWord) ?? 0
+                let idx2 = thirdDouble.firstIndex(of: allWord[allWord.count - 1]) ?? 0
                 let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - idx1 + idx2
                 lastWord = allWord[allWord.count - 1]
                 if let scalarValue = UnicodeScalar(str) {
@@ -262,7 +266,7 @@ class KeyboardManager {
                 }
                 return ("", 0)
             } else {
-                let idx = third.firstIndex(of: lastWord) ?? 0
+                let idx = thirdDouble.firstIndex(of: lastWord) ?? 0
                 let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - idx
                 lastWord = allWord[allWord.count - 1]
                 if let scalarValue = UnicodeScalar(str) {
