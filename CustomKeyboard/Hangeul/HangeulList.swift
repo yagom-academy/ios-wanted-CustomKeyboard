@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HangeulList {
+final class HangeulList {
     var head: Hangeul?
     var tail: Hangeul?
     

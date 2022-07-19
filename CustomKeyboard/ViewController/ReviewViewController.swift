@@ -11,7 +11,7 @@ protocol ReviewViewControllerDelegate: AnyObject {
     func reviewViewControllerDismiss(_ text: String)
 }
 
-class ReviewViewController: UIViewController {
+final class ReviewViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var keyboardView: KeyboardView!
     

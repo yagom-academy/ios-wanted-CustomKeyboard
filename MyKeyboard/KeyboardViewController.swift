@@ -7,7 +7,7 @@
 
 import UIKit
 
-class KeyboardViewController: UIInputViewController {
+final class KeyboardViewController: UIInputViewController {
     
     @IBOutlet weak var keyboardView: KeyboardView!
     private var myKeyboardView: UIView!

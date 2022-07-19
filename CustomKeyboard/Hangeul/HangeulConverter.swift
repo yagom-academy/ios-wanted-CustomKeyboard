@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HangeulConverter {
+final class HangeulConverter {
     
     func toUnicode(from string: String) -> Int {
         return Int(UnicodeScalar(string)!.value)

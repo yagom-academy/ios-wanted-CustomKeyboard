@@ -8,7 +8,7 @@
 import XCTest
 @testable import CustomKeyboard
 
-class back_input_Tests: XCTestCase {
+final class back_input_Tests: XCTestCase {
 
     var ioManager = HangeulIOManger()
     

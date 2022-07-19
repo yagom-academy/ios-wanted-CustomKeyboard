@@ -1,5 +1,5 @@
 //
-//  HangeulIoManager.swift
+//  HangeulIOManager.swift
 //  CustomKeyboard
 //
 //  Created by hayeon on 2022/07/16.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HangeulIOManger {
+final class HangeulIOManger {
     
     private var inputList = HangeulList()
     private var output = ""

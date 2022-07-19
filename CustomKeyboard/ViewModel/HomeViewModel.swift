@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class HomeViewModel {
+final class HomeViewModel {
     @Published var reviews: [Review] = []
     @Published var isUploaded = false
     

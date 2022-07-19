@@ -6,7 +6,7 @@
 import UIKit
 import Combine
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
     
     enum HomeConstants {
         static let segueReviewViewController = "showReviewViewController"

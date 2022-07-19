@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HangeulSpecifier {
+final class HangeulSpecifier {
     
     func specify(_ curr: Hangeul?, inputMode: HangeulInputMode) {
         switch inputMode {

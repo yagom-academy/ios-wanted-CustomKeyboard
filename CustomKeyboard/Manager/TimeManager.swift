@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TimeManager {
+final class TimeManager {
     static let shared = TimeManager()
     private init() { }
     

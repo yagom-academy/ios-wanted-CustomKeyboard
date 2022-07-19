@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ImageLoadManager {
+final class ImageLoadManager {
     static let shared = ImageLoadManager()
     private init() { }
     

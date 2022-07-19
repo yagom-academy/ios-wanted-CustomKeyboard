@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NetworkManager {
+final class NetworkManager {
     enum NetworkError: Error {
         case serverError(_ statusCode: Int)
         case noData

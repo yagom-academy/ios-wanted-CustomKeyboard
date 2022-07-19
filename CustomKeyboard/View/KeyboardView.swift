@@ -12,7 +12,7 @@ protocol KeyboardViewDelegate: AnyObject {
     func keyboardViewReturn()
 }
 
-class KeyboardView: UIView {
+final class KeyboardView: UIView {
     enum KeyboardConstants {
         static let NibName = String(describing: KeyboardView.self)
     }

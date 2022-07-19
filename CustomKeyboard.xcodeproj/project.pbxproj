@@ -27,7 +27,7 @@
 		0142F4E8287D62ED006F3E48 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4E7287D62ED006F3E48 /* KeyboardView.swift */; };
 		01A45B8128867C1A001F44D6 /* HangeulList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC4B34B2885606400F15B2D /* HangeulList.swift */; };
 		01A45B8328867D1B001F44D6 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A45B8228867D1B001F44D6 /* Content.swift */; };
-		01EA7CB5288538430006A23B /* HangeulIoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954F28821F4F00F6AE87 /* HangeulIoManager.swift */; };
+		01EA7CB5288538430006A23B /* HangeulIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954F28821F4F00F6AE87 /* HangeulIOManager.swift */; };
 		01EA7CB6288538500006A23B /* HangeulSpecifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954B28821A3300F6AE87 /* HangeulSpecifier.swift */; };
 		01EA7CB7288538500006A23B /* HangeulCombiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB69549288219F100F6AE87 /* HangeulCombiner.swift */; };
 		01EA7CB9288538500006A23B /* Hangeul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB695452881A3AA00F6AE87 /* Hangeul.swift */; };
@@ -42,7 +42,7 @@
 		9FB6954A288219F100F6AE87 /* HangeulCombiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB69549288219F100F6AE87 /* HangeulCombiner.swift */; };
 		9FB6954C28821A3300F6AE87 /* HangeulSpecifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954B28821A3300F6AE87 /* HangeulSpecifier.swift */; };
 		9FB6954E28821D8300F6AE87 /* HangeulConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954D28821D8300F6AE87 /* HangeulConverter.swift */; };
-		9FB6955028821F4F00F6AE87 /* HangeulIoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954F28821F4F00F6AE87 /* HangeulIoManager.swift */; };
+		9FB6955028821F4F00F6AE87 /* HangeulIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954F28821F4F00F6AE87 /* HangeulIOManager.swift */; };
 		9FB695542882265900F6AE87 /* HangeulDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB695532882265900F6AE87 /* HangeulDictionary.swift */; };
 		9FC4B34C2885606400F15B2D /* HangeulList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC4B34B2885606400F15B2D /* HangeulList.swift */; };
 		9FC4B37028869C9A00F15B2D /* triple_input_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC4B36F28869C9A00F15B2D /* triple_input_Tests.swift */; };
@@ -114,7 +114,7 @@
 		9FB69549288219F100F6AE87 /* HangeulCombiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulCombiner.swift; sourceTree = "<group>"; };
 		9FB6954B28821A3300F6AE87 /* HangeulSpecifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulSpecifier.swift; sourceTree = "<group>"; };
 		9FB6954D28821D8300F6AE87 /* HangeulConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulConverter.swift; sourceTree = "<group>"; };
-		9FB6954F28821F4F00F6AE87 /* HangeulIoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulIoManager.swift; sourceTree = "<group>"; };
+		9FB6954F28821F4F00F6AE87 /* HangeulIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulIOManager.swift; sourceTree = "<group>"; };
 		9FB695532882265900F6AE87 /* HangeulDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulDictionary.swift; sourceTree = "<group>"; };
 		9FC4B34B2885606400F15B2D /* HangeulList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulList.swift; sourceTree = "<group>"; };
 		9FC4B36F28869C9A00F15B2D /* triple_input_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = triple_input_Tests.swift; sourceTree = "<group>"; };
@@ -267,7 +267,7 @@
 				9FB69549288219F100F6AE87 /* HangeulCombiner.swift */,
 				9FB6954B28821A3300F6AE87 /* HangeulSpecifier.swift */,
 				9FB6954D28821D8300F6AE87 /* HangeulConverter.swift */,
-				9FB6954F28821F4F00F6AE87 /* HangeulIoManager.swift */,
+				9FB6954F28821F4F00F6AE87 /* HangeulIOManager.swift */,
 				9FB695532882265900F6AE87 /* HangeulDictionary.swift */,
 				9FC4B34B2885606400F15B2D /* HangeulList.swift */,
 			);
@@ -448,7 +448,7 @@
 				0141A8572884F1F300EEB918 /* KeyboardViewController.swift in Sources */,
 				01EA7CBB288538500006A23B /* HangeulDictionary.swift in Sources */,
 				01EA7CB7288538500006A23B /* HangeulCombiner.swift in Sources */,
-				01EA7CB5288538430006A23B /* HangeulIoManager.swift in Sources */,
+				01EA7CB5288538430006A23B /* HangeulIOManager.swift in Sources */,
 				01EA7CB9288538500006A23B /* Hangeul.swift in Sources */,
 				0141A8602884F3B400EEB918 /* KeyboardView.swift in Sources */,
 				01A45B8128867C1A001F44D6 /* HangeulList.swift in Sources */,
@@ -483,7 +483,7 @@
 				012EDE56287FA0BD0035C3E6 /* Provider.swift in Sources */,
 				0142F4D0287C0C9C006F3E48 /* ReviewResponse.swift in Sources */,
 				012EDE42287EB9FA0035C3E6 /* NetworkManager.swift in Sources */,
-				9FB6955028821F4F00F6AE87 /* HangeulIoManager.swift in Sources */,
+				9FB6955028821F4F00F6AE87 /* HangeulIOManager.swift in Sources */,
 				0142F4D6287C3078006F3E48 /* HomeViewModel.swift in Sources */,
 				9FB6954E28821D8300F6AE87 /* HangeulConverter.swift in Sources */,
 				DE15E66028604278003DD2F5 /* HomeViewController.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ImageCacheManager {
+final class ImageCacheManager {
     static let shared = ImageCacheManager()
     private init() { }
     

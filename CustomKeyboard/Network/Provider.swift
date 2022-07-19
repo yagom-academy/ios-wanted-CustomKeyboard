@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Provider {
+final class Provider {
     enum ProviderError: Error {
         case decode(Error)
     }

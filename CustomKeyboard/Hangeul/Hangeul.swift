@@ -23,7 +23,7 @@ enum HangeulCombinationPosition {
     case none, top, mid, end
 }
 
-class Hangeul {
+final class Hangeul {
     var prev: Hangeul?
     var next: Hangeul?
     

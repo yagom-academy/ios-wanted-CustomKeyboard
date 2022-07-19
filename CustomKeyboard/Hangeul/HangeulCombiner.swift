@@ -15,7 +15,7 @@ enum HangeulInputMode {
     case add, remove, space
 }
 
-class HangeulCombineBuffer {
+final class HangeulCombineBuffer {
     var top : [Hangeul]
     var mid : [Hangeul]
     var end : [Hangeul]
@@ -46,7 +46,7 @@ class HangeulCombineBuffer {
     }
 }
 
-class HangeulCombiner {
+final class HangeulCombiner {
     
     private var combinedString: String = ""
     private var outputMode: HangeulOutputMode!
