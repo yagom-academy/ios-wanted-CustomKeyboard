@@ -56,10 +56,6 @@ class KeyboardManager {
                 return (addString, 2)
             }
         case 1:
-            if tappedButton.type == .space {
-                return pressSpace(tappedButton)
-            }
-            
             // 자음이 입력되어 있는 상태 (ex ㄷ, ㅇ, ㅈ, ㄱ ...)
             if tappedButton.type == .consonant {
                 let doubleFirst = lastWord + addString
@@ -88,10 +84,6 @@ class KeyboardManager {
             }
             // TODO: - 이중 모음의 경우 구현 : ㅘ + ㅣ = ㅙ 구현 X
         case 2:
-            if tappedButton.type == .space {
-                return pressSpace(tappedButton)
-            }
-            
             // 모음이 입력되어 있는 상태 (ex ㅏ, ㅑ, ㅜ, ㅗ ...)
             if tappedButton.type == .consonant {
                 lastWord = addString
@@ -113,10 +105,6 @@ class KeyboardManager {
                 }
             }
         case 3:
-            if tappedButton.type == .space {
-                return pressSpace(tappedButton)
-            }
-            
             // 자음 + 모음이 입력되어 있는 상태 (ex 하, 기, 시, 러 ...)
             if tappedButton.type == .consonant {
                 let idx = third.firstIndex(of: addString) ?? 0
@@ -152,10 +140,6 @@ class KeyboardManager {
                 }
             }
         case 4:
-            if tappedButton.type == .space {
-                return pressSpace(tappedButton)
-            }
-            
             // 자음 + 모음 + 자음으로 받침이 있는 상태 (ex 언, 젠, 간, 끝 ...)
             if tappedButton.type == .consonant {
                 let doubleEnd = lastWord + addString
@@ -211,15 +195,18 @@ class KeyboardManager {
     }
     
     func deleteString(_ state: Int, _ currentText: String) -> (String, Int) {
-        if !allWord.isEmpty {
-            allWord.removeLast()
+        if allWord.isEmpty {
+            return ("", 0)
         }
+        
+        let deleteText = allWord.removeLast()
         switch state {
         case 1:
             // 쌍자음만 입력되어 있는 상태 (ex ㄱㄱ, ㄷㄷ, ㅂㅂ ...)
             if lastWord.count == 2 {
-                lastWord = allWord[allWord.count - 1]
-                return (allWord[allWord.count - 1], 1)
+                lastWord = String(lastWord.prefix(1))
+                allWord.append(lastWord)
+                return (lastWord, 1)
             } else {
                 lastWord = allWord[allWord.count - 1]
                 return ("", 0)
@@ -227,8 +214,8 @@ class KeyboardManager {
         case 2:
             // 이중 모음이 입력되어 있는 상태 (ex ㅏㅣ, ㅓㅣ, ㅡㅣ ...)
             if lastWord.count == 2 {
-                lastWord = allWord[allWord.count - 1]
-                return (allWord[allWord.count - 1], 2)
+                lastWord = String(lastWord.prefix(1))
+                return (lastWord, 2)
             } else {
                 lastWord = allWord[allWord.count - 1]
                 return ("", 0)
@@ -237,21 +224,16 @@ class KeyboardManager {
             // 자음 + 이중모음이 입력되어 있는 상태 (ex 왜, 내, 의 ...)
             if lastWord.count == 2 {
                 let idx1 = secondDouble.firstIndex(of: lastWord) ?? 0
-                let idx2 = second.firstIndex(of: allWord[allWord.count - 1]) ?? 0
+                let idx2 = second.firstIndex(of: String(lastWord.prefix(1))) ?? 0
                 let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - (idx1 * 28) + (idx2 * 28)
-                lastWord = allWord[allWord.count - 1]
+                lastWord = String(lastWord.prefix(1))
                 if let scalarValue = UnicodeScalar(str) {
                     return (String(scalarValue), 3)
                 }
                 return ("", 0)
             } else {
                 // TODO: - 가, 야, .. (앞글자의 받침으로 들어갈수 있는지 확인)
-                let idx = second.firstIndex(of: lastWord) ?? 0
-                let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - (idx * 28)
-                lastWord = allWord[allWord.count - 1]
-                if let scalarValue = UnicodeScalar(str) {
-                    return (String(scalarValue), 1)
-                }
+                let frontText = String(currentText.prefix(1)) // ["ㅏ"]
                 return ("", 0)
             }
         case 4:
