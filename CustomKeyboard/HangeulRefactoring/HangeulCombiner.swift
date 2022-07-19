@@ -42,7 +42,7 @@ class HangeulCombineBuffer {
             }
             let prev = curr!.prev ?? nil
             curr = prev
-        } while curr != nil && curr!.status != .finished
+        } while curr != nil && curr!.status != .finished && curr!.unicode > 0
     }
 }
 

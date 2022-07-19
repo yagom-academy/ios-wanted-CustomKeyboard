@@ -53,7 +53,9 @@ class Hangeul {
 extension Hangeul {
 
     func update(status: HangeulCombinationStatus = .none, position: HangeulCombinationPosition = .none) {
-        self.status = status
+        if status != .none {
+            self.status = status
+        }
         
         guard position != .none else {
             return

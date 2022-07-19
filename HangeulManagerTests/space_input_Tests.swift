@@ -91,4 +91,18 @@ class space_input_Tests: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
     
+    func testExample6() throws {
+        ioManager.reset()
+        let c = HangeulConverter()
+        let input = ["ㄱ", "ㄱ", "ㄱ", "Space", "Space", "Space", "Back", "ㄱ"] // ㄱㄱㄱ  ㄱ
+        let expectation = c.toString(from: HangeulDictionary.fixed.top.ㄱ.rawValue) + c.toString(from: HangeulDictionary.fixed.top.ㄱ.rawValue) + c.toString(from: HangeulDictionary.fixed.top.ㄱ.rawValue) + "  " + c.toString(from: HangeulDictionary.fixed.top.ㄱ.rawValue)
+        
+        for ele in input {
+            ioManager.process(input: ele)
+        }
+        let result = ioManager.getOutput()
+        
+        XCTAssertEqual(expectation, result)
+    }
+    
 }
