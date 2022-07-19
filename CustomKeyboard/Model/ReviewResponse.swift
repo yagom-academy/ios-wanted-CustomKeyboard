@@ -1,5 +1,5 @@
 //
-//  Review.swift
+//  ReviewResponse.swift
 //  CustomKeyboard
 //
 //  Created by rae on 2022/07/11.
@@ -20,8 +20,4 @@ struct Review: Decodable {
 struct User: Decodable {
     let userName: String
     let profileImage: String
-}
-
-struct Content: Codable {
-    let content: String
 }
