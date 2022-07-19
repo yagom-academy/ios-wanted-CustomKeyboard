@@ -26,105 +26,58 @@ enum HangeulCombinationPosition {
 class Hangeul {
     var prev: Hangeul?
     var next: Hangeul?
+    
     var value: String
     var unicode: Int
-    var unicodeType: HangeulUnicodeType
-    var unicodeIndex: Int
     var status: HangeulCombinationStatus
-    var phoneme: HangeulPhoneme
     var position: [HangeulCombinationPosition]
     
     init(_ input: String) {
-        
-        self.value = input
-        self.unicodeType = .compatible
-        self.unicodeIndex = -1
-        self.status = .ongoing
-        self.position = []
         self.prev = nil
         self.next = nil
+        self.value = input
+        self.position = []
         
         guard input != "Space" else {
             self.unicode = -2
-            self.phoneme = .vowel
             self.status = .finished
             return
         }
         
         let converter = HangeulConverter()
-        
         self.unicode = converter.toUnicode(from: input)
-        self.phoneme = .consonant
-        
-        for hangeul in HangeulDictionary.compatible.mid.allCases {
-            if hangeul.rawValue == self.unicode {
-                self.phoneme = .vowel
-                break
-            }
-        }
+        self.status = .ongoing
     }
 }
 
 extension Hangeul {
 
-    func update(type: HangeulUnicodeType = .none, status: HangeulCombinationStatus = .none, position: HangeulCombinationPosition = .none) {
+    func update(status: HangeulCombinationStatus = .none, position: HangeulCombinationPosition = .none) {
+        self.status = status
         
-        guard !(type == .none && position == .none) else {
-            self.status = status
+        guard position != .none else {
             return
         }
         
         let dictionary = HangeulDictionary()
-        
-        if status != .none {
-            self.status = status
-        }
-        
-        if type == .none && status == .none {
-            let oldCompatibleUnicode = dictionary.getUnicode(index: self.unicodeIndex, position: self.position.last!, unicodeType: .compatible)
-
-            if self.position.count > 1 && self.position.first! == position {
-                self.position.removeLast()
-            } else {
-                self.position.append(position)
-            }
-            
-            let newIndex = dictionary.getIndex(unicode: oldCompatibleUnicode, position: self.position.last!, unicodeType: .compatible)
-            let newUnicode = dictionary.getUnicode(index: newIndex, position: position, unicodeType: self.unicodeType)
-            
-            self.unicodeIndex = newIndex
-            self.unicode = newUnicode
-            
-            return
-        }
+        var oldCompatibleUnicode: Int
         
         if self.position.isEmpty {
-            self.position.append(position)
+            oldCompatibleUnicode = self.unicode
+        } else {
+            let oldIndex = dictionary.getIndex(unicode: self.unicode, position: self.position.last!, unicodeType: .fixed)
+            oldCompatibleUnicode = dictionary.getUnicode(index: oldIndex, position: self.position.last!, unicodeType: .compatible)
         }
         
-        var oldIndex = self.unicodeIndex
-        
-        if self.unicodeIndex < 0 {
-            oldIndex = dictionary.getIndex(unicode: self.unicode, position: self.position.last!, unicodeType: self.unicodeType)
-        }
-        
-        let oldCompatibleUnicode = dictionary.getUnicode(index: oldIndex, position: self.position.last!, unicodeType: .compatible)
-        
-        self.unicode = oldCompatibleUnicode
-        self.unicodeType = .compatible
+        let newIndex = dictionary.getIndex(unicode: oldCompatibleUnicode, position: position, unicodeType: .compatible)
+        let newFixedUnicode = dictionary.getUnicode(index: newIndex, position: position, unicodeType: .fixed)
+        self.unicode = newFixedUnicode
         
         if self.position.count > 1 && self.position.first! == position {
             self.position.removeLast()
-        } else if self.position.last! != position {
+        } else {
             self.position.append(position)
         }
-        
-        let newIndex = dictionary.getIndex(unicode: self.unicode, position: self.position.last!, unicodeType: self.unicodeType)
-        let newUnicode = dictionary.getUnicode(index: newIndex, position: position, unicodeType: type)
-        
-        self.unicodeIndex = newIndex
-        self.unicode = newUnicode
-        self.unicodeType = type
         
     }
 }
@@ -132,8 +85,10 @@ extension Hangeul {
 extension Hangeul {
     
     func isMid() -> Bool {
-        if self.phoneme == .vowel {
-            return true
+        for hangeul in HangeulDictionary.compatible.mid.allCases {
+            if hangeul.rawValue == self.unicode {
+                return true
+            }
         }
         return false
     }

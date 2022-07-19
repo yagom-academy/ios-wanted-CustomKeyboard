@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum HangeulOutputEditMode {
+enum HangeulOutputMode {
     case add, change, remove
 }
 
@@ -48,7 +48,7 @@ class HangeulCombineBuffer {
 
 class HangeulCombiner {
     
-    func combine(_ last: Hangeul, inputMode: HangeulInputMode) -> (newString: String, mode: HangeulOutputEditMode) {
+    func combine(_ last: Hangeul, inputMode: HangeulInputMode) -> (newString: String, mode: HangeulOutputMode) {
         let buffer = HangeulCombineBuffer()
         buffer.append(last)
         
@@ -99,12 +99,12 @@ class HangeulCombiner {
     
     private func getIndexArrayForCombine(with buffer: HangeulCombineBuffer) -> (top: Int, mid: Int, end: Int) {
         let dictionary = HangeulDictionary()
-        var topIndex = 0, midIndex = 0, endIndex = 0
+        var midIndex = 0, endIndex = 0
         
-        topIndex = buffer.top.first!.unicodeIndex
+        let topIndex = dictionary.getIndex(unicode: buffer.top.first!.unicode, position: .top, unicodeType: .fixed)
         
         if buffer.mid.count == 1 {
-            midIndex = buffer.mid.first!.unicodeIndex
+            midIndex = dictionary.getIndex(unicode: buffer.mid.first!.unicode, position: .mid, unicodeType: .fixed)
         } else {
             let doubleMidUnicode = dictionary.getDoubleUnicode(buffer.mid.first!, buffer.mid.last!)
             midIndex = dictionary.getIndex(unicode: doubleMidUnicode, position: .mid, unicodeType: .fixed)
@@ -113,7 +113,7 @@ class HangeulCombiner {
         if buffer.end.isEmpty {
             endIndex = dictionary.getIndex(unicode: -1, position: .end, unicodeType: .fixed)
         } else if buffer.end.count == 1 {
-            endIndex = buffer.end.first!.unicodeIndex
+            endIndex = dictionary.getIndex(unicode: buffer.end.first!.unicode, position: .end, unicodeType: .fixed)
         } else {
             let doubleEndUnicode = dictionary.getDoubleUnicode(buffer.end.first!, buffer.end.last!)
             endIndex = dictionary.getIndex(unicode: doubleEndUnicode, position: .end, unicodeType: .fixed)

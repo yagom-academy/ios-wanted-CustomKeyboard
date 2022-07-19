@@ -20,10 +20,10 @@ class HangeulIOManger {
         
         switch input {
         case "Back":
-            if inputList.isEmpty()  { 
+            guard !inputList.isEmpty() else {
                 return
             }
-            
+    
             inputList.removeLast()
             
             guard inputList.tail != nil && inputList.tail!.status != .finished else {
@@ -49,7 +49,7 @@ class HangeulIOManger {
         }
     }
     
-    private func updateOutputList(with character: String, mode: HangeulOutputEditMode) {
+    private func updateOutputList(with character: String, mode: HangeulOutputMode) {
 
         guard mode != .remove else {
             outputList.removeLast()

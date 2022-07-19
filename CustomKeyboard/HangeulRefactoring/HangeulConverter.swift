@@ -16,10 +16,4 @@ class HangeulConverter {
     func toString(from unicode: Int) -> String {
         return String(UnicodeScalar(unicode)!)
     }
-    
-    
-    deinit {
-        print("close hangeulConverter")
-    }
-
 }
