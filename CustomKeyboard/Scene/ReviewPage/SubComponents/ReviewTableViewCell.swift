@@ -1,5 +1,5 @@
 //
-//  ReveiwTableViewCell.swift
+//  ReviewTableViewCell.swift
 //  CustomKeyboard
 //
 //  Created by Mac on 2022/07/12.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewTableViewCell: UITableViewCell {
+class ReviewTablerViewCell: UITableViewCell {
     private let profileImage: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 30
