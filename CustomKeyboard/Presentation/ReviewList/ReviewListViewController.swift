@@ -49,7 +49,7 @@ extension ReviewListViewController {
         viewModel.postData(text: reviewTextView.text) { result in
             switch result {
             case .success(let result):
-                print(result)
+                self.addAlert(statusCode: result)
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -60,6 +60,12 @@ extension ReviewListViewController {
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView))
         self.reviewTextView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    private func addAlert(statusCode: NetworkManager.ResponseCode) {
+        let postAlert = UIAlertController(title: "알림", message: "Status Code: \(statusCode)\n 댓글이 업로드 되었습니다.", preferredStyle: .alert)
+        postAlert.addAction(UIAlertAction(title: "닫기", style: .destructive))
+        self.present(postAlert, animated: true)
     }
 }
 
@@ -74,6 +80,7 @@ extension ReviewListViewController {
     @objc func didTapWriteButton() {
         
         postData()
+       
     }
 }
 
