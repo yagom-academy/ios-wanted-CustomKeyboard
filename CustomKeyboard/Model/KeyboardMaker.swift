@@ -10,28 +10,16 @@ import Foundation
 class KeyboardMaker {
     
     struct Status {
-        var currentState: HangulState
+        var currentState: HangulKeyboardData.HangulState
         var isCompleted: Bool
         var alphaRepository: [HangulKeyboardData]
-    }
-    
-    enum HangulState: Int {
-        case empty = 0
-        case cho = 1
-        case doubleCho = 2
-        case jung = 3
-        case doubleJung = 4
-        case jong = 5
-        case doubleJong = 6
     }
     
     typealias CombineBuffer = [String]
     
     private var isDoubleJong = false
     private var isJong = false
-    private var isSpacePressed = false
     private var isdeleting = false
-    private var isEditing = true
     
     private var combineBuffer: CombineBuffer = [String](repeating: "", count: 3) // 현재 쓰여지고 있는 음소를 모아서 조합한 후 방출, 비워지는 배열
     private var processingBuffer = Status(currentState: .empty, isCompleted: false, alphaRepository: [])
@@ -54,15 +42,6 @@ class KeyboardMaker {
             
             releaseTextField.append(spaceKeyboardData.hangul)
             
-            return releaseTextField
-        }
-        
-        if inputData.unicode == SpecialCharSet.delete && processingBuffer.alphaRepository.count == 0 {
-            processingBuffer.currentState = .empty
-            combineBuffer = ["", "", ""]
-            if !releaseTextField.isEmpty {
-                releaseTextField.removeLast()
-            }
             return releaseTextField
         }
         
@@ -101,9 +80,10 @@ class KeyboardMaker {
             } else {
                 
                 var decomposedHangul = decomposeHangul(hangul: releaseTextField.last!, lastState: processingBuffer.currentState)
-                let lastKeyboardData = processingBuffer.alphaRepository.removeLast()
                 
-                decomposedHangul = decomposedHangul.filter{$0 != " "}.filter{$0 != lastKeyboardData.hangul }
+                decomposedHangul = decomposedHangul.filter{$0 != " "}
+                processingBuffer.alphaRepository.removeLast()
+                decomposedHangul.removeLast()
                 decomposedHangul.enumerated().forEach{ combineBuffer[$0.offset] = $0.element }
                 
                 let recombinedHangul = combineHangulForDelete(buffer: decomposedHangul, lastState: processingBuffer.currentState)
@@ -114,6 +94,13 @@ class KeyboardMaker {
                 return releaseTextField
             }
             
+        } else if inputData.unicode == SpecialCharSet.delete && processingBuffer.alphaRepository.count == 0 {
+            processingBuffer.currentState = .empty
+            combineBuffer = ["", "", ""]
+            if !releaseTextField.isEmpty {
+                releaseTextField.removeLast()
+            }
+            return releaseTextField
         }
         
         if isJong {
@@ -174,7 +161,7 @@ class KeyboardMaker {
     // MARK: - combineHangul
     
     
-    func combineHangul(buffer: CombineBuffer, lastState: HangulState) -> HangulKeyboardData { // 글자 조합해서 방
+    func combineHangul(buffer: CombineBuffer, lastState: HangulKeyboardData.HangulState) -> HangulKeyboardData { // 글자 조합해서 방
         if lastState == .cho && buffer[1] == "" && buffer[2] == "" {
             return HangulKeyboardData(char: buffer[0], state: lastState)
         } else if lastState == .doubleCho && buffer[1] == "" && buffer[2] == "" {
@@ -206,7 +193,7 @@ class KeyboardMaker {
         return hangul
     }
     
-    func combineHangulForDelete(buffer: [String], lastState: HangulState) -> HangulKeyboardData { // 글자 조합해서 방
+    func combineHangulForDelete(buffer: [String], lastState: HangulKeyboardData.HangulState) -> HangulKeyboardData { // 글자 조합해서 방
         if buffer.count == 1 {
             return HangulKeyboardData(char: buffer[0], state: .cho)
             
@@ -235,7 +222,7 @@ class KeyboardMaker {
         }
     }
     
-    func decomposeHangul(hangul: String, lastState: HangulState) -> [String] {
+    func decomposeHangul(hangul: String, lastState: HangulKeyboardData.HangulState) -> [String] {
         
         let hangulUnicode = hangulConverter.convertStr2Unicode(char: hangul)
         
@@ -256,15 +243,6 @@ class KeyboardMaker {
         let cho = HangulSet.chos[choIndex]
         let jung = HangulSet.jungs[jungIndex]
         let jong = decomposeJongs(str: HangulSet.jongs[jongIndex])
-        
-        if lastState == .jong {
-            return [cho, jung]
-        } else if lastState == .doubleJong {
-            if HangulSet.doubleChos.contains(HangulSet.jongs[jongIndex]) {
-                return [cho, jung]
-            }
-            return [cho, jung] + jong
-        }
         
         return [cho, jung] + jong
     }
@@ -503,6 +481,7 @@ class KeyboardMaker {
                 
                 return currentStatus
             }
+            
             combineBuffer = ["","",""]
             currentStatus.currentState = .jung
             currentStatus.isCompleted = true
@@ -512,45 +491,43 @@ class KeyboardMaker {
             
         } else if combineBuffer[0] != "" { // 초성이 이미 있다면 초중 완성. 즉, 종성을 받아 조합 되는지 여부 확인
             
-            // TODO: - 단일 종성배열로 리팩토링때 다시 한번 분기 가능함. - 스토리텔링
+            // TODO: - 단일 종성배열로 리팩토링때 다시 한번 분기 가능함.
             if HangulSet.jongs.contains(currentKeyboardData.hangul) { // 종성이 쌍자음일 경우와 아닐 경우의 넘기는 stage 차이 분기
+                
+                currentStatus.isCompleted = false // MARK: - 이 부분에서 true를 넘길경우 중복으로 쓰여진다.
+                combineBuffer[2] = currentKeyboardData.hangul
+                
                 if HangulSet.doubleJongs.contains(currentKeyboardData.hangul) {
                     
                     currentStatus.currentState = .doubleJong
-                    // MARK: - 이 부분에서 true를 넘길경우 중복으로 쓰여진다.
-                    currentStatus.isCompleted = false
-                    combineBuffer[2] = currentKeyboardData.hangul
                     
                     return currentStatus
                 }
                 
                 currentStatus.currentState = .jong
-                currentStatus.isCompleted = false
-                combineBuffer[2] = currentKeyboardData.hangul
                 
                 return currentStatus
             }
             
         } else if HangulSet.chos.contains(currentKeyboardData.hangul) { //버퍼에 초성이 없으므로 초성인 경우 -> 이 시점에서 글자를 완성 시키고 combineBuffer를 비워야 함.
-            // 인풋이 초성
+            
+            combineBuffer = ["","",""]
+            currentStatus.isCompleted = true
+            combineBuffer[0] = currentKeyboardData.hangul
+            
             if HangulSet.doubleChos.contains(currentKeyboardData.hangul) {
                 
-                combineBuffer = ["","",""]
                 currentStatus.currentState = .doubleCho
-                currentStatus.isCompleted = true
-                combineBuffer[0] = currentKeyboardData.hangul
                 
                 return currentStatus
             }
             
-            combineBuffer = ["","",""]
             currentStatus.currentState = .cho
-            currentStatus.isCompleted = true
-            combineBuffer[0] = currentKeyboardData.hangul
             
             return currentStatus
             
         }
+        
         if currentKeyboardData.unicode == SpecialCharSet.delete {
             
             currentStatus.alphaRepository.removeLast()
@@ -606,7 +583,7 @@ class KeyboardMaker {
             return currentStatus
             
         } else if combineBuffer[0] != "" {
-            // TODO: - 단일 종성배열로 리팩토링때 다시 한번 분기 가능함. - 스토리텔링
+            // TODO: - 단일 종성배열로 리팩토링때 다시 한번 분기 가능함.
             if HangulSet.jongs.contains(currentKeyboardData.hangul) { // 종성이 쌍자음일 경우와 아닐 경우의 넘기는 stage 차이 분기
                 if HangulSet.doubleJongs.contains(currentKeyboardData.hangul) {
                     
