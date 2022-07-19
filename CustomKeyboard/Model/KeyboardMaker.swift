@@ -12,7 +12,7 @@ class KeyboardMaker {
     struct Status {
         var currentState: HangulState
         var isCompleted: Bool
-        var alphaRepository: [KeyboardData]
+        var alphaRepository: [HangulKeyboardData]
     }
     
     enum HangulState: Int {
@@ -34,22 +34,17 @@ class KeyboardMaker {
     private var isEditing = true
     
     private var combineBuffer: CombineBuffer = [String](repeating: "", count: 3) // 현재 쓰여지고 있는 음소를 모아서 조합한 후 방출, 비워지는 배열
-    
     private var processingBuffer = Status(currentState: .empty, isCompleted: false, alphaRepository: [])
-    
     private var releaseTextField = [String]()
     
-    public func confirmEnterPressed(input: String) -> Bool {
-        return convertStr2Unicode(char: input) == SpecialCharSet.enter
-    }
+    private let hangulConverter = HangulKeyboardConverter()
+    private let combineValidator = HangulCombineValidator()
     
-    public func putHangul(input: String) -> String {
-        
-        let inputData = KeyboardData(char: input, state: .empty)
+    public func putKeyboardData(data inputData: HangulKeyboardData) -> [String] {
         
         guard inputData.hangul != " " else {
             
-            let spaceKeyboardData = KeyboardData(char: " ", state: processingBuffer.currentState)
+            let spaceKeyboardData = HangulKeyboardData(char: " ", state: processingBuffer.currentState)
             
             processingBuffer.alphaRepository.removeAll()
             processingBuffer.isCompleted = false
@@ -59,14 +54,16 @@ class KeyboardMaker {
             
             releaseTextField.append(spaceKeyboardData.hangul)
             
-            return releaseTextField.reduce(into: "") { $0 += $1 }
+            return releaseTextField
         }
         
         if inputData.unicode == SpecialCharSet.delete && processingBuffer.alphaRepository.count == 0 {
             processingBuffer.currentState = .empty
             combineBuffer = ["", "", ""]
-            releaseTextField.removeLast()
-            return releaseTextField.reduce(into: ""){ $0 += $1 }
+            if !releaseTextField.isEmpty {
+                releaseTextField.removeLast()
+            }
+            return releaseTextField
         }
         
         switch processingBuffer.currentState {
@@ -99,7 +96,7 @@ class KeyboardMaker {
                     decomposedHangul.enumerated().forEach{ combineBuffer[$0.offset] = $0.element }
                 }
                 
-                return releaseTextField.reduce(into: ""){ $0 += $1 }
+                return releaseTextField
                 
             } else {
                 
@@ -114,7 +111,7 @@ class KeyboardMaker {
                 releaseTextField[releaseTextField.count - 1] = recombinedHangul.hangul
                 isdeleting = false
                 
-                return releaseTextField.reduce(into: ""){ $0 += $1 }
+                return releaseTextField
             }
             
         }
@@ -145,7 +142,7 @@ class KeyboardMaker {
             releaseTextField.append(combinedHagul.hangul)
             processingBuffer.isCompleted = false
             
-            return releaseTextField.reduce(into: ""){ $0 += $1 }
+            return releaseTextField
         }
         
         if releaseTextField.count <= 1 {
@@ -165,62 +162,62 @@ class KeyboardMaker {
                 releaseTextField.append(combinedHagul.hangul)
                 processingBuffer.isCompleted = false
                 
-                return releaseTextField.reduce(into: ""){ $0 += $1 }
+                return releaseTextField
             }
             releaseTextField[releaseTextField.count - 1] = combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState).hangul
             
         }
         
-        return releaseTextField.reduce(into: ""){ $0 += $1 }
+        return releaseTextField
     }
     
     // MARK: - combineHangul
     
     
-    func combineHangul(buffer: CombineBuffer, lastState: HangulState) -> KeyboardData { // 글자 조합해서 방
+    func combineHangul(buffer: CombineBuffer, lastState: HangulState) -> HangulKeyboardData { // 글자 조합해서 방
         if lastState == .cho && buffer[1] == "" && buffer[2] == "" {
-            return KeyboardData(char: buffer[0], state: lastState)
+            return HangulKeyboardData(char: buffer[0], state: lastState)
         } else if lastState == .doubleCho && buffer[1] == "" && buffer[2] == "" {
-            return KeyboardData(char: buffer[0], state: lastState)
+            return HangulKeyboardData(char: buffer[0], state: lastState)
         } else if (lastState == .jung || lastState == .doubleJung) && buffer[0] == "" && buffer[2] == "" {
-            return KeyboardData(char: buffer[1], state: lastState)
+            return HangulKeyboardData(char: buffer[1], state: lastState)
         }
         
         guard buffer[0] != "" && buffer[1] != "" else {
-            return KeyboardData(char: "", state: lastState)
+            return HangulKeyboardData(char: "", state: lastState)
         }
         
         //TODO: - 한글set에 해당 unicode가 없을경우 예외처리 해야함
         let cho = HangulSet.chos.firstIndex(of: buffer[0]) ?? 0
         let jung = HangulSet.jungs.firstIndex(of: buffer[1]) ?? 0
         if buffer.count < 3 {
-            let uni2Str = convertUni2Str(uni: 44032 + cho * 28 * 21 + 28 * jung + 0)
+            let uni2Str = hangulConverter.convertUni2Str(uni: 44032 + cho * 28 * 21 + 28 * jung + 0)
             let uni =  44032 + cho * 28 * 21 + 28 * jung + 0
-            let hangul = KeyboardData(char: uni2Str, uni: uni, lastState: lastState)
+            let hangul = HangulKeyboardData(char: uni2Str, uni: uni, lastState: lastState)
             
             return hangul
         }
         let jong = HangulSet.jongs.firstIndex(of: buffer[2]) ?? 0
         
-        let uni2Str = convertUni2Str(uni: 44032 + cho * 28 * 21 + 28 * jung + jong)
+        let uni2Str = hangulConverter.convertUni2Str(uni: 44032 + cho * 28 * 21 + 28 * jung + jong)
         let uni =  44032 + cho * 28 * 21 + 28 * jung + jong
-        let hangul = KeyboardData(char: uni2Str, uni: uni, lastState: lastState)
+        let hangul = HangulKeyboardData(char: uni2Str, uni: uni, lastState: lastState)
         
         return hangul
     }
     
-    func combineHangulForDelete(buffer: [String], lastState: HangulState) -> KeyboardData { // 글자 조합해서 방
+    func combineHangulForDelete(buffer: [String], lastState: HangulState) -> HangulKeyboardData { // 글자 조합해서 방
         if buffer.count == 1 {
-            return KeyboardData(char: buffer[0], state: .cho)
+            return HangulKeyboardData(char: buffer[0], state: .cho)
             
         } else if buffer.count == 2 {
             
             let cho = HangulSet.chos.firstIndex(of: buffer[0]) ?? 0
             let jung = HangulSet.jungs.firstIndex(of: buffer[1]) ?? 0
             
-            let uni2Str = convertUni2Str(uni: 44032 + cho * 28 * 21 + 28 * jung + 0)
+            let uni2Str = hangulConverter.convertUni2Str(uni: 44032 + cho * 28 * 21 + 28 * jung + 0)
             let uni =  44032 + cho * 28 * 21 + 28 * jung + 0
-            let hangul = KeyboardData(char: uni2Str, uni: uni, lastState: lastState)
+            let hangul = HangulKeyboardData(char: uni2Str, uni: uni, lastState: lastState)
             
             return hangul
             
@@ -230,9 +227,9 @@ class KeyboardMaker {
             let jung = HangulSet.jungs.firstIndex(of: buffer[1]) ?? 0
             let jong = HangulSet.jongs.firstIndex(of: buffer[2]) ?? 0
             
-            let uni2Str = convertUni2Str(uni: 44032 + cho * 28 * 21 + 28 * jung + jong)
+            let uni2Str = hangulConverter.convertUni2Str(uni: 44032 + cho * 28 * 21 + 28 * jung + jong)
             let uni =  44032 + cho * 28 * 21 + 28 * jung + jong
-            let hangul = KeyboardData(char: uni2Str, uni: uni, lastState: lastState)
+            let hangul = HangulKeyboardData(char: uni2Str, uni: uni, lastState: lastState)
             
             return hangul
         }
@@ -240,14 +237,14 @@ class KeyboardMaker {
     
     func decomposeHangul(hangul: String, lastState: HangulState) -> [String] {
         
-        let hangulUnicode = convertStr2Unicode(char: hangul)
+        let hangulUnicode = hangulConverter.convertStr2Unicode(char: hangul)
         
         let choIndex = (hangulUnicode - 0xAC00) / 588
         
         guard choIndex >= 0 && choIndex < HangulSet.chos.count else {
             if HangulSet.doubleChos.contains(hangul) && lastState == .cho {
-                let singleUni = convertStr2Unicode(char: hangul) - 1
-                return [convertUni2Str(uni: singleUni)]
+                let singleUni = hangulConverter.convertStr2Unicode(char: hangul) - 1
+                return [hangulConverter.convertUni2Str(uni: singleUni)]
             }
             return [hangul]
         }
@@ -279,74 +276,14 @@ class KeyboardMaker {
         return [HangulSet.checkingJongs[idx].0, HangulSet.checkingJongs[idx].1]
     }
     
-    func convertStr2Unicode(char: String) -> Int {
-        if let unicodeScalar = UnicodeScalar(char) {
-            return Int(unicodeScalar.value)
-        }
-        return 0
-    }
     
-    func convertUni2Str(uni: Int) -> String {
-        if let unicodeScalar = UnicodeScalar(uni) {
-            return String(unicodeScalar)
-        }
-        return ""
-    }
     
-    func canMakeDoubleCho(onProcessing: String, input: String) -> Bool { // 쌍자음 체크
-        if HangulSet.checkingDoubleChos.contains(where: { $0 == (onProcessing, input) }) {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    func canMakeDoubleJung(onProcessing: String, input: String) -> Bool { // 모음 조합 확인
-        if HangulSet.checkingDoubleJungs.contains(where: { $0 == (onProcessing, input) }) {
-            return true
-        } else {
-            return false
-        }
-    }
-    func canMakeTripleJung(onProcessing: String, input: String) -> Bool { // 삼중 모음 조합 확인
-        if HangulSet.checkingTripleJungs.contains(where: { $0 == (onProcessing, input) }) {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    func canMakeDoubleJong(onProcessing: String, input: String) -> Bool { // 종성 조합 확인
-        if HangulSet.checkingJongs.contains(where: { $0 == (onProcessing, input) }) {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    func combineSingleToDouble(input: Int) -> Int {
-        return input+1
-    }
-    
-    func combineSingleJungToDouble(onProcessing: String, input: String) -> String {
-        let index = HangulSet.checkingDoubleJungs.firstIndex{$0 == (onProcessing, input)} ?? 0
-        return HangulSet.doubleJungs[index]
-    }
-    func combineTripleJungToDouble(onProcessing: String, input: String) -> String {
-        let index = HangulSet.checkingTripleJungs.firstIndex{$0 == (onProcessing, input)} ?? 0
-        return HangulSet.tripleJungs[index]
-    }
-    
-    func combineSingleJongToDouble(onProcessing: String, input: String) -> String {
-        let index = HangulSet.checkingJongs.firstIndex{ $0 == (onProcessing, input)} ?? 0
-        return HangulSet.doubleJongs[index]
-    }
     
     
     
     // MARK: - stage
     
-    func emptyStage(status: Status, input: KeyboardData) -> Status {
+    func emptyStage(status: Status, input: HangulKeyboardData) -> Status {
         
         combineBuffer = ["","",""]
         var currentStatus = status
@@ -411,7 +348,7 @@ class KeyboardMaker {
     }
     
     //MARK: - 초성 1 스테이지
-    func singleChoStage(status: Status, input: KeyboardData) -> Status { // 초성 자음 하나가 들어온 상태
+    func singleChoStage(status: Status, input: HangulKeyboardData) -> Status { // 초성 자음 하나가 들어온 상태
         
         var currentStatus = status
         var currentKeyboardData = input
@@ -432,11 +369,11 @@ class KeyboardMaker {
             // 초성 조합
             // 자음이 하나 있는 상태에서 자음이 하나 더 들어오면 쌍자음을 만들수 있는지 확인 후 있으면 만들어 combineBuffer에 넣어 내보낼 준비 ex) ㄲ
             
-            if canMakeDoubleCho(onProcessing: status.alphaRepository.last!.hangul, input: currentKeyboardData.hangul) {
-                let combinedChar = combineSingleToDouble(input: convertStr2Unicode(char: currentKeyboardData.hangul))
+            if combineValidator.canMakeDoubleCho(onProcessing: status.alphaRepository.last!.hangul, input: currentKeyboardData.hangul) {
+                let combinedChar = combineValidator.combineSingleToDouble(input: hangulConverter.convertStr2Unicode(char: currentKeyboardData.hangul))
                 currentStatus.currentState = .doubleCho
                 currentStatus.isCompleted = false
-                combineBuffer[0] = convertUni2Str(uni: combinedChar)
+                combineBuffer[0] = hangulConverter.convertUni2Str(uni: combinedChar)
                 
                 return currentStatus
                 
@@ -488,7 +425,7 @@ class KeyboardMaker {
     }
     
     //MARK: - 초성 2 스테이지
-    func doubleChoStage(status: Status, input: KeyboardData) -> Status { // 초성 쌍자음이 들어온 상태
+    func doubleChoStage(status: Status, input: HangulKeyboardData) -> Status { // 초성 쌍자음이 들어온 상태
         
         var currentStatus = status
         var currentKeyboardData = input
@@ -548,7 +485,7 @@ class KeyboardMaker {
     }
     
     //MARK: - 중성 1 스테이지
-    func singleJungStage(status: Status, input: KeyboardData) -> Status { // 중성인데 input이 들어오는 경우
+    func singleJungStage(status: Status, input: HangulKeyboardData) -> Status { // 중성인데 input이 들어오는 경우
         
         var currentStatus = status
         var currentKeyboardData = input
@@ -557,9 +494,9 @@ class KeyboardMaker {
         currentStatus.alphaRepository.append(currentKeyboardData)
         
         if HangulSet.jungs.contains(currentKeyboardData.hangul) { // 중성이 들어오는 경우 조합이 되는지 확인 후 되면 조합 후 조합중성 stage로 넘기고 아니라면 글자 완성.
-            if canMakeDoubleJung(onProcessing: combineBuffer[1], input: currentKeyboardData.hangul) {
+            if combineValidator.canMakeDoubleJung(onProcessing: combineBuffer[1], input: currentKeyboardData.hangul) {
                 
-                let combinedStr = combineSingleJungToDouble(onProcessing: combineBuffer[1], input: currentKeyboardData.hangul)
+                let combinedStr = combineValidator.combineSingleJungToDouble(onProcessing: combineBuffer[1], input: currentKeyboardData.hangul)
                 currentStatus.currentState = .doubleJung
                 currentStatus.isCompleted = false
                 combineBuffer[1] = combinedStr
@@ -632,7 +569,7 @@ class KeyboardMaker {
         return currentStatus
     }
     
-    func doubleJungStage(status: Status, input: KeyboardData) -> Status {
+    func doubleJungStage(status: Status, input: HangulKeyboardData) -> Status {
         
         var currentStatus = status
         var currentKeyboardData = input
@@ -642,11 +579,11 @@ class KeyboardMaker {
         
         if HangulSet.jungs.contains(currentKeyboardData.hangul) { // 중성이 들어오는 경우 조합이 되는지 확인 후 되면 조합 후 조합중성 stage로 넘기고 아니라면 글자 완성.
             
-            if canMakeTripleJung(onProcessing: combineBuffer[1], input: currentKeyboardData.hangul) {
+            if combineValidator.canMakeTripleJung(onProcessing: combineBuffer[1], input: currentKeyboardData.hangul) {
                 
                 currentStatus.isCompleted = false
                 currentStatus.currentState = .doubleJong
-                let newJung = combineTripleJungToDouble(onProcessing: combineBuffer[1], input: currentKeyboardData.hangul)
+                let newJung = combineValidator.combineTripleJungToDouble(onProcessing: combineBuffer[1], input: currentKeyboardData.hangul)
                 combineBuffer[1] = newJung
                 
                 return currentStatus
@@ -739,7 +676,7 @@ class KeyboardMaker {
         return currentStatus
     }
     
-    func singleJongStage(status: Status, input: KeyboardData) -> Status {
+    func singleJongStage(status: Status, input: HangulKeyboardData) -> Status {
         
         var currentStatus = status
         var currentKeyboardData = input
@@ -769,11 +706,11 @@ class KeyboardMaker {
             
         } else if HangulSet.chos.contains(currentKeyboardData.hangul) { // 종성이 있는데 자음이 들어올 때
             // 우선 들어온 자음과 기존 자음이 조합 되는지 확인
-            if canMakeDoubleJong(onProcessing: combineBuffer[2], input: currentKeyboardData.hangul) { // 종성 조합 가능
+            if combineValidator.canMakeDoubleJong(onProcessing: combineBuffer[2], input: currentKeyboardData.hangul) { // 종성 조합 가능
                 
                 currentStatus.currentState = .doubleJong
                 currentStatus.isCompleted = false
-                let combinedDoubleJong = combineSingleJongToDouble(onProcessing: combineBuffer[2], input: currentKeyboardData.hangul)
+                let combinedDoubleJong = combineValidator.combineSingleJongToDouble(onProcessing: combineBuffer[2], input: currentKeyboardData.hangul)
                 combineBuffer[2] = combinedDoubleJong
                 
                 return currentStatus
@@ -808,7 +745,7 @@ class KeyboardMaker {
         return currentStatus
     }
     
-    func doubleJongStage(status: Status, input: KeyboardData) -> Status {
+    func doubleJongStage(status: Status, input: HangulKeyboardData) -> Status {
         
         var currentStatus = status
         var currentKeyboardData = input
