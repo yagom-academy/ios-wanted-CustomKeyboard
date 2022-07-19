@@ -56,6 +56,7 @@ extension FirthRowKeyContainer {
         [returnButton].forEach {
             $0.backgroundColor = .systemGray
             $0.setTitleColor(.black, for: .normal)
+            $0.setTitleColor(.white, for: .normal)
             $0.layer.cornerRadius = 10
         }
         
@@ -70,7 +71,12 @@ extension FirthRowKeyContainer {
         returnButton.addTarget(self, action: #selector(tappedReturnButton), for: .touchUpInside)
         
         [spaceButton, returnButton].forEach {
-            $0.titleLabel?.font = .systemFont(ofSize: CustomKeyBoard.Math.fontSize)
+            $0.titleLabel?.font = .systemFont(ofSize: CustomKeyBoard.Math.fontSize, weight: .medium)
+            $0.layer.shadowColor = UIColor.black.cgColor
+            $0.layer.masksToBounds = false
+            $0.layer.shadowOffset = CGSize(width: 2, height: 2)
+            $0.layer.shadowRadius = 2
+            $0.layer.shadowOpacity = 0.5
         }
     }
     

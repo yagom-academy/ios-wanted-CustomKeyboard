@@ -25,14 +25,16 @@ class DynamicBasicKeyLine: BasicKeyLine {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func toggleDynamicBasicKeyState() {
+    func toggleDynamicBasicKeyState() -> State {
         
         if (self.state == .single) {
             self.state = .double
             toggleKey(to: .double)
+            return .double
         } else {
             self.state = .single
             toggleKey(to: .single)
+            return .single
         }
     }
     

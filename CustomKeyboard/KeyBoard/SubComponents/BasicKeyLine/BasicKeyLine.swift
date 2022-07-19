@@ -72,6 +72,11 @@ extension BasicKeyLine {
             btn.sizeToFit()
             btn.addTarget(self, action: #selector(tappedButton(_:)), for: .touchUpInside)
             btn.titleLabel?.font = .systemFont(ofSize: CustomKeyBoard.Math.fontSize)
+            btn.layer.shadowColor = UIColor.black.cgColor
+            btn.layer.masksToBounds = false
+            btn.layer.shadowOffset = CGSize(width: 2, height: 2)
+            btn.layer.shadowRadius = 2
+            btn.layer.shadowOpacity = 0.5
             return btn
         }
     }

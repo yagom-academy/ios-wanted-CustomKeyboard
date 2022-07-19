@@ -589,4 +589,46 @@ class KeyBoardEngine_addWord__test: XCTestCase {
         
         XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
     }
+    func test_addWord호출시_확에_ㄱ_입력시_확ㄱ가반환되는지() {
+        let input2 = 54869
+        let input1 = 12593
+        let result = "확ㄱ"
+        
+        XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
+    }
+    func test_addWord호출시_환에_ㅇ_입력시_환ㅇ가반환되는지() {
+        let input2 = 54872
+        let input1 = 12615
+        let result = "환ㅇ"
+        
+        XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
+    }
+    func test_addWord호출시_홥에_ㄷ_입력시_홥ㄷ가반환되는지() {
+        let input2 = 54885
+        let input1 = 12599
+        let result = "홥ㄷ"
+        
+        XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
+    }
+    func test_addWord호출시_활에_ㅇ_입력시_활ㅇ가반환되는지() {
+        let input2 = 54876
+        let input1 = 12615
+        let result = "활ㅇ"
+        
+        XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
+    }
+    func test_addWord호출시_방에_ㅎ_입력시_확ㄱ가반환되는지() {
+        let input2 = 48169
+        let input1 = 12622
+        let result = "방ㅎ"
+        
+        XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
+    }
+    func test_addWord호출시_핛에_ㄱ_입력시_핛ㄱ가반환되는지() {
+        let input2 = 54619
+        let input1 = 12593
+        let result = "핛ㄱ"
+        
+        XCTAssertEqual(sut?.addWord(inputUniCode: input1, lastUniCode: input2), result)
+    }
 }

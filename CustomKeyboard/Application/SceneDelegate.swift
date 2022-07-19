@@ -9,14 +9,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     var windowWidth: CGFloat?
+    var windowHeight: CGFloat?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         self.windowWidth = window?.frame.width
+        self.windowHeight = window?.frame.height
 
         let vc = ReviewListViewController()
         let nav = UINavigationController(rootViewController: vc)
+        nav.navigationBar.topItem?.backButtonTitle = ""
+        nav.navigationBar.tintColor = .label
         window?.rootViewController = nav
         window?.makeKeyAndVisible()
     }
@@ -48,7 +52,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
+    
 }
 

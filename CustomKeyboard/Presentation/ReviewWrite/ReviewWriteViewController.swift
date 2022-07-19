@@ -10,6 +10,11 @@ import UIKit
 class ReviewWriteViewController: UIViewController {
     
     // MARK: - Properties
+    private var windowHeight: CGFloat {
+        let sceneDelegate = UIApplication.shared.connectedScenes
+            .first!.delegate as! SceneDelegate
+        return sceneDelegate.windowHeight!
+    }
     private let textView = UITextView()
     private let customKeyboard = CustomKeyBoard()
     private var resultInputField: UITextView?
@@ -22,6 +27,14 @@ class ReviewWriteViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.customKeyboard.frame.origin.y = windowHeight
+        UIView.animate(withDuration: 0.4, delay: 0.3, options: .curveEaseInOut, animations: {
+            self.customKeyboard.frame.origin.y = self.windowHeight-CustomKeyBoard.Math.keyboardHeight
+        }, completion: nil)
     }
 }
 
@@ -64,14 +77,11 @@ extension ReviewWriteViewController {
     private func configureLayout() {
         [textView, customKeyboard].forEach {
             view.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        customKeyboard.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        customKeyboard.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        customKeyboard.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        customKeyboard.heightAnchor.constraint(equalToConstant: CustomKeyBoard.Math.keyboardWidth*3/4).isActive = true
+        customKeyboard.frame = CGRect(x: 0, y: windowHeight, width: CustomKeyBoard.Math.keyboardWidth, height: CustomKeyBoard.Math.keyboardHeight)
         
+        textView.translatesAutoresizingMaskIntoConstraints = false
         textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true

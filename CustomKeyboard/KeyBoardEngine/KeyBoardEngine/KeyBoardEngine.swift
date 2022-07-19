@@ -117,7 +117,9 @@ extension KeyBoardEngine {
         
         switch support {
         case Support.ㄱ.code:
-            return consonant == CharUnicode.ㅅ.code ? (Support.ㄳ.code,0) : (support,0)
+            if consonant == CharUnicode.ㅅ.code {
+                return (Support.ㄳ.code,0)
+            }
         case Support.ㄴ.code:
             if consonant == CharUnicode.ㅈ.code {
                 return (Support.ㄵ.code,0)

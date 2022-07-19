@@ -59,8 +59,6 @@ class ReviewListViewModel {
         return CellType(profileURL: url, userName: userName, contents: content, createdAt: createdAt)
     }
     
-    
-    
     private func convertDateTime(createdAtTime: String) -> String {
         
         enum IntervalRange: Int {
