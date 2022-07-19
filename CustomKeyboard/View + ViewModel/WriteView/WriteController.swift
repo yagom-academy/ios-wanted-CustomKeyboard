@@ -71,6 +71,10 @@ private extension WriteController {
     @objc func didTapDismissButton() {
         dismiss(animated: true)
     }
+    @objc func didTapClearDismissButton() {
+        viewModel.keyboardViewModel.clearAll()
+        dismiss(animated: true)
+    }
 }
 
 //MARK: - View Configure
@@ -80,7 +84,7 @@ private extension WriteController {
             image: UIImage(systemName: "xmark"),
             style: .plain,
             target: self,
-            action: #selector(didTapDismissButton)
+            action: #selector(didTapClearDismissButton)
         )
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "완료",
