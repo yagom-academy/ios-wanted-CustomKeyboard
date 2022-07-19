@@ -8,9 +8,7 @@
 import Foundation
 
 struct ReviewDataManager {
-    
-    static let shared = ReviewDataManager()
-    
+        
     func getData(_ url : String, completion : @escaping (ReviewList) -> Void ) {
         if let url = URL(string: url) {
             let session = URLSession(configuration: .default)
