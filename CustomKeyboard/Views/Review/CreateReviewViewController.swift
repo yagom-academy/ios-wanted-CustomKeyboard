@@ -9,7 +9,7 @@ import UIKit
 
 class CreateReviewViewController: UIViewController {
 
-    private let keyboadMaker = KeyboardMaker()
+    private let keyboardManager = HangulKeyboardManager()
     
     private let reviewTextView: UITextView = {
         var textView = UITextView()
@@ -22,9 +22,11 @@ class CreateReviewViewController: UIViewController {
         super.viewDidLoad()
         setLayout()
         setKeyboardInputView()
+        keyboardManager.delegate = self
     }
     
     private func setLayout() {
+        
         view.addSubview(reviewTextView)
         
         NSLayoutConstraint.activate([
@@ -39,32 +41,26 @@ class CreateReviewViewController: UIViewController {
         guard let customKeyboardView = Bundle.main.loadNibNamed("CustomKeyboard", owner: nil)?.first as? CustomKeyboardView else { return }
         customKeyboardView.delegate = self
         reviewTextView.inputView = customKeyboardView
-        
     }
-    
-    private func dissmiss() {
-        self.dismiss(animated: true)
-    }
-
 }
 
 extension CreateReviewViewController: KeyboardInfoReceivable {
     
     func customKeyboardView(pressedKeyboardButton: UIButton) {
-        
         let textData = pressedKeyboardButton.titleLabel!.text!
-        
-        guard !keyboadMaker.confirmEnterPressed(input: textData) else {
-            self.dismiss(animated: true)
-            return
-        }
-        reviewTextView.text = keyboadMaker.putHangul(input: textData)
+        keyboardManager.enterText(text: textData)
     }
     
 }
 
-extension CreateReviewViewController {
+extension CreateReviewViewController: HangulKeyboardDataReceivable {
     
+    func hangulKeyboard(enterPressed: HangulKeyboardData) {
+        self.dismiss(animated: true)
+    }
     
+    func hangulKeyboard(updatedResult text: String) {
+        reviewTextView.text = text
+    }
     
 }
