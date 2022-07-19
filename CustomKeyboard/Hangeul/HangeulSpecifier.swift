@@ -71,15 +71,13 @@ class HangeulSpecifier {
             }
         case .mid:
             if curr.isMid() {
-                if curr.isDoubleMid() {
+                if prev.canBeTripleMid() {
+                    curr.update(status: .finished, position: .mid)
+                } else if curr.isDoubleMid() {
                     prev.update(status: .finished)
                     curr.update(status: .finished, position: .mid)
                 } else if prev.canBeDoubleMid() {
-                    if prev.isAtStartingLine() {
-                        curr.update(status: .finished, position: .mid)
-                    } else {
-                        curr.update(position: .mid)
-                    }
+                    curr.update(position: .mid)
                 } else {
                     prev.update(status: .finished)
                     curr.update(position: .mid)

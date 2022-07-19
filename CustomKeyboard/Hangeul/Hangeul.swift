@@ -128,6 +128,21 @@ extension Hangeul {
         return true
     }
     
+    func canBeTripleMid() -> Bool {
+        let dictionary = HangeulDictionary()
+        
+        if self.prev == nil {
+            return false
+        } else if self.prev?.position.last! != .mid {
+            return false
+        } else if dictionary.getTripleMidUnicode(self.prev!, self, self.next!) < 0 {
+            return false
+        }
+        
+        return true
+    }
+    
+    
     func canBeDoubleMid() -> Bool {
         let dictionary = HangeulDictionary()
 

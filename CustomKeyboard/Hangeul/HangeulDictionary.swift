@@ -13,188 +13,6 @@ struct HangeulDictionary {
     let endCount = 28
     let baseCode = 44032
     
-    func getIndex(unicode: Int, position: HangeulCombinationPosition, unicodeType: HangeulUnicodeType) -> Int {
-        var index = 0
-        
-        guard unicode > 0 else {
-            return 0
-        }
-        
-        if unicodeType == .fixed {
-            switch position {
-            case .top:
-                for hangeul in HangeulDictionary.fixed.top.allCases {
-                    if hangeul.rawValue == unicode {
-                        break
-                    }
-                    index += 1
-                }
-            case .mid:
-                for hangeul in HangeulDictionary.fixed.mid.allCases {
-                    if hangeul.rawValue == unicode {
-                        break
-                    }
-                    index += 1
-                }
-            case .end:
-                for hangeul in HangeulDictionary.fixed.end.allCases {
-                    if hangeul.rawValue == unicode {
-                        break
-                    }
-                    index += 1
-                }
-            default:
-                break
-            }
-        } else {
-            switch position {
-            case .top:
-                for hangeul in HangeulDictionary.compatible.top.allCases {
-                    if hangeul.rawValue == unicode {
-                        break
-                    }
-                    index += 1
-                }
-            case .mid:
-                for hangeul in HangeulDictionary.compatible.mid.allCases {
-                    if hangeul.rawValue == unicode {
-                        break
-                    }
-                    index += 1
-                }
-            case .end:
-                for hangeul in HangeulDictionary.compatible.end.allCases {
-                    if hangeul.rawValue == unicode {
-                        break
-                    }
-                    index += 1
-                }
-            default:
-                break
-            }
-        }
-        return index
-    }
-    
-    func getUnicode(index: Int, position: HangeulCombinationPosition, unicodeType: HangeulUnicodeType) -> Int {
-        var i = 0
-        var unicode = 0
-        
-        if unicodeType == .fixed {
-            switch position {
-            case .top:
-                for hangeul in HangeulDictionary.fixed.top.allCases {
-                    if i == index {
-                        unicode = hangeul.rawValue
-                        break
-                    }
-                    i += 1
-                }
-            case .mid:
-                for hangeul in HangeulDictionary.fixed.mid.allCases {
-                    if i == index {
-                        unicode = hangeul.rawValue
-                        break
-                    }
-                    i += 1
-                }
-            case .end:
-                for hangeul in HangeulDictionary.fixed.end.allCases {
-                    if i == index {
-                        unicode = hangeul.rawValue
-                        break
-                    }
-                    i += 1
-                }
-            default:
-                break
-            }
-        } else {
-            switch position {
-            case .top:
-                for hangeul in HangeulDictionary.compatible.top.allCases {
-                    if i == index {
-                        unicode = hangeul.rawValue
-                        break
-                    }
-                    i += 1
-                }
-            case .mid:
-                for hangeul in HangeulDictionary.compatible.mid.allCases {
-                    if i == index {
-                        unicode = hangeul.rawValue
-                        break
-                    }
-                    i += 1
-                }
-            case .end:
-                for hangeul in HangeulDictionary.compatible.end.allCases {
-                    if i == index {
-                        unicode = hangeul.rawValue
-                        break
-                    }
-                    i += 1
-                }
-            default:
-                break
-            }
-        }
-        return unicode
-    }
-    
-    func getDoubleUnicode(_ prev: Hangeul, _ curr: Hangeul) -> Int {
-        if prev.position.last! == .mid {
-            if prev.value == "ㅏ" && curr.value == "ㅣ" {
-                return HangeulDictionary.fixed.mid.ㅐ.rawValue
-            } else if prev.value == "ㅑ" && curr.value == "ㅣ" {
-                return HangeulDictionary.fixed.mid.ㅒ.rawValue
-            } else if prev.value == "ㅓ" && curr.value == "ㅣ" {
-                return HangeulDictionary.fixed.mid.ㅔ.rawValue
-            } else if prev.value == "ㅕ" && curr.value == "ㅣ" {
-                return HangeulDictionary.fixed.mid.ㅖ.rawValue
-            } else if prev.value == "ㅗ" && curr.value == "ㅏ" {
-                return HangeulDictionary.fixed.mid.ㅘ.rawValue
-            } else if prev.value == "ㅗ" && curr.value == "ㅐ" {
-                return HangeulDictionary.fixed.mid.ㅙ.rawValue
-            } else if prev.value == "ㅗ" && curr.value == "ㅣ" {
-                return HangeulDictionary.fixed.mid.ㅚ.rawValue
-            } else if prev.value == "ㅜ" && curr.value == "ㅓ" {
-                return HangeulDictionary.fixed.mid.ㅝ.rawValue
-            } else if prev.value == "ㅜ" && curr.value == "ㅔ" {
-                return HangeulDictionary.fixed.mid.ㅞ.rawValue
-            } else if prev.value == "ㅜ" && curr.value == "ㅣ" {
-                return HangeulDictionary.fixed.mid.ㅟ.rawValue
-            } else if prev.value == "ㅡ" && curr.value == "ㅣ" {
-                return HangeulDictionary.fixed.mid.ㅢ.rawValue
-            } else if prev.value == "ㅠ" && curr.value == "ㅣ" {
-                return HangeulDictionary.fixed.mid.ㅝ.rawValue
-            }
-        } else if prev.position.last! == .end {
-            if prev.value == "ㄱ" && curr.value == "ㅅ" {
-                return HangeulDictionary.fixed.end.ㄱㅅ.rawValue
-            } else if prev.value == "ㄴ" && curr.value == "ㅈ" {
-                return HangeulDictionary.fixed.end.ㄴㅈ.rawValue
-            } else if prev.value == "ㄴ" && curr.value == "ㅎ" {
-                return HangeulDictionary.fixed.end.ㄴㅎ.rawValue
-            } else if prev.value == "ㄹ" && curr.value == "ㄱ" {
-                return HangeulDictionary.fixed.end.ㄹㄱ.rawValue
-            } else if prev.value == "ㄹ" && curr.value == "ㅁ" {
-                return HangeulDictionary.fixed.end.ㄹㅁ.rawValue
-            } else if prev.value == "ㄹ" && curr.value == "ㅂ" {
-                return HangeulDictionary.fixed.end.ㄹㅂ.rawValue
-            } else if prev.value == "ㄹ" && curr.value == "ㅅ" {
-                return HangeulDictionary.fixed.end.ㄹㅅ.rawValue
-            } else if prev.value == "ㄹ" && curr.value == "ㅌ" {
-                return HangeulDictionary.fixed.end.ㄹㅌ.rawValue
-            } else if prev.value == "ㄹ" && curr.value == "ㅍ" {
-                return HangeulDictionary.fixed.end.ㄹㅍ.rawValue
-            } else if prev.value == "ㄹ" && curr.value == "ㅎ" {
-                return HangeulDictionary.fixed.end.ㄹㅎ.rawValue
-            }
-        }
-        return -1
-    }
-    
     struct compatible {
         
         enum top: Int, CaseIterable{
@@ -389,5 +207,197 @@ struct HangeulDictionary {
             case ㅎ = 0x11C2
         }
 
+    }
+    
+    func getIndex(unicode: Int, position: HangeulCombinationPosition, unicodeType: HangeulUnicodeType) -> Int {
+        var index = 0
+        
+        guard unicode > 0 else {
+            return 0
+        }
+        
+        if unicodeType == .fixed {
+            switch position {
+            case .top:
+                for hangeul in HangeulDictionary.fixed.top.allCases {
+                    if hangeul.rawValue == unicode {
+                        break
+                    }
+                    index += 1
+                }
+            case .mid:
+                for hangeul in HangeulDictionary.fixed.mid.allCases {
+                    if hangeul.rawValue == unicode {
+                        break
+                    }
+                    index += 1
+                }
+            case .end:
+                for hangeul in HangeulDictionary.fixed.end.allCases {
+                    if hangeul.rawValue == unicode {
+                        break
+                    }
+                    index += 1
+                }
+            default:
+                break
+            }
+        } else {
+            switch position {
+            case .top:
+                for hangeul in HangeulDictionary.compatible.top.allCases {
+                    if hangeul.rawValue == unicode {
+                        break
+                    }
+                    index += 1
+                }
+            case .mid:
+                for hangeul in HangeulDictionary.compatible.mid.allCases {
+                    if hangeul.rawValue == unicode {
+                        break
+                    }
+                    index += 1
+                }
+            case .end:
+                for hangeul in HangeulDictionary.compatible.end.allCases {
+                    if hangeul.rawValue == unicode {
+                        break
+                    }
+                    index += 1
+                }
+            default:
+                break
+            }
+        }
+        return index
+    }
+    
+    func getUnicode(index: Int, position: HangeulCombinationPosition, unicodeType: HangeulUnicodeType) -> Int {
+        var i = 0
+        var unicode = 0
+        
+        if unicodeType == .fixed {
+            switch position {
+            case .top:
+                for hangeul in HangeulDictionary.fixed.top.allCases {
+                    if i == index {
+                        unicode = hangeul.rawValue
+                        break
+                    }
+                    i += 1
+                }
+            case .mid:
+                for hangeul in HangeulDictionary.fixed.mid.allCases {
+                    if i == index {
+                        unicode = hangeul.rawValue
+                        break
+                    }
+                    i += 1
+                }
+            case .end:
+                for hangeul in HangeulDictionary.fixed.end.allCases {
+                    if i == index {
+                        unicode = hangeul.rawValue
+                        break
+                    }
+                    i += 1
+                }
+            default:
+                break
+            }
+        } else {
+            switch position {
+            case .top:
+                for hangeul in HangeulDictionary.compatible.top.allCases {
+                    if i == index {
+                        unicode = hangeul.rawValue
+                        break
+                    }
+                    i += 1
+                }
+            case .mid:
+                for hangeul in HangeulDictionary.compatible.mid.allCases {
+                    if i == index {
+                        unicode = hangeul.rawValue
+                        break
+                    }
+                    i += 1
+                }
+            case .end:
+                for hangeul in HangeulDictionary.compatible.end.allCases {
+                    if i == index {
+                        unicode = hangeul.rawValue
+                        break
+                    }
+                    i += 1
+                }
+            default:
+                break
+            }
+        }
+        return unicode
+    }
+    
+    func getDoubleUnicode(_ prev: Hangeul, _ curr: Hangeul) -> Int {
+        if prev.position.last! == .mid {
+            if prev.value == "ㅏ" && curr.value == "ㅣ" {
+                return HangeulDictionary.fixed.mid.ㅐ.rawValue
+            } else if prev.value == "ㅑ" && curr.value == "ㅣ" {
+                return HangeulDictionary.fixed.mid.ㅒ.rawValue
+            } else if prev.value == "ㅓ" && curr.value == "ㅣ" {
+                return HangeulDictionary.fixed.mid.ㅔ.rawValue
+            } else if prev.value == "ㅕ" && curr.value == "ㅣ" {
+                return HangeulDictionary.fixed.mid.ㅖ.rawValue
+            } else if prev.value == "ㅗ" && curr.value == "ㅏ" {
+                return HangeulDictionary.fixed.mid.ㅘ.rawValue
+            } else if prev.value == "ㅗ" && curr.value == "ㅐ" {
+                return HangeulDictionary.fixed.mid.ㅙ.rawValue
+            } else if prev.value == "ㅗ" && curr.value == "ㅣ" {
+                return HangeulDictionary.fixed.mid.ㅚ.rawValue
+            } else if prev.value == "ㅜ" && curr.value == "ㅓ" {
+                return HangeulDictionary.fixed.mid.ㅝ.rawValue
+            } else if prev.value == "ㅜ" && curr.value == "ㅔ" {
+                return HangeulDictionary.fixed.mid.ㅞ.rawValue
+            } else if prev.value == "ㅜ" && curr.value == "ㅣ" {
+                return HangeulDictionary.fixed.mid.ㅟ.rawValue
+            } else if prev.value == "ㅡ" && curr.value == "ㅣ" {
+                return HangeulDictionary.fixed.mid.ㅢ.rawValue
+            } else if prev.value == "ㅠ" && curr.value == "ㅣ" {
+                return HangeulDictionary.fixed.mid.ㅝ.rawValue
+            }
+        } else if prev.position.last! == .end {
+            if prev.value == "ㄱ" && curr.value == "ㅅ" {
+                return HangeulDictionary.fixed.end.ㄱㅅ.rawValue
+            } else if prev.value == "ㄴ" && curr.value == "ㅈ" {
+                return HangeulDictionary.fixed.end.ㄴㅈ.rawValue
+            } else if prev.value == "ㄴ" && curr.value == "ㅎ" {
+                return HangeulDictionary.fixed.end.ㄴㅎ.rawValue
+            } else if prev.value == "ㄹ" && curr.value == "ㄱ" {
+                return HangeulDictionary.fixed.end.ㄹㄱ.rawValue
+            } else if prev.value == "ㄹ" && curr.value == "ㅁ" {
+                return HangeulDictionary.fixed.end.ㄹㅁ.rawValue
+            } else if prev.value == "ㄹ" && curr.value == "ㅂ" {
+                return HangeulDictionary.fixed.end.ㄹㅂ.rawValue
+            } else if prev.value == "ㄹ" && curr.value == "ㅅ" {
+                return HangeulDictionary.fixed.end.ㄹㅅ.rawValue
+            } else if prev.value == "ㄹ" && curr.value == "ㅌ" {
+                return HangeulDictionary.fixed.end.ㄹㅌ.rawValue
+            } else if prev.value == "ㄹ" && curr.value == "ㅍ" {
+                return HangeulDictionary.fixed.end.ㄹㅍ.rawValue
+            } else if prev.value == "ㄹ" && curr.value == "ㅎ" {
+                return HangeulDictionary.fixed.end.ㄹㅎ.rawValue
+            }
+        }
+        return -1
+    }
+    
+    func getTripleMidUnicode(_ prev: Hangeul, _ curr: Hangeul, _ next: Hangeul) -> Int {
+        
+        if prev.value == "ㅜ" && curr.value == "ㅓ" && next.value == "ㅣ" {
+            return HangeulDictionary.fixed.mid.ㅞ.rawValue
+        } else if prev.value == "ㅗ" && curr.value == "ㅏ" && next.value == "ㅣ" {
+            return HangeulDictionary.fixed.mid.ㅙ.rawValue
+        }
+        return -1
     }
 }

@@ -53,7 +53,7 @@ class HangeulCombiner {
         buffer.append(last)
         
         if buffer.top.isEmpty {
-            if buffer.mid.count == 2 {
+            if buffer.mid.count > 1 {
                 return (getCombinedString(with: buffer), .change)
             } else {
                 return (getCombinedString(buffer.mid.first!), .add)
@@ -90,6 +90,11 @@ class HangeulCombiner {
             return converter.toString(from: doubleUnicode)
         }
         
+        guard !(buffer.top.isEmpty && buffer.mid.count == 3) else {
+            let tripleUnicode = dictionary.getTripleMidUnicode(buffer.mid[0], buffer.mid[1], buffer.mid[2])
+            return converter.toString(from: tripleUnicode)
+        }
+        
         let index = getIndexArrayForCombine(with: buffer)
         let combineUnicode = (index.top * dictionary.midCount * dictionary.endCount) + (index.mid * dictionary.endCount) + index.end + dictionary.baseCode
         
@@ -105,9 +110,12 @@ class HangeulCombiner {
         
         if buffer.mid.count == 1 {
             midIndex = dictionary.getIndex(unicode: buffer.mid.first!.unicode, position: .mid, unicodeType: .fixed)
-        } else {
+        } else if buffer.mid.count == 2 {
             let doubleMidUnicode = dictionary.getDoubleUnicode(buffer.mid.first!, buffer.mid.last!)
             midIndex = dictionary.getIndex(unicode: doubleMidUnicode, position: .mid, unicodeType: .fixed)
+        } else if buffer.mid.count == 3 {
+            let tripleUnicode = dictionary.getTripleMidUnicode(buffer.mid[0], buffer.mid[1], buffer.mid[2])
+            midIndex = dictionary.getIndex(unicode: tripleUnicode, position: .mid, unicodeType: .fixed)
         }
         
         if buffer.end.isEmpty {
