@@ -30,7 +30,6 @@
 		01EA7CB5288538430006A23B /* HangeulIoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954F28821F4F00F6AE87 /* HangeulIoManager.swift */; };
 		01EA7CB6288538500006A23B /* HangeulSpecifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954B28821A3300F6AE87 /* HangeulSpecifier.swift */; };
 		01EA7CB7288538500006A23B /* HangeulCombiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB69549288219F100F6AE87 /* HangeulCombiner.swift */; };
-		01EA7CB8288538500006A23B /* HangeulJudgingMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB695512882248B00F6AE87 /* HangeulJudgingMachine.swift */; };
 		01EA7CB9288538500006A23B /* Hangeul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB695452881A3AA00F6AE87 /* Hangeul.swift */; };
 		01EA7CBA288538500006A23B /* HangeulConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954D28821D8300F6AE87 /* HangeulConverter.swift */; };
 		01EA7CBB288538500006A23B /* HangeulDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB695532882265900F6AE87 /* HangeulDictionary.swift */; };
@@ -44,7 +43,6 @@
 		9FB6954C28821A3300F6AE87 /* HangeulSpecifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954B28821A3300F6AE87 /* HangeulSpecifier.swift */; };
 		9FB6954E28821D8300F6AE87 /* HangeulConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954D28821D8300F6AE87 /* HangeulConverter.swift */; };
 		9FB6955028821F4F00F6AE87 /* HangeulIoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954F28821F4F00F6AE87 /* HangeulIoManager.swift */; };
-		9FB695522882248B00F6AE87 /* HangeulJudgingMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB695512882248B00F6AE87 /* HangeulJudgingMachine.swift */; };
 		9FB695542882265900F6AE87 /* HangeulDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB695532882265900F6AE87 /* HangeulDictionary.swift */; };
 		9FC4B34C2885606400F15B2D /* HangeulList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC4B34B2885606400F15B2D /* HangeulList.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
@@ -116,7 +114,6 @@
 		9FB6954B28821A3300F6AE87 /* HangeulSpecifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulSpecifier.swift; sourceTree = "<group>"; };
 		9FB6954D28821D8300F6AE87 /* HangeulConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulConverter.swift; sourceTree = "<group>"; };
 		9FB6954F28821F4F00F6AE87 /* HangeulIoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulIoManager.swift; sourceTree = "<group>"; };
-		9FB695512882248B00F6AE87 /* HangeulJudgingMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulJudgingMachine.swift; sourceTree = "<group>"; };
 		9FB695532882265900F6AE87 /* HangeulDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulDictionary.swift; sourceTree = "<group>"; };
 		9FC4B34B2885606400F15B2D /* HangeulList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulList.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -260,7 +257,7 @@
 			path = HangeulManagerTests;
 			sourceTree = "<group>";
 		};
-		9FB6954228818C4C00F6AE87 /* HangeulRefactoring */ = {
+		9FB6954228818C4C00F6AE87 /* Hangeul */ = {
 			isa = PBXGroup;
 			children = (
 				9FB695452881A3AA00F6AE87 /* Hangeul.swift */,
@@ -268,11 +265,10 @@
 				9FB6954B28821A3300F6AE87 /* HangeulSpecifier.swift */,
 				9FB6954D28821D8300F6AE87 /* HangeulConverter.swift */,
 				9FB6954F28821F4F00F6AE87 /* HangeulIoManager.swift */,
-				9FB695512882248B00F6AE87 /* HangeulJudgingMachine.swift */,
 				9FB695532882265900F6AE87 /* HangeulDictionary.swift */,
 				9FC4B34B2885606400F15B2D /* HangeulList.swift */,
 			);
-			path = HangeulRefactoring;
+			path = Hangeul;
 			sourceTree = "<group>";
 		};
 		DE15E64F28604278003DD2F5 = {
@@ -298,7 +294,7 @@
 		DE15E65A28604278003DD2F5 /* CustomKeyboard */ = {
 			isa = PBXGroup;
 			children = (
-				9FB6954228818C4C00F6AE87 /* HangeulRefactoring */,
+				9FB6954228818C4C00F6AE87 /* Hangeul */,
 				9F5042FD287C463300CDBD9C /* Extension */,
 				0142F4DB287C3510006F3E48 /* Application */,
 				0142F4D8287C34CC006F3E48 /* Model */,
@@ -455,7 +451,6 @@
 				01A45B8128867C1A001F44D6 /* HangeulList.swift in Sources */,
 				01EA7CBA288538500006A23B /* HangeulConverter.swift in Sources */,
 				01EA7CB6288538500006A23B /* HangeulSpecifier.swift in Sources */,
-				01EA7CB8288538500006A23B /* HangeulJudgingMachine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,7 +476,6 @@
 				012EDE5A287FA6FA0035C3E6 /* APIEndpoints.swift in Sources */,
 				012EDE46287EC14C0035C3E6 /* HttpMethod.swift in Sources */,
 				01A45B8328867D1B001F44D6 /* Content.swift in Sources */,
-				9FB695522882248B00F6AE87 /* HangeulJudgingMachine.swift in Sources */,
 				012EDE56287FA0BD0035C3E6 /* Provider.swift in Sources */,
 				0142F4D0287C0C9C006F3E48 /* ReviewResponse.swift in Sources */,
 				012EDE42287EB9FA0035C3E6 /* NetworkManager.swift in Sources */,
