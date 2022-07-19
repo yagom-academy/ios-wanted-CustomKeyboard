@@ -87,7 +87,7 @@ extension KeyboardViewController: ButtonDelegate {
             let currentText = String(reviewTextView.text.suffix(2))
             reviewTextView.text = String(reviewTextView.text.prefix(reviewTextView.text.count - 2))
             
-            let managerString = manager.deleteString(1, currentText)
+            let managerString = manager.deleteString(3, currentText)
             reviewTextView.text += managerString.0
             state = managerString.1
         } else {
