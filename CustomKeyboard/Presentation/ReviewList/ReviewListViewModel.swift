@@ -34,7 +34,7 @@ class ReviewListViewModel {
     
     func postData(text: String, completion: @escaping (Result<NetworkManager.ResponseCode, CustomError>) -> ()) {
         
-        NetworkManager.shared.postReview(message: "") { result in
+        NetworkManager.shared.postReview(message: text) { result in
             completion(result)
         }
     }

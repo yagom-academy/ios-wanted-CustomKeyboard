@@ -49,9 +49,9 @@ extension ReviewListViewController {
         viewModel.postData(text: reviewTextView.text) { result in
             switch result {
             case .success(let result):
-                self.addAlert(statusCode: result)
-            case .failure(let error):
-                print(error.localizedDescription)
+                self.addSuccessAlert(statusCode: result)
+            case .failure(let customError):
+                self.addFailureAlert(error: customError.description)
             }
         }
     }
@@ -62,11 +62,20 @@ extension ReviewListViewController {
         self.reviewTextView.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    private func addAlert(statusCode: NetworkManager.ResponseCode) {
-        let postAlert = UIAlertController(title: "알림", message: "Status Code: \(statusCode)\n 댓글이 업로드 되었습니다.", preferredStyle: .alert)
+    private func addSuccessAlert(statusCode: NetworkManager.ResponseCode) {
+        
+        let postAlert = UIAlertController(title: "알림", message: "Status Code: \(statusCode)\n 리뷰 작성이 성공했습니다.", preferredStyle: .alert)
         postAlert.addAction(UIAlertAction(title: "닫기", style: .destructive))
         self.present(postAlert, animated: true)
     }
+    
+    private func addFailureAlert(error: String) {
+        
+        let postAlert = UIAlertController(title: "경고", message: "에러 원인: \(error)\n 리뷰 작성이 실패했습니다.", preferredStyle: .alert)
+        postAlert.addAction(UIAlertAction(title: "닫기", style: .destructive))
+        self.present(postAlert, animated: true)
+    }
+    
 }
 
 // MARK: - @objc Methods
@@ -80,7 +89,7 @@ extension ReviewListViewController {
     @objc func didTapWriteButton() {
         
         postData()
-       
+        
     }
 }
 
@@ -117,6 +126,7 @@ extension ReviewListViewController {
         reviewPostButton.configuration = UIButton.Configuration.tinted()
         reviewPostButton.configuration?.title = "작성"
         reviewPostButton.addTarget(self, action: #selector(didTapWriteButton) , for: .touchUpInside)
+        
     }
     
     private func configureStackView() {
