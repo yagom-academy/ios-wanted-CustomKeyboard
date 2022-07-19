@@ -9,7 +9,6 @@ import UIKit
 
 protocol KeyboardInfoReceivable {
     func customKeyboardView(pressedKeyboardButton: UIButton)
-    func customKeyboardView(pressedDeleteButton: UIButton)
 }
 
 class CustomKeyboardView: UIView {
@@ -112,11 +111,6 @@ class CustomKeyboardView: UIView {
             shiftButton.setImage(UIImage(systemName: "shift"), for: .normal)
         }
         self.layoutIfNeeded()
-    }
-    
-    @IBAction func pressDeleteButton(_ sender: UIButton) {
-        guard let delegate = delegate else { return }
-        delegate.customKeyboardView(pressedDeleteButton: sender)
     }
     
 }

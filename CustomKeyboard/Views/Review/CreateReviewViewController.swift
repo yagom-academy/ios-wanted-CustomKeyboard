@@ -61,9 +61,6 @@ extension CreateReviewViewController: KeyboardInfoReceivable {
         reviewTextView.text = keyboadMaker.putHangul(input: hangul)
     }
     
-    func customKeyboardView(pressedDeleteButton: UIButton) {
-        reviewTextView.text = keyboadMaker.putHangul(input: pressedDeleteButton.titleLabel!.text!)
-    }
 }
 
 extension CreateReviewViewController {

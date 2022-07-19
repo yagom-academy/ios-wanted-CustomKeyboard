@@ -348,7 +348,7 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <connections>
-                                        <action selector="pressDeleteButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="PYE-H3-2kY"/>
+                                        <action selector="keyboardPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="vyZ-oZ-Ys6"/>
                                     </connections>
                                 </button>
                             </subviews>
