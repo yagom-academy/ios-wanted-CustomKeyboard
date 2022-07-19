@@ -77,7 +77,9 @@ class ReviewListViewController: UIViewController {
             guard let vc = vc as? WriteController else {
                 return
             }
-            self.present(vc, animated: true)
+            let nvc = UINavigationController(rootViewController: vc)
+            nvc.modalPresentationStyle = .fullScreen
+            self.present(nvc, animated: true)
         }
     }
     

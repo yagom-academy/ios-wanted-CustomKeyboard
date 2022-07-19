@@ -35,6 +35,7 @@ class WriteController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        setupNavigationBar()
         self.commentEditView.inputView = viewModel.keyBoardView
         
         commentEditView.text = delegate?.commentValue
@@ -51,8 +52,11 @@ class WriteController: UIViewController {
         }
     }
     func bindReturnButtonTapped() {
-        viewModel.returnButtonTapped.bind { _ in
-            self.dismiss(animated: true)
+        viewModel.returnButtonTapped.bind {
+            if $0 {
+                self.dismiss(animated: true)
+                self.viewModel.returnButtonTapped.value = false
+            }
         }
     }
     
@@ -62,9 +66,29 @@ class WriteController: UIViewController {
     }
 }
 
+// MARK: - @objc Methods
+private extension WriteController {
+    @objc func didTapDismissButton() {
+        dismiss(animated: true)
+    }
+}
 
 //MARK: - View Configure
 private extension WriteController {
+    func setupNavigationBar() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "xmark"),
+            style: .plain,
+            target: self,
+            action: #selector(didTapDismissButton)
+        )
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "완료",
+            style: .plain,
+            target: self,
+            action: #selector(didTapDismissButton)
+        )
+    }
     func configUI() {
         [commentEditView].forEach {
             view.addSubview($0)
