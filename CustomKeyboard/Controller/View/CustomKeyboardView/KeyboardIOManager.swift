@@ -26,7 +26,6 @@ class KeyboardIOManager {
     
     var updateTextView: ((String) -> Void)!
 
-    
 }
 
 extension KeyboardIOManager: CustomKeyboardDelegate {
