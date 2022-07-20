@@ -12,7 +12,7 @@ final class Hangeul {
     var next: Hangeul?
     
     var eumun: HangeulEumun
-    var text: String
+    let text: String
     var unicode: Int?
     var status: HangeulCombinationStatus
     var position: [HangeulCombinationPosition]
@@ -41,6 +41,8 @@ final class Hangeul {
         self.status = .ongoing
     }
 }
+
+// MARK: - Public Method
 
 extension Hangeul {
 
@@ -155,7 +157,7 @@ extension Hangeul {
         
         if mostPreviousCharacter.position.last! != .jungseong {
             return false
-        } else if dictionary.getTripleMidUnicode(mostPreviousCharacter, previousCharacter, self) == nil {
+        } else if dictionary.getTripleMidUnicode(mostPreviousCharacter.text, previousCharacter.text, self.text) == nil {
             return false
         }
         

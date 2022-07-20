@@ -9,8 +9,11 @@ import Foundation
 
 final class HangeulConverter {
     
-    func toUnicode(from string: String) -> Int {
-        return Int(UnicodeScalar(string)!.value)
+    func toUnicode(from string: String) -> Int? {
+        guard let unicodeScalar = UnicodeScalar(string) else {
+            return nil
+        }
+        return Int(unicodeScalar.value)
     }
     
     func toString(from unicode: Int?) -> String? {
@@ -18,7 +21,6 @@ final class HangeulConverter {
               let unicodeScalar = UnicodeScalar(unicode) else {
             return nil
         }
-    
         return String(unicodeScalar)
     }
 }

@@ -24,7 +24,7 @@ enum HangeulCombinationPosition {
 }
 
 enum HangeulOutputMode {
-    case none, add, change, remove
+    case add, change, remove
 }
 
 enum HangeulInputMode {

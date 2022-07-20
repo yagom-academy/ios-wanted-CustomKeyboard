@@ -19,7 +19,6 @@ final class HangeulIOManger {
 extension HangeulIOManger {
     
     func process(input: String) {
-        
         inputList.append(input)
         
         switch input {
@@ -106,14 +105,17 @@ extension HangeulIOManger {
 
 extension HangeulIOManger {
     
-    private func setOutput(with combinedString: String, editMode: HangeulOutputMode) {
-
+    private func setOutput(with combinedString: String, editMode: HangeulOutputMode?) {
+        guard let editMode = editMode else {
+            return
+        }
+        
         if editMode == .remove {
             output.unicodeScalars.removeLast()
             return
         }
         
-        if editMode == .change && !output.isEmpty {
+        if editMode == .change && output.isEmpty == false {
             output.unicodeScalars.removeLast()
         }
         

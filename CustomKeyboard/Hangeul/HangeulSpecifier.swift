@@ -43,7 +43,7 @@ extension HangeulSpecifier {
     }
     
     private func specifyPropertiesInRemoveMode(_ currentCharacter: Hangeul) {
-        if currentCharacter.status == .finished && currentCharacter.text != "Space" {
+        if currentCharacter.status == .finished && currentCharacter.text != Text.space {
             currentCharacter.update(status: .ongoing)
             return
         }

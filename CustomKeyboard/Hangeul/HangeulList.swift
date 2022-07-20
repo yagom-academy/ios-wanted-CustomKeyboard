@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - Variable
+
 final class HangeulList {
     var head: Hangeul?
     var tail: Hangeul?
@@ -16,6 +18,8 @@ final class HangeulList {
         tail = nil
     }
 }
+
+// MARK: - Public Method
 
 extension HangeulList {
     
@@ -49,9 +53,6 @@ extension HangeulList {
         tail = tail?.prev
         return
     }
-}
-
-extension HangeulList {
     
     func isEmpty() -> Bool {
         if head == nil || tail == nil {

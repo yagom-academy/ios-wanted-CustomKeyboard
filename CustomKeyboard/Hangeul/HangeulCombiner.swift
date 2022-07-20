@@ -11,7 +11,7 @@ import Foundation
 
 final class HangeulCombiner {
     private var combinedString: String = Text.emptyString
-    private var outputMode: HangeulOutputMode = .none
+    private var outputMode: HangeulOutputMode?
 
 }
 
@@ -41,7 +41,9 @@ extension HangeulCombiner {
             combinedString = getCombinedString(topFirstCharacter) ?? Text.emptyString
             outputMode = .add
         } else if buffer.jongseongSection.isEmpty {
-            let topFirstCharacterPositionList = buffer.choseongSection.first!.position
+            guard let topFirstCharacterPositionList = buffer.choseongSection.first?.position else {
+                return
+            }
             if inputMode == .add && buffer.jungseongSection.count == 1 && topFirstCharacterPositionList.count > 1 {
                 let previousBuffer = HangeulCombineBuffer()
                 guard let previousCurrentCharacter = buffer.choseongSection.first?.prev else {
@@ -62,7 +64,7 @@ extension HangeulCombiner {
         return combinedString
     }
         
-    func getOutputMode() -> HangeulOutputMode {
+    func getOutputMode() -> HangeulOutputMode? {
         return outputMode
     }
     
@@ -90,7 +92,7 @@ extension HangeulCombiner {
                 let doubleUnicode = dictionary.getDoubleUnicode(buffer.jungseongSection[0], buffer.jungseongSection[1])
                 return converter.toString(from: doubleUnicode)
             } else if buffer.jungseongSection.count == 3 {
-                let tripleUnicode = dictionary.getTripleMidUnicode(buffer.jungseongSection[0], buffer.jungseongSection[1], buffer.jungseongSection[2])
+                let tripleUnicode = dictionary.getTripleMidUnicode(buffer.jungseongSection[0].text, buffer.jungseongSection[1].text, buffer.jungseongSection[2].text)
                 return converter.toString(from: tripleUnicode)
             }
         }
@@ -108,21 +110,21 @@ extension HangeulCombiner {
         let dictionary = HangeulDictionary()
         var midIndex = 0, endIndex = 0
         
-        let topIndex = dictionary.getIndex(of: buffer.choseongSection.first!.unicode, in: .choseong, type: .fixed)
+        let topIndex = dictionary.getIndex(of: buffer.choseongSection.first?.unicode, in: .choseong, type: .fixed)
         
         if buffer.jungseongSection.count == 1 {
-            guard let index = dictionary.getIndex(of: buffer.jungseongSection.first!.unicode, in: .jungseong, type: .fixed) else {
+            guard let index = dictionary.getIndex(of: buffer.jungseongSection.first?.unicode, in: .jungseong, type: .fixed) else {
                 return nil
             }
             midIndex = index
         } else if buffer.jungseongSection.count == 2 {
-            let doubleMidUnicode = dictionary.getDoubleUnicode(buffer.jungseongSection.first!, buffer.jungseongSection.last!)
+            let doubleMidUnicode = dictionary.getDoubleUnicode(buffer.jungseongSection.first, buffer.jungseongSection.last)
             guard let index = dictionary.getIndex(of: doubleMidUnicode, in: .jungseong, type: .fixed) else {
                 return nil
             }
             midIndex = index
         } else if buffer.jungseongSection.count == 3 {
-            let tripleUnicode = dictionary.getTripleMidUnicode(buffer.jungseongSection[0], buffer.jungseongSection[1], buffer.jungseongSection[2])
+            let tripleUnicode = dictionary.getTripleMidUnicode(buffer.jungseongSection[0].text, buffer.jungseongSection[1].text, buffer.jungseongSection[2].text)
             guard let index = dictionary.getIndex(of: tripleUnicode, in: .jungseong, type: .fixed) else {
                 return nil
             }
@@ -140,7 +142,7 @@ extension HangeulCombiner {
             }
             endIndex = index
         } else {
-            let doubleEndUnicode = dictionary.getDoubleUnicode(buffer.jongseongSection.first!, buffer.jongseongSection.last!)
+            let doubleEndUnicode = dictionary.getDoubleUnicode(buffer.jongseongSection.first, buffer.jongseongSection.last)
             guard let index = dictionary.getIndex(of: doubleEndUnicode, in: .jongseong, type: .fixed) else {
                 return nil
             }
