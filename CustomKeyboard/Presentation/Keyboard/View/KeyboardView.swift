@@ -8,7 +8,7 @@
 import UIKit
 
 class KeyboardView: UIView {
-    
+        
     let reviewTextLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .white
@@ -41,10 +41,6 @@ class KeyboardView: UIView {
         setupView()
         setupConstraints()
     }
-    
-//    init(image : UIImage, frame : CGRect) { // custom initialize
-//        super.init(frame: frame)
-//    }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
