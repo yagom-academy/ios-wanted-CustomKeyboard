@@ -21,14 +21,6 @@ class WriteViewModel {
         returnButtonTapped = keyboardViewModel.returnButtonTapped
     }
     
-    lazy var keyBoardView: KeyboardView = {
-        let keyboard = KeyboardView(viewModel: keyboardViewModel)
-        keyboard.frame = CGRect(x: 0, y: 0, width: 0, height: 250)
-        keyboard.backgroundColor = .gray
-        return keyboard
-    }()
-    
-    
     func clearAll() {
         self.resultText.value = ""
         self.sendedText.value = ""

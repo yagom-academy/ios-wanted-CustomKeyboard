@@ -23,6 +23,13 @@ class WriteController: UIViewController {
         return textView
     }()
     
+    lazy var keyBoardView: KeyboardView = {
+        let keyboard = KeyboardView(viewModel: viewModel.keyboardViewModel)
+        keyboard.frame = CGRect(x: 0, y: 0, width: 0, height: 250)
+        keyboard.backgroundColor = .gray
+        return keyboard
+    }()
+    
     init(viewModel: WriteViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -36,7 +43,7 @@ class WriteController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupNavigationBar()
-        self.commentEditView.inputView = viewModel.keyBoardView
+        self.commentEditView.inputView = keyBoardView
         
         commentEditView.text = delegate?.commentValue
         configUI()
