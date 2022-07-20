@@ -38,7 +38,7 @@ struct Network {
         }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
-            guard error != nil else {
+            guard error == nil else {
                 completion(.failure(.invalidRequest))
                 return
             }

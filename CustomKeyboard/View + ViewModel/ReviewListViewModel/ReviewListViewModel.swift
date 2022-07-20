@@ -5,9 +5,7 @@
 //  Created by yc on 2022/07/11.
 //
 
-import Foundation
 import UIKit
-
 
 class ReviewListViewModel {
     var reviewList: Observable<[ReviewResult]> = Observable([])

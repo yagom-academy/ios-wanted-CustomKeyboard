@@ -29,20 +29,21 @@ struct ImageLoader {
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             
-            //TODO: - 에러 핸들링
-            guard error != nil else {
+            guard error == nil else {
+                print(url, "⭐️")
                 completion(.failure(.invalidRequest))
                 return
             }
             
-            //TODO: - 프로필 이미지가 없는 경우, 예외처리 하기
             guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+                print(url, "⭐️")
                 completion(.failure(.serverError))
                 return
             }
             
             guard let data = data,
                   let image = UIImage(data: data) else {
+                print(url, "⭐️")
                 completion(.failure(.unknown))
                 return
             }
