@@ -110,18 +110,18 @@
 				B779BBCC287D4B5300BB8DF5 /* EndPoint.swift */,
 				B779BBC7287D4B5300BB8DF5 /* Request.swift */,
 				B779BBC8287D4B5300BB8DF5 /* NetworkError.swift */,
-				B779BBC9287D4B5300BB8DF5 /* Protocols */,
+				B779BBC9287D4B5300BB8DF5 /* protocols */,
 			);
 			path = "Network ";
 			sourceTree = "<group>";
 		};
-		B779BBC9287D4B5300BB8DF5 /* Protocols */ = {
+		B779BBC9287D4B5300BB8DF5 /* protocols */ = {
 			isa = PBXGroup;
 			children = (
 				B779BBCA287D4B5300BB8DF5 /* EndPointable.swift */,
 				B779BBCB287D4B5300BB8DF5 /* Requestable.swift */,
 			);
-			path = Protocols;
+			path = protocols;
 			sourceTree = "<group>";
 		};
 		B779BBCD287D4B5300BB8DF5 /* Domain */ = {
