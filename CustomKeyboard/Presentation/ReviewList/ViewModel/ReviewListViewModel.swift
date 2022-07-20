@@ -5,12 +5,11 @@
 //  Created by 조성빈 on 2022/07/19.
 //
 
-import Foundation
 import Combine
 import UIKit
 
 class ReviewListViewModel: ObservableObject {
-    @Published var reviewList : ReviewList?
+    @Published var reviewList : ReviewList? // 서버가 문제다
     let reviewDataManager = ReviewDataManager()
     
     init() {

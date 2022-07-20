@@ -19,6 +19,7 @@ class ReviewListViewController: BaseViewController {
     var disposalbleBag = Set<AnyCancellable>()
         
     override func loadView() {
+//        super.loadView()
         self.view = reviewListView
     }
     
