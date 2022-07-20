@@ -35,10 +35,10 @@ struct HangulKeyboardData {
         self.bornState = state
     }
     
-    init(char: String, uni: Int, lastState: HangulState) {
+    init(char: String, uni: Int, state: HangulState) {
         self.hangul = char
         self.unicode = uni
-        self.bornState = lastState
+        self.bornState = state
     }
     
     private func convertUni2Str(uni: Int) -> String {
