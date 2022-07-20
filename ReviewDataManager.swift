@@ -9,8 +9,12 @@ import Foundation
 
 struct ReviewDataManager {
     
-    static let shared = ReviewDataManager()
-    
+//    static let shared = ReviewDataManager()
+//
+//    private init() {
+//
+//    } => 이렇게 세트인건가?
+        
     func getData(_ url : String, completion : @escaping (ReviewList) -> Void ) {
         if let url = URL(string: url) {
             let session = URLSession(configuration: .default)
@@ -54,7 +58,7 @@ struct ReviewDataManager {
                 print(error)
                 return
             }
-            
+            // Todo : process 200
             print((response as? HTTPURLResponse)?.statusCode)
         }
         task.resume()

@@ -7,9 +7,9 @@
 
 import UIKit
 
-final class ReviewListView: UIView {
+class ReviewListView: UIView {
     
-    lazy var profileImage: UIImageView = {
+    let profileImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "person")
         image.widthAnchor.constraint(equalToConstant: 40).isActive = true
@@ -17,7 +17,7 @@ final class ReviewListView: UIView {
         return image
     }()
     
-    lazy var reviewInputLabel: UILabel = {
+    let reviewInputLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = UIColor(red: 242/255, green: 243/255, blue: 247/255, alpha: 1)
         label.text = "  이 테마가 마음에 드시나요?"
@@ -28,7 +28,7 @@ final class ReviewListView: UIView {
         return label
     }()
     
-    lazy var postButton : UIButton = {
+    let postButton : UIButton = {
         let button = UIButton()
         button.setTitle("전송", for: .normal)
         button.backgroundColor = .systemCyan
@@ -38,7 +38,7 @@ final class ReviewListView: UIView {
         return button
     }()
     
-    lazy var reviewInputHorizontalStackView: UIStackView = {
+    let reviewInputHorizontalStackView: UIStackView = {
        let stackView = UIStackView()
         stackView.spacing = 15
         stackView.distribution = .fill
@@ -47,7 +47,7 @@ final class ReviewListView: UIView {
         return stackView
     }()
     
-    lazy var verticalStackView: UIStackView = {
+    let verticalStackView: UIStackView = {
        let stackView = UIStackView()
         stackView.spacing = 20
         stackView.distribution = .fill
@@ -56,7 +56,7 @@ final class ReviewListView: UIView {
         return stackView
     }()
     
-    lazy var tableView: UITableView = {
+    let tableView: UITableView = { // 항상 보이는 것이 아닌 것은 lazy var로 해야될 거 같은데 tableview는 왜 let으로 해도 같은지?
         lazy var tableView = UITableView()
         tableView.register(ReviewListTableViewCell.self, forCellReuseIdentifier: ReviewListTableViewCell.identifier)
         tableView.rowHeight = UITableView.automaticDimension
@@ -71,7 +71,6 @@ final class ReviewListView: UIView {
     }
     
     required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
         super.init(coder: coder)
     }
     
@@ -88,7 +87,6 @@ final class ReviewListView: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             reviewInputHorizontalStackView.addArrangedSubview($0)
         }
-        
     }
     
     func setupConstraints() {
