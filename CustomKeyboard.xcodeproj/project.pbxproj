@@ -28,7 +28,7 @@
 		01A45B8328867D1B001F44D6 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A45B8228867D1B001F44D6 /* Content.swift */; };
 		01A45B852886DC6F001F44D6 /* LazyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A45B842886DC6F001F44D6 /* LazyImageView.swift */; };
 		01EA7CB5288538430006A23B /* HangeulIOManager_OK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954F28821F4F00F6AE87 /* HangeulIOManager_OK.swift */; };
-		01EA7CB6288538500006A23B /* HangeulSpecifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954B28821A3300F6AE87 /* HangeulSpecifier.swift */; };
+		01EA7CB6288538500006A23B /* HangeulSpecifier_OK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954B28821A3300F6AE87 /* HangeulSpecifier_OK.swift */; };
 		01EA7CB7288538500006A23B /* HangeulCombiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB69549288219F100F6AE87 /* HangeulCombiner.swift */; };
 		01EA7CB9288538500006A23B /* Hangeul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB695452881A3AA00F6AE87 /* Hangeul.swift */; };
 		01EA7CBA288538500006A23B /* HangeulConverter_OK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954D28821D8300F6AE87 /* HangeulConverter_OK.swift */; };
@@ -46,7 +46,7 @@
 		9F57B54B2887EAC900B2DC24 /* HangeulEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F57B5492887EAC600B2DC24 /* HangeulEnums.swift */; };
 		9FB695462881A3AA00F6AE87 /* Hangeul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB695452881A3AA00F6AE87 /* Hangeul.swift */; };
 		9FB6954A288219F100F6AE87 /* HangeulCombiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB69549288219F100F6AE87 /* HangeulCombiner.swift */; };
-		9FB6954C28821A3300F6AE87 /* HangeulSpecifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954B28821A3300F6AE87 /* HangeulSpecifier.swift */; };
+		9FB6954C28821A3300F6AE87 /* HangeulSpecifier_OK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954B28821A3300F6AE87 /* HangeulSpecifier_OK.swift */; };
 		9FB6954E28821D8300F6AE87 /* HangeulConverter_OK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954D28821D8300F6AE87 /* HangeulConverter_OK.swift */; };
 		9FB6955028821F4F00F6AE87 /* HangeulIOManager_OK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954F28821F4F00F6AE87 /* HangeulIOManager_OK.swift */; };
 		9FB695542882265900F6AE87 /* HangeulDictionary_OK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB695532882265900F6AE87 /* HangeulDictionary_OK.swift */; };
@@ -121,7 +121,7 @@
 		9F57B5492887EAC600B2DC24 /* HangeulEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulEnums.swift; sourceTree = "<group>"; };
 		9FB695452881A3AA00F6AE87 /* Hangeul.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hangeul.swift; sourceTree = "<group>"; };
 		9FB69549288219F100F6AE87 /* HangeulCombiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulCombiner.swift; sourceTree = "<group>"; };
-		9FB6954B28821A3300F6AE87 /* HangeulSpecifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulSpecifier.swift; sourceTree = "<group>"; };
+		9FB6954B28821A3300F6AE87 /* HangeulSpecifier_OK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulSpecifier_OK.swift; sourceTree = "<group>"; };
 		9FB6954D28821D8300F6AE87 /* HangeulConverter_OK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulConverter_OK.swift; sourceTree = "<group>"; };
 		9FB6954F28821F4F00F6AE87 /* HangeulIOManager_OK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulIOManager_OK.swift; sourceTree = "<group>"; };
 		9FB695532882265900F6AE87 /* HangeulDictionary_OK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulDictionary_OK.swift; sourceTree = "<group>"; };
@@ -284,7 +284,7 @@
 				9F57B5422887C48D00B2DC24 /* Enums */,
 				9FB695452881A3AA00F6AE87 /* Hangeul.swift */,
 				9FB69549288219F100F6AE87 /* HangeulCombiner.swift */,
-				9FB6954B28821A3300F6AE87 /* HangeulSpecifier.swift */,
+				9FB6954B28821A3300F6AE87 /* HangeulSpecifier_OK.swift */,
 				9FB6954D28821D8300F6AE87 /* HangeulConverter_OK.swift */,
 				9FB6954F28821F4F00F6AE87 /* HangeulIOManager_OK.swift */,
 				9FB695532882265900F6AE87 /* HangeulDictionary_OK.swift */,
@@ -476,7 +476,7 @@
 				01EA7CBA288538500006A23B /* HangeulConverter_OK.swift in Sources */,
 				9F57B54B2887EAC900B2DC24 /* HangeulEnums.swift in Sources */,
 				9F57B5482887E82400B2DC24 /* Text.swift in Sources */,
-				01EA7CB6288538500006A23B /* HangeulSpecifier.swift in Sources */,
+				01EA7CB6288538500006A23B /* HangeulSpecifier_OK.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,7 +522,7 @@
 				9FC4B34C2885606400F15B2D /* HangeulList_OK.swift in Sources */,
 				9F5042FF287C467400CDBD9C /* DateFormatter_Extension.swift in Sources */,
 				012EDEAF288139480035C3E6 /* ImageCacheManager.swift in Sources */,
-				9FB6954C28821A3300F6AE87 /* HangeulSpecifier.swift in Sources */,
+				9FB6954C28821A3300F6AE87 /* HangeulSpecifier_OK.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

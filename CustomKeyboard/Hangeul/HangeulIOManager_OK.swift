@@ -10,7 +10,6 @@ import Foundation
 // MARK: - Variable
 
 final class HangeulIOManger {
-    
     private var inputList = HangeulList()
     private var output = Text.emptyString
 }

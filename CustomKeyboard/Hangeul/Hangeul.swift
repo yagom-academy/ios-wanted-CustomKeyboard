@@ -36,7 +36,6 @@ final class Hangeul {
             }
         }
         
-        
         let converter = HangeulConverter()
         self.unicode = converter.toUnicode(from: input)
         self.status = .ongoing
@@ -64,16 +63,11 @@ extension Hangeul {
         if self.position.isEmpty {
             oldCompatibleUnicode = oldUnicode
         } else {
-            guard let oldPosition = self.position.last else {
+            guard let oldPosition = self.position.last,
+                  let oldIndex = dictionary.getIndex(of: oldUnicode, in: oldPosition, type: .fixed),
+                  let unicode = dictionary.getUnicode(at: oldIndex, in: oldPosition, of: .compatible) else {
                 return
             }
-            guard let oldIndex = dictionary.getIndex(of: oldUnicode, in: oldPosition, type: .fixed) else {
-                return
-            }
-            guard let unicode = dictionary.getUnicode(at: oldIndex, in: oldPosition, of: .compatible) else {
-                return
-            }
-            
             oldCompatibleUnicode = unicode
         }
         
@@ -131,34 +125,29 @@ extension Hangeul {
         return false
     }
     
-    func canHaveEnd() -> Bool {
-        if !self.canCombineWithPreviousCharacter() {
+    func canHaveJongseong() -> Bool {
+        if self.canCombineWithPreviousCharacter() == false {
             return false
-        } else {
-            guard let currentCharacterPosition = self.position.last else {
-                return false
-            }
-            guard let previousCharacterPosition = self.prev?.position.last else {
-                return false
-            }
+        }
         
-            if currentCharacterPosition == .jungseong && previousCharacterPosition == .jungseong {
-                if self.prev?.prev == nil {
-                    return false
-                } else if previousCharacterPosition == .jungseong && self.prev?.prev?.status == .finished {
-                    return false
-                }
+        guard let currentCharacterPosition = self.position.last,
+              let previousCharacterPosition = self.prev?.position.last else {
+            return false
+        }
+    
+        if currentCharacterPosition == .jungseong && previousCharacterPosition == .jungseong {
+            if self.prev?.prev == nil {
+                return false
+            } else if previousCharacterPosition == .jungseong && self.prev?.prev?.status == .finished {
+                return false
             }
         }
+        
         return true
     }
     
-    func canBeTripleMid() -> Bool {
-        guard let previousCharacter = self.prev else {
-            return false
-        }
-        
-        guard let mostPreviousCharacter = previousCharacter.prev else {
+    func canBeTripleJungseong() -> Bool {
+        guard let previousCharacter = self.prev, let mostPreviousCharacter = previousCharacter.prev else {
             return false
         }
         
@@ -174,7 +163,7 @@ extension Hangeul {
     }
     
     
-    func canBeDoubleMid() -> Bool {
+    func canBeDoubleJungseong() -> Bool {
         let dictionary = HangeulDictionary()
 
         if !(self.prev?.status == .finished || self.prev?.position.last! != .jungseong) {
@@ -188,7 +177,7 @@ extension Hangeul {
         return true
     }
     
-    func canBeDoubleEnd() -> Bool {
+    func canBeDoubleJongseong() -> Bool {
         let dictionary = HangeulDictionary()
 
         if self.prev?.position.last! == .jongseong  {
@@ -196,7 +185,6 @@ extension Hangeul {
         } else if dictionary.getDoubleUnicode(self, self.next!) == nil {
             return false
         }
-        
         return true
     }
     
@@ -206,8 +194,7 @@ extension Hangeul {
         } else if self.prev?.status == .finished {
             return false
         }
-    
         return true
     }
-    
 }
+

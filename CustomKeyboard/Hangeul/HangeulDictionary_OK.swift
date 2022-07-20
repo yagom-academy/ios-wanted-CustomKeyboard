@@ -10,7 +10,6 @@ import Foundation
 // MARK: - Constant
 
 struct HangeulDictionary {
-    
     let jungseongTotalCount = 21
     let jongseongTotalCount = 28
     let baseCode = 44032

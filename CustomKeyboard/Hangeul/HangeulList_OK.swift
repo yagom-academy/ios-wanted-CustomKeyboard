@@ -32,7 +32,7 @@ extension HangeulList {
             
        let newNode = Hangeul.init(data)
        tail?.next = newNode
-       newNode.prev = tail!
+       newNode.prev = tail
        tail = newNode
     }
     

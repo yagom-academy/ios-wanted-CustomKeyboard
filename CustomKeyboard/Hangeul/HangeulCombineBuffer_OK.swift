@@ -10,14 +10,14 @@ import Foundation
 // MARK: - Variable
 
 final class HangeulCombineBuffer {
-    var choseongBuffer : [Hangeul]
-    var jungseongBuffer : [Hangeul]
-    var jongseongBuffer : [Hangeul]
+    var choseongSection : [Hangeul]
+    var jungseongSection : [Hangeul]
+    var jongseongSection : [Hangeul]
     
     init() {
-        choseongBuffer = []
-        jungseongBuffer = []
-        jongseongBuffer = []
+        choseongSection = []
+        jungseongSection = []
+        jongseongSection = []
     }
 }
 
@@ -31,17 +31,17 @@ extension HangeulCombineBuffer {
         }
         
         repeat {
-            guard let position = currentCharacter.position.last else {
+            guard let currentPosition = currentCharacter.position.last else {
                 return
             }
 
-            switch position {
+            switch currentPosition {
             case .choseong:
-                self.choseongBuffer.append(currentCharacter)
+                self.choseongSection.append(currentCharacter)
             case .jungseong:
-                self.jungseongBuffer.insert(currentCharacter, at: 0)
+                self.jungseongSection.insert(currentCharacter, at: 0)
             case .jongseong:
-                self.jongseongBuffer.insert(currentCharacter, at: 0)
+                self.jongseongSection.insert(currentCharacter, at: 0)
             }
             
             guard let previousCharacter = currentCharacter.prev else {

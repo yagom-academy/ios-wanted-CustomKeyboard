@@ -49,11 +49,8 @@ extension HangeulSpecifier {
         }
     
         if currentCharacter.position.count > 1 {
-            guard let previousCharacter = currentCharacter.prev else {
-                return
-            }
-            
-            guard let firstPosition = currentCharacter.position.first else {
+            guard let previousCharacter = currentCharacter.prev,
+                  let firstPosition = currentCharacter.position.first else {
                 return
             }
             
@@ -123,17 +120,17 @@ extension HangeulSpecifier {
             return
         }
         
-        if currentCharacter.canBeTripleMid() {
+        if currentCharacter.canBeTripleJungseong() {
             currentCharacter.update(status: .finished, position: .jungseong)
         } else if currentCharacter.isDoubleJungseong() {
             previousCharacter.update(status: .finished)
             currentCharacter.update(status: .finished, position: .jungseong)
-        } else if previousCharacter.canBeDoubleMid() {
+        } else if previousCharacter.canBeDoubleJungseong() {
             currentCharacter.update(position: .jungseong)
         } else if currentCharacter.canBeJungseong() {
             previousCharacter.update(status: .finished)
             currentCharacter.update(position: .jungseong)
-        } else if previousCharacter.canHaveEnd() && currentCharacter.canBeJongseong() {
+        } else if previousCharacter.canHaveJongseong() && currentCharacter.canBeJongseong() {
             currentCharacter.update(position: .jongseong)
         } else {
             previousCharacter.update(status: .finished)
@@ -142,11 +139,8 @@ extension HangeulSpecifier {
     }
     
     private func specifyPropertiesWhenPreviousIsJongseong(_ currentCharacter: Hangeul) {
-        guard let previousCharacter = currentCharacter.prev else {
-            return
-        }
-        
-        guard let mostPreviousCharacter = previousCharacter.prev else {
+        guard let previousCharacter = currentCharacter.prev,
+              let mostPreviousCharacter = previousCharacter.prev else {
             return
         }
         
@@ -154,7 +148,7 @@ extension HangeulSpecifier {
             mostPreviousCharacter.update(status: .finished)
             previousCharacter.update(position: .choseong)
             currentCharacter.update(position: .jungseong)
-        } else if previousCharacter.canBeDoubleEnd() {
+        } else if previousCharacter.canBeDoubleJongseong() {
             currentCharacter.update(position: .jongseong)
         } else {
             previousCharacter.update(status: .finished)
