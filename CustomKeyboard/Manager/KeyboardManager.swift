@@ -225,16 +225,17 @@ class KeyboardManager {
             return ("", 0)
         }
         
-        if allWord[allWord.count - 1] == " " {
-            return ("", 0)
-        }
-        
-        let deleteText = allWord.removeLast()
-        let deleteState = allState.removeLast()
+        allWord.removeLast()
+        allState.removeLast()
         print(allWord)
         print(allState)
         print(lastWord, state,"state")
-        print(deleteState, "deleteState")
+        
+        // space 지우기
+        if !allWord.isEmpty && allWord[allWord.count - 1] == " " {
+            return ("", 0)
+        }
+        
         switch state {
         case 1:
             // 쌍자음만 입력되어 있는 상태 (ex ㄱㄱ, ㄷㄷ, ㅂㅂ ...)
@@ -265,27 +266,29 @@ class KeyboardManager {
             }
         case 3:
             // 자음 + 이중모음이 입력되어 있는 상태 (ex 왜, 내, 의 ...)
+            let frontText = String(currentText.prefix(1))
             if lastWord.count == 2 {
-                let text = currentText.trimmingCharacters(in: .whitespaces)
+                let text = currentText.suffix(1)
                 let idx1 = secondDouble.firstIndex(of: lastWord) ?? 0
                 let idx2 = second.firstIndex(of: String(lastWord.prefix(1))) ?? 0
                 let str = text.utf16.map{ Int($0) }.reduce(0, +) - (idx1 * 28) + (idx2 * 28)
                 lastWord = String(lastWord.prefix(1))
                 allWord.append(lastWord)
                 if let scalarValue = UnicodeScalar(str) {
-                    print(String(scalarValue))
-                    return (" " + String(scalarValue), 3)
+                    print(currentText, text)
+                    if text != currentText {
+                        return (frontText + String(scalarValue), 3)
+                    }
+                    return (String(scalarValue), 3)
                 }
                 return ("", 0)
             } else {
-                // TODO: - 가, 야, .. (앞글자의 받침으로 들어갈수 있는지 확인)
+                // 가, 야, .. (앞글자의 받침으로 들어갈수 있는지 확인)
                 if currentText.count == 1 {
                     let text = allWord[allWord.count - 1]
                     lastWord = text
-//                    allState.append(1)
                     return (text, 1)
                 }
-                let frontText = String(currentText.prefix(1))
                 let addText = allWord[allWord.count - 1]
                 if addText.count == 2 {
                     if allState[allState.count - 3] == 3 {
@@ -308,7 +311,6 @@ class KeyboardManager {
                     let str = frontText.utf16.map{ Int($0) }.reduce(0, +) + idx
                     lastWord = addText
                     if let scalarValue = UnicodeScalar(str) {
-//                        allState.append(4)
                         print(String(scalarValue))
                         return (String(scalarValue), 4)
                     }
@@ -318,20 +320,17 @@ class KeyboardManager {
                         let idx = thirdDouble.firstIndex(of: text) ?? 0
                         if idx == 0 {
                             lastWord = addText
-//                            allState.append(1)
                             return (frontText + addText, 1)
                         } else {
                             let idx2 = thirdDouble.firstIndex(of: allWord[allWord.count - 2]) ?? 0
                             let str = frontText.utf16.map{ Int($0) }.reduce(0, +) - idx2 + idx
                             lastWord = text
                             if let scalarValue = UnicodeScalar(str) {
-//                                allState.append(4)
                                 return (String(scalarValue), 4)
                             }
                         }
                     } else {
                         lastWord = addText
-//                        allState.append(1)
                         return (frontText + addText, 1)
                     }
                 }
