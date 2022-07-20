@@ -49,6 +49,8 @@ class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()
+
+        bindImage()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -57,15 +59,17 @@ class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
     let viewModel = ReviewListTableViewCellViewModel()
     
     func setupView(review: ReviewResult) {
-        setupProfileImageView(review: review)
+        setupProfileImageView(review: review) //async
         nameLabel.text = review.user.userName
         rateLabel.text = review.rate
         contentLabel.text = review.reviewContent
         dateLabel.text = review.date
-        
-        viewModel.profileImage.bind { image in
+    }
+    
+    func bindImage() {
+        viewModel.image.bind { [weak self] profile in
             DispatchQueue.main.async {
-                self.profileImageView.image = image
+                self?.profileImageView.image = profile
             }
         }
     }

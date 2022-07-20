@@ -46,7 +46,14 @@ class ReviewListViewController: UIViewController {
         bindTableData()
         bindPostSuccess()
         bindPresentController()
-        bindResultText()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        commentButton.presentTextView.text = viewModel.keyboardViewModel.result.value
+        DispatchQueue.main.async {
+            self.commentButton.toggleAnimation(self.commentButton.presentTextView.text.isEmpty)
+        }
+        super.viewWillAppear(animated)
     }
     
     func bindTableData() {
@@ -62,8 +69,8 @@ class ReviewListViewController: UIViewController {
             if isSuccess {
                 DispatchQueue.main.async {
                     self.commentButton.toggleAnimation(isSuccess)
+                    self.commentButton.presentTextView.text = ""
                     
-                    self.viewModel.resultText.value = ""
                     self.viewModel.keyboardViewModel.clearAll()
                     self.viewModel.writeViewModel.clearAll()
                 }
@@ -79,15 +86,6 @@ class ReviewListViewController: UIViewController {
             let nvc = UINavigationController(rootViewController: vc)
             nvc.modalPresentationStyle = .fullScreen
             self.present(nvc, animated: true)
-        }
-    }
-    
-    func bindResultText() {
-        viewModel.resultText.bind { result in
-            self.commentButton.presentTextView.text = result
-            DispatchQueue.main.async {
-                self.commentButton.toggleAnimation(result.isEmpty)
-            }
         }
     }
 }

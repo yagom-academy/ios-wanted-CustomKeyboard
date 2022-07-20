@@ -14,13 +14,11 @@ class ReviewListViewModel {
     
     let keyboardViewModel: KeyboardViewModel
     let writeViewModel: WriteViewModel
-    var resultText: Observable<String>
+//    var resultText: Observable<String>
     
     init() {
         self.keyboardViewModel = KeyboardViewModel()
         self.writeViewModel = WriteViewModel(keyboardViewModel: self.keyboardViewModel)
-        
-        resultText = writeViewModel.sendedText
     }
     
     func fetchReviewList() {
