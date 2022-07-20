@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol KeyboardInfoReceivable {
+protocol KeyboardInfoReceivable: AnyObject {
     func customKeyboardView(pressedKeyboardButton: UIButton)
 }
 
 class CustomKeyboardView: UIView {
 
-    var delegate: KeyboardInfoReceivable?
+    weak var delegate: KeyboardInfoReceivable?
 
     private var isShiftPressed = false
     
