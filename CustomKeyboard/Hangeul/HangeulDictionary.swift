@@ -209,12 +209,12 @@ struct HangeulDictionary {
 
     }
     
-    func getIndex(unicode: Int, position: HangeulCombinationPosition, unicodeType: HangeulUnicodeType) -> Int {
-        var index = 0
-        
-        guard unicode > 0 else {
-            return 0
+    func getIndex(unicode: Int?, position: HangeulCombinationPosition, unicodeType: HangeulUnicodeType) -> Int? {
+        guard let unicode = unicode else {
+            return nil
         }
+
+        var index = 0
         
         if unicodeType == .fixed {
             switch position {

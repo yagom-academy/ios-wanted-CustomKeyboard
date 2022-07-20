@@ -60,6 +60,9 @@
                   Identifier = "normalCaseRefactoringCodeTests_monica">
                </Test>
                <Test
+                  Identifier = "normal_input_Tests">
+               </Test>
+               <Test
                   Identifier = "setCombinedTests">
                </Test>
                <Test
@@ -67,6 +70,12 @@
                </Test>
                <Test
                   Identifier = "spaceCaseRefactoringTests_monica">
+               </Test>
+               <Test
+                  Identifier = "space_input_Tests">
+               </Test>
+               <Test
+                  Identifier = "triple_input_Tests">
                </Test>
             </SkippedTests>
          </TestableReference>

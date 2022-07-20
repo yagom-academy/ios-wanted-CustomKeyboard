@@ -37,7 +37,7 @@ final class normal_input_Tests: XCTestCase {
         ioManager.reset()
         let c = HangeulConverter()
         let input = ["ㅏ", "ㅏ", "ㄴ", "ㅏ"]
-        let expectation = c.toString(from: HangeulDictionary.fixed.mid.ㅏ.rawValue) + c.toString(from: HangeulDictionary.fixed.mid.ㅏ.rawValue) + "나"
+        let expectation = c.toString(from: HangeulDictionary.fixed.mid.ㅏ.rawValue)! + c.toString(from: HangeulDictionary.fixed.mid.ㅏ.rawValue)! + "나"
         
         for ele in input {
             ioManager.process(input: ele)
@@ -51,7 +51,7 @@ final class normal_input_Tests: XCTestCase {
         ioManager.reset()
         let c = HangeulConverter()
         let input = ["ㅏ", "ㅣ", "ㄴ", "ㅏ"]
-        let expectation = c.toString(from: HangeulDictionary.fixed.mid.ㅐ.rawValue) + "나"
+        let expectation = c.toString(from: HangeulDictionary.fixed.mid.ㅐ.rawValue)! + "나"
         
         for ele in input {
             ioManager.process(input: ele)
@@ -104,7 +104,7 @@ final class normal_input_Tests: XCTestCase {
         ioManager.reset()
         let c = HangeulConverter()
         let input = ["ㅓ", "ㅏ", "ㅁ", "ㅈ", "ㅗ", "ㅣ", "ㄷ", "ㅗ", "ㅅ", "ㅣ", "ㄱ", "ㅏ", "ㄱ", "ㅅ"]
-        let expectation = c.toString(from: HangeulDictionary.fixed.mid.ㅓ.rawValue) + c.toString(from: HangeulDictionary.fixed.mid.ㅏ.rawValue) + c.toString(from: HangeulDictionary.fixed.top.ㅁ.rawValue) + "죄도시갃"
+        let expectation = c.toString(from: HangeulDictionary.fixed.mid.ㅓ.rawValue)! + c.toString(from: HangeulDictionary.fixed.mid.ㅏ.rawValue)! + c.toString(from: HangeulDictionary.fixed.top.ㅁ.rawValue)! + "죄도시갃"
         
         for ele in input {
             ioManager.process(input: ele)

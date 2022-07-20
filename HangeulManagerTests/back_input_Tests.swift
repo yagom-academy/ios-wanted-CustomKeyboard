@@ -103,7 +103,7 @@ final class back_input_Tests: XCTestCase {
         ioManager.reset()
         let c = HangeulConverter()
         let input = ["ㄱ", "Back", "ㅗ", "ㅏ", "Back", "ㄴ"]
-        let expectation = c.toString(from: HangeulDictionary.fixed.mid.ㅗ.rawValue) + c.toString(from: HangeulDictionary.fixed.top.ㄴ.rawValue) // "ㅗㄴ"
+        let expectation = c.toString(from: HangeulDictionary.fixed.mid.ㅗ.rawValue)! + c.toString(from: HangeulDictionary.fixed.top.ㄴ.rawValue)! // "ㅗㄴ"
         
         for ele in input {
             ioManager.process(input: ele)
@@ -117,7 +117,7 @@ final class back_input_Tests: XCTestCase {
         ioManager.reset()
         let c = HangeulConverter()
         let input = ["ㄱ", "Back", "ㅗ", "ㅏ", "Back", "ㄴ", "ㄱ", "ㅖ", "ㅈ", "ㅏ", "ㅇ", "ㅗ", "ㅣ", "ㅊ", "ㅜ", "Back", "ㄹ", "ㅇ", "Back", "Back", "Back", "Back", "ㅣ", "ㅂ", "ㄱ", "ㅡ", "ㅁ", "ㅈ", "ㅣ"]
-        let expectation = c.toString(from: HangeulDictionary.fixed.mid.ㅗ.rawValue) + c.toString(from: HangeulDictionary.fixed.top.ㄴ.rawValue) + "계자욉금지" // "ㅗㄴ계자욉금지"
+        let expectation = c.toString(from: HangeulDictionary.fixed.mid.ㅗ.rawValue)! + c.toString(from: HangeulDictionary.fixed.top.ㄴ.rawValue)! + "계자욉금지" // "ㅗㄴ계자욉금지"
         
         for ele in input {
             ioManager.process(input: ele)

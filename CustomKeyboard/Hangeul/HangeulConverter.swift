@@ -13,7 +13,14 @@ final class HangeulConverter {
         return Int(UnicodeScalar(string)!.value)
     }
     
-    func toString(from unicode: Int) -> String {
-        return String(UnicodeScalar(unicode)!)
+    func toString(from unicode: Int?) -> String? {
+        guard let unicode = unicode else {
+            return nil
+        }
+        
+        guard let unicodeScalar = UnicodeScalar(unicode) else {
+            return nil
+        }
+        return String(unicodeScalar)
     }
 }

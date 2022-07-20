@@ -28,7 +28,7 @@ final class Hangeul {
     var next: Hangeul?
     
     var value: String
-    var unicode: Int
+    var unicode: Int?
     var status: HangeulCombinationStatus
     var position: [HangeulCombinationPosition]
     
@@ -39,7 +39,7 @@ final class Hangeul {
         self.position = []
         
         guard input != "Space" else {
-            self.unicode = -2
+            self.unicode = nil
             self.status = .finished
             return
         }
@@ -53,6 +53,12 @@ final class Hangeul {
 extension Hangeul {
 
     func update(status: HangeulCombinationStatus = .none, position: HangeulCombinationPosition = .none) {
+        guard let oldUnicode = self.unicode else {
+            return
+        }
+        
+        
+        
         if status != .none {
             self.status = status
         }
@@ -65,13 +71,22 @@ extension Hangeul {
         var oldCompatibleUnicode: Int
         
         if self.position.isEmpty {
-            oldCompatibleUnicode = self.unicode
+            oldCompatibleUnicode = oldUnicode
         } else {
-            let oldIndex = dictionary.getIndex(unicode: self.unicode, position: self.position.last!, unicodeType: .fixed)
-            oldCompatibleUnicode = dictionary.getUnicode(index: oldIndex, position: self.position.last!, unicodeType: .compatible)
+            guard let oldPosition = self.position.last else {
+                return
+            }
+            guard let oldIndex = dictionary.getIndex(unicode: oldUnicode, position: oldPosition, unicodeType: .fixed) else {
+                return
+            }
+            let unicode = dictionary.getUnicode(index: oldIndex, position: oldPosition, unicodeType: .compatible)
+            
+            oldCompatibleUnicode = unicode
         }
         
-        let newIndex = dictionary.getIndex(unicode: oldCompatibleUnicode, position: position, unicodeType: .compatible)
+        guard let newIndex = dictionary.getIndex(unicode: oldCompatibleUnicode, position: position, unicodeType: .compatible) else {
+            return
+        }
         let newFixedUnicode = dictionary.getUnicode(index: newIndex, position: position, unicodeType: .fixed)
         self.unicode = newFixedUnicode
         
