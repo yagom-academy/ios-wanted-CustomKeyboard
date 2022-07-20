@@ -25,7 +25,7 @@ class ReviewListTableViewCellViewModel {
                 UserDefaults.standard.set(image.pngData(), forKey: urlString)
                 self.profileImage.value = image
             case .failure(let error):
-                debugPrint("ERROR \(error.localizedDescription)🐸")
+                print(error.description, "🐸")
                 self.profileImage.value = UIImage()
             }
         }

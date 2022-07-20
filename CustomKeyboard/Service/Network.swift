@@ -8,29 +8,43 @@
 import Foundation
 
 //MARK: - NetworkError
-enum NetworkError: Error {
-    //TODO: - Error 세부 만들기
+enum NetworkError: String, Error {
+    case invalidRequest
+    case jsonError
+    case serverError
     case unknown
+    
+    var description: String { self.rawValue }
 }
 
 struct Network {
     
     let path: String
-    let parameters: [String: String]
+    let parameters: [String: String]?
+    
+    init(path: String, parameters: [String: String]? = nil) {
+        self.path = path
+        self.parameters = parameters
+    }
     
     func get(completion: @escaping (Result<[ReviewResult], NetworkError>) -> Void) {
     
         var urlComponents = URLComponents(string: path)
-        urlComponents?.setQueryItems(with: parameters)
+        urlComponents?.setQueryItems(with: parameters ?? [:])
         
         guard let url = urlComponents?.url else {
-            completion(.failure(.unknown))
+            completion(.failure(.invalidRequest))
             return
         }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
+            guard error != nil else {
+                completion(.failure(.invalidRequest))
+                return
+            }
+            
             guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-                completion(.failure(.unknown))
+                completion(.failure(.serverError))
                 return
             }
             guard let data = data else {
@@ -42,7 +56,7 @@ struct Network {
                 let result = try JSONDecoder().decode(ReviewResponse.self, from: data)
                 completion(.success(result.data))
             } catch {
-                completion(.failure(.unknown))
+                completion(.failure(.jsonError))
             }
         }.resume()
     }
