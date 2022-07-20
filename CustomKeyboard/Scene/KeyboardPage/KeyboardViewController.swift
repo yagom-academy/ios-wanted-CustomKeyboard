@@ -8,7 +8,7 @@
 import UIKit
 
 class KeyboardViewController: UIViewController {
-    var delegate: PassContentDelegate?
+    weak var delegate: PassContentDelegate?
     private var viewModel = KeyboardViewModel()
     private let manager = KeyboardManager()
     private var state = 0

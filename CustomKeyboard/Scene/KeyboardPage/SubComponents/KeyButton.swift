@@ -7,7 +7,7 @@
 
 import UIKit
 
-public enum CSButtonType {
+enum CSButtonType {
     case consonant
     case vowel
     case space
