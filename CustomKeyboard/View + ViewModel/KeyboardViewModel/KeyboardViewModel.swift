@@ -14,6 +14,7 @@ class KeyboardViewModel {
     
     var result: Observable<String> = Observable("")
     var returnButtonTapped: Observable<Bool> = Observable(false)
+    var currentValue: Observable<UInt32?> = Observable(nil)
     
     var isShift: Observable<Bool> = Observable(false)
     
@@ -112,6 +113,7 @@ class KeyboardViewModel {
         
         result.value.appendUnicode(curr)
         isShift.value = false
+        currentValue.value = curr
         print(result.value)
     }
     

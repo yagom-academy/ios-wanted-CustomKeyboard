@@ -11,7 +11,6 @@ class WriteViewModel {
     let keyboardViewModel: KeyboardViewModel
     var resultText: Observable<String>
     
-    var sendedText: Observable<String> = Observable("")
     var returnButtonTapped: Observable<Bool>
     
     init(keyboardViewModel: KeyboardViewModel) {
@@ -23,6 +22,5 @@ class WriteViewModel {
     
     func clearAll() {
         self.resultText.value = ""
-        self.sendedText.value = ""
     }
 }
