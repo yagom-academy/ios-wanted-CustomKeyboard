@@ -7,104 +7,137 @@
 
 import Foundation
 
+// MARK: - Public Method
+
 final class HangeulSpecifier {
     
-    func specify(_ currentCharacter: Hangeul, inputMode: HangeulInputMode) {
+    func specifyProperties(of currentCharacter: Hangeul, when inputMode: HangeulInputMode) {
         switch inputMode {
         case .space:
-            specifyInSpaceMode(currentCharacter)
+            specifyPropertiesInSpaceMode(currentCharacter)
         case .remove:
-            specifyInRemoveMode(currentCharacter)
+            specifyPropertiesInRemoveMode(currentCharacter)
         default:
-            specifyInAddMode(currentCharacter)
+            specifyPropertiesInAddMode(currentCharacter)
         }
     }
+}
+
+// MARK: - Private Method
+
+// MARK: - called in specifyProperties
+
+extension HangeulSpecifier {
     
-    private func specifyInSpaceMode(_ currentCharacter: Hangeul) {
-        guard !currentCharacter.isAtStartingLine() else {
+    private func specifyPropertiesInSpaceMode(_ currentCharacter: Hangeul) {
+        guard currentCharacter.canCombineWithPreviousCharacter() else {
             return
         }
         
-        currentCharacter.prev?.update(status: .finished)
+        guard let previousCharacter = currentCharacter.prev else {
+            return
+        }
+        
+        previousCharacter.update(status: .finished)
     }
     
-    private func specifyInRemoveMode(_ currentCharacter: Hangeul) {
-        guard currentCharacter.status != .finished || currentCharacter.value == "Space" else {
+    private func specifyPropertiesInRemoveMode(_ currentCharacter: Hangeul) {
+        if currentCharacter.status == .finished && currentCharacter.text != "Space" {
             currentCharacter.update(status: .ongoing)
             return
         }
-        
+    
         if currentCharacter.position.count > 1 {
-            currentCharacter.prev?.update(status: .ongoing)
+            
+            guard let previousCharacter = currentCharacter.prev else {
+                return
+            }
+            
+            previousCharacter.update(status: .ongoing)
+            
             guard let firstPosition = currentCharacter.position.first else {
                 return
             }
             
             currentCharacter.update(status: .ongoing, position: firstPosition)
         }
-        
     }
     
-    private func specifyInAddMode(_ currentCharacter: Hangeul) {
-        if currentCharacter.isAtStartingLine() {
-            if currentCharacter.isMid() {
-                if currentCharacter.isDoubleMid() {
-                    currentCharacter.update(status: .finished, position: .mid)
-                } else {
-                    currentCharacter.update(position: .mid)
-                }
-            } else {
-                currentCharacter.update(position: .top)
-            }
+    private func specifyPropertiesInAddMode(_ currentCharacter: Hangeul) {
+        if currentCharacter.canCombineWithPreviousCharacter() {
+            specifyPropertiesMoreThanOne(currentCharacter)
+        } else {
+            specifyPropertiesOnlyOne(currentCharacter)
+        }
+    }
+}
+
+// MARK: - called in specifyPropertiesInAddMode
+
+extension HangeulSpecifier {
+    
+    private func specifyPropertiesMoreThanOne(_ currentCharacter: Hangeul) {
+        guard let previousCharacter = currentCharacter.prev else {
             return
         }
         
-        let previousCharacter = currentCharacter.prev!
-        
         switch previousCharacter.position.last {
-        case .top :
-            if currentCharacter.isMid() {
-                currentCharacter.update(position: .mid)
+        case .choseong :
+            if currentCharacter.canBeJungseong() {
+                currentCharacter.update(position: .jungseong)
             } else {
                 previousCharacter.update(status: .finished)
-                currentCharacter.update(position: .top)
+                currentCharacter.update(position: .choseong)
             }
-        case .mid:
-            if currentCharacter.isMid() {
+        case .jungseong:
+            if currentCharacter.canBeJungseong() {
                 if previousCharacter.canBeTripleMid() {
-                    currentCharacter.update(status: .finished, position: .mid)
+                    currentCharacter.update(status: .finished, position: .jungseong)
                 } else if currentCharacter.isDoubleMid() {
                     previousCharacter.update(status: .finished)
-                    currentCharacter.update(status: .finished, position: .mid)
+                    currentCharacter.update(status: .finished, position: .jungseong)
                 } else if previousCharacter.canBeDoubleMid() {
-                    currentCharacter.update(position: .mid)
+                    currentCharacter.update(position: .jungseong)
                 } else {
                     previousCharacter.update(status: .finished)
-                    currentCharacter.update(position: .mid)
+                    currentCharacter.update(position: .jungseong)
                 }
             } else {
-                if previousCharacter.canHaveEnd() && currentCharacter.isEnd() {
-                    currentCharacter.update(position: .end)
+                if previousCharacter.canHaveEnd() && currentCharacter.canBeJongseong() {
+                    currentCharacter.update(position: .jongseong)
                 } else {
                     previousCharacter.update(status: .finished)
-                    currentCharacter.update(position: .top)
+                    currentCharacter.update(position: .choseong)
                 }
             }
-        case .end:
-            if currentCharacter.isMid() {
+        case .jongseong:
+            if currentCharacter.canBeJungseong() {
                 previousCharacter.prev?.update(status: .finished)
-                previousCharacter.update(position: .top)
-                currentCharacter.update(position: .mid)
+                previousCharacter.update(position: .choseong)
+                currentCharacter.update(position: .jungseong)
             } else {
                 if previousCharacter.canBeDoubleEnd() {
-                    currentCharacter.update(position: .end)
+                    currentCharacter.update(position: .jongseong)
                 } else {
                     previousCharacter.update(status: .finished)
-                    currentCharacter.update(position: .top)
+                    currentCharacter.update(position: .choseong)
                 }
             }
         default:
             break
+        }
+    }
+    
+    private func specifyPropertiesOnlyOne(_ currentCharacter: Hangeul) {
+        
+        if currentCharacter.canBeJungseong() {
+            if currentCharacter.isDoubleMid() {
+                currentCharacter.update(status: .finished, position: .jungseong)
+            } else {
+                currentCharacter.update(position: .jungseong)
+            }
+        } else {
+            currentCharacter.update(position: .choseong)
         }
     }
     

@@ -15,8 +15,11 @@ final class HangeulList {
         head = nil
         tail = nil
     }
+}
+
+extension HangeulList {
     
-    func append(data: String) {
+    func append(_ data: String) {
         guard data != "Back" else {
             return
         }
@@ -46,7 +49,10 @@ final class HangeulList {
         tail = tail?.prev
         return
     }
+}
 
+extension HangeulList {
+    
     func isEmpty() -> Bool {
         if head == nil || tail == nil {
             return true

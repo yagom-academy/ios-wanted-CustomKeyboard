@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum HangeulPhoneme {
-    case vowel, consonant
+enum HangeulEumun {
+    case moeum, jaeum
 }
 
 enum HangeulUnicodeType {
@@ -20,14 +20,15 @@ enum HangeulCombinationStatus {
 }
 
 enum HangeulCombinationPosition {
-    case none, top, mid, end
+    case choseong, jungseong, jongseong
 }
 
 final class Hangeul {
     var prev: Hangeul?
     var next: Hangeul?
     
-    var value: String
+    var eumun: HangeulEumun
+    var text: String
     var unicode: Int?
     var status: HangeulCombinationStatus
     var position: [HangeulCombinationPosition]
@@ -35,14 +36,22 @@ final class Hangeul {
     init(_ input: String) {
         self.prev = nil
         self.next = nil
-        self.value = input
+        self.text = input
         self.position = []
+        self.eumun = .jaeum
         
         guard input != "Space" else {
             self.unicode = nil
             self.status = .finished
             return
         }
+        
+        for hangeul in HangeulDictionary.compatible.mid.allCases {
+            if hangeul.rawValue == self.unicode {
+                self.eumun = .moeum
+            }
+        }
+        
         
         let converter = HangeulConverter()
         self.unicode = converter.toUnicode(from: input)
@@ -74,20 +83,20 @@ extension Hangeul {
             guard let oldPosition = self.position.last else {
                 return
             }
-            guard let oldIndex = dictionary.getIndex(unicode: oldUnicode, position: oldPosition, unicodeType: .fixed) else {
+            guard let oldIndex = dictionary.getIndex(of: oldUnicode, in: oldPosition, type: .fixed) else {
                 return
             }
-            guard let unicode = dictionary.getUnicode(index: oldIndex, position: oldPosition, unicodeType: .compatible) else {
+            guard let unicode = dictionary.getUnicode(at: oldIndex, in: oldPosition, of: .compatible) else {
                 return
             }
             
             oldCompatibleUnicode = unicode
         }
         
-        guard let newIndex = dictionary.getIndex(unicode: oldCompatibleUnicode, position: position, unicodeType: .compatible) else {
+        guard let newIndex = dictionary.getIndex(of: oldCompatibleUnicode, in: position, type: .compatible) else {
             return
         }
-        let newFixedUnicode = dictionary.getUnicode(index: newIndex, position: position, unicodeType: .fixed)
+        let newFixedUnicode = dictionary.getUnicode(at: newIndex, in: position, of: .fixed)
         self.unicode = newFixedUnicode
         
         if self.position.isEmpty {
@@ -108,7 +117,7 @@ extension Hangeul {
 
 extension Hangeul {
     
-    func isMid() -> Bool {
+    func canBeJungseong() -> Bool {
         for hangeul in HangeulDictionary.compatible.mid.allCases {
             if hangeul.rawValue == self.unicode {
                 return true
@@ -117,27 +126,33 @@ extension Hangeul {
         return false
     }
     
-    func isEnd() -> Bool {
+    func canBeJongseong() -> Bool {
         for hangeul in HangeulDictionary.compatible.end.allCases {
             if hangeul.rawValue == self.unicode {
                 return true
             }
         }
+        
         return false
     }
     
     
     func isDoubleMid() -> Bool {
+        guard self.canBeJungseong() else {
+            return false
+        }
+        
         for hangeul in HangeulDictionary.compatible.doubleMid.allCases {
             if hangeul.rawValue == self.unicode {
                 return true
             }
         }
+        
         return false
     }
     
     func canHaveEnd() -> Bool {
-        if self.isAtStartingLine() {
+        if !self.canCombineWithPreviousCharacter() {
             return false
         } else {
             guard let currentCharacterPosition = self.position.last else {
@@ -147,10 +162,10 @@ extension Hangeul {
                 return false
             }
         
-            if currentCharacterPosition == .mid && previousCharacterPosition == .mid {
+            if currentCharacterPosition == .jungseong && previousCharacterPosition == .jungseong {
                 if self.prev?.prev == nil {
                     return false
-                } else if previousCharacterPosition == .mid && self.prev?.prev?.status == .finished {
+                } else if previousCharacterPosition == .jungseong && self.prev?.prev?.status == .finished {
                     return false
                 }
             }
@@ -163,7 +178,7 @@ extension Hangeul {
         
         if self.prev == nil {
             return false
-        } else if self.prev?.position.last! != .mid {
+        } else if self.prev?.position.last! != .jungseong {
             return false
         } else if dictionary.getTripleMidUnicode(self.prev!, self, self.next!) == nil {
             return false
@@ -176,7 +191,7 @@ extension Hangeul {
     func canBeDoubleMid() -> Bool {
         let dictionary = HangeulDictionary()
 
-        if !(self.prev?.status == .finished || self.prev?.position.last! != .mid) {
+        if !(self.prev?.status == .finished || self.prev?.position.last! != .jungseong) {
             return false
         } else if self.isDoubleMid() {
             return false
@@ -190,7 +205,7 @@ extension Hangeul {
     func canBeDoubleEnd() -> Bool {
         let dictionary = HangeulDictionary()
 
-        if self.prev?.position.last! == .end  {
+        if self.prev?.position.last! == .jongseong  {
             return false
         } else if dictionary.getDoubleUnicode(self, self.next!) == nil {
             return false
@@ -199,14 +214,14 @@ extension Hangeul {
         return true
     }
     
-    func isAtStartingLine() -> Bool {
+    func canCombineWithPreviousCharacter() -> Bool {
         if self.prev == nil {
-            return true
+            return false
         } else if self.prev?.status == .finished {
-            return true
+            return false
         }
     
-        return false
+        return true
     }
     
 }

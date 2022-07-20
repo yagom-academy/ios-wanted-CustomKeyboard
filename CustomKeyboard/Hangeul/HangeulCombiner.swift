@@ -25,6 +25,11 @@ final class HangeulCombineBuffer {
         mid = []
         end = []
     }
+}
+
+// MARK: Public Method
+
+extension HangeulCombineBuffer {
     
     func append(_ currentCharacter: Hangeul?) {
         guard var currentCharacter = currentCharacter else {
@@ -37,14 +42,12 @@ final class HangeulCombineBuffer {
             }
 
             switch position {
-            case .top:
+            case .choseong:
                 self.top.append(currentCharacter)
-            case .mid:
+            case .jungseong:
                 self.mid.insert(currentCharacter, at: 0)
-            case .end:
+            case .jongseong:
                 self.end.insert(currentCharacter, at: 0)
-            default:
-                break
             }
             
             guard let previousCharacter = currentCharacter.prev else {
@@ -56,10 +59,19 @@ final class HangeulCombineBuffer {
     }
 }
 
+
+// MARK: - Variable
+
 final class HangeulCombiner {
     
     private var combinedString: String = ""
     private var outputMode: HangeulOutputMode = .none
+
+}
+
+// MARK: - Public Method
+
+extension HangeulCombiner {
     
     func combine(_ currentCharacter: Hangeul, inputMode: HangeulInputMode) {
         let buffer = HangeulCombineBuffer()
@@ -100,6 +112,18 @@ final class HangeulCombiner {
         }
     }
         
+    func getOutputMode() -> HangeulOutputMode {
+        return outputMode
+    }
+    
+    func getCombinedString() -> String {
+        return combinedString
+    }
+}
+
+// MARK: - Private Method
+
+extension HangeulCombiner {
     
     private func getCombinedString(_ onlyOneCharacter: Hangeul? = nil, with buffer: HangeulCombineBuffer? = nil) -> String? {
         let converter = HangeulConverter()
@@ -137,40 +161,40 @@ final class HangeulCombiner {
         let dictionary = HangeulDictionary()
         var midIndex = 0, endIndex = 0
         
-        let topIndex = dictionary.getIndex(unicode: buffer.top.first!.unicode, position: .top, unicodeType: .fixed)
+        let topIndex = dictionary.getIndex(of: buffer.top.first!.unicode, in: .choseong, type: .fixed)
         
         if buffer.mid.count == 1 {
-            guard let index = dictionary.getIndex(unicode: buffer.mid.first!.unicode, position: .mid, unicodeType: .fixed) else {
+            guard let index = dictionary.getIndex(of: buffer.mid.first!.unicode, in: .jungseong, type: .fixed) else {
                 return nil
             }
             midIndex = index
         } else if buffer.mid.count == 2 {
             let doubleMidUnicode = dictionary.getDoubleUnicode(buffer.mid.first!, buffer.mid.last!)
-            guard let index = dictionary.getIndex(unicode: doubleMidUnicode, position: .mid, unicodeType: .fixed) else {
+            guard let index = dictionary.getIndex(of: doubleMidUnicode, in: .jungseong, type: .fixed) else {
                 return nil
             }
             midIndex = index
         } else if buffer.mid.count == 3 {
             let tripleUnicode = dictionary.getTripleMidUnicode(buffer.mid[0], buffer.mid[1], buffer.mid[2])
-            guard let index = dictionary.getIndex(unicode: tripleUnicode, position: .mid, unicodeType: .fixed) else {
+            guard let index = dictionary.getIndex(of: tripleUnicode, in: .jungseong, type: .fixed) else {
                 return nil
             }
             midIndex = index
         }
         
         if buffer.end.isEmpty {
-            guard let index = dictionary.getIndex(unicode: HangeulDictionary.fixed.end.blank.rawValue, position: .end, unicodeType: .fixed) else {
+            guard let index = dictionary.getIndex(of: HangeulDictionary.fixed.end.blank.rawValue, in: .jongseong, type: .fixed) else {
                 return nil
             }
             endIndex = index
         } else if buffer.end.count == 1 {
-            guard let index = dictionary.getIndex(unicode: buffer.end.first?.unicode, position: .end, unicodeType: .fixed) else {
+            guard let index = dictionary.getIndex(of: buffer.end.first?.unicode, in: .jongseong, type: .fixed) else {
                 return nil
             }
             endIndex = index
         } else {
             let doubleEndUnicode = dictionary.getDoubleUnicode(buffer.end.first!, buffer.end.last!)
-            guard let index = dictionary.getIndex(unicode: doubleEndUnicode, position: .end, unicodeType: .fixed) else {
+            guard let index = dictionary.getIndex(of: doubleEndUnicode, in: .jongseong, type: .fixed) else {
                 return nil
             }
             endIndex = index
@@ -179,11 +203,5 @@ final class HangeulCombiner {
         return (topIndex, midIndex, endIndex) as? (top: Int, mid: Int, end: Int)
     }
     
-    func getOutputMode() -> HangeulOutputMode {
-        return outputMode
-    }
     
-    func getCombinedString() -> String {
-        return combinedString
-    }
 }

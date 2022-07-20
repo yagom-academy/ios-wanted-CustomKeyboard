@@ -38,6 +38,8 @@
 		9F4652752884201D008D26D2 /* space_input_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4652742884201D008D26D2 /* space_input_Tests.swift */; };
 		9F5042FF287C467400CDBD9C /* DateFormatter_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5042FE287C467400CDBD9C /* DateFormatter_Extension.swift */; };
 		9F504301287C484900CDBD9C /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F504300287C484900CDBD9C /* TimeManager.swift */; };
+		9F57B5442887C4AD00B2DC24 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F57B5432887C4AD00B2DC24 /* Text.swift */; };
+		9F57B5462887E3D100B2DC24 /* HangeulCombineBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F57B5452887E3D100B2DC24 /* HangeulCombineBuffer.swift */; };
 		9FB695462881A3AA00F6AE87 /* Hangeul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB695452881A3AA00F6AE87 /* Hangeul.swift */; };
 		9FB6954A288219F100F6AE87 /* HangeulCombiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB69549288219F100F6AE87 /* HangeulCombiner.swift */; };
 		9FB6954C28821A3300F6AE87 /* HangeulSpecifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954B28821A3300F6AE87 /* HangeulSpecifier.swift */; };
@@ -110,6 +112,8 @@
 		9F5042FE287C467400CDBD9C /* DateFormatter_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter_Extension.swift; sourceTree = "<group>"; };
 		9F504300287C484900CDBD9C /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		9F504318287E323300CDBD9C /* CustomKeyboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomKeyboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F57B5432887C4AD00B2DC24 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
+		9F57B5452887E3D100B2DC24 /* HangeulCombineBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulCombineBuffer.swift; sourceTree = "<group>"; };
 		9FB695452881A3AA00F6AE87 /* Hangeul.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hangeul.swift; sourceTree = "<group>"; };
 		9FB69549288219F100F6AE87 /* HangeulCombiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulCombiner.swift; sourceTree = "<group>"; };
 		9FB6954B28821A3300F6AE87 /* HangeulSpecifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulSpecifier.swift; sourceTree = "<group>"; };
@@ -260,9 +264,18 @@
 			path = HangeulManagerTests;
 			sourceTree = "<group>";
 		};
+		9F57B5422887C48D00B2DC24 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				9F57B5432887C4AD00B2DC24 /* Text.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		9FB6954228818C4C00F6AE87 /* Hangeul */ = {
 			isa = PBXGroup;
 			children = (
+				9F57B5422887C48D00B2DC24 /* Enums */,
 				9FB695452881A3AA00F6AE87 /* Hangeul.swift */,
 				9FB69549288219F100F6AE87 /* HangeulCombiner.swift */,
 				9FB6954B28821A3300F6AE87 /* HangeulSpecifier.swift */,
@@ -270,6 +283,7 @@
 				9FB6954F28821F4F00F6AE87 /* HangeulIOManager.swift */,
 				9FB695532882265900F6AE87 /* HangeulDictionary.swift */,
 				9FC4B34B2885606400F15B2D /* HangeulList.swift */,
+				9F57B5452887E3D100B2DC24 /* HangeulCombineBuffer.swift */,
 			);
 			path = Hangeul;
 			sourceTree = "<group>";
@@ -480,8 +494,10 @@
 				012EDE5A287FA6FA0035C3E6 /* APIEndpoints.swift in Sources */,
 				012EDE46287EC14C0035C3E6 /* HttpMethod.swift in Sources */,
 				01A45B8328867D1B001F44D6 /* Content.swift in Sources */,
+				9F57B5442887C4AD00B2DC24 /* Text.swift in Sources */,
 				012EDE56287FA0BD0035C3E6 /* Provider.swift in Sources */,
 				0142F4D0287C0C9C006F3E48 /* ReviewResponse.swift in Sources */,
+				9F57B5462887E3D100B2DC24 /* HangeulCombineBuffer.swift in Sources */,
 				012EDE42287EB9FA0035C3E6 /* NetworkManager.swift in Sources */,
 				9FB6955028821F4F00F6AE87 /* HangeulIOManager.swift in Sources */,
 				0142F4D6287C3078006F3E48 /* HomeViewModel.swift in Sources */,

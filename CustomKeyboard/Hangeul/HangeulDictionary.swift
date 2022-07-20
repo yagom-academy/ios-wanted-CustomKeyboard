@@ -7,11 +7,19 @@
 
 import Foundation
 
+// MARK: - Constant
+
 struct HangeulDictionary {
     
     let midCount = 21
     let endCount = 28
     let baseCode = 44032
+    
+}
+
+// MARK: - Compatible Unicode List
+
+extension HangeulDictionary {
     
     struct compatible {
         
@@ -109,8 +117,11 @@ struct HangeulDictionary {
             case ㅎ = 0x314E
         }
     }
+}
 
-    
+// MARK: - Fixed Unicode List
+
+extension HangeulDictionary {
     
     struct fixed {
         
@@ -206,178 +217,80 @@ struct HangeulDictionary {
             case ㅍ = 0x11C1
             case ㅎ = 0x11C2
         }
-
     }
+}
+
+// MARK: - Public Method
+
+extension HangeulDictionary {
     
-    func getIndex(unicode: Int?, position: HangeulCombinationPosition, unicodeType: HangeulUnicodeType) -> Int? {
+    func getIndex(of unicode: Int?, in position: HangeulCombinationPosition, type unicodeType: HangeulUnicodeType) -> Int? {
         guard let unicode = unicode else {
             return nil
         }
+        
+        if unicodeType == .fixed {
+            return getIndexOfFixed(unicode, in: position)
+        } else {
+            return getIndexOfCompatible(unicode, in: position)
+        }
+    }
+    
+    func getUnicode(at index: Int, in position: HangeulCombinationPosition, of unicodeType: HangeulUnicodeType) -> Int? {
+        if unicodeType == .fixed {
+            return getUnicodeOfFixed(index, in: position)
+        } else {
+            return getUnicodeOfCompatible(index, in: position)
+        }
+    }
 
-        var index = 0
-        
-        if unicodeType == .fixed {
-            switch position {
-            case .top:
-                for hangeul in HangeulDictionary.fixed.top.allCases {
-                    if hangeul.rawValue == unicode {
-                        return index
-                    }
-                    index += 1
-                }
-            case .mid:
-                for hangeul in HangeulDictionary.fixed.mid.allCases {
-                    if hangeul.rawValue == unicode {
-                        return index
-                    }
-                    index += 1
-                }
-            case .end:
-                for hangeul in HangeulDictionary.fixed.end.allCases {
-                    if hangeul.rawValue == unicode {
-                        return index
-                    }
-                    index += 1
-                }
-            default:
-                return nil
-            }
-        } else {
-            switch position {
-            case .top:
-                for hangeul in HangeulDictionary.compatible.top.allCases {
-                    if hangeul.rawValue == unicode {
-                        return index
-                    }
-                    index += 1
-                }
-            case .mid:
-                for hangeul in HangeulDictionary.compatible.mid.allCases {
-                    if hangeul.rawValue == unicode {
-                        return index
-                    }
-                    index += 1
-                }
-            case .end:
-                for hangeul in HangeulDictionary.compatible.end.allCases {
-                    if hangeul.rawValue == unicode {
-                        return index
-                    }
-                    index += 1
-                }
-            default:
-                return nil
-            }
-        }
-        return nil
-    }
-    
-    func getUnicode(index: Int, position: HangeulCombinationPosition, unicodeType: HangeulUnicodeType) -> Int? {
-        var count = 0
-        
-        if unicodeType == .fixed {
-            switch position {
-            case .top:
-                for hangeul in HangeulDictionary.fixed.top.allCases {
-                    if count == index {
-                        return hangeul.rawValue
-                    }
-                    count += 1
-                }
-            case .mid:
-                for hangeul in HangeulDictionary.fixed.mid.allCases {
-                    if count == index {
-                        return hangeul.rawValue
-                    }
-                    count += 1
-                }
-            case .end:
-                for hangeul in HangeulDictionary.fixed.end.allCases {
-                    if count == index {
-                        return hangeul.rawValue
-                    }
-                    count += 1
-                }
-            default:
-                return nil
-            }
-        } else {
-            switch position {
-            case .top:
-                for hangeul in HangeulDictionary.compatible.top.allCases {
-                    if count == index {
-                        return hangeul.rawValue
-                    }
-                    count += 1
-                }
-            case .mid:
-                for hangeul in HangeulDictionary.compatible.mid.allCases {
-                    if count == index {
-                        return hangeul.rawValue
-                    }
-                    count += 1
-                }
-            case .end:
-                for hangeul in HangeulDictionary.compatible.end.allCases {
-                    if count == index {
-                        return hangeul.rawValue
-                    }
-                    count += 1
-                }
-            default:
-                return nil
-            }
-        }
-        return nil
-    }
-    
     func getDoubleUnicode(_ previousCharacter: Hangeul, _ currentCharacter: Hangeul) -> Int? {
-        if previousCharacter.position.last! == .mid {
-            if previousCharacter.value == "ㅏ" && currentCharacter.value == "ㅣ" {
+        if previousCharacter.position.last! == .jungseong {
+            if previousCharacter.text == "ㅏ" && currentCharacter.text == "ㅣ" {
                 return HangeulDictionary.fixed.mid.ㅐ.rawValue
-            } else if previousCharacter.value == "ㅑ" && currentCharacter.value == "ㅣ" {
+            } else if previousCharacter.text == "ㅑ" && currentCharacter.text == "ㅣ" {
                 return HangeulDictionary.fixed.mid.ㅒ.rawValue
-            } else if previousCharacter.value == "ㅓ" && currentCharacter.value == "ㅣ" {
+            } else if previousCharacter.text == "ㅓ" && currentCharacter.text == "ㅣ" {
                 return HangeulDictionary.fixed.mid.ㅔ.rawValue
-            } else if previousCharacter.value == "ㅕ" && currentCharacter.value == "ㅣ" {
+            } else if previousCharacter.text == "ㅕ" && currentCharacter.text == "ㅣ" {
                 return HangeulDictionary.fixed.mid.ㅖ.rawValue
-            } else if previousCharacter.value == "ㅗ" && currentCharacter.value == "ㅏ" {
+            } else if previousCharacter.text == "ㅗ" && currentCharacter.text == "ㅏ" {
                 return HangeulDictionary.fixed.mid.ㅘ.rawValue
-            } else if previousCharacter.value == "ㅗ" && currentCharacter.value == "ㅐ" {
+            } else if previousCharacter.text == "ㅗ" && currentCharacter.text == "ㅐ" {
                 return HangeulDictionary.fixed.mid.ㅙ.rawValue
-            } else if previousCharacter.value == "ㅗ" && currentCharacter.value == "ㅣ" {
+            } else if previousCharacter.text == "ㅗ" && currentCharacter.text == "ㅣ" {
                 return HangeulDictionary.fixed.mid.ㅚ.rawValue
-            } else if previousCharacter.value == "ㅜ" && currentCharacter.value == "ㅓ" {
+            } else if previousCharacter.text == "ㅜ" && currentCharacter.text == "ㅓ" {
                 return HangeulDictionary.fixed.mid.ㅝ.rawValue
-            } else if previousCharacter.value == "ㅜ" && currentCharacter.value == "ㅔ" {
+            } else if previousCharacter.text == "ㅜ" && currentCharacter.text == "ㅔ" {
                 return HangeulDictionary.fixed.mid.ㅞ.rawValue
-            } else if previousCharacter.value == "ㅜ" && currentCharacter.value == "ㅣ" {
+            } else if previousCharacter.text == "ㅜ" && currentCharacter.text == "ㅣ" {
                 return HangeulDictionary.fixed.mid.ㅟ.rawValue
-            } else if previousCharacter.value == "ㅡ" && currentCharacter.value == "ㅣ" {
+            } else if previousCharacter.text == "ㅡ" && currentCharacter.text == "ㅣ" {
                 return HangeulDictionary.fixed.mid.ㅢ.rawValue
-            } else if previousCharacter.value == "ㅠ" && currentCharacter.value == "ㅣ" {
+            } else if previousCharacter.text == "ㅠ" && currentCharacter.text == "ㅣ" {
                 return HangeulDictionary.fixed.mid.ㅝ.rawValue
             }
-        } else if previousCharacter.position.last! == .end {
-            if previousCharacter.value == "ㄱ" && currentCharacter.value == "ㅅ" {
+        } else if previousCharacter.position.last! == .jongseong {
+            if previousCharacter.text == "ㄱ" && currentCharacter.text == "ㅅ" {
                 return HangeulDictionary.fixed.end.ㄱㅅ.rawValue
-            } else if previousCharacter.value == "ㄴ" && currentCharacter.value == "ㅈ" {
+            } else if previousCharacter.text == "ㄴ" && currentCharacter.text == "ㅈ" {
                 return HangeulDictionary.fixed.end.ㄴㅈ.rawValue
-            } else if previousCharacter.value == "ㄴ" && currentCharacter.value == "ㅎ" {
+            } else if previousCharacter.text == "ㄴ" && currentCharacter.text == "ㅎ" {
                 return HangeulDictionary.fixed.end.ㄴㅎ.rawValue
-            } else if previousCharacter.value == "ㄹ" && currentCharacter.value == "ㄱ" {
+            } else if previousCharacter.text == "ㄹ" && currentCharacter.text == "ㄱ" {
                 return HangeulDictionary.fixed.end.ㄹㄱ.rawValue
-            } else if previousCharacter.value == "ㄹ" && currentCharacter.value == "ㅁ" {
+            } else if previousCharacter.text == "ㄹ" && currentCharacter.text == "ㅁ" {
                 return HangeulDictionary.fixed.end.ㄹㅁ.rawValue
-            } else if previousCharacter.value == "ㄹ" && currentCharacter.value == "ㅂ" {
+            } else if previousCharacter.text == "ㄹ" && currentCharacter.text == "ㅂ" {
                 return HangeulDictionary.fixed.end.ㄹㅂ.rawValue
-            } else if previousCharacter.value == "ㄹ" && currentCharacter.value == "ㅅ" {
+            } else if previousCharacter.text == "ㄹ" && currentCharacter.text == "ㅅ" {
                 return HangeulDictionary.fixed.end.ㄹㅅ.rawValue
-            } else if previousCharacter.value == "ㄹ" && currentCharacter.value == "ㅌ" {
+            } else if previousCharacter.text == "ㄹ" && currentCharacter.text == "ㅌ" {
                 return HangeulDictionary.fixed.end.ㄹㅌ.rawValue
-            } else if previousCharacter.value == "ㄹ" && currentCharacter.value == "ㅍ" {
+            } else if previousCharacter.text == "ㄹ" && currentCharacter.text == "ㅍ" {
                 return HangeulDictionary.fixed.end.ㄹㅍ.rawValue
-            } else if previousCharacter.value == "ㄹ" && currentCharacter.value == "ㅎ" {
+            } else if previousCharacter.text == "ㄹ" && currentCharacter.text == "ㅎ" {
                 return HangeulDictionary.fixed.end.ㄹㅎ.rawValue
             }
         }
@@ -386,10 +299,131 @@ struct HangeulDictionary {
     
     func getTripleMidUnicode(_ previousCharacter: Hangeul, _ currentCharacter: Hangeul, _ nextCharacter: Hangeul) -> Int? {
         
-        if previousCharacter.value == "ㅜ" && currentCharacter.value == "ㅓ" && nextCharacter.value == "ㅣ" {
+        if previousCharacter.text == "ㅜ" && currentCharacter.text == "ㅓ" && nextCharacter.text == "ㅣ" {
             return HangeulDictionary.fixed.mid.ㅞ.rawValue
-        } else if previousCharacter.value == "ㅗ" && currentCharacter.value == "ㅏ" && nextCharacter.value == "ㅣ" {
+        } else if previousCharacter.text == "ㅗ" && currentCharacter.text == "ㅏ" && nextCharacter.text == "ㅣ" {
             return HangeulDictionary.fixed.mid.ㅙ.rawValue
+        }
+        return nil
+    }
+}
+
+// MARK: - Private Method
+
+extension HangeulDictionary {
+    
+    private func getIndexOfCompatible(_ compatibleUnicode: Int, in position: HangeulCombinationPosition) -> Int? {
+        var index = 0
+        
+        switch position {
+        case .choseong:
+            for hangeul in HangeulDictionary.compatible.top.allCases {
+                if hangeul.rawValue == compatibleUnicode {
+                    return index
+                }
+                index += 1
+            }
+        case .jungseong:
+            for hangeul in HangeulDictionary.compatible.mid.allCases {
+                if hangeul.rawValue == compatibleUnicode {
+                    return index
+                }
+                index += 1
+            }
+        case .jongseong:
+            for hangeul in HangeulDictionary.compatible.end.allCases {
+                if hangeul.rawValue == compatibleUnicode {
+                    return index
+                }
+                index += 1
+            }
+        }
+        return nil
+    }
+    
+    private func getIndexOfFixed(_ fixedUnicode: Int, in position: HangeulCombinationPosition) -> Int? {
+        var index = 0
+        
+        switch position {
+        case .choseong:
+            for hangeul in HangeulDictionary.fixed.top.allCases {
+                if hangeul.rawValue == fixedUnicode {
+                    return index
+                }
+                index += 1
+            }
+        case .jungseong:
+            for hangeul in HangeulDictionary.fixed.mid.allCases {
+                if hangeul.rawValue == fixedUnicode {
+                    return index
+                }
+                index += 1
+            }
+        case .jongseong:
+            for hangeul in HangeulDictionary.fixed.end.allCases {
+                if hangeul.rawValue == fixedUnicode {
+                    return index
+                }
+                index += 1
+            }
+        }
+        return nil
+    }
+
+    private func getUnicodeOfCompatible(_ compatibleIndex: Int, in position: HangeulCombinationPosition) -> Int? {
+        var count = 0
+        
+        switch position {
+        case .choseong:
+            for hangeul in HangeulDictionary.compatible.top.allCases {
+                if count == compatibleIndex {
+                    return hangeul.rawValue
+                }
+                count += 1
+            }
+        case .jungseong:
+            for hangeul in HangeulDictionary.compatible.mid.allCases {
+                if count == compatibleIndex {
+                    return hangeul.rawValue
+                }
+                count += 1
+            }
+        case .jongseong:
+            for hangeul in HangeulDictionary.compatible.end.allCases {
+                if count == compatibleIndex {
+                    return hangeul.rawValue
+                }
+                count += 1
+            }
+        }
+        return nil
+    }
+    
+    private func getUnicodeOfFixed(_ fixedIndex: Int, in position: HangeulCombinationPosition) -> Int? {
+        var count = 0
+        
+        switch position {
+        case .choseong:
+            for hangeul in HangeulDictionary.fixed.top.allCases {
+                if count == fixedIndex {
+                    return hangeul.rawValue
+                }
+                count += 1
+            }
+        case .jungseong:
+            for hangeul in HangeulDictionary.fixed.mid.allCases {
+                if count == fixedIndex {
+                    return hangeul.rawValue
+                }
+                count += 1
+            }
+        case .jongseong:
+            for hangeul in HangeulDictionary.fixed.end.allCases {
+                if count == fixedIndex {
+                    return hangeul.rawValue
+                }
+                count += 1
+            }
         }
         return nil
     }

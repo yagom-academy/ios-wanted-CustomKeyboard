@@ -7,59 +7,101 @@
 
 import Foundation
 
+// MARK: - Variable
+
 final class HangeulIOManger {
     
     private var inputList = HangeulList()
     private var output = ""
+}
+
+// MARK: - Public Method
+
+extension HangeulIOManger {
     
     func process(input: String) {
-        let specifier = HangeulSpecifier()
-        let combiner = HangeulCombiner()
-        
-        inputList.append(data: input)
+        inputList.append(input)
         
         switch input {
         case "Back":
-            guard !inputList.isEmpty() else {
-                return
-            }
-    
-            inputList.removeLast()
-            updateOutput(with: "", outputMode: .remove)
-            
-            guard let inputListTail = inputList.tail else {
-                return
-            }
-            
-            if inputListTail.status == .finished {
-                specifier.specify(inputListTail, inputMode: .remove)
-                return
-            }
-            
-            if inputListTail.position.count > 1 {
-                specifier.specify(inputListTail, inputMode: .remove)
-                updateOutput(with: "", outputMode: .remove)
-            }
-            
-            combiner.combine(inputListTail, inputMode: .remove)
-            updateOutput(with: combiner.getCombinedString(), outputMode: .add)
+            processWithBack()
         case "Space":
-            guard let inputListTail = inputList.tail else {
-                return
-            }
-            specifier.specify(inputListTail, inputMode: .space)
-            updateOutput(with: " ", outputMode: .add)
+            processWithSpace()
         default:
-            guard let inputListTail = inputList.tail else {
-                return
-            }
-            specifier.specify(inputListTail, inputMode: .add)
-            combiner.combine(inputListTail, inputMode: .add)
-            updateOutput(with: combiner.getCombinedString(), outputMode: combiner.getOutputMode())
+            processWithNormalInput(input)
         }
     }
     
+    func getOutput() -> String {
+        return output
+    }
+    
+    func reset() {
+        inputList = HangeulList()
+        output = ""
+    }
+}
+
+// MARK: - Private Method
+
+extension HangeulIOManger {
+    
+    // MARK: - called in process
+    
+    private func processWithBack() {
+        let specifier = HangeulSpecifier()
+        let combiner = HangeulCombiner()
+
+        guard !inputList.isEmpty() else {
+            return
+        }
+
+        inputList.removeLast()
+        updateOutput(with: "", outputMode: .remove)
+        
+        guard let inputListTail = inputList.tail else {
+            return
+        }
+        
+        if inputListTail.status == .finished {
+            specifier.specifyProperties(of: inputListTail, when: .remove)
+            return
+        }
+        
+        if inputListTail.position.count > 1 {
+            specifier.specifyProperties(of: inputListTail, when: .remove)
+            updateOutput(with: "", outputMode: .remove)
+        }
+        
+        combiner.combine(inputListTail, inputMode: .remove)
+        updateOutput(with: combiner.getCombinedString(), outputMode: .add)
+    }
+    
+    private func processWithSpace() {
+        guard let inputListTail = inputList.tail else {
+            return
+        }
+        
+        let specifier = HangeulSpecifier()
+        
+        specifier.specifyProperties(of: inputListTail, when: .space)
+        updateOutput(with: " ", outputMode: .add)
+    }
+    
+    private func processWithNormalInput(_ input: String) {
+        guard let inputListTail = inputList.tail else {
+            return
+        }
+        
+        let specifier = HangeulSpecifier()
+        let combiner = HangeulCombiner()
+        
+        specifier.specifyProperties(of: inputListTail, when: .add)
+        combiner.combine(inputListTail, inputMode: .add)
+        updateOutput(with: combiner.getCombinedString(), outputMode: combiner.getOutputMode())
+    }
   
+    // MARK: - update output string
     private func updateOutput(with combinedString: String, outputMode: HangeulOutputMode) {
 
         guard outputMode != .remove else {
@@ -72,14 +114,5 @@ final class HangeulIOManger {
         }
         
         output += combinedString
-    }
-    
-    func getOutput() -> String {
-        return output
-    }
-    
-    func reset() {
-        inputList = HangeulList()
-        output = ""
     }
 }
