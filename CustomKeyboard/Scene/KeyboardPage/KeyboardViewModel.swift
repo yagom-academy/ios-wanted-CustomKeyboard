@@ -9,17 +9,10 @@ import UIKit
 
 class KeyboardViewModel {
     
-    var OnTitleUpdate: (String) -> Void = { _ in }
-    var titleUpdate: () -> Void = {}
-    
     var title = [
         "ㅂ", "ㅈ", "ㄷ", "ㄱ", "ㅅ",
         "ㅛ", "ㅕ", "ㅑ", "ㅐ", "ㅔ"
-    ]{
-        didSet {
-//            OnTitleUpdate(<#T##String#>)
-        }
-    }
+    ]
     
     let titleShift = [
         "ㅃ", "ㅉ", "ㄸ", "ㄲ", "ㅆ",
@@ -36,5 +29,9 @@ class KeyboardViewModel {
         for i in 0..<button.count {
             button[i].setTitle(title[i], for: .normal)
         }
+    }
+    
+    func lastErase(_ c: Character) {
+        
     }
 }

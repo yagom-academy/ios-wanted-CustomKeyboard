@@ -91,6 +91,9 @@ extension KeyboardViewController: ButtonDelegate {
             reviewTextView.text += managerString.0
             state = managerString.1
         } else {
+            let last = reviewTextView.text.last!
+            viewModel.lastErase(last)
+            
             reviewTextView.text.removeLast()
             let managerString = manager.deleteString(state, String(text))
             reviewTextView.text += managerString.0
