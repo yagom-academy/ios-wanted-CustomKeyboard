@@ -8,10 +8,18 @@
 import UIKit
 
 class KeyboardViewModel {
-    let title = [
+    
+    var OnTitleUpdate: (String) -> Void = { _ in }
+    var titleUpdate: () -> Void = {}
+    
+    var title = [
         "ㅂ", "ㅈ", "ㄷ", "ㄱ", "ㅅ",
         "ㅛ", "ㅕ", "ㅑ", "ㅐ", "ㅔ"
-    ]
+    ]{
+        didSet {
+//            OnTitleUpdate(<#T##String#>)
+        }
+    }
     
     let titleShift = [
         "ㅃ", "ㅉ", "ㄸ", "ㄲ", "ㅆ",

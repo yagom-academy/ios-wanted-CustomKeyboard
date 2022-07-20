@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol PassReviewDelegate {
+protocol PassReviewDelegate: AnyObject {
     func sendReviewData(review: Review)
 }
 
 class ReviewTableViewHeader: UITableViewHeaderFooterView {
     private var viewModel = ReviewTableViewHeaderViewModel()
-    var delegate: PassReviewDelegate?
+    weak var delegate: PassReviewDelegate?
     
     private let profileImage: UIImageView = {
         let image = UIImageView()

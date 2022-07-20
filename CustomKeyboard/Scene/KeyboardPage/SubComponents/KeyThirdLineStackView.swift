@@ -9,8 +9,8 @@ import UIKit
 
 class KeyThirdLineStackView: UIStackView {
     
-    var delegate: ButtonDelegate?
-    var shiftDelegate: ShiftDelegate?
+    weak var delegate: ButtonDelegate?
+    weak var shiftDelegate: ShiftDelegate?
     
     let shiftButton = KeyButton(type: .shift)
     let zButton = KeyButton(type: .consonant)
