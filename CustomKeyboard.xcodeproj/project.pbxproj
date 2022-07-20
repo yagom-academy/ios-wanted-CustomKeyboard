@@ -183,6 +183,8 @@
 				F039F8AD28866F0C00E7B637 /* KeyboardIOManager.swift */,
 				F039F8B1288690C800E7B637 /* HangulCombineValidator.swift */,
 				F039F8B3288692A900E7B637 /* HangulCombinator.swift */,
+				F0D480D4287E532000D9425C /* HangulSet.swift */,
+				F0D480D6287E658300D9425C /* KeyboardMaker.swift */,
 			);
 			path = Hangul;
 			sourceTree = "<group>";
@@ -199,8 +201,6 @@
 			isa = PBXGroup;
 			children = (
 				F0D4B435287D564D0083E8AE /* ReviewData.swift */,
-				F0D480D4287E532000D9425C /* HangulSet.swift */,
-				F0D480D6287E658300D9425C /* KeyboardMaker.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
