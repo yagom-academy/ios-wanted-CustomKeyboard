@@ -61,7 +61,7 @@ final class ReviewListCell: UITableViewCell {
         userNameLabel.text = reviewModel.name
         reviewLabel.text = reviewModel.content
         timeLabel.text = reviewModel.createDate
-        profileImageView.load(url: reviewModel.profileImage)
+        profileImageView.load(urlString: reviewModel.profileImage)
     }
 }
 
@@ -96,7 +96,7 @@ extension ReviewListCell {
         NSLayoutConstraint.activate([
             userNameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 20),
             userNameLabel.topAnchor.constraint(equalTo: profileImageView.topAnchor),
-            userNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -20),
+            userNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
         ])
     }
     

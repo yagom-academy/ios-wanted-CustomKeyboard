@@ -11,26 +11,35 @@ protocol WriteReviewViewControllerDelegate: AnyObject {
     func sendReviewMessage(review: String)
 }
 
-class WriteReviewViewController: UIViewController {
+final class WriteReviewViewController: UIViewController {
     
     // MARK: - Properties
     weak var delegate: WriteReviewViewControllerDelegate?
+    private let keyboardIOManager = KeyboardIOManager()
     
     // MARK: - ViewProperties
-    private let writeReviewTextView: UITextView = {
+    private lazy var customKeyboard: CustomKeyboardView = {
+        guard let customKeyboard = Bundle.main.loadNibNamed("CustomKeyboardView", owner: nil)?.first as? CustomKeyboardView else { return CustomKeyboardView() }
+        customKeyboard.delegate = keyboardIOManager
+        
+        return customKeyboard
+    }()
+    
+    private lazy var writeReviewTextView: UITextView = {
         let textView = UITextView()
         textView.layer.borderColor = UIColor.lightGray.cgColor
         textView.layer.borderWidth = 1
         
+        textView.inputView = customKeyboard
         textView.becomeFirstResponder()
         
         return textView
     }()
-    private var keyboardViewHeight: CGFloat?
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindingKeyboardManager()
         view.backgroundColor = .systemBackground
         configureSubViews()
         setConstraintsOfWriteReviewTextView()
@@ -39,6 +48,20 @@ class WriteReviewViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         delegate?.sendReviewMessage(review: writeReviewTextView.text)
+    }
+    
+    private func bindingKeyboardManager() {
+        keyboardIOManager.updateTextView = { [weak self] in
+            guard let self = self else { return }
+            while !(self.writeReviewTextView.text.isEmpty) {
+                self.writeReviewTextView.deleteBackward()
+            }
+            self.writeReviewTextView.insertText($0)
+        }
+        
+        keyboardIOManager.dismiss = { [weak self] in
+            self?.dismiss(animated: true)
+        }
     }
 }
 

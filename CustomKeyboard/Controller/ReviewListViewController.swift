@@ -7,13 +7,13 @@
 
 import UIKit
 
-final class ReviewListViewController : UIViewController {
+final class ReviewListViewController: UIViewController {
     
     // MARK: - Properties
     private let reviewListViewModel = ReviewListViewModel()
     
     // MARK: - ViewProperteis
-    private lazy var writeReviewButtonView : WriteReviewButtonView = {
+    private lazy var writeReviewButtonView: WriteReviewButtonView = {
         let writeReviewButtonView = WriteReviewButtonView()
         
         return writeReviewButtonView
@@ -69,7 +69,7 @@ extension ReviewListViewController {
         }
     }
     
-    func setConstraints() {
+    private func setConstraints() {
         setConstraintsOfReviewListTableView()
         setConstraintsOfWriteReviewButton()
     }
@@ -118,14 +118,19 @@ extension ReviewListViewController {
         self.present(vc, animated: true)
     }
     
-    @objc func tapSendReviewButton(){
+    @objc private func tapSendReviewButton() {
         reviewListViewModel.sendReview()
+        writeReviewButtonView.showSendReviewButton(isCanSend: false)
     }
 }
 
 // MARK: - WriteReviewViewControllerDelegate
 extension ReviewListViewController: WriteReviewViewControllerDelegate {
     func sendReviewMessage(review: String) {
-        reviewListViewModel.userWriteReview = review
+        if review.isEmpty {
+            writeReviewButtonView.showSendReviewButton(isCanSend: false)
+        } else {
+            reviewListViewModel.userWriteReview = review
+        }
     }
 }
