@@ -102,7 +102,8 @@ extension ReviewListViewController: UITableViewDataSource {
         ) as? ReviewListTableViewCell else { return UITableViewCell() }
         
         let review = viewModel.reviewList.value[indexPath.row]
-        cell.setupView(review: review)
+        cell.viewModel = ReviewListTableViewCellViewModel(review: review)
+        cell.setupView()
 
         return cell
     }

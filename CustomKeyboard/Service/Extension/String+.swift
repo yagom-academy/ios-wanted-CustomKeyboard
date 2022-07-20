@@ -8,6 +8,14 @@
 import Foundation
 
 extension String {
+    var toIdentifierPath: String {
+        var ret = self
+        ret = ret.replacingOccurrences(of: "https://", with: "")
+        ret = ret.replacingOccurrences(of: "http://", with: "")
+        ret = ret.replacingOccurrences(of: "/", with: "")
+        return ret
+    }
+    
     var toDate: Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
