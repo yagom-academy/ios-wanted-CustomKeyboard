@@ -225,6 +225,10 @@ class KeyboardManager {
             return ("", 0)
         }
         
+        if allWord[allWord.count - 1] == " " {
+            return ("", 0)
+        }
+        
         let deleteText = allWord.removeLast()
         let deleteState = allState.removeLast()
         print(allWord)
@@ -262,9 +266,10 @@ class KeyboardManager {
         case 3:
             // 자음 + 이중모음이 입력되어 있는 상태 (ex 왜, 내, 의 ...)
             if lastWord.count == 2 {
+                let text = currentText.trimmingCharacters(in: .whitespaces)
                 let idx1 = secondDouble.firstIndex(of: lastWord) ?? 0
                 let idx2 = second.firstIndex(of: String(lastWord.prefix(1))) ?? 0
-                let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - (idx1 * 28) + (idx2 * 28)
+                let str = text.utf16.map{ Int($0) }.reduce(0, +) - (idx1 * 28) + (idx2 * 28)
                 lastWord = String(lastWord.prefix(1))
                 if let scalarValue = UnicodeScalar(str) {
                     return (String(scalarValue), 3)
