@@ -81,4 +81,8 @@ class ReviewListHeaderView: UITableViewHeaderFooterView {
         delegate.presentButtonStatus()
     }
     
-}
+    func fetchReviewDataToTextField(reviewTextData text: String) {
+        reviewTextField.text = text
+    }
+    
+ }
