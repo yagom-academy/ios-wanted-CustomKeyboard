@@ -270,10 +270,7 @@
 				68AE7948287D3B1E003F4426 /* ReviewAPIManager.swift in Sources */,
 				6891525B2886DEE200D6FE7B /* KeyboardViewController.swift in Sources */,
 				68A3B4C82885570900DD1631 /* KeyboardViewModel.swift in Sources */,
-<<<<<<< HEAD
 				04158AD2287D3DA0004F6B9A /* ReviewViewController.swift in Sources */,
-=======
->>>>>>> develop
 				043D075C287D408B0061DCA2 /* ReviewTableViewCell.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
