@@ -8,18 +8,12 @@
 import UIKit
 
 class KeyboardViewModel {
-    
-    var OnTitleUpdate: (String) -> Void = { _ in }
-    var titleUpdate: () -> Void = {}
+    let manager = KeyboardManager()
     
     var title = [
         "ㅂ", "ㅈ", "ㄷ", "ㄱ", "ㅅ",
         "ㅛ", "ㅕ", "ㅑ", "ㅐ", "ㅔ"
-    ]{
-        didSet {
-//            OnTitleUpdate(<#T##String#>)
-        }
-    }
+    ]
     
     let titleShift = [
         "ㅃ", "ㅉ", "ㄸ", "ㄲ", "ㅆ",
@@ -36,5 +30,13 @@ class KeyboardViewModel {
         for i in 0..<button.count {
             button[i].setTitle(title[i], for: .normal)
         }
+    }
+    
+    func makeString(_ state: Int, _ currentText: String, _ tappedButton: KeyButton) -> (String, Int) {
+        return manager.makeString(state, currentText, tappedButton)
+    }
+    
+    func deleteString(_ state: Int, _ currentText: String) -> (String, Int) {
+        return manager.deleteString(state, currentText)
     }
 }

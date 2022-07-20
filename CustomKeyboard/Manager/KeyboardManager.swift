@@ -34,12 +34,9 @@ class KeyboardManager {
         "ㄹㅍ", "ㄹㅎ", "ㅁ", "ㅂ", "ㅂㅅ", "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"
     ]
     
-    func pressSpace(_ tappedButton: KeyButton) -> (String, Int) {
-        if !allWord.isEmpty && allWord[allWord.count - 1] == " " {
-            lastWord = " "
-        } else {
-            lastWord = "  "
-        }
+    private func pressSpace(_ tappedButton: KeyButton) -> (String, Int) {
+        lastWord = " "
+
         allWord.append(" ")
         allState.append(0)
         return (lastWord, 0)
@@ -287,6 +284,7 @@ class KeyboardManager {
                 if currentText.count == 1 {
                     let text = allWord[allWord.count - 1]
                     lastWord = text
+                    print(text)
                     return (text, 1)
                 }
                 let addText = allWord[allWord.count - 1]
