@@ -7,6 +7,13 @@
 
 import Foundation
 
+protocol ReviewAPIProviderType {
+    
+    func fetchReviews(completion: @escaping (Result<[ReviewResult], Error>) -> Void)
+    func upload(review: String, completion: @escaping (Result<Bool, Error>) -> Void)
+    
+}
+
 struct ReviewAPIProvider {
     
     let networkRequester: NetworkRequesterType

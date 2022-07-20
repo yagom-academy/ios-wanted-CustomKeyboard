@@ -33,9 +33,7 @@ enum NetworkError: LocalizedError {
 protocol NetworkRequesterType {
     
     func request(to urlString: String, completion: @escaping (Result<Data, NetworkError>) -> Void) -> URLSessionDataTask?
-    
     func request(to endPoint: EndPointType, completion: @escaping (Result<Data, NetworkError>) -> Void)
-    
     func request(to endPoint: EndPointType, with httpBody: Data, completion: @escaping (Result<Int, NetworkError>) -> Void
     )
     
