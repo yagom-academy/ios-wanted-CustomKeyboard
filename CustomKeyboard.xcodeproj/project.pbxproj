@@ -27,6 +27,7 @@
 		E171230728869AAD00FDAF6C /* ReviewResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E171230628869AAD00FDAF6C /* ReviewResult.swift */; };
 		E171230928869AB700FDAF6C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E171230828869AB700FDAF6C /* User.swift */; };
 		E171230B2886A75A00FDAF6C /* PostReviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E171230A2886A75A00FDAF6C /* PostReviewDTO.swift */; };
+		E1B120992887956B00910E84 /* ProfileImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B120982887956B00910E84 /* ProfileImageProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		E171230628869AAD00FDAF6C /* ReviewResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewResult.swift; sourceTree = "<group>"; };
 		E171230828869AB700FDAF6C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E171230A2886A75A00FDAF6C /* PostReviewDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReviewDTO.swift; sourceTree = "<group>"; };
+		E1B120982887956B00910E84 /* ProfileImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 				E17122F82886791100FDAF6C /* EndPointType.swift */,
 				E17122FA288683E800FDAF6C /* NetworkRequester.swift */,
 				E17122FF288692D000FDAF6C /* ReviewAPIProvider.swift */,
+				E1B120982887956B00910E84 /* ProfileImageProvider.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				E11AAD6E287D5101001B1F96 /* KeyboardView.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				E171230728869AAD00FDAF6C /* ReviewResult.swift in Sources */,
+				E1B120992887956B00910E84 /* ProfileImageProvider.swift in Sources */,
 				E1712300288692D000FDAF6C /* ReviewAPIProvider.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 				E17122F72886787C00FDAF6C /* ReviewEndPoint.swift in Sources */,
