@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class KeyboadCollectionViewCell: UICollectionViewCell {
+class KeyboadCollectionViewCell: UICollectionViewCell {
     
     static let identifier: String = "KeyboadCollectionViewCell"
     

@@ -8,7 +8,7 @@
 import UIKit
 
 class KeyboardView: UIView {
-    
+        
     let reviewTextLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .white
