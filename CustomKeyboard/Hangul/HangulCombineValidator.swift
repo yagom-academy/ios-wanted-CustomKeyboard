@@ -9,54 +9,54 @@ import Foundation
 
 class HangulCombineValidator {
     
-    func canMakeDoubleCho(onProcessing: String, input: String) -> Bool { // 쌍자음 체크
-        if HangulSet.checkingDoubleChos.contains(where: { $0 == (onProcessing, input) }) {
+    func canMakeDoubleCho(onProcessing: HangulKeyboardData, input: HangulKeyboardData) -> Bool { // 쌍자음 체크
+        if HangulSet.checkingDoubleChos.contains(where: { $0 == (onProcessing.hangul, input.hangul) }) {
             return true
         } else {
             return false
         }
     }
     
-    func canMakeDoubleJung(onProcessing: String, input: String) -> Bool { // 모음 조합 확인
-        if HangulSet.checkingDoubleJungs.contains(where: { $0 == (onProcessing, input) }) {
+    func canMakeDoubleJung(onProcessing: HangulKeyboardData, input: HangulKeyboardData) -> Bool { // 모음 조합 확인
+        if HangulSet.checkingDoubleJungs.contains(where: { $0 == (onProcessing.hangul, input.hangul) }) {
             return true
         } else {
             return false
         }
     }
-    func canMakeTripleJung(onProcessing: String, input: String) -> Bool { // 삼중 모음 조합 확인
-        if HangulSet.checkingTripleJungs.contains(where: { $0 == (onProcessing, input) }) {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    func canMakeDoubleJong(onProcessing: String, input: String) -> Bool { // 종성 조합 확인
-        if HangulSet.checkingJongs.contains(where: { $0 == (onProcessing, input) }) {
+    func canMakeTripleJung(onProcessing: HangulKeyboardData, input: HangulKeyboardData) -> Bool { // 삼중 모음 조합 확인
+        if HangulSet.checkingTripleJungs.contains(where: { $0 == (onProcessing.hangul, input.hangul) }) {
             return true
         } else {
             return false
         }
     }
     
-    func combineSingleToDouble(input: Int) -> Int {
-        return input+1
+    func canMakeDoubleJong(onProcessing: HangulKeyboardData, input: HangulKeyboardData) -> Bool { // 종성 조합 확인
+        if HangulSet.checkingJongs.contains(where: { $0 == (onProcessing.hangul, input.hangul) }) {
+            return true
+        } else {
+            return false
+        }
     }
     
-    func combineSingleJungToDouble(onProcessing: String, input: String) -> String {
-        let index = HangulSet.checkingDoubleJungs.firstIndex{$0 == (onProcessing, input)} ?? 0
-        return HangulSet.doubleJungs[index]
+    func combineSingleToDouble(input: HangulKeyboardData) -> HangulKeyboardData {
+        return HangulKeyboardData(uni: input.unicode + 1, state: .cho)
     }
     
-    func combineTripleJungToDouble(onProcessing: String, input: String) -> String {
-        let index = HangulSet.checkingTripleJungs.firstIndex{$0 == (onProcessing, input)} ?? 0
-        return HangulSet.tripleJungs[index]
+    func combineSingleJungToDouble(onProcessing: HangulKeyboardData, input: HangulKeyboardData) -> HangulKeyboardData {
+        let index = HangulSet.checkingDoubleJungs.firstIndex{$0 == (onProcessing.hangul, input.hangul)} ?? 0
+        return HangulKeyboardData(char: HangulSet.doubleJungs[index], state: .jung)
     }
     
-    func combineSingleJongToDouble(onProcessing: String, input: String) -> String {
-        let index = HangulSet.checkingJongs.firstIndex{ $0 == (onProcessing, input)} ?? 0
-        return HangulSet.doubleJongs[index]
+    func combineTripleJungToDouble(onProcessing: HangulKeyboardData, input: HangulKeyboardData) -> HangulKeyboardData {
+        let index = HangulSet.checkingTripleJungs.firstIndex{$0 == (onProcessing.hangul, input.hangul)} ?? 0
+        return HangulKeyboardData(char: HangulSet.tripleJungs[index], state: .doubleJung)
+    }
+    
+    func combineSingleJongToDouble(onProcessing: HangulKeyboardData, input: HangulKeyboardData) -> HangulKeyboardData {
+        let index = HangulSet.checkingJongs.firstIndex{ $0 == (onProcessing.hangul, input.hangul)} ?? 0
+        return HangulKeyboardData(char: HangulSet.doubleJongs[index], state: .jong)
     }
     
 }
