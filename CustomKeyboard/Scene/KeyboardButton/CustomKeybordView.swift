@@ -223,23 +223,14 @@ class CustomKeybordView: UIView {
             shiftButton.imageView?.tintColor = .black
             for button in firstLineButtonList {
                 if let title = button.titleLabel?.text {
-                    switch title {
-                    case "ㅂ" :
-                        button.setTitle("ㅃ", for: .normal)
-                    case "ㅈ" :
-                        button.setTitle("ㅉ", for: .normal)
-                    case "ㄷ" :
-                        button.setTitle("ㄸ", for: .normal)
-                    case "ㄱ" :
-                        button.setTitle("ㄲ", for: .normal)
-                    case "ㅅ" :
-                        button.setTitle("ㅆ", for: .normal)
-                    case "ㅐ" :
-                        button.setTitle("ㅒ", for: .normal)
-                    case "ㅔ" :
-                        button.setTitle("ㅖ", for: .normal)
-                    default :
-                        break
+                    if let consonant = KoreanCharacter.koreanConsonant(rawValue: title) {
+                        let value = KoreanCharacter(consonant: consonant,vowel: nil)
+                        button.setTitle(value.consonant?.doubleConsonant, for: .normal)
+                    }
+                    
+                    if let vowel = KoreanCharacter.koreanVowel(rawValue: title) {
+                        let value = KoreanCharacter(consonant: nil, vowel: vowel)
+                        button.setTitle(value.vowel?.diphthong, for: .normal)
                     }
                 }
             }
@@ -249,23 +240,14 @@ class CustomKeybordView: UIView {
             shiftButton.imageView?.tintColor = .white
             for button in firstLineButtonList {
                 if let title = button.titleLabel?.text {
-                    switch title {
-                    case "ㅃ" :
-                        button.setTitle("ㅂ", for: .normal)
-                    case "ㅉ" :
-                        button.setTitle("ㅈ", for: .normal)
-                    case "ㄸ" :
-                        button.setTitle("ㄷ", for: .normal)
-                    case "ㄲ" :
-                        button.setTitle("ㄱ", for: .normal)
-                    case "ㅆ" :
-                        button.setTitle("ㅅ", for: .normal)
-                    case "ㅒ" :
-                        button.setTitle("ㅐ", for: .normal)
-                    case "ㅖ" :
-                        button.setTitle("ㅔ", for: .normal)
-                    default :
-                        break
+                    if let consonant = KoreanCharacter.koreanConsonant(rawValue: title) {
+                        let value = KoreanCharacter(consonant: consonant,vowel: nil)
+                        button.setTitle(value.consonant?.reverceDoubleConsonant, for: .normal)
+                    }
+                    
+                    if let vowel = KoreanCharacter.koreanVowel(rawValue: title) {
+                        let value = KoreanCharacter(consonant: nil, vowel: vowel)
+                        button.setTitle(value.vowel?.reverceDiphthong, for: .normal)
                     }
                 }
             }

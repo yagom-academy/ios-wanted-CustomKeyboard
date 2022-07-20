@@ -10,6 +10,7 @@
 		B7344044287E830900C9B8B0 /* ReviewTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7344043287E830900C9B8B0 /* ReviewTextFieldView.swift */; };
 		B747B299287FE80700DE15FC /* CustomKeybordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B747B298287FE80700DE15FC /* CustomKeybordView.swift */; };
 		B747B29F2880491E00DE15FC /* CustomRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B747B29E2880491E00DE15FC /* CustomRoundButton.swift */; };
+		B747B2EF2885363B00DE15FC /* KoreanCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B747B2EE2885363B00DE15FC /* KoreanCharacter.swift */; };
 		B779BBCF287D4B5300BB8DF5 /* ReviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBC5287D4B5300BB8DF5 /* ReviewDTO.swift */; };
 		B779BBD0287D4B5300BB8DF5 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBC6287D4B5300BB8DF5 /* NetworkService.swift */; };
 		B779BBD1287D4B5300BB8DF5 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBC7287D4B5300BB8DF5 /* Request.swift */; };
@@ -26,6 +27,14 @@
 		B779BBF8287E8A5100BB8DF5 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBF7287E8A5100BB8DF5 /* Comment.swift */; };
 		B779BBFF287E91E700BB8DF5 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBFE287E91E700BB8DF5 /* HomeViewModel.swift */; };
 		B779BC01287E920900BB8DF5 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BC00287E920900BB8DF5 /* Observable.swift */; };
+		B7AF93772887D9D90058526E /* Initial.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF93762887D9D90058526E /* Initial.swift */; };
+		B7AF93792887D9E90058526E /* Neutral.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF93782887D9E90058526E /* Neutral.swift */; };
+		B7AF937B2887D9F30058526E /* Final.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF937A2887D9F30058526E /* Final.swift */; };
+		B7AF937D2887DA970058526E /* CharUnicode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF937C2887DA970058526E /* CharUnicode.swift */; };
+		B7AF937F2887DB320058526E /* HangeulConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF937E2887DB320058526E /* HangeulConverter.swift */; };
+		B7AF93822887DC200058526E /* UnicodeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF93812887DC200058526E /* UnicodeConverter.swift */; };
+		B7AF93842887DEED0058526E /* CharState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF93832887DEED0058526E /* CharState.swift */; };
+		B7AF93862887E0D20058526E /* HangeulManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF93852887E0D20058526E /* HangeulManger.swift */; };
 		B7F1DCF0287C12EE0065D587 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F1DCEF287C12EE0065D587 /* ReviewTableViewCell.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
@@ -38,6 +47,7 @@
 		B7344043287E830900C9B8B0 /* ReviewTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTextFieldView.swift; sourceTree = "<group>"; };
 		B747B298287FE80700DE15FC /* CustomKeybordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeybordView.swift; sourceTree = "<group>"; };
 		B747B29E2880491E00DE15FC /* CustomRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundButton.swift; sourceTree = "<group>"; };
+		B747B2EE2885363B00DE15FC /* KoreanCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanCharacter.swift; sourceTree = "<group>"; };
 		B779BBC5287D4B5300BB8DF5 /* ReviewDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewDTO.swift; sourceTree = "<group>"; };
 		B779BBC6287D4B5300BB8DF5 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B779BBC7287D4B5300BB8DF5 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
@@ -54,6 +64,14 @@
 		B779BBF7287E8A5100BB8DF5 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		B779BBFE287E91E700BB8DF5 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B779BC00287E920900BB8DF5 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		B7AF93762887D9D90058526E /* Initial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initial.swift; sourceTree = "<group>"; };
+		B7AF93782887D9E90058526E /* Neutral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neutral.swift; sourceTree = "<group>"; };
+		B7AF937A2887D9F30058526E /* Final.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Final.swift; sourceTree = "<group>"; };
+		B7AF937C2887DA970058526E /* CharUnicode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharUnicode.swift; sourceTree = "<group>"; };
+		B7AF937E2887DB320058526E /* HangeulConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulConverter.swift; sourceTree = "<group>"; };
+		B7AF93812887DC200058526E /* UnicodeConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnicodeConverter.swift; sourceTree = "<group>"; };
+		B7AF93832887DEED0058526E /* CharState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharState.swift; sourceTree = "<group>"; };
+		B7AF93852887E0D20058526E /* HangeulManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulManger.swift; sourceTree = "<group>"; };
 		B7F1DCEF287C12EE0065D587 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,18 +110,18 @@
 				B779BBCC287D4B5300BB8DF5 /* EndPoint.swift */,
 				B779BBC7287D4B5300BB8DF5 /* Request.swift */,
 				B779BBC8287D4B5300BB8DF5 /* NetworkError.swift */,
-				B779BBC9287D4B5300BB8DF5 /* protocols */,
+				B779BBC9287D4B5300BB8DF5 /* Protocols */,
 			);
 			path = "Network ";
 			sourceTree = "<group>";
 		};
-		B779BBC9287D4B5300BB8DF5 /* protocols */ = {
+		B779BBC9287D4B5300BB8DF5 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				B779BBCA287D4B5300BB8DF5 /* EndPointable.swift */,
 				B779BBCB287D4B5300BB8DF5 /* Requestable.swift */,
 			);
-			path = protocols;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		B779BBCD287D4B5300BB8DF5 /* Domain */ = {
@@ -170,6 +188,46 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		B7AF93742887D8970058526E /* Hangeul */ = {
+			isa = PBXGroup;
+			children = (
+				B7AF93872887E11E0058526E /* Util */,
+				B7AF93802887DBFD0058526E /* Protocols */,
+				B7AF93752887D98F0058526E /* Character */,
+				B7AF93852887E0D20058526E /* HangeulManger.swift */,
+			);
+			path = Hangeul;
+			sourceTree = "<group>";
+		};
+		B7AF93752887D98F0058526E /* Character */ = {
+			isa = PBXGroup;
+			children = (
+				B7AF93762887D9D90058526E /* Initial.swift */,
+				B7AF93782887D9E90058526E /* Neutral.swift */,
+				B7AF937A2887D9F30058526E /* Final.swift */,
+				B7AF937C2887DA970058526E /* CharUnicode.swift */,
+			);
+			path = Character;
+			sourceTree = "<group>";
+		};
+		B7AF93802887DBFD0058526E /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				B7AF93812887DC200058526E /* UnicodeConverter.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		B7AF93872887E11E0058526E /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				B7AF937E2887DB320058526E /* HangeulConverter.swift */,
+				B747B2EE2885363B00DE15FC /* KoreanCharacter.swift */,
+				B7AF93832887DEED0058526E /* CharState.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		DE15E64F28604278003DD2F5 = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +252,7 @@
 				B779BBD7287D51B000BB8DF5 /* Repository */,
 				B779BBCD287D4B5300BB8DF5 /* Domain */,
 				B779BBC4287D4B5300BB8DF5 /* Network  */,
+				B7AF93742887D8970058526E /* Hangeul */,
 				B779BBFB287E916E00BB8DF5 /* Scene */,
 				DE15E65B28604278003DD2F5 /* AppDelegate.swift */,
 				DE15E65D28604278003DD2F5 /* SceneDelegate.swift */,
@@ -274,19 +333,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7AF93772887D9D90058526E /* Initial.swift in Sources */,
 				B779BBF3287E4C7B00BB8DF5 /* DateFormatter.swift in Sources */,
 				DE15E66028604278003DD2F5 /* HomeViewController.swift in Sources */,
 				B747B299287FE80700DE15FC /* CustomKeybordView.swift in Sources */,
 				B779BBD2287D4B5300BB8DF5 /* NetworkError.swift in Sources */,
 				B779BBFF287E91E700BB8DF5 /* HomeViewModel.swift in Sources */,
 				B747B29F2880491E00DE15FC /* CustomRoundButton.swift in Sources */,
+				B7AF93792887D9E90058526E /* Neutral.swift in Sources */,
+				B7AF93822887DC200058526E /* UnicodeConverter.swift in Sources */,
 				B779BBDE287D54D700BB8DF5 /* Encoder.swift in Sources */,
+				B7AF937B2887D9F30058526E /* Final.swift in Sources */,
 				B779BBD3287D4B5300BB8DF5 /* EndPointable.swift in Sources */,
+				B7AF93862887E0D20058526E /* HangeulManger.swift in Sources */,
 				B7F1DCF0287C12EE0065D587 /* ReviewTableViewCell.swift in Sources */,
+				B7AF93842887DEED0058526E /* CharState.swift in Sources */,
 				B779BBDC287D544300BB8DF5 /* Decoder.swift in Sources */,
 				B779BBF8287E8A5100BB8DF5 /* Comment.swift in Sources */,
 				B779BBD5287D4B5300BB8DF5 /* EndPoint.swift in Sources */,
 				B779BC01287E920900BB8DF5 /* Observable.swift in Sources */,
+				B747B2EF2885363B00DE15FC /* KoreanCharacter.swift in Sources */,
+				B7AF937D2887DA970058526E /* CharUnicode.swift in Sources */,
+				B7AF937F2887DB320058526E /* HangeulConverter.swift in Sources */,
 				B779BBD6287D4B5300BB8DF5 /* Review.swift in Sources */,
 				B779BBCF287D4B5300BB8DF5 /* ReviewDTO.swift in Sources */,
 				B779BBD4287D4B5300BB8DF5 /* Requestable.swift in Sources */,
