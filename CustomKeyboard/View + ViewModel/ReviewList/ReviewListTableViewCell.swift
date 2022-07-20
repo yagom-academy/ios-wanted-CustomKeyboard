@@ -49,6 +49,7 @@ class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()
+
         bindImage()
     }
     required init?(coder: NSCoder) {
@@ -63,8 +64,6 @@ class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
         rateLabel.text = review.rate
         contentLabel.text = review.reviewContent
         dateLabel.text = review.date
-        
-//        bindImage()
     }
     
     func bindImage() {
@@ -79,7 +78,6 @@ class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
         profileImageView.image = nil
     }
 }
-
 
 //MARK: - View Configure
 private extension ReviewListTableViewCell {

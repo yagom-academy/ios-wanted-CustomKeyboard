@@ -13,7 +13,6 @@ protocol CacheProtocol: AnyObject {
 }
 
 class Cache: CacheProtocol {
-    
     static let shared = Cache()
     let memory = MemoryCache.shared
     let disk = DiskCache.shared
@@ -109,7 +108,6 @@ class ReviewListTableViewCellViewModel {
     let cache = Cache.shared
     var image: Observable<UIImage?> = Observable(nil)
     
-    
     func loadImage(urlString: String) {
         if let data = cache.fetchData(urlString) {
             if let image = UIImage(data: data) {
@@ -124,10 +122,9 @@ class ReviewListTableViewCellViewModel {
                 if let data = image.pngData() {
                     self.cache.uploadData(urlString, data: data)
                 }
-
                 self.image.value = image
             case .failure(let error):
-                debugPrint("ERROR \(urlString) \(error.localizedDescription)🐸")
+                debugPrint("ERROR \(urlString) \(error.description)🐸")
             }
         }
     }

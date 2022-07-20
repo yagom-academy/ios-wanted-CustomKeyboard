@@ -5,7 +5,6 @@
 //  Created by yc on 2022/07/11.
 //
 
-import Foundation
 import UIKit
 
 class ReviewListViewModel {
@@ -35,13 +34,13 @@ class ReviewListViewModel {
             case .success(let list):
                 self.reviewList.value = list
             case .failure(let error):
-                debugPrint("ERROR \(error.localizedDescription)🎉")
+                print(error.description, "🎉")
             }
         }
     }
     
     func postComment(_ comment: String) {
-        Network(path: "", parameters: [:]).post(comment) { isSuccess in
+        Network(path: "").post(comment) { isSuccess in
             if isSuccess {
                 let user = ReviewUser(id: "", userName: "익명", profileImage: "")
                 let review = ReviewResult(id: "", user: user, content: comment, createdAt: Date().intervalCurrentTime)
