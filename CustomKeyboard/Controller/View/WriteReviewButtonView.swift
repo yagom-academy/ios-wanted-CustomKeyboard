@@ -58,6 +58,9 @@ final class WriteReviewButtonView: UIView {
     func showSendReviewButton(isCanSend: Bool) {
         sendReviewButton.isHidden = isCanSend ? false : true
         writeReviewButtonTrailingConstraint.constant = isCanSend ? -60 : -10
+        if isCanSend == false {
+            writeReviewButton.setTitle("이 테마가 마음에 드시나요?", for: .normal)
+        }
     }
 }
 

@@ -120,12 +120,17 @@ extension ReviewListViewController {
     
     @objc private func tapSendReviewButton() {
         reviewListViewModel.sendReview()
+        writeReviewButtonView.showSendReviewButton(isCanSend: false)
     }
 }
 
 // MARK: - WriteReviewViewControllerDelegate
 extension ReviewListViewController: WriteReviewViewControllerDelegate {
     func sendReviewMessage(review: String) {
-        reviewListViewModel.userWriteReview = review
+        if review.isEmpty {
+            writeReviewButtonView.showSendReviewButton(isCanSend: false)
+        } else {
+            reviewListViewModel.userWriteReview = review
+        }
     }
 }

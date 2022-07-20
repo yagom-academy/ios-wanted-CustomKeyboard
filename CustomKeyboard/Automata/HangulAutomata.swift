@@ -82,7 +82,6 @@ final class HangulAutomata {
     
     private func joongsungPair() -> Bool {
         for i in 0..<dJoongTable.count {
-//            guard let oldKey = oldKey else { return false }
             if dJoongTable[i][0] == joongsungTable[Int(oldKey)] && dJoongTable[i][1] == joongsungTable[Int(keyCode)] {
                 keyCode = UInt32(joongsungTable.firstIndex(of: dJoongTable[i][2]) ?? 0)
                 return true
@@ -247,8 +246,6 @@ extension HangulAutomata {
             break
         }
         //MARK: - 오토마타 상태 별 작업 알고리즘
-        
-//        guard var keyCode = keyCode, var oldKey = oldKey, var charCode = charCode else { return }
         
         switch currentHangulState {
         case .chosung:
