@@ -8,6 +8,7 @@
 import UIKit
 
 class KeyboardViewModel {
+    let manager = KeyboardManager()
     
     var title = [
         "ㅂ", "ㅈ", "ㄷ", "ㄱ", "ㅅ",
@@ -31,6 +32,14 @@ class KeyboardViewModel {
         }
     }
     
+    func makeString(_ state: Int, _ currentText: String, _ tappedButton: KeyButton) -> (String, Int) {
+        return manager.makeString(state, currentText, tappedButton)
+    }
+    
+    func deleteString(_ state: Int, _ currentText: String) -> (String, Int) {
+        return manager.deleteString(state, currentText)
+    }
+
     func lastErase(_ c: Character) {
         
     }

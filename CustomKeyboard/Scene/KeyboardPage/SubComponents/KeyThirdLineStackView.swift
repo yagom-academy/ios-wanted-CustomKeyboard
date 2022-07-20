@@ -43,11 +43,11 @@ class KeyThirdLineStackView: UIStackView {
     
     private func setButtons() {
         let button = [
-            shiftButton, zButton, xButton, cButton, vButton,
+            zButton, xButton, cButton, vButton,
             bButton, nButton, mButton, eraseButton
         ]
         let title = [
-            "⇧", "ㅋ", "ㅌ", "ㅊ", "ㅍ",
+            "ㅋ", "ㅌ", "ㅊ", "ㅍ",
             "ㅠ", "ㅜ", "ㅡ", "⌫"
         ]
         
@@ -57,6 +57,10 @@ class KeyThirdLineStackView: UIStackView {
                 button[i].addTarget(self, action: #selector(tapButton(sender:)), for: .touchUpInside)
             }
         }
+        
+        shiftButton.setImage(UIImage(systemName: "shift"), for: .normal)
+        shiftButton.setImage(UIImage(systemName: "shift.fill"), for: .selected)
+        shiftButton.tintColor = .white
         
         shiftButton.addTarget(self, action: #selector(tapShiftButton(sender:)), for: .touchUpInside)
         eraseButton.addTarget(self, action: #selector(tapEraseButton(sender:)), for: .touchUpInside)
