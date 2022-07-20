@@ -44,6 +44,7 @@ class HangulCombinator {
     }
     
     func combineHangulForDelete(buffer: [HangulKeyboardData], lastState: HangulKeyboardData.HangulState) -> HangulKeyboardData { // 글자 조합해서 방
+        
         if buffer.count == 1 {
             return HangulKeyboardData(char: buffer[0].hangul, state: .cho)
             
@@ -72,22 +73,23 @@ class HangulCombinator {
     
     func decomposeHangul(hangul: String, lastState: HangulKeyboardData.HangulState) -> [HangulKeyboardData] {
         
+        
         let keyboardData = HangulKeyboardData(char: hangul, state: lastState)
         let hangulUnicode = keyboardData.unicode
+        
+        if HangulSet.chos.contains(keyboardData.hangul) {
+            if HangulSet.doubleChos.contains(keyboardData.hangul) {
+                return [HangulKeyboardData(uni: keyboardData.unicode - 1, state: .cho),HangulKeyboardData(uni: keyboardData.unicode - 1, state: .cho)]
+            }
+            return [keyboardData]
+        } else if HangulSet.jungs.contains(keyboardData.hangul) {
+            return decomposeJungs(str: keyboardData.hangul)
+        }
         
         let choIndex = (hangulUnicode - 0xAC00) / 588
         let removeCho = (hangulUnicode - 0xAC00) % 588
         let jungIndex = removeCho / 28
         let jongIndex = (hangulUnicode - 0xAC00) % 28
-        
-        
-        guard 0...HangulSet.chos.count ~= choIndex else {
-            if HangulSet.doubleChos.contains(keyboardData.hangul) {
-                return [HangulKeyboardData(uni: keyboardData.unicode - 1, state: .cho),HangulKeyboardData(uni: keyboardData.unicode - 1, state: .cho)]
-            } else {
-                return [keyboardData]
-            }
-        }
         
         if jongIndex != 0 {
             let cho = HangulKeyboardData(char: HangulSet.chos[choIndex], state: .cho)
