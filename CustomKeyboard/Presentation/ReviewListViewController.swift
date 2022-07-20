@@ -10,7 +10,8 @@ final class ReviewListViewController: BaseViewController {
     // MARK: - Properties
 
     private let reviewListView = ReviewListView()
-    private var reviewAPIProvider = ReviewAPIProvider(networkRequester: NetworkRequester())
+    private let reviewAPIProvider = ReviewAPIProvider(networkRequester: NetworkRequester())
+    private let profileImageProvider = ProfileImageProvider(networkRequester: NetworkRequester())
     
     private var reviews: [ReviewResult] = []
 
@@ -75,7 +76,16 @@ extension ReviewListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        cell.setupCell(review: reviews[indexPath.row])
+        let review = reviews[indexPath.row]
+        cell.setupCell(review: review)
+        profileImageProvider.fetchImage(from: review.user.profileImage) { result in
+            switch result {
+            case .success(let profileImage):
+                cell.setupProfileImage(profileImage)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
         return cell
     }
 

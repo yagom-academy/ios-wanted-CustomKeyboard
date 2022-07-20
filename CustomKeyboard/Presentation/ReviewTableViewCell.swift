@@ -86,6 +86,12 @@ extension ReviewTableViewCell {
         uploadedTimeLabel.text = review.createdAt
     }
     
+    func setupProfileImage(_ image: UIImage) {
+        DispatchQueue.main.async { [weak self] in
+            self?.profileImageView.image = image
+        }
+    }
+    
 }
 
 // MARK: - View setting methods
