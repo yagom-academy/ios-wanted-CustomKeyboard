@@ -7,18 +7,14 @@
 
 import UIKit
 
-//MARK: - ReviewListTableViewCellViewModelDelegate
-protocol ReviewListTableViewCellViewModelDelegate: AnyObject {
-    func reviewListTableViewCell(didLoadImage image: UIImage?)
-}
-
 class ReviewListTableViewCellViewModel {
-    weak var delegate: ReviewListTableViewCellViewModelDelegate?
+    
+    let profileImage: Observable<UIImage?> = Observable(nil)
     
     func loadImage(urlString: String) {
         if let cacheData = UserDefaults.standard.object(forKey: urlString) as? Data {
             if let cacheImage = UIImage(data: cacheData) {
-                self.delegate?.reviewListTableViewCell(didLoadImage: cacheImage)
+                profileImage.value = cacheImage
                 return
             }
         }
@@ -27,14 +23,10 @@ class ReviewListTableViewCellViewModel {
             switch result {
             case .success(let image):
                 UserDefaults.standard.set(image.pngData(), forKey: urlString)
-                DispatchQueue.main.async {
-                    self.delegate?.reviewListTableViewCell(didLoadImage: image)
-                }
+                self.profileImage.value = image
             case .failure(let error):
                 debugPrint("ERROR \(error.localizedDescription)🐸")
-                DispatchQueue.main.async {
-                    self.delegate?.reviewListTableViewCell(didLoadImage: UIImage())
-                }
+                self.profileImage.value = UIImage()
             }
         }
     }
