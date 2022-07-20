@@ -29,7 +29,7 @@ final class WriteReviewViewController: UIViewController {
         let textView = UITextView()
         textView.layer.borderColor = UIColor.lightGray.cgColor
         textView.layer.borderWidth = 1
-        
+        textView.font = .systemFont(ofSize: 20)
         textView.inputView = customKeyboard
         textView.becomeFirstResponder()
         
