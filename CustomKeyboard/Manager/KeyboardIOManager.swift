@@ -9,9 +9,9 @@ import Foundation
 
 final class KeyboardIOManager {
     
-    var hangulAutomata = HangulAutomata()
+    private var hangulAutomata = HangulAutomata()
     
-    var input: String = "" {
+    private var input: String = "" {
         didSet {
             if input == " " {
                 hangulAutomata.buffer.append(" ")

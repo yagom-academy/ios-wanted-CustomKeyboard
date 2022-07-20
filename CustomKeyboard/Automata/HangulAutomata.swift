@@ -38,20 +38,20 @@ final class HangulAutomata {
     
     var currentHangulState: HangulStatus?
     
-    var chKind: HangulCHKind!
+    private var chKind: HangulCHKind!
     
-    var charCode: String!
-    var oldKey: UInt32!
-    var oldChKind: HangulCHKind?
-    var keyCode: UInt32!
+    private var charCode: String!
+    private var oldKey: UInt32!
+    private var oldChKind: HangulCHKind?
+    private var keyCode: UInt32!
     
-    var chosungTable: [String] = ["ㄱ","ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
+    private var chosungTable: [String] = ["ㄱ","ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
     
-    var joongsungTable: [String] = ["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"]
+    private var joongsungTable: [String] = ["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"]
     
-    var jongsungTable: [String] = [" ", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ","ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
+    private var jongsungTable: [String] = [" ", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ","ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
     
-    var dJoongTable: [[String]] = [
+    private var dJoongTable: [[String]] = [
         ["ㅗ","ㅏ","ㅘ"],
         ["ㅗ","ㅐ","ㅙ"],
         ["ㅗ","ㅣ","ㅚ"],
@@ -66,7 +66,7 @@ final class HangulAutomata {
         ["ㅘ","ㅣ","ㅙ"]
     ]
     
-    var dJongTable: [[String]] = [
+    private var dJongTable: [[String]] = [
         ["ㄱ","ㅅ","ㄳ"],
         ["ㄴ","ㅈ","ㄵ"],
         ["ㄴ","ㅎ","ㄶ"],
@@ -80,7 +80,7 @@ final class HangulAutomata {
         ["ㅂ","ㅅ","ㅄ"]
     ]
     
-    func joongsungPair() -> Bool {
+    private func joongsungPair() -> Bool {
         for i in 0..<dJoongTable.count {
             if dJoongTable[i][0] == joongsungTable[Int(oldKey)] && dJoongTable[i][1] == joongsungTable[Int(keyCode)] {
                 keyCode = UInt32(joongsungTable.firstIndex(of: dJoongTable[i][2])!)
@@ -90,7 +90,7 @@ final class HangulAutomata {
         return false
     }
     
-    func jongsungPair() -> Bool {
+    private func jongsungPair() -> Bool {
         for i in 0..<dJongTable.count {
             if dJongTable[i][0] == jongsungTable[Int(oldKey)] && dJongTable[i][1] == chosungTable[Int(keyCode)] {
                 keyCode = UInt32(jongsungTable.firstIndex(of: dJongTable[i][2])!)
@@ -100,7 +100,7 @@ final class HangulAutomata {
         return false
     }
     
-    func isJoongSungPair(first: String, result: String) -> Bool {
+    private func isJoongSungPair(first: String, result: String) -> Bool {
         for i in 0..<dJoongTable.count {
             if dJoongTable[i][0] == first && dJoongTable[i][2] == result {
                 return true
@@ -109,7 +109,7 @@ final class HangulAutomata {
         return false
     }
     
-    func decompositionChosung(charCode: UInt32) -> UInt32 {
+    private func decompositionChosung(charCode: UInt32) -> UInt32 {
         let unicodeHangul = charCode - 0xAC00
         let jongsung = (unicodeHangul) % 28
         let joongsung = ((unicodeHangul - jongsung) / 28) % 21
@@ -117,7 +117,7 @@ final class HangulAutomata {
         return chosung
     }
     
-    func decompositionChosungJoongsung(charCode: UInt32) -> UInt32 {
+    private func decompositionChosungJoongsung(charCode: UInt32) -> UInt32 {
         let unicodeHangul = charCode - 0xAC00
         let jongsung = (unicodeHangul) % 28
         let joongsung = ((unicodeHangul - jongsung) / 28) % 21
@@ -125,7 +125,7 @@ final class HangulAutomata {
         return combinationHangul(chosung: chosung, joongsung: joongsung, jongsung: keyCode)
     }
     
-    func combinationHangul(chosung: UInt32 = 0, joongsung: UInt32, jongsung: UInt32 = 0) -> UInt32 {
+    private func combinationHangul(chosung: UInt32 = 0, joongsung: UInt32, jongsung: UInt32 = 0) -> UInt32 {
         return (((chosung * 21) + joongsung) * 28) + jongsung + 0xAC00
     }
     

@@ -28,8 +28,6 @@ final class ReviewListViewModel {
     var tableViewUpdate: () -> Void = { }
     var sendButtonStateUpdate: () -> Void = { }
     
-    // MARK: - LifeCycle
-    init() { }
     
     // MARK: - Method
     func fetchReviews() {
@@ -114,7 +112,6 @@ struct ReviewViewModel {
         guard let date = dateformatter.date(from: joinedDateStr) else {
             return Date()
         }
-        
         return date
     }
     

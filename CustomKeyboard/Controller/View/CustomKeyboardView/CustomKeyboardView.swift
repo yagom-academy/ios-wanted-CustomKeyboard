@@ -15,7 +15,7 @@ protocol CustomKeyboardDelegate: AnyObject{
 }
 
 final class CustomKeyboardView: UIView {
-    var isShift: Bool = false
+    private var isShift: Bool = false
     
     @IBOutlet weak var firstLineStackView: UIStackView!
     @IBOutlet weak var shiftButton: UIButton!

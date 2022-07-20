@@ -15,7 +15,7 @@ final class WriteReviewViewController: UIViewController {
     
     // MARK: - Properties
     weak var delegate: WriteReviewViewControllerDelegate?
-    let keyboardIOManager = KeyboardIOManager()
+    private let keyboardIOManager = KeyboardIOManager()
     
     // MARK: - ViewProperties
     private lazy var customKeyboard: CustomKeyboardView = {

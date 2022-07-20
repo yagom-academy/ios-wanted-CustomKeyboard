@@ -69,7 +69,7 @@ extension ReviewListViewController {
         }
     }
     
-    func setConstraints() {
+    private func setConstraints() {
         setConstraintsOfReviewListTableView()
         setConstraintsOfWriteReviewButton()
     }
@@ -118,7 +118,7 @@ extension ReviewListViewController {
         self.present(vc, animated: true)
     }
     
-    @objc func tapSendReviewButton() {
+    @objc private func tapSendReviewButton() {
         reviewListViewModel.sendReview()
     }
 }
