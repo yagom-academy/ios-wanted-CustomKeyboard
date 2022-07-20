@@ -12,10 +12,10 @@ class KeyboardView: UIView {
     let reviewTextLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .white
-        label.layer.cornerRadius = 30
-        label.layer.borderWidth = 3
-        label.layer.borderColor = UIColor.systemCyan.cgColor
-        label.text = ""
+        label.text = "텍스트를 입력해 주세요."
+        label.textColor = .darkGray
+        label.sizeToFit()
+        label.numberOfLines = 10
         return label
     }()
     
@@ -32,7 +32,7 @@ class KeyboardView: UIView {
         lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout.init())
         collectionView.register(KeyboadCollectionViewCell.self, forCellWithReuseIdentifier: KeyboadCollectionViewCell.identifier)
         collectionView.collectionViewLayout.invalidateLayout()
-        collectionView.backgroundColor = UIColor(red: 43/255, green: 43/255, blue: 43/255, alpha: 1)
+        collectionView.backgroundColor = .systemGray5
         return collectionView
     }()
     
@@ -66,8 +66,8 @@ class KeyboardView: UIView {
             verticalStackView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor,constant: -20),
             verticalStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
             collectionView.topAnchor.constraint(equalTo: self.bottomAnchor,constant: -200),
-            collectionView.leftAnchor.constraint(equalTo: self.leftAnchor),
-            collectionView.rightAnchor.constraint(equalTo: self.rightAnchor),
+            collectionView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
+            collectionView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10),
             collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }

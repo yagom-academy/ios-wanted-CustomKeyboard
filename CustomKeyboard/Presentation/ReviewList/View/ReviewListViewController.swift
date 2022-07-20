@@ -78,6 +78,9 @@ extension ReviewListViewController: UITableViewDataSource {
 
 extension ReviewListViewController : KeyboardViewControllerDelegate {
     func updateLabelText(_ reviewText: String?) {
-        reviewListView.reviewInputLabel.text = reviewText
+        guard let reviewText = reviewText else {
+            return
+        }
+        reviewListView.reviewInputLabel.text = "  " + reviewText
     }
 }

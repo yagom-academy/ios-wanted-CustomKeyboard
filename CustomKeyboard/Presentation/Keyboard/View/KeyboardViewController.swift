@@ -76,7 +76,15 @@ extension KeyboardViewController: UICollectionViewDataSource {
 
 extension KeyboardViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize { //cell의 크기를 지정해주는 함수 sizeForItemAt
-        return CGSize(width: 35, height: 45)
+        if keyboardViewModel.consonant[indexPath.row] == "변환" || keyboardViewModel.consonant[indexPath.row] == "지움" {
+            return CGSize(width: self.view.bounds.width / 8.5, height: 40)
+        } else if keyboardViewModel.consonant[indexPath.row] == "스페이스" {
+            return CGSize(width: self.view.bounds.width * 3.6 / 5, height: 40)
+        } else if keyboardViewModel.consonant[indexPath.row] == "엔터" {
+            return CGSize(width: self.view.bounds.width * 1.1 / 5, height: 40)
+        } else {
+            return CGSize(width: self.view.bounds.width / 11, height: 40)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {// 옆 간격을 지정해 줄 수 있는 함수 minimumInteritemSpacingForSectionAt
@@ -102,7 +110,7 @@ extension KeyboardViewController: UICollectionViewDelegateFlowLayout{
                 heightDimension: .fractionalWidth(2/5)
             ),
             subitem: item,
-            count: 2
+            count: 3
         )
         //Sections
         let section = NSCollectionLayoutSection(group: group)

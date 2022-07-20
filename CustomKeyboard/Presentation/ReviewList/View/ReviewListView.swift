@@ -12,8 +12,9 @@ class ReviewListView: UIView {
     let profileImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "person")
-        image.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        image.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        image.tintColor = .gray
+        image.widthAnchor.constraint(equalToConstant: 35).isActive = true
+        image.heightAnchor.constraint(equalToConstant: 35).isActive = true
         return image
     }()
     
