@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DynamicBasicKeyLine: BasicKeyLine {
+final class DynamicKeyLineExtendsBasicKeyLine: BasicKeyLine {
     
     // MARK: - Properties
     enum State {

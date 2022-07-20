@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewListViewController: UIViewController {
+final class ReviewListViewController: UIViewController {
     
     // MARK: - Properties
     private let viewModel = ReviewListViewModel()

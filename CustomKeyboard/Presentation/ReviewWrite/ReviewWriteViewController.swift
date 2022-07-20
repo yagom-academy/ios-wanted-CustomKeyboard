@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewWriteViewController: UIViewController {
+final class ReviewWriteViewController: UIViewController {
     
     // MARK: - Properties
     private var windowHeight: CGFloat {

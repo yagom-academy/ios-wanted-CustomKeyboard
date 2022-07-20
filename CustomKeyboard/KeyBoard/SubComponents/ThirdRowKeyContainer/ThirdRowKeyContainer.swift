@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ThirdRowKeyContainer: UIStackView {
+final class ThirdRowKeyContainer: UIStackView {
     
     // MARK: - Properties
     private let shiftButton = UIButton(type: .system)

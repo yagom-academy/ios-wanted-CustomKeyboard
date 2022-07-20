@@ -31,7 +31,7 @@
 		FE831582287ED8A10039A56B /* BasicKeyLineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE831581287ED8A10039A56B /* BasicKeyLineDelegate.swift */; };
 		FE9E345A28818D8F00AFE308 /* KeyBoardEngine_addWord__test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E345928818D8F00AFE308 /* KeyBoardEngine_addWord__test.swift */; };
 		FE9E34612881A56200AFE308 /* KeyBoardEngine_removeWord__test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E34602881A56200AFE308 /* KeyBoardEngine_removeWord__test.swift */; };
-		FEB79C88287E83E500B5168A /* DynamicBasicKeyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB79C87287E83E500B5168A /* DynamicBasicKeyLine.swift */; };
+		FEB79C88287E83E500B5168A /* DynamicKeyLineExtendsBasicKeyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB79C87287E83E500B5168A /* DynamicKeyLineExtendsBasicKeyLine.swift */; };
 		FED1A80A28822E79007CA79E /* Initial.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED1A80928822E79007CA79E /* Initial.swift */; };
 		FED1A80C28823039007CA79E /* Neutral.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED1A80B28823039007CA79E /* Neutral.swift */; };
 		FED1A80E28823133007CA79E /* Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED1A80D28823133007CA79E /* Support.swift */; };
@@ -92,7 +92,7 @@
 		FE9E345728818D8F00AFE308 /* KeyBoardEngineTest__TEST.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeyBoardEngineTest__TEST.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE9E345928818D8F00AFE308 /* KeyBoardEngine_addWord__test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardEngine_addWord__test.swift; sourceTree = "<group>"; };
 		FE9E34602881A56200AFE308 /* KeyBoardEngine_removeWord__test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardEngine_removeWord__test.swift; sourceTree = "<group>"; };
-		FEB79C87287E83E500B5168A /* DynamicBasicKeyLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicBasicKeyLine.swift; sourceTree = "<group>"; };
+		FEB79C87287E83E500B5168A /* DynamicKeyLineExtendsBasicKeyLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicKeyLineExtendsBasicKeyLine.swift; sourceTree = "<group>"; };
 		FED1A80928822E79007CA79E /* Initial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initial.swift; sourceTree = "<group>"; };
 		FED1A80B28823039007CA79E /* Neutral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neutral.swift; sourceTree = "<group>"; };
 		FED1A80D28823133007CA79E /* Support.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Support.swift; sourceTree = "<group>"; };
@@ -205,7 +205,7 @@
 			children = (
 				FE43998C287D908C00BFF841 /* BasicKeyLine.swift */,
 				FE831581287ED8A10039A56B /* BasicKeyLineDelegate.swift */,
-				FEB79C87287E83E500B5168A /* DynamicBasicKeyLine.swift */,
+				FEB79C87287E83E500B5168A /* DynamicKeyLineExtendsBasicKeyLine.swift */,
 			);
 			path = BasicKeyLine;
 			sourceTree = "<group>";
@@ -486,7 +486,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE7A7E602885272C004315C3 /* FirthRowKeyContainer.swift in Sources */,
-				FEB79C88287E83E500B5168A /* DynamicBasicKeyLine.swift in Sources */,
+				FEB79C88287E83E500B5168A /* DynamicKeyLineExtendsBasicKeyLine.swift in Sources */,
 				FE7A7E6A2885300C004315C3 /* SecondRowKeyContainer.swift in Sources */,
 				FE7A7E6C28853028004315C3 /* SecondRowKeyContainerDelegate.swift in Sources */,
 				FE7A7E62288527B4004315C3 /* FirthRowKeyContainerDelegate.swift in Sources */,

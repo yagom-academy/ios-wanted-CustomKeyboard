@@ -7,10 +7,10 @@
 
 import UIKit
 
-class FirstRowKeyContainer: UIStackView {
+final class FirstRowKeyContainer: UIStackView {
     
     // MARK: - Properties
-    private let firstLineDynamicBasicKeys = DynamicBasicKeyLine()
+    private let firstLineDynamicBasicKeys = DynamicKeyLineExtendsBasicKeyLine()
     weak var delegate: FirstRowKeyContainerDelegate?
     
     init() {
@@ -31,7 +31,7 @@ extension FirstRowKeyContainer: BasicKeyLineDelegate {
 
 // MARK: - Methods
 extension FirstRowKeyContainer {
-    func toggleDynamicBasicKeyState() -> DynamicBasicKeyLine.State {
+    func toggleDynamicBasicKeyState() -> DynamicKeyLineExtendsBasicKeyLine.State {
         return firstLineDynamicBasicKeys.toggleDynamicBasicKeyState()
     }
 }

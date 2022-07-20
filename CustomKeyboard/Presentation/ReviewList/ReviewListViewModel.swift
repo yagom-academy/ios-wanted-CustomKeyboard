@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ReviewListViewModel {
+final class ReviewListViewModel {
     
     // MARK: - Properties
     struct CellType {

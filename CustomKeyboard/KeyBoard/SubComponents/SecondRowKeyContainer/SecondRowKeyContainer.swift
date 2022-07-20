@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SecondRowKeyContainer: UIStackView {
+final class SecondRowKeyContainer: UIStackView {
     
     // MARK: - Properties
     private let secondLineBasicKeys = BasicKeyLine(keys: ["ㅁ", "ㄴ", "ㅇ", "ㄹ", "ㅎ", "ㅗ", "ㅓ", "ㅏ", "ㅣ"])

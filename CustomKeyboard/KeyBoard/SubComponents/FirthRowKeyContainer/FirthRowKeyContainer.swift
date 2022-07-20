@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FirthRowKeyContainer: UIStackView {
+final class FirthRowKeyContainer: UIStackView {
     
     // MARK: - Properties
     private let spaceButton = UIButton(type: .system)

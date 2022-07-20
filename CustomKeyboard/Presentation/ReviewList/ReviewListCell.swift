@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewListCell: UICollectionViewCell {
+final class ReviewListCell: UICollectionViewCell {
     
     // MARK: - Properties
     static let identifier = "ReviewListCell"
