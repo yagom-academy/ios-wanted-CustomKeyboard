@@ -256,18 +256,22 @@ class KeyboardManager {
                     lastWord = ""
                     return ("", 0)
                 }
-                lastWord = deleteText
-                return ("", deleteState)
+                lastWord = allWord[allWord.count - 1]
+                return ("", allState[allState.count - 1])
             }
         case 3:
             // 자음 + 이중모음이 입력되어 있는 상태 (ex 왜, 내, 의 ...)
             if lastWord.count == 2 {
-                let idx1 = secondDouble.firstIndex(of: lastWord) ?? 0
+                let text = currentText.trimmingCharacters(in: [" "])
+                let idx1 = secondDouble.firstIndex(of: lastWord) ?? 0 //ㅁ ㅜ
                 let idx2 = second.firstIndex(of: String(lastWord.prefix(1))) ?? 0
-                let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - (idx1 * 28) + (idx2 * 28)
+                print(text)
+                let str = text.utf16.map{ Int($0) }.reduce(0, +) - (idx1 * 28) + (idx2 * 28)
                 lastWord = String(lastWord.prefix(1))
+                allWord.append(lastWord)
                 if let scalarValue = UnicodeScalar(str) {
-                    return (String(scalarValue), 3)
+                    print(String(scalarValue))
+                    return (" " + String(scalarValue), 3)
                 }
                 return ("", 0)
             } else {
@@ -280,7 +284,23 @@ class KeyboardManager {
                 }
                 let frontText = String(currentText.prefix(1))
                 let addText = allWord[allWord.count - 1]
-                if allState[allState.count - 2] == 3 {
+                if addText.count == 2 {
+                    if allState[allState.count - 3] == 3 {
+                        let idx = thirdDouble.firstIndex(of: addText) ?? 0
+                        let str = frontText.utf16.map{ Int($0) }.reduce(0, +) + idx
+                        lastWord = addText
+                        if let scalarValue = UnicodeScalar(str) {
+                            return (String(scalarValue), 4)
+                        }
+                        return ("", 0)
+                    } else {
+                        let idx = thirdDouble.firstIndex(of: addText) ?? 0
+                        let str = third[idx]
+                        lastWord = addText
+                        return (frontText + str, 1)
+                    }
+                } else {
+                    if allState[allState.count - 2] == 3 {
                     let idx = third.firstIndex(of: addText) ?? thirdDouble.firstIndex(of: addText) ?? 0
                     let str = frontText.utf16.map{ Int($0) }.reduce(0, +) + idx
                     lastWord = addText
@@ -290,26 +310,27 @@ class KeyboardManager {
                         return (String(scalarValue), 4)
                     }
                     return ("", 0)
-                } else if allState[allState.count - 2] == 4 {
-                    let text = allWord[allWord.count - 2] + addText
-                    let idx = thirdDouble.firstIndex(of: text) ?? 0
-                    if idx == 0 {
+                    } else if allState[allState.count - 2] == 4 {
+                        let text = allWord[allWord.count - 2] + addText
+                        let idx = thirdDouble.firstIndex(of: text) ?? 0
+                        if idx == 0 {
+                            lastWord = addText
+//                            allState.append(1)
+                            return (frontText + addText, 1)
+                        } else {
+                            let idx2 = thirdDouble.firstIndex(of: allWord[allWord.count - 2]) ?? 0
+                            let str = frontText.utf16.map{ Int($0) }.reduce(0, +) - idx2 + idx
+                            lastWord = text
+                            if let scalarValue = UnicodeScalar(str) {
+//                                allState.append(4)
+                                return (String(scalarValue), 4)
+                            }
+                        }
+                    } else {
                         lastWord = addText
 //                        allState.append(1)
                         return (frontText + addText, 1)
-                    } else {
-                        let idx2 = thirdDouble.firstIndex(of: allWord[allWord.count - 2]) ?? 0
-                        let str = frontText.utf16.map{ Int($0) }.reduce(0, +) - idx2 + idx
-                        lastWord = text
-                        if let scalarValue = UnicodeScalar(str) {
-//                            allState.append(4)
-                            return (String(scalarValue), 4)
-                        }
                     }
-                } else {
-                    lastWord = addText
-//                    allState.append(1)
-                    return (frontText + addText, 1)
                 }
                 return ("", 0)
             }
