@@ -38,12 +38,12 @@ final class HangulAutomata {
     
     var currentHangulState: HangulStatus?
     
-    private var chKind: HangulCHKind!
+    private var chKind = HangulCHKind.vowel
     
-    private var charCode: String!
-    private var oldKey: UInt32!
+    private var charCode: String = ""
+    private var oldKey: UInt32 = 0
     private var oldChKind: HangulCHKind?
-    private var keyCode: UInt32!
+    private var keyCode: UInt32 = 0
     
     private var chosungTable: [String] = ["ㄱ","ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
     
@@ -82,8 +82,9 @@ final class HangulAutomata {
     
     private func joongsungPair() -> Bool {
         for i in 0..<dJoongTable.count {
+//            guard let oldKey = oldKey else { return false }
             if dJoongTable[i][0] == joongsungTable[Int(oldKey)] && dJoongTable[i][1] == joongsungTable[Int(keyCode)] {
-                keyCode = UInt32(joongsungTable.firstIndex(of: dJoongTable[i][2])!)
+                keyCode = UInt32(joongsungTable.firstIndex(of: dJoongTable[i][2]) ?? 0)
                 return true
             }
         }
@@ -93,7 +94,7 @@ final class HangulAutomata {
     private func jongsungPair() -> Bool {
         for i in 0..<dJongTable.count {
             if dJongTable[i][0] == jongsungTable[Int(oldKey)] && dJongTable[i][1] == chosungTable[Int(keyCode)] {
-                keyCode = UInt32(jongsungTable.firstIndex(of: dJongTable[i][2])!)
+                keyCode = UInt32(jongsungTable.firstIndex(of: dJongTable[i][2]) ?? 0)
                 return true
             }
         }
@@ -177,13 +178,14 @@ final class HangulAutomata {
 
 extension HangulAutomata {
     func hangulAutomata(key: String) {
+        
         var canBeJongsung: Bool = false
         if joongsungTable.contains(key) {
             chKind = .vowel
-            keyCode = UInt32(joongsungTable.firstIndex(of: key)!)
+            keyCode = UInt32(joongsungTable.firstIndex(of: key) ?? 0)
         } else {
             chKind = .consonant
-            keyCode = UInt32(chosungTable.firstIndex(of: key)!)
+            keyCode = UInt32(chosungTable.firstIndex(of: key) ?? 0)
             if !((key == "ㄸ") || (key == "ㅉ") || (key == "ㅃ")) {
                 canBeJongsung = true
             }
@@ -245,26 +247,29 @@ extension HangulAutomata {
             break
         }
         //MARK: - 오토마타 상태 별 작업 알고리즘
+        
+//        guard var keyCode = keyCode, var oldKey = oldKey, var charCode = charCode else { return }
+        
         switch currentHangulState {
         case .chosung:
             charCode = chosungTable[Int(keyCode)]
         case .joongsung:
-            charCode = String(Unicode.Scalar(combinationHangul(chosung: oldKey, joongsung: keyCode))!)
+            charCode = String(Unicode.Scalar(combinationHangul(chosung: oldKey, joongsung: keyCode)) ?? Unicode.Scalar(0))
         case .dJoongsung:
-            let currentChosung = decompositionChosung(charCode: Unicode.Scalar(charCode)!.value)
-            charCode = String(Unicode.Scalar(combinationHangul(chosung: currentChosung, joongsung: keyCode))!)
+            let currentChosung = decompositionChosung(charCode: Unicode.Scalar(charCode)?.value ?? 0)
+            charCode = String(Unicode.Scalar(combinationHangul(chosung: currentChosung, joongsung: keyCode)) ?? Unicode.Scalar(0))
         case .jongsung:
             if canBeJongsung {
-                keyCode = UInt32(jongsungTable.firstIndex(of: key)!)
-                let currentCharCode =  Unicode.Scalar(charCode)!.value
-                charCode = String(Unicode.Scalar(decompositionChosungJoongsung(charCode: currentCharCode))!)
+                keyCode = UInt32(jongsungTable.firstIndex(of: key) ?? 0)
+                let currentCharCode =  Unicode.Scalar(charCode)?.value ?? 0
+                charCode = String(Unicode.Scalar(decompositionChosungJoongsung(charCode: currentCharCode)) ?? Unicode.Scalar(0))
             } else {
                 charCode = key
             }
         case .dJongsung:
-            let currentCharCode = Unicode.Scalar(charCode)!.value
-            charCode = String(Unicode.Scalar(decompositionChosungJoongsung(charCode: currentCharCode))!)
-            keyCode = UInt32(jongsungTable.firstIndex(of: key)!)
+            let currentCharCode = Unicode.Scalar(charCode)?.value ?? 0
+            charCode = String(Unicode.Scalar(decompositionChosungJoongsung(charCode: currentCharCode)) ?? Unicode.Scalar(0))
+            keyCode = UInt32(jongsungTable.firstIndex(of: key) ?? 0)
         case .endOne:
             if chKind == .consonant {
                 charCode = chosungTable[Int(keyCode)]
@@ -276,8 +281,8 @@ extension HangulAutomata {
             buffer.append("")
         case.endTwo:
             if oldChKind == .consonant {
-                oldKey = UInt32(chosungTable.firstIndex(of: jongsungTable[Int(oldKey)])!)
-                charCode =  String(Unicode.Scalar(combinationHangul(chosung: oldKey, joongsung: keyCode))!)
+                oldKey = UInt32(chosungTable.firstIndex(of: jongsungTable[Int(oldKey)]) ?? 0)
+                charCode =  String(Unicode.Scalar(combinationHangul(chosung: oldKey, joongsung: keyCode)) ?? Unicode.Scalar(0))
                 currentHangulState = .joongsung
                 buffer[buffer.count - 1] = inpStack[inpStack.count - 2].charCode
                 buffer.append("")
@@ -292,7 +297,7 @@ extension HangulAutomata {
         default:
             break
         }
-        inpStack.append(InpStack(curhanst: currentHangulState!, key: keyCode, charCode: String(Unicode.Scalar(charCode)!), chKind: chKind))
+        inpStack.append(InpStack(curhanst: currentHangulState ?? .start, key: keyCode, charCode: String(Unicode.Scalar(charCode) ?? Unicode.Scalar(0)), chKind: chKind))
         buffer[buffer.count - 1] = charCode
     }
 }

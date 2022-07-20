@@ -20,11 +20,11 @@ final class KeyboardIOManager {
             } else {
                 hangulAutomata.hangulAutomata(key: input)
             }
-            updateTextView(hangulAutomata.buffer.reduce("", { $0 + $1 }))
+            updateTextView?(hangulAutomata.buffer.reduce("", { $0 + $1 }))
         }
     }
     
-    var updateTextView: ((String) -> Void)!
+    var updateTextView: ((String) -> Void)?
     var dismiss: (() -> Void)?
     
 }
@@ -36,7 +36,7 @@ extension KeyboardIOManager: CustomKeyboardDelegate {
     
     func backKeypadTap() {
         hangulAutomata.deleteBuffer()
-        updateTextView(hangulAutomata.buffer.reduce("", { $0 + $1 }))
+        updateTextView?(hangulAutomata.buffer.reduce("", { $0 + $1 }))
     }
     
     func enterKeypadTap() {

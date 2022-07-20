@@ -9,8 +9,8 @@ import Foundation
 
 enum NetworkError: Error {
     case url
-    case network(error: Error)
-    case decode(error: Error)
+    case network(error: Error?)
+    case decode(error: Error?)
 }
 
 final class NetworkManager {
@@ -25,12 +25,12 @@ final class NetworkManager {
         let session = URLSession(configuration: .default)
         session.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil else {
-                completion(.failure(.network(error: error!)))
+                completion(.failure(.network(error: error)))
                 return
             }
             let decorder = JSONDecoder()
             guard let data = try? decorder.decode(ReviewList.self, from: data) else {
-                completion(.failure(.decode(error: error!)))
+                completion(.failure(.decode(error: error)))
                 return
             }
             completion(.success(data.data))
