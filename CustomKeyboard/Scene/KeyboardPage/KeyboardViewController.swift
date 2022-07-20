@@ -10,7 +10,6 @@ import UIKit
 class KeyboardViewController: UIViewController {
     weak var delegate: PassContentDelegate?
     private var viewModel = KeyboardViewModel()
-    private let manager = KeyboardManager()
     private var state = 0
     
     private let reviewTextView: UITextView = {
@@ -22,6 +21,8 @@ class KeyboardViewController: UIViewController {
     
     private let keyboardView = KeyboardView()
     
+    lazy var firstLineButtons = keyboardView.keyFirstLine.passButtons()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +33,7 @@ class KeyboardViewController: UIViewController {
         keyboardView.keySecondLine.delegate = self
         keyboardView.keyThirdLine.delegate = self
         keyboardView.keyFourthLine.delegate = self
+        keyboardView.keyThirdLine.shiftDelegate = self
     }
 }
 
@@ -79,6 +81,8 @@ extension KeyboardViewController {
 
 extension KeyboardViewController: ButtonDelegate {
     func eraseButtonClickEvent(sender: KeyButton) {
+        keyboardView.keyThirdLine.shiftButton.isSelected = false
+        viewModel.resetShift(firstLineButtons)
         guard let text = reviewTextView.text?.last else {
             return
         }
@@ -87,32 +91,51 @@ extension KeyboardViewController: ButtonDelegate {
             let currentText = String(reviewTextView.text.suffix(2))
             reviewTextView.text = String(reviewTextView.text.prefix(reviewTextView.text.count - 2))
             
-            let managerString = manager.deleteString(3, currentText)
+            let managerString = viewModel.deleteString(3, currentText)
             reviewTextView.text += managerString.0
             state = managerString.1
         } else {
             reviewTextView.text.removeLast()
-            let managerString = manager.deleteString(state, String(text))
+            let managerString = viewModel.deleteString(state, String(text))
             reviewTextView.text += managerString.0
             state = managerString.1
         }
+        print(reviewTextView.text)
     }
     
     func buttonClickEvent(sender: KeyButton) {
         guard let text = reviewTextView.text?.last else {
-            let managerString = manager.makeString(state, "", sender)
+            let managerString = viewModel.makeString(state, "", sender)
             reviewTextView.text! = managerString.0
             state = managerString.1
+            keyboardView.keyThirdLine.shiftButton.isSelected = false
+            viewModel.resetShift(firstLineButtons)
+            print(reviewTextView.text)
             return
         }
-
-        let managerString = manager.makeString(state, String(text), sender)
         
-        if managerString.1 != 0 {
+        let managerString = viewModel.makeString(state, String(text), sender)
+
+        if state != 0 && managerString.0 != " " {
             reviewTextView.text.removeLast()
         }
         
         reviewTextView.text! += managerString.0
         state = managerString.1
+        
+        keyboardView.keyThirdLine.shiftButton.isSelected = false
+        viewModel.resetShift(firstLineButtons)
+        
+        print(reviewTextView.text)
+    }
+}
+
+extension KeyboardViewController: ShiftDelegate {
+    func shiftClickEvent(isShift: Bool) {
+        if isShift {
+            viewModel.changeShift(firstLineButtons)
+        } else {
+            viewModel.resetShift(firstLineButtons)
+        }
     }
 }
