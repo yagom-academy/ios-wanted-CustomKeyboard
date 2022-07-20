@@ -31,12 +31,3 @@ final class HomeTableViewCell: UITableViewCell {
         userImageView.loadImage(review.user.profileImage)
     }
 }
-
-// MARK: - Private
-
-extension HomeTableViewCell {
-    private func configureImageViewCircle() {
-        userImageView.layer.cornerRadius = userImageView.frame.width / 2
-        userImageView.clipsToBounds = true
-    }
-}
