@@ -15,7 +15,7 @@ class ReviewListViewController: UIViewController {
     private let reviewTextFieldStack = UIStackView()
     private let profileImageView = UIImageView()
     private let reviewTextView = UITextView()
-    private let reviewPostButton = UIButton()
+    private var reviewPostButton = UIButton()
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -122,9 +122,13 @@ extension ReviewListViewController {
         reviewTextView.layer.cornerRadius = 15
         reviewTextView.backgroundColor = .systemGray6
         
-        //버튼
-        reviewPostButton.configuration = UIButton.Configuration.tinted()
-        reviewPostButton.configuration?.title = "작성"
+        //작성버튼
+        reviewPostButton = UIButton(type: UIButton.ButtonType.system)
+        reviewPostButton.backgroundColor = .systemBlue
+        reviewPostButton.layer.cornerRadius = 10
+        reviewPostButton.setTitle("작성", for: .normal)
+        reviewPostButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        reviewPostButton.setTitleColor(.white, for: .normal)
         reviewPostButton.addTarget(self, action: #selector(didTapWriteButton) , for: .touchUpInside)
         
     }
@@ -147,7 +151,9 @@ extension ReviewListViewController {
         
         reviewTextFieldStack.addArrangedSubview(reviewTextView)
         reviewTextFieldStack.addArrangedSubview(reviewPostButton)
-        
+        NSLayoutConstraint.activate([
+            reviewPostButton.widthAnchor.constraint(equalTo: reviewTextFieldStack.widthAnchor, multiplier: 0.15),
+        ])
     }
     
     private func configureCollectionViewLayout() {
