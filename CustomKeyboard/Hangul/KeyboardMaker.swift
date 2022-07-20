@@ -13,9 +13,10 @@ class KeyboardMaker {
         var currentState: HangulKeyboardData.HangulState
         var isCompleted: Bool
         var alphaRepository: [HangulKeyboardData]
+        var mode: EditingMode
     }
     
-    enum Mode {
+    enum EditingMode {
         case none
         case doubleJong
         case jong
@@ -24,24 +25,28 @@ class KeyboardMaker {
     
     private var isDoubleJong = false
     private var isJong = false
-    private var isdeleting = false
     
     private var combineBuffer = [HangulKeyboardData](repeating: HangulKeyboardData(char: "", state: .empty), count: 3) // 현재 쓰여지고 있는 음소를 모아서 조합한 후 방출, 비워지는 배열
-    private var processingBuffer = Status(currentState: .empty, isCompleted: false, alphaRepository: [])
+    private var processingBuffer = Status(currentState: .empty, isCompleted: false, alphaRepository: [], mode: .none)
     private var releaseTextField = [String]()
     private let hangulConverter = HangulKeyboardConverter()
     private let combineValidator = HangulCombineValidator()
     private let combinator = HangulCombinator()
     
     public func putKeyboardData(data inputData: HangulKeyboardData) -> [String] {
-        guard inputData.hangul != " " else {
+         guard inputData.hangul != " " else {
+            
             let spaceKeyboardData = HangulKeyboardData(char: " ", state: processingBuffer.currentState)
             
             processingBuffer.alphaRepository.removeAll()
             processingBuffer.isCompleted = false
             processingBuffer.currentState = .empty
+            processingBuffer.mode = .none
+            
             combineBuffer = [HangulKeyboardData](repeating: HangulKeyboardData(char: "", state: .empty), count: 3)
+            
             releaseTextField.append(spaceKeyboardData.hangul)
+            
             return releaseTextField
         }
         
@@ -62,37 +67,62 @@ class KeyboardMaker {
             processingBuffer = doubleJongStage(status: processingBuffer, input: inputData)
         }
         
-        if isdeleting && !releaseTextField.isEmpty && !processingBuffer.alphaRepository.isEmpty {
-            if processingBuffer.alphaRepository.last!.hangul == releaseTextField.last! {
-                processingBuffer.alphaRepository.removeLast()
-                releaseTextField.removeLast()
-                isdeleting = false
-                if !releaseTextField.isEmpty {
-                    let decomposedHangul = combinator.decomposeForCompletedHangul(hangul: releaseTextField.last!, lastState: processingBuffer.currentState)
+        
+        switch processingBuffer.mode {
+        case .none:
+            print("y")
+        case .jong:
+            print("y")
+        case .doubleJong:
+            print("y")
+            
+        case .deleting:
+            print("delete")
+            if !releaseTextField.isEmpty && !processingBuffer.alphaRepository.isEmpty {
+                
+                if processingBuffer.alphaRepository.last!.hangul == releaseTextField.last! {
+                    
+                    processingBuffer.alphaRepository.removeLast()
+                    releaseTextField.removeLast()
+                    processingBuffer.mode = .none
+                    
+                    if !releaseTextField.isEmpty {
+                        let decomposedHangul = combinator.decomposeForCompletedHangul(hangul: releaseTextField.last!, lastState: processingBuffer.currentState)
+                        decomposedHangul.enumerated().forEach{ combineBuffer[$0.offset] = $0.element }
+                    }
+                    
+                    return releaseTextField
+                    
+                } else {
+                    print("delete 들어와서 현재 텍스트 필드 ",releaseTextField, processingBuffer.alphaRepository.map{$0.hangul})
+                    var decomposedHangul = combinator.decomposeHangul(hangul: releaseTextField.last!, lastState: processingBuffer.currentState)
+                    
+                    decomposedHangul = decomposedHangul.filter{$0.hangul != " "}
+                    processingBuffer.alphaRepository.removeLast()
+                    decomposedHangul.removeLast()
+                    combineBuffer = [HangulKeyboardData](repeating: HangulKeyboardData(char: "", state: .empty), count: 3)
                     decomposedHangul.enumerated().forEach{ combineBuffer[$0.offset] = $0.element }
+                    
+                    let recombinedHangul = combinator.combineHangulForDelete(buffer: decomposedHangul, lastState: processingBuffer.currentState)
+                    
+                    releaseTextField[releaseTextField.count - 1] = recombinedHangul.hangul
+                    processingBuffer.mode = .none
+                    
+                    return releaseTextField
+                }
+                
+            } else if inputData.unicode == SpecialCharSet.delete && processingBuffer.alphaRepository.count == 0 {
+                processingBuffer.currentState = .empty
+                processingBuffer.mode = .none
+                combineBuffer = [HangulKeyboardData](repeating: HangulKeyboardData(char: "", state: .empty), count: 3)
+                if !releaseTextField.isEmpty {
+                    releaseTextField.removeLast()
                 }
                 return releaseTextField
-            } else {
-                var decomposedHangul = combinator.decomposeHangul(hangul: releaseTextField.last!, lastState: processingBuffer.currentState)
-                decomposedHangul = decomposedHangul.filter{$0.hangul != " "}
-                processingBuffer.alphaRepository.removeLast()
-                decomposedHangul.removeLast()
-                combineBuffer = [HangulKeyboardData](repeating: HangulKeyboardData(char: "", state: .empty), count: 3)
-                decomposedHangul.enumerated().forEach{ combineBuffer[$0.offset] = $0.element }
-                
-                let recombinedHangul = combinator.combineHangulForDelete(buffer: decomposedHangul, lastState: processingBuffer.currentState)
-                releaseTextField[releaseTextField.count - 1] = recombinedHangul.hangul
-                isdeleting = false
-                return releaseTextField
             }
-        } else if inputData.unicode == SpecialCharSet.delete && processingBuffer.alphaRepository.count == 0 {
-            processingBuffer.currentState = .empty
-            combineBuffer = [HangulKeyboardData](repeating: HangulKeyboardData(char: "", state: .empty), count: 3)
-            if !releaseTextField.isEmpty {
-                releaseTextField.removeLast()
-            }
-            return releaseTextField
+            
         }
+        
         
         if isJong {
             let decomposedHangul = combinator.decomposeHangul(hangul: releaseTextField.last! , lastState: .jong).filter{$0.hangul != " "}
@@ -189,13 +219,15 @@ class KeyboardMaker {
         } else if currentKeyboardData.unicode == SpecialCharSet.delete {
             
             currentStatus.alphaRepository.removeLast()
-            isdeleting = true
+            currentStatus.mode = .deleting
             
             if currentStatus.alphaRepository.count == 0 {
+                
                 currentStatus.isCompleted = false
                 currentStatus.currentState = .empty
-                isdeleting = false
+                
                 return currentStatus
+                
             } else {
                 
                 currentStatus.isCompleted = false
@@ -271,7 +303,7 @@ class KeyboardMaker {
         if currentKeyboardData.unicode == SpecialCharSet.delete {
             
             currentStatus.alphaRepository.removeLast()// repo에 들어온 delete 값을 지워 줌
-            isdeleting = true
+            currentStatus.mode = .deleting
             currentStatus.isCompleted = false
             
             if currentStatus.alphaRepository.count > 1 {
@@ -330,7 +362,7 @@ class KeyboardMaker {
         } else if currentKeyboardData.unicode == SpecialCharSet.delete {
             
             currentStatus.alphaRepository.removeLast()
-            isdeleting = true
+            currentStatus.mode = .deleting
             currentStatus.isCompleted = false
             
             if currentStatus.alphaRepository.count > 1 {
@@ -391,16 +423,29 @@ class KeyboardMaker {
                 currentStatus.currentState = .jong
                 
                 return currentStatus
+            } else if HangulSet.chos.contains(currentKeyboardData.hangul) {
+                
+                combineBuffer = [HangulKeyboardData](repeating: HangulKeyboardData(char: "", state: .empty), count: 3)
+                currentStatus.isCompleted = true
+                combineBuffer[0] = currentKeyboardData
+                
+                if HangulSet.doubleChos.contains(currentKeyboardData.hangul) {
+                    currentStatus.currentState = .doubleCho
+                    
+                    return currentStatus
+                }
+                
+                currentStatus.currentState = .cho
+                
+                return currentStatus
             }
             
         } else if HangulSet.chos.contains(currentKeyboardData.hangul) { //버퍼에 초성이 없으므로 초성인 경우 -> 이 시점에서 글자를 완성 시키고 combineBuffer를 비워야 함.
-            
             combineBuffer = [HangulKeyboardData](repeating: HangulKeyboardData(char: "", state: .empty), count: 3)
             currentStatus.isCompleted = true
             combineBuffer[0] = currentKeyboardData
             
             if HangulSet.doubleChos.contains(currentKeyboardData.hangul) {
-                
                 currentStatus.currentState = .doubleCho
                 
                 return currentStatus
@@ -415,7 +460,7 @@ class KeyboardMaker {
         if currentKeyboardData.unicode == SpecialCharSet.delete {
             
             currentStatus.alphaRepository.removeLast()
-            isdeleting = true
+            currentStatus.mode = .deleting
             currentStatus.isCompleted = false
             
             if currentStatus.alphaRepository.count <= 1 {
@@ -507,7 +552,7 @@ class KeyboardMaker {
         if currentKeyboardData.unicode == SpecialCharSet.delete {
             
             currentStatus.alphaRepository.removeLast()
-            isdeleting = true
+            currentStatus.mode = .deleting
             currentStatus.isCompleted = false
             
             if currentStatus.alphaRepository.count > 1 {
@@ -576,7 +621,7 @@ class KeyboardMaker {
         if currentKeyboardData.unicode == SpecialCharSet.delete {
             
             currentStatus.alphaRepository.removeLast()
-            isdeleting = true
+            currentStatus.mode = .deleting
             currentStatus.isCompleted = false
             
             if currentStatus.alphaRepository.count > 1 {
@@ -638,7 +683,7 @@ class KeyboardMaker {
         if currentKeyboardData.unicode == SpecialCharSet.delete {
             
             currentStatus.alphaRepository.removeLast()
-            isdeleting = true
+            currentStatus.mode = .deleting
             currentStatus.isCompleted = false
             
             if currentStatus.alphaRepository.count > 1 {
