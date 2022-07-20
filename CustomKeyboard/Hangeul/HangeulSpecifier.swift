@@ -9,102 +9,103 @@ import Foundation
 
 final class HangeulSpecifier {
     
-    func specify(_ curr: Hangeul, inputMode: HangeulInputMode) {
+    func specify(_ currentCharacter: Hangeul, inputMode: HangeulInputMode) {
         switch inputMode {
         case .space:
-            specifyInSpaceMode(curr)
+            specifyInSpaceMode(currentCharacter)
         case .remove:
-            specifyInRemoveMode(curr)
+            specifyInRemoveMode(currentCharacter)
         default:
-            specifyInAddMode(curr)
+            specifyInAddMode(currentCharacter)
         }
     }
     
-    private func specifyInSpaceMode(_ curr: Hangeul) {
-        guard !curr.isAtStartingLine() else {
+    private func specifyInSpaceMode(_ currentCharacter: Hangeul) {
+        guard !currentCharacter.isAtStartingLine() else {
             return
         }
         
-        curr.prev?.update(status: .finished)
+        currentCharacter.prev?.update(status: .finished)
     }
     
-    private func specifyInRemoveMode(_ curr: Hangeul) {
-        guard curr.status != .finished || curr.value == "Space" else {
-            curr.update(status: .ongoing)
+    private func specifyInRemoveMode(_ currentCharacter: Hangeul) {
+        guard currentCharacter.status != .finished || currentCharacter.value == "Space" else {
+            currentCharacter.update(status: .ongoing)
             return
         }
         
-        if curr.position.count > 1 {
-            curr.prev?.update(status: .ongoing)
-            guard let firstPosition = curr.position.first else {
+        if currentCharacter.position.count > 1 {
+            currentCharacter.prev?.update(status: .ongoing)
+            guard let firstPosition = currentCharacter.position.first else {
                 return
             }
             
-            curr.update(status: .ongoing, position: firstPosition)
+            currentCharacter.update(status: .ongoing, position: firstPosition)
         }
         
     }
     
-    private func specifyInAddMode(_ curr: Hangeul) {
-        guard !curr.isAtStartingLine() else {
-            if curr.isMid() {
-                if curr.isDoubleMid() {
-                    curr.update(status: .finished, position: .mid)
+    private func specifyInAddMode(_ currentCharacter: Hangeul) {
+        if currentCharacter.isAtStartingLine() {
+            if currentCharacter.isMid() {
+                if currentCharacter.isDoubleMid() {
+                    currentCharacter.update(status: .finished, position: .mid)
                 } else {
-                    curr.update(position: .mid)
+                    currentCharacter.update(position: .mid)
                 }
             } else {
-                curr.update(position: .top)
+                currentCharacter.update(position: .top)
             }
             return
         }
         
-        let prev = curr.prev!
+        let previousCharacter = currentCharacter.prev!
         
-        switch prev.position.last {
+        switch previousCharacter.position.last {
         case .top :
-            if curr.isMid() {
-                curr.update(position: .mid)
+            if currentCharacter.isMid() {
+                currentCharacter.update(position: .mid)
             } else {
-                prev.update(status: .finished)
-                curr.update(position: .top)
+                previousCharacter.update(status: .finished)
+                currentCharacter.update(position: .top)
             }
         case .mid:
-            if curr.isMid() {
-                if prev.canBeTripleMid() {
-                    curr.update(status: .finished, position: .mid)
-                } else if curr.isDoubleMid() {
-                    prev.update(status: .finished)
-                    curr.update(status: .finished, position: .mid)
-                } else if prev.canBeDoubleMid() {
-                    curr.update(position: .mid)
+            if currentCharacter.isMid() {
+                if previousCharacter.canBeTripleMid() {
+                    currentCharacter.update(status: .finished, position: .mid)
+                } else if currentCharacter.isDoubleMid() {
+                    previousCharacter.update(status: .finished)
+                    currentCharacter.update(status: .finished, position: .mid)
+                } else if previousCharacter.canBeDoubleMid() {
+                    currentCharacter.update(position: .mid)
                 } else {
-                    prev.update(status: .finished)
-                    curr.update(position: .mid)
+                    previousCharacter.update(status: .finished)
+                    currentCharacter.update(position: .mid)
                 }
             } else {
-                if prev.canHaveEnd() && curr.isEnd() {
-                    curr.update(position: .end)
+                if previousCharacter.canHaveEnd() && currentCharacter.isEnd() {
+                    currentCharacter.update(position: .end)
                 } else {
-                    prev.update(status: .finished)
-                    curr.update(position: .top)
+                    previousCharacter.update(status: .finished)
+                    currentCharacter.update(position: .top)
                 }
             }
         case .end:
-            if curr.isMid() {
-                prev.prev?.update(status: .finished)
-                prev.update(position: .top)
-                curr.update(position: .mid)
+            if currentCharacter.isMid() {
+                previousCharacter.prev?.update(status: .finished)
+                previousCharacter.update(position: .top)
+                currentCharacter.update(position: .mid)
             } else {
-                if prev.canBeDoubleEnd() {
-                    curr.update(position: .end)
+                if previousCharacter.canBeDoubleEnd() {
+                    currentCharacter.update(position: .end)
                 } else {
-                    prev.update(status: .finished)
-                    curr.update(position: .top)
+                    previousCharacter.update(status: .finished)
+                    currentCharacter.update(position: .top)
                 }
             }
         default:
             break
         }
     }
+    
 }

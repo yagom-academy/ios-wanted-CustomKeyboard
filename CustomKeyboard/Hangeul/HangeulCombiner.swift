@@ -26,27 +26,33 @@ final class HangeulCombineBuffer {
         end = []
     }
     
-    func append(_ last: Hangeul) {
-        var curr: Hangeul? = last
+    func append(_ currentCharacter: Hangeul?) {
+        guard var currentCharacter = currentCharacter else {
+            return
+        }
         
         repeat {
-            guard let position = curr?.position.last else {
+            guard let position = currentCharacter.position.last else {
                 return
             }
 
             switch position {
             case .top:
-                self.top.append(curr!)
+                self.top.append(currentCharacter)
             case .mid:
-                self.mid.insert(curr!, at: 0)
+                self.mid.insert(currentCharacter, at: 0)
             case .end:
-                self.end.insert(curr!, at: 0)
+                self.end.insert(currentCharacter, at: 0)
             default:
                 break
             }
-            let prev = curr!.prev ?? nil
-            curr = prev
-        } while curr != nil && curr?.status != .finished && curr?.unicode != nil
+            
+            guard let previousCharacter = currentCharacter.prev else {
+                return
+            }
+            
+            currentCharacter = previousCharacter
+        } while currentCharacter.status != .finished && currentCharacter.unicode != nil
     }
 }
 
@@ -55,9 +61,9 @@ final class HangeulCombiner {
     private var combinedString: String = ""
     private var outputMode: HangeulOutputMode = .none
     
-    func combine(_ last: Hangeul, inputMode: HangeulInputMode) {
+    func combine(_ currentCharacter: Hangeul, inputMode: HangeulInputMode) {
         let buffer = HangeulCombineBuffer()
-        buffer.append(last)
+        buffer.append(currentCharacter)
         
         if buffer.top.isEmpty {
             if buffer.mid.count > 1 {
@@ -77,14 +83,14 @@ final class HangeulCombiner {
             combinedString = getCombinedString(topFirstCharacter) ?? ""
             outputMode = .add
         } else if buffer.end.isEmpty {
-            let topPos = buffer.top.first!.position
-            if inputMode == .add && buffer.mid.count == 1 && topPos.count > 1 {
-                let prevBuffer = HangeulCombineBuffer()
-                guard let prevLast = buffer.top.first?.prev else {
+            let topFirstCharacterPositionList = buffer.top.first!.position
+            if inputMode == .add && buffer.mid.count == 1 && topFirstCharacterPositionList.count > 1 {
+                let previousBuffer = HangeulCombineBuffer()
+                guard let previousCurrentCharacter = buffer.top.first?.prev else {
                     return
                 }
-                prevBuffer.append(prevLast)
-                combinedString += getCombinedString(with: prevBuffer) ?? ""
+                previousBuffer.append(previousCurrentCharacter)
+                combinedString += getCombinedString(with: previousBuffer) ?? ""
             }
             combinedString += getCombinedString(with: buffer) ?? ""
             outputMode = .change
@@ -95,11 +101,11 @@ final class HangeulCombiner {
     }
         
     
-    private func getCombinedString(_ solo: Hangeul? = nil, with buffer: HangeulCombineBuffer? = nil) -> String? {
+    private func getCombinedString(_ onlyOneCharacter: Hangeul? = nil, with buffer: HangeulCombineBuffer? = nil) -> String? {
         let converter = HangeulConverter()
     
-        if solo != nil {
-            return converter.toString(from: solo?.unicode)
+        if onlyOneCharacter != nil {
+            return converter.toString(from: onlyOneCharacter?.unicode)
         }
         
         guard let buffer = buffer else {

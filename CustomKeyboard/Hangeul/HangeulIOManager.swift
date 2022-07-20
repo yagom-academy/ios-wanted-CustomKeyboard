@@ -60,7 +60,7 @@ final class HangeulIOManger {
     }
     
   
-    private func updateOutput(with character: String, outputMode: HangeulOutputMode) {
+    private func updateOutput(with combinedString: String, outputMode: HangeulOutputMode) {
 
         guard outputMode != .remove else {
             output.unicodeScalars.removeLast()
@@ -71,7 +71,7 @@ final class HangeulIOManger {
             output.unicodeScalars.removeLast()
         }
         
-        output += character
+        output += combinedString
     }
     
     func getOutput() -> String {
