@@ -30,22 +30,22 @@ class API {
         }
     }
     
-    func post(message: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+    func post(message: String, completion: @escaping (Error?) -> Void) {
         guard let url = URL(string: constantURL.postURL) else {
-            completion(.failure(NetworkError.invalidURL))
+            completion(NetworkError.invalidURL)
             return
         }
         
         let data = PostReviewData(content: message)
         let resource = Resource<PostReviewData>(url: url, parameters: ["content":data.content], method: .post(data))
+        
         defaultSession.upload(resource) { result in
             switch result {
             case true:
-                completion(.success(true))
+                completion(nil)
             case false:
-                completion(.failure(NetworkError.invalidData))
+                completion(NetworkError.invalidData)
             }
-            completion(.success(true))
         }
     }
 }
