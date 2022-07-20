@@ -42,10 +42,6 @@ class KeyboardView: UIView {
         setupConstraints()
     }
     
-//    init(image : UIImage, frame : CGRect) { // custom initialize
-//        super.init(frame: frame)
-//    }
-    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
 //        fatalError("init(coder:) has not been implemented")
