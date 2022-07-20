@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct KeyBoardEngine: KeyBoardEngineProtocol {
     
@@ -117,7 +118,9 @@ extension KeyBoardEngine {
         
         switch support {
         case Support.ㄱ.code:
-            return consonant == CharUnicode.ㅅ.code ? (Support.ㄳ.code,0) : (support,0)
+            if consonant == CharUnicode.ㅅ.code {
+                return (Support.ㄳ.code,0)
+            }
         case Support.ㄴ.code:
             if consonant == CharUnicode.ㅈ.code {
                 return (Support.ㄵ.code,0)
@@ -330,7 +333,7 @@ extension KeyBoardEngine {
 //MARK: - Remove: 받침x
 extension KeyBoardEngine {
     private func removeFromPerfactCharNoSupport(initial:Int, neutral:Int) -> String {
-        
+
         switch neutral {
         case Neutral.ㅘ.code, Neutral.ㅙ.code, Neutral.ㅚ.code:
             return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: Neutral.ㅗ.code, support: 0))

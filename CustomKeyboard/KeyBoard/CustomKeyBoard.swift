@@ -15,6 +15,7 @@ class CustomKeyBoard: UIStackView {
                 .first!.delegate as! SceneDelegate
             return sceneDelegate.windowWidth!
         }
+        static let keyboardHeight: CGFloat = keyboardWidth < 340 ? keyboardWidth*3/5 : keyboardWidth*3/4
         static let buttonPadding = 5.0
         static let buttonWidth = keyboardWidth / 10.0 - buttonPadding
         static let fontSize: CGFloat = keyboardWidth < 340 ? 13.0 : 19.0
@@ -65,9 +66,8 @@ extension CustomKeyBoard: SecondRowKeyContainerDelegate {
 
 //MARK: - ThirdRowKeyContainerDelegate(세번째줄컨테이너) 이벤트 메서드
 extension CustomKeyBoard: ThirdRowKeyContainerDelegate {
-    func tappedShiftButton() {
-        
-        firstLineContainer.toggleDynamicBasicKeyState()
+    func tappedShiftButton() -> Bool {
+        return firstLineContainer.toggleDynamicBasicKeyState() == .double ? true : false
     }
     
     func tappedBackButton() {

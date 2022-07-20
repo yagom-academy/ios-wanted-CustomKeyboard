@@ -31,8 +31,8 @@ extension FirstRowKeyContainer: BasicKeyLineDelegate {
 
 // MARK: - Methods
 extension FirstRowKeyContainer {
-    func toggleDynamicBasicKeyState() {
-        firstLineDynamicBasicKeys.toggleDynamicBasicKeyState()
+    func toggleDynamicBasicKeyState() -> DynamicBasicKeyLine.State {
+        return firstLineDynamicBasicKeys.toggleDynamicBasicKeyState()
     }
 }
 

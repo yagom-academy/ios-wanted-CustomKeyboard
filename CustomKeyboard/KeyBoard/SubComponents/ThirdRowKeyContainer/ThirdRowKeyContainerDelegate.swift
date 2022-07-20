@@ -5,10 +5,10 @@
 //  Created by 김기림 on 2022/07/18.
 //
 
-import Foundation
+import UIKit
 
 protocol ThirdRowKeyContainerDelegate: AnyObject {
-    func tappedShiftButton()
+    func tappedShiftButton() -> Bool
     func tappedBackButton()
     func tappedThirdrowBasicKey(unicode: Int)
 }
