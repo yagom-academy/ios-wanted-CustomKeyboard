@@ -16,7 +16,7 @@ enum HangeulUnicodeType {
 }
 
 enum HangeulCombinationStatus {
-    case none, ongoing, finished
+    case ongoing, finished
 }
 
 enum HangeulCombinationPosition {
@@ -52,18 +52,16 @@ final class Hangeul {
 
 extension Hangeul {
 
-    func update(status: HangeulCombinationStatus = .none, position: HangeulCombinationPosition = .none) {
+    func update(status: HangeulCombinationStatus? = nil, position: HangeulCombinationPosition? = nil) {
         guard let oldUnicode = self.unicode else {
             return
         }
         
-        
-        
-        if status != .none {
-            self.status = status
+        if status != nil {
+            self.status = status ?? .ongoing
         }
         
-        guard position != .none else {
+        guard let position = position else {
             return
         }
         
@@ -79,7 +77,9 @@ extension Hangeul {
             guard let oldIndex = dictionary.getIndex(unicode: oldUnicode, position: oldPosition, unicodeType: .fixed) else {
                 return
             }
-            let unicode = dictionary.getUnicode(index: oldIndex, position: oldPosition, unicodeType: .compatible)
+            guard let unicode = dictionary.getUnicode(index: oldIndex, position: oldPosition, unicodeType: .compatible) else {
+                return
+            }
             
             oldCompatibleUnicode = unicode
         }
@@ -90,12 +90,19 @@ extension Hangeul {
         let newFixedUnicode = dictionary.getUnicode(index: newIndex, position: position, unicodeType: .fixed)
         self.unicode = newFixedUnicode
         
-        if self.position.count > 1 && self.position.first! == position {
-            self.position.removeLast()
+        if self.position.isEmpty {
+            self.position.append(position)
+        } else if self.position.count > 1 {
+            guard let firstPosition = self.position.first else {
+                return
+            }
+            
+            if firstPosition == position {
+                self.position.removeLast()
+            }
         } else {
             self.position.append(position)
         }
-        
     }
 }
 
@@ -132,14 +139,22 @@ extension Hangeul {
     func canHaveEnd() -> Bool {
         if self.isAtStartingLine() {
             return false
-        } else if self.position.last! == .mid && self.prev?.position.last! == .mid {
-            if self.prev?.prev == nil {
-                return false
-            } else if self.prev?.position.last! == .mid && self.prev?.prev?.status == .finished {
+        } else {
+            guard let currentCharacterPosition = self.position.last else {
                 return false
             }
-        }
+            guard let previousCharacterPosition = self.prev?.position.last else {
+                return false
+            }
         
+            if currentCharacterPosition == .mid && previousCharacterPosition == .mid {
+                if self.prev?.prev == nil {
+                    return false
+                } else if previousCharacterPosition == .mid && self.prev?.prev?.status == .finished {
+                    return false
+                }
+            }
+        }
         return true
     }
     
@@ -150,7 +165,7 @@ extension Hangeul {
             return false
         } else if self.prev?.position.last! != .mid {
             return false
-        } else if dictionary.getTripleMidUnicode(self.prev!, self, self.next!) < 0 {
+        } else if dictionary.getTripleMidUnicode(self.prev!, self, self.next!) == nil {
             return false
         }
         
@@ -165,7 +180,7 @@ extension Hangeul {
             return false
         } else if self.isDoubleMid() {
             return false
-        } else if dictionary.getDoubleUnicode(self, self.next!) < 0 {
+        } else if dictionary.getDoubleUnicode(self, self.next!) == nil {
             return false
         }
         
@@ -177,7 +192,7 @@ extension Hangeul {
 
         if self.prev?.position.last! == .end  {
             return false
-        } else if dictionary.getDoubleUnicode(self, self.next!) < 0 {
+        } else if dictionary.getDoubleUnicode(self, self.next!) == nil {
             return false
         }
         

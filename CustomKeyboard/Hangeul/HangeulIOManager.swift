@@ -25,26 +25,36 @@ final class HangeulIOManger {
             }
     
             inputList.removeLast()
+            updateOutput(with: "", outputMode: .remove)
             
-            guard inputList.tail != nil && inputList.tail!.status != .finished else {
-                specifier.specify(inputList.tail, inputMode: .remove)
-                updateOutput(with: "", outputMode: .remove)
+            guard let inputListTail = inputList.tail else {
                 return
             }
             
-            if inputList.tail!.position.count > 1 {
-                specifier.specify(inputList.tail, inputMode: .remove)
+            if inputListTail.status == .finished {
+                specifier.specify(inputListTail, inputMode: .remove)
+                return
+            }
+            
+            if inputListTail.position.count > 1 {
+                specifier.specify(inputListTail, inputMode: .remove)
                 updateOutput(with: "", outputMode: .remove)
             }
             
-            combiner.combine(inputList.tail!, inputMode: .remove)
-            updateOutput(with: combiner.getCombinedString(), outputMode: .change)
+            combiner.combine(inputListTail, inputMode: .remove)
+            updateOutput(with: combiner.getCombinedString(), outputMode: .add)
         case "Space":
-            specifier.specify(inputList.tail!, inputMode: .space)
+            guard let inputListTail = inputList.tail else {
+                return
+            }
+            specifier.specify(inputListTail, inputMode: .space)
             updateOutput(with: " ", outputMode: .add)
         default:
-            specifier.specify(inputList.tail!, inputMode: .add)
-            combiner.combine(inputList.tail!, inputMode: .add)
+            guard let inputListTail = inputList.tail else {
+                return
+            }
+            specifier.specify(inputListTail, inputMode: .add)
+            combiner.combine(inputListTail, inputMode: .add)
             updateOutput(with: combiner.getCombinedString(), outputMode: combiner.getOutputMode())
         }
     }

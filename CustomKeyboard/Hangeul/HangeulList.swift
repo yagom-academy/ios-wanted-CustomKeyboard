@@ -42,7 +42,7 @@ final class HangeulList {
             return
         }
         
-        tail?.prev!.next = tail!.next
+        tail?.prev?.next = tail?.next
         tail = tail?.prev
         return
     }
