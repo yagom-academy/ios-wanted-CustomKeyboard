@@ -7,13 +7,20 @@
 
 import UIKit
 
+protocol ReviewTextReceivable: AnyObject {
+    func hangulKeyboardText(text: String)
+}
+
 class CreateReviewViewController: UIViewController {
 
+    weak var delegate: ReviewTextReceivable?
+    
     private let keyboardManager = HangulKeyboardManager()
     
     private let reviewTextView: UITextView = {
         var textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.font = UIFont.systemFont(ofSize: 30)
         textView.backgroundColor = .white
         return textView
     }()
@@ -56,11 +63,30 @@ extension CreateReviewViewController: KeyboardInfoReceivable {
 extension CreateReviewViewController: HangulKeyboardDataReceivable {
     
     func hangulKeyboard(enterPressed: HangulKeyboardData) {
-        self.dismiss(animated: true)
+        
+        API.shared.post(message: reviewTextView.text) { [self] error in
+            if let error = error {
+                reviewDataPostErrorHandler(error: error)
+            } else {
+                DispatchQueue.main.async { [self] in
+                    self.navigationController?.popViewController(animated: true)
+                    delegate?.hangulKeyboardText(text: reviewTextView.text)
+                }
+            }
+        }
     }
     
     func hangulKeyboard(updatedResult text: String) {
         reviewTextView.text = text
+    }
+    
+    func reviewDataPostErrorHandler(error: Error) {
+        let alert = UIAlertController(title: "리뷰 포스트 실패!", message: "오류코드: \(error.localizedDescription)", preferredStyle: .alert)
+        let action = UIAlertAction(title: "확인", style: .default)
+        alert.addAction(action)
+        self.present(alert, animated: true) {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
 }
