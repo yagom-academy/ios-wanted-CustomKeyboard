@@ -41,19 +41,12 @@ final class ReviewTableViewCell: UITableViewCell {
         return label
     }()
 
-    private lazy var starRatingLabel: UILabel = {
-        let label = UILabel()
-        label.text = Text.starRating
-        label.font = UIFont.preferredFont(forTextStyle: .body)
-        label.textColor = .label
-        return label
-    }()
-
     private lazy var reviewLabel: UILabel = {
         let label = UILabel()
         label.text = Text.review
         label.font = UIFont.preferredFont(forTextStyle: .body)
         label.textColor = .label
+        label.numberOfLines = 0
         return label
     }()
 
@@ -85,6 +78,16 @@ final class ReviewTableViewCell: UITableViewCell {
 
 }
 
+extension ReviewTableViewCell {
+    
+    func setupCell(review: ReviewResult) {
+        nameLabel.text = review.user.userName
+        reviewLabel.text = review.content
+        uploadedTimeLabel.text = review.createdAt
+    }
+    
+}
+
 // MARK: - View setting methods
 
 extension ReviewTableViewCell {
@@ -95,7 +98,7 @@ extension ReviewTableViewCell {
             self.addSubview($0)
         }
 
-        [nameLabel, starRatingLabel, reviewLabel, uploadedTimeLabel].forEach {
+        [nameLabel, reviewLabel, uploadedTimeLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             reviewVerticalStackView.addArrangedSubview($0)
         }
@@ -134,7 +137,7 @@ extension ReviewTableViewCell {
 
     private enum Text {
         static let userName: String = "o달빔o"
-        static let starRating: String = "별점: ⭐️⭐️⭐️⭐️⭐️"
+//        static let starRating: String = "별점: ⭐️⭐️⭐️⭐️⭐️"
         static let review: String = "리뷰: 아진짜 귀여워요!!!!"
         static let uploadedTime: String = "1분"
     }

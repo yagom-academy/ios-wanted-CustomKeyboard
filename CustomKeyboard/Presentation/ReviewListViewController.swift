@@ -10,6 +10,9 @@ final class ReviewListViewController: BaseViewController {
     // MARK: - Properties
 
     private let reviewListView = ReviewListView()
+    private var reviewAPIProvider = ReviewAPIProvider(networkRequester: NetworkRequester())
+    
+    private var reviews: [ReviewResult] = []
 
     // MARK: - Lifecycle
 
@@ -19,6 +22,7 @@ final class ReviewListViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchReviews()
     }
 
     override func setupView() {
@@ -37,12 +41,29 @@ extension ReviewListViewController {
 
 }
 
+extension ReviewListViewController {
+    
+    func fetchReviews() {
+        reviewAPIProvider.fetchReviews(completion: { result in
+            switch result {
+            case .success(let reviews):
+                self.reviews = reviews
+                DispatchQueue.main.async {
+                    self.reviewListView.reviewTableView.reloadData()
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        })
+    }
+}
+
 // MARK: - UITableViewDataSource
 
 extension ReviewListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return reviews.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -54,7 +75,9 @@ extension ReviewListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
+        cell.setupCell(review: reviews[indexPath.row])
         return cell
     }
 
 }
+

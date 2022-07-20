@@ -22,7 +22,8 @@ struct ReviewAPIProvider {
         networkRequester.request(to: ReviewEndPoint.getReviews) { result in
             switch result {
             case .success(let data):
-                guard let decodedData = try? JSONDecoder().decode(ReviewDataDTO.self, from: data) else { return }
+                guard let decodedData = try? JSONDecoder().decode(ReviewDataDTO.self, from: data) else { return
+                }
                 let reviewResults = decodedData.datas
                 completion(.success(reviewResults))
                 
