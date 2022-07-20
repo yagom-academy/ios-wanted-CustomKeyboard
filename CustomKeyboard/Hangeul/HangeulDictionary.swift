@@ -255,9 +255,22 @@ extension HangeulDictionary {
         return nil
     }
     
-    func getTripleMidUnicode(_ previousCharacterText: String, _ currentCharacterText: String, _ nextCharacterText: String) -> Int? {
+    func getTripleMidUnicode(_ previousCharacterText: String? = nil, _ currentCharacterText: String, _ nextCharacterText: String) -> Int? {
         let dictionary = HangeulDictionary.fixed.jungseong.self
         
+        switch (currentCharacterText, nextCharacterText) {
+        case ("ㅜ", "ㅔ"):
+            return dictionary.ㅞ.rawValue
+        case ("ㅗ", "ㅐ"):
+            return dictionary.ㅙ.rawValue
+        default:
+            break
+        }
+        
+        guard let previousCharacterText = previousCharacterText else {
+            return nil
+        }
+
         switch (previousCharacterText, currentCharacterText, nextCharacterText) {
         case ("ㅜ", "ㅓ", "ㅣ"):
             return dictionary.ㅞ.rawValue

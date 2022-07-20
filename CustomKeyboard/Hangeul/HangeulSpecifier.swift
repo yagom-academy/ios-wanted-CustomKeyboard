@@ -121,11 +121,11 @@ extension HangeulSpecifier {
         }
         
         if currentCharacter.canBeTripleJungseong() {
-            currentCharacter.update(status: .finished, position: .jungseong)
+            currentCharacter.update(position: .jungseong)
         } else if currentCharacter.isDoubleJungseong() {
             previousCharacter.update(status: .finished)
             currentCharacter.update(status: .finished, position: .jungseong)
-        } else if previousCharacter.canBeDoubleJungseong() {
+        } else if currentCharacter.canBeDoubleJungseong() {
             currentCharacter.update(position: .jungseong)
         } else if currentCharacter.canBeJungseong() {
             previousCharacter.update(status: .finished)
@@ -148,7 +148,7 @@ extension HangeulSpecifier {
             mostPreviousCharacter.update(status: .finished)
             previousCharacter.update(position: .choseong)
             currentCharacter.update(position: .jungseong)
-        } else if previousCharacter.canBeDoubleJongseong() {
+        } else if currentCharacter.canBeDoubleJongseong() {
             currentCharacter.update(position: .jongseong)
         } else {
             previousCharacter.update(status: .finished)

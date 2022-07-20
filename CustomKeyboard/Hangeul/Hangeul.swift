@@ -149,18 +149,16 @@ extension Hangeul {
     }
     
     func canBeTripleJungseong() -> Bool {
-        guard let previousCharacter = self.prev, let mostPreviousCharacter = previousCharacter.prev else {
+        guard let previousCharacter = self.prev else {
             return false
         }
         
+        let mostPreviousCharacterText: String? = previousCharacter.prev?.text
         let dictionary = HangeulDictionary()
         
-        if mostPreviousCharacter.position.last! != .jungseong {
-            return false
-        } else if dictionary.getTripleMidUnicode(mostPreviousCharacter.text, previousCharacter.text, self.text) == nil {
+        if dictionary.getTripleMidUnicode(mostPreviousCharacterText, previousCharacter.text, self.text) == nil {
             return false
         }
-        
         return true
     }
     
@@ -168,11 +166,11 @@ extension Hangeul {
     func canBeDoubleJungseong() -> Bool {
         let dictionary = HangeulDictionary()
 
-        if !(self.prev?.status == .finished || self.prev?.position.last! != .jungseong) {
+        if self.prev?.prev?.status != .finished && self.prev?.prev?.position.last == .jungseong {
             return false
-        } else if self.isDoubleJungseong() {
+        } else if self.prev?.isDoubleJungseong() == true {
             return false
-        } else if dictionary.getDoubleUnicode(self, self.next!) == nil {
+        } else if dictionary.getDoubleUnicode(self.prev, self) == nil {
             return false
         }
         
@@ -182,9 +180,9 @@ extension Hangeul {
     func canBeDoubleJongseong() -> Bool {
         let dictionary = HangeulDictionary()
 
-        if self.prev?.position.last! == .jongseong  {
+        if self.prev?.prev?.position.last == .jongseong  {
             return false
-        } else if dictionary.getDoubleUnicode(self, self.next!) == nil {
+        } else if dictionary.getDoubleUnicode(self.prev, self) == nil {
             return false
         }
         return true

@@ -71,5 +71,18 @@ final class triple_input_Tests: XCTestCase {
         
         XCTAssertEqual(expectation, result)
     }
+    
+    func testExample5() throws {
+        ioManager.reset()
+        let input = ["ㄱ", "ㅗ", "ㅏ", "ㅣ", "ㄴ"]
+        let expectation = "괜"
+        
+        for ele in input {
+            ioManager.process(input: ele)
+        }
+        let result = ioManager.getOutput()
+        
+        XCTAssertEqual(expectation, result)
+    }
 
 }
