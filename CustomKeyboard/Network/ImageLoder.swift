@@ -21,7 +21,6 @@ class ImageLoder {
         }
         
         if let image = ImageLoder.imageCache.object(forKey: url as NSString) {
-            print("캐싱??")
             DispatchQueue.main.async {
                 completion(.success(image))
             }

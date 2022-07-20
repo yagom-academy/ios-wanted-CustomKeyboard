@@ -89,7 +89,7 @@ class ReviewTableViewCell: UITableViewCell {
         ])
     }
     
-    func fetchDataFromTableView(data: ReviewData1) {
+    func fetchDataFromTableView(data: ReviewData) {
         ImageLoder().leadImage(url: data.user.profileImage) { result in
             switch result {
             case .success(let profileImage):
@@ -98,12 +98,7 @@ class ReviewTableViewCell: UITableViewCell {
                 print(error.localizedDescription)
             }
         }
-        guard let reviewDate = data.createdAt.stringToDate else { return }
-        if reviewDate > Date(timeIntervalSinceNow: -86400) {
-            timeLabel.text = reviewDate.dateToRelativeTimeString
-        } else {
-            timeLabel.text = reviewDate.dateToOverTimeString
-        }
+        timeLabel.text = data.createdAt
         nickNameLabel.text = data.user.userName
         rateLabel.text = data.content
     }

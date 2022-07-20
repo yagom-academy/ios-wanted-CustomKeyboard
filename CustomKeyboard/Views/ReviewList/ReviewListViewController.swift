@@ -7,8 +7,7 @@ import UIKit
 
 class ReviewListViewController: UIViewController {
 
-    private let endPoint = EndPoint()
-    private var dataList = Data1(data: [])
+    private var dataList = ModelData()
     
     private var reviewTableView: UITableView = {
         let reviewTableView = UITableView()
@@ -56,7 +55,7 @@ class ReviewListViewController: UIViewController {
         
     }
     private func getData() {
-        endPoint.getReview { [self] result in
+        API.shared.get { [self] result in
             switch result {
             case .success(let data):
                 dataList = data
