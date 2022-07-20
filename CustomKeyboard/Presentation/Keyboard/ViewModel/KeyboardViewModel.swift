@@ -23,14 +23,14 @@ class KeyboardViewModel {
     let consonant = [
         "ㅂ","ㅈ","ㄷ","ㄱ","ㅅ","ㅛ","ㅕ","ㅑ","ㅐ",
         "ㅔ","ㅁ","ㄴ","ㅇ","ㄹ","ㅎ","ㅗ","ㅓ","ㅏ",
-        "ㅣ","up","ㅋ","ㅌ","ㅊ","ㅍ","ㅠ","ㅜ","ㅡ",
+        "ㅣ","변환","ㅋ","ㅌ","ㅊ","ㅍ","ㅠ","ㅜ","ㅡ",
         "지움","스페이스","엔터"
     ]
 
     let doubleConsonant = [
         "ㅃ","ㅉ","ㄸ","ㄲ","ㅆ","ㅛ","ㅕ","ㅑ","ㅒ",
         "ㅖ","ㅁ","ㄴ","ㅇ","ㄹ","ㅎ","ㅗ","ㅓ","ㅏ",
-        "ㅣ","up","ㅋ","ㅌ","ㅊ","ㅍ","ㅠ","ㅜ","ㅡ",
+        "ㅣ","변환","ㅋ","ㅌ","ㅊ","ㅍ","ㅠ","ㅜ","ㅡ",
         "지움","스페이스","엔터"
     ]
     
@@ -41,7 +41,7 @@ class KeyboardViewModel {
     func processKeyboardInput(_ index : Int) {
         // Save in buffer
         if isShift == 0 {
-            if consonant[index] != "지움", consonant[index] != "up", consonant[index] != "엔터" {
+            if consonant[index] != "지움", consonant[index] != "변환", consonant[index] != "엔터" {
                 if consonant[index] == "스페이스" {
                     buffer.append(" ")
                 } else {
@@ -49,7 +49,7 @@ class KeyboardViewModel {
                 }
             }
         } else {
-            if doubleConsonant[index] != "지움", doubleConsonant[index] != "up", doubleConsonant[index] != "엔터" {
+            if doubleConsonant[index] != "지움", doubleConsonant[index] != "변환", doubleConsonant[index] != "엔터" {
                 if doubleConsonant[index] == "스페이스" {
                     buffer.append(" ")
                 } else {
@@ -61,7 +61,7 @@ class KeyboardViewModel {
         print("buffer : \(buffer)")
         if consonant[index] == "지움" || doubleConsonant[index] == "지움" {
             erase()
-        } else if consonant[index] == "up" || doubleConsonant[index] == "up" {
+        } else if consonant[index] == "변환" || doubleConsonant[index] == "변환" {
             pressUp()
         }
     }
