@@ -62,15 +62,3 @@ class User: Codable {
         profileImage = try values.decode(String.self, forKey: .profileImage)
     }
 }
-
-class ReviewDateConverter {
-    
-    func convertReviewDate(rawData: String) -> String {
-        if rawData.stringToDate ?? Date() > Date(timeIntervalSinceNow: -86400) {
-            return rawData.stringToDate?.dateToRelativeTimeString ?? rawData
-        } else {
-            return rawData.stringToDate?.dateToOverTimeString ?? rawData
-        }
-    }
-    
-}
