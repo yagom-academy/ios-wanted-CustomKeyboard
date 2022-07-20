@@ -27,7 +27,8 @@ class KeyboardView: UIView {
         button.setupUtilButton(
             "shift",
             target: self,
-            action: #selector(didTapShift)
+            touchUpAction: #selector(didTapShift(_:)),
+            touchDownAction: #selector(didPressKeyboardButton(_:))
         )
         return button
     }()
@@ -36,7 +37,8 @@ class KeyboardView: UIView {
         button.setupUtilButton(
             "space",
             target: self,
-            action: #selector(didTapSpace)
+            touchUpAction: #selector(didTapSpace(_:)),
+            touchDownAction: #selector(didPressKeyboardButton(_:))
         )
         return button
     }()
@@ -45,16 +47,18 @@ class KeyboardView: UIView {
         button.setupUtilButton(
             "return",
             target: self,
-            action: #selector(didTapReturn)
+            touchUpAction: #selector(didTapReturn(_:)),
+            touchDownAction: #selector(didPressKeyboardButton(_:))
         )
         return button
     }()
     private lazy var backButton: UIButton = {
         let button = UIButton()
         button.setupUtilButton(
-            "Back",
+            "back",
             target: self,
-            action: #selector(didTapBack)
+            touchUpAction: #selector(didTapBack(_:)),
+            touchDownAction: #selector(didPressKeyboardButton(_:))
         )
         return button
     }()
@@ -94,6 +98,7 @@ class KeyboardView: UIView {
         
         //Binding
         bindShiftMode()
+        print(shiftButton.layer.bounds)
     }
     
     required init?(coder: NSCoder) {
@@ -121,26 +126,33 @@ class KeyboardView: UIView {
 
 // MARK: - @objc Methods
 private extension KeyboardView {
+    @objc func didPressKeyboardButton(_ sender: UIButton) {
+        sender.backgroundColor = .secondarySystemFill
+    }
     @objc func didTapKeyboardButton(_ sender: KeyboardButton) {
+        sender.backgroundColor = .systemBackground
         let buffer = sender.compatibility
         viewModel.didTapKeyboardButton(buffer: buffer)
     }
-    
-    @objc func didTapSpace() {
+    @objc func didTapSpace(_ sender: UIButton) {
+        sender.backgroundColor = .systemBackground
         viewModel.result.value.append(" ")
         viewModel.sejongState = .writeInitialState
     }
-    @objc func didTapShift() {
+    @objc func didTapShift(_ sender: UIButton) {
+        sender.backgroundColor = .systemBackground
         debugPrint("didTapShift")
         isShift = !isShift
         viewModel.isShift.value = isShift
         changeShiftMode(isShift)
     }
-    @objc func didTapReturn() {
+    @objc func didTapReturn(_ sender: UIButton) {
+        sender.backgroundColor = .systemBackground
         debugPrint("didTapReturn")
         viewModel.returnButtonTapped.value = true
     }
-    @objc func didTapBack() {
+    @objc func didTapBack(_ sender: UIButton) {
+        sender.backgroundColor = .systemBackground
         viewModel.didTapBack()
     }
 }
@@ -171,22 +183,28 @@ private extension KeyboardView {
             midStackView.topAnchor.constraint(equalTo: topStackView.bottomAnchor,constant: 8),
             midStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
+            shiftButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 3),
+            shiftButton.trailingAnchor.constraint(equalTo: bottomStackView.leadingAnchor, constant: -8),
+            shiftButton.centerYAnchor.constraint(equalTo: bottomStackView.centerYAnchor),
+            shiftButton.heightAnchor.constraint(equalToConstant: KeyboardButton.height),
+            
             bottomStackView.topAnchor.constraint(equalTo: midStackView.bottomAnchor,constant: 8),
             bottomStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-
-            shiftButton.leadingAnchor.constraint(equalTo: topStackView.leadingAnchor),
-            shiftButton.topAnchor.constraint(equalTo: spaceButton.topAnchor),
-            shiftButton.widthAnchor.constraint(lessThanOrEqualToConstant: 60.0),
-
-            spaceButton.leadingAnchor.constraint(equalTo: shiftButton.trailingAnchor, constant: 6),
-            spaceButton.topAnchor.constraint(equalTo: bottomStackView.bottomAnchor, constant: 10),
-            spaceButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-
+            backButton.leadingAnchor.constraint(equalTo: bottomStackView.trailingAnchor, constant: 8),
+            backButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -3),
+            backButton.centerYAnchor.constraint(equalTo: bottomStackView.centerYAnchor),
+            backButton.heightAnchor.constraint(equalToConstant: KeyboardButton.height),
+            
+            spaceButton.leadingAnchor.constraint(equalTo: bottomStackView.leadingAnchor, constant: KeyboardButton.width + 6),
+            spaceButton.topAnchor.constraint(equalTo: bottomStackView.bottomAnchor, constant: 13),
+            spaceButton.trailingAnchor.constraint(equalTo: bottomStackView.trailingAnchor, constant: -(KeyboardButton.width + 6)),
+            spaceButton.heightAnchor.constraint(equalToConstant: KeyboardButton.height),
+            
+            
             returnButton.leadingAnchor.constraint(equalTo: spaceButton.trailingAnchor, constant: 6),
-            returnButton.topAnchor.constraint(equalTo: spaceButton.topAnchor),
-            returnButton.trailingAnchor.constraint(equalTo: topStackView.trailingAnchor),
-            returnButton.widthAnchor.constraint(lessThanOrEqualToConstant: 60.0),
-            backButton.topAnchor.constraint(equalTo: returnButton.bottomAnchor)
+            returnButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -3),
+            returnButton.centerYAnchor.constraint(equalTo: spaceButton.centerYAnchor),
+            returnButton.heightAnchor.constraint(equalToConstant: KeyboardButton.height)
         ])
     }
     
@@ -197,6 +215,11 @@ private extension KeyboardView {
                 self,
                 action: #selector(didTapKeyboardButton(_:)),
                 for: .touchUpInside
+            )
+            button.addTarget(
+                self,
+                action: #selector(didPressKeyboardButton(_:)),
+                for: .touchDown
             )
             stackView.addArrangedSubview(button)
         }

@@ -127,7 +127,7 @@ class KeyboardViewModel {
                 guard let willRemove = result.value.unicodeScalars.last else {
                     return
                 }
-
+                
                 if willRemove == " " {
                     isRemovePhoneme = false
                     result.value.unicodeScalars.removeLast()
@@ -174,16 +174,28 @@ class KeyboardViewModel {
                         sejongState = .writeLastState
                     }
                 }
-
-                // 호환성인 경우
-                if Compatibility(rawValue: willRemove.value) != nil {
-                    result.value.unicodeScalars.removeLast()
-                    sejongState = .writeInitialState
-                }
                 
+                // 호환성인 경우
+                if Compatibility(rawValue: willRemove.value) != nil { // 안녕하ㅅ
+                    result.value.unicodeScalars.removeLast() // 안녕하
+                    guard let lastValue = result.value.unicodeScalars.last?.value else { return } // ㅏ
+                    
+                    if Jungsung(rawValue: lastValue) != nil {
+                        sejongState = .writeLastState
+                    } else {
+                        if splitDoubleJongsung(Jongsung(rawValue: lastValue)) != nil {
+                            sejongState = .alreadyDoubleLastState
+                        } else {
+                            sejongState = .alreadyLastState
+                        }
+                    }
+                }
             } else {
                 result.value.removeLast()
                 sejongState = .writeInitialState
+                if result.value.isEmpty {
+                    isRemovePhoneme = true
+                }
             }
         }
     }

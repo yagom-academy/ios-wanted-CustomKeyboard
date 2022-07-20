@@ -25,8 +25,7 @@ class WriteController: UIViewController {
     
     lazy var keyBoardView: KeyboardView = {
         let keyboard = KeyboardView(viewModel: viewModel.keyboardViewModel)
-        keyboard.frame = CGRect(x: 0, y: 0, width: 0, height: 250)
-        keyboard.backgroundColor = .gray
+        keyboard.backgroundColor = .systemGray4
         return keyboard
     }()
     
@@ -43,7 +42,8 @@ class WriteController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupNavigationBar()
-        self.commentEditView.inputView = keyBoardView
+        commentEditView.inputView = keyBoardView
+        commentEditView.inputView?.autoresizingMask = .flexibleHeight
         
         commentEditView.text = delegate?.commentValue
         configUI()

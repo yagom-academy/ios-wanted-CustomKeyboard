@@ -18,6 +18,8 @@ class KeyboardButton: UIButton {
         }
     }
     
+    static let width = (UIScreen.main.bounds.width - 60.0) / 10
+    static let height = width * 1.3
     
     init(
         text: String? = nil,
@@ -35,17 +37,24 @@ class KeyboardButton: UIButton {
     func setupButton() {
         setTitle(text, for: .normal)
         setTitleColor(.label, for: .normal)
-        backgroundColor = .white
+        titleLabel?.font = .systemFont(ofSize: 22.0, weight: .regular)
+        backgroundColor = .systemBackground
         layer.cornerRadius = 4.0
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowRadius = 1.0
-        layer.shadowOpacity = 0.3
+        layer.shadowOpacity = 0.4
         layer.shadowOffset = .init(width: 0.0, height: 1.0)
+        layer.shadowPath = UIBezierPath(roundedRect: CGRect(
+            x: 0.0,
+            y: 0.0,
+            width: KeyboardButton.width,
+            height: KeyboardButton.height
+        ), cornerRadius: 4.0).cgPath
         layer.borderColor = UIColor.black.cgColor
         layer.borderWidth = 0.1
         translatesAutoresizingMaskIntoConstraints = false
-        let width = (UIScreen.main.bounds.width - 54.0) / 10
-        widthAnchor.constraint(equalToConstant: width).isActive = true
+        widthAnchor.constraint(equalToConstant: KeyboardButton.width).isActive = true
+        heightAnchor.constraint(equalToConstant: KeyboardButton.height).isActive = true
     }
     
     func setupShiftMode(_ isShift: Bool) {
