@@ -37,11 +37,7 @@ class ReviewData: Codable {
         user = try values.decode(User.self, forKey: .user)
         content = try values.decode(String.self, forKey: .content)
         let date = try values.decode(String.self, forKey: .createdAt)
-        if date.stringToDate ?? Date() > Date(timeIntervalSinceNow: -86400) {
-            createdAt = date.stringToDate?.dateToRelativeTimeString ?? date
-        } else {
-            createdAt = date.stringToDate?.dateToOverTimeString ?? date
-        }
+        createdAt = ReviewDateConverter().convertReviewDate(rawData: date)
     }
 }
 
@@ -65,4 +61,16 @@ class User: Codable {
         userName = try values.decode(String.self, forKey: .userName)
         profileImage = try values.decode(String.self, forKey: .profileImage)
     }
+}
+
+class ReviewDateConverter {
+    
+    func convertReviewDate(rawData: String) -> String {
+        if rawData.stringToDate ?? Date() > Date(timeIntervalSinceNow: -86400) {
+            return rawData.stringToDate?.dateToRelativeTimeString ?? rawData
+        } else {
+            return rawData.stringToDate?.dateToOverTimeString ?? rawData
+        }
+    }
+    
 }
