@@ -32,6 +32,7 @@
 		F039F8B028868F2000E7B637 /* HangulKeyboardConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F039F8AF28868F2000E7B637 /* HangulKeyboardConverter.swift */; };
 		F039F8B2288690C800E7B637 /* HangulCombineValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F039F8B1288690C800E7B637 /* HangulCombineValidator.swift */; };
 		F039F8B4288692A900E7B637 /* HangulCombinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F039F8B3288692A900E7B637 /* HangulCombinator.swift */; };
+		F039F8C828881FBA00E7B637 /* ReviewDateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F039F8C728881FBA00E7B637 /* ReviewDateConverter.swift */; };
 		F0D480D3287D97BD00D9425C /* CreateReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D480D2287D97BD00D9425C /* CreateReviewViewController.swift */; };
 		F0D480D5287E532000D9425C /* HangulSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D480D4287E532000D9425C /* HangulSet.swift */; };
 		F0D480D7287E658300D9425C /* KeyboardMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D480D6287E658300D9425C /* KeyboardMaker.swift */; };
@@ -66,6 +67,7 @@
 		F039F8AF28868F2000E7B637 /* HangulKeyboardConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangulKeyboardConverter.swift; sourceTree = "<group>"; };
 		F039F8B1288690C800E7B637 /* HangulCombineValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangulCombineValidator.swift; sourceTree = "<group>"; };
 		F039F8B3288692A900E7B637 /* HangulCombinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangulCombinator.swift; sourceTree = "<group>"; };
+		F039F8C728881FBA00E7B637 /* ReviewDateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDateConverter.swift; sourceTree = "<group>"; };
 		F0D480D2287D97BD00D9425C /* CreateReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewViewController.swift; sourceTree = "<group>"; };
 		F0D480D4287E532000D9425C /* HangulSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangulSet.swift; sourceTree = "<group>"; };
 		F0D480D6287E658300D9425C /* KeyboardMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardMaker.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			children = (
 				F0D4B435287D564D0083E8AE /* ReviewData.swift */,
 				36FCAC0C28825D0B003AF9AF /* PostReviewData.swift */,
+				F039F8C728881FBA00E7B637 /* ReviewDateConverter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				DE15E66028604278003DD2F5 /* ReviewListViewController.swift in Sources */,
 				F0D480D3287D97BD00D9425C /* CreateReviewViewController.swift in Sources */,
 				36F646D0287D39E8007288C7 /* ReviewTableViewCell.swift in Sources */,
+				F039F8C828881FBA00E7B637 /* ReviewDateConverter.swift in Sources */,
 				F039F8AE28866F0C00E7B637 /* KeyboardIOManager.swift in Sources */,
 				36B1CD0A2887DC27003E13C3 /* API.swift in Sources */,
 				36FEC399288534C800F2C39B /* ImageLoder.swift in Sources */,
