@@ -21,7 +21,7 @@ final class HangeulConverter {
         guard let unicodeScalar = UnicodeScalar(unicode) else {
             return nil
         }
-        
+    
         return String(unicodeScalar)
     }
 }

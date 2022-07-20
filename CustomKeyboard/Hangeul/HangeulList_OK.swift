@@ -20,7 +20,7 @@ final class HangeulList {
 extension HangeulList {
     
     func append(_ data: String) {
-        guard data != "Back" else {
+        if data == Text.back {
             return
         }
         

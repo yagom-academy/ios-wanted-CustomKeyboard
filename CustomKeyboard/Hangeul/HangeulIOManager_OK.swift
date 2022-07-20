@@ -12,7 +12,7 @@ import Foundation
 final class HangeulIOManger {
     
     private var inputList = HangeulList()
-    private var output = ""
+    private var output = Text.emptyString
 }
 
 // MARK: - Public Method
@@ -20,12 +20,13 @@ final class HangeulIOManger {
 extension HangeulIOManger {
     
     func process(input: String) {
+        
         inputList.append(input)
         
         switch input {
-        case "Back":
+        case Text.back:
             processWithBack()
-        case "Space":
+        case Text.space:
             processWithSpace()
         default:
             processWithNormalInput(input)
@@ -38,30 +39,30 @@ extension HangeulIOManger {
     
     func reset() {
         inputList = HangeulList()
-        output = ""
+        output = Text.emptyString
     }
 }
 
 // MARK: - Private Method
 
+// MARK: - called in process
+
 extension HangeulIOManger {
     
-    // MARK: - called in process
-    
     private func processWithBack() {
-        let specifier = HangeulSpecifier()
-        let combiner = HangeulCombiner()
-
-        guard !inputList.isEmpty() else {
+        if inputList.isEmpty() {
             return
         }
-
+        
         inputList.removeLast()
-        updateOutput(with: "", outputMode: .remove)
+        setOutput(with: Text.emptyString, editMode: .remove)
         
         guard let inputListTail = inputList.tail else {
             return
         }
+        
+        let specifier = HangeulSpecifier()
+        let combiner = HangeulCombiner()
         
         if inputListTail.status == .finished {
             specifier.specifyProperties(of: inputListTail, when: .remove)
@@ -70,11 +71,11 @@ extension HangeulIOManger {
         
         if inputListTail.position.count > 1 {
             specifier.specifyProperties(of: inputListTail, when: .remove)
-            updateOutput(with: "", outputMode: .remove)
+            setOutput(with: Text.emptyString, editMode: .remove)
         }
         
-        combiner.combine(inputListTail, inputMode: .remove)
-        updateOutput(with: combiner.getCombinedString(), outputMode: .add)
+        combiner.setCombinedString(using: inputListTail, when: .remove)
+        setOutput(with: combiner.getCombinedString(), editMode: .add)
     }
     
     private func processWithSpace() {
@@ -85,7 +86,7 @@ extension HangeulIOManger {
         let specifier = HangeulSpecifier()
         
         specifier.specifyProperties(of: inputListTail, when: .space)
-        updateOutput(with: " ", outputMode: .add)
+        setOutput(with: Text.whiteSpaceString, editMode: .add)
     }
     
     private func processWithNormalInput(_ input: String) {
@@ -97,19 +98,23 @@ extension HangeulIOManger {
         let combiner = HangeulCombiner()
         
         specifier.specifyProperties(of: inputListTail, when: .add)
-        combiner.combine(inputListTail, inputMode: .add)
-        updateOutput(with: combiner.getCombinedString(), outputMode: combiner.getOutputMode())
+        combiner.setCombinedString(using: inputListTail, when: .add)
+        setOutput(with: combiner.getCombinedString(), editMode: combiner.getOutputMode())
     }
-  
-    // MARK: - update output string
-    private func updateOutput(with combinedString: String, outputMode: HangeulOutputMode) {
+}
 
-        guard outputMode != .remove else {
+// MARK: - set output string
+
+extension HangeulIOManger {
+    
+    private func setOutput(with combinedString: String, editMode: HangeulOutputMode) {
+
+        if editMode == .remove {
             output.unicodeScalars.removeLast()
             return
         }
         
-        if outputMode == .change && !output.isEmpty {
+        if editMode == .change && !output.isEmpty {
             output.unicodeScalars.removeLast()
         }
         

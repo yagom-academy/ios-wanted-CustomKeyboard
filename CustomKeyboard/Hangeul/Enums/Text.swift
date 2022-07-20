@@ -8,7 +8,6 @@
 import Foundation
 
 enum Text {
-    
     static let back = "Back"
     static let space = "Space"
     static let whiteSpaceString = " "

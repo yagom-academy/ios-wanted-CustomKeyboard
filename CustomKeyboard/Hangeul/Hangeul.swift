@@ -7,22 +7,6 @@
 
 import Foundation
 
-enum HangeulEumun {
-    case moeum, jaeum
-}
-
-enum HangeulUnicodeType {
-    case fixed, compatible
-}
-
-enum HangeulCombinationStatus {
-    case ongoing, finished
-}
-
-enum HangeulCombinationPosition {
-    case choseong, jungseong, jongseong
-}
-
 final class Hangeul {
     var prev: Hangeul?
     var next: Hangeul?
@@ -40,13 +24,13 @@ final class Hangeul {
         self.position = []
         self.eumun = .jaeum
         
-        guard input != "Space" else {
+        guard input != Text.space else {
             self.unicode = nil
             self.status = .finished
             return
         }
         
-        for hangeul in HangeulDictionary.compatible.mid.allCases {
+        for hangeul in HangeulDictionary.compatible.jungseong.allCases {
             if hangeul.rawValue == self.unicode {
                 self.eumun = .moeum
             }
@@ -118,7 +102,7 @@ extension Hangeul {
 extension Hangeul {
     
     func canBeJungseong() -> Bool {
-        for hangeul in HangeulDictionary.compatible.mid.allCases {
+        for hangeul in HangeulDictionary.compatible.jungseong.allCases {
             if hangeul.rawValue == self.unicode {
                 return true
             }
@@ -127,7 +111,7 @@ extension Hangeul {
     }
     
     func canBeJongseong() -> Bool {
-        for hangeul in HangeulDictionary.compatible.end.allCases {
+        for hangeul in HangeulDictionary.compatible.jongseong.allCases {
             if hangeul.rawValue == self.unicode {
                 return true
             }
@@ -137,12 +121,8 @@ extension Hangeul {
     }
     
     
-    func isDoubleMid() -> Bool {
-        guard self.canBeJungseong() else {
-            return false
-        }
-        
-        for hangeul in HangeulDictionary.compatible.doubleMid.allCases {
+    func isDoubleJungseong() -> Bool {
+        for hangeul in HangeulDictionary.compatible.doubleJungseong.allCases {
             if hangeul.rawValue == self.unicode {
                 return true
             }
@@ -174,13 +154,19 @@ extension Hangeul {
     }
     
     func canBeTripleMid() -> Bool {
+        guard let previousCharacter = self.prev else {
+            return false
+        }
+        
+        guard let mostPreviousCharacter = previousCharacter.prev else {
+            return false
+        }
+        
         let dictionary = HangeulDictionary()
         
-        if self.prev == nil {
+        if mostPreviousCharacter.position.last! != .jungseong {
             return false
-        } else if self.prev?.position.last! != .jungseong {
-            return false
-        } else if dictionary.getTripleMidUnicode(self.prev!, self, self.next!) == nil {
+        } else if dictionary.getTripleMidUnicode(mostPreviousCharacter, previousCharacter, self) == nil {
             return false
         }
         
@@ -193,7 +179,7 @@ extension Hangeul {
 
         if !(self.prev?.status == .finished || self.prev?.position.last! != .jungseong) {
             return false
-        } else if self.isDoubleMid() {
+        } else if self.isDoubleJungseong() {
             return false
         } else if dictionary.getDoubleUnicode(self, self.next!) == nil {
             return false

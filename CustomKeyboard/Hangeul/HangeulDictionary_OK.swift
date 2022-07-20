@@ -11,8 +11,8 @@ import Foundation
 
 struct HangeulDictionary {
     
-    let midCount = 21
-    let endCount = 28
+    let jungseongTotalCount = 21
+    let jongseongTotalCount = 28
     let baseCode = 44032
     
 }
@@ -23,7 +23,7 @@ extension HangeulDictionary {
     
     struct compatible {
         
-        enum top: Int, CaseIterable{
+        enum choseong: Int, CaseIterable{
             
             case ㄱ = 0x3131
             case ㄲ = 0x3132
@@ -46,7 +46,7 @@ extension HangeulDictionary {
             case ㅎ = 0x314E
         }
         
-        enum mid: Int, CaseIterable {
+        enum jungseong: Int, CaseIterable {
         
             case ㅏ = 0x314F
             case ㅐ = 0x3150
@@ -71,7 +71,7 @@ extension HangeulDictionary {
             case ㅣ = 0x3163
         }
         
-        enum doubleMid: Int, CaseIterable {
+        enum doubleJungseong: Int, CaseIterable {
             case ㅐ = 0x3150
             case ㅒ = 0x3152
             case ㅔ = 0x3154
@@ -85,7 +85,7 @@ extension HangeulDictionary {
             case ㅢ = 0x3162
         }
             
-        enum end: Int, CaseIterable {
+        enum jongseong: Int, CaseIterable {
             
             case blank = 0x3130
             case ㄱ = 0x3131
@@ -125,7 +125,7 @@ extension HangeulDictionary {
     
     struct fixed {
         
-        enum top: Int, CaseIterable{
+        enum choseong: Int, CaseIterable{
             case ㄱ = 0x1100
             case ㄲ = 0x1101
             case ㄴ = 0x1102
@@ -147,7 +147,7 @@ extension HangeulDictionary {
             case ㅎ = 0x1112
         }
         
-        enum mid: Int, CaseIterable {
+        enum jungseong: Int, CaseIterable {
             case ㅏ = 0x1161
             case ㅐ = 0x1162
             case ㅑ = 0x1163
@@ -186,8 +186,7 @@ extension HangeulDictionary {
         }
         
         
-            
-        enum end: Int, CaseIterable {
+        enum jongseong: Int, CaseIterable {
             case blank = 0x11A7
             case ㄱ = 0x11A8
             case ㄲ = 0x11A9
@@ -231,84 +230,45 @@ extension HangeulDictionary {
         
         if unicodeType == .fixed {
             return getIndexOfFixed(unicode, in: position)
-        } else {
-            return getIndexOfCompatible(unicode, in: position)
         }
+        
+        return getIndexOfCompatible(unicode, in: position)
     }
     
     func getUnicode(at index: Int, in position: HangeulCombinationPosition, of unicodeType: HangeulUnicodeType) -> Int? {
         if unicodeType == .fixed {
             return getUnicodeOfFixed(index, in: position)
-        } else {
-            return getUnicodeOfCompatible(index, in: position)
         }
+        return getUnicodeOfCompatible(index, in: position)
     }
 
     func getDoubleUnicode(_ previousCharacter: Hangeul, _ currentCharacter: Hangeul) -> Int? {
-        if previousCharacter.position.last! == .jungseong {
-            if previousCharacter.text == "ㅏ" && currentCharacter.text == "ㅣ" {
-                return HangeulDictionary.fixed.mid.ㅐ.rawValue
-            } else if previousCharacter.text == "ㅑ" && currentCharacter.text == "ㅣ" {
-                return HangeulDictionary.fixed.mid.ㅒ.rawValue
-            } else if previousCharacter.text == "ㅓ" && currentCharacter.text == "ㅣ" {
-                return HangeulDictionary.fixed.mid.ㅔ.rawValue
-            } else if previousCharacter.text == "ㅕ" && currentCharacter.text == "ㅣ" {
-                return HangeulDictionary.fixed.mid.ㅖ.rawValue
-            } else if previousCharacter.text == "ㅗ" && currentCharacter.text == "ㅏ" {
-                return HangeulDictionary.fixed.mid.ㅘ.rawValue
-            } else if previousCharacter.text == "ㅗ" && currentCharacter.text == "ㅐ" {
-                return HangeulDictionary.fixed.mid.ㅙ.rawValue
-            } else if previousCharacter.text == "ㅗ" && currentCharacter.text == "ㅣ" {
-                return HangeulDictionary.fixed.mid.ㅚ.rawValue
-            } else if previousCharacter.text == "ㅜ" && currentCharacter.text == "ㅓ" {
-                return HangeulDictionary.fixed.mid.ㅝ.rawValue
-            } else if previousCharacter.text == "ㅜ" && currentCharacter.text == "ㅔ" {
-                return HangeulDictionary.fixed.mid.ㅞ.rawValue
-            } else if previousCharacter.text == "ㅜ" && currentCharacter.text == "ㅣ" {
-                return HangeulDictionary.fixed.mid.ㅟ.rawValue
-            } else if previousCharacter.text == "ㅡ" && currentCharacter.text == "ㅣ" {
-                return HangeulDictionary.fixed.mid.ㅢ.rawValue
-            } else if previousCharacter.text == "ㅠ" && currentCharacter.text == "ㅣ" {
-                return HangeulDictionary.fixed.mid.ㅝ.rawValue
-            }
-        } else if previousCharacter.position.last! == .jongseong {
-            if previousCharacter.text == "ㄱ" && currentCharacter.text == "ㅅ" {
-                return HangeulDictionary.fixed.end.ㄱㅅ.rawValue
-            } else if previousCharacter.text == "ㄴ" && currentCharacter.text == "ㅈ" {
-                return HangeulDictionary.fixed.end.ㄴㅈ.rawValue
-            } else if previousCharacter.text == "ㄴ" && currentCharacter.text == "ㅎ" {
-                return HangeulDictionary.fixed.end.ㄴㅎ.rawValue
-            } else if previousCharacter.text == "ㄹ" && currentCharacter.text == "ㄱ" {
-                return HangeulDictionary.fixed.end.ㄹㄱ.rawValue
-            } else if previousCharacter.text == "ㄹ" && currentCharacter.text == "ㅁ" {
-                return HangeulDictionary.fixed.end.ㄹㅁ.rawValue
-            } else if previousCharacter.text == "ㄹ" && currentCharacter.text == "ㅂ" {
-                return HangeulDictionary.fixed.end.ㄹㅂ.rawValue
-            } else if previousCharacter.text == "ㄹ" && currentCharacter.text == "ㅅ" {
-                return HangeulDictionary.fixed.end.ㄹㅅ.rawValue
-            } else if previousCharacter.text == "ㄹ" && currentCharacter.text == "ㅌ" {
-                return HangeulDictionary.fixed.end.ㄹㅌ.rawValue
-            } else if previousCharacter.text == "ㄹ" && currentCharacter.text == "ㅍ" {
-                return HangeulDictionary.fixed.end.ㄹㅍ.rawValue
-            } else if previousCharacter.text == "ㄹ" && currentCharacter.text == "ㅎ" {
-                return HangeulDictionary.fixed.end.ㄹㅎ.rawValue
-            }
+        guard let previousCharacterPosition = previousCharacter.position.last else {
+            return nil
         }
+        
+        if previousCharacterPosition == .jungseong {
+            return getDoubleJungseongUnicode(previousCharacter.text, currentCharacter.text)
+        } else if previousCharacter.position.last! == .jongseong {
+            return getDoubleJongseongUnicode(previousCharacter.text, currentCharacter.text)
+        }
+        
         return nil
     }
     
     func getTripleMidUnicode(_ previousCharacter: Hangeul, _ currentCharacter: Hangeul, _ nextCharacter: Hangeul) -> Int? {
-        
         if previousCharacter.text == "ㅜ" && currentCharacter.text == "ㅓ" && nextCharacter.text == "ㅣ" {
-            return HangeulDictionary.fixed.mid.ㅞ.rawValue
+            return HangeulDictionary.fixed.jungseong.ㅞ.rawValue
         } else if previousCharacter.text == "ㅗ" && currentCharacter.text == "ㅏ" && nextCharacter.text == "ㅣ" {
-            return HangeulDictionary.fixed.mid.ㅙ.rawValue
+            return HangeulDictionary.fixed.jungseong.ㅙ.rawValue
         }
         return nil
     }
 }
 
 // MARK: - Private Method
+
+// MARK: - called in getIndex
 
 extension HangeulDictionary {
     
@@ -317,21 +277,21 @@ extension HangeulDictionary {
         
         switch position {
         case .choseong:
-            for hangeul in HangeulDictionary.compatible.top.allCases {
+            for hangeul in HangeulDictionary.compatible.choseong.allCases {
                 if hangeul.rawValue == compatibleUnicode {
                     return index
                 }
                 index += 1
             }
         case .jungseong:
-            for hangeul in HangeulDictionary.compatible.mid.allCases {
+            for hangeul in HangeulDictionary.compatible.jungseong.allCases {
                 if hangeul.rawValue == compatibleUnicode {
                     return index
                 }
                 index += 1
             }
         case .jongseong:
-            for hangeul in HangeulDictionary.compatible.end.allCases {
+            for hangeul in HangeulDictionary.compatible.jongseong.allCases {
                 if hangeul.rawValue == compatibleUnicode {
                     return index
                 }
@@ -346,21 +306,21 @@ extension HangeulDictionary {
         
         switch position {
         case .choseong:
-            for hangeul in HangeulDictionary.fixed.top.allCases {
+            for hangeul in HangeulDictionary.fixed.choseong.allCases {
                 if hangeul.rawValue == fixedUnicode {
                     return index
                 }
                 index += 1
             }
         case .jungseong:
-            for hangeul in HangeulDictionary.fixed.mid.allCases {
+            for hangeul in HangeulDictionary.fixed.jungseong.allCases {
                 if hangeul.rawValue == fixedUnicode {
                     return index
                 }
                 index += 1
             }
         case .jongseong:
-            for hangeul in HangeulDictionary.fixed.end.allCases {
+            for hangeul in HangeulDictionary.fixed.jongseong.allCases {
                 if hangeul.rawValue == fixedUnicode {
                     return index
                 }
@@ -369,27 +329,33 @@ extension HangeulDictionary {
         }
         return nil
     }
+}
 
+
+// MARK: - called in getUnicode
+
+extension HangeulDictionary {
+    
     private func getUnicodeOfCompatible(_ compatibleIndex: Int, in position: HangeulCombinationPosition) -> Int? {
         var count = 0
         
         switch position {
         case .choseong:
-            for hangeul in HangeulDictionary.compatible.top.allCases {
+            for hangeul in HangeulDictionary.compatible.choseong.allCases {
                 if count == compatibleIndex {
                     return hangeul.rawValue
                 }
                 count += 1
             }
         case .jungseong:
-            for hangeul in HangeulDictionary.compatible.mid.allCases {
+            for hangeul in HangeulDictionary.compatible.jungseong.allCases {
                 if count == compatibleIndex {
                     return hangeul.rawValue
                 }
                 count += 1
             }
         case .jongseong:
-            for hangeul in HangeulDictionary.compatible.end.allCases {
+            for hangeul in HangeulDictionary.compatible.jongseong.allCases {
                 if count == compatibleIndex {
                     return hangeul.rawValue
                 }
@@ -404,21 +370,21 @@ extension HangeulDictionary {
         
         switch position {
         case .choseong:
-            for hangeul in HangeulDictionary.fixed.top.allCases {
+            for hangeul in HangeulDictionary.fixed.choseong.allCases {
                 if count == fixedIndex {
                     return hangeul.rawValue
                 }
                 count += 1
             }
         case .jungseong:
-            for hangeul in HangeulDictionary.fixed.mid.allCases {
+            for hangeul in HangeulDictionary.fixed.jungseong.allCases {
                 if count == fixedIndex {
                     return hangeul.rawValue
                 }
                 count += 1
             }
         case .jongseong:
-            for hangeul in HangeulDictionary.fixed.end.allCases {
+            for hangeul in HangeulDictionary.fixed.jongseong.allCases {
                 if count == fixedIndex {
                     return hangeul.rawValue
                 }
@@ -426,5 +392,68 @@ extension HangeulDictionary {
             }
         }
         return nil
+    }
+}
+
+// MARK: - called in getDoubleUnicode
+
+extension HangeulDictionary {
+    
+    private func getDoubleJungseongUnicode(_ previousCharacterText: String, _ currentCharacterText: String) -> Int? {
+        switch (previousCharacterText, currentCharacterText) {
+        case ("ㅏ", "ㅣ"):
+            return HangeulDictionary.fixed.jungseong.ㅐ.rawValue
+        case ("ㅑ", "ㅣ"):
+            return HangeulDictionary.fixed.jungseong.ㅒ.rawValue
+        case ("ㅓ", "ㅣ"):
+            return HangeulDictionary.fixed.jungseong.ㅔ.rawValue
+        case ("ㅕ", "ㅣ"):
+            return HangeulDictionary.fixed.jungseong.ㅖ.rawValue
+        case ("ㅗ", "ㅏ"):
+            return HangeulDictionary.fixed.jungseong.ㅘ.rawValue
+        case ("ㅗ", "ㅐ"):
+            return HangeulDictionary.fixed.jungseong.ㅙ.rawValue
+        case ("ㅗ", "ㅣ"):
+            return HangeulDictionary.fixed.jungseong.ㅚ.rawValue
+        case ("ㅜ", "ㅓ"):
+            return HangeulDictionary.fixed.jungseong.ㅝ.rawValue
+        case ("ㅜ", "ㅔ"):
+            return HangeulDictionary.fixed.jungseong.ㅞ.rawValue
+        case ("ㅜ", "ㅣ"):
+            return HangeulDictionary.fixed.jungseong.ㅟ.rawValue
+        case ("ㅡ", "ㅣ"):
+            return HangeulDictionary.fixed.jungseong.ㅢ.rawValue
+        case ("ㅠ", "ㅣ"):
+            return HangeulDictionary.fixed.jungseong.ㅝ.rawValue
+        default:
+            return nil
+        }
+    }
+    
+    private func getDoubleJongseongUnicode(_ previousCharacterText: String, _ currentCharacterText: String) -> Int? {
+        switch (previousCharacterText, currentCharacterText) {
+        case ("ㄱ", "ㅅ"):
+            return HangeulDictionary.fixed.jongseong.ㄱㅅ.rawValue
+        case ("ㄴ", "ㅈ"):
+            return HangeulDictionary.fixed.jongseong.ㄴㅈ.rawValue
+        case ("ㄴ", "ㅎ"):
+            return HangeulDictionary.fixed.jongseong.ㄴㅎ.rawValue
+        case ("ㄹ", "ㄱ"):
+            return HangeulDictionary.fixed.jongseong.ㄹㄱ.rawValue
+        case ("ㄹ", "ㅁ"):
+            return HangeulDictionary.fixed.jongseong.ㄹㅁ.rawValue
+        case ("ㄹ", "ㅂ"):
+            return HangeulDictionary.fixed.jongseong.ㄹㅂ.rawValue
+        case ("ㄹ", "ㅅ"):
+            return HangeulDictionary.fixed.jongseong.ㄹㅅ.rawValue
+        case ("ㄹ", "ㅌ"):
+            return HangeulDictionary.fixed.jongseong.ㄹㅌ.rawValue
+        case ("ㄹ", "ㅍ"):
+            return HangeulDictionary.fixed.jongseong.ㄹㅍ.rawValue
+        case ("ㄹ", "ㅎ"):
+            return HangeulDictionary.fixed.jongseong.ㄹㅎ.rawValue
+        default:
+            return nil
+        }
     }
 }
