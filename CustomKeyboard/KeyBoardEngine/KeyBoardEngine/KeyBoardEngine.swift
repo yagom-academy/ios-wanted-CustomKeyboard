@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct KeyBoardEngine: KeyBoardEngineProtocol {
     
@@ -332,7 +333,7 @@ extension KeyBoardEngine {
 //MARK: - Remove: 받침x
 extension KeyBoardEngine {
     private func removeFromPerfactCharNoSupport(initial:Int, neutral:Int) -> String {
-        
+
         switch neutral {
         case Neutral.ㅘ.code, Neutral.ㅙ.code, Neutral.ㅚ.code:
             return makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: Neutral.ㅗ.code, support: 0))

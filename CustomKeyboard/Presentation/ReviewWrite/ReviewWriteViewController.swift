@@ -32,7 +32,8 @@ class ReviewWriteViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.customKeyboard.frame.origin.y = windowHeight
-        UIView.animate(withDuration: 0.4, delay: 0.3, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.4, delay: 0.3, options: .curveEaseInOut, animations: { [weak self] in
+            guard let self = self else { return }
             self.customKeyboard.frame.origin.y = self.windowHeight-CustomKeyBoard.Math.keyboardHeight
         }, completion: nil)
     }

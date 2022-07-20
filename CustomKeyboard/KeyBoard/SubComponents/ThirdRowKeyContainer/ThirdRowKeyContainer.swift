@@ -10,9 +10,9 @@ import UIKit
 class ThirdRowKeyContainer: UIStackView {
     
     // MARK: - Properties
-    private let shiftButton = UIButton()
+    private let shiftButton = UIButton(type: .system)
     private let thirdLineBasicKeys = BasicKeyLine(keys: ["ㅋ", "ㅌ", "ㅊ", "ㅍ", "ㅠ", "ㅜ", "ㅡ"])
-    private let backButton = UIButton()
+    private let backButton = UIButton(type: .system)
     weak var delegate: ThirdRowKeyContainerDelegate?
     
     init() {
@@ -43,12 +43,14 @@ extension ThirdRowKeyContainer {
     }
     
     private func toggleShiftButtonState(_ isSelected: Bool) {
-        if isSelected == true {
-            shiftButton.backgroundColor = .white
-            shiftButton.setTitleColor(.black, for: .normal)
-        } else {
-            shiftButton.backgroundColor = .systemGray
-            shiftButton.setTitleColor(.white, for: .normal)
+        UIView.animate(withDuration: 0.2) { [weak self] in
+            if isSelected == true {
+                self?.shiftButton.backgroundColor = .white
+                self?.shiftButton.setTitleColor(.black, for: .normal)
+            } else {
+                self?.shiftButton.backgroundColor = .systemGray
+                self?.shiftButton.setTitleColor(.white, for: .normal)
+            }
         }
     }
     
@@ -80,7 +82,6 @@ extension ThirdRowKeyContainer {
         
         [shiftButton, backButton].forEach {
             $0.backgroundColor = .systemGray
-//            $0.setTitleColor(.black, for: .normal)
             $0.setTitleColor(.white, for: .normal)
             $0.layer.cornerRadius = 10
             $0.titleLabel?.font = .systemFont(ofSize: CustomKeyBoard.Math.fontSize, weight: .medium)

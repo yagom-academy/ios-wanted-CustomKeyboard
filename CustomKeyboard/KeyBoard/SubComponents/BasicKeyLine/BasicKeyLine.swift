@@ -63,8 +63,6 @@ extension BasicKeyLine {
         self.buttons = keys.map { key in
             let btn = UIButton(type: .system)
             btn.setTitle("\(key)", for: .normal)
-            btn.setTitleColor(.white, for: .normal)
-            btn.backgroundColor = .gray
             btn.layer.cornerRadius = 10
             btn.backgroundColor = .white
             btn.setTitleColor(.black, for: .normal)

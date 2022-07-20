@@ -10,8 +10,8 @@ import UIKit
 class FirthRowKeyContainer: UIStackView {
     
     // MARK: - Properties
-    private let spaceButton = UIButton()
-    private let returnButton = UIButton()
+    private let spaceButton = UIButton(type: .system)
+    private let returnButton = UIButton(type: .system)
     
     weak var delegate: FirthRowKeyContainerDelegate?
     
