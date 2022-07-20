@@ -7,10 +7,10 @@
 
 import UIKit
 
-final class FirstRowKeyContainer: UIStackView {
+final class FirstRowKeyContainerStackView: UIStackView {
     
     // MARK: - Properties
-    private let firstLineDynamicBasicKeys = DynamicKeyLineExtendsBasicKeyLine()
+    private let firstLineDynamicBasicKeys = DynamicBasicKeyLine()
     weak var delegate: FirstRowKeyContainerDelegate?
     
     init() {
@@ -23,21 +23,21 @@ final class FirstRowKeyContainer: UIStackView {
     }
 }
 
-extension FirstRowKeyContainer: BasicKeyLineDelegate {
+extension FirstRowKeyContainerStackView: BasicKeyLineDelegate {
     func tappedBasicKeyButton(unicode: Int) {
         delegate?.tappedFirstrowBasicKey(unicode: unicode)
     }
 }
 
 // MARK: - Methods
-extension FirstRowKeyContainer {
-    func toggleDynamicBasicKeyState() -> DynamicKeyLineExtendsBasicKeyLine.State {
+extension FirstRowKeyContainerStackView {
+    func toggleDynamicBasicKeyState() -> DynamicBasicKeyLine.State {
         return firstLineDynamicBasicKeys.toggleDynamicBasicKeyState()
     }
 }
 
 // MARK: - ConfigureUI
-extension FirstRowKeyContainer {
+extension FirstRowKeyContainerStackView {
     private func configureUI() {
         
         configureAttribute()
@@ -46,13 +46,13 @@ extension FirstRowKeyContainer {
     
     private func configureAttribute() {
         
+        axis = .horizontal
         firstLineDynamicBasicKeys.delegate = self
-        self.axis = .horizontal
     }
     
     private func configureLayout() {
         
-        self.addArrangedSubview(firstLineDynamicBasicKeys)
+        addArrangedSubview(firstLineDynamicBasicKeys)
         firstLineDynamicBasicKeys.translatesAutoresizingMaskIntoConstraints = false
     }
 }

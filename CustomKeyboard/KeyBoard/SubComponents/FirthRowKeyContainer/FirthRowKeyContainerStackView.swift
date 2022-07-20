@@ -7,13 +7,15 @@
 
 import UIKit
 
-final class FirthRowKeyContainer: UIStackView {
+final class FirthRowKeyContainerStackView: UIStackView {
     
     // MARK: - Properties
     private let spaceButton = UIButton(type: .system)
     private let returnButton = UIButton(type: .system)
-    
     weak var delegate: FirthRowKeyContainerDelegate?
+    
+    private let spaceButtonTitle = "space"
+    private let returnButtonTitle = "return"
     
     init() {
         super.init(frame: CGRect.zero)
@@ -28,7 +30,7 @@ final class FirthRowKeyContainer: UIStackView {
 }
 
 // MARK: - @objc Methods
-extension FirthRowKeyContainer {
+extension FirthRowKeyContainerStackView {
     @objc private func tappedReturnButton() {
         
         delegate?.tappedReturnButton()
@@ -41,7 +43,7 @@ extension FirthRowKeyContainer {
 }
 
 //MARK: - ConfigureUI
-extension FirthRowKeyContainer {
+extension FirthRowKeyContainerStackView {
     private func configureUI() {
         
         configureAttribute()
@@ -50,8 +52,8 @@ extension FirthRowKeyContainer {
     
     private func configureAttribute() {
         
-        self.axis = .horizontal
-        self.spacing = 10
+        axis = .horizontal
+        spacing = 10
 
         [returnButton].forEach {
             $0.backgroundColor = .systemGray
@@ -60,18 +62,18 @@ extension FirthRowKeyContainer {
             $0.layer.cornerRadius = 10
         }
         
-        spaceButton.setTitle("space", for: .normal)
+        spaceButton.setTitle(spaceButtonTitle, for: .normal)
         spaceButton.backgroundColor = .white
         spaceButton.setTitleColor(.black, for: .normal)
         spaceButton.layer.cornerRadius = 10
         spaceButton.tag = Int(UnicodeScalar(" ").value)
         spaceButton.addTarget(self, action: #selector(tappedSpaceButton), for: .touchUpInside)
         
-        returnButton.setTitle("return", for: .normal)
+        returnButton.setTitle(returnButtonTitle, for: .normal)
         returnButton.addTarget(self, action: #selector(tappedReturnButton), for: .touchUpInside)
         
         [spaceButton, returnButton].forEach {
-            $0.titleLabel?.font = .systemFont(ofSize: CustomKeyBoard.Math.fontSize, weight: .medium)
+            $0.titleLabel?.font = .systemFont(ofSize: CustomKeyBoardStackView.Math.fontSize, weight: .medium)
             $0.layer.shadowColor = UIColor.black.cgColor
             $0.layer.masksToBounds = false
             $0.layer.shadowOffset = CGSize(width: 2, height: 2)
@@ -84,12 +86,12 @@ extension FirthRowKeyContainer {
         
         let spaceView = UIView()
         [spaceView, spaceButton, returnButton].forEach {
-            self.addArrangedSubview($0)
+            addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         [spaceView, returnButton].forEach {
-            $0.widthAnchor.constraint(equalToConstant: CustomKeyBoard.Math.buttonWidth*2.5).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: CustomKeyBoardStackView.Math.buttonWidth*2.5).isActive = true
         }
 
     }

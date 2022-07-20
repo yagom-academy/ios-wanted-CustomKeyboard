@@ -18,8 +18,9 @@ struct CustomKeyBoardViewModel {
     
     func addWord(inputUniCode: Int, to beforeText: String?) -> String {
         
-        guard let beforeText = beforeText else { return "" }
-        let inputChar = String(UnicodeScalar(inputUniCode)!)
+        guard let beforeText = beforeText,
+              let unicodeScalar = UnicodeScalar(inputUniCode) else { return "" }
+        let inputChar = String(unicodeScalar)
         guard let lastCharUnicode = getLastCharUnicode(from: beforeText),
               let beforeTextExceptLastChar = getStringExceptLastChar(from: beforeText) else { return inputChar }
         let lastChar = engine.addWord(inputUniCode: inputUniCode, lastUniCode: lastCharUnicode)
@@ -28,8 +29,9 @@ struct CustomKeyBoardViewModel {
     
     func addSpace(inputUniCode: Int = 32, to beforeText: String?) -> String {
         
-        guard let beforeText = beforeText else { return "" }
-        let space = String(UnicodeScalar(inputUniCode)!)
+        guard let beforeText = beforeText,
+              let unicodeScalar = UnicodeScalar(inputUniCode) else { return "" }
+        let space = String(unicodeScalar)
         return beforeText + space
     }
     
@@ -46,9 +48,10 @@ struct CustomKeyBoardViewModel {
     
     private func getLastCharUnicode(from text: String) -> Int? {
         
-        guard text != "" else { return nil }
-        let lastChar = String(text.last!)
-        return Int(UnicodeScalar(lastChar)!.value)
+        guard text != "",
+              let lastChar = text.last,
+              let unicodeScalar = UnicodeScalar(String(lastChar)) else { return nil }
+        return Int(unicodeScalar.value)
     }
     
     private func getStringExceptLastChar(from text: String) -> String? {

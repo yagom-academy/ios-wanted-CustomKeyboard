@@ -7,13 +7,16 @@
 
 import UIKit
 
-final class ThirdRowKeyContainer: UIStackView {
+final class ThirdRowKeyContainerStackView: UIStackView {
     
     // MARK: - Properties
     private let shiftButton = UIButton(type: .system)
     private let thirdLineBasicKeys = BasicKeyLine(keys: ["ㅋ", "ㅌ", "ㅊ", "ㅍ", "ㅠ", "ㅜ", "ㅡ"])
     private let backButton = UIButton(type: .system)
     weak var delegate: ThirdRowKeyContainerDelegate?
+    
+    private let shiftButtonTitle = "shift"
+    private let backButtonTitle = "back"
     
     init() {
         super.init(frame: CGRect.zero)
@@ -26,7 +29,7 @@ final class ThirdRowKeyContainer: UIStackView {
     }
 }
 
-extension ThirdRowKeyContainer: BasicKeyLineDelegate {
+extension ThirdRowKeyContainerStackView: BasicKeyLineDelegate {
     func tappedBasicKeyButton(unicode: Int) {
         
         delegate?.tappedThirdrowBasicKey(unicode: unicode)
@@ -36,7 +39,7 @@ extension ThirdRowKeyContainer: BasicKeyLineDelegate {
 }
 
 //MARK: - @objc Methods
-extension ThirdRowKeyContainer {
+extension ThirdRowKeyContainerStackView {
     @objc private func tappedShiftButton() {
         guard let resultTappedShiftButton = delegate?.tappedShiftButton() else { return }
         toggleShiftButtonState(resultTappedShiftButton)
@@ -60,7 +63,7 @@ extension ThirdRowKeyContainer {
     }
 }
 
-extension ThirdRowKeyContainer {
+extension ThirdRowKeyContainerStackView {
     private func configureUI() {
         
         configureAttribute()
@@ -69,22 +72,22 @@ extension ThirdRowKeyContainer {
     
     private func configureAttribute() {
         
-        self.axis = .horizontal
-        self.distribution = .equalSpacing
+        axis = .horizontal
+        distribution = .equalSpacing
         
         thirdLineBasicKeys.delegate = self
         
-        shiftButton.setTitle("shift", for: .normal)
+        shiftButton.setTitle(shiftButtonTitle, for: .normal)
         shiftButton.addTarget(self, action: #selector(tappedShiftButton), for: .touchUpInside)
         
-        backButton.setTitle("back", for: .normal)
+        backButton.setTitle(backButtonTitle, for: .normal)
         backButton.addTarget(self, action: #selector(tappedBackButton), for: .touchUpInside)
         
         [shiftButton, backButton].forEach {
             $0.backgroundColor = .systemGray
             $0.setTitleColor(.white, for: .normal)
             $0.layer.cornerRadius = 10
-            $0.titleLabel?.font = .systemFont(ofSize: CustomKeyBoard.Math.fontSize, weight: .medium)
+            $0.titleLabel?.font = .systemFont(ofSize: CustomKeyBoardStackView.Math.fontSize, weight: .medium)
             $0.layer.shadowColor = UIColor.black.cgColor
             $0.layer.masksToBounds = false
             $0.layer.shadowOffset = CGSize(width: 2, height: 2)
@@ -96,12 +99,12 @@ extension ThirdRowKeyContainer {
     private func configureLayout() {
         
         [shiftButton, thirdLineBasicKeys, backButton].forEach {
-            self.addArrangedSubview($0)
+            addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        thirdLineBasicKeys.widthAnchor.constraint(equalToConstant: CustomKeyBoard.Math.keyboardWidth-CustomKeyBoard.Math.buttonWidth*3-CustomKeyBoard.Math.buttonPadding*4).isActive = true
+        thirdLineBasicKeys.widthAnchor.constraint(equalToConstant: CustomKeyBoardStackView.Math.keyboardWidth-CustomKeyBoardStackView.Math.buttonWidth*3-CustomKeyBoardStackView.Math.buttonPadding*4).isActive = true
         [shiftButton, backButton].forEach {
-            $0.widthAnchor.constraint(equalToConstant: CustomKeyBoard.Math.buttonWidth*1.5).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: CustomKeyBoardStackView.Math.buttonWidth*1.5).isActive = true
         }
     }
 }

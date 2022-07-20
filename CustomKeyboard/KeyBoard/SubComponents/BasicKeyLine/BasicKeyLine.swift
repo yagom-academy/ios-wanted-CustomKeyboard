@@ -36,8 +36,8 @@ extension BasicKeyLine {
     
     private func configureAttribute() {
         
-        self.axis = .horizontal
-        self.distribution = .equalSpacing
+        axis = .horizontal
+        distribution = .equalSpacing
     }
     
     private func configureLayout() {
@@ -46,10 +46,10 @@ extension BasicKeyLine {
             return
         }
         
-        let buttonWidth = CustomKeyBoard.Math.buttonWidth
+        let buttonWidth = CustomKeyBoardStackView.Math.buttonWidth
         
         buttons.forEach {
-            self.addArrangedSubview($0)
+            addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         }
@@ -69,7 +69,7 @@ extension BasicKeyLine {
             btn.tag = Int(UnicodeScalar(key)!.value)
             btn.sizeToFit()
             btn.addTarget(self, action: #selector(tappedButton(_:)), for: .touchUpInside)
-            btn.titleLabel?.font = .systemFont(ofSize: CustomKeyBoard.Math.fontSize)
+            btn.titleLabel?.font = .systemFont(ofSize: CustomKeyBoardStackView.Math.fontSize)
             btn.layer.shadowColor = UIColor.black.cgColor
             btn.layer.masksToBounds = false
             btn.layer.shadowOffset = CGSize(width: 2, height: 2)
