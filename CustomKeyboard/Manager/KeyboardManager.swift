@@ -35,14 +35,18 @@ class KeyboardManager {
     ]
     
     func pressSpace(_ tappedButton: KeyButton) -> (String, Int) {
-        lastWord = " "
-        allWord.append(lastWord)
+        if !allWord.isEmpty && allWord[allWord.count - 1] == " " {
+            lastWord = " "
+        } else {
+            lastWord = "  "
+        }
+        allWord.append(" ")
         allState.append(0)
-        return (" ", 0)
+        return (lastWord, 0)
     }
     
     func makeString(_ state: Int, _ currentText: String, _ tappedButton: KeyButton) -> (String, Int) {
-        print(allWord, "insert")
+        print(allWord)
         
         if tappedButton.type == .space {
             print("space")
@@ -215,7 +219,7 @@ class KeyboardManager {
     }
     
     func deleteString(_ state: Int, _ currentText: String) -> (String, Int) {
-        print(allWord, "delete")
+        print(allWord)
         
         if allWord.isEmpty {
             return ("", 0)
@@ -225,7 +229,8 @@ class KeyboardManager {
         let deleteState = allState.removeLast()
         print(allWord)
         print(allState)
-        print(lastWord, state)
+        print(lastWord, state,"state")
+        print(deleteState, "deleteState")
         switch state {
         case 1:
             // 쌍자음만 입력되어 있는 상태 (ex ㄱㄱ, ㄷㄷ, ㅂㅂ ...)
@@ -275,7 +280,7 @@ class KeyboardManager {
                 }
                 let frontText = String(currentText.prefix(1))
                 let addText = allWord[allWord.count - 1]
-                if deleteState == 3 {
+                if allState[allState.count - 2] == 3 {
                     let idx = third.firstIndex(of: addText) ?? thirdDouble.firstIndex(of: addText) ?? 0
                     let str = frontText.utf16.map{ Int($0) }.reduce(0, +) + idx
                     lastWord = addText
@@ -285,7 +290,7 @@ class KeyboardManager {
                         return (String(scalarValue), 4)
                     }
                     return ("", 0)
-                } else if deleteState == 4 {
+                } else if allState[allState.count - 2] == 4 {
                     let text = allWord[allWord.count - 2] + addText
                     let idx = thirdDouble.firstIndex(of: text) ?? 0
                     if idx == 0 {
@@ -315,7 +320,9 @@ class KeyboardManager {
                 let idx2 = third.firstIndex(of: String(lastWord.prefix(1))) ?? 0
                 let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - idx1 + idx2
                 lastWord = String(lastWord.prefix(1))
-//                allWord.append(lastWord)
+                
+                // TODO: - 쌍자음일 때 아닐 때 나누기
+                allWord.append(lastWord)
                 if let scalarValue = UnicodeScalar(str) {
                     return (String(scalarValue), 4)
                 }

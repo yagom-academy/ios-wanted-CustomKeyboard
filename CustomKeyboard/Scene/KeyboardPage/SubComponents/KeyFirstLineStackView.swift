@@ -9,7 +9,7 @@ import UIKit
 
 class KeyFirstLineStackView: UIStackView {
     
-    var delegate: ButtonDelegate?
+    weak var delegate: ButtonDelegate?
     
     let qButton = KeyButton(type: .consonant)
     let wButton = KeyButton(type: .consonant)

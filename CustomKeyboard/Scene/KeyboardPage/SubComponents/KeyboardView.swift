@@ -23,6 +23,17 @@ class KeyboardView: UIView {
         
         layout()
         keyThirdLine.shiftDelegate = self
+        
+        viewModel.OnTitleUpdate = { subtitle in
+            subtitle
+        }
+        
+        viewModel.titleUpdate = {
+            
+        }
+        
+        let l = layout
+        l()
     }
     
     required init?(coder: NSCoder) {

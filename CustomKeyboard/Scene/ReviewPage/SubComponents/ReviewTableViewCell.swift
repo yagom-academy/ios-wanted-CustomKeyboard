@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewTablerViewCell: UITableViewCell {
+class ReviewTableViewCell: UITableViewCell {
     private let profileImage: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 30
