@@ -54,10 +54,10 @@ extension KeyboardViewController {
         customKeyboard.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            customKeyboard.topAnchor.constraint(equalTo: inputView.topAnchor),
+            customKeyboard.topAnchor.constraint(equalTo: inputView.topAnchor, constant: 10),
             customKeyboard.leadingAnchor.constraint(equalTo: inputView.leadingAnchor),
             customKeyboard.trailingAnchor.constraint(equalTo: inputView.trailingAnchor),
-            customKeyboard.bottomAnchor.constraint(equalTo: inputView.bottomAnchor)
+            customKeyboard.bottomAnchor.constraint(equalTo: inputView.bottomAnchor, constant: -10)
         ])
     }
 }
