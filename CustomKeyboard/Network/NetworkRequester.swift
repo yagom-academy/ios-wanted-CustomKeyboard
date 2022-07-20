@@ -30,18 +30,18 @@ enum NetworkError: LocalizedError {
     }
 }
 
-protocol NetworkManagerType {
+protocol NetworkRequesterType {
     
     func request(to urlString: String, completion: @escaping (Result<Data, NetworkError>) -> Void) -> URLSessionDataTask?
     
     func request(to endPoint: EndPointType, completion: @escaping (Result<Data, NetworkError>) -> Void)
     
-    func request(to endPoint: EndPointType, with httpBody: Data, completion: @escaping (Result<Data, NetworkError>) -> Void
+    func request(to endPoint: EndPointType, with httpBody: Data, completion: @escaping (Result<Int, NetworkError>) -> Void
     )
     
 }
 
-struct NetworkManager: NetworkManagerType {
+struct NetworkRequester: NetworkRequesterType {
     
     private let session: URLSession = .shared
     
@@ -73,7 +73,7 @@ struct NetworkManager: NetworkManagerType {
     func request(
         to endPoint: EndPointType,
         with httpBody: Data,
-        completion: @escaping (Result<Data, NetworkError>) -> Void
+        completion: @escaping (Result<Int, NetworkError>) -> Void
     ) {
         guard var urlRequest = endPoint.asURLRequest() else {
             completion(.failure(.invalidURL))
@@ -81,16 +81,39 @@ struct NetworkManager: NetworkManagerType {
         }
         urlRequest.httpBody = httpBody
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
         dataTask(request: urlRequest, completion: completion).resume()
     }
     
     private func dataTask(
         request: URLRequest,
-        completion: @escaping (Result<Data, NetworkError>) -> ()
+        completion: @escaping (Result<Int, NetworkError>) -> Void
     ) -> URLSessionDataTask {
         let task = session.dataTask(with: request) { data, response, error in
-            guard error == nil else {
-                completion(.failure(.requestFail(error!)))
+            if let err = error {
+                completion(.failure(.requestFail(err)))
+                return
+            }
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(.invalidResponse))
+                return
+            }
+            guard 200..<300 ~= httpResponse.statusCode else {
+                completion(.failure(.failedResponse(statusCode: httpResponse.statusCode)))
+                return
+            }
+            completion(.success(httpResponse.statusCode))
+        }
+        return task
+    }
+    
+    private func dataTask(
+        request: URLRequest,
+        completion: @escaping (Result<Data, NetworkError>) -> Void
+    ) -> URLSessionDataTask {
+        let task = session.dataTask(with: request) { data, response, error in
+            if let err = error {
+                completion(.failure(.requestFail(err)))
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse else {
