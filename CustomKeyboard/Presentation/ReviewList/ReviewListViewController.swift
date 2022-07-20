@@ -163,7 +163,7 @@ extension ReviewListViewController {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(ReviewListCell.self, forCellWithReuseIdentifier: ReviewListCell.identifier)
+        collectionView.register(ReviewListCell.self, forCellWithReuseIdentifier: ReviewListCell.reuseIdentifier)
         view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
@@ -216,7 +216,7 @@ extension ReviewListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewListCell.identifier, for: indexPath) as? ReviewListCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewListCell.reuseIdentifier, for: indexPath) as? ReviewListCell else {
             return ReviewListCell()
         }
         
