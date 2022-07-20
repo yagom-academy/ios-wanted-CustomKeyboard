@@ -60,7 +60,7 @@ extension ReviewListCell {
     
     private func configureAttribute() {
         
-        contentView.layer.addBorder(arrEdge: [.bottom], color: .systemGray5, width: 1)
+        contentView.layer.addBorder(rectEdge: [.bottom], color: .systemGray5, width: 1)
         
         [profileImage, userNameLabel, contentsLabel, timeLabel, declarationStack].forEach {
             contentView.addSubview($0)
