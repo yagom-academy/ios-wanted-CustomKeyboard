@@ -7,13 +7,13 @@
 
 import UIKit
 
-final class ReviewListViewController : UIViewController {
+final class ReviewListViewController: UIViewController {
     
     // MARK: - Properties
     private let reviewListViewModel = ReviewListViewModel()
     
     // MARK: - ViewProperteis
-    private lazy var writeReviewButtonView : WriteReviewButtonView = {
+    private lazy var writeReviewButtonView: WriteReviewButtonView = {
         let writeReviewButtonView = WriteReviewButtonView()
         
         return writeReviewButtonView
@@ -118,7 +118,7 @@ extension ReviewListViewController {
         self.present(vc, animated: true)
     }
     
-    @objc func tapSendReviewButton(){
+    @objc func tapSendReviewButton() {
         reviewListViewModel.sendReview()
     }
 }

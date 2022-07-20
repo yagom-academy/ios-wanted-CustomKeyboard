@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WriteReviewButtonView: UIView {
+final class WriteReviewButtonView: UIView {
     
     // MARK: - Properties
     private var writeReviewButtonTrailingConstraint: NSLayoutConstraint!
@@ -16,6 +16,7 @@ class WriteReviewButtonView: UIView {
     private lazy var profileImageView: UIImageView = {
         let profileImageView = UIImageView()
         profileImageView.image = UIImage(systemName: "person.circle.fill")
+        
         return profileImageView
     }()
     
@@ -77,8 +78,8 @@ extension WriteReviewButtonView {
     
     private func setConstraintsOfProfileImageView() {
         NSLayoutConstraint.activate([
-            profileImageView.heightAnchor.constraint(equalToConstant:  50),
-            profileImageView.widthAnchor.constraint(equalToConstant:  50),
+            profileImageView.heightAnchor.constraint(equalToConstant: 50),
+            profileImageView.widthAnchor.constraint(equalToConstant: 50),
             profileImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10)
         ])

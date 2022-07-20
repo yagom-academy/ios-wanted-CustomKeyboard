@@ -7,7 +7,7 @@
 
 import Foundation
 
-class KeyboardIOManager {
+final class KeyboardIOManager {
     
     var hangulAutomata = HangulAutomata()
     
@@ -36,7 +36,7 @@ extension KeyboardIOManager: CustomKeyboardDelegate {
     
     func backKeypadTap() {
         hangulAutomata.deleteBuffer()
-        updateTextView(hangulAutomata.buffer.reduce("", { $0 + $1}))
+        updateTextView(hangulAutomata.buffer.reduce("", { $0 + $1 }))
     }
     
     func enterKeypadTap() {

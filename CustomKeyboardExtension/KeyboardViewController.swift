@@ -7,7 +7,7 @@
 
 import UIKit
 
-class KeyboardViewController: UIInputViewController {
+final class KeyboardViewController: UIInputViewController {
     
     // MARK: - Properties
     private let keyboardIOManager = KeyboardIOManager()

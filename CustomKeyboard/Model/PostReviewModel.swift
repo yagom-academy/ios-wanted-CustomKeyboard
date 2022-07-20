@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct PostReviewModel : Codable{
-    let content : String
+struct PostReviewModel: Codable{
+    let content: String
 }

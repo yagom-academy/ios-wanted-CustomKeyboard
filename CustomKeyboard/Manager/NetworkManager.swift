@@ -7,15 +7,15 @@
 
 import Foundation
 
-enum NetworkError : Error {
+enum NetworkError: Error {
     case url
     case network(error: Error)
     case decode(error: Error)
 }
 
-class NetworkManager{
+final class NetworkManager {
     
-    func fetchReviews(start: Int, completion : @escaping (Result<[ReviewModel], NetworkError>) -> Void){
+    func fetchReviews(start: Int, completion: @escaping (Result<[ReviewModel], NetworkError>) -> Void) {
         let urlStr = "https://api.plkey.app/theme/review?themeId=6&start=\(start)&count=10"
         guard let url = URL(string: urlStr) else {
             completion(.failure(.url))
@@ -37,7 +37,7 @@ class NetworkManager{
         }.resume()
     }
     
-    func uploadPost(with data : PostReviewModel, completion : @escaping (Bool)->Void){
+    func uploadPost(with data: PostReviewModel, completion: @escaping (Bool) -> Void) {
         guard let url = URL(string: "https://api.plkey.app/tmp/theme/PLKEY0-L-81/review") else {
             completion(false)
             return
@@ -53,10 +53,9 @@ class NetworkManager{
             guard let _ = data, error == nil else {
                 return
             }
-            guard let response = response as? HTTPURLResponse, (200..<300) ~= response.statusCode else{
+            guard let response = response as? HTTPURLResponse, (200..<300) ~= response.statusCode else {
                 return
             }
-            print(response.statusCode)
             completion(true)
         }.resume()
     }

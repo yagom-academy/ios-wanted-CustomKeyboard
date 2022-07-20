@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ProfileImageCacheManager {
+final class ProfileImageCacheManager {
     
     static let shared = ProfileImageCacheManager()
     

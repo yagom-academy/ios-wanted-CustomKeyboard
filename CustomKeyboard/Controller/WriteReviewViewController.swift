@@ -11,7 +11,7 @@ protocol WriteReviewViewControllerDelegate: AnyObject {
     func sendReviewMessage(review: String)
 }
 
-class WriteReviewViewController: UIViewController {
+final class WriteReviewViewController: UIViewController {
     
     // MARK: - Properties
     weak var delegate: WriteReviewViewControllerDelegate?
@@ -35,7 +35,6 @@ class WriteReviewViewController: UIViewController {
         
         return textView
     }()
-    private var keyboardViewHeight: CGFloat?
     
     // MARK: - LifeCycle
     override func viewDidLoad() {

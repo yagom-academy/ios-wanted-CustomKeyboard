@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewListViewModel {
+final class ReviewListViewModel {
     // MARK: - Properties
     private let networkManager = NetworkManager()
     private var reviews: [ReviewModel] = [] {
