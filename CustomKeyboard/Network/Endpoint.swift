@@ -8,10 +8,6 @@
 import Foundation
 
 struct Endpoint {
-    enum EndpointError: Error {
-        case invalidURLError
-    }
-    
     private let urlString: String
     private let method: HttpMethod
     private let headers: [String: String]
@@ -26,9 +22,9 @@ struct Endpoint {
         self.bodyData = bodyData
     }
     
-    func urlRequest() throws -> URLRequest {
+    func urlRequest() -> URLRequest? {
         guard let url = url() else {
-            throw EndpointError.invalidURLError
+            return nil
         }
         
         var urlRequest = URLRequest(url: url)

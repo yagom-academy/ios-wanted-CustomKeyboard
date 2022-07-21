@@ -10,7 +10,6 @@
 		012EDE42287EB9FA0035C3E6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE40287EB9FA0035C3E6 /* NetworkManager.swift */; };
 		012EDE46287EC14C0035C3E6 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE45287EC14C0035C3E6 /* HttpMethod.swift */; };
 		012EDE54287F9B960035C3E6 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE53287F9B960035C3E6 /* Endpoint.swift */; };
-		012EDE56287FA0BD0035C3E6 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE55287FA0BC0035C3E6 /* Provider.swift */; };
 		012EDE5A287FA6FA0035C3E6 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE59287FA6FA0035C3E6 /* APIEndpoints.swift */; };
 		012EDE5C287FAF790035C3E6 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE5B287FAF790035C3E6 /* ReviewViewController.swift */; };
 		012EDEAB288135430035C3E6 /* KeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 012EDEAA288135430035C3E6 /* KeyboardView.xib */; };
@@ -96,7 +95,6 @@
 		012EDE40287EB9FA0035C3E6 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		012EDE45287EC14C0035C3E6 /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
 		012EDE53287F9B960035C3E6 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
-		012EDE55287FA0BC0035C3E6 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		012EDE59287FA6FA0035C3E6 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		012EDE5B287FAF790035C3E6 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		012EDEAA288135430035C3E6 /* KeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardView.xib; sourceTree = "<group>"; };
@@ -170,7 +168,6 @@
 				012EDE45287EC14C0035C3E6 /* HttpMethod.swift */,
 				012EDE53287F9B960035C3E6 /* Endpoint.swift */,
 				012EDE59287FA6FA0035C3E6 /* APIEndpoints.swift */,
-				012EDE55287FA0BC0035C3E6 /* Provider.swift */,
 				012EDE40287EB9FA0035C3E6 /* NetworkManager.swift */,
 			);
 			path = Network;
@@ -509,7 +506,6 @@
 				01A45B8328867D1B001F44D6 /* Content.swift in Sources */,
 				9F57B5442887C4AD00B2DC24 /* Text.swift in Sources */,
 				9F57B54A2887EAC600B2DC24 /* HangeulEnums.swift in Sources */,
-				012EDE56287FA0BD0035C3E6 /* Provider.swift in Sources */,
 				0142F4D0287C0C9C006F3E48 /* ReviewResponse.swift in Sources */,
 				9F57B5462887E3D100B2DC24 /* HangeulCombineBuffer.swift in Sources */,
 				012EDE42287EB9FA0035C3E6 /* NetworkManager.swift in Sources */,
