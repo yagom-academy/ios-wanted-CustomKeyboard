@@ -35,7 +35,7 @@ struct Endpoint {
         return urlRequest
     }
     
-    private func url() -> URL? {
+    func url() -> URL? {
         guard var urlComponents = URLComponents(string: urlString) else {
             return nil
         }

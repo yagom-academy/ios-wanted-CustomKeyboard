@@ -7,80 +7,85 @@
 
 import Foundation
 
+enum NetworkError: Error {
+    case urlRequestError
+    case invalidError
+    case statusCodeError
+    case noData
+    case decodeError
+}
+
 final class NetworkManager {
-    enum NetworkError: Error {
-        case serverError(_ statusCode: Int)
-        case noData
-        case unknownError
-        case invalidError(Error)
-        case urlRequestError
-        case decodeError(Error)
+    // URLSession.shared -> URLSessionProtocol
+    // 나중에 MockURLSession 활용해 테스트
+    private let session: URLSessionProtocol
+    
+    init(session: URLSessionProtocol = URLSession.shared) {
+        self.session = session
     }
     
-    private let session = URLSession.shared
-    
-    func fetchData<T: Decodable>(endpoint: Endpoint, dataType: T.Type, completion: @escaping (Result<T, NetworkError>) -> Void) {
+    func fetchData<T: Decodable>(endpoint: Endpoint, dataType: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
         guard let urlRequest = endpoint.urlRequest() else {
-            completion(.failure(.urlRequestError))
+            completion(.failure(NetworkError.urlRequestError))
             return
         }
         
         let dataTask = session.dataTask(with: urlRequest) { data, response, error in
             if let error = error {
-                completion(.failure(.invalidError(error)))
+                completion(.failure(error))
                 return
             }
             
             guard let httpResponse = response as? HTTPURLResponse else {
-                completion(.failure(.unknownError))
+                completion(.failure(NetworkError.invalidError))
                 return
             }
             
             guard 200..<300 ~= httpResponse.statusCode else {
-                completion(.failure(.serverError(httpResponse.statusCode)))
+                completion(.failure(NetworkError.statusCodeError))
                 return
             }
             
             guard let data = data else {
-                completion(.failure(.noData))
+                completion(.failure(NetworkError.noData))
                 return
             }
             
             do {
                 let result = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(result))
-            } catch let error {
-                completion(.failure(.decodeError(error)))
+            } catch {
+                completion(.failure(NetworkError.decodeError))
             }
         }
         
         dataTask.resume()
     }
     
-    func postRequest(endpoint: Endpoint, completion: @escaping (Result<Data, NetworkError>) -> Void) {
+    func postRequest(endpoint: Endpoint, completion: @escaping (Result<Data, Error>) -> Void) {
         guard let urlRequest = endpoint.urlRequest() else {
-            completion(.failure(.urlRequestError))
+            completion(.failure(NetworkError.urlRequestError))
             return
         }
         
         let dataTask = session.dataTask(with: urlRequest) { data, response, error in
             if let error = error {
-                completion(.failure(.invalidError(error)))
+                completion(.failure(error))
                 return
             }
             
             guard let httpResponse = response as? HTTPURLResponse else {
-                completion(.failure(.unknownError))
+                completion(.failure(NetworkError.invalidError))
                 return
             }
             
             guard 200..<300 ~= httpResponse.statusCode else {
-                completion(.failure(.serverError(httpResponse.statusCode)))
+                completion(.failure(NetworkError.statusCodeError))
                 return
             }
             
             guard let data = data else {
-                completion(.failure(.noData))
+                completion(.failure(NetworkError.noData))
                 return
             }
             
