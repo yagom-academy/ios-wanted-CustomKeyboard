@@ -19,7 +19,7 @@
 <br>
 
 # 다이어그램
-![다이어그램](https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/develop_sungeo/스크린샷/diagram.png)
+<img src="https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/develop_sungeo/스크린샷/diagram.png">
 
 <br>
 
@@ -27,15 +27,15 @@
 ## 첫 번째 화면
 |리뷰 목록 표시|리뷰 작성|
 |--|--|
-|![화면1_1](https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/develop_sungeo/스크린샷/화면1_1.gif)|![화면1_2](https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/develop_sungeo/스크린샷/화면1_2.gif)|
+|<img src="https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/develop_sungeo/스크린샷/화면1_1.gif">|<img src="https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/develop_sungeo/스크린샷/화면1_2.gif">|
 ## 두 번째 화면
 |한글 조합, Shift, Back, Space|특수한 경우|
 |--|--|
-|![화면2_1](https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/develop_sungeo/스크린샷/화면2_1.gif)||
+|<img src="https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/develop_sungeo/스크린샷/화면2_1.gif">||
 ## 추가 기능
 |Custom Keyboard (홈버튼 모델)|Custom Keyboard|
 |--|--|
-|![화면3_1](https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/develop_sungeo/스크린샷/화면3_1.gif)|![화면3_2](https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/develop_sungeo/스크린샷/화면3_2.gif)|
+|<img src="https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/develop_sungeo/스크린샷/화면3_1.gif">|<img src="https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/develop_sungeo/스크린샷/화면3_2.gif">|
 
 <br>
 
@@ -52,7 +52,7 @@
 ### 테이블뷰 셀에 올바른 이미지가 나타나지 않는 문제
 |원인|해결|
 |--|--|
-|![이미지원인](https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/develop_sungeo/스크린샷/숭어_이미지뷰_원인.gif)|![이미지해결](https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/develop_sungeo/스크린샷/숭어_이미지뷰_해결.gif)|
+|<img src="https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/develop_sungeo/스크린샷/숭어_이미지뷰_원인.gif">|<img src="https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/develop_sungeo/스크린샷/숭어_이미지뷰_해결.gif">|
 - 빠르게 스크롤할 경우 해당 cell에 알맞는 이미지가 나타나지 않는 문제 발생
 - 지나간 cell 부분의 작업은 취소 기능 구현 필요
 - LazyImageView인 custom UIImageView 구현 및 변수로 URLSessionDataTask를 가지고 있으며 cell 재사용 중 해당 부분 작업이 존재한다면 cancel 처리
