@@ -15,19 +15,18 @@ protocol HangulKeyboardDataReceivable {
 class HangulKeyboardManager {
     
     var delegate: HangulKeyboardDataReceivable!
-    
     private let keyboardIOManager = KeyboardIOManager()
     private let keyboardMaker = KeyboardMaker()
     
     func enterText(text: String) {
-        
         let keyboardData = keyboardIOManager.stringToKeyboardData(input: text)
-        
         guard !isEnter(inputData: keyboardData) else { return }
-        
         let result = keyboardMaker.putKeyboardData(data: keyboardData)
-        
-        delegate.hangulKeyboard(updatedResult: keyboardIOManager.keyboardDataToString(outputKeyboardData: result))
+        delegate.hangulKeyboard(
+            updatedResult: keyboardIOManager.keyboardDataToString(
+                outputKeyboardData: result
+            )
+        )
     }
     
     private func isEnter(inputData: HangulKeyboardData) -> Bool {
@@ -35,5 +34,4 @@ class HangulKeyboardManager {
         delegate.hangulKeyboard(enterPressed: inputData)
         return true
     }
-    
 }
