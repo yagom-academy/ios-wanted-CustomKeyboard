@@ -10,7 +10,6 @@ import UIKit
 class KeyboardViewController: UIViewController {
     weak var delegate: PassContentDelegate?
     private var viewModel = KeyboardViewModel()
-    private var state = 0
     
     private let reviewTextView: UITextView = {
         var textView = UITextView()
@@ -83,50 +82,11 @@ extension KeyboardViewController: ButtonDelegate {
     func eraseButtonClickEvent(sender: KeyButton) {
         keyboardView.keyThirdLine.shiftButton.isSelected = false
         viewModel.resetShift(firstLineButtons)
-        guard let text = reviewTextView.text?.last else {
-            return
-        }
-        
-        if state == 3 && reviewTextView.text.count >= 2 {
-            let currentText = String(reviewTextView.text.suffix(2))
-            reviewTextView.text = String(reviewTextView.text.prefix(reviewTextView.text.count - 2))
-            
-            let managerString = viewModel.deleteString(3, currentText)
-            reviewTextView.text += managerString.0
-            state = managerString.1
-        } else {
-            reviewTextView.text.removeLast()
-            let managerString = viewModel.deleteString(state, String(text))
-            reviewTextView.text += managerString.0
-            state = managerString.1
-        }
-        print(reviewTextView.text)
+        viewModel.eraseButton(reviewTextView)
     }
     
     func buttonClickEvent(sender: KeyButton) {
-        guard let text = reviewTextView.text?.last else {
-            let managerString = viewModel.makeString(state, "", sender)
-            reviewTextView.text! = managerString.0
-            state = managerString.1
-            keyboardView.keyThirdLine.shiftButton.isSelected = false
-            viewModel.resetShift(firstLineButtons)
-            print(reviewTextView.text)
-            return
-        }
-        
-        let managerString = viewModel.makeString(state, String(text), sender)
-
-        if state != 0 && managerString.0 != " " {
-            reviewTextView.text.removeLast()
-        }
-        
-        reviewTextView.text! += managerString.0
-        state = managerString.1
-        
-        keyboardView.keyThirdLine.shiftButton.isSelected = false
-        viewModel.resetShift(firstLineButtons)
-        
-        print(reviewTextView.text)
+        viewModel.buttonClick(reviewTextView, keyboardView, sender)
     }
 }
 
