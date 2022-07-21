@@ -68,15 +68,19 @@ class KeyboardManager {
         // 완벽한 글자를 지울 때 아, 애, 앵, 왱
         var deleteWord = str // "ㄹㄱ" "ㅏㅣ"
         print(deleteWord, "deleteWord")
-        if deleteWord.count == 2 {
+        if deleteWord.count == 3 {
+            allState.removeLast(2)
+        } else if deleteWord.count == 2 {
             allState.removeLast()
         }
         
         // 모음을 지우면 들어가지 않는다
-        while !second.contains(deleteWord) && !secondDouble.contains(deleteWord) {
+        while !second.contains(deleteWord) && !secondDouble.contains(deleteWord) && !secondTriple.contains(deleteWord) {
             deleteWord = allWord.removeLast()
             allState.removeLast()
-            if deleteWord.count == 2 {
+            if deleteWord.count == 3 {
+                allState.removeLast(2)
+            } else if deleteWord.count == 2 {
                 allState.removeLast()
             }
         }
@@ -319,7 +323,21 @@ class KeyboardManager {
         case 3:
             // 자음 + 이중모음이 입력되어 있는 상태 (ex 왜, 내, 의 ...)
             let frontText = String(currentText.prefix(1))
-            if lastWord.count == 2 {
+            if lastWord.count == 3 {
+                let text = currentText.suffix(1)
+                let idx1 = secondTriple.firstIndex(of: lastWord) ?? 0
+                let idx2 = secondDouble.firstIndex(of: String(lastWord.prefix(2))) ?? 0
+                let str = text.utf16.map{ Int($0) }.reduce(0, +) - (idx1 * 28) + (idx2 * 28)
+                lastWord = String(lastWord.prefix(2))
+                allWord.append(lastWord)
+                if let scalarValue = UnicodeScalar(str) {
+                    if text != currentText {
+                        return (frontText + String(scalarValue), 3)
+                    }
+                    return (String(scalarValue), 3)
+                }
+                return ("", 0)
+            } else if lastWord.count == 2 {
                 let text = currentText.suffix(1)
                 let idx1 = secondDouble.firstIndex(of: lastWord) ?? 0
                 let idx2 = second.firstIndex(of: String(lastWord.prefix(1))) ?? 0
@@ -327,7 +345,6 @@ class KeyboardManager {
                 lastWord = String(lastWord.prefix(1))
                 allWord.append(lastWord)
                 if let scalarValue = UnicodeScalar(str) {
-                    print(currentText, text)
                     if text != currentText {
                         return (frontText + String(scalarValue), 3)
                     }
