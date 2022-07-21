@@ -46,51 +46,21 @@ final class Hangeul {
 
 extension Hangeul {
 
-    func update(status: HangeulCombinationStatus? = nil, position: HangeulCombinationPosition? = nil) {
-        guard let oldUnicode = self.unicode else {
+    func update(newStatus: HangeulCombinationStatus? = nil, newPosition: HangeulCombinationPosition? = nil) {
+        if newStatus != nil {
+            self.status = newStatus ?? .ongoing
+        }
+
+        guard let newPosition = newPosition else {
             return
         }
         
-        if status != nil {
-            self.status = status ?? .ongoing
-        }
-        
-        guard let position = position else {
-            return
-        }
-        
-        let dictionary = HangeulDictionary()
-        var oldCompatibleUnicode: Int
-        
-        if self.position.isEmpty {
-            oldCompatibleUnicode = oldUnicode
+        self.unicode = getNewFixedUnicodeAccordingTo(newPosition)
+     
+        if self.position.count > 1 && self.position.first == newPosition {
+            self.position.removeLast()
         } else {
-            guard let oldPosition = self.position.last,
-                  let oldIndex = dictionary.getIndex(of: oldUnicode, in: oldPosition, type: .fixed),
-                  let unicode = dictionary.getUnicode(at: oldIndex, in: oldPosition, of: .compatible) else {
-                return
-            }
-            oldCompatibleUnicode = unicode
-        }
-        
-        guard let newIndex = dictionary.getIndex(of: oldCompatibleUnicode, in: position, type: .compatible) else {
-            return
-        }
-        let newFixedUnicode = dictionary.getUnicode(at: newIndex, in: position, of: .fixed)
-        self.unicode = newFixedUnicode
-        
-        if self.position.isEmpty {
-            self.position.append(position)
-        } else if self.position.count > 1 {
-            guard let firstPosition = self.position.first else {
-                return
-            }
-            
-            if firstPosition == position {
-                self.position.removeLast()
-            }
-        } else {
-            self.position.append(position)
+            self.position.append(newPosition)
         }
     }
 }
@@ -134,7 +104,7 @@ extension Hangeul {
               let previousLetterPosition = self.prev?.position.last else {
             return false
         }
-    
+        
         if letterPosition == .jungseong && previousLetterPosition == .jungseong {
             if self.prev?.prev == nil {
                 return false
@@ -142,7 +112,6 @@ extension Hangeul {
                 return false
             }
         }
-        
         return true
     }
     
@@ -171,7 +140,6 @@ extension Hangeul {
         } else if dictionary.getDoubleUnicode(self.prev, self) == nil {
             return false
         }
-        
         return true
     }
     
@@ -196,3 +164,31 @@ extension Hangeul {
     }
 }
 
+// MARK: - Private Method
+
+extension Hangeul {
+    
+    func getNewFixedUnicodeAccordingTo(_ newPosition: HangeulCombinationPosition) -> Int? {
+        guard let oldUnicode = self.unicode else {
+            return nil
+        }
+        let dictionary = HangeulDictionary()
+        var oldCompatibleUnicode: Int
+        
+        if self.position.isEmpty {
+            oldCompatibleUnicode = oldUnicode
+        } else {
+            guard let oldPosition = self.position.last,
+                  let oldIndex = dictionary.getIndex(of: oldUnicode, in: oldPosition, type: .fixed),
+                  let unicode = dictionary.getUnicode(at: oldIndex, in: oldPosition, of: .compatible) else {
+                return nil
+            }
+            oldCompatibleUnicode = unicode
+        }
+        guard let newIndex = dictionary.getIndex(of: oldCompatibleUnicode, in: newPosition, type: .compatible),
+              let newFixedUnicode = dictionary.getUnicode(at: newIndex, in: newPosition, of: .fixed) else {
+            return nil
+        }
+        return newFixedUnicode
+    }
+}

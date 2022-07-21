@@ -29,14 +29,11 @@ extension HangeulCombiner {
                     && buffer.jongseongSection.isEmpty
                     && buffer.jungseongSection.count == 1
                     && buffer.choseongSection.first?.position.count ?? 0 > 1 {
-            
             let previousBuffer = HangeulCombineBuffer(buffer.choseongSection.first?.prev)
-            
             guard let previousCombinedCharacter = getCombinedCharacter(with: previousBuffer),
                   let currentCombinedCharacter = getCombinedCharacter(with: buffer) else {
                 return nil
             }
-            
             let combinedCharacter = previousCombinedCharacter + currentCombinedCharacter
             return (combinedCharacter, .change)
         } else {

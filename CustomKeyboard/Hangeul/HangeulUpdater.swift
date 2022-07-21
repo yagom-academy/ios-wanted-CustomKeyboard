@@ -39,12 +39,12 @@ extension HangeulUpdater {
             return
         }
         
-        previousLetter.update(status: .finished)
+        previousLetter.update(newStatus: .finished)
     }
     
     private func updatePropertiesInRemoveMode(_ letter: Hangeul) {
         if letter.status == .finished && letter.text != Text.space {
-            letter.update(status: .ongoing)
+            letter.update(newStatus: .ongoing)
             return
         }
     
@@ -54,8 +54,8 @@ extension HangeulUpdater {
                 return
             }
             
-            previousLetter.update(status: .ongoing)
-            letter.update(status: .ongoing, position: firstPositionOfLetter)
+            previousLetter.update(newStatus: .ongoing)
+            letter.update(newStatus: .ongoing, newPosition: firstPositionOfLetter)
         }
     }
     
@@ -89,11 +89,11 @@ extension HangeulUpdater {
     
     private func updatePropertiesOnlyOne(_ letter: Hangeul) {
         if letter.isDoubleJungseong() {
-            letter.update(status: .finished, position: .jungseong)
+            letter.update(newStatus: .finished, newPosition: .jungseong)
         } else if letter.canBeJungseong() {
-            letter.update(position: .jungseong)
+            letter.update(newPosition: .jungseong)
         } else {
-            letter.update(position: .choseong)
+            letter.update(newPosition: .choseong)
         }
     }
 }
@@ -108,10 +108,10 @@ extension HangeulUpdater {
         }
         
         if letter.canBeJungseong() {
-            letter.update(position: .jungseong)
+            letter.update(newPosition: .jungseong)
         } else {
-            previousLetter.update(status: .finished)
-            letter.update(position: .choseong)
+            previousLetter.update(newStatus: .finished)
+            letter.update(newPosition: .choseong)
         }
     }
     
@@ -121,20 +121,20 @@ extension HangeulUpdater {
         }
         
         if letter.canBeTripleJungseong() {
-            letter.update(position: .jungseong)
+            letter.update(newPosition: .jungseong)
         } else if letter.isDoubleJungseong() {
-            previousLetter.update(status: .finished)
-            letter.update(status: .finished, position: .jungseong)
+            previousLetter.update(newStatus: .finished)
+            letter.update(newStatus: .finished, newPosition: .jungseong)
         } else if letter.canBeDoubleJungseong() {
-            letter.update(position: .jungseong)
+            letter.update(newPosition: .jungseong)
         } else if letter.canBeJungseong() {
-            previousLetter.update(status: .finished)
-            letter.update(position: .jungseong)
+            previousLetter.update(newStatus: .finished)
+            letter.update(newPosition: .jungseong)
         } else if previousLetter.canHaveJongseong() && letter.canBeJongseong() {
-            letter.update(position: .jongseong)
+            letter.update(newPosition: .jongseong)
         } else {
-            previousLetter.update(status: .finished)
-            letter.update(position: .choseong)
+            previousLetter.update(newStatus: .finished)
+            letter.update(newPosition: .choseong)
         }
         
         
@@ -147,14 +147,14 @@ extension HangeulUpdater {
         }
         
         if letter.canBeJungseong() {
-            mostPreviousLetter.update(status: .finished)
-            previousLetter.update(position: .choseong)
-            letter.update(position: .jungseong)
+            mostPreviousLetter.update(newStatus: .finished)
+            previousLetter.update(newPosition: .choseong)
+            letter.update(newPosition: .jungseong)
         } else if letter.canBeDoubleJongseong() {
-            letter.update(position: .jongseong)
+            letter.update(newPosition: .jongseong)
         } else {
-            previousLetter.update(status: .finished)
-            letter.update(position: .choseong)
+            previousLetter.update(newStatus: .finished)
+            letter.update(newPosition: .choseong)
         }
     }
 }

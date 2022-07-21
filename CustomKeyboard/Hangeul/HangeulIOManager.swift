@@ -53,24 +53,19 @@ extension HangeulIOManger {
         if inputList.isEmpty() {
             return
         }
-        
         inputList.removeLast()
         setOutput(with: Text.emptyString, editMode: .remove)
-        
         guard let lastInputLetter = inputList.tail else {
             return
         }
-        
         if lastInputLetter.status == .finished {
             specifier.updateProperties(of: lastInputLetter, when: .remove)
             return
         }
-        
         if lastInputLetter.position.count > 1 {
             specifier.updateProperties(of: lastInputLetter, when: .remove)
             setOutput(with: Text.emptyString, editMode: .remove)
         }
-        
         guard let result = combiner.combineCharacter(using: lastInputLetter, when: .remove) else {
             return
         }
@@ -81,7 +76,6 @@ extension HangeulIOManger {
         guard let lastInputLetter = inputList.tail else {
             return
         }
-        
         specifier.updateProperties(of: lastInputLetter, when: .space)
         setOutput(with: Text.whiteSpaceString, editMode: .add)
     }
@@ -90,9 +84,7 @@ extension HangeulIOManger {
         guard let lastInputLetter = inputList.tail else {
             return
         }
-        
         specifier.updateProperties(of: lastInputLetter, when: .add)
-        
         guard let result = combiner.combineCharacter(using: lastInputLetter, when: .add) else {
             return
         }
@@ -108,20 +100,16 @@ extension HangeulIOManger {
         guard let editMode = editMode else {
             return
         }
-        
         if editMode == .remove {
             output.unicodeScalars.removeLast()
             return
         }
-        
         if editMode == .change && output.isEmpty == false {
             output.unicodeScalars.removeLast()
         }
-        
         guard let combinedCharacter = combinedCharacter else {
             return
         }
-
         output += combinedCharacter
     }
 }
