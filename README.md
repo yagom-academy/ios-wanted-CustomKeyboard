@@ -55,28 +55,56 @@
 
 ## ⚠️ 이슈
 
-- 
+- URLSession Network Layer에 관한 고민
     
+```Text
+→ 네트워크 관련 라이브러리를 사용하지 않을 때 효율적인 network layer를 만들 수 있을지에 대한 고민과 에러 및 예외 처리에 대한 고민
 
-```swift
+→  여러 시도 후 URL, NetworkError, HTTPMethod, URLSession, URLRequest, API, Resource 등으로 나누어 구현
 
+→ ConstanURL : “GET”, “POST” 통신을 하는 URL 등을 지정하는 별도 파일
+
+→ NetworkError : 네트워크 및 서비스 관련 설정한 에러를 처리할 수 있도록 생성
+
+→ Resource : Encodable, Decodable type을 Generic하게 입력받을 수 있도록 생성
+
+→ HTTPMethod : HTTPMethod를 enum type 으로 전달
+
+→ URLSession : URLSession의 request를 Resource에 맞춰 request할 수 있도록, upload, load 함수 생성
+
+→ API : Singleton 방식으로 API 객체를 생성하여 관리하고 통신을 시도하는 객체
+
+→ 현재 URL이 적어 URL주소 전체를 적용했으나 추후 많은 양의 URL주소가 있을 시 
+  URL을 scheme, host, path, parameter(questyString) 등으로 나누어 구현하는 방법도 적용해보는 것도 좋을 것 같음
 ```
 
 <br>
 
-- 
-    
+- Data(contentsOf: url?)에 관한 고민
 
-```swift
+```Text
+→ 처음 네트워크 구현 시 init(contesntsOf: url)메소드 사용
 
+→ init(contesntsOf: url) 메소드는 동기적으로 작동해 현재 작업중인 스레드의 모든 작업을 해당 작업을 수행하는 동안 멈추게할 위험이 있어 
+  DispatchQueue.global().async를 통해 스레드 문제를 해결해도 GCD의 제한된 작업스레드 중 하나를 묶는 것이 되어 직접적이진 않아도 
+  간접적으로 성능에 영향을 줄 수 있어 권장하지 않음
+
+→ URLSession에서는 오류가 네트워크 오류인지, HTTP 오류인지, contents 오류 인지 등을 판할 수 있는 반면 
+  init(contentsOf:)에서는 이를 확인할 수 없음
+
+→ URLSession으로 변경
 ```
 
 <br>
 
--
+- Cell 재사용 문제
+    - TableView Cell 재사용으로 인해 스크롤 시 이미지가 맞지 않는 경우 발생
+    - prepareForReuse() 메소드를 사용해 수정
 
 ```swift
-
+override func prepareForReuse() {
+		profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
+}
 ```
 <br>
 
