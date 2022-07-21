@@ -20,6 +20,7 @@ class CreateReviewViewController: UIViewController {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = UIFont.systemFont(ofSize: 30)
         textView.backgroundColor = .white
+        textView.becomeFirstResponder()
         return textView
     }()
     
