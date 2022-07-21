@@ -59,7 +59,6 @@ class ReviewListHeaderView: UITableViewHeaderFooterView {
         reviewTextField.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            
             profileImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             profileImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             profileImageView.widthAnchor.constraint(equalTo: profileImageView.heightAnchor),
@@ -84,5 +83,4 @@ class ReviewListHeaderView: UITableViewHeaderFooterView {
     func fetchReviewDataToTextField(reviewTextData text: String) {
         reviewTextField.text = text
     }
-    
- }
+}

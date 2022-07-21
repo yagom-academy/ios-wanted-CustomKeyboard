@@ -14,9 +14,7 @@ protocol ReviewTextReceivable: AnyObject {
 class CreateReviewViewController: UIViewController {
 
     weak var delegate: ReviewTextReceivable?
-    
     private let keyboardManager = HangulKeyboardManager()
-    
     private let reviewTextView: UITextView = {
         var textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -33,9 +31,7 @@ class CreateReviewViewController: UIViewController {
     }
     
     private func setLayout() {
-        
         view.addSubview(reviewTextView)
-        
         NSLayoutConstraint.activate([
             reviewTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             reviewTextView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -57,13 +53,11 @@ extension CreateReviewViewController: KeyboardInfoReceivable {
         let textData = pressedKeyboardButton.titleLabel!.text!
         keyboardManager.enterText(text: textData)
     }
-    
 }
 
 extension CreateReviewViewController: HangulKeyboardDataReceivable {
     
     func hangulKeyboard(enterPressed: HangulKeyboardData) {
-        
         API.shared.post(message: reviewTextView.text) { [self] error in
             if let error = error {
                 reviewDataPostErrorHandler(error: error)
@@ -88,5 +82,4 @@ extension CreateReviewViewController: HangulKeyboardDataReceivable {
             self.navigationController?.popViewController(animated: true)
         }
     }
-    
 }

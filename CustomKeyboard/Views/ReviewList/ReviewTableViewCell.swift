@@ -68,7 +68,6 @@ class ReviewTableViewCell: UITableViewCell {
         labelStackView.addArrangedSubview(rateLabel)
         labelStackView.addArrangedSubview(timeLabel)
         
-        
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         nickNameLabel.translatesAutoresizingMaskIntoConstraints = false
         rateLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -76,7 +75,6 @@ class ReviewTableViewCell: UITableViewCell {
         labelStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            
             profileImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             profileImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             profileImageView.widthAnchor.constraint(equalTo: profileImageView.heightAnchor),

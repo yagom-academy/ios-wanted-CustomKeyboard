@@ -24,7 +24,6 @@ class ReviewListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setLayout()
         setIndicatorUI()
         setNavigationLayout()
@@ -46,17 +45,14 @@ class ReviewListViewController: UIViewController {
     private func setLayout() {
         view.backgroundColor = .white
         view.addSubview(reviewTableView)
+        
         reviewTableView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
-        
             reviewTableView.topAnchor.constraint(equalTo: view.topAnchor),
             reviewTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             reviewTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
             reviewTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-            
         ])
-        
     }
     
     func setIndicatorUI() {
@@ -90,6 +86,7 @@ class ReviewListViewController: UIViewController {
 }
 
 extension ReviewListViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataList.data.count
     }
@@ -119,6 +116,7 @@ extension ReviewListViewController: UITableViewDelegate {
 }
 
 extension ReviewListViewController: PresentButtonSelectable {
+    
     func presentButtonStatus() {
         let createReviewVC = CreateReviewViewController()
         createReviewVC.delegate = self
@@ -128,6 +126,7 @@ extension ReviewListViewController: PresentButtonSelectable {
 }
 
 extension ReviewListViewController: ReviewTextReceivable {
+    
     func  hangulKeyboardText(text: String) {
         headerText = text
         reviewTableView.reloadData()

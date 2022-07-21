@@ -14,7 +14,6 @@ protocol KeyboardInfoReceivable: AnyObject {
 class CustomKeyboardView: UIView {
 
     weak var delegate: KeyboardInfoReceivable?
-
     private var isShiftPressed = false
     
     @IBOutlet weak var qButton: UIButton!
@@ -88,7 +87,6 @@ class CustomKeyboardView: UIView {
     }
     
     private func changeDoubleChar() {
-        
         if isShiftPressed {
             qButton.setTitle("ㅃ", for: .normal)
             wButton.setTitle("ㅉ", for: .normal)
@@ -112,5 +110,4 @@ class CustomKeyboardView: UIView {
         }
         self.layoutIfNeeded()
     }
-    
 }
