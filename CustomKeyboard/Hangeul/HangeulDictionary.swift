@@ -240,25 +240,25 @@ extension HangeulDictionary {
         return getUnicodeOfCompatible(index, in: position)
     }
 
-    func getDoubleUnicode(_ previousCharacter: Hangeul?, _ currentCharacter: Hangeul?) -> Int? {
-        guard let previousCharacter = previousCharacter,
-              let currentCharacter = currentCharacter,
-              let previousCharacterPosition = previousCharacter.position.last else {
+    func getDoubleUnicode(_ previousLetter: Hangeul?, _ currentLetter: Hangeul?) -> Int? {
+        guard let previousLetter = previousLetter,
+              let currentLetter = currentLetter,
+              let previousLetterPosition = previousLetter.position.last else {
             return nil
         }
         
-        if previousCharacterPosition == .jungseong {
-            return getDoubleJungseongUnicode(previousCharacter.text, currentCharacter.text)
-        } else if previousCharacter.position.last == .jongseong {
-            return getDoubleJongseongUnicode(previousCharacter.text, currentCharacter.text)
+        if previousLetterPosition == .jungseong {
+            return getDoubleJungseongUnicode(previousLetter.text, currentLetter.text)
+        } else if previousLetter.position.last == .jongseong {
+            return getDoubleJongseongUnicode(previousLetter.text, currentLetter.text)
         }
         return nil
     }
     
-    func getTripleMidUnicode(_ previousCharacterText: String? = nil, _ currentCharacterText: String, _ nextCharacterText: String) -> Int? {
+    func getTripleMidUnicode(_ previousLetterText: String? = nil, _ currentLetterText: String, _ nextLetterText: String) -> Int? {
         let dictionary = HangeulDictionary.fixed.jungseong.self
         
-        switch (currentCharacterText, nextCharacterText) {
+        switch (currentLetterText, nextLetterText) {
         case ("ㅜ", "ㅔ"):
             return dictionary.ㅞ.rawValue
         case ("ㅗ", "ㅐ"):
@@ -267,11 +267,11 @@ extension HangeulDictionary {
             break
         }
         
-        guard let previousCharacterText = previousCharacterText else {
+        guard let previousLetterText = previousLetterText else {
             return nil
         }
 
-        switch (previousCharacterText, currentCharacterText, nextCharacterText) {
+        switch (previousLetterText, currentLetterText, nextLetterText) {
         case ("ㅜ", "ㅓ", "ㅣ"):
             return dictionary.ㅞ.rawValue
         case ("ㅗ", "ㅏ", "ㅣ"):
@@ -415,10 +415,10 @@ extension HangeulDictionary {
 
 extension HangeulDictionary {
     
-    private func getDoubleJungseongUnicode(_ previousCharacterText: String, _ currentCharacterText: String) -> Int? {
+    private func getDoubleJungseongUnicode(_ previousLetterText: String, _ currentLetterText: String) -> Int? {
         let dictionary = HangeulDictionary.fixed.jungseong.self
         
-        switch (previousCharacterText, currentCharacterText) {
+        switch (previousLetterText, currentLetterText) {
         case ("ㅏ", "ㅣ"):
             return dictionary.ㅐ.rawValue
         case ("ㅑ", "ㅣ"):
@@ -448,10 +448,10 @@ extension HangeulDictionary {
         }
     }
     
-    private func getDoubleJongseongUnicode(_ previousCharacterText: String, _ currentCharacterText: String) -> Int? {
+    private func getDoubleJongseongUnicode(_ previousLetterText: String, _ currentLetterText: String) -> Int? {
         let dictionary = HangeulDictionary.fixed.jongseong.self
         
-        switch (previousCharacterText, currentCharacterText) {
+        switch (previousLetterText, currentLetterText) {
         case ("ㄱ", "ㅅ"):
             return dictionary.ㄱㅅ.rawValue
         case ("ㄴ", "ㅈ"):

@@ -12,6 +12,8 @@ import Foundation
 final class HangeulIOManger {
     private var inputList = HangeulList()
     private var output = Text.emptyString
+    private let specifier = HangeulUpdater()
+    private let combiner = HangeulCombiner()
 }
 
 // MARK: - Public Method
@@ -23,11 +25,11 @@ extension HangeulIOManger {
         
         switch input {
         case Text.back:
-            processWithBack()
+            processWhenInputIsBack()
         case Text.space:
-            processWithSpace()
+            processWhenInputIsSpace()
         default:
-            processWithNormalInput(input)
+            processWhenInputIsNormalLetter()
         }
     }
     
@@ -47,7 +49,7 @@ extension HangeulIOManger {
 
 extension HangeulIOManger {
     
-    private func processWithBack() {
+    private func processWhenInputIsBack() {
         if inputList.isEmpty() {
             return
         }
@@ -55,49 +57,46 @@ extension HangeulIOManger {
         inputList.removeLast()
         setOutput(with: Text.emptyString, editMode: .remove)
         
-        guard let inputListTail = inputList.tail else {
+        guard let lastInputLetter = inputList.tail else {
             return
         }
         
-        let specifier = HangeulSpecifier()
-        let combiner = HangeulCombiner()
-        
-        if inputListTail.status == .finished {
-            specifier.specifyProperties(of: inputListTail, when: .remove)
+        if lastInputLetter.status == .finished {
+            specifier.updateProperties(of: lastInputLetter, when: .remove)
             return
         }
         
-        if inputListTail.position.count > 1 {
-            specifier.specifyProperties(of: inputListTail, when: .remove)
+        if lastInputLetter.position.count > 1 {
+            specifier.updateProperties(of: lastInputLetter, when: .remove)
             setOutput(with: Text.emptyString, editMode: .remove)
         }
         
-        combiner.setCombinedString(using: inputListTail, when: .remove)
-        setOutput(with: combiner.getCombinedString(), editMode: .add)
+        guard let result = combiner.combineCharacter(using: lastInputLetter, when: .remove) else {
+            return
+        }
+        setOutput(with: result.combinedCharacter, editMode: .add)
     }
     
-    private func processWithSpace() {
-        guard let inputListTail = inputList.tail else {
+    private func processWhenInputIsSpace() {
+        guard let lastInputLetter = inputList.tail else {
             return
         }
         
-        let specifier = HangeulSpecifier()
-        
-        specifier.specifyProperties(of: inputListTail, when: .space)
+        specifier.updateProperties(of: lastInputLetter, when: .space)
         setOutput(with: Text.whiteSpaceString, editMode: .add)
     }
     
-    private func processWithNormalInput(_ input: String) {
-        guard let inputListTail = inputList.tail else {
+    private func processWhenInputIsNormalLetter() {
+        guard let lastInputLetter = inputList.tail else {
             return
         }
         
-        let specifier = HangeulSpecifier()
-        let combiner = HangeulCombiner()
+        specifier.updateProperties(of: lastInputLetter, when: .add)
         
-        specifier.specifyProperties(of: inputListTail, when: .add)
-        combiner.setCombinedString(using: inputListTail, when: .add)
-        setOutput(with: combiner.getCombinedString(), editMode: combiner.getOutputMode())
+        guard let result = combiner.combineCharacter(using: lastInputLetter, when: .add) else {
+            return
+        }
+        setOutput(with: result.combinedCharacter, editMode: result.outputEditMode)
     }
 }
 
@@ -105,7 +104,7 @@ extension HangeulIOManger {
 
 extension HangeulIOManger {
     
-    private func setOutput(with combinedString: String, editMode: HangeulOutputMode?) {
+    private func setOutput(with combinedCharacter: String?, editMode: HangeulOutputEditMode?) {
         guard let editMode = editMode else {
             return
         }
@@ -119,6 +118,10 @@ extension HangeulIOManger {
             output.unicodeScalars.removeLast()
         }
         
-        output += combinedString
+        guard let combinedCharacter = combinedCharacter else {
+            return
+        }
+
+        output += combinedCharacter
     }
 }

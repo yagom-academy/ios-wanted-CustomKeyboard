@@ -10,45 +10,34 @@ import Foundation
 // MARK: - Variable
 
 final class HangeulCombineBuffer {
-    var choseongSection : [Hangeul]
-    var jungseongSection : [Hangeul]
-    var jongseongSection : [Hangeul]
+    var choseongSection = [Hangeul]()
+    var jungseongSection = [Hangeul]()
+    var jongseongSection = [Hangeul]()
     
-    init() {
-        choseongSection = []
-        jungseongSection = []
-        jongseongSection = []
-    }
-}
-
-// MARK: Public Method
-
-extension HangeulCombineBuffer {
-    
-    func append(_ currentCharacter: Hangeul?) {
-        guard var currentCharacter = currentCharacter else {
+    init(_ letter: Hangeul?) {
+        guard var currentLetter = letter else {
             return
         }
         
         repeat {
-            guard let currentPosition = currentCharacter.position.last else {
+            guard let currentLetterPosition = currentLetter.position.last else {
                 return
             }
 
-            switch currentPosition {
+            switch currentLetterPosition {
             case .choseong:
-                self.choseongSection.append(currentCharacter)
+                self.choseongSection.append(currentLetter)
             case .jungseong:
-                self.jungseongSection.insert(currentCharacter, at: 0)
+                self.jungseongSection.insert(currentLetter, at: 0)
             case .jongseong:
-                self.jongseongSection.insert(currentCharacter, at: 0)
+                self.jongseongSection.insert(currentLetter, at: 0)
             }
             
-            guard let previousCharacter = currentCharacter.prev else {
+            guard let previousLetter = currentLetter.prev else {
                 return
             }
             
-            currentCharacter = previousCharacter
-        } while currentCharacter.status != .finished && currentCharacter.unicode != nil
+            currentLetter = previousLetter
+        } while currentLetter.status != .finished && currentLetter.unicode != nil
     }
 }

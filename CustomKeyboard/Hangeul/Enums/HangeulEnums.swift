@@ -23,7 +23,7 @@ enum HangeulCombinationPosition {
     case choseong, jungseong, jongseong
 }
 
-enum HangeulOutputMode {
+enum HangeulOutputEditMode {
     case add, change, remove
 }
 

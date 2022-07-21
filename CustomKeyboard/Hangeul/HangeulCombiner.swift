@@ -10,147 +10,102 @@ import Foundation
 // MARK: - Variable
 
 final class HangeulCombiner {
-    private var combinedString: String = Text.emptyString
-    private var outputMode: HangeulOutputMode?
-
+    private let converter = HangeulConverter()
+    private let dictionary = HangeulDictionary()
 }
 
 // MARK: - Public Method
 
 extension HangeulCombiner {
     
-    func setCombinedString(using currentCharacter: Hangeul, when inputMode: HangeulInputMode) {
-        let buffer = HangeulCombineBuffer()
-        buffer.append(currentCharacter)
+    func combineCharacter(using letter: Hangeul, when inputMode: HangeulInputMode) -> (combinedCharacter: String?, outputEditMode: HangeulOutputEditMode)? {
+        let buffer = HangeulCombineBuffer(letter)
         
-        if buffer.choseongSection.isEmpty {
-            if buffer.jungseongSection.count > 1 {
-                combinedString = getCombinedString(with: buffer) ?? Text.emptyString
-                outputMode = .change
-            } else {
-                guard let midFirstCharacter = buffer.jungseongSection.first else {
-                    return
-                }
-                combinedString = getCombinedString(midFirstCharacter) ?? Text.emptyString
-                outputMode = .add
+        if buffer.choseongSection.isEmpty && buffer.jungseongSection.count == 1 {
+            return (getCombinedCharacter(buffer.jungseongSection.first), .add)
+        } else if buffer.jungseongSection.isEmpty && buffer.jongseongSection.isEmpty  {
+            return (getCombinedCharacter(buffer.choseongSection.first), .add)
+        } else if inputMode == .add
+                    && buffer.jongseongSection.isEmpty
+                    && buffer.jungseongSection.count == 1
+                    && buffer.choseongSection.first?.position.count ?? 0 > 1 {
+            
+            let previousBuffer = HangeulCombineBuffer(buffer.choseongSection.first?.prev)
+            
+            guard let previousCombinedCharacter = getCombinedCharacter(with: previousBuffer),
+                  let currentCombinedCharacter = getCombinedCharacter(with: buffer) else {
+                return nil
             }
-        } else if buffer.jungseongSection.isEmpty && buffer.jongseongSection.isEmpty {
-            guard let topFirstCharacter = buffer.choseongSection.first else {
-                return
-            }
-            combinedString = getCombinedString(topFirstCharacter) ?? Text.emptyString
-            outputMode = .add
-        } else if buffer.jongseongSection.isEmpty {
-            guard let topFirstCharacterPositionList = buffer.choseongSection.first?.position else {
-                return
-            }
-            if inputMode == .add && buffer.jungseongSection.count == 1 && topFirstCharacterPositionList.count > 1 {
-                let previousBuffer = HangeulCombineBuffer()
-                guard let previousCurrentCharacter = buffer.choseongSection.first?.prev else {
-                    return
-                }
-                previousBuffer.append(previousCurrentCharacter)
-                combinedString += getCombinedString(with: previousBuffer) ?? Text.emptyString
-            }
-            combinedString += getCombinedString(with: buffer) ?? Text.emptyString
-            outputMode = .change
+            
+            let combinedCharacter = previousCombinedCharacter + currentCombinedCharacter
+            return (combinedCharacter, .change)
         } else {
-            combinedString += getCombinedString(with: buffer) ?? Text.emptyString
-            outputMode = .change
+            return (getCombinedCharacter(with: buffer), .change)
         }
     }
-    
-    func getCombinedString() -> String {
-        return combinedString
-    }
-        
-    func getOutputMode() -> HangeulOutputMode? {
-        return outputMode
-    }
-    
 }
 
 // MARK: - Private Method
 
 extension HangeulCombiner {
     
-    private func getCombinedString(_ onlyOneCharacter: Hangeul? = nil, with buffer: HangeulCombineBuffer? = nil) -> String? {
-        let converter = HangeulConverter()
-    
-        if onlyOneCharacter != nil {
-            return converter.toString(from: onlyOneCharacter?.unicode)
+    private func getCombinedCharacter(_ letter: Hangeul? = nil, with buffer: HangeulCombineBuffer? = nil) -> String? {
+        if letter != nil {
+            return converter.toString(from: letter?.unicode)
         }
         
         guard let buffer = buffer else {
             return nil
         }
         
-        let dictionary = HangeulDictionary()
-        
-        if buffer.choseongSection.isEmpty {
-            if buffer.jungseongSection.count == 2 {
-                let doubleUnicode = dictionary.getDoubleUnicode(buffer.jungseongSection[0], buffer.jungseongSection[1])
-                return converter.toString(from: doubleUnicode)
-            } else if buffer.jungseongSection.count == 3 {
-                let tripleUnicode = dictionary.getTripleMidUnicode(buffer.jungseongSection[0].text, buffer.jungseongSection[1].text, buffer.jungseongSection[2].text)
-                return converter.toString(from: tripleUnicode)
-            }
+        if buffer.choseongSection.isEmpty && buffer.jungseongSection.count > 1 {
+            let letterUnicode = getLetterUnicode(of: buffer.choseongSection, using: buffer.jungseongSection, in: .choseong)
+            return converter.toString(from: letterUnicode)
         }
         
-        guard let index = getIndexArrayForCombine(with: buffer) else {
+        let combinedUnicode = getCombinedUnicode(with: buffer)
+        return converter.toString(from: combinedUnicode)
+    }
+    
+    
+    private func getCombinedUnicode(with buffer: HangeulCombineBuffer) -> Int? {
+        guard let choseongIndex = getIndexForCombine(of: buffer.choseongSection, in: .choseong),
+              let jungseongIndex = getIndexForCombine(of: buffer.jungseongSection, in: .jungseong),
+              let jongseongIndex = getIndexForCombine(of: buffer.jongseongSection, in: .jongseong) else {
             return nil
         }
-        let combineUnicode = (index.top * dictionary.jungseongTotalCount * dictionary.jongseongTotalCount) + (index.mid * dictionary.jongseongTotalCount) + index.end + dictionary.baseCode
-        
-        return converter.toString(from: combineUnicode)
+              
+        let combinedUnicode = (choseongIndex * dictionary.jungseongTotalCount * dictionary.jongseongTotalCount) + (jungseongIndex * dictionary.jongseongTotalCount) + jongseongIndex + dictionary.baseCode
+            
+        return combinedUnicode
     }
     
-    
-    private func getIndexArrayForCombine(with buffer: HangeulCombineBuffer) -> (top: Int, mid: Int, end: Int)? {
-        let dictionary = HangeulDictionary()
-        var midIndex = 0, endIndex = 0
-        
-        let topIndex = dictionary.getIndex(of: buffer.choseongSection.first?.unicode, in: .choseong, type: .fixed)
-        
-        if buffer.jungseongSection.count == 1 {
-            guard let index = dictionary.getIndex(of: buffer.jungseongSection.first?.unicode, in: .jungseong, type: .fixed) else {
+    private func getLetterUnicode(of section: [Hangeul], using jungseongSection: [Hangeul]? = nil, in position: HangeulCombinationPosition) -> Int? {
+        switch section.count {
+        case 0 where position == .jongseong:
+            return HangeulDictionary.fixed.jongseong.blank.rawValue
+        case 0 where position == .choseong && jungseongSection?.count == 2:
+            return dictionary.getDoubleUnicode(jungseongSection?[0], jungseongSection?[1])
+        case 0 where position == .choseong && jungseongSection?.count == 3:
+            guard let jungseongSection = jungseongSection else {
                 return nil
             }
-            midIndex = index
-        } else if buffer.jungseongSection.count == 2 {
-            let doubleMidUnicode = dictionary.getDoubleUnicode(buffer.jungseongSection.first, buffer.jungseongSection.last)
-            guard let index = dictionary.getIndex(of: doubleMidUnicode, in: .jungseong, type: .fixed) else {
-                return nil
-            }
-            midIndex = index
-        } else if buffer.jungseongSection.count == 3 {
-            let tripleUnicode = dictionary.getTripleMidUnicode(buffer.jungseongSection[0].text, buffer.jungseongSection[1].text, buffer.jungseongSection[2].text)
-            guard let index = dictionary.getIndex(of: tripleUnicode, in: .jungseong, type: .fixed) else {
-                return nil
-            }
-            midIndex = index
+            return dictionary.getTripleMidUnicode(jungseongSection[0].text, jungseongSection[1].text, jungseongSection[2].text)
+        case 1:
+            return section.first?.unicode
+        case 2:
+            return dictionary.getDoubleUnicode(section.first, section.last)
+        case 3:
+            return dictionary.getTripleMidUnicode(section[0].text, section[1].text, section[2].text)
+        default:
+            return nil
         }
-        
-        if buffer.jongseongSection.isEmpty {
-            guard let index = dictionary.getIndex(of: HangeulDictionary.fixed.jongseong.blank.rawValue, in: .jongseong, type: .fixed) else {
-                return nil
-            }
-            endIndex = index
-        } else if buffer.jongseongSection.count == 1 {
-            guard let index = dictionary.getIndex(of: buffer.jongseongSection.first?.unicode, in: .jongseong, type: .fixed) else {
-                return nil
-            }
-            endIndex = index
-        } else {
-            let doubleEndUnicode = dictionary.getDoubleUnicode(buffer.jongseongSection.first, buffer.jongseongSection.last)
-            guard let index = dictionary.getIndex(of: doubleEndUnicode, in: .jongseong, type: .fixed) else {
-                return nil
-            }
-            endIndex = index
-        }
-        
-        return (topIndex, midIndex, endIndex) as? (top: Int, mid: Int, end: Int)
     }
     
+    private func getIndexForCombine(of section: [Hangeul], in position: HangeulCombinationPosition) -> Int? {
+        let letterUnicode = getLetterUnicode(of: section, in: position)
+        
+        return dictionary.getIndex(of: letterUnicode, in: position, type: .fixed)
+    }
     
 }

@@ -112,7 +112,6 @@ extension Hangeul {
                 return true
             }
         }
-        
         return false
     }
     
@@ -123,24 +122,23 @@ extension Hangeul {
                 return true
             }
         }
-        
         return false
     }
     
     func canHaveJongseong() -> Bool {
-        if self.canCombineWithPreviousCharacter() == false {
+        if self.canCombineWithPreviousLetter() == false {
             return false
         }
         
-        guard let currentCharacterPosition = self.position.last,
-              let previousCharacterPosition = self.prev?.position.last else {
+        guard let letterPosition = self.position.last,
+              let previousLetterPosition = self.prev?.position.last else {
             return false
         }
     
-        if currentCharacterPosition == .jungseong && previousCharacterPosition == .jungseong {
+        if letterPosition == .jungseong && previousLetterPosition == .jungseong {
             if self.prev?.prev == nil {
                 return false
-            } else if previousCharacterPosition == .jungseong && self.prev?.prev?.status == .finished {
+            } else if previousLetterPosition == .jungseong && self.prev?.prev?.status == .finished {
                 return false
             }
         }
@@ -149,14 +147,14 @@ extension Hangeul {
     }
     
     func canBeTripleJungseong() -> Bool {
-        guard let previousCharacter = self.prev else {
+        guard let previousLetter = self.prev else {
             return false
         }
         
-        let mostPreviousCharacterText: String? = previousCharacter.prev?.text
+        let mostPreviousLetterText: String? = previousLetter.prev?.text
         let dictionary = HangeulDictionary()
         
-        if dictionary.getTripleMidUnicode(mostPreviousCharacterText, previousCharacter.text, self.text) == nil {
+        if dictionary.getTripleMidUnicode(mostPreviousLetterText, previousLetter.text, self.text) == nil {
             return false
         }
         return true
@@ -188,7 +186,7 @@ extension Hangeul {
         return true
     }
     
-    func canCombineWithPreviousCharacter() -> Bool {
+    func canCombineWithPreviousLetter() -> Bool {
         if self.prev == nil {
             return false
         } else if self.prev?.status == .finished {
