@@ -39,8 +39,4 @@ class KeyboardViewModel {
     func deleteString(_ state: Int, _ currentText: String) -> (String, Int) {
         return manager.deleteString(state, currentText)
     }
-
-    func lastErase(_ c: Character) {
-        
-    }
 }
