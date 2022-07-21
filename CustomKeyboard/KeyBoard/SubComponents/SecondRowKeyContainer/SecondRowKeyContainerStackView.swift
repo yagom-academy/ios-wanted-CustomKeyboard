@@ -12,7 +12,7 @@ final class SecondRowKeyContainerStackView: UIStackView {
     // MARK: - Properties
     private let secondLineBasicKeys = BasicKeyLine(keys: ["ㅁ", "ㄴ", "ㅇ", "ㄹ", "ㅎ", "ㅗ", "ㅓ", "ㅏ", "ㅣ"])
 
-    weak var delegate: SecondRowKeyContainerDelegate?
+    weak var delegate: SecondRowKeyContainerStackViewDelegate?
     
     init() {
         super.init(frame: CGRect.zero)

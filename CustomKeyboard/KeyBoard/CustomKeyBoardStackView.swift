@@ -23,8 +23,8 @@ final class CustomKeyBoardStackView: UIStackView {
     private let thirdLineContainer = ThirdRowKeyContainerStackView()
     private let firthLineContainer = FirthRowKeyContainerStackView()
     
-    weak var delegate: CustomKeyBoardDelegate?
-    private let viewModel = CustomKeyBoardViewModel(engine: KeyBoardEngine())
+    weak var delegate: CustomKeyBoardStackViewDelegate?
+    private let viewModel = CustomKeyBoardStackViewViewModel(engine: KeyBoardEngine())
     
     init() {
         super.init(frame: CGRect.zero)
@@ -45,7 +45,7 @@ extension CustomKeyBoardStackView {
 }
 
 //MARK: - FirstRowKeyContainerDelegate(첫번째줄컨테이너) 이벤트 메서드
-extension CustomKeyBoardStackView: FirstRowKeyContainerDelegate {
+extension CustomKeyBoardStackView: FirstRowKeyContainerStackViewDelegate {
     func tappedFirstrowBasicKey(unicode: Int) {
         
         tappedBasicKey(unicode: unicode)
@@ -53,7 +53,7 @@ extension CustomKeyBoardStackView: FirstRowKeyContainerDelegate {
 }
 
 //MARK: - SecondRowKeyContainerDelegate(두번째줄컨테이너) 이벤트 메서드
-extension CustomKeyBoardStackView: SecondRowKeyContainerDelegate {
+extension CustomKeyBoardStackView: SecondRowKeyContainerStackViewDelegate {
     func tappedSecondrowBasicKey(unicode: Int) {
         
         tappedBasicKey(unicode: unicode)
@@ -61,7 +61,7 @@ extension CustomKeyBoardStackView: SecondRowKeyContainerDelegate {
 }
 
 //MARK: - ThirdRowKeyContainerDelegate(세번째줄컨테이너) 이벤트 메서드
-extension CustomKeyBoardStackView: ThirdRowKeyContainerDelegate {
+extension CustomKeyBoardStackView: ThirdRowKeyContainerStackViewDelegate {
     func tappedShiftButton() -> Bool {
         return firstLineContainer.toggleDynamicBasicKeyState() == .double ? true : false
     }
@@ -78,7 +78,7 @@ extension CustomKeyBoardStackView: ThirdRowKeyContainerDelegate {
 }
 
 //MARK: - FirthRowKeyContainerDelegate(네번째줄컨테이너) 이벤트 메서드
-extension CustomKeyBoardStackView: FirthRowKeyContainerDelegate {
+extension CustomKeyBoardStackView: FirthRowKeyContainerStackViewDelegate {
     func tappedReturnButton() {
         
         delegate?.tappedReturnButton()

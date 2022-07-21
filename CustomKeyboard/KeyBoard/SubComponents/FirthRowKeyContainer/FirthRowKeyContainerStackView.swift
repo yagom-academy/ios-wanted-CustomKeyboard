@@ -12,7 +12,7 @@ final class FirthRowKeyContainerStackView: UIStackView {
     // MARK: - Properties
     private let spaceButton = UIButton(type: .system)
     private let returnButton = UIButton(type: .system)
-    weak var delegate: FirthRowKeyContainerDelegate?
+    weak var delegate: FirthRowKeyContainerStackViewDelegate?
     
     private let spaceButtonTitle = "space"
     private let returnButtonTitle = "return"

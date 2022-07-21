@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol FirthRowKeyContainerDelegate:AnyObject {
+protocol FirthRowKeyContainerStackViewDelegate:AnyObject {
     func tappedSpaceButton(_ inputUniCode: Int)
     func tappedReturnButton()
 }

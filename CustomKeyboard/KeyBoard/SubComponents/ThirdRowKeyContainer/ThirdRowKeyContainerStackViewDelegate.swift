@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ThirdRowKeyContainerDelegate: AnyObject {
+protocol ThirdRowKeyContainerStackViewDelegate: AnyObject {
     func tappedShiftButton() -> Bool
     func tappedBackButton()
     func tappedThirdrowBasicKey(unicode: Int)

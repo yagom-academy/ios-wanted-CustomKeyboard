@@ -36,7 +36,7 @@ final class ReviewWriteViewController: UIViewController {
 }
 
 //MARK: - 커스텀키보드 Delegate 메서드
-extension ReviewWriteViewController: CustomKeyBoardDelegate {
+extension ReviewWriteViewController: CustomKeyBoardStackViewDelegate {
     func tappedReturnButton() {
         
         guard let message = self.textView.text else { return }

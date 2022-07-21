@@ -11,7 +11,7 @@ final class FirstRowKeyContainerStackView: UIStackView {
     
     // MARK: - Properties
     private let firstLineDynamicBasicKeys = DynamicBasicKeyLine()
-    weak var delegate: FirstRowKeyContainerDelegate?
+    weak var delegate: FirstRowKeyContainerStackViewDelegate?
     
     init() {
         super.init(frame: CGRect.zero)

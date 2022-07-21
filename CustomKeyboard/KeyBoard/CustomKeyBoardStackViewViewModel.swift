@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct CustomKeyBoardViewModel {
+struct CustomKeyBoardStackViewViewModel {
     
     // MARK: - Properties
     private let engine: KeyBoardEngineProtocol

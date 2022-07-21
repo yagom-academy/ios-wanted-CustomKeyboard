@@ -13,7 +13,7 @@ final class ThirdRowKeyContainerStackView: UIStackView {
     private let shiftButton = UIButton(type: .system)
     private let thirdLineBasicKeys = BasicKeyLine(keys: ["ㅋ", "ㅌ", "ㅊ", "ㅍ", "ㅠ", "ㅜ", "ㅡ"])
     private let backButton = UIButton(type: .system)
-    weak var delegate: ThirdRowKeyContainerDelegate?
+    weak var delegate: ThirdRowKeyContainerStackViewDelegate?
     
     private let shiftButtonTitle = "shift"
     private let backButtonTitle = "back"
