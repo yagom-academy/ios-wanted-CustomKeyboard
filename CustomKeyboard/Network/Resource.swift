@@ -13,6 +13,7 @@ struct Resource<T> {
 }
 
 extension Resource where T: Decodable {
+    
     init(url: URL) {
         self.urlRequest = URLRequest(url: url)
         self.parse = { data in

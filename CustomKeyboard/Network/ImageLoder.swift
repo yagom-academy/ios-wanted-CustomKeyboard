@@ -13,19 +13,20 @@ enum ImageLoaderError: Error {
 }
 
 class ImageLoder {
+    
     static let imageCache = NSCache<NSString, UIImage>()
     
     func leadImage(url: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
         if url.isEmpty {
             completion(.failure(ImageLoaderError.invalidImageURL))
         }
-        
         if let image = ImageLoder.imageCache.object(forKey: url as NSString) {
             DispatchQueue.main.async {
                 completion(.success(image))
             }
             return
         }
+        
         DispatchQueue.global().async {
             guard let imageUrl = URL(string: url) else { return }
             let session = URLSession(configuration: .ephemeral)
