@@ -1,5 +1,5 @@
 //
-//  ReviewAPIManager.swift
+//  ReviewAPIService.swift
 //  CustomKeyboard
 //
 //  Created by 백유정 on 2022/07/12.
@@ -15,7 +15,7 @@ enum APIError: Error {
     case invalidData
 }
 
-class ReviewAPIManager {
+class ReviewAPIService {
     func getReview(_ completion: @escaping (ReviewData?, APIError?) -> Void) {
         
         var request = URLRequest(url: EndPoint.getReview.url)

@@ -8,9 +8,9 @@
 import UIKit
 
 class ReviewViewModel {
-    private let networkManager = ReviewAPIManager()
+    private let networkService = ReviewAPIService()
     
     func getReview(_ completion: @escaping (ReviewData?, APIError?) -> Void) {
-        networkManager.getReview(completion)
+        networkService.getReview(completion)
     }
 }
