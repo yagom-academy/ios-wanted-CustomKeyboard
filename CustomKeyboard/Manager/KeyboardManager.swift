@@ -46,53 +46,56 @@ class KeyboardManager {
         return (lastWord, 0)
     }
     
-    private func eraseLast() {
-        // 꽭 ㄱㄱ을 남긴다는 가정
-//        while allState.popLast() != 1 {
-//            allWord.removeLast()
-//        }
-//        
-//        if firstDouble.contains(allWord.popLast() ?? "") { // "ㄱㄱ"
-//            allState.removeLast()
-//        }
-//        var cnt = 0
-//
-//        for fir in first {
-//            if s == fir { cnt = 1 }
-//        }
-//
-//        for sec in second {
-//            if s == sec { cnt = 1 }
-//        }
-//
-//        for i in 0..<first.count {
-//            for j in 0..<second.count {
-//                let str = 44032 + (i * 588) + (j * 28)
-//                if let scalarValue = UnicodeScalar(str) {
-//                    if s == String(scalarValue) { cnt = 2 }
-//                }
-//            }
-//        }
-//
-//        for i in 0..<first.count {
-//            for j in 0..<second.count {
-//                for k in 0..<third.count {
-//                    let str = 44032 + (i * 588) + (j * 28) + k
-//                    if let scalarValue = UnicodeScalar(str) {
-//                        if s == String(scalarValue) { cnt = 3 }
-//                    }
-//                }
-//            }
-//        } //ㄱ괡 꽭
+    private func eraseLast(_ deleteText: String, _ str: String) {
+        print(allWord, "deleteAll")
+        print(allState, "deleteState")
+        // 자음만 입력되어 있을 때
+        if first.contains(deleteText) {
+            if str.count == 2 {
+                allState.removeLast()
+            }
+            return
+        }
         
-//        if !allWord.isEmpty && cnt != 0 { allWord.removeLast(cnt) }
+        // 모음만 입력되어 있을 때
+        if second.contains(deleteText) {
+            if str.count == 2 {
+                allState.removeLast()
+            }
+            return
+        }
+        
+        // 완벽한 글자를 지울 때 아, 애, 앵, 왱
+        var deleteWord = str // "ㄹㄱ" "ㅏㅣ"
+        print(deleteWord, "deleteWord")
+        if deleteWord.count == 2 {
+            allState.removeLast()
+        }
+        
+        // 모음을 지우면 들어가지 않는다
+        while !second.contains(deleteWord) && !secondDouble.contains(deleteWord) {
+            deleteWord = allWord.removeLast()
+            allState.removeLast()
+            if deleteWord.count == 2 {
+                allState.removeLast()
+            }
+        }
+        
+        deleteWord = allWord.removeLast()
+        allState.removeLast()
+        if deleteWord.count == 2 {
+            allState.removeLast()
+        }
+        
+        print(allWord, "deleteComplete")
+        print(allState, "deleteComplete")
     }
     
     func makeString(_ state: Int, _ currentText: String, _ tappedButton: KeyButton) -> (String, Int) {
-        print("make", allWord)
-        print(allState)
+//        print("make", allWord)
+//        print(allState)
         if tappedButton.type == .space {
-            print("space")
+//            print("space")
             return pressSpace(tappedButton)
         }
         guard let addString = tappedButton.title(for: .normal) else { return ("", 0) }
@@ -266,20 +269,20 @@ class KeyboardManager {
             return ("", 0)
         }
         
-        allWord.removeLast()
+        let deleteText = allWord.removeLast()
         allState.removeLast()
-        print(allWord)
+//        print(allWord)
         print(allState)
-        print(lastWord, state,"state")
+//        print(lastWord, state,"state")
         
         // space 지우기
-        if !allWord.isEmpty && allWord[allWord.count - 1] == " " {
+        if !allWord.isEmpty && deleteText == " " {
             return ("", 0)
         }
         
         switch state {
         case 0:
-            eraseLast()
+            eraseLast(currentText, deleteText)
             return ("", 0)
         case 1:
             // 쌍자음만 입력되어 있는 상태 (ex ㄱㄱ, ㄷㄷ, ㅂㅂ ...)
@@ -336,7 +339,7 @@ class KeyboardManager {
                 if currentText.count == 1 {
                     let text = allWord[allWord.count - 1]
                     lastWord = text
-                    print(text)
+//                    print(text)
                     return (text, 1)
                 }
                 let addText = allWord[allWord.count - 1]
@@ -361,7 +364,7 @@ class KeyboardManager {
                     let str = frontText.utf16.map{ Int($0) }.reduce(0, +) + idx
                     lastWord = addText
                     if let scalarValue = UnicodeScalar(str) {
-                        print(String(scalarValue))
+//                        print(String(scalarValue))
                         return (String(scalarValue), 4)
                     }
                     return ("", 0)
