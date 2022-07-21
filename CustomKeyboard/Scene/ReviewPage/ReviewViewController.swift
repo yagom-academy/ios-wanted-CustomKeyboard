@@ -23,8 +23,9 @@ class ReviewViewController: UIViewController {
         attribute()
         layout()
         bind(viewModel)
-        viewModel.getReview { [weak self] reviews in
+        viewModel.getReview { [weak self] reviews, error in
             guard let self = self  else { return }
+            guard let reviews = reviews else { return }
             self.reviewList = reviews.reviewData
             self.reviewList = self.reviewList.sorted(by: { r1, r2 in
                 r1.createdAt.compare(r2.createdAt) == .orderedDescending
