@@ -8,6 +8,7 @@
 import Foundation
 
 extension Date {
+    
     var dateToRelativeTimeString: String {
         let formatter = RelativeDateTimeFormatter()
         let relativeFormatter = formatter.localizedString(for: self, relativeTo: Date())

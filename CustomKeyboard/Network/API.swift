@@ -10,9 +10,7 @@ import Foundation
 class API {
     
     static let shared: API = API()
-    
     private lazy var defaultSession = URLSession(configuration: .default)
-    
     private init() { }
     
     func get(completion: @escaping (Result<ModelData, Error>) -> Void) {
@@ -35,10 +33,8 @@ class API {
             completion(NetworkError.invalidURL)
             return
         }
-        
         let data = PostReviewData(content: message)
         let resource = Resource<PostReviewData>(url: url, parameters: ["content":data.content], method: .post(data))
-        
         defaultSession.upload(resource) { result in
             switch result {
             case true:
