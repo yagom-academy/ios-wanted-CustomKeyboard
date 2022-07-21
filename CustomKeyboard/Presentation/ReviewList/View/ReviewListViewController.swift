@@ -40,6 +40,7 @@ class ReviewListViewController: BaseViewController {
     
     @objc func postDataToServer() {
         reviewListViewModel.postDataToServer(reviewListView.reviewInputLabel.text ?? "")
+        reviewListView.tableView.reloadData()
     }
     
     @IBAction func pressReviewInput(_ sender: UITapGestureRecognizer) {
@@ -81,6 +82,6 @@ extension ReviewListViewController : KeyboardViewControllerDelegate {
         guard let reviewText = reviewText else {
             return
         }
-        reviewListView.reviewInputLabel.text = "  " + reviewText
+        reviewListView.reviewInputLabel.text = reviewText
     }
 }

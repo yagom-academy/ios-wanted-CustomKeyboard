@@ -26,17 +26,23 @@ extension ReviewListViewModel {
     }
     
     func postDataToServer(_ content : String) {
-        reviewDataManager.postData("https://api.plkey.app/tmp/theme/PLKEY0-L-81/review", content)
+        reviewDataManager.postData("https://api.plkey.app/tmp/theme/PLKEY0-L-81/review", content) { content in
+            guard let content = content else {
+                return
+            }
+
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd'T'hh:mm"
+            self.reviewList?.data.insert(ReviewData(user: User(userName: "비공개", profileImage: "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"), content: content, createdAt: formatter.string(from: Date())), at: 0)
+        }
     }
 }
 
 extension ReviewListViewModel {
     func makeTimeLine(_ time : String) -> String {
-        // 우선 현재 시간이랑 차이를 구해야함
-        
         // 현재 시간
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd hh"
+        formatter.dateFormat = "yyyy-MM-dd hh:mm"
         let current = formatter.string(from: Date()).split(separator: " ")
         let currentDate = current[0]
         let currentHour = current[1]

@@ -43,7 +43,7 @@ struct ReviewDataManager {
         }
     }
     
-    func postData(_ url : String, _ content : String) {
+    func postData(_ url : String, _ content : String, completion : @escaping (String?) -> Void) {
         guard let url = URL(string: url) else {return}
         let data = uploadData(content: content)
         
@@ -59,7 +59,12 @@ struct ReviewDataManager {
                 return
             }
             // Todo : process 200
-            print((response as? HTTPURLResponse)?.statusCode)
+            if (((response as? HTTPURLResponse)?.statusCode) != nil) {
+                guard let data = data else {
+                    return
+                }
+                completion(String(data: data, encoding: .utf8))
+            }
         }
         task.resume()
     }

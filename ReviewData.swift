@@ -8,7 +8,7 @@
 import Foundation
 
 struct ReviewList : Decodable {
-    let data : [ReviewData]
+    var data : [ReviewData]
 }
 
 struct ReviewData : Decodable {
