@@ -8,13 +8,13 @@
 import Foundation
 
 class ModelData: Codable {
+    
     var data: [ReviewData] = [ReviewData.Empty]
 }
 
 class ReviewData: Codable {
     
     static var Empty = ReviewData(user: User(userName: "", profileImage: ""), content: "", createAt: "")
-    
     var user: User
     var content: String
     var createdAt: String
@@ -23,7 +23,6 @@ class ReviewData: Codable {
         self.user = user
         self.content = content
         self.createdAt = createAt
-        
     }
     
     enum Codingkeys: CodingKey {
@@ -46,11 +45,11 @@ class User: Codable {
     var userName: String
     var profileImage: String
     
-        init(userName: String, profileImage: String) {
-            self.userName = userName
-            self.profileImage = profileImage
-        }
-        
+    init(userName: String, profileImage: String) {
+        self.userName = userName
+        self.profileImage = profileImage
+    }
+    
     enum UserCodingKeys: CodingKey {
         case userName
         case profileImage

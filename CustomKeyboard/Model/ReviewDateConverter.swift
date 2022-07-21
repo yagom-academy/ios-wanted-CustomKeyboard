@@ -16,5 +16,4 @@ class ReviewDateConverter {
             return rawData.stringToDate?.dateToOverTimeString ?? rawData
         }
     }
-    
 }
