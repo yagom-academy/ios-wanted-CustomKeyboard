@@ -104,7 +104,8 @@ extension ReviewListViewController: UITableViewDataSource {
         let review = viewModel.reviewList.value[indexPath.row]
         cell.viewModel = ReviewListTableViewCellViewModel(review: review)
         cell.setupView()
-
+        cell.selectionStyle = .none
+        
         return cell
     }
 }

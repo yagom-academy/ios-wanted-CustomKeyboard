@@ -21,13 +21,13 @@ struct ImageLoader {
     static func loadImage(
         urlString: String,
         completion: @escaping (Result<UIImage, ImageLoaderError>) -> Void
-    ) {
+    ) -> URLSessionDataTask? {
         guard let url = URL(string: urlString) else {
             completion(.failure(.invalidURL))
-            return
+            return nil
         }
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
             
             guard error == nil else {
                 print(url, "⭐️")
@@ -49,6 +49,15 @@ struct ImageLoader {
             }
             
             completion(.success(image))
-        }.resume()
+        }
+        
+        return task
+    }
+    
+    static func cancelSession(urlString: String) {
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        URLSession.shared.dataTask(with: url).cancel()
     }
 }

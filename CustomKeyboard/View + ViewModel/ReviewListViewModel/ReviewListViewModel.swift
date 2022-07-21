@@ -43,7 +43,7 @@ class ReviewListViewModel {
         Network(path: "").post(comment) { isSuccess in
             if isSuccess {
                 let user = ReviewUser(id: "", userName: "익명", profileImage: "")
-                let review = ReviewResult(id: "", user: user, content: comment, createdAt: Date().intervalCurrentTime)
+                let review = ReviewResult(id: "", user: user, content: "Review: " + comment, createdAt: Date().toString(format: "y-MM-dd'T'HH:mm:ss.SSS'Z'"))
                 self.reviewList.value.insert(review, at: 0)
             }
             self.isSuccess.value = isSuccess

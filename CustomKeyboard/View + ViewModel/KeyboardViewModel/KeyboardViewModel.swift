@@ -14,7 +14,7 @@ class KeyboardViewModel {
     
     var result: Observable<String> = Observable("")
     var returnButtonTapped: Observable<Bool> = Observable(false)
-    var currentValue: Observable<UInt32?> = Observable(nil)
+    var currentValue: Observable<[Character]> = Observable([])
     
     var isShift: Observable<Bool> = Observable(false)
     
@@ -23,16 +23,16 @@ class KeyboardViewModel {
     func didTapKeyboardButton(buffer: Compatibility) {
         
         var curr: UInt32? = 0
-        
+        isRemovePhoneme = true
         switch sejongState {
-        case .writeInitialState:
+        case .writeInitialState: //초성을 적어야 하는 상태
             curr = buffer.rawValue
             if buffer.jungsung != nil {
                 sejongState = .writeLastState
             } else {
                 sejongState = .writeMiddleState
             }
-        case .writeMiddleState:
+        case .writeMiddleState: // 중성이 들어와야 하는 상태
             if buffer.jungsung != nil {
                 let last = result.value.unicodeScalars.removeLast()
                 result.value.appendUnicode(Compatibility(rawValue: last.value)?.chosung?.rawValue)
@@ -113,8 +113,12 @@ class KeyboardViewModel {
         
         result.value.appendUnicode(curr)
         isShift.value = false
-        currentValue.value = curr
-        print(result.value)
+        
+//        if result.value.count < 2 {
+//            currentValue.value = result.value.map { $0 }
+//        } else {
+//            currentValue.value = result.value.map { $0 }[(result.value.count - 2)...].map { $0 }
+//        }
     }
     
     func clearAll() {
@@ -200,6 +204,11 @@ class KeyboardViewModel {
                 }
             }
         }
+    }
+    
+    func addSpace() {
+        result.value.append(" ")
+        sejongState = .writeInitialState
     }
     
     func mergeDoubleJongsung(_ jong1: Jongsung?, _ jong2: Jongsung?) -> Jongsung? {

@@ -10,15 +10,17 @@ import UIKit
 class ReviewListTableViewCellViewModel {
     let cache = Cache.shared
     var image: Observable<UIImage?> = Observable(nil)
+    var task: URLSessionDataTask?
     
     let review: ReviewResult
     
     init(review: ReviewResult) {
         self.review = review
-        loadImage(urlString: review.user.profileImage)
+        setImageTask()
     }
     
-    func loadImage(urlString: String) {
+    func setImageTask() {
+        let urlString = review.user.profileImage
         if let data = cache.fetchData(urlString) {
             if let image = UIImage(data: data) {
                 self.image.value = image
@@ -26,7 +28,7 @@ class ReviewListTableViewCellViewModel {
             }
         }
         
-        ImageLoader.loadImage(urlString: urlString) { result in
+        task = ImageLoader.loadImage(urlString: urlString) { result in
             switch result {
             case .success(let image):
                 if let data = image.pngData() {
@@ -37,5 +39,14 @@ class ReviewListTableViewCellViewModel {
                 debugPrint("ERROR \(urlString) \(error.description)🐸")
             }
         }
+    }
+    
+    func loadImage() {
+        task?.resume()
+    }
+    
+    func cancelImageDownLoad() {
+        task?.cancel()
+        task = nil
     }
 }

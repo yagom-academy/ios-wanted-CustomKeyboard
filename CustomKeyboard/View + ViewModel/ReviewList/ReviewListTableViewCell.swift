@@ -8,7 +8,8 @@
 import UIKit
 
 class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
-    
+    var viewModel: ReviewListTableViewCellViewModel?
+
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -49,19 +50,18 @@ class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()
-
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var viewModel: ReviewListTableViewCellViewModel?
     
     func setupView() {
         nameLabel.text = viewModel?.review.user.userName
         rateLabel.text = viewModel?.review.rate
         contentLabel.text = viewModel?.review.reviewContent
         dateLabel.text = viewModel?.review.date
+        viewModel?.loadImage()
         bindImage()
     }
     
@@ -74,6 +74,8 @@ class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
+        viewModel?.cancelImageDownLoad()
         profileImageView.image = nil
     }
 }

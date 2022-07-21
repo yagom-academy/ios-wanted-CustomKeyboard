@@ -136,8 +136,7 @@ private extension KeyboardView {
     }
     @objc func didTapSpace(_ sender: UIButton) {
         sender.backgroundColor = .systemBackground
-        viewModel.result.value.append(" ")
-        viewModel.sejongState = .writeInitialState
+        viewModel.addSpace()
     }
     @objc func didTapShift(_ sender: UIButton) {
         sender.backgroundColor = .systemBackground

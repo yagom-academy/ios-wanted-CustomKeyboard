@@ -12,7 +12,7 @@ extension String {
         var ret = self
         ret = ret.replacingOccurrences(of: "https://", with: "")
         ret = ret.replacingOccurrences(of: "http://", with: "")
-        ret = ret.replacingOccurrences(of: "/", with: "")
+        ret = ret.replacingOccurrences(of: "/", with: "_")
         return ret
     }
     
