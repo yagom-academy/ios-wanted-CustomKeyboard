@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - Public Method
+// MARK: - Public
 
 final class HangeulUpdater {
     
@@ -24,7 +24,7 @@ final class HangeulUpdater {
 }
 
 
-// MARK: - Private Method
+// MARK: - Private
 
 // MARK: - called in specifyProperties
 

@@ -42,7 +42,7 @@ final class Hangeul {
     }
 }
 
-// MARK: - Public Method
+// MARK: - Public
 
 extension Hangeul {
 
@@ -164,7 +164,7 @@ extension Hangeul {
     }
 }
 
-// MARK: - Private Method
+// MARK: - Private
 
 extension Hangeul {
     

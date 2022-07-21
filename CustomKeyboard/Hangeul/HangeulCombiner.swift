@@ -14,7 +14,7 @@ final class HangeulCombiner {
     private let dictionary = HangeulDictionary()
 }
 
-// MARK: - Public Method
+// MARK: - Public
 
 extension HangeulCombiner {
     
@@ -42,7 +42,7 @@ extension HangeulCombiner {
     }
 }
 
-// MARK: - Private Method
+// MARK: - Private
 
 extension HangeulCombiner {
     
