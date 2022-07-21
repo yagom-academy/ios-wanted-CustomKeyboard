@@ -60,31 +60,31 @@
 
 ### 네트워크 파일 분리
 - 기존에는 네트워크 매니저 하나의 파일에 구현
-- 네트워크 요청에 따라 알맞는 메서드를 따로 구현
+- 네트워크 요청에 따라 알맞는 메서드를 매번 따로 구현
 
 ```swift
 class NetworkManager {
-	static let shared = NetworkManager()
-	private init() { }
-	
-	func downloadReview(completion: @escaping (ReviewResponse) -> Void) {
-		guard let url = URL(string: "https://api.plkey.app/theme/review?themeId=PLKEY0-L-81&start=0&count=20") else {
-			return
-		}
-
-		URLSession.shared.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
-			guard let data = data else {
-				return
-			}
-
-			do {
-				let result : ReviewResponse = try JSONDecoder().decode(ReviewResponse.self, from: data)
-				completion(result)
-			} catch(let error) {
-				print(error.localizedDescription)
-			}
-		}.resume()
+    static let shared = NetworkManager()
+    private init() { }
+    
+    func downloadReview(completion: @escaping (ReviewResponse) -> Void) {
+        guard let url = URL(string: "https://api.plkey.app/theme/review?themeId=PLKEY0-L-81&start=0&count=20") else {
+	    return
 	}
+
+	URLSession.shared.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
+	    guard let data = data else {
+	        return
+	    }
+	    
+	    do {
+	        let result : ReviewResponse = try JSONDecoder().decode(ReviewResponse.self, from: data)
+		completion(result)
+	    } catch(let error) {
+		print(error.localizedDescription)
+	    }
+	}.resume()
+    }
 }
 ```
 
