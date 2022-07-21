@@ -9,12 +9,12 @@ import UIKit
 import Combine
 
 class SeochoKeyboardViewController: UIInputViewController {
-    
-    @IBOutlet var nextKeyboardButton: UIButton!
-    
+        
     private let keyboardView = KeyboardView()
     
     var keyboardViewModel = KeyboardViewModel()
+    
+    var koreanAutomata = KoreanAutomata()
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -24,7 +24,7 @@ class SeochoKeyboardViewController: UIInputViewController {
     
     var disposalbleBag = Set<AnyCancellable>()
 
-    var isShift : Int = 0
+    var onShift : Int = 0
     var buffer : [String] = []
     var count : Int = 0
         
@@ -47,8 +47,8 @@ extension SeochoKeyboardViewController {
             self.buffer = updatedBuffer
         }.store(in: &disposalbleBag)
         
-        self.keyboardViewModel.$isShift.sink { updatedShift in
-            self.isShift = updatedShift
+        self.keyboardViewModel.$onShift.sink { updatedShift in
+            self.onShift = updatedShift
             DispatchQueue.main.async {
                 self.keyboardView.collectionView.reloadData()
             }
@@ -71,10 +71,10 @@ extension SeochoKeyboardViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: KeyboadCollectionViewCell.identifier, for: indexPath) as? KeyboadCollectionViewCell else { return UICollectionViewCell() }
-        if isShift == 0 {
-            cell.letter.text = keyboardViewModel.consonant[indexPath.row]
+        if onShift == 0 {
+            cell.letter.text = keyboardViewModel.keyboardLayout[indexPath.row]
         } else {
-            cell.letter.text = keyboardViewModel.doubleConsonant[indexPath.row]
+            cell.letter.text = keyboardViewModel.keyboardLayoutWithShift[indexPath.row]
         }
         return cell
     }
@@ -82,10 +82,18 @@ extension SeochoKeyboardViewController: UICollectionViewDataSource {
 
 extension SeochoKeyboardViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize { //cell의 크기를 지정해주는 함수 sizeForItemAt
-        return CGSize(width: 35, height: 45)
+        if keyboardViewModel.keyboardLayout[indexPath.row] == "변환" || keyboardViewModel.keyboardLayout[indexPath.row] == "지움" {
+            return CGSize(width: self.view.bounds.width / 8.5, height: 40)
+        } else if keyboardViewModel.keyboardLayout[indexPath.row] == "스페이스" {
+            return CGSize(width: self.view.bounds.width * 3.6 / 5, height: 40)
+        } else if keyboardViewModel.keyboardLayout[indexPath.row] == "엔터" {
+            return CGSize(width: self.view.bounds.width * 1.1 / 5, height: 40)
+        } else {
+            return CGSize(width: self.view.bounds.width / 11, height: 40)
+        }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {// 옆 간격을 지정해 줄 수 있는 함수 minimumInteritemSpacingForSectionAt
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat { // 옆 간격을 지정해 줄 수 있는 함수 minimumInteritemSpacingForSectionAt
         return 1
     }
     
@@ -120,10 +128,11 @@ extension SeochoKeyboardViewController: UICollectionViewDelegateFlowLayout{
 extension SeochoKeyboardViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        keyboardViewModel.processKeyboardInput(indexPath.row)
+        keyboardViewModel.handleKeyboardInput(indexPath.row)
         while textDocumentProxy.hasText {
             textDocumentProxy.deleteBackward()
         }
-        textDocumentProxy.insertText(keyboardViewModel.automata().joined(separator: "")) // convert array to string
+        keyboardViewModel.automata()
+        textDocumentProxy.insertText(KoreanAutomata.AutomataInfo.finalArray.joined(separator: "")) // convert array to string
     }
 }

@@ -12,7 +12,7 @@ class KeyboardView: UIView {
     let reviewTextLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .white
-        label.text = "텍스트를 입력해 주세요."
+        label.text = ""
         label.textColor = .darkGray
         label.sizeToFit()
         label.numberOfLines = 10
