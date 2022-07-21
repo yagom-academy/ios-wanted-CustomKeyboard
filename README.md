@@ -53,8 +53,9 @@
 ## 기능 소개
 
 ### App Flow
+
   <p float="none">
-  <img src= "CustomKeyboard/Resource/Images/AppFlow.png" width="500" />
+  <img src= "CustomKeyboard/Resource/Images/Appflow.png" width="500" />
   </p>
 
 ### Demo Gif
