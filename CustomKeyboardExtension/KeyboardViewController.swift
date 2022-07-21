@@ -4,18 +4,6 @@
 //
 //  Created by 이경민 on 2022/07/20.
 //
-// 1번 지워야 하는 경우 - false
-
-/// 최후의 보루
-//keyboardView.viewModel.result.bind { value in
-//    if let documentCount = proxy.documentContextBeforeInput?.count {
-//        for i in 0..<documentCount {
-//            proxy.deleteBackward()
-//        }
-//    }
-//    proxy.insertText(value)
-//}
-
 
 // 2번 지워야 하는 경우 - true
     // 1. 이중 종성이 있을때, 모음이 들어 온 경우
@@ -50,58 +38,39 @@ class KeyboardViewController: UIInputViewController {
     let viewModel = KeyboardViewModel()
     lazy var keyboardView = KeyboardView(viewModel: viewModel)
     var isDoubleDelete: Bool = false
+    var preValuesCount: Int = 0
+    lazy var proxy = self.textDocumentProxy
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
-        
-        // Add custom view sizing constraints here
+//        let heightValue = (KeyboardButton.height * 4) + (8 * 3) + 13
+//
+//        self.view.heightAnchor.constraint(equalToConstant: heightValue).isActive = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Perform custom UI setup here
+        view.addSubview(keyboardView)
+        keyboardView.translatesAutoresizingMaskIntoConstraints = false
+        keyboardView.sizeToFit()
+
+        self.keyboardView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        self.keyboardView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        self.keyboardView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        self.keyboardView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+
         self.nextKeyboardButton = UIButton(type: .system)
-        
+
         self.nextKeyboardButton.setTitle(NSLocalizedString("Next Keyboard", comment: "Title for 'Next Keyboard' button"), for: [])
         self.nextKeyboardButton.sizeToFit()
         self.nextKeyboardButton.translatesAutoresizingMaskIntoConstraints = false
-        
+
         self.nextKeyboardButton.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
         
-        self.view.addSubview(self.nextKeyboardButton)
         
-        self.nextKeyboardButton.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        self.nextKeyboardButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        self.inputBinding(proxy: proxy)
+        self.deleteBinding(proxy: proxy)
         
-        
-        self.view.addSubview(keyboardView)
-        keyboardView.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.keyboardView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        self.keyboardView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        self.keyboardView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        self.keyboardView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
-//        let proxy = self.textDocumentProxy
-//        
-//        keyboardView.viewModel.result.bind { value in
-//            if !value.isEmpty {
-//                proxy.insertText(String(UnicodeScalar(Chosung.ㄱ.rawValue)!))
-//                proxy.insertText(String(UnicodeScalar(Jungsung.ㅏ.rawValue)!))
-//                proxy.insertText(String(UnicodeScalar(Jungsung.ㅣ.rawValue)!))
-//            }
-//        }
-    }
-    
-    override func viewWillLayoutSubviews() {
-        self.nextKeyboardButton.isHidden = !self.needsInputModeSwitchKey
-        super.viewWillLayoutSubviews()
-    }
-    
-    override func textWillChange(_ textInput: UITextInput?) {
-//        print(textInput)
-        // The app is about to change the document's contents. Perform any preparation here.
     }
     
     override func textDidChange(_ textInput: UITextInput?) {
@@ -115,7 +84,116 @@ class KeyboardViewController: UIInputViewController {
         } else {
             textColor = UIColor.black
         }
-        self.nextKeyboardButton.setTitleColor(textColor, for: [])
+//        self.nextKeyboardButton.setTitleColor(textColor, for: [])
+    }
+    
+    func deleteBinding(proxy: UITextDocumentProxy) {
+        keyboardView.viewModel.isDelete.bind { isDelete in
+            if isDelete {
+                
+                if self.viewModel.result.value.isEmpty {
+                    proxy.deleteBackward()
+                    self.preValuesCount = 0
+                    self.viewModel.isDelete.value = false
+                    
+                    return
+                }
+                
+                if !self.viewModel.isRemovePhoneme {
+                    proxy.deleteBackward()
+                    self.preValuesCount = 0
+                    self.viewModel.isDelete.value = false
+                    return
+                }
+                
+                
+                if let lastValue = self.viewModel.result.value.last {
+                    
+                    let insertCount = lastValue.unicodeScalars.count
+                    
+                    if insertCount <= self.preValuesCount {
+
+                        
+                        proxy.deleteBackward()
+                        if lastValue != " " {
+                            proxy.insertText(String(lastValue))
+                        }
+                    } else {
+                        proxy.deleteBackward()
+                    }
+                    
+                    self.preValuesCount = insertCount
+                    self.viewModel.isDelete.value = false
+                }
+            }
+        }
+        
+        // 안녕하세요 -> 안녕하세ㅇ  2:1
+        // 안녕하세ㅇ -> 안녕하세   1:2
+        // 안녕하세  -> 안녕하서   2:2
+        // 안녕하ㅅ -> 안녕하.    1:2
+        
+        // 안녕 -> 안녀.    3:2
+        // 안녀 -> 안ㄴ.     2:1
+        // 안ㄴ -> 안.      1:3
+        // 안 -> 아.       3:2
+        // 아 -> ㅇ        2:1
+        // ㅇ -> ""       1:0
+        
+        // 안 녕 -> 안 녀    3:2
+        // 안 녀 -> 안 ㄴ.   2:1
+        // 안 ㄴ -> 안" ".   1:0
+    }
+    
+    func inputBinding(proxy: UITextDocumentProxy) {
+        viewModel.resultCompats.bind { charValue in
+            guard let char = charValue else {
+                return
+            }
+            
+            let result = String(char)
+            let count = result.unicodeScalars.count
+            
+            if result == " " {
+                proxy.insertText(result)
+                self.preValuesCount = 0
+                return
+            }
+            
+            // ㅇ u{}
+            if self.preValuesCount == 0 {
+                proxy.insertText(result)
+                self.preValuesCount = count
+                return
+            }
+            
+            // 아 - 1:2 ㅇ ㅏ u{} u{}
+            // 안 - 2:3
+            
+            if self.preValuesCount < count {
+                proxy.deleteBackward()
+                proxy.insertText(result)
+            }
+            
+            // 3(앉) : 2(자)
+            if self.preValuesCount > count {
+                let indexs = self.viewModel.result.value.index(self.viewModel.result.value.endIndex, offsetBy: -2) //뒤에서 2개
+                let prevValue = String(self.viewModel.result.value[indexs...]) // 안자
+                
+                proxy.deleteBackward()
+                
+                proxy.insertText(prevValue)
+            }
+            
+            // 앉 3 : 3
+            // 안자
+            if self.preValuesCount == count {
+                proxy.deleteBackward()
+                proxy.insertText(result)
+            }
+            
+            self.preValuesCount = count
+        }
     }
 
 }

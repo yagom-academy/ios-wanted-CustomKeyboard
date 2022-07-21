@@ -198,6 +198,7 @@ private extension KeyboardView {
             spaceButton.topAnchor.constraint(equalTo: bottomStackView.bottomAnchor, constant: 13),
             spaceButton.trailingAnchor.constraint(equalTo: bottomStackView.trailingAnchor, constant: -(KeyboardButton.width + 6)),
             spaceButton.heightAnchor.constraint(equalToConstant: KeyboardButton.height),
+//            spaceButton.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             
             returnButton.leadingAnchor.constraint(equalTo: spaceButton.trailingAnchor, constant: 6),

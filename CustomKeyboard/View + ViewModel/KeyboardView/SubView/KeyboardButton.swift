@@ -55,6 +55,7 @@ class KeyboardButton: UIButton {
         translatesAutoresizingMaskIntoConstraints = false
         widthAnchor.constraint(equalToConstant: KeyboardButton.width).isActive = true
         heightAnchor.constraint(equalToConstant: KeyboardButton.height).isActive = true
+        setContentHuggingPriority(.init(rawValue: 1000), for: .vertical)
     }
     
     func setupShiftMode(_ isShift: Bool) {
