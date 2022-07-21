@@ -9,6 +9,7 @@ import Combine
 import UIKit
 
 class ReviewListViewModel: ObservableObject {
+    
     @Published var reviewList : ReviewList? // 서버가 문제다
     let reviewDataManager = ReviewDataManager()
     
