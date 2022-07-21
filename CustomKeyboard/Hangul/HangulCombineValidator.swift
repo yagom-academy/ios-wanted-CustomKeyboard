@@ -9,7 +9,7 @@ import Foundation
 
 class HangulCombineValidator {
     
-    func canMakeDoubleCho(onProcessing: HangulKeyboardData, input: HangulKeyboardData) -> Bool { // 쌍자음 체크
+    func canMakeDoubleCho(onProcessing: HangulKeyboardData, input: HangulKeyboardData) -> Bool {
         if HangulSet.checkingDoubleChos.contains(where: { $0 == (onProcessing.hangul, input.hangul) }) {
             return true
         } else {
@@ -17,14 +17,15 @@ class HangulCombineValidator {
         }
     }
     
-    func canMakeDoubleJung(onProcessing: HangulKeyboardData, input: HangulKeyboardData) -> Bool { // 모음 조합 확인
+    func canMakeDoubleJung(onProcessing: HangulKeyboardData, input: HangulKeyboardData) -> Bool {
         if HangulSet.checkingDoubleJungs.contains(where: { $0 == (onProcessing.hangul, input.hangul) }) {
             return true
         } else {
             return false
         }
     }
-    func canMakeTripleJung(onProcessing: HangulKeyboardData, input: HangulKeyboardData) -> Bool { // 삼중 모음 조합 확인
+    
+    func canMakeTripleJung(onProcessing: HangulKeyboardData, input: HangulKeyboardData) -> Bool {
         if HangulSet.checkingTripleJungs.contains(where: { $0 == (onProcessing.hangul, input.hangul) }) {
             return true
         } else {
@@ -32,7 +33,7 @@ class HangulCombineValidator {
         }
     }
     
-    func canMakeDoubleJong(onProcessing: HangulKeyboardData, input: HangulKeyboardData) -> Bool { // 종성 조합 확인
+    func canMakeDoubleJong(onProcessing: HangulKeyboardData, input: HangulKeyboardData) -> Bool {
         if HangulSet.checkingJongs.contains(where: { $0 == (onProcessing.hangul, input.hangul) }) {
             return true
         } else {
@@ -58,5 +59,4 @@ class HangulCombineValidator {
         let index = HangulSet.checkingJongs.firstIndex{ $0 == (onProcessing.hangul, input.hangul)} ?? 0
         return HangulKeyboardData(char: HangulSet.doubleJongs[index], state: .jong)
     }
-    
 }

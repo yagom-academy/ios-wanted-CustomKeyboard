@@ -38,6 +38,7 @@ class KeyboardViewController: UIInputViewController {
 }
 
 extension KeyboardViewController: KeyboardInfoReceivable, HangulKeyboardDataReceivable {
+
     func customKeyboardView(pressedKeyboardButton: UIButton) {
         guard let textData = pressedKeyboardButton.titleLabel?.text else { return }
         keyboardManager.enterText(text: textData)

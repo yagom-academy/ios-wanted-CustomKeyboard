@@ -54,5 +54,4 @@ struct HangulKeyboardData {
         }
         return 0
     }
-    
 }

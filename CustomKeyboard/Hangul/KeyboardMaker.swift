@@ -29,25 +29,19 @@ class KeyboardMaker {
     private var combineBuffer = [HangulKeyboardData](repeating: HangulKeyboardData(char: "", state: .empty), count: 3) // 현재 쓰여지고 있는 음소를 모아서 조합한 후 방출, 비워지는 배열
     private var processingBuffer = Status(currentState: .empty, isCompleted: false, alphaRepository: [])
     private var releaseTextField = [String]()
-    
     private let hangulConverter = HangulKeyboardConverter()
     private let combineValidator = HangulCombineValidator()
     private let combinator = HangulCombinator()
     
     public func putKeyboardData(data inputData: HangulKeyboardData) -> [String] {
-        
         guard inputData.hangul != " " else {
-            
             let spaceKeyboardData = HangulKeyboardData(char: " ", state: processingBuffer.currentState)
             
             processingBuffer.alphaRepository.removeAll()
             processingBuffer.isCompleted = false
             processingBuffer.currentState = .empty
-            
             combineBuffer = [HangulKeyboardData](repeating: HangulKeyboardData(char: "", state: .empty), count: 3)
-            
             releaseTextField.append(spaceKeyboardData.hangul)
-            
             return releaseTextField
         }
         
@@ -69,24 +63,17 @@ class KeyboardMaker {
         }
         
         if isdeleting && !releaseTextField.isEmpty && !processingBuffer.alphaRepository.isEmpty {
-            
             if processingBuffer.alphaRepository.last!.hangul == releaseTextField.last! {
-                
                 processingBuffer.alphaRepository.removeLast()
                 releaseTextField.removeLast()
                 isdeleting = false
-                
                 if !releaseTextField.isEmpty {
                     let decomposedHangul = combinator.decomposeForCompletedHangul(hangul: releaseTextField.last!, lastState: processingBuffer.currentState)
                     decomposedHangul.enumerated().forEach{ combineBuffer[$0.offset] = $0.element }
                 }
-                
                 return releaseTextField
-                
             } else {
-                
                 var decomposedHangul = combinator.decomposeHangul(hangul: releaseTextField.last!, lastState: processingBuffer.currentState)
-                
                 decomposedHangul = decomposedHangul.filter{$0.hangul != " "}
                 processingBuffer.alphaRepository.removeLast()
                 decomposedHangul.removeLast()
@@ -94,13 +81,10 @@ class KeyboardMaker {
                 decomposedHangul.enumerated().forEach{ combineBuffer[$0.offset] = $0.element }
                 
                 let recombinedHangul = combinator.combineHangulForDelete(buffer: decomposedHangul, lastState: processingBuffer.currentState)
-                
                 releaseTextField[releaseTextField.count - 1] = recombinedHangul.hangul
                 isdeleting = false
-                
                 return releaseTextField
             }
-            
         } else if inputData.unicode == SpecialCharSet.delete && processingBuffer.alphaRepository.count == 0 {
             processingBuffer.currentState = .empty
             combineBuffer = [HangulKeyboardData](repeating: HangulKeyboardData(char: "", state: .empty), count: 3)
@@ -111,76 +95,51 @@ class KeyboardMaker {
         }
         
         if isJong {
-            
             let decomposedHangul = combinator.decomposeHangul(hangul: releaseTextField.last! , lastState: .jong).filter{$0.hangul != " "}
             let newBuffer = [decomposedHangul[0], decomposedHangul[1], HangulKeyboardData(char: "", state: .empty)]
             let newKeyboardData = combinator.combineHangul(buffer: newBuffer, lastState: .jung)
             isJong = false
-            
             releaseTextField[releaseTextField.count - 1] = newKeyboardData.hangul
-            
         } else if isDoubleJong {
-            
             let decomposedHangul = combinator.decomposeHangul(hangul: releaseTextField.last!, lastState: .doubleJong)
             let newBuffer = decomposedHangul
             let newKeyboardData = combinator.combineHangul(buffer: newBuffer, lastState: .jong)
             isDoubleJong = false
-            
             releaseTextField[releaseTextField.count - 1] = newKeyboardData.hangul
         }
         
         if processingBuffer.isCompleted {
-            
             let combinedHagul = combinator.combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState)
-            
             releaseTextField.append(combinedHagul.hangul)
             processingBuffer.isCompleted = false
-            
             return releaseTextField
         }
         
         if releaseTextField.count <= 1 {
-            
             let newHangul = combinator.combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState)
-            
             if releaseTextField.isEmpty {
-                
                 releaseTextField.append(newHangul.hangul)
-                
             } else {
-                
                 if processingBuffer.alphaRepository.count == 1 {
-                    
                     releaseTextField.append(newHangul.hangul)
-                    
                     return releaseTextField
                 }
-                
                 releaseTextField[0] = newHangul.hangul
             }
-            
         } else if releaseTextField.count > 1 {
-            
             if releaseTextField.last == " " {
-                
                 let combinedHagul = combinator.combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState)
                 releaseTextField.append(combinedHagul.hangul)
                 processingBuffer.isCompleted = false
-                
                 return releaseTextField
-                
             } else if processingBuffer.alphaRepository.count == 1 {
-                
                 let combinedHagul = combinator.combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState)
                 releaseTextField.append(combinedHagul.hangul)
                 processingBuffer.isCompleted = false
-                
                 return releaseTextField
             }
-            
             releaseTextField[releaseTextField.count - 1] = combinator.combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState).hangul
         }
-        
         return releaseTextField
     }
     
