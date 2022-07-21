@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol HangulKeyboardDataReceivable {
+protocol HangulKeyboardDataReceivable: AnyObject {
     func hangulKeyboard(enterPressed: HangulKeyboardData)
     func hangulKeyboard(updatedResult text: String)
 }
 
 class HangulKeyboardManager {
     
-    var delegate: HangulKeyboardDataReceivable!
+    weak var delegate: HangulKeyboardDataReceivable!
     private let keyboardIOManager = KeyboardIOManager()
     private let keyboardMaker = KeyboardMaker()
     
