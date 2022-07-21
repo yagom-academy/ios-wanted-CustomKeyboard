@@ -31,14 +31,14 @@
 | 오얏                       | 커킴                            | 
 | ---------------------------- | -------------------------------- |
 | [<img src="https://github.com/iclxxud.png" width="200">](https://github.com/iclxxud)|[<img src="https://github.com/kirkim.png" width="200">](https://github.com/kirkim)|
-| 개발 | 개발 |
+| 개발 및 팀 자료 제작 | 개발 및 앱 Bug 탐색 |
 
 ## 기여한 부분
 
 | 팀원 | 기여한 내용|
 | ---------------------------- | -------------------------------- |
-| 오얏 |- 개발1 <br />- 개발2 <br />- <br />- KeyBoardEngine 기능구현 <br />- CustomKeyBoardStackViewViewModel, CustomKeyBoard 테스트코드 구현|
-| 커킴 |- NetworkManager 기능구현 <br />- ReviewWriteView UI 및 기능구현 <br />- CustomKeyBoardStackView UI 및 기능 구현(MVVM, Delegate패턴) <br />- Unicode열거형타입(Initial, Neutral, Support, CharUnicode) 구현 <br />- KeyBoardEngine 기능구현 <br />- CustomKeyBoardStackViewViewModel, CustomKeyBoard 테스트코드 구현|
+| 오얏 |- ReviewListView UI 및 기능 구현 <br />- Network ReviewType CodingKeys 적용 <br />- 코드 리팩토링 및 앱 기본 타겟 설정 <br />- KeyBoardEngine 기능 구현 <br />- CustomKeyBoardStackViewViewModel, CustomKeyBoard 테스트코드 구현|
+| 커킴 |- NetworkManager 기능 구현 <br />- ReviewWriteView UI 및 기능 구현 <br />- CustomKeyBoardStackView UI 및 기능 구현(MVVM, Delegate패턴) <br />- Unicode열거형타입(Initial, Neutral, Support, CharUnicode) 구현 <br />- KeyBoardEngine 기능 구현 <br />- CustomKeyBoardStackViewViewModel, CustomKeyBoard 테스트코드 구현|
 
 # 프로젝트 소개
 
@@ -53,22 +53,27 @@
 ## 기능 소개
 
 ### App Flow
-  - all Flow
   <p float="none">
-  <img src= "./images/AppFlow001.jpg" width="500" />
+  <img src= "CustomKeyboard/Resource/Images/AppFlow.png" width="500" />
   </p>
 
 ### Demo Gif
-  - ReviewList
-  
-   <p float="left">
-  <img src= "./images/gif/home.gif" width="300"/>
+  - ReviewList 메인 화면
+
+ <p float="left">
+  <img src= "CustomKeyboard/Resource/Images/reviewListView.gif" width="300"/>
 </p>
 
-  - ReviewWrite
+ - ReviewList 작성 버튼 알림창
+
+    <p float="left">
+  <img src= "CustomKeyboard/Resource/Images/post.gif" width="300"/>
+</p>
+
+  - ReviewWrite 키보드 기능
   
    <p float="left">
-  <img src= "./images/gif/record.gif" width="300"/>
+  <img src= "CustomKeyboard/Resource/Images/keyboardView.gif" width="300"/>
 </p>
 
 ## 사용한 Pattern 소개
