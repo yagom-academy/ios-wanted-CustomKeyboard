@@ -8,6 +8,7 @@
 import Foundation
 
 extension URLSession {
+    
     func load<T>(_ resource: Resource<T>, completion: @escaping (T?, Bool) -> Void) {
         dataTask(with: resource.urlRequest) { data, response, error in
             if let error = error {
@@ -21,6 +22,7 @@ extension URLSession {
             }
         }.resume()
     }
+    
     func upload<T>(_ resource: Resource<T>, completion: @escaping (Bool) -> Void) {
         dataTask(with: resource.urlRequest) { data, response, error in
             if let _ = error {
