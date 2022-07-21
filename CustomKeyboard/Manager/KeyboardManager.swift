@@ -25,6 +25,10 @@ class KeyboardManager {
         "ㅏ", "ㅏㅣ", "ㅑ", "ㅑㅣ", "ㅓ", "ㅓㅣ", "ㅕ", "ㅕㅣ", "ㅗ", "ㅗㅏ", "ㅗㅐ", "ㅗㅣ",
         "ㅛ", "ㅜ", "ㅜㅓ", "ㅜㅔ", "ㅜㅣ", "ㅠ", "ㅡ", "ㅡㅣ", "ㅣ"
     ]
+    private let secondTriple = [
+        "ㅏ", "ㅏㅣ", "ㅑ", "ㅑㅣ", "ㅓ", "ㅓㅣ", "ㅕ", "ㅕㅣ", "ㅗ", "ㅗㅏ", "ㅗㅏㅣ", "ㅗㅣ",
+        "ㅛ", "ㅜ", "ㅜㅓ", "ㅜㅓㅣ", "ㅜㅣ", "ㅠ", "ㅡ", "ㅡㅣ", "ㅣ"
+    ]
     private let third = [
         "", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ",
         "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"
@@ -137,7 +141,6 @@ class KeyboardManager {
                 }
                 return ("", 0)
             }
-            // TODO: - 이중 모음의 경우 구현 : ㅘ + ㅣ = ㅙ 구현 X
         case 2:
             // 모음이 입력되어 있는 상태 (ex ㅏ, ㅑ, ㅜ, ㅗ ...)
             if tappedButton.type == .consonant {
@@ -147,7 +150,7 @@ class KeyboardManager {
                 return (currentText + addString, 1)
             } else {
                 let doubleMid = lastWord + addString
-                let idx = secondDouble.firstIndex(of: doubleMid) ?? 0
+                let idx = secondDouble.firstIndex(of: doubleMid) ?? secondTriple.firstIndex(of: doubleMid) ?? 0
                 if idx == 0 {
                     lastWord = addString
                     allWord.append(lastWord)
@@ -182,8 +185,8 @@ class KeyboardManager {
                 return ("", 0)
             } else {
                 let doubleMid = lastWord + addString
-                let idx1 = secondDouble.firstIndex(of: doubleMid) ?? 0
-                let idx2 = second.firstIndex(of: lastWord) ?? 0
+                let idx1 = secondDouble.firstIndex(of: doubleMid) ?? secondTriple.firstIndex(of: doubleMid) ?? 0
+                let idx2 = second.firstIndex(of: lastWord) ?? secondDouble.firstIndex(of: lastWord) ?? 0
                 if idx1 == 0 {
                     lastWord = addString
                     allWord.append(lastWord)
@@ -297,7 +300,12 @@ class KeyboardManager {
             }
         case 2:
             // 이중 모음이 입력되어 있는 상태 (ex ㅏㅣ, ㅓㅣ, ㅡㅣ ...)
-            if lastWord.count == 2 {
+            if lastWord.count == 3 {
+                lastWord = String(lastWord.prefix(2))
+                let idx = secondDouble.firstIndex(of: lastWord) ?? 0
+                let str = second[idx]
+                return (str, 2)
+            } else if lastWord.count == 2 {
                 lastWord = String(lastWord.prefix(1))
                 return (lastWord, 2)
             } else {
@@ -388,8 +396,6 @@ class KeyboardManager {
                 let idx2 = third.firstIndex(of: String(lastWord.prefix(1))) ?? 0
                 let str = currentText.utf16.map{ Int($0) }.reduce(0, +) - idx1 + idx2
                 lastWord = String(lastWord.prefix(1))
-                
-                // TODO: - 쌍자음일 때 아닐 때 나누기
                 allWord.append(lastWord)
                 if let scalarValue = UnicodeScalar(str) {
                     return (String(scalarValue), 4)
