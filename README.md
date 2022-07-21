@@ -37,8 +37,8 @@
 
 | 팀원 | 기여한 내용|
 | ---------------------------- | -------------------------------- |
-| 오얏 |- 개발1 <br />- 개발2 <br />|
-| 커킴 |- 개발1 <br />- 개발2 <br />|
+| 오얏 |- 개발1 <br />- 개발2 <br />- <br />- KeyBoardEngine 기능구현 <br />- CustomKeyBoardStackViewViewModel, CustomKeyBoard 테스트코드 구현|
+| 커킴 |- NetworkManager 기능구현 <br />- ReviewWriteView UI 및 기능구현 <br />- CustomKeyBoardStackView UI 및 기능 구현(MVVM, Delegate패턴) <br />- Unicode열거형타입(Initial, Neutral, Support, CharUnicode) 구현 <br />- KeyBoardEngine 기능구현 <br />- CustomKeyBoardStackViewViewModel, CustomKeyBoard 테스트코드 구현|
 
 # 프로젝트 소개
 
@@ -137,16 +137,17 @@
 
 | class / struct               | 역할                                                         |
 | ---------------------------- | ------------------------------------------------------------ |
-| `SceneDelegate`         | - 입력  |
-| `ReviewListView`           | - 입력1 <br />- 입력2 <br />- 입력3 |
-| `ReviewWriteView`            | - 입력1 <br />- 입력2 <br />- 입력3 |
+| `SceneDelegate`         | - 윈도우초기화 및 앱의 초기 권한 요청, 첫페이지 연결  |
+| `ReviewListView`           | - 요청받아온 리뷰목록을 표시한다. <br />- 입력한 리뷰를 POST요청할 수 있다. |
+| `ReviewWriteView`            | - 키보드로 입력된 값을 실시간으로 출력하여 보여준다. <br />- 키보드 return입력시 실시간내용을 ReviewListView로 보내준다. |
+| `CustomKeyBoardStackView`            | - 한글쿼티키보드입력, shift, back, space, return 버튼기능을 한다. |
 
 ### Manger 관련
 
 | class / struct               | 역할                                                         |
 | ---------------------------- | ------------------------------------------------------------ |
-| `NetworkManager`         | - 어떤 객체인지 입력 <br />- 기능 입력 |
-| `KeyboardEngine`      | - 어떤 객체인지 입력 <br />- 기능 입력 |
+| `NetworkManager`         | - 네트워크 통신을 하는 싱글턴 객체입니다. <br />- 제공된API로부터 리뷰목록을 GET요청하여 데이터를 받아온다. <br />- 제공된API로 리뷰를 POST요청하여 응답코드를 받을 수 있다. |
+| `KeyboardEngine`      | - 문장의 끝글자와 입력글자의 조합역할을 하는 구조체입니다. <br />- 글자,space 입력시 아이폰의 입력과 동일한 규칙의 조합으로 출력해줍니다. <br />- back버튼 클릭시 글자,space의 입력과 동일한 규칙을 이용해 역방향으로 지워줍니다.<br />&nbsp;&nbsp;(단, ㅓ+ㅣ => ㅔ와 같은 아이폰에만 존재하는 규칙은 한번에 지워줌) |
 
 # 고민한 부분
 ## 오얏
