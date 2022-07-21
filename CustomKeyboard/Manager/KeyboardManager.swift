@@ -42,14 +42,55 @@ class KeyboardManager {
         return (lastWord, 0)
     }
     
-    func makeString(_ state: Int, _ currentText: String, _ tappedButton: KeyButton) -> (String, Int) {
-        print(allWord)
+    private func eraseLast() {
+        // 꽭 ㄱㄱ을 남긴다는 가정
+//        while allState.popLast() != 1 {
+//            allWord.removeLast()
+//        }
+//        
+//        if firstDouble.contains(allWord.popLast() ?? "") { // "ㄱㄱ"
+//            allState.removeLast()
+//        }
+//        var cnt = 0
+//
+//        for fir in first {
+//            if s == fir { cnt = 1 }
+//        }
+//
+//        for sec in second {
+//            if s == sec { cnt = 1 }
+//        }
+//
+//        for i in 0..<first.count {
+//            for j in 0..<second.count {
+//                let str = 44032 + (i * 588) + (j * 28)
+//                if let scalarValue = UnicodeScalar(str) {
+//                    if s == String(scalarValue) { cnt = 2 }
+//                }
+//            }
+//        }
+//
+//        for i in 0..<first.count {
+//            for j in 0..<second.count {
+//                for k in 0..<third.count {
+//                    let str = 44032 + (i * 588) + (j * 28) + k
+//                    if let scalarValue = UnicodeScalar(str) {
+//                        if s == String(scalarValue) { cnt = 3 }
+//                    }
+//                }
+//            }
+//        } //ㄱ괡 꽭
         
+//        if !allWord.isEmpty && cnt != 0 { allWord.removeLast(cnt) }
+    }
+    
+    func makeString(_ state: Int, _ currentText: String, _ tappedButton: KeyButton) -> (String, Int) {
+        print("make", allWord)
+        print(allState)
         if tappedButton.type == .space {
             print("space")
             return pressSpace(tappedButton)
         }
-        print(allWord)
         guard let addString = tappedButton.title(for: .normal) else { return ("", 0) }
         switch state {
         case 0:
@@ -216,7 +257,7 @@ class KeyboardManager {
     }
     
     func deleteString(_ state: Int, _ currentText: String) -> (String, Int) {
-        print(allWord)
+        print("delete", allWord)
         
         if allWord.isEmpty {
             return ("", 0)
@@ -234,6 +275,9 @@ class KeyboardManager {
         }
         
         switch state {
+        case 0:
+            eraseLast()
+            return ("", 0)
         case 1:
             // 쌍자음만 입력되어 있는 상태 (ex ㄱㄱ, ㄷㄷ, ㅂㅂ ...)
             if lastWord.count == 2 {
