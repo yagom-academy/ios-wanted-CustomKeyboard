@@ -9,7 +9,7 @@ import Foundation
 
 class HangeulConverter : UnicodeConverter {
     func getInitalValue(_ unicode: Int) -> Int? {
-        if (unicode >= 44032) {
+        if unicode >= 44032 {
             let value: Int = unicode - 44032
             let initial = value/28/21
             return initial
@@ -19,7 +19,7 @@ class HangeulConverter : UnicodeConverter {
     }
     
     func getNeutralValue(_ unicode: Int) -> Int? {
-        if (unicode >= 44032) {
+        if unicode >= 44032 {
             let value: Int = unicode - 44032
             let neutral = (value / 28) % 21
             return neutral
@@ -29,7 +29,7 @@ class HangeulConverter : UnicodeConverter {
     }
     
     func getFinalValue(_ unicode: Int) -> Int? {
-        if (unicode >= 44032) {
+        if unicode >= 44032 {
             let value: Int = unicode - 44032
             let support: Int = value % 28
             return support
@@ -60,10 +60,10 @@ class HangeulConverter : UnicodeConverter {
     }
     
     func lastCharState(_ unicode: Int) -> CharState {
-        if (unicode >= 44032) {
+        if unicode >= 44032 {
             let value:Int = unicode - 44032
             let final:Int = value % 28
-            if (final == 0) {
+            if final == 0 {
                 return .noneFinalChar
             } else {
                 return .includingFinalChar
