@@ -16,7 +16,7 @@ enum APIError: Error {
 }
 
 class ReviewAPIService {
-    func getReview(_ completion: @escaping (ReviewData?, APIError?) -> Void) {
+    func getReview(_ completion: @escaping (Result<ReviewData, APIError>) -> Void) {
         
         var request = URLRequest(url: EndPoint.getReview.url)
         request.httpMethod = HTTPMethod.GET.rawValue
@@ -31,40 +31,6 @@ class ReviewAPIService {
         request.httpMethod = HTTPMethod.POST.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let review = Post(content: content)
-        
-        guard let uploadData = try? JSONEncoder().encode(review) else {
-            completion(.failure(.failed))
-            return
-        }
-        
-        let uploadTask = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
-            guard error == nil else {
-                completion(.failure(.failed))
-                return
-            }
-            
-            guard data != nil else {
-                completion(.failure(.invalidData))
-                return
-            }
-            
-            guard let response = response as? HTTPURLResponse else {
-                completion(.failure(.invalidResponse))
-                return
-            }
-            
-            guard response.statusCode == 200 else {
-                completion(.failure(.unexpectedStatusCode(statusCode: "\(response.statusCode)")))
-                return
-            }
-            
-            if let data = data, let dataString = String(data: data, encoding: .utf8) {
-                print("\(dataString)")
-                completion(.success(review))
-                return
-            }
-        }
-        uploadTask.resume()
+        URLSession.request(.shared, content: content, endpoint: request, completion: completion)
     }
 }
