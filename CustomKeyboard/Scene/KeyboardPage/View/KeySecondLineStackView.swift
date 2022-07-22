@@ -8,7 +8,6 @@
 import UIKit
 
 class KeySecondLineStackView: UIStackView {
-    
     weak var delegate: ButtonDelegate?
     
     let aButton = KeyButton(type: .consonant)

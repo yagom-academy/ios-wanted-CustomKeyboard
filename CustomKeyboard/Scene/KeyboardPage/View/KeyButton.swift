@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum CSButtonType {
+enum CustomButtonType {
     case consonant
     case vowel
     case space
@@ -17,9 +17,9 @@ enum CSButtonType {
 
 class KeyButton: UIButton {
     
-    let type: CSButtonType
+    let type: CustomButtonType
     
-    init(type: CSButtonType) {
+    init(type: CustomButtonType) {
         self.type = type
         super.init(frame: .zero)
         

@@ -146,9 +146,9 @@
 		04486787287D51550004A512 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				04486784287D51460004A512 /* UITextField+.swift */,
 				046F3E90288A72FE00409BD9 /* String+.swift */,
 				04ADA74E288A7F8B00FBFD1C /* Date+.swift */,
+				04486784287D51460004A512 /* UITextField+.swift */,
 				68EBC4F92889513F0088A238 /* URLSession+.swift */,
 			);
 			path = Extension;

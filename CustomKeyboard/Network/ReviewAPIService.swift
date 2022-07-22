@@ -17,7 +17,6 @@ enum APIError: Error {
 
 class ReviewAPIService {
     func getReview(_ completion: @escaping (Result<ReviewData, APIError>) -> Void) {
-        
         var request = URLRequest(url: EndPoint.getReview.url)
         request.httpMethod = HTTPMethod.GET.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -26,7 +25,6 @@ class ReviewAPIService {
     }
     
     func postReview(content: String, _ completion: @escaping(Result<Post, APIError>) -> Void) {
-        
         var request = URLRequest(url: EndPoint.postReview.url)
         request.httpMethod = HTTPMethod.POST.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

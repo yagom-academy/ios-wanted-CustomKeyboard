@@ -8,7 +8,6 @@
 import UIKit
 
 class KeyFourthLineStackView: UIStackView {
-    
     weak var delegate: ButtonDelegate?
     
     let numButton = KeyButton(type: .dark)

@@ -7,7 +7,6 @@
 
 import UIKit
 
-// DTO : Data Transfer Object
 struct ReviewData: Codable {
     let reviewData: [Review]
 

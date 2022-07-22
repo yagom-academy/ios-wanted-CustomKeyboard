@@ -47,8 +47,6 @@ class KeyboardManager {
     }
     
     private func eraseLast(_ deleteText: String, _ str: String) {
-        print(allWord, "deleteAll")
-        print(allState, "deleteState")
         // 자음만 입력되어 있을 때
         if first.contains(deleteText) {
             if str.count == 2 {
@@ -65,9 +63,8 @@ class KeyboardManager {
             return
         }
         
-        // 완벽한 글자를 지울 때 아, 애, 앵, 왱
-        var deleteWord = str // "ㄹㄱ" "ㅏㅣ"
-        print(deleteWord, "deleteWord")
+        // 완벽한 글자를 지울 때 (아, 애, 앵, 왱)
+        var deleteWord = str
         if deleteWord.count == 3 {
             allState.removeLast(2)
         } else if deleteWord.count == 2 {
@@ -90,16 +87,11 @@ class KeyboardManager {
         if deleteWord.count == 2 {
             allState.removeLast()
         }
-        
-        print(allWord, "deleteComplete")
-        print(allState, "deleteComplete")
     }
     
     func makeString(_ state: Int, _ currentText: String, _ tappedButton: KeyButton) -> (String, Int) {
-//        print("make", allWord)
-//        print(allState)
+        
         if tappedButton.type == .space {
-//            print("space")
             return pressSpace(tappedButton)
         }
         guard let addString = tappedButton.title(for: .normal) else { return ("", 0) }
@@ -267,7 +259,6 @@ class KeyboardManager {
     }
     
     func deleteString(_ state: Int, _ currentText: String) -> (String, Int) {
-        print("delete", allWord)
         
         if allWord.isEmpty {
             return ("", 0)
@@ -275,9 +266,6 @@ class KeyboardManager {
         
         let deleteText = allWord.removeLast()
         allState.removeLast()
-//        print(allWord)
-        print(allState)
-//        print(lastWord, state,"state")
         
         // space 지우기
         if !allWord.isEmpty && deleteText == " " {
@@ -356,7 +344,6 @@ class KeyboardManager {
                 if currentText.count == 1 {
                     let text = allWord[allWord.count - 1]
                     lastWord = text
-//                    print(text)
                     return (text, 1)
                 }
                 let addText = allWord[allWord.count - 1]
@@ -381,7 +368,6 @@ class KeyboardManager {
                     let str = frontText.utf16.map{ Int($0) }.reduce(0, +) + idx
                     lastWord = addText
                     if let scalarValue = UnicodeScalar(str) {
-//                        print(String(scalarValue))
                         return (String(scalarValue), 4)
                     }
                     return ("", 0)

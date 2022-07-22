@@ -59,7 +59,6 @@ extension URLSession {
     }
     
     static func request<T: Decodable>(_ session: URLSession = .shared, content: String, endpoint: URLRequest, completion: @escaping(Result<T, APIError>) -> Void) {
-        
         let review = Post(content: content)
         
         guard let uploadData = try? JSONEncoder().encode(review) else {
