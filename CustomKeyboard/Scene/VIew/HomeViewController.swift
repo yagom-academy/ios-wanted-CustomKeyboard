@@ -7,19 +7,15 @@ import UIKit
 
 class HomeViewController: UIViewController {
   
-  private let viewModel = HomeViewModel()
+  private let viewModel = ReviewViewModel()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = "안녕"
     setTableView()
     setConstraints()
-    setKeyboardNotification()
     setupKeyboardActions()
     setData()
     setReviewButtonAction()
-//    setTextField()
-
   }
   
   private func setData(){
@@ -46,8 +42,8 @@ class HomeViewController: UIViewController {
     return tableView
   }()
   
-  private let reviewBannerView: ReviewBannerView = {
-    let view = ReviewBannerView()
+  private let reviewBannerView: HomeBannerView = {
+    let view = HomeBannerView()
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
@@ -71,27 +67,6 @@ class HomeViewController: UIViewController {
     ])
   }
   
-  private func setKeyboardNotification() {
-//    NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillShowNotification, object: nil)
-//    NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillHideNotification, object: nil)
-  }
-  
-  
-//  @objc private func adjustInputView(noti: Notification) {
-//    guard let userInfo = noti.userInfo else { return }
-//    guard let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-//    let adjustmentHeight = (keyboardFrame.height + (reviewTextField.frame.height/2)) - view.safeAreaInsets.bottom
-//    let originalYCoord = CGFloat(Int(view.frame.size.height) - 60)
-//
-//    if noti.name == UIResponder.keyboardWillShowNotification &&  reviewTextField.frame.origin.y == originalYCoord{
-//      reviewTextField.frame.origin.y -= adjustmentHeight
-//      reviewTextField.layoutIfNeeded()
-//    } else {
-//      reviewTextField.frame.origin.y = originalYCoord
-//      reviewTextField.layoutIfNeeded()
-//    }
-//  }
-
   private func setupKeyboardActions() {
     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     gestureRecognizer.cancelsTouchesInView = false
@@ -104,22 +79,12 @@ class HomeViewController: UIViewController {
   
   private func setReviewButtonAction() {
     reviewBannerView.buttonDidTap = {
-      let reivewViewController = ReviewViewController()
+      let reivewViewController = ReviewViewController(viewModel: self.viewModel)
       reivewViewController.modalPresentationStyle = .fullScreen
       self.present(reivewViewController, animated: true)
     }
   }
   
-//  private func setTextField() {
-//    reviewTextField.done = { text in
-//      print(text)
-//      self.viewModel.makeReview(review: text) { error in
-//        if let error = error {
-//          print(error)
-//        }
-//      }
-//    }
-//  }
 }
 
 extension HomeViewController : UITableViewDataSource {

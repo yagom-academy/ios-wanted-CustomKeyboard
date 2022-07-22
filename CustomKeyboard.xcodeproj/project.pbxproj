@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B7344044287E830900C9B8B0 /* ReviewBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7344043287E830900C9B8B0 /* ReviewBannerView.swift */; };
+		B7344044287E830900C9B8B0 /* HomeBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7344043287E830900C9B8B0 /* HomeBannerView.swift */; };
 		B747B299287FE80700DE15FC /* CustomKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B747B298287FE80700DE15FC /* CustomKeyboardView.swift */; };
 		B747B29F2880491E00DE15FC /* CustomRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B747B29E2880491E00DE15FC /* CustomRoundButton.swift */; };
 		B747B2EF2885363B00DE15FC /* KoreanCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B747B2EE2885363B00DE15FC /* KoreanCharacter.swift */; };
@@ -25,9 +25,11 @@
 		B779BBF3287E4C7B00BB8DF5 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBF2287E4C7B00BB8DF5 /* DateFormatter.swift */; };
 		B779BBF6287E500100BB8DF5 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBF5287E500100BB8DF5 /* String+.swift */; };
 		B779BBF8287E8A5100BB8DF5 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBF7287E8A5100BB8DF5 /* Comment.swift */; };
-		B779BBFF287E91E700BB8DF5 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBFE287E91E700BB8DF5 /* HomeViewModel.swift */; };
+		B779BBFF287E91E700BB8DF5 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBFE287E91E700BB8DF5 /* ReviewViewModel.swift */; };
 		B779BC01287E920900BB8DF5 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BC00287E920900BB8DF5 /* Observable.swift */; };
 		B78B2D57288B086500615067 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78B2D56288B086500615067 /* ReviewViewController.swift */; };
+		B78B2D59288B1E5900615067 /* ReviewContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78B2D58288B1E5900615067 /* ReviewContentView.swift */; };
+		B78B2D5B288B1F1500615067 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78B2D5A288B1F1500615067 /* UITextField+.swift */; };
 		B7AF93772887D9D90058526E /* Initial.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF93762887D9D90058526E /* Initial.swift */; };
 		B7AF93792887D9E90058526E /* Neutral.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF93782887D9E90058526E /* Neutral.swift */; };
 		B7AF937B2887D9F30058526E /* Final.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF937A2887D9F30058526E /* Final.swift */; };
@@ -48,7 +50,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B7344043287E830900C9B8B0 /* ReviewBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewBannerView.swift; sourceTree = "<group>"; };
+		B7344043287E830900C9B8B0 /* HomeBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBannerView.swift; sourceTree = "<group>"; };
 		B747B298287FE80700DE15FC /* CustomKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyboardView.swift; sourceTree = "<group>"; };
 		B747B29E2880491E00DE15FC /* CustomRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundButton.swift; sourceTree = "<group>"; };
 		B747B2EE2885363B00DE15FC /* KoreanCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanCharacter.swift; sourceTree = "<group>"; };
@@ -66,9 +68,11 @@
 		B779BBF2287E4C7B00BB8DF5 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		B779BBF5287E500100BB8DF5 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		B779BBF7287E8A5100BB8DF5 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
-		B779BBFE287E91E700BB8DF5 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		B779BBFE287E91E700BB8DF5 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 		B779BC00287E920900BB8DF5 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		B78B2D56288B086500615067 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+		B78B2D58288B1E5900615067 /* ReviewContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewContentView.swift; sourceTree = "<group>"; };
+		B78B2D5A288B1F1500615067 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		B7AF93762887D9D90058526E /* Initial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initial.swift; sourceTree = "<group>"; };
 		B7AF93782887D9E90058526E /* Neutral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neutral.swift; sourceTree = "<group>"; };
 		B7AF937A2887D9F30058526E /* Final.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Final.swift; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				B779BBF5287E500100BB8DF5 /* String+.swift */,
+				B78B2D5A288B1F1500615067 /* UITextField+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -182,7 +187,8 @@
 		B779BBFC287E91AF00BB8DF5 /* VIew */ = {
 			isa = PBXGroup;
 			children = (
-				B7344043287E830900C9B8B0 /* ReviewBannerView.swift */,
+				B7344043287E830900C9B8B0 /* HomeBannerView.swift */,
+				B78B2D58288B1E5900615067 /* ReviewContentView.swift */,
 				B7F1DCEF287C12EE0065D587 /* ReviewTableViewCell.swift */,
 				DE15E65F28604278003DD2F5 /* HomeViewController.swift */,
 				B78B2D56288B086500615067 /* ReviewViewController.swift */,
@@ -193,7 +199,7 @@
 		B779BBFD287E91C300BB8DF5 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				B779BBFE287E91E700BB8DF5 /* HomeViewModel.swift */,
+				B779BBFE287E91E700BB8DF5 /* ReviewViewModel.swift */,
 				B7AF938F2888CBD10058526E /* CustomKeyboardViewModel.swift */,
 			);
 			path = ViewModel;
@@ -350,10 +356,11 @@
 				DE15E66028604278003DD2F5 /* HomeViewController.swift in Sources */,
 				B747B299287FE80700DE15FC /* CustomKeyboardView.swift in Sources */,
 				B779BBD2287D4B5300BB8DF5 /* NetworkError.swift in Sources */,
-				B779BBFF287E91E700BB8DF5 /* HomeViewModel.swift in Sources */,
+				B779BBFF287E91E700BB8DF5 /* ReviewViewModel.swift in Sources */,
 				B747B29F2880491E00DE15FC /* CustomRoundButton.swift in Sources */,
 				B7AF939428895B950058526E /* HangeulStruct.swift in Sources */,
 				B7AF93792887D9E90058526E /* Neutral.swift in Sources */,
+				B78B2D5B288B1F1500615067 /* UITextField+.swift in Sources */,
 				B7AF93822887DC200058526E /* UnicodeConverter.swift in Sources */,
 				B779BBDE287D54D700BB8DF5 /* Encoder.swift in Sources */,
 				B7AF937B2887D9F30058526E /* Final.swift in Sources */,
@@ -376,9 +383,10 @@
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				B779BBD1287D4B5300BB8DF5 /* Request.swift in Sources */,
 				B7AF93902888CBD10058526E /* CustomKeyboardViewModel.swift in Sources */,
-				B7344044287E830900C9B8B0 /* ReviewBannerView.swift in Sources */,
+				B7344044287E830900C9B8B0 /* HomeBannerView.swift in Sources */,
 				B779BBD0287D4B5300BB8DF5 /* NetworkService.swift in Sources */,
 				B779BBF6287E500100BB8DF5 /* String+.swift in Sources */,
+				B78B2D59288B1E5900615067 /* ReviewContentView.swift in Sources */,
 				B779BBD9287D51CD00BB8DF5 /* ReviewRepository.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 			);

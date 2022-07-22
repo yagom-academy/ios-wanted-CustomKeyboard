@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewBannerView: UIView {
+class HomeBannerView: UIView {
   
   var buttonDidTap:(() -> Void)?
   
@@ -29,21 +29,12 @@ class ReviewBannerView: UIView {
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
-  
-  let customKeyboard = CustomKeyboardView(frame: CGRect(x: 0, y: 0, width: 0, height: UIScreen.main.bounds.height / 3.4))
-  
+    
   override init(frame: CGRect) {
     super.init(frame: frame)
     backgroundColor = .white
     setReviewButtonAction()
     setConstraints()
-    
-    //    customKeyboard.pressedRetrunButton = { self.reviewTextField.resignFirstResponder() }
-    //    customKeyboard.buttonPressed = { [weak self] in
-    //      self?.reviewTextField.text = $0
-    //    }
-    //
-
   }
   
   required init?(coder: NSCoder) {
@@ -53,7 +44,7 @@ class ReviewBannerView: UIView {
 }
 
 
-private extension ReviewBannerView {
+private extension HomeBannerView {
   func setConstraints() {
     addSubview(userProfileImageView)
     addSubview(reviewButton)
@@ -83,10 +74,3 @@ private extension ReviewBannerView {
 
 
 
-extension UITextField {
-  func addLeftPadding() {
-    let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: self.frame.height))
-    self.leftView = paddingView
-    self.leftViewMode = ViewMode.always
-  }
-}

@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class HomeViewModel {
+final class ReviewViewModel {
     
   var reviewList = Observable<[Review]>([])
   private let repository = ReviewRepository()
