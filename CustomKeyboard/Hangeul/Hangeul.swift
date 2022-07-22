@@ -11,7 +11,6 @@ final class Hangeul {
     var prev: Hangeul?
     var next: Hangeul?
     
-    var eumun: HangeulEumun
     let text: String
     var unicode: Int?
     var status: HangeulCombinationStatus
@@ -22,18 +21,11 @@ final class Hangeul {
         self.next = nil
         self.text = input
         self.position = []
-        self.eumun = .jaeum
         
         guard input != Text.space else {
             self.unicode = nil
             self.status = .finished
             return
-        }
-        
-        for hangeul in HangeulDictionary.compatible.jungseong.allCases {
-            if hangeul.rawValue == self.unicode {
-                self.eumun = .moeum
-            }
         }
         
         let converter = HangeulConverter()
@@ -68,7 +60,7 @@ extension Hangeul {
 extension Hangeul {
     
     func canBeJungseong() -> Bool {
-        for hangeul in HangeulDictionary.compatible.jungseong.allCases {
+        for hangeul in HangeulUnicodeType.Compatible.jungseong.allCases {
             if hangeul.rawValue == self.unicode {
                 return true
             }
@@ -77,7 +69,7 @@ extension Hangeul {
     }
     
     func canBeJongseong() -> Bool {
-        for hangeul in HangeulDictionary.compatible.jongseong.allCases {
+        for hangeul in HangeulUnicodeType.Compatible.jongseong.allCases {
             if hangeul.rawValue == self.unicode {
                 return true
             }
@@ -87,7 +79,7 @@ extension Hangeul {
     
     
     func isDoubleJungseong() -> Bool {
-        for hangeul in HangeulDictionary.compatible.doubleJungseong.allCases {
+        for hangeul in HangeulUnicodeType.Compatible.doubleJungseong.allCases {
             if hangeul.rawValue == self.unicode {
                 return true
             }

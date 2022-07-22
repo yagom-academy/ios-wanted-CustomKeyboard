@@ -56,7 +56,7 @@ extension HangeulCombiner {
         }
         
         if buffer.choseongSection.isEmpty && buffer.jungseongSection.count > 1 {
-            let letterUnicode = getLetterUnicode(of: buffer.choseongSection, using: buffer.jungseongSection, in: .choseong)
+            let letterUnicode = getLetterUnicode(of: buffer.jungseongSection, in: .choseong)
             return converter.toString(from: letterUnicode)
         }
         
@@ -77,17 +77,11 @@ extension HangeulCombiner {
         return combinedUnicode
     }
     
-    private func getLetterUnicode(of section: [Hangeul], using jungseongSection: [Hangeul]? = nil, in position: HangeulCombinationPosition) -> Int? {
+    private func getLetterUnicode(of section: [Hangeul], in position: HangeulCombinationPosition) -> Int? {
+    
         switch section.count {
         case 0 where position == .jongseong:
-            return HangeulDictionary.fixed.jongseong.blank.rawValue
-        case 0 where position == .choseong && jungseongSection?.count == 2:
-            return dictionary.getDoubleUnicode(jungseongSection?[0], jungseongSection?[1])
-        case 0 where position == .choseong && jungseongSection?.count == 3:
-            guard let jungseongSection = jungseongSection else {
-                return nil
-            }
-            return dictionary.getTripleMidUnicode(jungseongSection[0].text, jungseongSection[1].text, jungseongSection[2].text)
+            return HangeulUnicodeType.Fixed.jongseong.blank.rawValue
         case 1:
             return section.first?.unicode
         case 2:
@@ -104,5 +98,4 @@ extension HangeulCombiner {
         
         return dictionary.getIndex(of: letterUnicode, in: position, type: .fixed)
     }
-    
 }

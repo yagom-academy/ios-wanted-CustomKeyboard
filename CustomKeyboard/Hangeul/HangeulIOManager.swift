@@ -107,23 +107,21 @@ extension HangeulIOManger {
 extension HangeulIOManger {
     
     private func setOutput(with combinedCharacter: String?, editMode: HangeulOutputEditMode?) {
-        guard let editMode = editMode else {
+        guard let editMode = editMode,
+              let combinedCharacter = combinedCharacter else {
             return
         }
         
-        if editMode == .remove {
+        switch editMode {
+        case .add:
+            output += combinedCharacter
+        case .change where output.count > 0:
             output.unicodeScalars.removeLast()
-            return
-        }
-        
-        if editMode == .change && output.isEmpty == false {
+            output += combinedCharacter
+        case .remove:
             output.unicodeScalars.removeLast()
+        default:
+            break
         }
-        
-        guard let combinedCharacter = combinedCharacter else {
-            return
-        }
-        
-        output += combinedCharacter
     }
 }
