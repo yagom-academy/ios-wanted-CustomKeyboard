@@ -13,6 +13,12 @@ protocol KeyboardViewPresentable: NSObject {
     
 }
 
+protocol ReviewUploadable: NSObject {
+    
+    func uploadReview(with contents: String)
+    
+}
+
 final class ReviewListView: UIView {
 
     // MARK: - UIProperties
@@ -61,7 +67,7 @@ final class ReviewListView: UIView {
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont(descriptor: descriptor, size: .zero)
         button.layer.cornerRadius = Style.cornerRadius
-//        button.addTarget(nil, action: #selector(presentKeyboardViewController), for: .touchUpInside)
+        button.addTarget(nil, action: #selector(uploadReviewButtonTouched(_:)), for: .touchUpInside)
         return button
     }()
 
@@ -78,7 +84,8 @@ final class ReviewListView: UIView {
     
     // MARK: - Properties
     
-    weak var delegate: KeyboardViewPresentable?
+    weak var delegate: (KeyboardViewPresentable &
+                        ReviewUploadable)?
 
     // MARK: - Lifecycles
 
@@ -122,6 +129,13 @@ extension ReviewListView {
         }
         
         reviewWritingLabel.text = contents
+    }
+    
+    @objc func uploadReviewButtonTouched(_ sender: UIButton) {
+        guard let contents = reviewWritingLabel.text else {
+            return
+        }
+        delegate?.uploadReview(with: contents)
     }
     
 }

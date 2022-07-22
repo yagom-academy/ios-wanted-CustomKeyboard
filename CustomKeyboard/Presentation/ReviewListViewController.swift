@@ -45,6 +45,24 @@ extension ReviewListViewController: KeyboardViewPresentable {
 
 }
 
+extension ReviewListViewController: ReviewUploadable {
+    
+    func uploadReview(with contents: String) {
+        reviewAPIProvider.upload(review: contents) { result in
+            switch result {
+            case.success(let success):
+                self.reviews.append(ReviewResult.init(user: User.init(userName: "당신", profileImage: "noImage"), content: contents, createdAt: Date.now.description))
+                DispatchQueue.main.async {
+                    self.reviewListView.reviewTableView.reloadData()
+                }
+            case.failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+}
+
 // MARK: - View setting methods
 
 extension ReviewListViewController {
