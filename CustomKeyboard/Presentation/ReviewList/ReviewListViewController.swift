@@ -140,13 +140,12 @@ extension ReviewListViewController {
             reviewTextFieldStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             reviewTextFieldStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             reviewTextFieldStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            reviewTextFieldStack.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.1)
+            reviewTextFieldStack.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.1)
         ])
         
         reviewTextFieldStack.addArrangedSubview(profileImageView)
         NSLayoutConstraint.activate([
             profileImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.1),
-            profileImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.1),
         ])
         
         reviewTextFieldStack.addArrangedSubview(reviewTextView)
