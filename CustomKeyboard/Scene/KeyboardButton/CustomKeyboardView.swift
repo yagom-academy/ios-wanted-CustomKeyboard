@@ -111,8 +111,8 @@ class CustomKeyboardView: UIView {
     
     self.backgroundColor = #colorLiteral(red: 0.1686274707, green: 0.1686274707, blue: 0.1686274707, alpha: 1)
     
-    viewModel.text.bind {
-      self.buttonPressed?($0)
+    viewModel.text.bind { [weak self] in
+      self?.buttonPressed?($0)
     }
     
     self.addSubview(containerView)

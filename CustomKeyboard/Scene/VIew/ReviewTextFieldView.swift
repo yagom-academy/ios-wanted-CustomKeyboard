@@ -16,7 +16,6 @@ class ReviewTextFieldView: UIView {
     imageView.image = UIImage(named: "default_image")
     imageView.contentMode = .scaleAspectFit
     imageView.translatesAutoresizingMaskIntoConstraints = false
-    
     return imageView
   }()
   
@@ -29,7 +28,6 @@ class ReviewTextFieldView: UIView {
     textField.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     textField.addLeftPadding()
     textField.inputView = customKeyboard
-
     textField.translatesAutoresizingMaskIntoConstraints = false
     return textField
   }()
@@ -38,14 +36,15 @@ class ReviewTextFieldView: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    customKeyboard.buttonPressed = {
-      self.reviewTextField.text = $0
-    }
+    backgroundColor = .white
+    
     customKeyboard.pressedRetrunButton = { self.reviewTextField.resignFirstResponder() }
+    customKeyboard.buttonPressed = { [weak self] in
+      self?.reviewTextField.text = $0
+    }
+    
     addSubview(userProfileImageView)
     addSubview(reviewTextField)
-    
-    reviewTextField.delegate = self
     
     NSLayoutConstraint.activate([
       userProfileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
@@ -65,13 +64,6 @@ class ReviewTextFieldView: UIView {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
-  }
-}
-
-extension ReviewTextFieldView : UITextFieldDelegate {
-  
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    self.endEditing(true)
   }
 }
 
