@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040319F5288A87B000892003 /* LoadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040319F4288A87B000892003 /* LoadImage.swift */; };
 		04158AD5287D3DB7004F6B9A /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04158AD4287D3DB7004F6B9A /* Review.swift */; };
 		043D075C287D408B0061DCA2 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D075B287D408B0061DCA2 /* ReviewTableViewCell.swift */; };
 		04486783287D4B080004A512 /* ReviewTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04486782287D4B080004A512 /* ReviewTableViewHeader.swift */; };
@@ -72,6 +73,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		040319F4288A87B000892003 /* LoadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImage.swift; sourceTree = "<group>"; };
 		04158AD1287D3DA0004F6B9A /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		04158AD4287D3DB7004F6B9A /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		043D075B287D408B0061DCA2 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			children = (
 				68EBC4F7288949270088A238 /* HTTPMethod.swift */,
 				68EBC4F4288945840088A238 /* EndPoint.swift */,
+				040319F4288A87B000892003 /* LoadImage.swift */,
 				68AE7947287D3B1E003F4426 /* ReviewAPIService.swift */,
 			);
 			path = Network;
@@ -394,6 +397,7 @@
 				04486783287D4B080004A512 /* ReviewTableViewHeader.swift in Sources */,
 				04FE9E93287E6A0E0002EE50 /* ReviewViewModel.swift in Sources */,
 				04C523F2287FE93A008488CF /* KeyboardManager.swift in Sources */,
+				040319F5288A87B000892003 /* LoadImage.swift in Sources */,
 				04ADA74F288A7F8B00FBFD1C /* Date+.swift in Sources */,
 				68AE7948287D3B1E003F4426 /* ReviewAPIService.swift in Sources */,
 				6891525B2886DEE200D6FE7B /* KeyboardViewController.swift in Sources */,

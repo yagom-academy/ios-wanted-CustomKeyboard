@@ -61,9 +61,16 @@ class ReviewTableViewCell: UITableViewCell {
     func setup(_ review: Review) {
         layout()
         
-        urlToImage(review.user.profileImage, { image in
-            self.profileImage.image = image
-        })
+        LoadImage().loadImage(review.user.profileImage) { result in
+            switch result {
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self.profileImage.image = image
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
         nameLabel.text = review.user.userName
         timeLabel.text = dateToTime(review.date)
         starLabel.text = separateStarAndReview(review.content).0.replacingOccurrences(of: "Rating", with: "별점")
@@ -154,21 +161,5 @@ extension ReviewTableViewCell {
         default:
             return ("별점: ", "리뷰: ")
         }
-    }
-    
-    private func urlToImage(_ url: String, _ completion: @escaping (UIImage) -> Void) {
-        guard let imageURL = URL(string: url) else { return }
-        
-        let session = URLSession(configuration: .default)
-        let dataTask = session.dataTask(with: imageURL) { data, response, error in
-            guard error == nil,
-                  let data = data else { return }
-            
-            guard let image = UIImage(data: data) else { return }
-            DispatchQueue.main.async {
-                completion(image)
-            }
-        }
-        dataTask.resume()
     }
 }
