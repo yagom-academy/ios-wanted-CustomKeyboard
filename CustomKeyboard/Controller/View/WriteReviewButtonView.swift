@@ -10,7 +10,7 @@ import UIKit
 final class WriteReviewButtonView: UIView {
     
     // MARK: - Properties
-    private var writeReviewButtonTrailingConstraint: NSLayoutConstraint!
+    private var writeReviewButtonTrailingConstraint: NSLayoutConstraint?
     
     // MARK: - ViewProperties
     private lazy var profileImageView: UIImageView = {
@@ -57,7 +57,7 @@ final class WriteReviewButtonView: UIView {
     // MARK: - Method
     func showSendReviewButton(isCanSend: Bool) {
         sendReviewButton.isHidden = isCanSend ? false : true
-        writeReviewButtonTrailingConstraint.constant = isCanSend ? -60 : -10
+        writeReviewButtonTrailingConstraint?.constant = isCanSend ? -60 : -10
         if isCanSend == false {
             writeReviewButton.setTitle("이 테마가 마음에 드시나요?", for: .normal)
         }
@@ -90,10 +90,11 @@ extension WriteReviewButtonView {
     
     private func setConstraintsOfWriteReviewButton() {
         writeReviewButtonTrailingConstraint = writeReviewButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15)
+        guard let safeWriteReviewButtonTrailingConstraint = writeReviewButtonTrailingConstraint else { return }
         NSLayoutConstraint.activate([
             writeReviewButton.heightAnchor.constraint(equalToConstant: 50),
             writeReviewButton.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 10),
-            writeReviewButtonTrailingConstraint,
+            safeWriteReviewButtonTrailingConstraint,
             writeReviewButton.topAnchor.constraint(equalTo: topAnchor, constant: 10)
         ])
     }

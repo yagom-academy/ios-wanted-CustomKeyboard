@@ -23,7 +23,8 @@ final class CustomKeyboardView: UIView {
     weak var delegate: CustomKeyboardDelegate?
     
     @IBAction func hangulKeypadTap(_ sender: UIButton) {
-        delegate?.hangulKeypadTap(char: sender.currentTitle!)
+        guard let safeTapKeypadButtonText = sender.currentTitle else { return }
+        delegate?.hangulKeypadTap(char: safeTapKeypadButtonText)
         if isShift {
             shiftKeypadTap(shiftButton)
         }

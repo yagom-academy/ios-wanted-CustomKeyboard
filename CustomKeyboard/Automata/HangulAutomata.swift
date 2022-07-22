@@ -276,7 +276,7 @@ extension HangulAutomata {
                 currentHangulState = .jongsung
             }
             buffer.append("")
-        case.endTwo:
+        case .endTwo:
             if oldChKind == .consonant {
                 oldKey = UInt32(chosungTable.firstIndex(of: jongsungTable[Int(oldKey)]) ?? 0)
                 charCode =  String(Unicode.Scalar(combinationHangul(chosung: oldKey, joongsung: keyCode)) ?? Unicode.Scalar(0))

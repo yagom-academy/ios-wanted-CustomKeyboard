@@ -8,8 +8,7 @@
 import XCTest
 
 class CustomKeyboardAutomataTests: XCTestCase {
-    var hangulAutomata: HangulAutomata!
-    
+    var hangulAutomata: HangulAutomata?
     
     override func setUpWithError() throws {
         hangulAutomata = HangulAutomata()
@@ -20,34 +19,34 @@ class CustomKeyboardAutomataTests: XCTestCase {
     }
 
     func testCompositHangul() throws {
-        hangulAutomata.hangulAutomata(key: "ㄱ")
-        hangulAutomata.hangulAutomata(key: "ㅏ")
-        hangulAutomata.hangulAutomata(key: "ㅂ")
-        hangulAutomata.hangulAutomata(key: "ㅅ")
-        let buffer = hangulAutomata.buffer.reduce("") {
+        hangulAutomata?.hangulAutomata(key: "ㄱ")
+        hangulAutomata?.hangulAutomata(key: "ㅏ")
+        hangulAutomata?.hangulAutomata(key: "ㅂ")
+        hangulAutomata?.hangulAutomata(key: "ㅅ")
+        let buffer = hangulAutomata?.buffer.reduce("") {
             $0 + $1
         }
         XCTAssertEqual("값", buffer)
     }
     
     func testDeleteHangul() {
-        hangulAutomata.hangulAutomata(key: "ㄱ")
-        hangulAutomata.hangulAutomata(key: "ㅏ")
-        hangulAutomata.hangulAutomata(key: "ㅂ")
-        hangulAutomata.hangulAutomata(key: "ㅅ")
-        hangulAutomata.deleteBuffer()
-        let buffer = hangulAutomata.buffer.reduce("") {
+        hangulAutomata?.hangulAutomata(key: "ㄱ")
+        hangulAutomata?.hangulAutomata(key: "ㅏ")
+        hangulAutomata?.hangulAutomata(key: "ㅂ")
+        hangulAutomata?.hangulAutomata(key: "ㅅ")
+        hangulAutomata?.deleteBuffer()
+        let buffer = hangulAutomata?.buffer.reduce("") {
             $0 + $1
         }
         XCTAssertEqual("갑", buffer)
     }
     
     func testAutomataStatus() {
-        hangulAutomata.hangulAutomata(key: "ㄱ")
-        hangulAutomata.hangulAutomata(key: "ㅏ")
-        hangulAutomata.hangulAutomata(key: "ㅂ")
-        hangulAutomata.hangulAutomata(key: "ㅅ")
-        let state = hangulAutomata.currentHangulState
+        hangulAutomata?.hangulAutomata(key: "ㄱ")
+        hangulAutomata?.hangulAutomata(key: "ㅏ")
+        hangulAutomata?.hangulAutomata(key: "ㅂ")
+        hangulAutomata?.hangulAutomata(key: "ㅅ")
+        let state = hangulAutomata?.currentHangulState
         
         XCTAssertEqual(.dJongsung, state)
     }
