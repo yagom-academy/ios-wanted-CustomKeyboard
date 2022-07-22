@@ -22,7 +22,6 @@ class HangulCombinator {
             return HangulKeyboardData(char: "", state: lastState)
         }
         
-        //TODO: - 한글set에 해당 unicode가 없을경우 예외처리 해야함
         let cho = HangulSet.chos.firstIndex(of: buffer[0].hangul) ?? 0
         let jung = HangulSet.jungs.firstIndex(of: buffer[1].hangul) ?? 0
         
@@ -78,6 +77,10 @@ class HangulCombinator {
         if jongIndex != 0 {
             let cho = HangulKeyboardData(char: HangulSet.chos[choIndex], state: .cho)
             let jung = HangulKeyboardData(char: HangulSet.jungs[jungIndex], state: .jung)
+            if !HangulSet.onlyDoubleJongs.contains(HangulSet.jongs[jongIndex]) {
+                let jong = HangulKeyboardData(char: HangulSet.jongs[jongIndex], state: .doubleJong)
+                return [cho, jung, jong]
+            }
             let jong = decomposeJongs(str: HangulSet.jongs[jongIndex])
             return [cho, jung] + jong
         } else if jongIndex == 0 {
