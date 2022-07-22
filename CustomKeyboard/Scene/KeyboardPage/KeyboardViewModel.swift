@@ -41,7 +41,10 @@ class KeyboardViewModel {
         return manager.deleteString(state, currentText)
     }
     
-    func eraseButton(_ reviewTextView: UITextView) {
+    func eraseButton(_ reviewTextView: UITextView, _ keyboardView: KeyboardView) {
+        let firstLineButtons = keyboardView.keyFirstLine.passButtons()
+        keyboardView.keyThirdLine.shiftButton.isSelected = false
+        resetShift(firstLineButtons)
         guard let text = reviewTextView.text?.last else {
             return
         }

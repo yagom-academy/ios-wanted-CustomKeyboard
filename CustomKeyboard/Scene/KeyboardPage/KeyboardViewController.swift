@@ -20,7 +20,7 @@ class KeyboardViewController: UIViewController {
     
     private let keyboardView = KeyboardView()
     
-    lazy var firstLineButtons = keyboardView.keyFirstLine.passButtons()
+    private lazy var firstLineButtons = keyboardView.keyFirstLine.passButtons()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,9 +80,7 @@ extension KeyboardViewController {
 
 extension KeyboardViewController: ButtonDelegate {
     func eraseButtonClickEvent(sender: KeyButton) {
-        keyboardView.keyThirdLine.shiftButton.isSelected = false
-        viewModel.resetShift(firstLineButtons)
-        viewModel.eraseButton(reviewTextView)
+        viewModel.eraseButton(reviewTextView, keyboardView)
     }
     
     func buttonClickEvent(sender: KeyButton) {

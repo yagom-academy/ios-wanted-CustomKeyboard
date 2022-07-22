@@ -61,9 +61,18 @@ class ReviewTableViewCell: UITableViewCell {
     func setup(_ review: Review) {
         layout()
         
-        profileImage.image = urlToImage(review.user.profileImage)
+        LoadImage().loadImage(review.user.profileImage) { result in
+            switch result {
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self.profileImage.image = image
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
         nameLabel.text = review.user.userName
-        timeLabel.text = dateToTime(review.createdAt)
+        timeLabel.text = dateToTime(review.date)
         starLabel.text = separateStarAndReview(review.content).0.replacingOccurrences(of: "Rating", with: "별점")
         reviewLabel.text = separateStarAndReview(review.content).1.replacingOccurrences(of: "Review", with: "리뷰")
     }
@@ -113,26 +122,29 @@ extension ReviewTableViewCell {
         ])
     }
     
-    private func dateToTime(_ createdAt: String) -> String {
-        let time = createdAt.components(separatedBy: ["-", "T", ":", "Z"]).map{ Int($0) ?? 0 }
+    private func dateToTime(_ createdAt: Date?) -> String {
+        guard let time = createdAt else { return "" }
+        let currentTime = Date()
+        
+        return compareDate(time, currentTime)
+    }
+    
+    private func compareDate(_ time: Date, _ currentTime: Date) -> String {
+        let interval = Int(currentTime.timeIntervalSince(time))
+        if interval >= 86400 {
+            return "\(time.year)년 \(time.month)월 \(time.day)일"
+        } else if interval < 3600 {
+            return "\(interval / 60)분"
+        } else {
+            return "\(interval / 3600)시간"
+        }
+    }
+    
+    private func dateToString(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko")
-        formatter.dateFormat = "yyyy_MM_dd_HH_mm_ss"
-        let currentTime = formatter.string(from: Date()).components(separatedBy: "_").map{ Int($0)! }
-        
-        if currentTime[2] > time[2] {
-            if currentTime[2] - time[2] == 1 && time[3] > currentTime[3] {
-                return String(24 - (time[3] - currentTime[3])) + "시간"
-            }
-            return String(time[0]) + "년 " + String(time[1]) + "월 " + String(time[2]) + "일"
-        } else {
-            if currentTime[3] - time[3] == 1 && time[4] > currentTime[4] {
-                return String(60 - (time[4] - currentTime[4])) + "분"
-            } else if currentTime[3] == time[3] {
-                return String(currentTime[4] - time[4]) + "분"
-            }
-            return String(currentTime[3] - time[3]) + "시간"
-        }
+        formatter.dateFormat = "yyyy년 MM월 dd일"
+        return formatter.string(from: date)
     }
     
     private func separateStarAndReview(_ content: String) -> (String, String) {
@@ -148,20 +160,6 @@ extension ReviewTableViewCell {
             return (temp[0], temp[1])
         default:
             return ("별점: ", "리뷰: ")
-        }
-    }
-    
-    private func urlToImage(_ url: String) -> UIImage {
-        guard let imageURL = URL(string: url) else { return UIImage() }
-        
-        do {
-            // TODO: - DataTask로 바꿔보기
-            let imageData = try Data(contentsOf: imageURL)
-            let image = UIImage(data: imageData)
-            return image ?? UIImage()
-        } catch let error {
-            print("Image Error: \(String(describing: error))")
-            return UIImage()
         }
     }
 }
