@@ -8,11 +8,9 @@
 import UIKit
 
 extension CALayer {
-    func addBorder( arrEdge: [UIRectEdge],
-                    color: UIColor,
-                    width: CGFloat) {
+    func addBorder( rectEdge: [UIRectEdge], color: UIColor, width: CGFloat) {
         
-        for edge in arrEdge {
+        for edge in rectEdge {
             let border = CALayer()
             switch edge {
             case UIRectEdge.bottom:
@@ -21,7 +19,7 @@ extension CALayer {
                 break
             }
             border.backgroundColor = color.cgColor
-            self.addSublayer(border)
+            addSublayer(border)
         }
     }
 }

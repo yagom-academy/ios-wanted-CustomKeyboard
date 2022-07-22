@@ -7,15 +7,13 @@
 
 import UIKit
 
-final class ReviewListCell: UICollectionViewCell {
+final class ReviewListCell: UICollectionViewCell, ReuseIdentifying {
     
     // MARK: - Properties
-    static let identifier = "ReviewListCell"
-    
-    let profileImage = UIImageView()
-    let userNameLabel = UILabel()
-    let contentsLabel = UILabel()
-    let timeLabel = UILabel()
+    private let profileImage = UIImageView()
+    private let userNameLabel = UILabel()
+    private let contentsLabel = UILabel()
+    private let timeLabel = UILabel()
     private let declarationStack = UIStackView()
     private let declarationIcon = UIImageView()
     private let declarationLabel = UILabel()
@@ -60,7 +58,7 @@ extension ReviewListCell {
     
     private func configureAttribute() {
         
-        contentView.layer.addBorder(arrEdge: [.bottom], color: .systemGray5, width: 1)
+        contentView.layer.addBorder(rectEdge: [.bottom], color: .systemGray5, width: 1)
         
         [profileImage, userNameLabel, contentsLabel, timeLabel, declarationStack].forEach {
             contentView.addSubview($0)
