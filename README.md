@@ -55,7 +55,7 @@
 
 ## ⚠️ 이슈
 
-- URLSession Network Layer에 관한 고민
+- ### URLSession Network Layer에 관한 고민
     
 ```Text
 → 네트워크 관련 라이브러리를 사용하지 않을 때 효율적인 network layer를 만들 수 있을지에 대한 고민과 에러 및 예외 처리에 대한 고민
@@ -80,7 +80,7 @@
 
 <br>
 
-- Data(contentsOf: url?)에 관한 고민
+- ### Data(contentsOf: url?)에 관한 고민
 
 ```Text
 → 처음 네트워크 구현 시 init(contesntsOf: url)메소드 사용
@@ -97,7 +97,7 @@
 
 <br>
 
-- Cell 재사용 문제
+- ### Cell 재사용 문제
     - TableView Cell 재사용으로 인해 스크롤 시 이미지가 맞지 않는 경우 발생
     - prepareForReuse() 메소드를 사용해 수정
 
@@ -107,6 +107,41 @@ override func prepareForReuse() {
 }
 ```
 <br>
+
+- ### Keyboard extension : textDocumentProxy
+```Text
+대부분의 외국어는 글자를 조합하는게 아닌 나열 하는 형식이다. 
+UIInputViewContoller의 textDocumentProxy는 키보드의 글자를 입력 받아 UIKeyInput 프로토콜에서 제공하는 inserText 메서드를 통해 저장한다.
+이때문에 직접적인 text저장소에 접근은 불가하며, 오로지 insert 또는 delete만 가능하다.
+때문에 기존 text를 새로 만든 text로 대체하던 방식의 오토마타로 keyboard extension을 구현할 경우 text가 중복되어 쌓이는 현상이 발생 했다.
+```
+- 해결
+```Text
+오토마타를 이에 맞게 수정하여 키보드를 입력 받을때 마다 이에 맞게 기존에 있는 글자를 지우고 새로운 글자를 삽입 해줄 수도 있지만, 
+textDocumentProxt의 hasText를 통해 글자를 지운후 출력 되는 text를 다시 삽입해주는 방식을 채택했다.
+```
+```swift
+while textDocumentProxy.hasText {
+            textDocumentProxy.deleteBackward()
+        }
+```
+
+![Simulator Screen Recording - iPhone 11 Pro - 2022-07-22 at 17 48 37](https://user-images.githubusercontent.com/36326157/180401710-8c08d463-f788-4a96-9a70-f86ea4b109e7.gif)   ![Simulator Screen Recording - iPhone 11 Pro - 2022-07-22 at 17 52 29](https://user-images.githubusercontent.com/36326157/180402430-19b534ff-845f-498c-b73e-d082a13bbf02.gif)
+
+<br>
+
+- ### 키보드 오토마타 : 삭제 기능
+```Text
+오토마타의 기존 배열에서의 종성과 이중종성을 구별할 수 없어 삭제에 어려움을 겪고 있던 도중 모든 음소를 저장 할 배열을 하나 더 추가하여
+완성된 한글을 분해하여 비교를 통해 해결 하였다.
+```
+	
+- [한글 오토마타 구현 코드] https://github.com/ScutiUY/ios-wanted-CustomKeyboard/blob/fix/automata/CustomKeyboard/Hangul/KeyboardMaker.swift
+
+
+
+
+
 
 ## 💼 리팩토링
 
