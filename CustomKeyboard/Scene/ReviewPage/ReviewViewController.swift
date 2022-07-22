@@ -37,14 +37,12 @@ class ReviewViewController: UIViewController {
             case .failure(_) :
                 print(Error.self)
             }
-            
         }
     }
 }
 
 extension ReviewViewController {
     private func attribute() {
-        
         reviewTableView.delegate = self
         reviewTableView.dataSource = self
         reviewTableView.register(ReviewTableViewCell.self, forCellReuseIdentifier: "ReviewTableViewCell")
@@ -119,7 +117,6 @@ extension ReviewViewController: UITextFieldDelegate {
     }
 }
 
-// MARK: - TextFieldTextDelegate
 extension ReviewViewController: PassContentDelegate {
     func sendReviewData(content: String) {
         myContent.append(content)

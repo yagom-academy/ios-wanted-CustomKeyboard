@@ -140,13 +140,6 @@ extension ReviewTableViewCell {
         }
     }
     
-    private func dateToString(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ko")
-        formatter.dateFormat = "yyyy년 MM월 dd일"
-        return formatter.string(from: date)
-    }
-    
     private func separateStarAndReview(_ content: String) -> (String, String) {
         let temp = content.components(separatedBy: "\n")
         switch temp.count {

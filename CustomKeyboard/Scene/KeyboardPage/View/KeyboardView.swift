@@ -8,7 +8,6 @@
 import UIKit
 
 class KeyboardView: UIView {
-    
     let viewModel = KeyboardViewModel()
     
     let keyFirstLine = KeyFirstLineStackView()

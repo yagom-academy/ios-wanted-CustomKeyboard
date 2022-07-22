@@ -8,7 +8,6 @@
 import UIKit
 
 class KeyThirdLineStackView: UIStackView {
-    
     weak var delegate: ButtonDelegate?
     weak var shiftDelegate: ShiftDelegate?
     
