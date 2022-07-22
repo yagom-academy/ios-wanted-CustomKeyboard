@@ -22,13 +22,13 @@
 		18C304FA2887B2C00028ADD5 /* CustomKeyboardExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 18C304F32887B2C00028ADD5 /* CustomKeyboardExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		18C304FF2887B3050028ADD5 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2D8927287D656D00002AD3 /* KeyboardView.swift */; };
 		18C305002887B3070028ADD5 /* KeyboardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1483FE287E52A6009B49FB /* KeyboardButton.swift */; };
-		18C305012887B3090028ADD5 /* KeyboardButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B148400287E52C5009B49FB /* KeyboardButtonType.swift */; };
 		18C305022887B30B0028ADD5 /* SejongState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B675983287FB39D009B2E51 /* SejongState.swift */; };
 		18C305032887B3100028ADD5 /* KeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B675987288027A5009B2E51 /* KeyboardViewModel.swift */; };
 		18C305042887B3740028ADD5 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1802A70F287FDCDC00D10F46 /* Observable.swift */; };
 		18C305052887B3800028ADD5 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2D8923287D4D2600002AD3 /* String+.swift */; };
 		18C305062887B3820028ADD5 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B56403E2881343E0033D620 /* UIButton+.swift */; };
 		18C305072887B5060028ADD5 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C304F52887B2C00028ADD5 /* KeyboardViewController.swift */; };
+		18E29938288A7418002E8DD3 /* KeyboardButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B148400287E52C5009B49FB /* KeyboardButtonType.swift */; };
 		6B1483FF287E52A6009B49FB /* KeyboardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1483FE287E52A6009B49FB /* KeyboardButton.swift */; };
 		6B148401287E52C5009B49FB /* KeyboardButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B148400287E52C5009B49FB /* KeyboardButtonType.swift */; };
 		6B2D8924287D4D2600002AD3 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2D8923287D4D2600002AD3 /* String+.swift */; };
@@ -447,10 +447,10 @@
 				18C305002887B3070028ADD5 /* KeyboardButton.swift in Sources */,
 				18C304F62887B2C00028ADD5 /* KeyboardViewController.swift in Sources */,
 				18C305052887B3800028ADD5 /* String+.swift in Sources */,
+				18E29938288A7418002E8DD3 /* KeyboardButtonType.swift in Sources */,
 				18C305022887B30B0028ADD5 /* SejongState.swift in Sources */,
 				18C305062887B3820028ADD5 /* UIButton+.swift in Sources */,
 				18C305042887B3740028ADD5 /* Observable.swift in Sources */,
-				18C305012887B3090028ADD5 /* KeyboardButtonType.swift in Sources */,
 				18C304FF2887B3050028ADD5 /* KeyboardView.swift in Sources */,
 				18C305032887B3100028ADD5 /* KeyboardViewModel.swift in Sources */,
 			);

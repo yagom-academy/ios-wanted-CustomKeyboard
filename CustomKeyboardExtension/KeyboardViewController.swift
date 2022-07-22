@@ -4,34 +4,8 @@
 //
 //  Created by 이경민 on 2022/07/20.
 //
-
-// 2번 지워야 하는 경우 - true
-    // 1. 이중 종성이 있을때, 모음이 들어 온 경우
-    // 2. 단종성이 있을 때, 모음이 들어 온 경우 - compat - next // 안녕핫 -> 안녕하세
-
-// 지우면 안되는 경우 - nil
-    // 1. 이중 종성이 있을 경우, 초성이 들어온 경우 - compat - next
-    // 2. 단종성이 있을 경우, 이중 종성이 안되는 초성이 들어온 경우
-    // 5. 단중성이 있을 때, 이중 중성이 안되는 경우
-    // 6. 이중 중성이 있을때, 중성이 들어온 경우
-    // 7. 초성이 있을때, 초성이 들어온 경우 - compat - next
-
 import UIKit
 
-//enum DeleteCase {
-//    case once // 한번 지우는 경우 (기본값)
-//    case twice // 두번 지우는 경우
-//    case zero // 지우면 안되는 경우
-//}
-
-// ㅁ + ㅜ -> 2개 지우고 => 글자 1개 넣고
-// 무 + 궁 -> 2개 지우고 => 글자가 1개라면  2개 넣고
-// 무궁 + 화 -> 2개 지우고 => 글자가 1 3개 넣고
-// 무궁화 + 삼 -> 2개 지우고 3개 넣고
-// 무궁화삼 + 천 -> 2개 지우고 3개 넣고
-
-
-// ㅁ ㅜ 무궁
 class KeyboardViewController: UIInputViewController {
 
     @IBOutlet var nextKeyboardButton: UIButton!
@@ -43,9 +17,6 @@ class KeyboardViewController: UIInputViewController {
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
-//        let heightValue = (KeyboardButton.height * 4) + (8 * 3) + 13
-//
-//        self.view.heightAnchor.constraint(equalToConstant: heightValue).isActive = true
     }
     
     override func viewDidLoad() {
@@ -74,8 +45,6 @@ class KeyboardViewController: UIInputViewController {
     }
     
     override func textDidChange(_ textInput: UITextInput?) {
-        // The app has just changed the document's contents, the document context has been updated.
-        
         var textColor: UIColor
         let proxy = self.textDocumentProxy
         
@@ -84,7 +53,6 @@ class KeyboardViewController: UIInputViewController {
         } else {
             textColor = UIColor.black
         }
-//        self.nextKeyboardButton.setTitleColor(textColor, for: [])
     }
     
     func deleteBinding(proxy: UITextDocumentProxy) {
@@ -128,21 +96,7 @@ class KeyboardViewController: UIInputViewController {
             }
         }
         
-        // 안녕하세요 -> 안녕하세ㅇ  2:1
-        // 안녕하세ㅇ -> 안녕하세   1:2
-        // 안녕하세  -> 안녕하서   2:2
-        // 안녕하ㅅ -> 안녕하.    1:2
-        
-        // 안녕 -> 안녀.    3:2
-        // 안녀 -> 안ㄴ.     2:1
-        // 안ㄴ -> 안.      1:3
-        // 안 -> 아.       3:2
-        // 아 -> ㅇ        2:1
-        // ㅇ -> ""       1:0
-        
-        // 안 녕 -> 안 녀    3:2
-        // 안 녀 -> 안 ㄴ.   2:1
-        // 안 ㄴ -> 안" ".   1:0
+
     }
     
     func inputBinding(proxy: UITextDocumentProxy) {

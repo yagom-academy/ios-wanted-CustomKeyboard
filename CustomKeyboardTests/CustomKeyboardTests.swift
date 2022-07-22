@@ -19,7 +19,7 @@ class CustomKeyboardTests: XCTestCase {
         viewModel = nil
     }
     
-    func test_입력() {
+    func test_띄어쓰기가없는장문작성() {
         let expected = "헤일못별빛이이런하나의내일봅니다써라이너새워때이름과잠이런위에있습니다별시와사람들의차이름을너무나아직까닭입니다시와내일아침이밤이있습니다남은너무나이런있습니다흙으로풀이이름을많은사람들의불러나의지나가는위에도봅니다별들을딴은추억과아직별빛이어머님파란봅니다"
         
         let compats: [Compatibility] = [
@@ -60,6 +60,7 @@ class CustomKeyboardTests: XCTestCase {
         XCTAssertEqual(expect, viewModel.result.value)
     }
     
+    // 헤일몺" "
     func test_띄어쓰기가마지막에있는텍스트지우기() {
         let compats: [Compatibility] = [.ㅎ, .ㅔ, .ㅇ, .ㅣ, .ㄹ, .ㅁ, .ㅗ, .ㅂ, .ㅅ]
         
@@ -79,7 +80,7 @@ class CustomKeyboardTests: XCTestCase {
     }
     
 
-    
+    // 헤 일몺 -> '지우기'
     func test_띄어쓰기가중간에있는텍스트지우기() {
         let compats: [Compatibility?] = [.ㅎ, .ㅔ, nil, .ㅇ, .ㅣ, .ㄹ, .ㅁ, .ㅗ, .ㅂ, .ㅅ]
         
@@ -102,7 +103,8 @@ class CustomKeyboardTests: XCTestCase {
         XCTAssertEqual(expect, resultCount)
     }
     
-    func test_마지막을지웠다가다시적었을경우() { // 헤일못 -> 헤일몺
+    // 헤일못 -> 헤일몺
+    func test_마지막을지웠다가다시적었을경우() {
         let compats: [Compatibility] = [.ㅎ, .ㅔ, .ㅇ, .ㅣ, .ㄹ, .ㅁ, .ㅗ, .ㅅ]
         let afterCompats: [Compatibility] = [.ㅂ, .ㅅ]
         compats.forEach { value in
@@ -119,7 +121,7 @@ class CustomKeyboardTests: XCTestCase {
         XCTAssertEqual(expect, viewModel.result.value)
     }
     
-    // 헤일못
+    // 헤일못" " -> 헤일못
     func test_마지막스페이스를지우고다시작성하는경우() {
         let compats: [Compatibility] = [.ㅎ, .ㅔ, .ㅇ, .ㅣ, .ㄹ, .ㅁ, .ㅗ, .ㅅ]
         compats.forEach { value in
@@ -136,7 +138,8 @@ class CustomKeyboardTests: XCTestCase {
         XCTAssertEqual(expect, viewModel.result.value)
     }
     
-    func test_마지막스페이스를지우고다시작성히하는데이중모음이가능한경우() { // 헤일몹" " => 헤일몹ㅅ
+    // 헤일몹" " => 헤일몹ㅅ
+    func test_마지막스페이스를지우고다시작성히하는데이중모음이가능한경우() {
         let compats: [Compatibility] = [.ㅎ, .ㅔ, .ㅇ, .ㅣ, .ㄹ, .ㅁ, .ㅗ, .ㅂ]
         
         compats.forEach { value in
@@ -150,5 +153,36 @@ class CustomKeyboardTests: XCTestCase {
         let expect = "헤일몹ㅅ"
         
         XCTAssertEqual(expect, viewModel.result.value)
+    }
+    
+    //썛씠덂쒗뙑
+    func test_자주사용하지않는글자() {
+        let compats: [Compatibility] = [.ㅆ, .ㅒ, .ㄹ, .ㅎ, .ㅆ, .ㅢ, .ㅆ, .ㄷ, .ㅒ, .ㄹ, .ㅁ, .ㅆ, .ㅝ, .ㅊ, .ㄸ, .ㅙ, .ㄹ, .ㄱ]
+
+        compats.forEach { value in
+            viewModel.didTapKeyboardButton(buffer: value)
+        }
+        let expect = "썛씠덂쒗뙑"
+        
+        XCTAssertEqual(expect, viewModel.result.value)
+    }
+    
+    //랜덤생성기
+    func test_random글자사용하기() {
+        let doubleArr: [Compatibility] = [.ㄱㅅ,.ㄴㅈ,.ㄴㅎ,.ㄹㄱ,.ㄹㅁ,.ㄹㅂ,.ㄹㅅ,.ㄹㅌ,.ㄹㅍ,.ㄹㅎ,.ㅂㅅ,.ㅟ,.ㅘ,.ㅙ,.ㅚ,.ㅞ,.ㅝ,.ㅢ]
+        var compats: [Compatibility] = []
+        
+        (0..<8).forEach { _ in
+            if let value = Compatibility.allCases.filter({ !doubleArr.contains($0) }).randomElement() {
+                compats.append(value)
+            }
+        }
+        
+        print(compats)
+        
+        compats.forEach { value in
+            viewModel.didTapKeyboardButton(buffer: value)
+        }
+        print(viewModel.result.value)
     }
 }

@@ -30,7 +30,18 @@ class KeyboardViewModel {
         case .writeInitialState: //초성을 적어야 하는 상태
             curr = buffer.rawValue
             if buffer.jungsung != nil {
-                sejongState = .writeLastState
+                
+                if let last = result.value.unicodeScalars.last {
+                    if let _ = Chosung(rawValue: last.value) {
+                        sejongState = .writeLastState
+                    } else {
+                        sejongState = .writeInitialState
+                    }
+                } else {
+                    sejongState = .writeInitialState
+                }
+                
+
             } else {
                 sejongState = .writeMiddleState
             }
@@ -49,7 +60,6 @@ class KeyboardViewModel {
             if buffer.jungsung != nil { // 아 + ㅏ or ㅣ(이중모음)
                 // 이중 모음 체크
                 guard let last = result.value.unicodeScalars.last else { return } // ㅏ
-                
                 if let doubleJungsung = mergeJungsung(Jungsung(rawValue: last.value), buffer.jungsung) { // 이중모음 가능
                     result.value.unicodeScalars.removeLast()
                     curr = doubleJungsung.rawValue
@@ -117,41 +127,6 @@ class KeyboardViewModel {
         result.value.appendUnicode(curr)
         isShift.value = false
         resultCompats.value = result.value.last
-        
-        // 이전 : [[ㄴ ㅕ ㅇ],[ㅎ ㅏ ㅅ]] -> 녕핫
-        // 새로운 배열 : [[ㅎ ㅏ],[ㅅ ㅔ]] -> 녕하세
-        
-        // 함핫 -> 함하세 [ㅎ ㅏ ㅅ] 3 : [ㅎ ㅏ],[ㅅ ㅔ] 2
-        
-        // 핫 -> 하세 [ㅎ ㅏ ㅅ] : [ㅅ ㅔ]
-        
-        
-        // "" -> ㅇ   [ ] 0 : [ㅇ] 1
-        // ㅇ -> 아    [ㅇ] 1 : [ㅇ ㅏ] 2
-        // 아 -> 안    [ㅇ ㅏ] 2 : [ㅇ ㅏ ㄴ] 3
-        // 안 -> 앉    [ㅇ ㅏ ㄴ] 3 : [ㅇ ㅏ ㄴ ㅈ] 4
-        // 앉ㅇ -> 앉아 [ㅇ] 1 : [ㅇ ㅏ] 2
-        // 앉아 -> 앉았 [ㅇ ㅏ] 2 : [ㅇ ㅏ ㅆ] 3
-        // 앉았 -> 앉았ㅇ [ㅇ ㅏ ㅆ] 3 : [ㅇ] 1
-        
-        // 앉 -> 안ㅈ   [ㅇ ㅏ ㄴㅈ] 3 : [[ㅇ ㅏ ㄴ], [ㅈ]] 3
- 
-        
-        // ㅇ -> 아 -> 안 -> 앉
-        // ㅇ -> ㅇ아 -> ㅇ아안 -> ㅇ아안앉
-        // ㅇ -> 아 -> 안 -> 앉 -> 자
-        // 마지막 글자를 가져와서 한개 지우고 넣는다.
-        // 앉 -> 안ㅈ
-        
-//        if result.value.count < 2 {
-//            currentValue.value = result.value.map { $0 }
-//        } else {
-//            currentValue.value = result.value.map { $0 }[(result.value.count - 2)...].map { $0 }
-//        }
-        
-        // 완성된 글자만으로도 할 수 있는가? -> 지우고 쓰고
-        // 조립의 상태를 알아야 하는 것인가? -> 재조립을 한다.
-        
     }
     
     func clearAll() {
@@ -229,6 +204,8 @@ class KeyboardViewModel {
                                 sejongState = .alreadyLastState
                             }
                         }
+                    } else {
+                        sejongState = .writeInitialState
                     }
                     
                 }

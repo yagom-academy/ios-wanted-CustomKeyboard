@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Compatibility: UInt32 {
+enum Compatibility: UInt32, CaseIterable {
     case ㄱ = 0x3131
     case ㄲ = 0x3132
     case ㄱㅅ = 0x3133
