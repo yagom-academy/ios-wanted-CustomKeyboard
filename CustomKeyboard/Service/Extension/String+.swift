@@ -26,6 +26,6 @@ extension String {
     mutating func appendUnicode(_ code: UInt32?) {
         guard let code = code,
               let unicode = UnicodeScalar(code) else { return }
-        self.append(String(unicode))
+        append(String(unicode))
     }
 }

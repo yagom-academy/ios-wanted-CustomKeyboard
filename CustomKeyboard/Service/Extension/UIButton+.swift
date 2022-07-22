@@ -8,7 +8,12 @@
 import UIKit
 
 extension UIButton {
-    func setupUtilButton(_ title: String, target: Any?, touchUpAction: Selector, touchDownAction: Selector) {
+    func setupUtilButton(
+        _ title: String,
+        target: Any?,
+        touchUpAction: Selector,
+        touchDownAction: Selector
+    ) {
         setTitle(title, for: .normal)
         setTitleColor(.label, for: .normal)
         titleLabel?.font = .systemFont(ofSize: 20.0, weight: .regular)

@@ -157,7 +157,9 @@ class CustomKeyboardTests: XCTestCase {
     
     //썛씠덂쒗뙑
     func test_자주사용하지않는글자() {
-        let compats: [Compatibility] = [.ㅆ, .ㅒ, .ㄹ, .ㅎ, .ㅆ, .ㅢ, .ㅆ, .ㄷ, .ㅒ, .ㄹ, .ㅁ, .ㅆ, .ㅝ, .ㅊ, .ㄸ, .ㅙ, .ㄹ, .ㄱ]
+        let compats: [Compatibility] = [
+            .ㅆ, .ㅒ, .ㄹ, .ㅎ, .ㅆ, .ㅢ, .ㅆ, .ㄷ, .ㅒ, .ㄹ, .ㅁ, .ㅆ, .ㅝ, .ㅊ, .ㄸ, .ㅙ, .ㄹ, .ㄱ
+        ]
 
         compats.forEach { value in
             viewModel.didTapKeyboardButton(buffer: value)
@@ -169,11 +171,14 @@ class CustomKeyboardTests: XCTestCase {
     
     //랜덤생성기
     func test_random글자사용하기() {
-        let doubleArr: [Compatibility] = [.ㄱㅅ,.ㄴㅈ,.ㄴㅎ,.ㄹㄱ,.ㄹㅁ,.ㄹㅂ,.ㄹㅅ,.ㄹㅌ,.ㄹㅍ,.ㄹㅎ,.ㅂㅅ,.ㅟ,.ㅘ,.ㅙ,.ㅚ,.ㅞ,.ㅝ,.ㅢ]
+        let doubleArr: [Compatibility] = [
+            .ㄱㅅ,.ㄴㅈ,.ㄴㅎ,.ㄹㄱ,.ㄹㅁ,.ㄹㅂ,.ㄹㅅ,.ㄹㅌ,.ㄹㅍ,.ㄹㅎ,.ㅂㅅ,.ㅟ,.ㅘ,.ㅙ,.ㅚ,.ㅞ,.ㅝ,.ㅢ
+        ]
         var compats: [Compatibility] = []
+        let filteredArr = Compatibility.allCases.filter { !doubleArr.contains($0) }
         
         (0..<8).forEach { _ in
-            if let value = Compatibility.allCases.filter({ !doubleArr.contains($0) }).randomElement() {
+            if let value = filteredArr.randomElement() {
                 compats.append(value)
             }
         }

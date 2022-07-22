@@ -7,20 +7,23 @@
 
 import Foundation
 
-protocol CacheProtocol: AnyObject {
+// MARK: - Cacheable Protocol
+protocol Cacheable {
     func fetchData(_ key: String) -> Data?
     func uploadData(_ key: String, data: Data)
 }
 
-class Cache: CacheProtocol {
-    static let shared = Cache()
-    let memory = MemoryCache.shared
-    let disk = DiskCache.shared
+// MARK: - Cache Manager
+class CacheManager: Cacheable {
+    // MARK: - Properties
+    static let shared = CacheManager()
+    private let memory = MemoryCache()
+    private let disk = DiskCache()
     
     func fetchData(_ key: String) -> Data? {
-        if let data = self.memory.fetchData(key) {
+        if let data = memory.fetchData(key) {
             return data
-        } else if let data = self.disk.fetchData(key) {
+        } else if let data = disk.fetchData(key) {
             memory.uploadData(key, data: data)
             return data
         } else {
@@ -29,49 +32,47 @@ class Cache: CacheProtocol {
     }
     
     func uploadData(_ key: String, data: Data) {
-        self.memory.uploadData(key, data: data)
-        self.disk.uploadData(key, data: data)
+        memory.uploadData(key, data: data)
+        disk.uploadData(key, data: data)
     }
-    
 }
 
-class MemoryCache: CacheProtocol {
-    static let shared = MemoryCache()
-    
+// MARK: - Memory Cache
+class MemoryCache: Cacheable {
+    // MARK: - Properties
     let cache = NSCache<NSString, NSData>()
     
     func fetchData(_ key: String) -> Data? {
-        guard let data = self.cache.object(forKey: key as NSString) else  {
+        guard let data = cache.object(forKey: key as NSString) else  {
             return nil
         }
         return Data(referencing: data)
     }
     
     func uploadData(_ key: String, data: Data) {
-        self.cache.setObject(NSData(data: data), forKey: key as NSString)
+        cache.setObject(NSData(data: data), forKey: key as NSString)
     }
 }
 
-class DiskCache: CacheProtocol {
-
-    static let shared = DiskCache(name: "cache")
-    
+// MARK: - Disk Cache
+class DiskCache: Cacheable {
+    // MARK: - Properties
     var folderURL: URL? {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(self.name)
+        return FileManager.default.urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        )
+        .first?
+        .appendingPathComponent(name)
     }
-    
     var name: String = "cache"
     
-    init(name: String) {
-        self.name = name
-        
-        self.createFolder()
-    }
-    
+    // MARK: - Init
+    init() { createFolder() }
     
     func fetchData(_ key: String) -> Data? {
         let imageKey = key.toIdentifierPath
-        guard let writeURL = self.folderURL?.appendingPathComponent(imageKey) else {
+        guard let writeURL = folderURL?.appendingPathComponent(imageKey) else {
             return nil
         }
         return FileManager.default.contents(atPath: writeURL.path)
@@ -79,7 +80,7 @@ class DiskCache: CacheProtocol {
     
     func uploadData(_ key: String, data: Data) {
         let imageKey = key.toIdentifierPath
-        guard let writeURL = self.folderURL?.appendingPathComponent(imageKey) else {
+        guard let writeURL = folderURL?.appendingPathComponent(imageKey) else {
             return
         }
         try? data.write(to: writeURL)
@@ -94,6 +95,9 @@ class DiskCache: CacheProtocol {
             return
         }
         
-        try? FileManager.default.createDirectory(at: folderURL, withIntermediateDirectories: true)
+        try? FileManager.default.createDirectory(
+            at: folderURL,
+            withIntermediateDirectories: true
+        )
     }
 }

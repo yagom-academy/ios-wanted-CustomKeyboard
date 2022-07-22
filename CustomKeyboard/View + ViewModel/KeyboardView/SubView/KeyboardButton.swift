@@ -8,6 +8,9 @@
 import UIKit
 
 class KeyboardButton: UIButton {
+    // MARK: - Properties
+    static let width = (UIScreen.main.bounds.width - 60.0) / 10
+    static let height = width * 1.3
     
     var text: String?
     var compatibility: Compatibility
@@ -18,9 +21,7 @@ class KeyboardButton: UIButton {
         }
     }
     
-    static let width = (UIScreen.main.bounds.width - 60.0) / 10
-    static let height = width * 1.3
-    
+    // MARK: - Init
     init(
         text: String? = nil,
         compatibility: Compatibility
@@ -34,6 +35,30 @@ class KeyboardButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setupShiftMode(_ isShift: Bool) {
+        switch compatibility {
+        case .ㄱ: if isShift { compatibility = .ㄲ }
+        case .ㄲ: if !isShift { compatibility = .ㄱ }
+        case .ㄷ: if isShift { compatibility = .ㄸ }
+        case .ㄸ: if !isShift { compatibility = .ㄷ }
+        case .ㅂ: if isShift { compatibility = .ㅃ }
+        case .ㅃ: if !isShift { compatibility = .ㅂ }
+        case .ㅅ: if isShift { compatibility = .ㅆ }
+        case .ㅆ: if !isShift { compatibility = .ㅅ }
+        case .ㅈ: if isShift { compatibility = .ㅉ }
+        case .ㅉ: if !isShift { compatibility = .ㅈ }
+        case .ㅐ: if isShift { compatibility = .ㅒ }
+        case .ㅒ: if !isShift { compatibility = .ㅐ }
+        case .ㅔ: if isShift { compatibility = .ㅖ }
+        case .ㅖ: if !isShift { compatibility = .ㅔ }
+        default: break
+        }
+        text = compatibility.text
+    }
+}
+
+// MARK: - View Configure
+private extension KeyboardButton {
     func setupButton() {
         setTitle(text, for: .normal)
         setTitleColor(.label, for: .normal)
@@ -58,38 +83,5 @@ class KeyboardButton: UIButton {
         setContentHuggingPriority(.init(rawValue: 1000), for: .vertical)
     }
     
-    func setupShiftMode(_ isShift: Bool) {
-        switch compatibility {
-        case .ㄱ:
-            if isShift { compatibility = .ㄲ }
-        case .ㄲ:
-            if !isShift { compatibility = .ㄱ }
-        case .ㄷ:
-            if isShift { compatibility = .ㄸ }
-        case .ㄸ:
-            if !isShift { compatibility = .ㄷ }
-        case .ㅂ:
-            if isShift { compatibility = .ㅃ }
-        case .ㅃ:
-            if !isShift { compatibility = .ㅂ }
-        case .ㅅ:
-            if isShift { compatibility = .ㅆ }
-        case .ㅆ:
-            if !isShift { compatibility = .ㅅ }
-        case .ㅈ:
-            if isShift { compatibility = .ㅉ }
-        case .ㅉ:
-            if !isShift { compatibility = .ㅈ }
-        case .ㅐ:
-            if isShift { compatibility = .ㅒ }
-        case .ㅒ:
-            if !isShift { compatibility = .ㅐ }
-        case .ㅔ:
-            if isShift { compatibility = .ㅖ }
-        case .ㅖ:
-            if !isShift { compatibility = .ㅔ }
-        default: break
-        }
-        text = compatibility.text
-    }
+    
 }

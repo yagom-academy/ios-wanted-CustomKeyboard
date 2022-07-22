@@ -7,12 +7,16 @@
 
 import UIKit
 
+
 class WriteViewModel {
+    // MARK: - Properties
+    // ViewModel
     let keyboardViewModel: KeyboardViewModel
+    // Observable
     var resultText: Observable<String>
-    
     var returnButtonTapped: Observable<Bool>
     
+    // MARK: - Init
     init(keyboardViewModel: KeyboardViewModel) {
         self.keyboardViewModel = keyboardViewModel
         
@@ -21,6 +25,6 @@ class WriteViewModel {
     }
     
     func clearAll() {
-        self.resultText.value = ""
+        resultText.value = ""
     }
 }

@@ -18,10 +18,11 @@ enum NetworkError: String, Error {
 }
 
 struct Network {
-    
+    // MARK: - Properties
     let path: String
     let parameters: [String: String]?
     
+    // MARK: - Init
     init(path: String, parameters: [String: String]? = nil) {
         self.path = path
         self.parameters = parameters
@@ -72,9 +73,7 @@ struct Network {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let value: [String:String] = [
-            "content":comment
-        ]
+        let value: [String: String] = ["content": comment]
         
         do {
             let jsonData = try JSONEncoder().encode(value)
@@ -83,8 +82,11 @@ struct Network {
             debugPrint(error)
         }
         
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            debugPrint(String(data: data!, encoding: .utf8)!)
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            guard error == nil else {
+                completionHandler(false)
+                return
+            }
             guard (response as? HTTPURLResponse)?.statusCode == 200 else {
                 completionHandler(false)
                 return

@@ -8,12 +8,16 @@
 import UIKit
 
 class ReviewListTableViewCellViewModel {
-    let cache = Cache.shared
-    var image: Observable<UIImage?> = Observable(nil)
+    //MARK: - Properties
+    // Network
+    let cache = CacheManager.shared
     var task: URLSessionDataTask?
-    
     let review: ReviewResult
     
+    // Observable
+    var image: Observable<UIImage?> = Observable(nil)
+
+    //MARK: - Init
     init(review: ReviewResult) {
         self.review = review
         setImageTask()

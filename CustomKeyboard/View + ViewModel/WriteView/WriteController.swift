@@ -7,51 +7,45 @@
 
 import UIKit
 
-//MARK: - CommentEditDelegate
-protocol CommentEditDelegate: AnyObject {
-    var commentValue: String? { get set }
-}
-
-class WriteController: UIViewController {
-    weak var delegate: CommentEditDelegate?
-    let viewModel: WriteViewModel
+final class WriteController: UIViewController {
+    // MARK: - Properties
+    private let viewModel: WriteViewModel
     
+    // MARK: - UI Components
     lazy var commentEditView: UITextView = {
         let textView = UITextView()
-        textView.font = UIFont.systemFont(ofSize: 20)
-        textView.textContainer.maximumNumberOfLines = 0
+        textView.font = .systemFont(ofSize: 20)
         return textView
     }()
-    
     lazy var keyBoardView: KeyboardView = {
         let keyboard = KeyboardView(viewModel: viewModel.keyboardViewModel)
         keyboard.backgroundColor = .systemGray4
         return keyboard
     }()
     
+    // MARK: - Init
     init(viewModel: WriteViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
         setupNavigationBar()
-        commentEditView.inputView = keyBoardView
-        commentEditView.inputView?.autoresizingMask = .flexibleHeight
-        
-        commentEditView.text = delegate?.commentValue
+        setupInputView()
         configUI()
         
         bindResult()
         bindReturnButtonTapped()
     }
-    
+}
+
+// MARK: - Bind Methods
+private extension WriteController {
     func bindResult() {
         viewModel.resultText.bind { [weak self] result in
             self?.commentEditView.text = result
@@ -65,13 +59,7 @@ class WriteController: UIViewController {
             }
         }
     }
-    
-    func keyboardView(_ keyboard: KeyboardView, didEndEditing: Bool, text: String) {
-        delegate?.commentValue = text
-        dismiss(animated: true)
-    }
 }
-
 // MARK: - @objc Methods
 private extension WriteController {
     @objc func didTapDismissButton() {
@@ -83,7 +71,7 @@ private extension WriteController {
     }
 }
 
-//MARK: - View Configure
+// MARK: - View Configure
 private extension WriteController {
     func setupNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -98,18 +86,34 @@ private extension WriteController {
             target: self,
             action: #selector(didTapDismissButton)
         )
+        navigationItem.title = "리뷰 작성"
     }
     func configUI() {
-        [commentEditView].forEach {
-            view.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
+        view.backgroundColor = .systemBackground
+        commentEditView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(commentEditView)
+        
+        let commonSpacing: CGFloat = 20
+        let safeArea = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            commentEditView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            commentEditView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            commentEditView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            commentEditView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+            commentEditView
+                .topAnchor
+                .constraint(equalTo: safeArea.topAnchor, constant: commonSpacing),
+            commentEditView
+                .leadingAnchor
+                .constraint(equalTo: safeArea.leadingAnchor, constant: commonSpacing),
+            commentEditView
+                .bottomAnchor
+                .constraint(equalTo: safeArea.bottomAnchor, constant: -commonSpacing),
+            commentEditView
+                .trailingAnchor
+                .constraint(equalTo: safeArea.trailingAnchor, constant: -commonSpacing)
         ])
+    }
+    
+    func setupInputView() {
+        commentEditView.inputView = keyBoardView
+        commentEditView.inputView?.autoresizingMask = .flexibleHeight
     }
 }

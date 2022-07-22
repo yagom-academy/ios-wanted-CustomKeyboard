@@ -30,20 +30,17 @@ struct ImageLoader {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             
             guard error == nil else {
-                print(url, "⭐️")
                 completion(.failure(.invalidRequest))
                 return
             }
             
             guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-                print(url, "⭐️")
                 completion(.failure(.serverError))
                 return
             }
             
             guard let data = data,
                   let image = UIImage(data: data) else {
-                print(url, "⭐️")
                 completion(.failure(.unknown))
                 return
             }

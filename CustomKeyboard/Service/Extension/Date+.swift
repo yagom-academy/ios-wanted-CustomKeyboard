@@ -18,17 +18,18 @@ extension Date {
         guard let day = dateComponents.day,
               let hour = dateComponents.hour,
               let minute = dateComponents.minute else {
-            return self.toString(format: "y년 MM월 dd일")
+            return toString(format: "y년 MM월 dd일")
         }
         
         if day >= 1 {
-            return self.toString(format: "y년 MM월 dd일")
+            return toString(format: "y년 MM월 dd일")
         } else if hour >= 1 {
             return "\(hour)시간 전"
         } else {
             return "\(minute)분 전"
         }
     }
+    
     func toString(format: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")

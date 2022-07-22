@@ -7,7 +7,7 @@
 import UIKit
 
 class KeyboardViewController: UIInputViewController {
-
+    // MARK: - Properties
     @IBOutlet var nextKeyboardButton: UIButton!
     let viewModel = KeyboardViewModel()
     lazy var keyboardView = KeyboardView(viewModel: viewModel)
@@ -108,21 +108,22 @@ class KeyboardViewController: UIInputViewController {
             let result = String(char)
             let count = result.unicodeScalars.count
             
+            // 띄어쓰기 할 경우
             if result == " " {
                 proxy.insertText(result)
                 self.preValuesCount = 0
                 return
             }
             
-            // ㅇ u{}
+            // 0("") : 1(ㅇ)
             if self.preValuesCount == 0 {
                 proxy.insertText(result)
                 self.preValuesCount = count
                 return
             }
             
-            // 아 - 1:2 ㅇ ㅏ u{} u{}
-            // 안 - 2:3
+            // 1(아) : 2(ㅇ ㅏ)
+            // 2(아) : 3(안)
             
             if self.preValuesCount < count {
                 proxy.deleteBackward()
@@ -139,8 +140,7 @@ class KeyboardViewController: UIInputViewController {
                 proxy.insertText(prevValue)
             }
             
-            // 앉 3 : 3
-            // 안자
+            // 3(안) : 3 (앉)
             if self.preValuesCount == count {
                 proxy.deleteBackward()
                 proxy.insertText(result)

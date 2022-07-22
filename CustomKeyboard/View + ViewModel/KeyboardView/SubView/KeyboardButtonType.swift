@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// 호환형 한글 유니코드
 enum Compatibility: UInt32, CaseIterable {
     case ㄱ = 0x3131
     case ㄲ = 0x3132
@@ -60,6 +61,7 @@ enum Compatibility: UInt32, CaseIterable {
     case ㅢ = 0x3162
     case ㅣ = 0x3163
     
+    /// 자판에 들어갈 문자열
     var text: String? {
         switch self {
         case .ㄱ: return "ㄱ"
@@ -106,6 +108,7 @@ enum Compatibility: UInt32, CaseIterable {
         }
     }
     
+    /// 호환형을 초성으로 변환해주는 프로퍼티
     var chosung: Chosung? {
         switch self {
         case .ㄱ: return .ㄱ
@@ -131,6 +134,7 @@ enum Compatibility: UInt32, CaseIterable {
         }
     }
     
+    /// 호환형을 중성으로 변환해주는 프로퍼티
     var jungsung: Jungsung? {
         switch self {
         case .ㅏ: return .ㅏ
@@ -158,6 +162,7 @@ enum Compatibility: UInt32, CaseIterable {
         }
     }
     
+    /// 호환형을 종성으로 변환해주는 프로퍼티
     var jongsung: Jongsung? {
         switch self {
         case .ㄱ: return .ㄱ
@@ -192,6 +197,7 @@ enum Compatibility: UInt32, CaseIterable {
     }
 }
 
+/// 조합형 한글 초성 유니코드
 enum Chosung: UInt32 {
     case ㄱ = 0x1100
     case ㄲ = 0x1101
@@ -213,6 +219,7 @@ enum Chosung: UInt32 {
     case ㅍ = 0x1111
     case ㅎ = 0x1112
     
+    /// 초성을 종성으로 변환해주는 프로퍼티
     var jongsung: Jongsung? {
         switch self {
         case .ㄱ: return.ㄱ
@@ -235,6 +242,7 @@ enum Chosung: UInt32 {
         }
     }
     
+    /// 초성을 호환형으로 변환해주는 프로퍼티
     var compatibility: Compatibility {
         switch self {
         case .ㄱ: return .ㄱ
@@ -260,6 +268,7 @@ enum Chosung: UInt32 {
     }
 }
 
+/// 조합형 한글 중성 유니코드
 enum Jungsung: UInt32 {
     case ㅏ = 0x1161
     case ㅐ = 0x1162
@@ -283,6 +292,7 @@ enum Jungsung: UInt32 {
     case ㅢ = 0x1174
     case ㅣ = 0x1175
     
+    /// 중성을 호환형으로 변환해주는 프로퍼티
     var compatibility: Compatibility {
         switch self {
         case .ㅏ: return .ㅏ
@@ -310,6 +320,7 @@ enum Jungsung: UInt32 {
     }
 }
 
+/// 조합형 한글 종성 유니코드
 enum Jongsung: UInt32 {
     case empty
     case ㄱ = 0x11A8
@@ -340,6 +351,7 @@ enum Jongsung: UInt32 {
     case ㅍ = 0x11C1
     case ㅎ = 0x11C2
     
+    /// 종성을 초성으로 변환해주는 프로퍼티
     var chosung: Chosung? {
         switch self {
         case .ㄱ: return .ㄱ

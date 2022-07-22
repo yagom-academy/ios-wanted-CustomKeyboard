@@ -8,140 +8,160 @@
 import Foundation
 
 class KeyboardViewModel {
+    // MARK: - Properties
+    
+    // Result Value State
     var sejongState: SejongState = .writeInitialState
-    var currentJungsung: Jungsung? = nil
-    var currentLastJongsung: Jongsung? = nil
-    
     var result: Observable<String> = Observable("")
-    var returnButtonTapped: Observable<Bool> = Observable(false)
-    var currentValue: Observable<[Character]> = Observable([])
     
+    // Utility Buttons
     var isShift: Observable<Bool> = Observable(false)
-    var resultCompats: Observable<Character?> = Observable(nil)
-    var isDelete: Observable<Bool> = Observable(false)
+    var returnButtonTapped: Observable<Bool> = Observable(false)
     
+    // Delete
+    var isDelete: Observable<Bool> = Observable(false)
     var isRemovePhoneme = true
     
+    // Keyboard Extension
+    var resultCompats: Observable<Character?> = Observable(nil)
+    
     func didTapKeyboardButton(buffer: Compatibility) {
-        
         var curr: UInt32? = 0
         isRemovePhoneme = true
+        
         switch sejongState {
-        case .writeInitialState: //초성을 적어야 하는 상태
+        case .writeInitialState where buffer.jungsung != nil:
+            // 초성이 들어와야 하는 상태에서 초성이 들어온 경우
             curr = buffer.rawValue
-            if buffer.jungsung != nil {
-                
-                if let last = result.value.unicodeScalars.last {
-                    if let _ = Chosung(rawValue: last.value) {
-                        sejongState = .writeLastState
-                    } else {
-                        sejongState = .writeInitialState
-                    }
+            if let last = result.value.unicodeScalars.last {
+                if let _ = Chosung(rawValue: last.value) {
+                    sejongState = .writeLastState
                 } else {
                     sejongState = .writeInitialState
                 }
-                
-
             } else {
-                sejongState = .writeMiddleState
+                sejongState = .writeInitialState
             }
             
-        case .writeMiddleState: // 중성이 들어와야 하는 상태
-            if buffer.jungsung != nil {
-                let last = result.value.unicodeScalars.removeLast()
-                result.value.appendUnicode(Compatibility(rawValue: last.value)?.chosung?.rawValue)
-                curr = buffer.jungsung?.rawValue
-                sejongState = .writeLastState
-            } else {
-                curr = buffer.rawValue
-                sejongState = .writeMiddleState
-            }
-        case .writeLastState: // 아
-            if buffer.jungsung != nil { // 아 + ㅏ or ㅣ(이중모음)
-                // 이중 모음 체크
-                guard let last = result.value.unicodeScalars.last else { return } // ㅏ
-                if let doubleJungsung = mergeJungsung(Jungsung(rawValue: last.value), buffer.jungsung) { // 이중모음 가능
-                    result.value.unicodeScalars.removeLast()
-                    curr = doubleJungsung.rawValue
-                    sejongState = .writeLastState
-                } else if let doubleJungsung = mergeJungsung(Compatibility(rawValue: last.value)?.jungsung, buffer.jungsung) {
-                    result.value.unicodeScalars.removeLast()
-                    curr = doubleJungsung.rawValue
-                    sejongState = .writeLastState
-                } else { // 이중모음 안되는 경우
-                    curr = buffer.rawValue
-                    sejongState = .writeInitialState
-                }
-            } else {
-                if let jongsung = buffer.jongsung {
-                    curr = jongsung.rawValue
-                    sejongState = .alreadyLastState
-                } else {
-                    curr = buffer.rawValue
-                    sejongState = .writeMiddleState
-                }
-            }
-        case .alreadyLastState: // 안 + ㅣ -> 아 ㄴ
-            if buffer.jungsung != nil {
-                let last = result.value.unicodeScalars.removeLast()
-                result.value.appendUnicode(Jongsung(rawValue: last.value)?.chosung?.rawValue)
-                curr = buffer.jungsung?.rawValue
-                sejongState = .writeLastState
-            } else {
-                // 이중 자음 체크
-                let last = result.value.unicodeScalars.last
-                
-                if let lastValue = last?.value,
-                   let doubleJongsung = mergeDoubleJongsung(Jongsung(rawValue: lastValue), buffer.jongsung) { // 이중 자음 가능
-                    result.value.unicodeScalars.removeLast()
-                    curr = doubleJongsung.rawValue
-                    sejongState = .alreadyDoubleLastState
-                } else { // 이중 자음 안되는 경우
-                    curr = buffer.rawValue
-                    sejongState = .writeMiddleState
-                }
-            }
-        case .alreadyDoubleLastState: // 앉, 았 -> 안자, 아싸
-            if buffer.jungsung != nil {
-                // 받침이 ㄲ, ㅆ일 때 체크
-                guard let lastValue = result.value.unicodeScalars.last?.value else { return }
-                
-                if let splitJongsung = splitDoubleJongsung(Jongsung(rawValue: lastValue)) { // ㄱㅅ, ㄴㅎ 처럼 쪼개지는 경우
-                    result.value.unicodeScalars.removeLast()
-                    result.value.appendUnicode(splitJongsung.0.rawValue)
-                    result.value.appendUnicode(splitJongsung.1.chosung?.rawValue)
-                    curr = buffer.jungsung?.rawValue
-                    sejongState = .writeLastState
-                } else { // ㄲ, ㅆ 처럼 안쪼개지는 경우
-                    result.value.unicodeScalars.removeLast()
-                    result.value.appendUnicode(Chosung(rawValue: lastValue)?.rawValue)
-                    curr = buffer.jungsung?.rawValue
-                    sejongState = .writeLastState
-                }
-            } else {
-                curr = buffer.rawValue
-                sejongState = .writeMiddleState
-            }
-        }
+        case .writeInitialState where buffer.jungsung == nil:
+            // 초성이 들어와야 하지만 중성이 들어온 경우
+            curr = buffer.rawValue
+            sejongState = .writeMiddleState
 
+        case .writeMiddleState where buffer.jungsung != nil:
+            // 중성이 들어와야 하는 상태에서 중성이 들어온 경우
+            let last = result.value.unicodeScalars.removeLast()
+            let chosung = Compatibility(rawValue: last.value)?.chosung
+            result.value.appendUnicode(chosung?.rawValue)
+            curr = buffer.jungsung?.rawValue
+            sejongState = .writeLastState
+            
+        case .writeMiddleState where buffer.jungsung == nil:
+            // 중성이 들어와야 하는 상태에서 중성이 안들어온 경우
+            curr = buffer.rawValue
+            sejongState = .writeMiddleState
+            
+        case .writeLastState where buffer.jungsung != nil: // 아
+            // 종성이 들어와야 하는 상태에서 중성이 들어온 경우
+            guard let last = result.value.unicodeScalars.last else {
+                return
+            }
+            
+            if let doubleJungsung = mergeJungsung(
+                Jungsung(rawValue: last.value),
+                buffer.jungsung
+            ) {
+                // 이중모음 가능
+                result.value.unicodeScalars.removeLast()
+                curr = doubleJungsung.rawValue
+                sejongState = .writeLastState
+            } else if let doubleJungsung = mergeJungsung(
+                Compatibility(rawValue: last.value)?.jungsung,
+                buffer.jungsung
+            ) {
+                result.value.unicodeScalars.removeLast()
+                curr = doubleJungsung.rawValue
+                sejongState = .writeLastState
+            } else { // 이중모음 안되는 경우
+                curr = buffer.rawValue
+                sejongState = .writeInitialState
+            }
+        case .writeLastState where buffer.jungsung == nil:
+            // 종성이 들어와야 하는 상태에서 자음이 들어온 경우
+            if let jongsung = buffer.jongsung {
+                curr = jongsung.rawValue
+                sejongState = .alreadyLastState
+            } else {
+                curr = buffer.rawValue
+                sejongState = .writeMiddleState
+            }
+        case .alreadyLastState where buffer.jungsung != nil: // 안 + ㅣ -> 아 ㄴ
+            // 홑받침이 있고, 모음이 들어온 경우
+            let last = result.value.unicodeScalars.removeLast()
+            let chosung = Jongsung(rawValue: last.value)?.chosung
+            result.value.appendUnicode(chosung?.rawValue)
+            curr = buffer.jungsung?.rawValue
+            sejongState = .writeLastState
+            
+        case .alreadyLastState where buffer.jungsung == nil:
+            // 홑받침이 있고, 자음이 들어온 경우
+            let last = result.value.unicodeScalars.last
+            
+            if let lastValue = last?.value,
+               let doubleJongsung = mergeJongsung(
+                Jongsung(rawValue: lastValue),
+                buffer.jongsung
+               ) {
+                // 이중 자음 가능
+                result.value.unicodeScalars.removeLast()
+                curr = doubleJongsung.rawValue
+                sejongState = .alreadyDoubleLastState
+            } else {
+                // 이중 자음 안되는 경우
+                curr = buffer.rawValue
+                sejongState = .writeMiddleState
+            }
+        case .alreadyDoubleLastState where buffer.jungsung != nil: // 앉, 았 -> 안자, 아싸
+            // 겹받침이 있고, 모음이 들어온 경우
+            guard let lastValue = result.value.unicodeScalars.last?.value else {
+                return
+            }
+            
+            if let splitJongsung = splitJongsung(Jongsung(rawValue: lastValue)) {
+                // ㄱㅅ, ㄴㅎ 처럼 쪼개지는 경우
+                result.value.unicodeScalars.removeLast()
+                result.value.appendUnicode(splitJongsung.0.rawValue)
+                result.value.appendUnicode(splitJongsung.1.chosung?.rawValue)
+                curr = buffer.jungsung?.rawValue
+                sejongState = .writeLastState
+            } else {
+                // ㄲ, ㅆ 처럼 안쪼개지는 경우
+                result.value.unicodeScalars.removeLast()
+                result.value.appendUnicode(Chosung(rawValue: lastValue)?.rawValue)
+                curr = buffer.jungsung?.rawValue
+                sejongState = .writeLastState
+            }
+        case .alreadyDoubleLastState where buffer.jungsung == nil:
+            // 겹받침이 있고, 자음이 들어온 경우
+            curr = buffer.rawValue
+            sejongState = .writeMiddleState
+        default:
+            break
+        }
+        
         result.value.appendUnicode(curr)
         isShift.value = false
         resultCompats.value = result.value.last
     }
     
-    func clearAll() {
-        sejongState = .writeInitialState
-        self.result.value = ""
-    }
-    
     func didTapBack() {
-        
         if !result.value.isEmpty {
-            if isRemovePhoneme {
+            if isRemovePhoneme { // 음소 지우기
                 guard let willRemove = result.value.unicodeScalars.last else {
                     return
                 }
                 
+                // 공백일 경우
                 if willRemove == " " {
                     isRemovePhoneme = false
                     result.value.unicodeScalars.removeLast()
@@ -149,9 +169,9 @@ class KeyboardViewModel {
                     return
                 }
                 
-                // 공백이 아닐 경우의 메서드
+                // 공백이 아닐 경우
                 
-                // 모음을 지우는 경우
+                // 1. 모음을 지우는 경우
                 if let jungsung = Jungsung.init(rawValue: willRemove.value) { // 중성
                     // 이중 중성
                     if let doubleJungsung = splitJungsung(jungsung) { // 과 -> 고 ㅘ -> ㅗ
@@ -159,10 +179,11 @@ class KeyboardViewModel {
                         
                         if let chosungValue = result.value.unicodeScalars.last?.value,
                            let _ = Chosung(rawValue: chosungValue) {
-                            result.value.appendUnicode(doubleJungsung.0.rawValue) //
+                            result.value.appendUnicode(doubleJungsung.0.rawValue)
                             sejongState = .writeLastState
                         } else {
-                            result.value.appendUnicode(doubleJungsung.0.compatibility.rawValue)
+                            let compat = doubleJungsung.0.compatibility
+                            result.value.appendUnicode(compat.rawValue)
                             sejongState = .writeLastState
                         }
                     } else { // 단 중성 -> 고,ㅗ
@@ -180,7 +201,7 @@ class KeyboardViewModel {
                 // 2. 자음을 지우는 경우
                 if let jongsung = Jongsung(rawValue: willRemove.value) {
                     //이중 자음인 경우
-                    if let doubleJongsung = splitDoubleJongsung(jongsung) {
+                    if let doubleJongsung = splitJongsung(jongsung) {
                         result.value.unicodeScalars.removeLast()
                         result.value.appendUnicode(doubleJongsung.0.rawValue)
                         sejongState = .alreadyLastState
@@ -190,15 +211,14 @@ class KeyboardViewModel {
                     }
                 }
                 
-                // 호환성인 경우
+                // 3. 호환성인 경우
                 if Compatibility(rawValue: willRemove.value) != nil { // 안녕하ㅅ
                     result.value.unicodeScalars.removeLast() // 안녕하
-                    
                     if let lastValue = result.value.unicodeScalars.last?.value {
                         if Jungsung(rawValue: lastValue) != nil {
                             sejongState = .writeLastState
                         } else {
-                            if splitDoubleJongsung(Jongsung(rawValue: lastValue)) != nil {
+                            if splitJongsung(Jongsung(rawValue: lastValue)) != nil {
                                 sejongState = .alreadyDoubleLastState
                             } else {
                                 sejongState = .alreadyLastState
@@ -207,28 +227,37 @@ class KeyboardViewModel {
                     } else {
                         sejongState = .writeInitialState
                     }
-                    
                 }
-            } else {
+            } else { // 음절 지우기
                 result.value.removeLast()
                 sejongState = .writeInitialState
                 if result.value.isEmpty {
                     isRemovePhoneme = true
                 }
             }
-            print(result.value)
         }
-        
         isDelete.value = true
     }
     
+    // 공백 추가 메서드
     func addSpace() {
         result.value.append(" ")
         sejongState = .writeInitialState
         resultCompats.value = result.value.last
     }
     
-    func mergeDoubleJongsung(_ jong1: Jongsung?, _ jong2: Jongsung?) -> Jongsung? {
+    // 초기화 메서드
+    func clearAll() {
+        sejongState = .writeInitialState
+        result.value = ""
+    }
+}
+
+private extension KeyboardViewModel {
+    /// 두개의 종성을 이중 종성으로 반환하는 메서드
+    ///
+    /// 반환값이 `nil`인 경우 이중 종성이 불가능하다.
+    func mergeJongsung(_ jong1: Jongsung?, _ jong2: Jongsung?) -> Jongsung? {
         switch jong1 {
         case .ㄱ:
             if jong2 == .ㅅ { return .ㄱㅅ }
@@ -254,7 +283,11 @@ class KeyboardViewModel {
         default: return nil
         }
     }
-    func splitDoubleJongsung(_ jong: Jongsung?) -> (Jongsung, Jongsung)? {
+    
+    /// 한개의 종성 (이중 종성인 경우) 을 두개의 종성으로 반환하는 메서드
+    ///
+    /// 반환값이 `nil`인 경우 이중 종성이 분리가 불가능하다.
+    func splitJongsung(_ jong: Jongsung?) -> (Jongsung, Jongsung)? {
         switch jong {
         case .ㄱㅅ: return (.ㄱ, .ㅅ)
         case .ㄴㅈ: return (.ㄴ, .ㅈ)
@@ -270,6 +303,10 @@ class KeyboardViewModel {
         default: return nil
         }
     }
+    
+    /// 두개의 중성을 이중 중성으로 반환하는 메서드
+    ///
+    /// 반환값이 `nil`인 경우 이중 중성이 불가능하다.
     func mergeJungsung(_ jung1: Jungsung?, _ jung2: Jungsung?) -> Jungsung? {
         switch jung1 {
         case .ㅗ:
@@ -305,6 +342,9 @@ class KeyboardViewModel {
         }
     }
     
+    /// 한개의 중성 (이중 중성인 경우) 을 두개의 중성으로 반환하는 메서드
+    ///
+    /// 반환값이 `nil`인 경우 이중 중성이 분리가 불가능하다.
     func splitJungsung(_ jung: Jungsung?) -> (Jungsung, Jungsung)? {
         switch jung {
         case .ㅖ: return (.ㅕ, .ㅣ)

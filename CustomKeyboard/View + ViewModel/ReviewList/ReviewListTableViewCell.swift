@@ -8,14 +8,16 @@
 import UIKit
 
 class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
+    //MARK: - Properties
     var viewModel: ReviewListTableViewCellViewModel?
 
+    //MARK: - UI Components
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 35.0
         imageView.clipsToBounds = true
-        imageView.backgroundColor = UIColor(red: 247 / 255, green: 37 / 255, blue: 133 / 255, alpha: 0.5)
+        imageView.backgroundColor = .backgroundPink
         imageView.layer.borderColor = UIColor.separator.cgColor
         imageView.layer.borderWidth = 0.5
         return imageView
@@ -47,6 +49,7 @@ class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
         return label
     }()
     
+    //MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()
@@ -55,7 +58,7 @@ class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+    //MARK: - SetUp
     func setupView() {
         nameLabel.text = viewModel?.review.user.userName
         rateLabel.text = viewModel?.review.rate
@@ -64,19 +67,22 @@ class ReviewListTableViewCell: UITableViewCell, CellIdentifiable {
         viewModel?.loadImage()
         bindImage()
     }
-    
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        viewModel?.cancelImageDownLoad()
+        profileImageView.image = nil
+    }
+}
+
+//MARK: - Bind Methods
+private extension ReviewListTableViewCell {
     func bindImage() {
         viewModel?.image.bind { [weak self] profile in
             DispatchQueue.main.async {
                 self?.profileImageView.image = profile
             }
         }
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        viewModel?.cancelImageDownLoad()
-        profileImageView.image = nil
     }
 }
 
@@ -95,6 +101,7 @@ private extension ReviewListTableViewCell {
         }
         
         let commonSpacing = 16.0
+        let safeArea = contentView.safeAreaLayoutGuide
         
         nameLabel.setContentHuggingPriority(.init(rawValue: 1000), for: .vertical)
         rateLabel.setContentHuggingPriority(.init(rawValue: 1000), for: .vertical)
@@ -102,27 +109,64 @@ private extension ReviewListTableViewCell {
         dateLabel.setContentHuggingPriority(.init(rawValue: 999), for: .vertical)
         
         NSLayoutConstraint.activate([
-            profileImageView.widthAnchor.constraint(equalToConstant: 70.0),
-            profileImageView.heightAnchor.constraint(equalToConstant: 70.0),
-            profileImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: commonSpacing),
-            profileImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: commonSpacing),
+            profileImageView
+                .widthAnchor
+                .constraint(equalToConstant: 70.0),
+            profileImageView
+                .heightAnchor
+                .constraint(equalToConstant: 70.0),
+            profileImageView
+                .leadingAnchor
+                .constraint(equalTo: safeArea.leadingAnchor, constant: commonSpacing),
+            profileImageView
+                .topAnchor
+                .constraint(equalTo: safeArea.topAnchor, constant: commonSpacing),
             
-            nameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: commonSpacing),
-            nameLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: commonSpacing),
-            nameLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -commonSpacing),
+            nameLabel
+                .leadingAnchor
+                .constraint(
+                    equalTo: profileImageView.trailingAnchor,
+                    constant: commonSpacing
+                ),
+            nameLabel
+                .topAnchor
+                .constraint(equalTo: safeArea.topAnchor, constant: commonSpacing),
+            nameLabel
+                .trailingAnchor
+                .constraint(equalTo: safeArea.trailingAnchor, constant: -commonSpacing),
             
-            rateLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-            rateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: commonSpacing),
-            rateLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
+            rateLabel
+                .leadingAnchor
+                .constraint(equalTo: nameLabel.leadingAnchor),
+            rateLabel
+                .topAnchor
+                .constraint(equalTo: nameLabel.bottomAnchor, constant: commonSpacing),
+            rateLabel
+                .trailingAnchor
+                .constraint(equalTo: nameLabel.trailingAnchor),
             
-            contentLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-            contentLabel.topAnchor.constraint(equalTo: rateLabel.bottomAnchor, constant: commonSpacing),
-            contentLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
+            contentLabel
+                .leadingAnchor
+                .constraint(equalTo: nameLabel.leadingAnchor),
+            contentLabel
+                .topAnchor
+                .constraint(equalTo: rateLabel.bottomAnchor, constant: commonSpacing),
+            contentLabel
+                .trailingAnchor
+                .constraint(equalTo: nameLabel.trailingAnchor),
             
-            dateLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-            dateLabel.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: commonSpacing),
-            dateLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
-            dateLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -commonSpacing)
+            dateLabel
+                .leadingAnchor
+                .constraint(equalTo: nameLabel.leadingAnchor),
+            dateLabel
+                .topAnchor
+                .constraint(equalTo: contentLabel.bottomAnchor, constant: commonSpacing),
+            dateLabel
+                .trailingAnchor
+                .constraint(equalTo: nameLabel.trailingAnchor),
+            dateLabel
+                .bottomAnchor
+                .constraint(equalTo: safeArea.bottomAnchor, constant: -commonSpacing)
         ])
     }
 }

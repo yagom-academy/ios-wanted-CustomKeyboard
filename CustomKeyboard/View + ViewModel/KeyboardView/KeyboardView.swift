@@ -8,20 +8,14 @@
 import UIKit
 
 class KeyboardView: UIView {
+    // MARK: - Properties
     let viewModel: KeyboardViewModel
-    
     var isShift = false
-    
-    let topLetterValues: [Compatibility] = [
-        .ㅂ,.ㅈ,.ㄷ,.ㄱ,.ㅅ,.ㅛ,.ㅕ,.ㅑ,.ㅐ,.ㅔ
-    ]
-    let middleLetterValues: [Compatibility] = [
-        .ㅁ,.ㄴ,.ㅇ,.ㄹ,.ㅎ,.ㅗ,.ㅓ,.ㅏ,.ㅣ
-    ]
-    let lastLetterValues:[Compatibility] = [
-        .ㅋ,.ㅌ,.ㅊ,.ㅍ,.ㅠ,.ㅜ,.ㅡ
-    ]
+    let topLetterValues: [Compatibility] = [.ㅂ, .ㅈ, .ㄷ, .ㄱ, .ㅅ, .ㅛ, .ㅕ, .ㅑ, .ㅐ, .ㅔ]
+    let middleLetterValues: [Compatibility] = [.ㅁ, .ㄴ, .ㅇ, .ㄹ, .ㅎ, .ㅗ, .ㅓ, .ㅏ, .ㅣ]
+    let lastLetterValues:[Compatibility] = [.ㅋ, .ㅌ, .ㅊ, .ㅍ, .ㅠ, .ㅜ, .ㅡ]
 
+    // MARK: - UI Components
     private lazy var shiftButton: UIButton = {
         let button = UIButton()
         button.setupUtilButton(
@@ -62,8 +56,6 @@ class KeyboardView: UIView {
         )
         return button
     }()
-    
-
     private lazy var topStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -81,7 +73,6 @@ class KeyboardView: UIView {
         configureButton(middleLetterValues, stackView: stackView)
         return stackView
     }()
-
     private lazy var bottomStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -91,20 +82,31 @@ class KeyboardView: UIView {
         return stackView
     }()
 
+    // MARK: - Init
     init(viewModel: KeyboardViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         setupLayout()
         
-        //Binding
         bindShiftMode()
-        print(shiftButton.layer.bounds)
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+}
+
+// MARK: - Bind Methods
+private extension KeyboardView {
+    func bindShiftMode() {
+        viewModel.isShift.bind { isShift in
+            self.isShift = isShift
+            self.changeShiftMode(isShift)
+        }
+    }
+}
+
+// MARK: - Methods
+private extension KeyboardView {
     func changeShiftMode(_ bool: Bool) {
         topStackView
             .arrangedSubviews
@@ -114,13 +116,6 @@ class KeyboardView: UIView {
             .forEach {
                 $0.isShift = bool
             }
-    }
-    
-    func bindShiftMode() {
-        viewModel.isShift.bind { isShift in
-            self.isShift = isShift
-            self.changeShiftMode(isShift)
-        }
     }
 }
 
@@ -156,10 +151,7 @@ private extension KeyboardView {
     }
 }
 
-// MARK: - Methods
-private extension KeyboardView {}
-
-// MARK: - UI Methods
+// MARK: - View Configure
 private extension KeyboardView {
     func setupLayout() {
         [
@@ -175,36 +167,86 @@ private extension KeyboardView {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
+        let buttonWidth = KeyboardButton.width
+        let buttonHeight = KeyboardButton.height
         NSLayoutConstraint.activate([
-            topStackView.topAnchor.constraint(equalTo: self.topAnchor,constant: 8),
-            topStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            topStackView
+                .topAnchor
+                .constraint(equalTo: topAnchor,constant: 8),
+            topStackView
+                .centerXAnchor
+                .constraint(equalTo: centerXAnchor),
             
-            midStackView.topAnchor.constraint(equalTo: topStackView.bottomAnchor,constant: 8),
-            midStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            midStackView
+                .topAnchor
+                .constraint(equalTo: topStackView.bottomAnchor,constant: 8),
+            midStackView
+                .centerXAnchor
+                .constraint(equalTo: centerXAnchor),
             
-            shiftButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 3),
-            shiftButton.trailingAnchor.constraint(equalTo: bottomStackView.leadingAnchor, constant: -8),
-            shiftButton.centerYAnchor.constraint(equalTo: bottomStackView.centerYAnchor),
-            shiftButton.heightAnchor.constraint(equalToConstant: KeyboardButton.height),
+            shiftButton
+                .leadingAnchor
+                .constraint(equalTo: leadingAnchor, constant: 3),
+            shiftButton
+                .trailingAnchor
+                .constraint(equalTo: bottomStackView.leadingAnchor, constant: -8),
+            shiftButton
+                .centerYAnchor
+                .constraint(equalTo: bottomStackView.centerYAnchor),
+            shiftButton
+                .heightAnchor
+                .constraint(equalToConstant: buttonHeight),
             
-            bottomStackView.topAnchor.constraint(equalTo: midStackView.bottomAnchor,constant: 8),
-            bottomStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            backButton.leadingAnchor.constraint(equalTo: bottomStackView.trailingAnchor, constant: 8),
-            backButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -3),
-            backButton.centerYAnchor.constraint(equalTo: bottomStackView.centerYAnchor),
-            backButton.heightAnchor.constraint(equalToConstant: KeyboardButton.height),
+            bottomStackView
+                .topAnchor
+                .constraint(equalTo: midStackView.bottomAnchor,constant: 8),
+            bottomStackView
+                .centerXAnchor
+                .constraint(equalTo: centerXAnchor),
+            backButton
+                .leadingAnchor
+                .constraint(equalTo: bottomStackView.trailingAnchor, constant: 8),
+            backButton
+                .trailingAnchor
+                .constraint(equalTo: trailingAnchor, constant: -3),
+            backButton
+                .centerYAnchor
+                .constraint(equalTo: bottomStackView.centerYAnchor),
+            backButton
+                .heightAnchor
+                .constraint(equalToConstant: buttonHeight),
             
-            spaceButton.leadingAnchor.constraint(equalTo: bottomStackView.leadingAnchor, constant: KeyboardButton.width + 6),
-            spaceButton.topAnchor.constraint(equalTo: bottomStackView.bottomAnchor, constant: 13),
-            spaceButton.trailingAnchor.constraint(equalTo: bottomStackView.trailingAnchor, constant: -(KeyboardButton.width + 6)),
-            spaceButton.heightAnchor.constraint(equalToConstant: KeyboardButton.height),
-//            spaceButton.bottomAnchor.constraint(equalTo: bottomAnchor),
+            spaceButton
+                .leadingAnchor
+                .constraint(
+                    equalTo: bottomStackView.leadingAnchor,
+                    constant: buttonWidth + 6
+                ),
+            spaceButton
+                .topAnchor
+                .constraint(equalTo: bottomStackView.bottomAnchor, constant: 13),
+            spaceButton
+                .trailingAnchor
+                .constraint(
+                    equalTo: bottomStackView.trailingAnchor,
+                    constant: -(buttonWidth + 6)
+                ),
+            spaceButton
+                .heightAnchor
+                .constraint(equalToConstant: buttonHeight),
             
-            
-            returnButton.leadingAnchor.constraint(equalTo: spaceButton.trailingAnchor, constant: 6),
-            returnButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -3),
-            returnButton.centerYAnchor.constraint(equalTo: spaceButton.centerYAnchor),
-            returnButton.heightAnchor.constraint(equalToConstant: KeyboardButton.height)
+            returnButton
+                .leadingAnchor
+                .constraint(equalTo: spaceButton.trailingAnchor, constant: 6),
+            returnButton
+                .trailingAnchor
+                .constraint(equalTo: trailingAnchor, constant: -3),
+            returnButton
+                .centerYAnchor
+                .constraint(equalTo: spaceButton.centerYAnchor),
+            returnButton
+                .heightAnchor
+                .constraint(equalToConstant: buttonHeight)
         ])
     }
     
