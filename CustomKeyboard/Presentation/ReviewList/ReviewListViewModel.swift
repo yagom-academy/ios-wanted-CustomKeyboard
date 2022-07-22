@@ -11,7 +11,7 @@ final class ReviewListViewModel {
     
     // MARK: - Properties
     struct CellType {
-        var profileURL: URL
+        var profileURLStrig: String
         var userName: String
         var contents: String
         var createdAt: String
@@ -48,15 +48,12 @@ final class ReviewListViewModel {
         
         let row = indexPath.row
         
-        guard let url = URL(string: self.reviewDatas[row].user.profileImage) else {
-            return nil
-        }
-        
+        let urlString = self.reviewDatas[row].user.profileImage
         let userName =  reviewDatas[row].user.userName
         let content = reviewDatas[row].content
         let createdAt = convertDateTime(createdAtTime: reviewDatas[row].createdAt)
         
-        return CellType(profileURL: url, userName: userName, contents: content, createdAt: createdAt)
+        return CellType(profileURLStrig: urlString, userName: userName, contents: content, createdAt: createdAt)
     }
     
     private func convertDateTime(createdAtTime: String) -> String {

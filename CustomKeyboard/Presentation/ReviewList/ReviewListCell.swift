@@ -34,7 +34,7 @@ final class ReviewListCell: UICollectionViewCell, ReuseIdentifying {
             return
         }
         
-        profileImage.load(url: data.profileURL)
+        profileImage.load(urlString: data.profileURLStrig)
         userNameLabel.text = data.userName
         contentsLabel.text = data.contents
         timeLabel.text = data.createdAt

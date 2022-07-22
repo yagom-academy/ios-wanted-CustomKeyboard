@@ -30,6 +30,7 @@
 		FE7A7E6C28853028004315C3 /* SecondRowKeyContainerStackViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7A7E6B28853028004315C3 /* SecondRowKeyContainerStackViewDelegate.swift */; };
 		FE7A7E6E288558EB004315C3 /* CustomKeyBoardViewModel_publicMethod__test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7A7E6D288558EB004315C3 /* CustomKeyBoardViewModel_publicMethod__test.swift */; };
 		FE831582287ED8A10039A56B /* BasicKeyLineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE831581287ED8A10039A56B /* BasicKeyLineDelegate.swift */; };
+		FE8E8CC4288A78A000EA8E6C /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8E8CC3288A78A000EA8E6C /* ImageCacheManager.swift */; };
 		FE9E345A28818D8F00AFE308 /* KeyBoardEngine_addWord__test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E345928818D8F00AFE308 /* KeyBoardEngine_addWord__test.swift */; };
 		FE9E34612881A56200AFE308 /* KeyBoardEngine_removeWord__test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E34602881A56200AFE308 /* KeyBoardEngine_removeWord__test.swift */; };
 		FEB79C88287E83E500B5168A /* DynamicBasicKeyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB79C87287E83E500B5168A /* DynamicBasicKeyLine.swift */; };
@@ -91,6 +92,7 @@
 		FE7A7E6B28853028004315C3 /* SecondRowKeyContainerStackViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondRowKeyContainerStackViewDelegate.swift; sourceTree = "<group>"; };
 		FE7A7E6D288558EB004315C3 /* CustomKeyBoardViewModel_publicMethod__test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyBoardViewModel_publicMethod__test.swift; sourceTree = "<group>"; };
 		FE831581287ED8A10039A56B /* BasicKeyLineDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicKeyLineDelegate.swift; sourceTree = "<group>"; };
+		FE8E8CC3288A78A000EA8E6C /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		FE9E344A2881837300AFE308 /* CustomKeyBoardViewModel__TEST.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomKeyBoardViewModel__TEST.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE9E345728818D8F00AFE308 /* KeyBoardEngineTest__TEST.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeyBoardEngineTest__TEST.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE9E345928818D8F00AFE308 /* KeyBoardEngine_addWord__test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardEngine_addWord__test.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				FFE422A0287D42A700EA04AF /* Entities */,
 				FFE4229F287D427200EA04AF /* Presentation */,
 				FEF67F8C287D2661008E9A97 /* Network */,
+				FE8E8CC2288A785D00EA8E6C /* Cache */,
 				FFE4229E287D425000EA04AF /* Application */,
 				FFE4229D287D422A00EA04AF /* Resource */,
 				DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */,
@@ -248,6 +251,14 @@
 				FE7A7E6728852EF0004315C3 /* FirstRowKeyContainerStackViewDelegate.swift */,
 			);
 			path = FirstRowKeyContainer;
+			sourceTree = "<group>";
+		};
+		FE8E8CC2288A785D00EA8E6C /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				FE8E8CC3288A78A000EA8E6C /* ImageCacheManager.swift */,
+			);
+			path = Cache;
 			sourceTree = "<group>";
 		};
 		FE9E344B2881837300AFE308 /* CustomKeyBoardViewModel__TEST */ = {
@@ -513,6 +524,7 @@
 				FED1A80A28822E79007CA79E /* Initial.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				FF66E251287ECCD8008DF303 /* ReviewListViewController.swift in Sources */,
+				FE8E8CC4288A78A000EA8E6C /* ImageCacheManager.swift in Sources */,
 				FF66E259287ED6EC008DF303 /* UIImageView+Custom.swift in Sources */,
 				FFE4229C287D215200EA04AF /* ReviewType.swift in Sources */,
 				FF66E25C287FF5D3008DF303 /* ReviewListViewModel.swift in Sources */,
