@@ -10,6 +10,7 @@
 |monica|숭어|
 |--|--|
 |[<img src="https://user-images.githubusercontent.com/66169740/177245353-2c07bcd1-ffee-4d2d-923b-f1867aba606d.png" width="200">](https://github.com/3dots3craters)|[<img src="https://avatars.githubusercontent.com/u/31765530?v=4" width="200">](https://github.com/hhhan0315)|
+|한글 오토마타 구현|API 통신 및 Keyboard Extension 구현|
 
 
 
@@ -29,17 +30,13 @@
 |--|--|
 |<img src="https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/main/스크린샷/화면1_1.gif" width="220">|<img src="https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/main/스크린샷/화면1_2.gif" width="220">|
 ## 두 번째 화면
-|한글 조합, Shift, Back, Space|특수한 경우|
+|한글 조합, Shift, Back, Space|겹받침, 이중모음, ㅠ + ㅣ|
 |--|--|
-|<img src="https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/main/스크린샷/화면2_1.gif" width="220">||
+|<img src="https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/main/스크린샷/화면2_1.gif" width="220">|<img src="https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/main/스크린샷/화면2_2.gif" width="220">|
 ## 추가 기능
 |Custom Keyboard (홈버튼 모델)|Custom Keyboard|
 |--|--|
 |<img src="https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/main/스크린샷/화면3_1.gif" width="220">|<img src="https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/main/스크린샷/화면3_2.gif" width="220">|
-
-
-
-# 담당
 
 
 
@@ -95,5 +92,44 @@ class NetworkManager {
 - `NetworkManager` : URLRequest와 Generic dataType을 이용해 네트워크 요청 후 해당 데이터를 dataType에 맞게 decode한 후에 리턴
 - 필요한 주소를 APIEndpoints에서 메서드로 정의한 이후에 해당 Endpoint를 NetworkManager에서 활용해 네트워크 처리할 수 있도록 처리
 
+### Mock을 이용한 Network Test
+- 참고
+  - https://techblog.woowahan.com/2704/
+  - https://sujinnaljin.medium.com/swift-mock-을-이용한-network-unit-test-하기-a69570defb41
+- `Mock` : 호출에 대해 예상하는 결과를 받을 수 있을도록 미리 정의한 객체
+- 실제 네트워크를 호출해야 하는 테스트는 네트워크 상황에 따라 달라질 수 있고 시간이 많이 걸릴 수도 있다.
+- Swift protocol을 사용해 MockURLSession을 이용해 테스트 진행
+- `URLSessionProtocol` : URLSession의 dataTask와 동일한 메서드 선언
+- `URLSessionDataTaskProtocol` : resume 메서드
+- `NetworkManager` : 생성 시 URLSessionProtocol 주입
+```swift
+func test_fetchData_Data가_존재하며_statusCode가_200일때() {
+    // MockURLSession에서 테스트하기 위해 data, statusCode 지정
+    let mockURLSession = MockURLSession.make(url: endpoint.url()!, data: data, statusCode: 200)
+    
+    // sut(systemUnderTest) : 테스트할 클래스
+    // URLSessionProtocol 주입할 수 있어서 mockURLSession으로 초기화 가능
+    let sut = NetworkManager(session: mockURLSession)
+    
+    // data가 존재하고 dataType도 올바르기 때문에 성공할 것이고 decode 이후 ReviewResponse return
+    var result: ReviewResponse?
+    sut.fetchData(endpoint: endpoint, dataType: ReviewResponse.self) { response in
+        if case let .success(reviewResponse) = response {
+            result = reviewResponse
+        }
+    }
+    
+    // 예상값은 미리 저장해둔 data를 ReviewReponse로 decode
+    let expectation: ReviewResponse? = try? JSONDecoder().decode(ReviewResponse.self, from: data)
+    
+    // 결과와 예상값 비교
+    XCTAssertEqual(result?.data.count, expectation?.data.count)
+    XCTAssertEqual(result?.data.first?.content, result?.data.first?.content)
+}
+```
+- MOCKURLSession.make()를 통해 원하는 네트워크 상태를 정의하고 에러가 발생할 때도 확인해볼 수 있다.
+- 테스트코드를 한번 경험해본다는 의미로 작성해봤으며 protocol을 사용해 테스트할 Mock, 실제 URLSession도 가능하다는 것이 신기했다.
+
+
 # 개발 과정
-- 노션 주소
+- ![노션 주소](https://www.notion.so/315a86cbbca5496aa26fe869fad87ec0?v=0c821910441c41e29a06a371ec58148b)
