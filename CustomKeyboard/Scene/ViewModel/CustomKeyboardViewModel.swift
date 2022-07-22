@@ -29,19 +29,29 @@ class CustomKeyboardViewModel {
     }
   }
   
-  func addChar(_ InputCode : Int ){
-    
-    guard let inputChar = UnicodeScalar(InputCode)?.description else {
-      print("Fail Paring To Int")
-      text.value = ""
-      return
+    func addChar(_ InputCode : Int ){
+        
+        guard let inputChar = UnicodeScalar(InputCode)?.description else {
+            print("Fail Paring To Int")
+            text.value = ""
+            return
+        }
+        guard let lastChar = text.value.last, let lastCharUnicode = UnicodeScalar(String(lastChar))?.value else {
+            print("Fail Paring To String")
+            text.value = inputChar
+            return
+        }
+        
+        let startIndex = text.value.startIndex
+        let endIndex = self.text.value.endIndex
+        let subIndex = text.value.index(endIndex, offsetBy: -1)
+        let subString = text.value[startIndex..<subIndex]
+        if subString.isEmpty {
+            text.value = hangeulManger.addChar(Int(lastCharUnicode), InputCode)
+        } else {
+            text.value = subString + hangeulManger.addChar(Int(lastCharUnicode), InputCode)
+        }
+        
     }
-    guard let lastChar = text.value.last, let lastCharUnicode = UnicodeScalar(String(lastChar))?.value else {
-      print("Fail Paring To String")
-      text.value = inputChar
-      return
-    }
-    self.text.value = hangeulManger.addChar(Int(lastCharUnicode), InputCode)
-  }
 
 }
