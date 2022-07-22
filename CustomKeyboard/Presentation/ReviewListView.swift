@@ -9,7 +9,7 @@ import UIKit
 
 protocol KeyboardViewPresentable: NSObject {
     
-    func presentKeyboardView()
+    func presentKeyboardViewController()
     
 }
 
@@ -41,6 +41,11 @@ final class ReviewListView: UIView {
         label.numberOfLines = Style.reviewLineLimit
         label.layer.cornerRadius = Style.cornerRadius
         label.clipsToBounds = true
+        
+        let gestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(presentKeyboardViewController))
+        label.addGestureRecognizer(gestureRecognizer)
+        label.isUserInteractionEnabled = true
+        
         return label
     }()
 
@@ -56,7 +61,7 @@ final class ReviewListView: UIView {
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont(descriptor: descriptor, size: .zero)
         button.layer.cornerRadius = Style.cornerRadius
-        button.addTarget(nil, action: #selector(presentKeyboardView), for: .touchUpInside)
+//        button.addTarget(nil, action: #selector(presentKeyboardViewController), for: .touchUpInside)
         return button
     }()
 
@@ -81,6 +86,7 @@ final class ReviewListView: UIView {
         super.init(frame: frame)
         setupView()
         setupConstraints()
+        addObservers()
     }
 
     @available(*, unavailable, message: "This initializer is not available.")
@@ -88,20 +94,34 @@ final class ReviewListView: UIView {
         super.init(coder: coder)
         setupView()
         setupConstraints()
+        addObservers()
     }
 
     override func layoutSubviews() {
         profileImageView.layer.cornerRadius = profileImageView.frame.height * Style.half
     }
+    
+    func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reviewContentsUpdated(_:)), name: .sendKeyboardContentsToReviewWrittingLabel, object: nil)
+    }
 
 }
 
-// MARK: - Event Methods
+// MARK: - objc Methods
 
 extension ReviewListView {
     
-    @objc func presentKeyboardView() {
-        delegate?.presentKeyboardView()
+    @objc func presentKeyboardViewController() {
+        delegate?.presentKeyboardViewController()
+    }
+    
+    @objc func reviewContentsUpdated(_ sender: NSNotification) {
+        guard let userInfo = sender.userInfo,
+              let contents = userInfo["reviewContents"] as? String else {
+            return
+        }
+        
+        reviewWritingLabel.text = contents
     }
     
 }

@@ -33,18 +33,17 @@ final class ReviewListViewController: BaseViewController {
 
 }
 
-// MARK: - Event Methods
+// MARK: - objc Methods
 
 extension ReviewListViewController: KeyboardViewPresentable {
 
-    func presentKeyboardView() {
+    func presentKeyboardViewController() {
         let viewController = KeyboardViewController()
         viewController.modalPresentationStyle = .overFullScreen
         present(viewController, animated: true)
     }
 
 }
-
 
 // MARK: - View setting methods
 
