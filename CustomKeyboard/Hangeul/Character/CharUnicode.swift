@@ -14,4 +14,5 @@ enum CharUnicode : Int {
     var value: Int {
         return self.rawValue
     }
+    
 }

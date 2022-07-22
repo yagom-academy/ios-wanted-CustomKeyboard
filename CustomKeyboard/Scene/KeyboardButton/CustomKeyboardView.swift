@@ -12,7 +12,7 @@ enum BackgroundColor {
     case lightGray
 }
 
-class CustomKeybordView: UIView {
+class CustomKeyboardView: UIView {
     
     var pressedCharButton : ((String) -> Void)?
     var pressedDeleteButton : (() -> Void)?
@@ -26,6 +26,8 @@ class CustomKeybordView: UIView {
     private lazy var firstLineButtonList = makeButtonList(firstLineCharList)
     private lazy var secondLineButtonList = makeButtonList(secondLineCharList)
     private lazy var thirdLineButtonList = makeButtonList(thirdLineCharList)
+    
+    private let viewModel = CustomKeyboardViewModel()
     
     private lazy var shiftButton : CustomRoundButton = {
         let button = CustomRoundButton()
@@ -109,6 +111,8 @@ class CustomKeybordView: UIView {
         super.init(frame: frame)
         
         self.backgroundColor = #colorLiteral(red: 0.1686274707, green: 0.1686274707, blue: 0.1686274707, alpha: 1)
+        
+        viewModel.text.bind { self.pressedCharButton?($0)}
         
         self.addSubview(containerView)
         containerView.addSubview(firstLineStackView)
@@ -261,7 +265,9 @@ class CustomKeybordView: UIView {
                 if shiftButton.isSelected {
                     changeShiftMode()
                 }
-                pressedCharButton?(char)
+                guard let unicode = UnicodeScalar(char)?.value else { return }
+                viewModel.addChar(Int(unicode))
+                
             }
         }
     }

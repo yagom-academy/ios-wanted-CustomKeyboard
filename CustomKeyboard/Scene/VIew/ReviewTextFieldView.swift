@@ -11,6 +11,7 @@ class ReviewTextFieldView: UIView {
     
     var done:((String) -> ())?
     
+    let viewModel = CustomKeyboardViewModel()
     
     let userProfileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -29,10 +30,9 @@ class ReviewTextFieldView: UIView {
         textField.textColor = .black
         textField.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         textField.addLeftPadding()
-        
         let screenSize : CGRect = UIScreen.main.bounds
         let screenHeight = screenSize.height
-        let customKeyboard = CustomKeybordView(frame: CGRect(x: 0, y: 0, width: 0, height: screenHeight / 3.4))
+        let customKeyboard = CustomKeyboardView(frame: CGRect(x: 0, y: 0, width: 0, height: screenHeight / 3.4))
         customKeyboard.pressedCharButton = { textField.text = $0 }
         customKeyboard.pressedRetrunButton = { textField.resignFirstResponder() }
         customKeyboard.pressedDeleteButton = { print("Clicked Delete Button") }
@@ -69,12 +69,6 @@ class ReviewTextFieldView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setTextfileInputView() {
-        reviewTextField.inputView = nil
-        reviewTextField.inputView = CustomKeybordView()
-        
     }
 }
 

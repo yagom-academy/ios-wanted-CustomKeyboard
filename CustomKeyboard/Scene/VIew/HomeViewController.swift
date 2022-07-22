@@ -27,6 +27,7 @@ class HomeViewController: UIViewController {
     }
     
     private func setData(){
+        
         viewModel.viewReviewList()
         viewModel.reviewList.bind { reviews in
             DispatchQueue.main.async {

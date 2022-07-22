@@ -8,10 +8,40 @@
 import Foundation
 
 class HangeulConverter : UnicodeConverter {
+    func getInitalValue(_ unicode: Int) -> Int? {
+        if (unicode >= 44032) {
+            let value: Int = unicode - 44032
+            let initial = value/28/21
+            return initial
+        }
+        print("Fail to Paring InitalValue")
+        return nil
+    }
+    
+    func getNeutralValue(_ unicode: Int) -> Int? {
+        if (unicode >= 44032) {
+            let value: Int = unicode - 44032
+            let neutral = (value / 28) % 21
+            return neutral
+        }
+        print("Fail to Paring NeutralValue")
+        return nil
+    }
+    
+    func getFinalValue(_ unicode: Int) -> Int? {
+        if (unicode >= 44032) {
+            let value: Int = unicode - 44032
+            let support: Int = value % 28
+            return support
+        }
+        print("Fail to Paring FinalValue")
+        return nil
+    }
+    
     
     func convertCharFromUniCode(_ unicode: Int) -> String {
         guard let unicodeScalar = UnicodeScalar(unicode) else {
-            print("fail parsing to Int")
+            print("Fail parsing to Int")
             return ""
         }
         return unicodeScalar.description
@@ -19,7 +49,7 @@ class HangeulConverter : UnicodeConverter {
     
     func convertUniCodeFromChar(_ char: String) -> Int {
         guard let unicodeScalar = UnicodeScalar(char) else {
-            print("fail parsing to String")
+            print("Fail parsing to String")
             return 0
         }
         return Int(unicodeScalar.value)
