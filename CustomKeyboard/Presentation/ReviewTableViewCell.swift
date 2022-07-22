@@ -75,6 +75,10 @@ final class ReviewTableViewCell: UITableViewCell {
     override func draw(_ rect: CGRect) {
         profileImageView.layer.cornerRadius = profileImageView.frame.width * Style.half
     }
+    
+    override func prepareForReuse() {
+        profileImageView.image = Style.profileImage
+    }
 
 }
 
