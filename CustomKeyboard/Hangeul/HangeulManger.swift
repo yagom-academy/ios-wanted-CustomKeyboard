@@ -53,16 +53,27 @@ class HangeulManger : UnicodeManger {
         
         switch lastCodeState {
         case .includingFinalChar:
-            <#code#>
+            guard let initial = converter.getInitalValue(unicode),
+                  let neutral = converter.getNeutralValue(unicode),
+                  let final = converter.getFinalValue(unicode) else {
+                print("Not includingFinalChar")
+                return ""
+            }
+            let hangeulStruct = HangeulStruct(initial: initial, neutral: neutral, final: final)
+            return removeIncludingFinalChar(lastChar: hangeulStruct)
         case .noneFinalChar:
-            <#code#>
+            guard let initial = converter.getInitalValue(unicode),
+                  let neutral = converter.getNeutralValue(unicode) else {
+                print("Not noneFinalChar")
+                return ""
+            }
+            let hangeulStruct = HangeulStruct(initial: initial, neutral: neutral, final: nil)
+            return removeNoneFinalChar(lastChar: hangeulStruct)
         case .onlyConsonant:
-            <#code#>
+            return removeOnlyConsonant(unicode: unicode)
         case .onlyVowel:
-            <#code#>
+            return removeOnlyVowel(unicode: unicode)
         }
-        
-        return ""
     }
     
 //MARK: - 유니코드 -> 모음, 자음값으로 변경
@@ -72,6 +83,51 @@ class HangeulManger : UnicodeManger {
 
     private func getNeutralValueToVowel(_ NeutralValue: Int) -> Int {
         return NeutralValue + 12623
+    }
+    
+    private func getInitialValueToUnicode(_ InitialValue : Int) -> Int {
+        switch InitialValue {
+        case 0 :
+            return CharUnicode.ㄱ.value
+        case 1 :
+            return CharUnicode.ㄲ.value
+        case 2 :
+            return CharUnicode.ㄴ.value
+        case 3 :
+            return CharUnicode.ㄷ.value
+        case 4 :
+            return CharUnicode.ㄸ.value
+        case 5 :
+            return CharUnicode.ㄹ.value
+        case 6 :
+            return CharUnicode.ㅁ.value
+        case 7 :
+            return CharUnicode.ㅂ.value
+        case 8 :
+            return CharUnicode.ㅃ.value
+        case 9 :
+            return CharUnicode.ㅅ.value
+        case 10 :
+            return CharUnicode.ㅆ.value
+        case 11 :
+            return CharUnicode.ㅇ.value
+        case 12 :
+            return CharUnicode.ㅈ.value
+        case 13 :
+            return CharUnicode.ㅉ.value
+        case 14 :
+            return CharUnicode.ㅊ.value
+        case 15 :
+            return CharUnicode.ㅋ.value
+        case 16 :
+            return CharUnicode.ㅌ.value
+        case 17 :
+            return CharUnicode.ㅍ.value
+        case 18 :
+            return CharUnicode.ㅎ.value
+        default :
+            return 0
+        }
     }
     
     private func finalValueToInitialValue(_ final: Int) -> Int {
@@ -542,9 +598,95 @@ class HangeulManger : UnicodeManger {
         }
         return converter.convertCharFromUniCode(lastCharUnicode)
     }
+    //MARK: - Remove 받침 있음
+    private func removeIncludingFinalChar(lastChar: HangeulStruct) -> String{
+        guard let final = lastChar.final else {
+            print("Not IncludingFinalChar")
+            return ""
+        }
+        var lastCharUnicode = 0
+        switch final {
+        case Final.ㄲ.value, Final.ㄳ.value :
+            lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄱ.value)
+        case Final.ㄵ.value, Final.ㄶ.value :
+            lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄴ.value)
+        case Final.ㄺ.value, Final.ㄻ.value, Final.ㄼ.value, Final.ㄽ.value, Final.ㄾ.value, Final.ㄿ.value, Final.ㅀ.value :
+            lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄹ.value)
+        case Final.ㅄ.value :
+            lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㅂ.value)
+        case Final.ㅆ.value :
+            lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㅅ.value)
+        default :
+            lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: 0)
+        }
+        
+        return converter.convertCharFromUniCode(lastCharUnicode)
+    }
+    //MARK: - Remove 받침 없음
+    func removeNoneFinalChar(lastChar: HangeulStruct) -> String {
+        var lastCharUnicode = 0
+        switch lastChar.neutral {
+        case Neutral.ㅐ.value :
+            lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: Neutral.ㅏ.value, final: 0)
+        case Neutral.ㅒ.value :
+            lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: Neutral.ㅑ.value, final: 0)
+        case Neutral.ㅔ.value :
+            lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: Neutral.ㅓ.value, final: 0)
+        case Neutral.ㅖ.value :
+            lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: Neutral.ㅕ.value, final: 0)
+        case Neutral.ㅘ.value, Neutral.ㅙ.value, Neutral.ㅚ.value :
+            lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: Neutral.ㅗ.value, final: 0)
+        case Neutral.ㅝ.value, Neutral.ㅞ.value, Neutral.ㅟ.value :
+            lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: Neutral.ㅜ.value, final: 0)
+        case Neutral.ㅢ.value :
+            lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: Neutral.ㅡ.value, final: 0)
+        default :
+            return converter.convertCharFromUniCode(getInitialValueToUnicode(lastChar.initial))
+        }
+        return converter.convertCharFromUniCode(lastCharUnicode)
+    }
+    //MARK: - Remove 자음만
+    func removeOnlyConsonant(unicode : Int) -> String {
+    //case ㄱ,ㄲ,ㄴ,ㄷ,ㄸ,ㄹ,ㅁ,ㅂ,ㅃ,ㅅ,ㅆ,ㅇ,ㅈ,ㅉ,ㅊ,ㅋ,ㅌ,ㅍ,ㅎ
+        switch unicode {
+        case CharUnicode.ㄲ.value :
+            return converter.convertCharFromUniCode(CharUnicode.ㄱ.value)
+        case CharUnicode.ㄸ.value :
+            return converter.convertCharFromUniCode(CharUnicode.ㄷ.value)
+        case CharUnicode.ㅃ.value :
+            return converter.convertCharFromUniCode(CharUnicode.ㅂ.value)
+        case CharUnicode.ㅆ.value :
+            return converter.convertCharFromUniCode(CharUnicode.ㅅ.value)
+        case CharUnicode.ㅉ.value :
+            return converter.convertCharFromUniCode(CharUnicode.ㅈ.value)
+        default:
+            return ""
+        }
+    }
+    //MARK: - Remove 모음만
+    func removeOnlyVowel(unicode : Int) -> String {
+        switch unicode {
+        case CharUnicode.ㅐ.value :
+            return converter.convertCharFromUniCode(CharUnicode.ㅏ.value)
+        case CharUnicode.ㅒ.value :
+            return converter.convertCharFromUniCode(CharUnicode.ㅑ.value)
+        case CharUnicode.ㅔ.value :
+            return converter.convertCharFromUniCode(CharUnicode.ㅓ.value)
+        case CharUnicode.ㅖ.value :
+            return converter.convertCharFromUniCode(CharUnicode.ㅕ.value)
+        case CharUnicode.ㅘ.value, CharUnicode.ㅙ.value, CharUnicode.ㅚ.value :
+            return converter.convertCharFromUniCode(CharUnicode.ㅗ.value)
+        case CharUnicode.ㅝ.value, CharUnicode.ㅞ.value, CharUnicode.ㅟ.value :
+            return converter.convertCharFromUniCode(CharUnicode.ㅜ.value)
+        case CharUnicode.ㅢ.value :
+            return converter.convertCharFromUniCode(CharUnicode.ㅡ.value)
+        default :
+            return ""
+        }
+        
+    }
+
+
+    
 }
 
-//MARK: - Remove 받침 있음
-//MARK: - Remove 받침 없음
-//MARK: - Remove 자음만
-//MARK: - Remove 모음만

@@ -9,5 +9,5 @@ import Foundation
 
 protocol UnicodeManger {
     func addChar(_ unitcode : Int,_ inputChar : Int) -> String
-    func removeChar()
+    func removeChar(_ unitcode : Int) -> String
 }
