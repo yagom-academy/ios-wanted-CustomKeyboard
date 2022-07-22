@@ -7,13 +7,13 @@
 
 import UIKit
 
-class ImageCacheManager {
+final class ImageCacheManager {
     static let shared = ImageCacheManager()
     private init() {}
 
     private let storage = NSCache<NSString, UIImage>()
     
-    func getCachedImage(urlString: String) -> UIImage? {
+    func cachedImage(urlString: String) -> UIImage? {
         let cachedKey = NSString(string: urlString)
         if let cachedImage = storage.object(forKey: cachedKey) {
             return cachedImage

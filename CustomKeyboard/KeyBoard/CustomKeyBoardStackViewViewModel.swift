@@ -37,15 +37,15 @@ struct CustomKeyBoardStackViewViewModel {
     
     func removeWord(from beforeText: String?) -> String {
         
-        guard let beforeText = beforeText else { return "" }
-        guard let lastCharUnicode = getLastCharUnicode(from: beforeText),
+        guard let beforeText = beforeText,
+              let lastCharUnicode = getLastCharUnicode(from: beforeText),
               let beforeTextExceptLastChar = getStringExceptLastChar(from: beforeText) else { return "" }
         
         let lastChar = engine.removeWord(lastUniCode: lastCharUnicode)
         
         return beforeTextExceptLastChar + lastChar
     }
-    
+    //TODO: get지우기
     private func getLastCharUnicode(from text: String) -> Int? {
         
         guard text != "",

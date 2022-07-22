@@ -45,7 +45,7 @@ final class DynamicBasicKeyLine: BasicKeyLine {
         guard super.buttons != nil,
               let buttonsCount = super.buttons?.count,
               buttonsCount >= 9 else { return }
-        
+        //TODO: Array에 safe접근하는 방법알아보기
         if (state == .single) {
             super.buttons?[0].setTitle("ㅂ", for: .normal)
             super.buttons?[1].setTitle("ㅈ", for: .normal)

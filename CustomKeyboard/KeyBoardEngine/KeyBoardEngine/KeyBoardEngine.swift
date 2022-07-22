@@ -23,7 +23,7 @@ struct KeyBoardEngine: KeyBoardEngineProtocol {
         switch parsedLastUnicode {
         case let .perfect(initial, neutral, support):
             return combineToPerfactChar(
-                initial:initial,
+                initial: initial,
                 neutral: neutral,
                 support: support,
                 inputLetter: inputUniCode
@@ -224,8 +224,8 @@ extension KeyBoardEngine {
 extension KeyBoardEngine {
     private func combineToPerfactCharNoSupport(lastUnicode:Int , initial:Int, neutral:Int, inputLetter:Int) -> String {
         
-        if (inputLetter <= CharUnicode.ㅎ.code) {
-            if ([CharUnicode.ㄸ.code, CharUnicode.ㅃ.code, CharUnicode.ㅉ.code].contains(inputLetter)) {
+        if inputLetter <= CharUnicode.ㅎ.code {
+            if [CharUnicode.ㄸ.code, CharUnicode.ㅃ.code, CharUnicode.ㅉ.code].contains(inputLetter) {
                 return makeCharFromUnicode(lastUnicode) + makeCharFromUnicode(inputLetter)
             }
             

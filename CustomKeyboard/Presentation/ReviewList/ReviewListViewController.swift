@@ -11,7 +11,7 @@ final class ReviewListViewController: UIViewController {
     
     // MARK: - Properties
     private let viewModel = ReviewListViewModel()
-    private var collectionView: UICollectionView! = nil
+    private var collectionView: UICollectionView!
     private let reviewTextFieldStack = UIStackView()
     private let profileImageView = UIImageView()
     private let reviewTextView = UITextView()
@@ -61,7 +61,7 @@ extension ReviewListViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView))
         self.reviewTextView.addGestureRecognizer(tapGestureRecognizer)
     }
-    
+    //TODO: String값 따로 보관하도록하는게 좋다
     private func addSuccessAlert(statusCode: NetworkManager.ResponseCode) {
         
         let postAlert = UIAlertController(title: "알림", message: "Status Code: \(statusCode)\n 리뷰 작성이 성공했습니다.", preferredStyle: .alert)
@@ -82,14 +82,13 @@ extension ReviewListViewController {
 extension ReviewListViewController {
     @objc func didTapView() {
         
-        let vc = ReviewWriteViewController(inputField: reviewTextView)
-        navigationController?.pushViewController(vc, animated: true)
+        let viewController = ReviewWriteViewController(inputField: reviewTextView)
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     @objc func didTapWriteButton() {
         
         postData()
-        
     }
 }
 
@@ -118,16 +117,16 @@ extension ReviewListViewController {
         //텍스트뷰
         reviewTextView.text = "이 테마가 마음에 드시나요?"
         reviewTextView.textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 5, right: 5)
-        reviewTextView.font = UIFont.boldSystemFont(ofSize: 16)
+        reviewTextView.font = .boldSystemFont(ofSize: 16)
         reviewTextView.layer.cornerRadius = 15
         reviewTextView.backgroundColor = .systemGray6
         
         //작성버튼
-        reviewPostButton = UIButton(type: UIButton.ButtonType.system)
+        reviewPostButton = UIButton(type: .system)
         reviewPostButton.backgroundColor = .systemBlue
         reviewPostButton.layer.cornerRadius = 10
         reviewPostButton.setTitle("작성", for: .normal)
-        reviewPostButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        reviewPostButton.titleLabel?.font = .boldSystemFont(ofSize: 15)
         reviewPostButton.setTitleColor(.white, for: .normal)
         reviewPostButton.addTarget(self, action: #selector(didTapWriteButton) , for: .touchUpInside)
         
@@ -166,7 +165,7 @@ extension ReviewListViewController {
         view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            collectionView.topAnchor.constraint(equalTo: reviewTextFieldStack.bottomAnchor, constant: 30),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
@@ -210,7 +209,7 @@ extension ReviewListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return viewModel.getCellTotalCount()
+        return viewModel.reviewDataCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -219,7 +218,7 @@ extension ReviewListViewController: UICollectionViewDataSource {
             return ReviewListCell()
         }
         
-        cell.setData(data: viewModel.getCellData(indexPath: indexPath))
+        cell.configure(data: viewModel.reviewData(indexPath: indexPath))
         
         return cell
     }

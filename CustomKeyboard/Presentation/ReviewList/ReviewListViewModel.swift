@@ -10,14 +10,17 @@ import Foundation
 final class ReviewListViewModel {
     
     // MARK: - Properties
-    struct CellType {
+    struct ReviewData {
         var profileURLStrig: String
         var userName: String
         var contents: String
         var createdAt: String
     }
     
-    private var reviewDatas: [ReviewType] = []
+    private var reviewDatas: [Review] = []
+    var reviewDataCount:Int {
+        return reviewDatas.count
+    }
     
     func fetchData(completion: @escaping () -> ()) {
         
@@ -39,21 +42,17 @@ final class ReviewListViewModel {
         }
     }
     
-    func getCellTotalCount() -> Int {
-        
-        return reviewDatas.count
-    }
-    
-    func getCellData(indexPath: IndexPath) -> CellType? {
-        
+    func reviewData(indexPath: IndexPath) -> ReviewData? {
+        //TODO: Array Safe하게 처리하기
         let row = indexPath.row
+        guard row < reviewDataCount else { return nil }
         
-        let urlString = self.reviewDatas[row].user.profileImage
+        let urlString = reviewDatas[safe: row]?.user.profileImage
         let userName =  reviewDatas[row].user.userName
         let content = reviewDatas[row].content
         let createdAt = convertDateTime(createdAtTime: reviewDatas[row].createdAt)
         
-        return CellType(profileURLStrig: urlString, userName: userName, contents: content, createdAt: createdAt)
+        return ReviewData(profileURLStrig: urlString?, userName: userName, contents: content, createdAt: createdAt)
     }
     
     private func convertDateTime(createdAtTime: String) -> String {
@@ -82,6 +81,7 @@ final class ReviewListViewModel {
         let minutes = interval/60
         let hours = interval/3600
         
+        //TODO: 1년전, 2년전,등등 단위로 케이스늘리기
         switch interval {
         case IntervalRange.in60MinutesRange.range :
             createdDateString = "\(minutes)분 전"
@@ -94,4 +94,3 @@ final class ReviewListViewModel {
         return createdDateString
     }
 }
-

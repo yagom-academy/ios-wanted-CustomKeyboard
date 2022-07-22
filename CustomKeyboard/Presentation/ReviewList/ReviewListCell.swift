@@ -28,7 +28,7 @@ final class ReviewListCell: UICollectionViewCell, ReuseIdentifying {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setData(data: ReviewListViewModel.CellType?) {
+    func configure(data: ReviewListViewModel.ReviewData?) {
         
         guard let data = data else {
             return

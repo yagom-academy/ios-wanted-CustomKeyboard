@@ -31,6 +31,7 @@
 		FE7A7E6E288558EB004315C3 /* CustomKeyBoardViewModel_publicMethod__test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7A7E6D288558EB004315C3 /* CustomKeyBoardViewModel_publicMethod__test.swift */; };
 		FE831582287ED8A10039A56B /* BasicKeyLineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE831581287ED8A10039A56B /* BasicKeyLineDelegate.swift */; };
 		FE8E8CC4288A78A000EA8E6C /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8E8CC3288A78A000EA8E6C /* ImageCacheManager.swift */; };
+		FE8E8CD6288ACC5800EA8E6C /* Collection+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8E8CD5288ACC5800EA8E6C /* Collection+Custom.swift */; };
 		FE9E345A28818D8F00AFE308 /* KeyBoardEngine_addWord__test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E345928818D8F00AFE308 /* KeyBoardEngine_addWord__test.swift */; };
 		FE9E34612881A56200AFE308 /* KeyBoardEngine_removeWord__test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E34602881A56200AFE308 /* KeyBoardEngine_removeWord__test.swift */; };
 		FEB79C88287E83E500B5168A /* DynamicBasicKeyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB79C87287E83E500B5168A /* DynamicBasicKeyLine.swift */; };
@@ -46,7 +47,7 @@
 		FF66E259287ED6EC008DF303 /* UIImageView+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E258287ED6EC008DF303 /* UIImageView+Custom.swift */; };
 		FF66E25C287FF5D3008DF303 /* ReviewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E25B287FF5D3008DF303 /* ReviewListViewModel.swift */; };
 		FFE4229A287D1F2A00EA04AF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE42299287D1F2A00EA04AF /* NetworkManager.swift */; };
-		FFE4229C287D215200EA04AF /* ReviewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE4229B287D215200EA04AF /* ReviewType.swift */; };
+		FFE4229C287D215200EA04AF /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE4229B287D215200EA04AF /* Review.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		FE7A7E6D288558EB004315C3 /* CustomKeyBoardViewModel_publicMethod__test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyBoardViewModel_publicMethod__test.swift; sourceTree = "<group>"; };
 		FE831581287ED8A10039A56B /* BasicKeyLineDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicKeyLineDelegate.swift; sourceTree = "<group>"; };
 		FE8E8CC3288A78A000EA8E6C /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
+		FE8E8CD5288ACC5800EA8E6C /* Collection+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Custom.swift"; sourceTree = "<group>"; };
 		FE9E344A2881837300AFE308 /* CustomKeyBoardViewModel__TEST.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomKeyBoardViewModel__TEST.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE9E345728818D8F00AFE308 /* KeyBoardEngineTest__TEST.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeyBoardEngineTest__TEST.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE9E345928818D8F00AFE308 /* KeyBoardEngine_addWord__test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardEngine_addWord__test.swift; sourceTree = "<group>"; };
@@ -110,7 +112,7 @@
 		FF66E258287ED6EC008DF303 /* UIImageView+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Custom.swift"; sourceTree = "<group>"; };
 		FF66E25B287FF5D3008DF303 /* ReviewListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewModel.swift; sourceTree = "<group>"; };
 		FFE42299287D1F2A00EA04AF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		FFE4229B287D215200EA04AF /* ReviewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewType.swift; sourceTree = "<group>"; };
+		FFE4229B287D215200EA04AF /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +325,7 @@
 			children = (
 				FF66E258287ED6EC008DF303 /* UIImageView+Custom.swift */,
 				FF20EEA82883F89700B79460 /* CALayer+Custom.swift */,
+				FE8E8CD5288ACC5800EA8E6C /* Collection+Custom.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -365,7 +368,7 @@
 		FFE422A0287D42A700EA04AF /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				FFE4229B287D215200EA04AF /* ReviewType.swift */,
+				FFE4229B287D215200EA04AF /* Review.swift */,
 				FE6A5F0F2888AAC200E52DFD /* User.swift */,
 				FE439986287D6B1D00BFF841 /* CustomError.swift */,
 			);
@@ -506,6 +509,7 @@
 				FEB79C88287E83E500B5168A /* DynamicBasicKeyLine.swift in Sources */,
 				FE7A7E6A2885300C004315C3 /* SecondRowKeyContainerStackView.swift in Sources */,
 				FE7A7E6C28853028004315C3 /* SecondRowKeyContainerStackViewDelegate.swift in Sources */,
+				FE8E8CD6288ACC5800EA8E6C /* Collection+Custom.swift in Sources */,
 				FE7A7E62288527B4004315C3 /* FirthRowKeyContainerStackViewDelegate.swift in Sources */,
 				FE439987287D6B1D00BFF841 /* CustomError.swift in Sources */,
 				FE148A37288053BC007AAF1C /* KeyBoardEngine.swift in Sources */,
@@ -526,7 +530,7 @@
 				FF66E251287ECCD8008DF303 /* ReviewListViewController.swift in Sources */,
 				FE8E8CC4288A78A000EA8E6C /* ImageCacheManager.swift in Sources */,
 				FF66E259287ED6EC008DF303 /* UIImageView+Custom.swift in Sources */,
-				FFE4229C287D215200EA04AF /* ReviewType.swift in Sources */,
+				FFE4229C287D215200EA04AF /* Review.swift in Sources */,
 				FF66E25C287FF5D3008DF303 /* ReviewListViewModel.swift in Sources */,
 				FE7A7E6828852EF0004315C3 /* FirstRowKeyContainerStackViewDelegate.swift in Sources */,
 				FF66E254287ECEAD008DF303 /* ReviewListCell.swift in Sources */,

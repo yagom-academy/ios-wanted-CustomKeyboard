@@ -13,11 +13,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
 
-        let vc = ReviewListViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        nav.navigationBar.topItem?.backButtonTitle = ""
-        nav.navigationBar.tintColor = .label
-        window?.rootViewController = nav
+        let viewController = ReviewListViewController()
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.navigationBar.topItem?.backButtonTitle = ""
+        navigationController.navigationBar.tintColor = .label
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 

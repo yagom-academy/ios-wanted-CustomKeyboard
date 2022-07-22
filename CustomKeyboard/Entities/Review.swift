@@ -8,12 +8,12 @@
 import Foundation
 
 // MARK: - ReviewTypes
-struct ReviewTypes: Codable {
-    var data: [ReviewType]
+struct Reviews: Codable {
+    var data: [Review]
 }
 
 // MARK: - ReviewType
-struct ReviewType: Codable {
+struct Review: Codable {
     var id: String
     var user: User
     var content: String
