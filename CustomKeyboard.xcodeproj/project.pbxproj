@@ -19,7 +19,7 @@
 		6891525A2886D92C00D6FE7B /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04158AD1287D3DA0004F6B9A /* ReviewViewController.swift */; };
 		6891525B2886DEE200D6FE7B /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AE794C287D3E5E003F4426 /* KeyboardViewController.swift */; };
 		68A3B4C82885570900DD1631 /* KeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A3B4C72885570900DD1631 /* KeyboardViewModel.swift */; };
-		68AE7948287D3B1E003F4426 /* ReviewAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AE7947287D3B1E003F4426 /* ReviewAPIManager.swift */; };
+		68AE7948287D3B1E003F4426 /* ReviewAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AE7947287D3B1E003F4426 /* ReviewAPIService.swift */; };
 		68AE794F287D3E87003F4426 /* ReviewTableViewHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AE794E287D3E87003F4426 /* ReviewTableViewHeaderViewModel.swift */; };
 		68AE7952287D3F8C003F4426 /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AE7951287D3F8C003F4426 /* KeyButton.swift */; };
 		68B9A087287E605E00D09A0A /* Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B9A086287E605E00D09A0A /* Delegates.swift */; };
@@ -38,6 +38,9 @@
 		68EBC4F1288930910088A238 /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AE7951287D3F8C003F4426 /* KeyButton.swift */; };
 		68EBC4F22889309A0088A238 /* KeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A3B4C72885570900DD1631 /* KeyboardViewModel.swift */; };
 		68EBC4F3288930B80088A238 /* Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B9A086287E605E00D09A0A /* Delegates.swift */; };
+		68EBC4F5288945840088A238 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EBC4F4288945840088A238 /* EndPoint.swift */; };
+		68EBC4F8288949270088A238 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EBC4F7288949270088A238 /* HTTPMethod.swift */; };
+		68EBC4FA2889513F0088A238 /* URLSession+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EBC4F92889513F0088A238 /* URLSession+.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
 		DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66428604279003DD2F5 /* Assets.xcassets */; };
@@ -80,7 +83,7 @@
 		04FE9E92287E6A0E0002EE50 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 		68351508287D6F4B0018CEB9 /* KeyFirstLineStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyFirstLineStackView.swift; sourceTree = "<group>"; };
 		68A3B4C72885570900DD1631 /* KeyboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewModel.swift; sourceTree = "<group>"; };
-		68AE7947287D3B1E003F4426 /* ReviewAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAPIManager.swift; sourceTree = "<group>"; };
+		68AE7947287D3B1E003F4426 /* ReviewAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAPIService.swift; sourceTree = "<group>"; };
 		68AE794C287D3E5E003F4426 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		68AE794E287D3E87003F4426 /* ReviewTableViewHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewHeaderViewModel.swift; sourceTree = "<group>"; };
 		68AE7951287D3F8C003F4426 /* KeyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyButton.swift; sourceTree = "<group>"; };
@@ -92,6 +95,9 @@
 		68EBC4DF28892B090088A238 /* MyCustomKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MyCustomKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		68EBC4E128892B090088A238 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		68EBC4E328892B090088A238 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68EBC4F4288945840088A238 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		68EBC4F7288949270088A238 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		68EBC4F92889513F0088A238 /* URLSession+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+.swift"; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE15E65D28604278003DD2F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -127,12 +133,12 @@
 			path = Scene;
 			sourceTree = "<group>";
 		};
-		04158AD3287D3DA8004F6B9A /* Entity */ = {
+		04158AD3287D3DA8004F6B9A /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				04158AD4287D3DB7004F6B9A /* Review.swift */,
 			);
-			path = Entity;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		04486787287D51550004A512 /* Extension */ = {
@@ -141,6 +147,7 @@
 				04486784287D51460004A512 /* UITextField+.swift */,
 				046F3E90288A72FE00409BD9 /* String+.swift */,
 				04ADA74E288A7F8B00FBFD1C /* Date+.swift */,
+				68EBC4F92889513F0088A238 /* URLSession+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -148,21 +155,21 @@
 		68A3B4C52881336200DD1631 /* ReviewPage */ = {
 			isa = PBXGroup;
 			children = (
-				68A3B4C62881338600DD1631 /* SubComponents */,
+				68A3B4C62881338600DD1631 /* View */,
 				04158AD1287D3DA0004F6B9A /* ReviewViewController.swift */,
 				04FE9E92287E6A0E0002EE50 /* ReviewViewModel.swift */,
 			);
 			path = ReviewPage;
 			sourceTree = "<group>";
 		};
-		68A3B4C62881338600DD1631 /* SubComponents */ = {
+		68A3B4C62881338600DD1631 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				04486782287D4B080004A512 /* ReviewTableViewHeader.swift */,
 				68AE794E287D3E87003F4426 /* ReviewTableViewHeaderViewModel.swift */,
 				043D075B287D408B0061DCA2 /* ReviewTableViewCell.swift */,
 			);
-			path = SubComponents;
+			path = View;
 			sourceTree = "<group>";
 		};
 		68A3B4C928858C9200DD1631 /* Delegate */ = {
@@ -176,7 +183,6 @@
 		68AE7946287D3AD5003F4426 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				68AE7947287D3B1E003F4426 /* ReviewAPIManager.swift */,
 				04C523F1287FE93A008488CF /* KeyboardManager.swift */,
 			);
 			path = Manager;
@@ -185,14 +191,14 @@
 		68AE794B287D3E38003F4426 /* KeyboardPage */ = {
 			isa = PBXGroup;
 			children = (
-				68AE7950287D3F31003F4426 /* SubComponents */,
+				68AE7950287D3F31003F4426 /* View */,
 				68AE794C287D3E5E003F4426 /* KeyboardViewController.swift */,
 				68A3B4C72885570900DD1631 /* KeyboardViewModel.swift */,
 			);
 			path = KeyboardPage;
 			sourceTree = "<group>";
 		};
-		68AE7950287D3F31003F4426 /* SubComponents */ = {
+		68AE7950287D3F31003F4426 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				68AE7951287D3F8C003F4426 /* KeyButton.swift */,
@@ -202,7 +208,7 @@
 				68D17D67287E8F6A003E9BAC /* KeyFourthLineStackView.swift */,
 				68D17D63287E8CEC003E9BAC /* KeyboardView.swift */,
 			);
-			path = SubComponents;
+			path = View;
 			sourceTree = "<group>";
 		};
 		68EBC4E028892B090088A238 /* MyCustomKeyboard */ = {
@@ -212,6 +218,16 @@
 				68EBC4E328892B090088A238 /* Info.plist */,
 			);
 			path = MyCustomKeyboard;
+			sourceTree = "<group>";
+		};
+		68EBC4F6288949020088A238 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				68EBC4F7288949270088A238 /* HTTPMethod.swift */,
+				68EBC4F4288945840088A238 /* EndPoint.swift */,
+				68AE7947287D3B1E003F4426 /* ReviewAPIService.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		DE15E64F28604278003DD2F5 = {
@@ -237,8 +253,9 @@
 			children = (
 				68A3B4C928858C9200DD1631 /* Delegate */,
 				04486787287D51550004A512 /* Extension */,
+				68EBC4F6288949020088A238 /* Network */,
 				68AE7946287D3AD5003F4426 /* Manager */,
-				04158AD3287D3DA8004F6B9A /* Entity */,
+				04158AD3287D3DA8004F6B9A /* Model */,
 				04158AD0287D3D8E004F6B9A /* Scene */,
 				DE15E65B28604278003DD2F5 /* AppDelegate.swift */,
 				DE15E65D28604278003DD2F5 /* SceneDelegate.swift */,
@@ -370,16 +387,19 @@
 				6891525A2886D92C00D6FE7B /* ReviewViewController.swift in Sources */,
 				68D17D68287E8F6A003E9BAC /* KeyFourthLineStackView.swift in Sources */,
 				68AE7952287D3F8C003F4426 /* KeyButton.swift in Sources */,
+				68EBC4FA2889513F0088A238 /* URLSession+.swift in Sources */,
 				68D17D66287E8F5A003E9BAC /* KeyThirdLineStackView.swift in Sources */,
 				68B9A087287E605E00D09A0A /* Delegates.swift in Sources */,
 				68AE794F287D3E87003F4426 /* ReviewTableViewHeaderViewModel.swift in Sources */,
 				04486783287D4B080004A512 /* ReviewTableViewHeader.swift in Sources */,
 				04FE9E93287E6A0E0002EE50 /* ReviewViewModel.swift in Sources */,
 				04C523F2287FE93A008488CF /* KeyboardManager.swift in Sources */,
-				68AE7948287D3B1E003F4426 /* ReviewAPIManager.swift in Sources */,
 				04ADA74F288A7F8B00FBFD1C /* Date+.swift in Sources */,
+				68AE7948287D3B1E003F4426 /* ReviewAPIService.swift in Sources */,
 				6891525B2886DEE200D6FE7B /* KeyboardViewController.swift in Sources */,
+				68EBC4F5288945840088A238 /* EndPoint.swift in Sources */,
 				68A3B4C82885570900DD1631 /* KeyboardViewModel.swift in Sources */,
+				68EBC4F8288949270088A238 /* HTTPMethod.swift in Sources */,
 				043D075C287D408B0061DCA2 /* ReviewTableViewCell.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
