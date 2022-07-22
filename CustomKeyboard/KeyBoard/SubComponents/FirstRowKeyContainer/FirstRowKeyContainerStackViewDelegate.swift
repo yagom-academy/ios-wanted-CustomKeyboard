@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol FirstRowKeyContainerDelegate: AnyObject {
+protocol FirstRowKeyContainerStackViewDelegate: AnyObject {
     func tappedFirstrowBasicKey(unicode: Int)
 }

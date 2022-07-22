@@ -10,18 +10,14 @@ import UIKit
 final class ReviewWriteViewController: UIViewController {
     
     // MARK: - Properties
-    private var windowHeight: CGFloat {
-        let sceneDelegate = UIApplication.shared.connectedScenes
-            .first!.delegate as! SceneDelegate
-        return sceneDelegate.windowHeight!
-    }
+    private let windowHeight: CGFloat = UIScreen.main.bounds.height
     private let textView = UITextView()
-    private let customKeyboard = CustomKeyBoard()
-    private var resultInputField: UITextView?
+    private let customKeyboard = CustomKeyBoardStackView()
+    private let resultInputField: UITextView
     
     init(inputField: UITextView) {
+        resultInputField = inputField
         super.init(nibName: nil, bundle: nil)
-        self.resultInputField = inputField
         configureUI()
     }
     
@@ -31,30 +27,30 @@ final class ReviewWriteViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.customKeyboard.frame.origin.y = windowHeight
+        customKeyboard.frame.origin.y = windowHeight
         UIView.animate(withDuration: 0.4, delay: 0.3, options: .curveEaseInOut, animations: { [weak self] in
             guard let self = self else { return }
-            self.customKeyboard.frame.origin.y = self.windowHeight-CustomKeyBoard.Math.keyboardHeight
+            self.customKeyboard.frame.origin.y = self.windowHeight-CustomKeyBoardStackView.Math.keyboardHeight
         }, completion: nil)
     }
 }
 
 //MARK: - 커스텀키보드 Delegate 메서드
-extension ReviewWriteViewController: CustomKeyBoardDelegate {
+extension ReviewWriteViewController: CustomKeyBoardStackViewDelegate {
     func tappedReturnButton() {
         
         guard let message = self.textView.text else { return }
-        self.resultInputField?.text = message
-        if (self.navigationController != nil) {
-            self.navigationController?.popViewController(animated: true)
+        resultInputField.text = message
+        if (navigationController != nil) {
+            navigationController?.popViewController(animated: true)
         } else {
-            self.dismiss(animated: true)
+            dismiss(animated: true)
         }
     }
     
     func connectTextView() -> UITextView {
         
-        return self.textView
+        return textView
     }
 }
 
@@ -68,7 +64,7 @@ extension ReviewWriteViewController {
     
     private func configureAttribute() {
         
-        self.title = " 리뷰 작성 "
+        title = " 리뷰 작성 "
         view.backgroundColor = .white
         textView.font = .systemFont(ofSize: 20)
         
@@ -80,7 +76,7 @@ extension ReviewWriteViewController {
             view.addSubview($0)
         }
         
-        customKeyboard.frame = CGRect(x: 0, y: windowHeight, width: CustomKeyBoard.Math.keyboardWidth, height: CustomKeyBoard.Math.keyboardHeight)
+        customKeyboard.frame = CGRect(x: 0, y: windowHeight, width: CustomKeyBoardStackView.Math.keyboardWidth, height: CustomKeyBoardStackView.Math.keyboardHeight)
         
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true

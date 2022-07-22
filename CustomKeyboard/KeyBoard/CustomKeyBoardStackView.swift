@@ -7,14 +7,10 @@
 
 import UIKit
 
-final class CustomKeyBoard: UIStackView {
+final class CustomKeyBoardStackView: UIStackView {
     
     struct Math {
-        static var keyboardWidth: CGFloat {
-            let sceneDelegate = UIApplication.shared.connectedScenes
-                .first!.delegate as! SceneDelegate
-            return sceneDelegate.windowWidth!
-        }
+        static let keyboardWidth: CGFloat = UIScreen.main.bounds.width
         static let keyboardHeight: CGFloat = keyboardWidth < 340 ? keyboardWidth*3/5 : keyboardWidth*3/4
         static let buttonPadding = 5.0
         static let buttonWidth = keyboardWidth / 10.0 - buttonPadding
@@ -22,13 +18,13 @@ final class CustomKeyBoard: UIStackView {
     }
     
     // MARK: - Properties
-    private let firstLineContainer = FirstRowKeyContainer()
-    private let secondLineContainer = SecondRowKeyContainer()
-    private let thirdLineContainer = ThirdRowKeyContainer()
-    private let firthLineContainer = FirthRowKeyContainer()
+    private let firstLineContainer = FirstRowKeyContainerStackView()
+    private let secondLineContainer = SecondRowKeyContainerStackView()
+    private let thirdLineContainer = ThirdRowKeyContainerStackView()
+    private let firthLineContainer = FirthRowKeyContainerStackView()
     
-    weak var delegate: CustomKeyBoardDelegate?
-    private let viewModel = CustomKeyBoardViewModel(engine: KeyBoardEngine())
+    weak var delegate: CustomKeyBoardStackViewDelegate?
+    private let viewModel = CustomKeyBoardStackViewViewModel(engine: KeyBoardEngine())
     
     init() {
         super.init(frame: CGRect.zero)
@@ -40,8 +36,8 @@ final class CustomKeyBoard: UIStackView {
     }
 }
 
-//MARK: - CustomKeyBoard: private 메서드
-extension CustomKeyBoard {
+//MARK: - CustomKeyBoardStackView: private 메서드
+extension CustomKeyBoardStackView {
     private func tappedBasicKey(unicode: Int) {
         
         delegate?.connectTextView().text = viewModel.addWord(inputUniCode: unicode, to: delegate?.connectTextView().text)
@@ -49,7 +45,7 @@ extension CustomKeyBoard {
 }
 
 //MARK: - FirstRowKeyContainerDelegate(첫번째줄컨테이너) 이벤트 메서드
-extension CustomKeyBoard: FirstRowKeyContainerDelegate {
+extension CustomKeyBoardStackView: FirstRowKeyContainerStackViewDelegate {
     func tappedFirstrowBasicKey(unicode: Int) {
         
         tappedBasicKey(unicode: unicode)
@@ -57,7 +53,7 @@ extension CustomKeyBoard: FirstRowKeyContainerDelegate {
 }
 
 //MARK: - SecondRowKeyContainerDelegate(두번째줄컨테이너) 이벤트 메서드
-extension CustomKeyBoard: SecondRowKeyContainerDelegate {
+extension CustomKeyBoardStackView: SecondRowKeyContainerStackViewDelegate {
     func tappedSecondrowBasicKey(unicode: Int) {
         
         tappedBasicKey(unicode: unicode)
@@ -65,7 +61,7 @@ extension CustomKeyBoard: SecondRowKeyContainerDelegate {
 }
 
 //MARK: - ThirdRowKeyContainerDelegate(세번째줄컨테이너) 이벤트 메서드
-extension CustomKeyBoard: ThirdRowKeyContainerDelegate {
+extension CustomKeyBoardStackView: ThirdRowKeyContainerStackViewDelegate {
     func tappedShiftButton() -> Bool {
         return firstLineContainer.toggleDynamicBasicKeyState() == .double ? true : false
     }
@@ -82,7 +78,7 @@ extension CustomKeyBoard: ThirdRowKeyContainerDelegate {
 }
 
 //MARK: - FirthRowKeyContainerDelegate(네번째줄컨테이너) 이벤트 메서드
-extension CustomKeyBoard: FirthRowKeyContainerDelegate {
+extension CustomKeyBoardStackView: FirthRowKeyContainerStackViewDelegate {
     func tappedReturnButton() {
         
         delegate?.tappedReturnButton()
@@ -95,7 +91,7 @@ extension CustomKeyBoard: FirthRowKeyContainerDelegate {
 }
 
 //MARK: - ConfigureUI
-extension CustomKeyBoard {
+extension CustomKeyBoardStackView {
     private func configureUI() {
         
         configureAttribute()
@@ -104,10 +100,10 @@ extension CustomKeyBoard {
     
     private func configureAttribute() {
         
-        self.backgroundColor = .systemGray3
-        self.axis = .vertical
-        self.distribution = .equalSpacing
-        self.alignment = .center
+        backgroundColor = .systemGray3
+        axis = .vertical
+        distribution = .equalSpacing
+        alignment = .center
         
         firstLineContainer.delegate = self
         secondLineContainer.delegate = self
@@ -121,7 +117,7 @@ extension CustomKeyBoard {
         let bottomPaddingView = UIView()
         
         [topPaddingView, firstLineContainer, secondLineContainer, thirdLineContainer, firthLineContainer, bottomPaddingView].forEach {
-            self.addArrangedSubview($0)
+            addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         

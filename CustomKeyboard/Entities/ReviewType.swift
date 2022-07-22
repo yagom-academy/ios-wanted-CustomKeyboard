@@ -26,16 +26,3 @@ struct ReviewType: Codable {
         
     }
 }
-
-// MARK: - User
-struct User: Codable {
-    var id: String
-    var isAdmin: Bool
-    var profileImage: String
-    var userName: String
-    
-    enum CodingKeys : String , CodingKey {
-        case id = "_id"
-        case isAdmin, profileImage, userName
-    }
-}

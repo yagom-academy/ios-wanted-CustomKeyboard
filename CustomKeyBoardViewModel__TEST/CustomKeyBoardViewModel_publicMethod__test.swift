@@ -10,11 +10,11 @@ import XCTest
 
 class CustomKeyBoardViewModel_publicMethod__test: XCTestCase {
     
-    var sut: CustomKeyBoardViewModel?
+    var sut: CustomKeyBoardStackViewViewModel?
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CustomKeyBoardViewModel(engine: KeyBoardEngine())
+        sut = CustomKeyBoardStackViewViewModel(engine: KeyBoardEngine())
     }
     
     override func tearDownWithError() throws {

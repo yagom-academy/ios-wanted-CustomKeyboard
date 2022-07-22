@@ -5,12 +5,11 @@
 //  Created by 김기림 on 2022/07/14.
 //
 
-import Foundation
 import UIKit
 
 struct KeyBoardEngine: KeyBoardEngineProtocol {
     
-    enum SeparatedUnicode {
+    private enum SeparatedUnicode {
         case perfect(initial:Int, neutral:Int, support:Int)
         case perfectNoSupport(initial:Int, neutral:Int)
         case onlyConsonant(consonant:Int)
@@ -18,33 +17,58 @@ struct KeyBoardEngine: KeyBoardEngineProtocol {
     }
     
     func addWord(inputUniCode:Int, lastUniCode:Int) -> String {
-        
-        let parsedLastUnicode: SeparatedUnicode = SeparatingUnicode(unicode: lastUniCode)
+
+        let parsedLastUnicode = SeparatingUnicode(unicode: lastUniCode)
         
         switch parsedLastUnicode {
-        case .perfect(let initial, let neutral, let support):
-            return combineToPerfactChar(initial:initial, neutral: neutral, support: support, inputLetter: inputUniCode)
-        case .perfectNoSupport(let initial, let neutral):
-            return combineToPerfactCharNoSupport(lastUnicode: lastUniCode, initial: initial, neutral: neutral, inputLetter: inputUniCode)
-        case .onlyConsonant(let consonant):
-            return combineToOnlyConsonantChar(lastUnicode: lastUniCode, consonant: consonant, inputLetter: inputUniCode)
-        case .onlyVowel(let vowel):
-            return combineToOnlyVowelChar(lastUnicode: lastUniCode, vowel: vowel, inputLetter: inputUniCode)
+        case let .perfect(initial, neutral, support):
+            return combineToPerfactChar(
+                initial:initial,
+                neutral: neutral,
+                support: support,
+                inputLetter: inputUniCode
+            )
+        case let .perfectNoSupport(initial, neutral):
+            return combineToPerfactCharNoSupport(
+                lastUnicode: lastUniCode,
+                initial: initial,
+                neutral: neutral,
+                inputLetter: inputUniCode
+            )
+        case let .onlyConsonant(consonant):
+            return combineToOnlyConsonantChar(
+                lastUnicode: lastUniCode,
+                consonant: consonant,
+                inputLetter: inputUniCode
+            )
+        case let .onlyVowel(vowel):
+            return combineToOnlyVowelChar(
+                lastUnicode: lastUniCode,
+                vowel: vowel,
+                inputLetter: inputUniCode
+            )
         }
     }
     
     func removeWord(lastUniCode:Int) -> String {
         
-        let parsedLastUnicode: SeparatedUnicode = SeparatingUnicode(unicode: lastUniCode)
+        let parsedLastUnicode = SeparatingUnicode(unicode: lastUniCode)
         
         switch parsedLastUnicode {
-        case .perfect(let initial, let neutral, let support):
-            return removeFromPerfactChar(initial: initial, neutral: neutral, support: support)
-        case .perfectNoSupport(let initial, let neutral):
-            return removeFromPerfactCharNoSupport(initial: initial, neutral: neutral)
-        case .onlyConsonant(let consonant):
+        case let .perfect(initial, neutral, support):
+            return removeFromPerfactChar(
+                initial: initial,
+                neutral: neutral,
+                support: support
+            )
+        case let .perfectNoSupport(initial, neutral):
+            return removeFromPerfactCharNoSupport(
+                initial: initial,
+                neutral: neutral
+            )
+        case let .onlyConsonant(consonant):
             return removeFromOnlyConsonantChar(consonant: consonant)
-        case .onlyVowel(let vowel):
+        case let .onlyVowel(vowel):
             return removeFromOnlyVowelChar(vowel: vowel)
         }
     }
@@ -109,7 +133,13 @@ extension KeyBoardEngine {
             combinedData = combineSupportWithVowel(support: support, vowel: inputLetter)
         }
         
-        let firstChar = makeCharFromUnicode(makePerfectCharUnicode(initial: initial, neutral: neutral, support: combinedData.support))
+        let firstChar = makeCharFromUnicode(
+            makePerfectCharUnicode(
+                initial: initial,
+                neutral: neutral,
+                support: combinedData.support
+            )
+        )
         let secondChar = combinedData.secondCharUnicode == 0 ? "" : makeCharFromUnicode(combinedData.secondCharUnicode)
         return firstChar + secondChar
     }

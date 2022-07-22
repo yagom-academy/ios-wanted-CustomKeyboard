@@ -7,12 +7,12 @@
 
 import UIKit
 
-final class SecondRowKeyContainer: UIStackView {
+final class SecondRowKeyContainerStackView: UIStackView {
     
     // MARK: - Properties
     private let secondLineBasicKeys = BasicKeyLine(keys: ["ㅁ", "ㄴ", "ㅇ", "ㄹ", "ㅎ", "ㅗ", "ㅓ", "ㅏ", "ㅣ"])
 
-    weak var delegate: SecondRowKeyContainerDelegate?
+    weak var delegate: SecondRowKeyContainerStackViewDelegate?
     
     init() {
         super.init(frame: CGRect.zero)
@@ -24,7 +24,7 @@ final class SecondRowKeyContainer: UIStackView {
     }
 }
 
-extension SecondRowKeyContainer: BasicKeyLineDelegate {
+extension SecondRowKeyContainerStackView: BasicKeyLineDelegate {
     func tappedBasicKeyButton(unicode: Int) {
         
         delegate?.tappedSecondrowBasicKey(unicode: unicode)
@@ -32,7 +32,7 @@ extension SecondRowKeyContainer: BasicKeyLineDelegate {
 }
 
 // MARK: - ConfigureUI
-extension SecondRowKeyContainer {
+extension SecondRowKeyContainerStackView {
     
     private func configureUI() {
         
@@ -43,16 +43,16 @@ extension SecondRowKeyContainer {
     private func configureAttribute() {
         
         secondLineBasicKeys.delegate = self
-        self.axis = .horizontal
-        self.distribution = .equalSpacing
+        axis = .horizontal
+        distribution = .equalSpacing
     }
     
     private func configureLayout() {
         
         [UIView(), secondLineBasicKeys, UIView()].forEach {
-            self.addArrangedSubview($0)
+            addArrangedSubview($0)
         }
         secondLineBasicKeys.translatesAutoresizingMaskIntoConstraints = false
-        secondLineBasicKeys.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -CustomKeyBoard.Math.buttonWidth).isActive = true
+        secondLineBasicKeys.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -CustomKeyBoardStackView.Math.buttonWidth).isActive = true
     }
 }
