@@ -45,23 +45,23 @@ final class DynamicBasicKeyLine: BasicKeyLine {
         guard super.buttons != nil,
               let buttonsCount = super.buttons?.count,
               buttonsCount >= 9 else { return }
-        //TODO: Array에 safe접근하는 방법알아보기
+
         if (state == .single) {
-            super.buttons?[0].setTitle("ㅂ", for: .normal)
-            super.buttons?[1].setTitle("ㅈ", for: .normal)
-            super.buttons?[2].setTitle("ㄷ", for: .normal)
-            super.buttons?[3].setTitle("ㄱ", for: .normal)
-            super.buttons?[4].setTitle("ㅅ", for: .normal)
-            super.buttons?[8].setTitle("ㅐ", for: .normal)
-            super.buttons?[9].setTitle("ㅔ", for: .normal)
+            super.buttons?[safe: 0]?.setTitle("ㅂ", for: .normal)
+            super.buttons?[safe: 1]?.setTitle("ㅈ", for: .normal)
+            super.buttons?[safe: 2]?.setTitle("ㄷ", for: .normal)
+            super.buttons?[safe: 3]?.setTitle("ㄱ", for: .normal)
+            super.buttons?[safe: 4]?.setTitle("ㅅ", for: .normal)
+            super.buttons?[safe: 8]?.setTitle("ㅐ", for: .normal)
+            super.buttons?[safe: 9]?.setTitle("ㅔ", for: .normal)
         } else {
-            super.buttons?[0].setTitle("ㅃ", for: .normal)
-            super.buttons?[1].setTitle("ㅉ", for: .normal)
-            super.buttons?[2].setTitle("ㄸ", for: .normal)
-            super.buttons?[3].setTitle("ㄲ", for: .normal)
-            super.buttons?[4].setTitle("ㅆ", for: .normal)
-            super.buttons?[8].setTitle("ㅒ", for: .normal)
-            super.buttons?[9].setTitle("ㅖ", for: .normal)
+            super.buttons?[safe: 0]?.setTitle("ㅃ", for: .normal)
+            super.buttons?[safe: 1]?.setTitle("ㅉ", for: .normal)
+            super.buttons?[safe: 2]?.setTitle("ㄸ", for: .normal)
+            super.buttons?[safe: 3]?.setTitle("ㄲ", for: .normal)
+            super.buttons?[safe: 4]?.setTitle("ㅆ", for: .normal)
+            super.buttons?[safe: 8]?.setTitle("ㅒ", for: .normal)
+            super.buttons?[safe: 9]?.setTitle("ㅖ", for: .normal)
         }
         super.buttons?.forEach { button in
             guard let buttonTitle = button.currentTitle,

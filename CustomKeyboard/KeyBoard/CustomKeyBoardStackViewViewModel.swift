@@ -21,8 +21,8 @@ struct CustomKeyBoardStackViewViewModel {
         guard let beforeText = beforeText,
               let unicodeScalar = UnicodeScalar(inputUniCode) else { return "" }
         let inputChar = String(unicodeScalar)
-        guard let lastCharUnicode = getLastCharUnicode(from: beforeText),
-              let beforeTextExceptLastChar = getStringExceptLastChar(from: beforeText) else { return inputChar }
+        guard let lastCharUnicode = lastCharUnicode(from: beforeText),
+              let beforeTextExceptLastChar = stringExceptLastChar(from: beforeText) else { return inputChar }
         let lastChar = engine.addWord(inputUniCode: inputUniCode, lastUniCode: lastCharUnicode)
         return beforeTextExceptLastChar + lastChar
     }
@@ -38,15 +38,15 @@ struct CustomKeyBoardStackViewViewModel {
     func removeWord(from beforeText: String?) -> String {
         
         guard let beforeText = beforeText,
-              let lastCharUnicode = getLastCharUnicode(from: beforeText),
-              let beforeTextExceptLastChar = getStringExceptLastChar(from: beforeText) else { return "" }
+              let lastCharUnicode = lastCharUnicode(from: beforeText),
+              let beforeTextExceptLastChar = stringExceptLastChar(from: beforeText) else { return "" }
         
         let lastChar = engine.removeWord(lastUniCode: lastCharUnicode)
         
         return beforeTextExceptLastChar + lastChar
     }
-    //TODO: get지우기
-    private func getLastCharUnicode(from text: String) -> Int? {
+
+    private func lastCharUnicode(from text: String) -> Int? {
         
         guard text != "",
               let lastChar = text.last,
@@ -54,7 +54,7 @@ struct CustomKeyBoardStackViewViewModel {
         return Int(unicodeScalar.value)
     }
     
-    private func getStringExceptLastChar(from text: String) -> String? {
+    private func stringExceptLastChar(from text: String) -> String? {
         
         guard text != "" else { return nil }
         let i = text.index(text.endIndex, offsetBy: -1)

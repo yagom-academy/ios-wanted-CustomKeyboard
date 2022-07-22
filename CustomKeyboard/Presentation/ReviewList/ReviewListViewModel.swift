@@ -43,16 +43,15 @@ final class ReviewListViewModel {
     }
     
     func reviewData(indexPath: IndexPath) -> ReviewData? {
-        //TODO: Array Safe하게 처리하기
         let row = indexPath.row
-        guard row < reviewDataCount else { return nil }
         
-        let urlString = reviewDatas[safe: row]?.user.profileImage
-        let userName =  reviewDatas[row].user.userName
-        let content = reviewDatas[row].content
-        let createdAt = convertDateTime(createdAtTime: reviewDatas[row].createdAt)
+        guard let urlString = reviewDatas[safe: row]?.user.profileImage,
+              let userName =  reviewDatas[safe: row]?.user.userName,
+              let content = reviewDatas[safe: row]?.content,
+              let createdAtTime = reviewDatas[safe: row]?.createdAt else { return nil }
+        let createdAt = convertDateTime(createdAtTime: createdAtTime)
         
-        return ReviewData(profileURLStrig: urlString?, userName: userName, contents: content, createdAt: createdAt)
+        return ReviewData(profileURLStrig: urlString, userName: userName, contents: content, createdAt: createdAt)
     }
     
     private func convertDateTime(createdAtTime: String) -> String {

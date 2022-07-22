@@ -14,6 +14,7 @@ final class ReviewWriteViewController: UIViewController {
     private let textView = UITextView()
     private let customKeyboard = CustomKeyBoardStackView()
     private let resultInputField: UITextView
+    private let mainTitle: String = "리뷰 작성"
     
     init(inputField: UITextView) {
         resultInputField = inputField
@@ -64,7 +65,7 @@ extension ReviewWriteViewController {
     
     private func configureAttribute() {
         
-        title = " 리뷰 작성 "
+        title = mainTitle
         view.backgroundColor = .white
         textView.font = .systemFont(ofSize: 20)
         

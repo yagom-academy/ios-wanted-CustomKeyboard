@@ -34,8 +34,6 @@ extension ThirdRowKeyContainerStackView: BasicKeyLineDelegate {
         
         delegate?.tappedThirdrowBasicKey(unicode: unicode)
     }
-    
-    
 }
 
 //MARK: - @objc Methods
