@@ -19,7 +19,7 @@ final class HangeulList {
     }
 }
 
-// MARK: - Public Method
+// MARK: - Public
 
 extension HangeulList {
     

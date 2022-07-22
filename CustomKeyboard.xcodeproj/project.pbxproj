@@ -51,6 +51,7 @@
 		9F57B54A2887EAC600B2DC24 /* HangeulEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F57B5492887EAC600B2DC24 /* HangeulEnums.swift */; };
 		9F57B54B2887EAC900B2DC24 /* HangeulEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F57B5492887EAC600B2DC24 /* HangeulEnums.swift */; };
 		9F57B54D28881BA500B2DC24 /* double_input_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F57B54C28881BA500B2DC24 /* double_input_Tests.swift */; };
+		9F76CB78288A0053002D1535 /* total_input_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F76CB77288A0053002D1535 /* total_input_Tests.swift */; };
 		9FB695462881A3AA00F6AE87 /* Hangeul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB695452881A3AA00F6AE87 /* Hangeul.swift */; };
 		9FB6954A288219F100F6AE87 /* HangeulCombiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB69549288219F100F6AE87 /* HangeulCombiner.swift */; };
 		9FB6954C28821A3300F6AE87 /* HangeulUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954B28821A3300F6AE87 /* HangeulUpdater.swift */; };
@@ -141,6 +142,7 @@
 		9F57B5452887E3D100B2DC24 /* HangeulCombineBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulCombineBuffer.swift; sourceTree = "<group>"; };
 		9F57B5492887EAC600B2DC24 /* HangeulEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulEnums.swift; sourceTree = "<group>"; };
 		9F57B54C28881BA500B2DC24 /* double_input_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = double_input_Tests.swift; sourceTree = "<group>"; };
+		9F76CB77288A0053002D1535 /* total_input_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = total_input_Tests.swift; sourceTree = "<group>"; };
 		9FB695452881A3AA00F6AE87 /* Hangeul.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hangeul.swift; sourceTree = "<group>"; };
 		9FB69549288219F100F6AE87 /* HangeulCombiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulCombiner.swift; sourceTree = "<group>"; };
 		9FB6954B28821A3300F6AE87 /* HangeulUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulUpdater.swift; sourceTree = "<group>"; };
@@ -300,7 +302,7 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		9F504319287E323300CDBD9C /* HangeulManagerTests */ = {
+		9F504319287E323300CDBD9C /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				9F4652702883D722008D26D2 /* normal_input_Tests.swift */,
@@ -308,8 +310,9 @@
 				9F4652742884201D008D26D2 /* space_input_Tests.swift */,
 				9FC4B36F28869C9A00F15B2D /* triple_input_Tests.swift */,
 				9F57B54C28881BA500B2DC24 /* double_input_Tests.swift */,
+				9F76CB77288A0053002D1535 /* total_input_Tests.swift */,
 			);
-			path = HangeulManagerTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		9F57B5422887C48D00B2DC24 /* Enums */ = {
@@ -341,6 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				DE15E65A28604278003DD2F5 /* CustomKeyboard */,
+				9F504319287E323300CDBD9C /* Tests */,
 				0141A8552884F1F300EEB918 /* MyKeyboard */,
 				9F504319287E323300CDBD9C /* HangeulManagerTests */,
 				019814A728895A8800A7A59C /* NetworkTests */,
@@ -574,6 +578,7 @@
 				9FC4B37028869C9A00F15B2D /* triple_input_Tests.swift in Sources */,
 				9F4652712883D722008D26D2 /* normal_input_Tests.swift in Sources */,
 				9F4652732884101A008D26D2 /* back_input_Tests.swift in Sources */,
+				9F76CB78288A0053002D1535 /* total_input_Tests.swift in Sources */,
 				9F57B54D28881BA500B2DC24 /* double_input_Tests.swift in Sources */,
 				9F4652752884201D008D26D2 /* space_input_Tests.swift in Sources */,
 			);

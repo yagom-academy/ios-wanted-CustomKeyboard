@@ -218,7 +218,7 @@ extension HangeulDictionary {
     }
 }
 
-// MARK: - Public Method
+// MARK: - Public
 
 extension HangeulDictionary {
     
@@ -282,7 +282,7 @@ extension HangeulDictionary {
     }
 }
 
-// MARK: - Private Method
+// MARK: - Private
 
 // MARK: - called in getIndex
 
@@ -472,6 +472,8 @@ extension HangeulDictionary {
             return dictionary.ㄹㅍ.rawValue
         case ("ㄹ", "ㅎ"):
             return dictionary.ㄹㅎ.rawValue
+        case ("ㅂ", "ㅅ"):
+            return dictionary.ㅂㅅ.rawValue
         default:
             return nil
         }
