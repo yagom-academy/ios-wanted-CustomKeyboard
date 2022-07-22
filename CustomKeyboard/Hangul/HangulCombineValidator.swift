@@ -41,7 +41,6 @@ class HangulCombineValidator {
         }
     }
     
-    
     func combineSingleToDouble(input: HangulKeyboardData) -> HangulKeyboardData {
         return HangulKeyboardData(uni: input.unicode + 1, state: .cho)
     }
