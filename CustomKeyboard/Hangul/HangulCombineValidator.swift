@@ -41,6 +41,7 @@ class HangulCombineValidator {
         }
     }
     
+    
     func combineSingleToDouble(input: HangulKeyboardData) -> HangulKeyboardData {
         return HangulKeyboardData(uni: input.unicode + 1, state: .cho)
     }
@@ -57,6 +58,6 @@ class HangulCombineValidator {
     
     func combineSingleJongToDouble(onProcessing: HangulKeyboardData, input: HangulKeyboardData) -> HangulKeyboardData {
         let index = HangulSet.checkingJongs.firstIndex{ $0 == (onProcessing.hangul, input.hangul)} ?? 0
-        return HangulKeyboardData(char: HangulSet.doubleJongs[index], state: .jong)
+        return HangulKeyboardData(char: HangulSet.onlyDoubleJongs[index], state: .jong)
     }
 }
