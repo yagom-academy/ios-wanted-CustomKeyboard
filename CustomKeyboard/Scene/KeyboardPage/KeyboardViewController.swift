@@ -13,7 +13,7 @@ class KeyboardViewController: UIViewController {
     
     private let reviewTextView: UITextView = {
         var textView = UITextView()
-        textView.font = .systemFont(ofSize: 50, weight: .medium)
+        textView.font = .systemFont(ofSize: 24, weight: .medium)
         
         return textView
     }()
@@ -27,12 +27,22 @@ class KeyboardViewController: UIViewController {
         
         layout()
         addTarget()
+        touchTextView()
         bind(viewModel)
         keyboardView.keyFirstLine.delegate = self
         keyboardView.keySecondLine.delegate = self
         keyboardView.keyThirdLine.delegate = self
         keyboardView.keyFourthLine.delegate = self
         keyboardView.keyThirdLine.shiftDelegate = self
+    }
+    
+    func touchTextView() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        reviewTextView.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 
