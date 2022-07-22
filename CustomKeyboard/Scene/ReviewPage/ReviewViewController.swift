@@ -23,16 +23,21 @@ class ReviewViewController: UIViewController {
         attribute()
         layout()
         bind(viewModel)
-        viewModel.getReview { [weak self] reviews, error in
+        viewModel.getReview { [weak self] result in
             guard let self = self  else { return }
-            guard let reviews = reviews else { return }
-            self.reviewList = reviews.reviewData
-            self.reviewList = self.reviewList.sorted(by: { r1, r2 in
-                r1.createdAt.compare(r2.createdAt) == .orderedDescending
-            })
-            DispatchQueue.main.async {
-                self.reviewTableView.reloadData()
+            switch result {
+            case .success(let reviews):
+                self.reviewList = reviews.reviewData
+                self.reviewList = self.reviewList.sorted(by: { r1, r2 in
+                    r1.createdAt.compare(r2.createdAt) == .orderedDescending
+                })
+                DispatchQueue.main.async {
+                    self.reviewTableView.reloadData()
+                }
+            case .failure(_) :
+                print(Error.self)
             }
+            
         }
     }
 }
