@@ -61,18 +61,24 @@ extension ReviewListViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView))
         self.reviewTextView.addGestureRecognizer(tapGestureRecognizer)
     }
-    //TODO: String값 따로 보관하도록하는게 좋다
+    
     private func addSuccessAlert(statusCode: NetworkManager.ResponseCode) {
+        let title = "알림"
+        let message = "Status Code: \(statusCode)\n 리뷰 작성이 성공했습니다."
+        let dismissTitle = "닫기"
         
-        let postAlert = UIAlertController(title: "알림", message: "Status Code: \(statusCode)\n 리뷰 작성이 성공했습니다.", preferredStyle: .alert)
-        postAlert.addAction(UIAlertAction(title: "닫기", style: .destructive))
+        let postAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        postAlert.addAction(UIAlertAction(title: dismissTitle, style: .destructive))
         self.present(postAlert, animated: true)
     }
     
     private func addFailureAlert(error: String) {
+        let title = "경고"
+        let message = "에러 원인: \(error)\n 리뷰 작성이 실패했습니다."
+        let dismissTitle = "닫기"
         
-        let postAlert = UIAlertController(title: "경고", message: "에러 원인: \(error)\n 리뷰 작성이 실패했습니다.", preferredStyle: .alert)
-        postAlert.addAction(UIAlertAction(title: "닫기", style: .destructive))
+        let postAlert = UIAlertController(title:title, message: message, preferredStyle: .alert)
+        postAlert.addAction(UIAlertAction(title: dismissTitle, style: .destructive))
         self.present(postAlert, animated: true)
     }
     

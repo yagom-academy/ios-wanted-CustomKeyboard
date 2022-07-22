@@ -81,7 +81,6 @@ final class ReviewListViewModel {
         let minutes = interval/60
         let hours = interval/3600
         
-        //TODO: 1년전, 2년전,등등 단위로 케이스늘리기
         switch interval {
         case IntervalRange.in60MinutesRange.range :
             createdDateString = "\(minutes)분 전"
