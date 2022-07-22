@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B7344044287E830900C9B8B0 /* ReviewTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7344043287E830900C9B8B0 /* ReviewTextFieldView.swift */; };
+		B7344044287E830900C9B8B0 /* ReviewBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7344043287E830900C9B8B0 /* ReviewBannerView.swift */; };
 		B747B299287FE80700DE15FC /* CustomKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B747B298287FE80700DE15FC /* CustomKeyboardView.swift */; };
 		B747B29F2880491E00DE15FC /* CustomRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B747B29E2880491E00DE15FC /* CustomRoundButton.swift */; };
 		B747B2EF2885363B00DE15FC /* KoreanCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B747B2EE2885363B00DE15FC /* KoreanCharacter.swift */; };
@@ -27,6 +27,7 @@
 		B779BBF8287E8A5100BB8DF5 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBF7287E8A5100BB8DF5 /* Comment.swift */; };
 		B779BBFF287E91E700BB8DF5 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBFE287E91E700BB8DF5 /* HomeViewModel.swift */; };
 		B779BC01287E920900BB8DF5 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BC00287E920900BB8DF5 /* Observable.swift */; };
+		B78B2D57288B086500615067 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78B2D56288B086500615067 /* ReviewViewController.swift */; };
 		B7AF93772887D9D90058526E /* Initial.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF93762887D9D90058526E /* Initial.swift */; };
 		B7AF93792887D9E90058526E /* Neutral.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF93782887D9E90058526E /* Neutral.swift */; };
 		B7AF937B2887D9F30058526E /* Final.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF937A2887D9F30058526E /* Final.swift */; };
@@ -47,7 +48,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B7344043287E830900C9B8B0 /* ReviewTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTextFieldView.swift; sourceTree = "<group>"; };
+		B7344043287E830900C9B8B0 /* ReviewBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewBannerView.swift; sourceTree = "<group>"; };
 		B747B298287FE80700DE15FC /* CustomKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyboardView.swift; sourceTree = "<group>"; };
 		B747B29E2880491E00DE15FC /* CustomRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundButton.swift; sourceTree = "<group>"; };
 		B747B2EE2885363B00DE15FC /* KoreanCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanCharacter.swift; sourceTree = "<group>"; };
@@ -67,6 +68,7 @@
 		B779BBF7287E8A5100BB8DF5 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		B779BBFE287E91E700BB8DF5 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B779BC00287E920900BB8DF5 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		B78B2D56288B086500615067 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		B7AF93762887D9D90058526E /* Initial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initial.swift; sourceTree = "<group>"; };
 		B7AF93782887D9E90058526E /* Neutral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neutral.swift; sourceTree = "<group>"; };
 		B7AF937A2887D9F30058526E /* Final.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Final.swift; sourceTree = "<group>"; };
@@ -180,9 +182,10 @@
 		B779BBFC287E91AF00BB8DF5 /* VIew */ = {
 			isa = PBXGroup;
 			children = (
-				B7344043287E830900C9B8B0 /* ReviewTextFieldView.swift */,
+				B7344043287E830900C9B8B0 /* ReviewBannerView.swift */,
 				B7F1DCEF287C12EE0065D587 /* ReviewTableViewCell.swift */,
 				DE15E65F28604278003DD2F5 /* HomeViewController.swift */,
+				B78B2D56288B086500615067 /* ReviewViewController.swift */,
 			);
 			path = VIew;
 			sourceTree = "<group>";
@@ -368,11 +371,12 @@
 				B7AF937F2887DB320058526E /* HangeulConverter.swift in Sources */,
 				B779BBD6287D4B5300BB8DF5 /* Review.swift in Sources */,
 				B779BBCF287D4B5300BB8DF5 /* ReviewDTO.swift in Sources */,
+				B78B2D57288B086500615067 /* ReviewViewController.swift in Sources */,
 				B779BBD4287D4B5300BB8DF5 /* Requestable.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				B779BBD1287D4B5300BB8DF5 /* Request.swift in Sources */,
 				B7AF93902888CBD10058526E /* CustomKeyboardViewModel.swift in Sources */,
-				B7344044287E830900C9B8B0 /* ReviewTextFieldView.swift in Sources */,
+				B7344044287E830900C9B8B0 /* ReviewBannerView.swift in Sources */,
 				B779BBD0287D4B5300BB8DF5 /* NetworkService.swift in Sources */,
 				B779BBF6287E500100BB8DF5 /* String+.swift in Sources */,
 				B779BBD9287D51CD00BB8DF5 /* ReviewRepository.swift in Sources */,

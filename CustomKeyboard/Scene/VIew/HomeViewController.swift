@@ -16,7 +16,8 @@ class HomeViewController: UIViewController {
     setKeyboardNotification()
     setupKeyboardActions()
     setData()
-    setTextField()
+    setReviewButtonAction()
+//    setTextField()
 
   }
   
@@ -44,16 +45,25 @@ class HomeViewController: UIViewController {
     return tableView
   }()
   
-  private lazy var reviewTextField : ReviewTextFieldView = {
-    let view = ReviewTextFieldView(frame: CGRect(x: 0, y: Int(view.frame.size.height) - 60, width: Int(view.frame.width), height: 60))
+  private let reviewBannerView: ReviewBannerView = {
+    let view = ReviewBannerView()
+    view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
   
   private func setConstraints() {
+    view.addSubview(reviewBannerView)
     view.addSubview(reviewTableView)
-    view.addSubview(reviewTextField)
+    
     NSLayoutConstraint.activate([
-      reviewTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      reviewBannerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      reviewBannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      reviewBannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      reviewBannerView.heightAnchor.constraint(equalToConstant: 60),
+    ])
+    
+    NSLayoutConstraint.activate([
+      reviewTableView.topAnchor.constraint(equalTo: reviewBannerView.bottomAnchor, constant: 5),
       reviewTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       reviewTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       reviewTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -61,25 +71,25 @@ class HomeViewController: UIViewController {
   }
   
   private func setKeyboardNotification() {
-    NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillShowNotification, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillHideNotification, object: nil)
+//    NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillShowNotification, object: nil)
+//    NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillHideNotification, object: nil)
   }
   
   
-  @objc private func adjustInputView(noti: Notification) {
-    guard let userInfo = noti.userInfo else { return }
-    guard let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-    let adjustmentHeight = (keyboardFrame.height + (reviewTextField.frame.height/2)) - view.safeAreaInsets.bottom
-    let originalYCoord = CGFloat(Int(view.frame.size.height) - 60)
-    
-    if noti.name == UIResponder.keyboardWillShowNotification &&  reviewTextField.frame.origin.y == originalYCoord{
-      reviewTextField.frame.origin.y -= adjustmentHeight
-      reviewTextField.layoutIfNeeded()
-    } else {
-      reviewTextField.frame.origin.y = originalYCoord
-      reviewTextField.layoutIfNeeded()
-    }
-  }
+//  @objc private func adjustInputView(noti: Notification) {
+//    guard let userInfo = noti.userInfo else { return }
+//    guard let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+//    let adjustmentHeight = (keyboardFrame.height + (reviewTextField.frame.height/2)) - view.safeAreaInsets.bottom
+//    let originalYCoord = CGFloat(Int(view.frame.size.height) - 60)
+//
+//    if noti.name == UIResponder.keyboardWillShowNotification &&  reviewTextField.frame.origin.y == originalYCoord{
+//      reviewTextField.frame.origin.y -= adjustmentHeight
+//      reviewTextField.layoutIfNeeded()
+//    } else {
+//      reviewTextField.frame.origin.y = originalYCoord
+//      reviewTextField.layoutIfNeeded()
+//    }
+//  }
 
   private func setupKeyboardActions() {
     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -91,16 +101,24 @@ class HomeViewController: UIViewController {
     view.endEditing(true)
   }
   
-  private func setTextField() {
-    reviewTextField.done = { text in
-      print(text)
-      self.viewModel.makeReview(review: text) { error in
-        if let error = error {
-          print(error)
-        }
-      }
+  private func setReviewButtonAction() {
+    reviewBannerView.buttonDidTap = {
+      let reivewViewController = ReviewViewController()
+      reivewViewController.modalPresentationStyle = .fullScreen
+      self.present(reivewViewController, animated: true)
     }
   }
+  
+//  private func setTextField() {
+//    reviewTextField.done = { text in
+//      print(text)
+//      self.viewModel.makeReview(review: text) { error in
+//        if let error = error {
+//          print(error)
+//        }
+//      }
+//    }
+//  }
 }
 
 extension HomeViewController : UITableViewDataSource {
