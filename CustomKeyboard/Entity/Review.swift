@@ -21,6 +21,12 @@ struct Review: Codable {
     let content: String
     /// 2022-07-22T19:00:00.000Z
     let createdAt: String
+    
+    var date: Date? {
+        let time = createdAt.replacingOccurrences(of: "T", with: " ")
+            .components(separatedBy: ".")[0]
+        return time.toDate()
+    }
 }
 
 struct User: Codable {

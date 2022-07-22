@@ -11,11 +11,10 @@ class KeyboardViewController: UIInputViewController {
 
     @IBOutlet var nextKeyboardButton: UIButton!
     private let textView = UITextView()
-    private let keyboardManager = KeyboardManager()
     private let keyboardView = KeyboardView()
     private let viewModel = KeyboardViewModel()
-    lazy var firstLineButtons = keyboardView.keyFirstLine.passButtons()
-    private var state = 0
+    
+    private lazy var firstLineButtons = keyboardView.keyFirstLine.passButtons()
     
 //    override func updateViewConstraints() {
 //        super.updateViewConstraints()
@@ -57,10 +56,10 @@ class KeyboardViewController: UIInputViewController {
 //        super.viewWillLayoutSubviews()
 //    }
 
-    override func textWillChange(_ textInput: UITextInput?) {
+//    override func textWillChange(_ textInput: UITextInput?) {
         // The app is about to change the document's contents. Perform any preparation here.
-        setProxy()
-    }
+        
+//    }
 
 //    override func textDidChange(_ textInput: UITextInput?) {
 //        // The app has just changed the document's contents, the document context has been updated.
@@ -85,13 +84,12 @@ class KeyboardViewController: UIInputViewController {
 
 extension KeyboardViewController: ButtonDelegate {
     func eraseButtonClickEvent(sender: KeyButton) {
-        keyboardView.keyThirdLine.shiftButton.isSelected = false
-        viewModel.resetShift(firstLineButtons)
-        viewModel.eraseButton(textView)
+        viewModel.eraseButton(textView, keyboardView)
     }
     
     func buttonClickEvent(sender: KeyButton) {
         viewModel.buttonClick(textView, keyboardView, sender)
+        print(textView.text)
     }
 }
 
