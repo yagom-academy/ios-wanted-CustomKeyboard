@@ -7,6 +7,12 @@
 
 import UIKit
 
+protocol KeyboardViewPresentable: NSObject {
+    
+    func presentKeyboardView()
+    
+}
+
 final class ReviewListView: UIView {
 
     // MARK: - UIProperties
@@ -50,6 +56,7 @@ final class ReviewListView: UIView {
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont(descriptor: descriptor, size: .zero)
         button.layer.cornerRadius = Style.cornerRadius
+        button.addTarget(nil, action: #selector(presentKeyboardView), for: .touchUpInside)
         return button
     }()
 
@@ -63,6 +70,10 @@ final class ReviewListView: UIView {
         tableView.separatorInset.right = Style.padding
         return tableView
     }()
+    
+    // MARK: - Properties
+    
+    weak var delegate: KeyboardViewPresentable?
 
     // MARK: - Lifecycles
 
@@ -83,6 +94,16 @@ final class ReviewListView: UIView {
         profileImageView.layer.cornerRadius = profileImageView.frame.height * Style.half
     }
 
+}
+
+// MARK: - Event Methods
+
+extension ReviewListView {
+    
+    @objc func presentKeyboardView() {
+        delegate?.presentKeyboardView()
+    }
+    
 }
 
 // MARK: - View setting methods

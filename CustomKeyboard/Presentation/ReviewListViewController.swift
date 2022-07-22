@@ -18,6 +18,7 @@ final class ReviewListViewController: BaseViewController {
     // MARK: - Lifecycle
 
     override func loadView() {
+        reviewListView.delegate = self
         self.view = reviewListView
     }
 
@@ -31,6 +32,19 @@ final class ReviewListViewController: BaseViewController {
     }
 
 }
+
+// MARK: - Event Methods
+
+extension ReviewListViewController: KeyboardViewPresentable {
+
+    func presentKeyboardView() {
+        let viewController = KeyboardViewController()
+        viewController.modalPresentationStyle = .overFullScreen
+        present(viewController, animated: true)
+    }
+
+}
+
 
 // MARK: - View setting methods
 
