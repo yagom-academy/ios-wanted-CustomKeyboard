@@ -26,6 +26,7 @@ class CustomKeyboardViewModel {
             deleteChar()
             print("deletePressed")
         case .spacePressed:
+            addSpace()
             print("spacePressed")
         }
     }
@@ -70,6 +71,10 @@ class CustomKeyboardViewModel {
         } else {
             text.value = subString + hangeulManger.removeChar(Int(lastUnicode))
         }
+    }
+    
+    func addSpace() {
+        text.value += " "
     }
 
 }
