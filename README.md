@@ -62,19 +62,19 @@
   - ReviewList 메인 화면
 
  <p float="left">
-  <img src= "CustomKeyboard/Resource/Images/reviewListView.gif" width="300"/>
+  <img src= "CustomKeyboard/Resource/Images/reviewListView.gif" width="200"/>
 </p>
 
  - ReviewList 작성 버튼 알림창
 
     <p float="left">
-  <img src= "CustomKeyboard/Resource/Images/post.gif" width="300"/>
+  <img src= "CustomKeyboard/Resource/Images/post.gif" width="200"/>
 </p>
 
   - ReviewWrite 키보드 기능
   
    <p float="left">
-  <img src= "CustomKeyboard/Resource/Images/keyboardView.gif" width="300"/>
+  <img src= "CustomKeyboard/Resource/Images/keyboardView.gif" width="200"/>
 </p>
 
 ## 사용한 Pattern 소개
