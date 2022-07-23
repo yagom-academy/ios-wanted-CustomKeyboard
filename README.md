@@ -48,7 +48,7 @@
 > 아이폰, 세로 모드만 지원하는 앱입니다.
 
 ## 사용한 기술
-`MVVM Pattern` `Delegate Pattern` `Code-based UI`
+`MVVM Pattern` `Delegate Pattern` `Code-based UI` `NSCache` `XCTest`
   
 ## 기능 소개
 
