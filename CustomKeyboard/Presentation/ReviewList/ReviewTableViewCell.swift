@@ -64,6 +64,7 @@ final class ReviewTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupCellStyle()
         setupView()
         setupConstraints()
     }
@@ -71,6 +72,7 @@ final class ReviewTableViewCell: UITableViewCell {
     @available(*, unavailable, message: "This initializer is not available.")
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setupCellStyle()
         setupView()
         setupConstraints()
     }
@@ -104,6 +106,10 @@ extension ReviewTableViewCell {
 // MARK: - View setting methods
 
 extension ReviewTableViewCell {
+    
+    private func setupCellStyle() {
+        self.selectionStyle = .none
+    }
 
     private func setupView() {
         [profileImageView,

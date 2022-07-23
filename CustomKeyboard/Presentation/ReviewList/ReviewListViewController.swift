@@ -6,15 +6,15 @@
 import UIKit
 
 final class ReviewListViewController: UIViewController {
-
+    
     // MARK: - Properties
-
+    
     private let reviewListView = ReviewListView()
     private var reviewAPIProvider: ReviewAPIProviderType?
     private var profileImageProvider: ProfileImageProviderType?
     
     private var reviews: [ReviewResult] = []
-
+    
     // MARK: - Lifecycle
     
     static func instantiate(
@@ -26,40 +26,40 @@ final class ReviewListViewController: UIViewController {
         viewController.profileImageProvider = profileImageProvider
         return viewController
     }
-
+    
     override func loadView() {
         reviewListView.delegate = self
         self.view = reviewListView
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableViewDelegate()
         fetchReviews()
     }
-
+    
 }
 
 // MARK: - View presenting methods
 
 extension ReviewListViewController: KeyboardViewPresentable {
-
+    
     func presentKeyboardViewController() {
         let viewController = KeyboardViewController()
         viewController.modalPresentationStyle = .overFullScreen
         present(viewController, animated: true)
     }
-
+    
 }
 
 // MARK: - View setting methods
 
 extension ReviewListViewController {
-
+    
     private func setTableViewDelegate() {
         reviewListView.reviewTableView.dataSource = self
     }
-
+    
 }
 
 // MARK: - Review networking methods
@@ -79,7 +79,7 @@ extension ReviewListViewController {
             }
         })
     }
-
+    
 }
 
 extension ReviewListViewController: ReviewUploadable {
@@ -88,7 +88,7 @@ extension ReviewListViewController: ReviewUploadable {
         reviewAPIProvider?.upload(review: contents) { result in
             switch result {
             case.success(_):
-                self.reviews.append(
+                self.reviews.insert(
                     ReviewResult.init(
                         user: User.init(
                             userName: Text.writterName,
@@ -96,8 +96,8 @@ extension ReviewListViewController: ReviewUploadable {
                         ),
                         content: contents,
                         createdAt: Date.now.description
-                    )
-                )
+                    ),
+                    at: .zero)
                 DispatchQueue.main.async {
                     self.reviewListView.reviewTableView.reloadData()
                 }
@@ -112,11 +112,11 @@ extension ReviewListViewController: ReviewUploadable {
 // MARK: - UITableViewDataSource
 
 extension ReviewListViewController: UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return reviews.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: ReviewTableViewCell.identifier,
@@ -125,7 +125,7 @@ extension ReviewListViewController: UITableViewDataSource {
         else {
             return UITableViewCell()
         }
-
+        
         let review = reviews[indexPath.row]
         cell.setupCell(review: review)
         
@@ -143,16 +143,16 @@ extension ReviewListViewController: UITableViewDataSource {
         }
         return cell
     }
-
+    
 }
 
 // MARK: - NameSpaces
 
 extension ReviewListViewController {
-
+    
     private enum Text {
         static let writterName = "당신"
         static let noImage = "noImage"
     }
-
+    
 }
