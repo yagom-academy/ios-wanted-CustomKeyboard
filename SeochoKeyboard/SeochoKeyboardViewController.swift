@@ -82,11 +82,11 @@ extension SeochoKeyboardViewController: UICollectionViewDataSource {
 
 extension SeochoKeyboardViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize { //cell의 크기를 지정해주는 함수 sizeForItemAt
-        if keyboardViewModel.keyboardLayout[indexPath.row] == "변환" || keyboardViewModel.keyboardLayout[indexPath.row] == "지움" {
+        if keyboardViewModel.keyboardLayout[indexPath.row] == "Shift" || keyboardViewModel.keyboardLayout[indexPath.row] == "Del" {
             return CGSize(width: self.view.bounds.width / 8.5, height: 40)
-        } else if keyboardViewModel.keyboardLayout[indexPath.row] == "스페이스" {
+        } else if keyboardViewModel.keyboardLayout[indexPath.row] == "Space" {
             return CGSize(width: self.view.bounds.width * 3.6 / 5, height: 40)
-        } else if keyboardViewModel.keyboardLayout[indexPath.row] == "엔터" {
+        } else if keyboardViewModel.keyboardLayout[indexPath.row] == "Return" {
             return CGSize(width: self.view.bounds.width * 1.1 / 5, height: 40)
         } else {
             return CGSize(width: self.view.bounds.width / 11, height: 40)
