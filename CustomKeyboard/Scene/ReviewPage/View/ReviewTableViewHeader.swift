@@ -11,8 +11,7 @@ protocol PassReviewDelegate: AnyObject {
     func sendReviewData(review: Review)
 }
 
-class ReviewTableViewHeader: UITableViewHeaderFooterView {
-    static let identifier = String(describing: ReviewTableViewHeader.self)
+class ReviewTableViewHeader: UITableViewHeaderFooterView, ReusableCell {
     weak var delegate: PassReviewDelegate?
     private var viewModel = ReviewTableViewHeaderViewModel()
     
