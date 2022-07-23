@@ -25,17 +25,18 @@ extension HangeulDictionary {
             return nil
         }
         
-        if unicodeType == .fixed {
-            return getIndexOfFixed(unicode, in: position)
-        }
-        return getIndexOfCompatible(unicode, in: position)
+        let allCases = getAllCases(of: unicodeType, in: position)
+        let index = allCases.firstIndex(of: unicode)
+        return index
     }
     
     func getUnicode(at index: Int, in position: HangeulCombinationPosition, of unicodeType: HangeulUnicodeType) -> Int? {
-        if unicodeType == .fixed {
-            return getUnicodeOfFixed(index, in: position)
+        let allCases = getAllCases(of: unicodeType, in: position)
+
+        if (0...allCases.count).contains(index) {
+            return allCases[index]
         }
-        return getUnicodeOfCompatible(index, in: position)
+        return nil
     }
 
     func getDoubleUnicode(_ previousLetter: Hangeul?, _ currentLetter: Hangeul?) -> Int? {
@@ -81,133 +82,6 @@ extension HangeulDictionary {
 }
 
 // MARK: - Private
-
-// MARK: - called in getIndex
-
-extension HangeulDictionary {
-    
-    private func getIndexOfCompatible(_ compatibleUnicode: Int, in position: HangeulCombinationPosition) -> Int? {
-        var index = 0
-        
-        switch position {
-        case .choseong:
-            for hangeul in HangeulUnicodeType.Compatible.choseong.allCases {
-                if hangeul.rawValue == compatibleUnicode {
-                    return index
-                }
-                index += 1
-            }
-        case .jungseong:
-            for hangeul in HangeulUnicodeType.Compatible.jungseong.allCases {
-                if hangeul.rawValue == compatibleUnicode {
-                    return index
-                }
-                index += 1
-            }
-        case .jongseong:
-            for hangeul in HangeulUnicodeType.Compatible.jongseong.allCases {
-                if hangeul.rawValue == compatibleUnicode {
-                    return index
-                }
-                index += 1
-            }
-        }
-        return nil
-    }
-    
-    private func getIndexOfFixed(_ fixedUnicode: Int, in position: HangeulCombinationPosition) -> Int? {
-        var index = 0
-        
-        switch position {
-        case .choseong:
-            for hangeul in HangeulUnicodeType.Fixed.choseong.allCases {
-                if hangeul.rawValue == fixedUnicode {
-                    return index
-                }
-                index += 1
-            }
-        case .jungseong:
-            for hangeul in HangeulUnicodeType.Fixed.jungseong.allCases {
-                if hangeul.rawValue == fixedUnicode {
-                    return index
-                }
-                index += 1
-            }
-        case .jongseong:
-            for hangeul in HangeulUnicodeType.Fixed.jongseong.allCases {
-                if hangeul.rawValue == fixedUnicode {
-                    return index
-                }
-                index += 1
-            }
-        }
-        return nil
-    }
-}
-
-
-// MARK: - called in getUnicode
-
-extension HangeulDictionary {
-    
-    private func getUnicodeOfCompatible(_ compatibleIndex: Int, in position: HangeulCombinationPosition) -> Int? {
-        var count = 0
-        
-        switch position {
-        case .choseong:
-            for hangeul in HangeulUnicodeType.Compatible.choseong.allCases {
-                if count == compatibleIndex {
-                    return hangeul.rawValue
-                }
-                count += 1
-            }
-        case .jungseong:
-            for hangeul in HangeulUnicodeType.Compatible.jungseong.allCases {
-                if count == compatibleIndex {
-                    return hangeul.rawValue
-                }
-                count += 1
-            }
-        case .jongseong:
-            for hangeul in HangeulUnicodeType.Compatible.jongseong.allCases {
-                if count == compatibleIndex {
-                    return hangeul.rawValue
-                }
-                count += 1
-            }
-        }
-        return nil
-    }
-    
-    private func getUnicodeOfFixed(_ fixedIndex: Int, in position: HangeulCombinationPosition) -> Int? {
-        var count = 0
-        
-        switch position {
-        case .choseong:
-            for hangeul in HangeulUnicodeType.Fixed.choseong.allCases {
-                if count == fixedIndex {
-                    return hangeul.rawValue
-                }
-                count += 1
-            }
-        case .jungseong:
-            for hangeul in HangeulUnicodeType.Fixed.jungseong.allCases {
-                if count == fixedIndex {
-                    return hangeul.rawValue
-                }
-                count += 1
-            }
-        case .jongseong:
-            for hangeul in HangeulUnicodeType.Fixed.jongseong.allCases {
-                if count == fixedIndex {
-                    return hangeul.rawValue
-                }
-                count += 1
-            }
-        }
-        return nil
-    }
-}
 
 // MARK: - called in getDoubleUnicode
 
@@ -277,24 +151,24 @@ extension HangeulDictionary {
         }
     }
     
-    private func getAllCases(of unicodeType: HangeulUnicodeType, in position: HangeulCombinationPosition) -> Any {
+    func getAllCases(of unicodeType: HangeulUnicodeType, in position: HangeulCombinationPosition) -> Array<Int> {
         if unicodeType == .compatible {
             switch position {
             case .choseong:
-                return HangeulUnicodeType.Compatible.choseong.allCases
+                return HangeulUnicodeType.Compatible.choseong.allCases.map {$0.rawValue}
             case .jungseong:
-                return HangeulUnicodeType.Compatible.jungseong.allCases
+                return HangeulUnicodeType.Compatible.jungseong.allCases.map {$0.rawValue}
             case .jongseong:
-                return HangeulUnicodeType.Compatible.jongseong.allCases
+                return HangeulUnicodeType.Compatible.jongseong.allCases.map {$0.rawValue}
             }
         } else {
             switch position {
             case .choseong:
-                return HangeulUnicodeType.Fixed.choseong.allCases
+                return HangeulUnicodeType.Fixed.choseong.allCases.map {$0.rawValue}
             case .jungseong:
-                return HangeulUnicodeType.Fixed.jungseong.allCases
+                return HangeulUnicodeType.Fixed.jungseong.allCases.map {$0.rawValue}
             case .jongseong:
-                return HangeulUnicodeType.Fixed.jongseong.allCases
+                return HangeulUnicodeType.Fixed.jongseong.allCases.map {$0.rawValue}
             }
         }
     }
