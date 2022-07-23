@@ -108,7 +108,7 @@
 ### 네트워크 Layer 
 
   <p align="center">
-   <img src="https://user-images.githubusercontent.com/36659877/180599495-02eed3b1-0141-460c-a8ed-656b2e86f5fa.png" width="300" height="200"> 
+   <img src="https://user-images.githubusercontent.com/36659877/180600713-fddad89f-a699-4800-8b9e-ac1816e1d30c.png" width="300" height="200"> 
    </p>
 
 - Endpoint
@@ -122,7 +122,18 @@
 - NetworkService
 > 서버에 요청하고, response 를 받아오는 핵심로직을 가지고 있습니다. 
 
-### 아키텍쳐 
+### Architecture 
+![image](https://user-images.githubusercontent.com/36659877/180601271-384df35c-9e79-4433-9b6b-ae208e3e6d31.png)
+
+### 키보드 한글 조합 로직 
+
+- [한글 조합 시스템 흐름] 
+![image](https://user-images.githubusercontent.com/36659877/180601420-81144836-f7cc-4db6-8402-a1a2c593a482.png)
+
+- [조합 함수 경우의 수]
+![image](https://user-images.githubusercontent.com/36659877/180601385-18804780-d047-4725-a2bb-a58a26cc384d.png)
+
+
 
 
 
