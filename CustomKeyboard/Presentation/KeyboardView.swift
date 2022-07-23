@@ -5,8 +5,13 @@
 //  Created by BH on 2022/07/12.
 //
 
-import Foundation
 import UIKit
+
+protocol KeyboardViewDismissible: NSObject {
+    
+    func dismissKeyboardViewController(reviewContents: String)
+    
+}
 
 final class KeyboardView: UIView {
 
@@ -124,6 +129,8 @@ final class KeyboardView: UIView {
         button.setTitleColor(.black, for: .normal)
         button.setImage(Style.returnKeyImage, for: .normal)
         button.tintColor = .black
+        
+        button.addTarget(nil, action: #selector(returnButtonTouched(_:)), for: .touchUpInside)
 
         button.heightAnchor
             .constraint(equalToConstant:keyboardKeyHeight).isActive  = true
@@ -141,8 +148,11 @@ final class KeyboardView: UIView {
         stackView.spacing = Style.basicPadding
         return stackView
     }()
+    
+    // MARK: - Properties
 
     private var toBeConvertedButtons = [UIButton]()
+    weak var delegate: KeyboardViewDismissible?
 
     // MARK: - LifeCycles
 
@@ -174,6 +184,13 @@ final class KeyboardView: UIView {
         toBeConvertedButtons.forEach {
             $0.isSelected.toggle()
         }
+    }
+    
+    @objc func returnButtonTouched(_ sender: UIButton) {
+        guard let contents = textLabel.text else {
+            return
+        }
+        delegate?.dismissKeyboardViewController(reviewContents: contents)
     }
 
 }

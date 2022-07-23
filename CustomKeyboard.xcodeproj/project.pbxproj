@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B0AE87A5288AF9BF00611FFD /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AE87A4288AF9BF00611FFD /* Notification+Extension.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
 		DE15E66028604278003DD2F5 /* ReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65F28604278003DD2F5 /* ReviewListViewController.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B0AE87A4288AF9BF00611FFD /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE15E65D28604278003DD2F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				DFC51025287D48B1003D26B0 /* Base */,
+				B0AE87A4288AF9BF00611FFD /* Notification+Extension.swift */,
 				DFFCAB25288BCBD100D9423E /* Character+extension.swift */,
 			);
 			path = Util;
@@ -271,6 +274,7 @@
 				DFC51027287D48CC003D26B0 /* BaseViewController.swift in Sources */,
 				E11AAD6E287D5101001B1F96 /* KeyboardView.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
+				B0AE87A5288AF9BF00611FFD /* Notification+Extension.swift in Sources */,
 				E171230728869AAD00FDAF6C /* ReviewResult.swift in Sources */,
 				E1B120992887956B00910E84 /* ProfileImageProvider.swift in Sources */,
 				E1712300288692D000FDAF6C /* ReviewAPIProvider.swift in Sources */,

@@ -18,6 +18,7 @@ final class ReviewListViewController: BaseViewController {
     // MARK: - Lifecycle
 
     override func loadView() {
+        reviewListView.delegate = self
         self.view = reviewListView
     }
 
@@ -30,6 +31,45 @@ final class ReviewListViewController: BaseViewController {
         setTableViewDelegate()
     }
 
+}
+
+// MARK: - objc Methods
+
+extension ReviewListViewController: KeyboardViewPresentable {
+
+    func presentKeyboardViewController() {
+        let viewController = KeyboardViewController()
+        viewController.modalPresentationStyle = .overFullScreen
+        present(viewController, animated: true)
+    }
+
+}
+
+extension ReviewListViewController: ReviewUploadable {
+    
+    func uploadReview(with contents: String) {
+        reviewAPIProvider.upload(review: contents) { result in
+            switch result {
+            case.success(let success):
+                self.reviews.append(
+                    ReviewResult.init(
+                        user: User.init(
+                            userName: Text.writterName,
+                            profileImage: Text.noImage
+                        ),
+                        content: contents,
+                        createdAt: Date.now.description
+                    )
+                )
+                DispatchQueue.main.async {
+                    self.reviewListView.reviewTableView.reloadData()
+                }
+            case.failure(let error):
+                print(error)
+            }
+        }
+    }
+    
 }
 
 // MARK: - View setting methods
@@ -78,6 +118,11 @@ extension ReviewListViewController: UITableViewDataSource {
 
         let review = reviews[indexPath.row]
         cell.setupCell(review: review)
+        
+        guard review.user.profileImage != Text.noImage else {
+            return cell
+        }
+        
         profileImageProvider.fetchImage(from: review.user.profileImage) { result in
             switch result {
             case .success(let profileImage):
@@ -91,3 +136,9 @@ extension ReviewListViewController: UITableViewDataSource {
 
 }
 
+extension ReviewListViewController {
+    private enum Text {
+        static let writterName = "당신"
+        static let noImage = "noImage"
+    }
+}

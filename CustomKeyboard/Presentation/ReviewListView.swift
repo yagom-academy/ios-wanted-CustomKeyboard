@@ -7,6 +7,18 @@
 
 import UIKit
 
+protocol KeyboardViewPresentable: NSObject {
+    
+    func presentKeyboardViewController()
+    
+}
+
+protocol ReviewUploadable: NSObject {
+    
+    func uploadReview(with contents: String)
+    
+}
+
 final class ReviewListView: UIView {
 
     // MARK: - UIProperties
@@ -35,6 +47,11 @@ final class ReviewListView: UIView {
         label.numberOfLines = Style.reviewLineLimit
         label.layer.cornerRadius = Style.cornerRadius
         label.clipsToBounds = true
+        
+        let gestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(presentKeyboardViewController))
+        label.addGestureRecognizer(gestureRecognizer)
+        label.isUserInteractionEnabled = true
+        
         return label
     }()
 
@@ -50,6 +67,7 @@ final class ReviewListView: UIView {
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont(descriptor: descriptor, size: .zero)
         button.layer.cornerRadius = Style.cornerRadius
+        button.addTarget(nil, action: #selector(uploadReviewButtonTouched(_:)), for: .touchUpInside)
         return button
     }()
 
@@ -63,6 +81,11 @@ final class ReviewListView: UIView {
         tableView.separatorInset.right = Style.padding
         return tableView
     }()
+    
+    // MARK: - Properties
+    
+    weak var delegate: (KeyboardViewPresentable &
+                        ReviewUploadable)?
 
     // MARK: - Lifecycles
 
@@ -70,6 +93,7 @@ final class ReviewListView: UIView {
         super.init(frame: frame)
         setupView()
         setupConstraints()
+        addObservers()
     }
 
     @available(*, unavailable, message: "This initializer is not available.")
@@ -77,12 +101,43 @@ final class ReviewListView: UIView {
         super.init(coder: coder)
         setupView()
         setupConstraints()
+        addObservers()
     }
 
     override func layoutSubviews() {
         profileImageView.layer.cornerRadius = profileImageView.frame.height * Style.half
     }
+    
+    func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reviewContentsUpdated(_:)), name: .sendKeyboardContentsToReviewWrittingLabel, object: nil)
+    }
 
+}
+
+// MARK: - objc Methods
+
+extension ReviewListView {
+    
+    @objc func presentKeyboardViewController() {
+        delegate?.presentKeyboardViewController()
+    }
+    
+    @objc func reviewContentsUpdated(_ sender: NSNotification) {
+        guard let userInfo = sender.userInfo,
+              let contents = userInfo["reviewContents"] as? String else {
+            return
+        }
+        
+        reviewWritingLabel.text = contents
+    }
+    
+    @objc func uploadReviewButtonTouched(_ sender: UIButton) {
+        guard let contents = reviewWritingLabel.text else {
+            return
+        }
+        delegate?.uploadReview(with: contents)
+    }
+    
 }
 
 // MARK: - View setting methods
