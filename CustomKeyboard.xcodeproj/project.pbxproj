@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		36081E06287FFC0200A933AE /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36081E05287FFC0200A933AE /* Date+.swift */; };
-		36081E08288003CC00A933AE /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36081E07288003CC00A933AE /* String+.swift */; };
+		36081E06287FFC0200A933AE /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36081E05287FFC0200A933AE /* Date+extension.swift */; };
+		36081E08288003CC00A933AE /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36081E07288003CC00A933AE /* String+extension.swift */; };
 		36431EB8287D4D79003C99B4 /* ReviewListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36431EB7287D4D79003C99B4 /* ReviewListHeaderView.swift */; };
 		36431EBB287D9582003C99B4 /* CustomKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36431EBA287D9581003C99B4 /* CustomKeyboardView.swift */; };
 		36431EBD287D9598003C99B4 /* CustomKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36431EBC287D9598003C99B4 /* CustomKeyboard.xib */; };
@@ -26,7 +26,7 @@
 		36AA02252888CF5D006A9704 /* CustomKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36431EBA287D9581003C99B4 /* CustomKeyboardView.swift */; };
 		36B1CD042887DB6B003E13C3 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B1CD032887DB6B003E13C3 /* HTTPMethod.swift */; };
 		36B1CD062887DBC1003E13C3 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B1CD052887DBC1003E13C3 /* Resource.swift */; };
-		36B1CD082887DC0D003E13C3 /* URLSession+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B1CD072887DC0D003E13C3 /* URLSession+.swift */; };
+		36B1CD082887DC0D003E13C3 /* URLSession+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B1CD072887DC0D003E13C3 /* URLSession+extension.swift */; };
 		36B1CD0A2887DC27003E13C3 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B1CD092887DC27003E13C3 /* API.swift */; };
 		36B1CD0C2887DE4D003E13C3 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B1CD0B2887DE4D003E13C3 /* NetworkError.swift */; };
 		36B1CD0E2887DE7E003E13C3 /* ConstantURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B1CD0D2887DE7E003E13C3 /* ConstantURL.swift */; };
@@ -76,8 +76,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		36081E05287FFC0200A933AE /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
-		36081E07288003CC00A933AE /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		36081E05287FFC0200A933AE /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
+		36081E07288003CC00A933AE /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		36431EB7287D4D79003C99B4 /* ReviewListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListHeaderView.swift; sourceTree = "<group>"; };
 		36431EBA287D9581003C99B4 /* CustomKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyboardView.swift; sourceTree = "<group>"; };
 		36431EBC287D9598003C99B4 /* CustomKeyboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomKeyboard.xib; sourceTree = "<group>"; };
@@ -86,7 +86,7 @@
 		36AA02142888CED4006A9704 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36B1CD032887DB6B003E13C3 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		36B1CD052887DBC1003E13C3 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
-		36B1CD072887DC0D003E13C3 /* URLSession+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+.swift"; sourceTree = "<group>"; };
+		36B1CD072887DC0D003E13C3 /* URLSession+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+extension.swift"; sourceTree = "<group>"; };
 		36B1CD092887DC27003E13C3 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		36B1CD0B2887DE4D003E13C3 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		36B1CD0D2887DE7E003E13C3 /* ConstantURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantURL.swift; sourceTree = "<group>"; };
@@ -134,9 +134,9 @@
 		36081E0928800B1500A933AE /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				36081E05287FFC0200A933AE /* Date+.swift */,
-				36081E07288003CC00A933AE /* String+.swift */,
-				36B1CD072887DC0D003E13C3 /* URLSession+.swift */,
+				36081E05287FFC0200A933AE /* Date+extension.swift */,
+				36081E07288003CC00A933AE /* String+extension.swift */,
+				36B1CD072887DC0D003E13C3 /* URLSession+extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -379,7 +379,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36081E06287FFC0200A933AE /* Date+.swift in Sources */,
+				36081E06287FFC0200A933AE /* Date+extension.swift in Sources */,
 				36B1CD0C2887DE4D003E13C3 /* NetworkError.swift in Sources */,
 				F0D4B436287D564D0083E8AE /* ReviewData.swift in Sources */,
 				F039F8AA28866A2500E7B637 /* HangulKeyboardData.swift in Sources */,
@@ -399,9 +399,9 @@
 				F0D480D5287E532000D9425C /* HangulSet.swift in Sources */,
 				36B1CD0E2887DE7E003E13C3 /* ConstantURL.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
-				36B1CD082887DC0D003E13C3 /* URLSession+.swift in Sources */,
+				36B1CD082887DC0D003E13C3 /* URLSession+extension.swift in Sources */,
 				36B1CD062887DBC1003E13C3 /* Resource.swift in Sources */,
-				36081E08288003CC00A933AE /* String+.swift in Sources */,
+				36081E08288003CC00A933AE /* String+extension.swift in Sources */,
 				36B1CD042887DB6B003E13C3 /* HTTPMethod.swift in Sources */,
 				36431EBB287D9582003C99B4 /* CustomKeyboardView.swift in Sources */,
 				F0D480D7287E658300D9425C /* KeyboardMaker.swift in Sources */,
