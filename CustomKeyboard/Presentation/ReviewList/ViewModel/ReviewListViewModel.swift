@@ -31,7 +31,8 @@ extension ReviewListViewModel {
 
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd'T'hh:mm"
-            self?.reviewList?.data.insert(ReviewData(user: User(userName: "비공개", profileImage: "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"), content: content, createdAt: formatter.string(from: Date())), at: 0)
+            let reviewTime = formatter.string(from: Date())
+            self?.reviewList?.data.insert(ReviewData(user: User(userName: "비공개", profileImage: "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"), content: content, createdAt: reviewTime), at: 0)
         }
     }
 }
@@ -43,7 +44,9 @@ extension ReviewListViewModel {
         formatter.dateFormat = "yyyy-MM-dd hh:mm"
         let current = formatter.string(from: Date()).split(separator: " ")
         let currentDate = current[0]
-        let currentHour = current[1]
+        let currentTime = current[1]
+        let currentHour = isFirstZero(String(currentTime.split(separator: ":")[0]))
+        let currentMinute = isFirstZero(String(currentTime.split(separator: ":")[1]))
         
         // 주어진 시간
         let splitReviewDate = time.split(separator: "T")
@@ -56,8 +59,13 @@ extension ReviewListViewModel {
         if currentDate != reviewDate {
             return String(reviewDate)
         } else {
-            if currentHour != reviewHour {
-                 return ("\(reviewMinute)분 전")
+            if currentHour == reviewHour {
+                let minuteDifference = (Int(currentMinute) ?? 0) - (Int(reviewMinute) ?? 0)
+                if minuteDifference != 0 {
+                    return ("\(Int(currentMinute)! - Int(reviewMinute)!)분 전")
+                } else {
+                    return "방금 전"
+                }
             } else {
                  return ("\(reviewHour)시간 전")
             }
