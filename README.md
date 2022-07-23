@@ -22,6 +22,9 @@
 # 다이어그램
 <img src="https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/main/스크린샷/diagram.png">
 
+# 한글 입력 처리 방
+![무제6](https://user-images.githubusercontent.com/66169740/180589919-5d9604db-5a9d-476e-91bc-eb93d20fc1a7.png)
+
 
 
 # 기능
