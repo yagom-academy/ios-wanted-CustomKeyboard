@@ -23,8 +23,6 @@ class KeyboardMaker {
         case deleting
     }
     
-    private var isDoubleJong = false
-    private var isJong = false
     
     private var combineBuffer = [HangulKeyboardData](repeating: HangulKeyboardData(char: "", state: .empty), count: 3)
     private var processingBuffer = Status(currentState: .empty, isCompleted: false, alphaRepository: [], mode: .none)
@@ -33,8 +31,8 @@ class KeyboardMaker {
     private let combineValidator = HangulCombineValidator()
     private let combinator = HangulCombinator()
     
-    public func putKeyboardData(data inputData: HangulKeyboardData) -> [String] {
-         guard inputData.hangul != " " else {
+    public func insertKeyboardData(data inputData: HangulKeyboardData) -> [String] {
+        guard inputData.hangul != " " else {
             let spaceKeyboardData = HangulKeyboardData(char: " ", state: processingBuffer.currentState)
             
             processingBuffer.alphaRepository.removeAll()
@@ -66,29 +64,38 @@ class KeyboardMaker {
         
         switch processingBuffer.mode {
         case .none:
-            print("y")
+            return onCombinationProcess()
         case .jong:
-            print("y")
-        case .doubleJong:
-            print("y")
-        case .deleting:
-            return deleteKeyboardData(currentKeyboardData: inputData)
-        }
-        
-        
-        if isJong {
             let decomposedHangul = combinator.decomposeHangul(hangul: releaseTextField.last! , lastState: .jong).filter{$0.hangul != " "}
             let newBuffer = [decomposedHangul[0], decomposedHangul[1], HangulKeyboardData(char: "", state: .empty)]
             let newKeyboardData = combinator.combineHangul(buffer: newBuffer, lastState: .jung)
-            isJong = false
+            processingBuffer.mode = .none
             releaseTextField[releaseTextField.count - 1] = newKeyboardData.hangul
-        } else if isDoubleJong {
-            let decomposedHangul = combinator.decomposeHangul(hangul: releaseTextField.last!, lastState: .doubleJong)
-            let newBuffer = decomposedHangul
-            let newKeyboardData = combinator.combineHangul(buffer: newBuffer, lastState: .jong)
-            isDoubleJong = false
-            releaseTextField[releaseTextField.count - 1] = newKeyboardData.hangul
+            return onCombinationProcess()
+        case .doubleJong:
+            let lastDoubleJong = processingBuffer.alphaRepository[processingBuffer.alphaRepository.count - 2]
+         
+            var decomposedHangul = combinator.decomposeHangul(hangul: releaseTextField.last!, lastState: .doubleJong)
+            
+            if combineBuffer[0].hangul == lastDoubleJong.hangul {
+                decomposedHangul.removeLast()
+                let newBuffer = decomposedHangul
+                let newKeyboardData = combinator.combineHangul(buffer: newBuffer, lastState: .jong)
+                processingBuffer.mode = .none
+                releaseTextField[releaseTextField.count - 1] = newKeyboardData.hangul
+            } else {
+                let newBuffer = decomposedHangul
+                let newKeyboardData = combinator.combineHangul(buffer: newBuffer, lastState: .jong)
+                processingBuffer.mode = .none
+                releaseTextField[releaseTextField.count - 1] = newKeyboardData.hangul
+            }
+            return onCombinationProcess()
+        case .deleting:
+            return deleteKeyboardData(currentKeyboardData: inputData)
         }
+    }
+    
+    func onCombinationProcess() -> [String] {
         
         if processingBuffer.isCompleted {
             let combinedHagul = combinator.combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState)
@@ -122,6 +129,7 @@ class KeyboardMaker {
             }
             releaseTextField[releaseTextField.count - 1] = combinator.combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState).hangul
         }
+        
         return releaseTextField
     }
     
@@ -140,7 +148,6 @@ class KeyboardMaker {
     func deleteHangulInEditing() -> [String] {
         
         if processingBuffer.alphaRepository.last!.hangul == releaseTextField.last! {
-            
             processingBuffer.alphaRepository.removeLast()
             releaseTextField.removeLast()
             processingBuffer.mode = .none
@@ -472,7 +479,7 @@ class KeyboardMaker {
             currentStatus.mode = .deleting
             currentStatus.isCompleted = false
             
-            if currentStatus.alphaRepository.count <= 1 {
+            if currentStatus.alphaRepository.count > 1 {
                 currentStatus.currentState = currentStatus.alphaRepository.last!.bornState
             } else {
                 currentStatus.currentState = .empty
@@ -581,7 +588,7 @@ class KeyboardMaker {
         if HangulSet.jungs.contains(currentKeyboardData.hangul) {
             
             currentStatus.isCompleted = true
-            isJong = true
+            currentStatus.mode = .jong
             combineBuffer[0] = combineBuffer[2]
             combineBuffer[1] = currentKeyboardData
             combineBuffer[2] = HangulKeyboardData(char: "", state: .empty)
@@ -589,7 +596,7 @@ class KeyboardMaker {
             
             
             if HangulSet.doubleJungs.contains(currentKeyboardData.hangul) {
-                isDoubleJong = true
+                currentStatus.mode = .doubleJong
                 currentStatus.currentState = .doubleJung
                 
                 return currentStatus
@@ -664,7 +671,8 @@ class KeyboardMaker {
         } else if HangulSet.jungs.contains(currentKeyboardData.hangul) {
             
             currentStatus.isCompleted = true
-            isDoubleJong = true
+            currentStatus.mode = .doubleJong
+            
             combineBuffer[0] = currentStatus.alphaRepository[currentStatus.alphaRepository.count - 2]
             combineBuffer[1] = currentKeyboardData
             combineBuffer[2] = HangulKeyboardData(char: "", state: .empty)
