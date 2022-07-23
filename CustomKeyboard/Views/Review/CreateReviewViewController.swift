@@ -28,6 +28,7 @@ class CreateReviewViewController: UIViewController {
         super.viewDidLoad()
         setLayout()
         setKeyboardInputView()
+        setNavigationButton()
         keyboardManager.delegate = self
     }
     
@@ -46,6 +47,40 @@ class CreateReviewViewController: UIViewController {
         customKeyboardView.delegate = self
         reviewTextView.inputView = customKeyboardView
     }
+    
+    private func setNavigationButton() {
+        let createReviewBarButton = UIBarButtonItem(title: "작성", style: .plain, target: self, action: #selector(createReviewNpost))
+        self.navigationItem.rightBarButtonItem = createReviewBarButton
+    }
+    
+    @objc private func createReviewNpost() {
+        postReviewData()
+    }
+    
+    private func postReviewData() {
+        guard !reviewTextView.text.isEmpty else {
+            emptyTextViewAlert()
+            return
+        }
+        API.shared.post(message: reviewTextView.text) { [self] error in
+            if let error = error {
+                reviewDataPostErrorHandler(error: error)
+            } else {
+                DispatchQueue.main.async { [self] in
+                    self.navigationController?.popViewController(animated: true)
+                    delegate?.hangulKeyboardText(text: reviewTextView.text)
+                }
+            }
+        }
+    }
+    
+    private func emptyTextViewAlert() {
+        let alert = UIAlertController(title: "리뷰를 작성해 주세요!", message: nil, preferredStyle: .alert)
+        let action = UIAlertAction(title: "확인", style: .default)
+        alert.addAction(action)
+        self.present(alert, animated: true)
+    }
+    
 }
 
 extension CreateReviewViewController: KeyboardInfoReceivable {
@@ -59,16 +94,7 @@ extension CreateReviewViewController: KeyboardInfoReceivable {
 extension CreateReviewViewController: HangulKeyboardDataReceivable {
     
     func hangulKeyboard(enterPressed: HangulKeyboardData) {
-        API.shared.post(message: reviewTextView.text) { [self] error in
-            if let error = error {
-                reviewDataPostErrorHandler(error: error)
-            } else {
-                DispatchQueue.main.async { [self] in
-                    self.navigationController?.popViewController(animated: true)
-                    delegate?.hangulKeyboardText(text: reviewTextView.text)
-                }
-            }
-        }
+        postReviewData()
     }
     
     func hangulKeyboard(updatedResult text: String) {
