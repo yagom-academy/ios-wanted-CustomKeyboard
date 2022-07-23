@@ -7,38 +7,35 @@
 
 import Foundation
 
-protocol HomeViewModelable {
-    func reloadReviewList(completion: @escaping (Result<[ReviewModel], Error>)->())
-}
+class HomeViewModel {
 
-class HomeViewModel: HomeViewModelable {
     private let networkService: Api
-//    var reviewList: Observable<[ReviewModel]> = Observable([])
+    private var reviewListModel: ReviewListModel?
     
     init(networkService: Api) {
         self.networkService = networkService
     }
+}
+
+extension HomeViewModel: HomeViewModelable {
     
-    func reloadReviewList(completion: @escaping (Result<[ReviewModel], Error>)->()) {
+    func reloadReviewList(completion: @escaping (Result<Void, Error>)->()) {
         networkService.request(httpMethod: .get, condent: "") { result in
             switch result {
             case .success(let list):
-                let reviewList = list as? reviewListModel
-                var tmpArr: [ReviewModel] = []
-                reviewList?.data.forEach { reviewInfo in
-                    let review = ReviewModel(
-                        userName: reviewInfo.user.userName,
-                        profileImage: reviewInfo.user.profileImage,
-                        content: reviewInfo.content,
-                        createdAt: reviewInfo.createdAt
-                    )
-                    tmpArr.append(review)
-                }
-//                self.reviewList.value.append(contentsOf: tmpArr)
-                completion(.success(tmpArr))
+                self.reviewListModel = list as? ReviewListModel
+                completion(.success(()))
             case .failure(let error):
                 completion(.failure(error))
             }
         }
+    }
+    
+    func countOfReviewListModel() -> Int {
+        return self.reviewListModel?.data.count ?? 0
+    }
+    
+    func getReviewModel(index: Int) -> Review? {
+        return reviewListModel?.data[index]
     }
 }

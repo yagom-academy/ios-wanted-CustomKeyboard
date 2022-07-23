@@ -7,12 +7,17 @@
 
 import UIKit
 
+protocol HomeViewModelable {
+    func reloadReviewList(completion: @escaping (Result<Void, Error>)->())
+    func countOfReviewListModel() -> Int
+    func getReviewModel(index: Int) -> Review?
+}
+
 class HomeViewController: UIViewController {
     
-    let homeViewModel: HomeViewModelable
-    var arr: [ReviewModel] = []
+    private let homeViewModel: HomeViewModelable
     
-    lazy var reviewTableview: UITableView = {
+    private lazy var reviewTableview: UITableView = {
         var tableview = UITableView()
         tableview.delegate = self
         tableview.dataSource = self
@@ -44,8 +49,7 @@ class HomeViewController: UIViewController {
         setConstraints()
         homeViewModel.reloadReviewList { result in
             switch result {
-            case .success(let data):
-                self.arr = data
+            case .success():
                 DispatchQueue.main.async {
                     self.reviewTableview.reloadData()
                 }
@@ -54,7 +58,7 @@ class HomeViewController: UIViewController {
             }
         }
     }
-    func setConstraints() {
+    private func setConstraints() {
         view.addSubview(reviewTableview)
         NSLayoutConstraint.activate([
         reviewTableview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -64,14 +68,15 @@ class HomeViewController: UIViewController {
         ])
     }
 
-    @objc func tapAddButton(){
+    @objc
+    private func tapAddButton(){
         self.navigationController?.pushViewController(CreateReviewViewController(), animated: false)
     }
 }
 
 extension HomeViewController:  UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.arr.count
+        return self.homeViewModel.countOfReviewListModel()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -81,32 +86,10 @@ extension HomeViewController:  UITableViewDelegate, UITableViewDataSource{
         ) as? ReviewTableviewCell  else {
             return UITableViewCell()
         }
-        let currReview = arr[indexPath.row]
-        if let url = URL(string: currReview.profileImage),let data = try? Data(contentsOf: url){
-            cell.userImage.image = UIImage(data: data)
-        }else{
-            cell.userImage.image = UIImage(systemName: "heart")
-        }
-        cell.userName.text = currReview.userName
-        cell.condent.text = currReview.content
+        cell.configure(review: homeViewModel.getReviewModel(index: indexPath.row))
         return cell
     }
 }
-
-
-
-//        homeViewModel.reloadReviewList {
-//            self.bind()
-//        }
-
-//    func bind(){
-//        self.homeViewModel.reviewList.bind { review in
-//            self.reviewList = review
-//            DispatchQueue.main.async {
-//              self.reviewTableview.reloadData()
-//            }
-//        }
-//    }
 
 
 

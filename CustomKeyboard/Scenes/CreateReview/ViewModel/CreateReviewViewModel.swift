@@ -14,6 +14,7 @@ class CreateReviewViewModel{
         networkService.request(httpMethod: .post, condent: condent) { result in
             switch result {
             case .success(_):
+                print("Success!")
                 completion()
             case .failure(_):
                 completion()

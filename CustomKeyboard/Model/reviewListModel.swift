@@ -7,25 +7,12 @@
 
 import Foundation
 
-//typealias reviewList = [review]
-//
-//struct review: Codable{
-//    let user: User
-//    let content: String
-//    let createdAt: String
-//}
-//
-//struct User: Codable{
-//    let userName: String
-//    let profileImage: String
-//}
-
-struct reviewListModel: Codable { // 대문자
-    let data: [review]
+struct ReviewListModel: Codable {
+    let data: [Review]
 }
 
 // MARK: - review
-struct review: Codable {
+struct Review: Codable {
     let user: User
     let content, createdAt: String
 }

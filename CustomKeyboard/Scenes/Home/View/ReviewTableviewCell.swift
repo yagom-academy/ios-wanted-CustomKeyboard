@@ -11,19 +11,19 @@ class ReviewTableviewCell: UITableViewCell {
     
     static let identifier = "ReviewTableviewCell"
     
-    let userImage: UIImageView = {
+    private let userImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
         
-    let userName: UILabel = {
+    private let userName: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
         
-    let condent: UILabel = {
+    private let condent: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -68,5 +68,19 @@ class ReviewTableviewCell: UITableViewCell {
             condent.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             condent.heightAnchor.constraint(equalTo: userName.heightAnchor),
             ])
+    }
+    
+    func configure(review: Review?) {
+        guard let review = review else {
+            return
+        }
+
+        if let url = URL(string: review.user.profileImage),let data = try? Data(contentsOf: url){
+            self.userImage.image = UIImage(data: data)
+        }else{
+            self.userImage.image = UIImage(systemName: "heart")
+        }
+        self.userName.text = review.user.userName
+        self.condent.text = review.content
     }
 }

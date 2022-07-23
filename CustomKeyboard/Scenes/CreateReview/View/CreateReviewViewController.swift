@@ -7,18 +7,19 @@
 
 import UIKit
 
+
 class CreateReviewViewController: UIViewController {
     
     let createReviewViewModel = CreateReviewViewModel()
     let homeViewModel = HomeViewModel(networkService: NetworkService())
-    
     lazy var textfield: UITextField = {
         var textfield = UITextField()
-        textfield.backgroundColor = .gray
+        textfield.backgroundColor = .systemGray
+        textfield.placeholder = "여기에 리뷰를 작성해 주세요"
         textfield.translatesAutoresizingMaskIntoConstraints = false
         return textfield
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -34,10 +35,11 @@ class CreateReviewViewController: UIViewController {
             textfield.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             textfield.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             textfield.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            textfield.heightAnchor.constraint(equalToConstant: 200)
+            textfield.heightAnchor.constraint(equalToConstant: 200),
         ])
     }
-    @objc func tapDoneButton(){
+    @objc
+    func tapDoneButton(){
         guard let condent = textfield.text else { return }
         createReviewViewModel.uploadReview(condent: condent) {
             DispatchQueue.main.async {

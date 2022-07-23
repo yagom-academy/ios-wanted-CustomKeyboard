@@ -54,7 +54,7 @@ class NetworkService: Api{
                 return
             }
             do{
-                let resultData = try JSONDecoder().decode(reviewListModel.self, from: data)
+                let resultData = try JSONDecoder().decode(ReviewListModel.self, from: data)
                 print(">>>>>>get>>>>>>>Success")
                 completion(.success(resultData))
             }catch{
