@@ -25,13 +25,13 @@ struct HangulKeyboardData {
     
     init(char: String, state: HangulState) {
         self.hangul = char
-        self.unicode = convertStr2Unicode(char: char)
+        self.unicode = convertHangul2Unicode(char: char)
         self.bornState = state
     }
     
     init(uni: Int, state: HangulState) {
         self.unicode = uni
-        self.hangul = convertUni2Str(uni: uni)
+        self.hangul = convertUni2Hangul(uni: uni)
         self.bornState = state
     }
     
@@ -41,14 +41,14 @@ struct HangulKeyboardData {
         self.bornState = state
     }
     
-    private func convertUni2Str(uni: Int) -> String {
+    private func convertUni2Hangul(uni: Int) -> String {
         if let unicodeScalar = UnicodeScalar(uni) {
             return String(unicodeScalar)
         }
         return ""
     }
     
-    private func convertStr2Unicode(char: String) -> Int {
+    private func convertHangul2Unicode(char: String) -> Int {
         if let unicodeScalar = UnicodeScalar(char) {
             return Int(unicodeScalar.value)
         }
