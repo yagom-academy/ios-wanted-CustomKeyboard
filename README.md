@@ -7,12 +7,16 @@
 
 mini|cobugi
 :-:|:-:
-<img src="\Previews\mini.jpeg" alt="mini" />|<img src="\Previews\cobugi.png" alt="cobugi" />
-
+<img width="250px" src="./Previews/mini.jpeg" alt="mini" />|<img width="250px" src="./Previews/cobugi.png" alt="cobugi" />
 
 ## 한글 오토마타 로직 Flow Chart
 
-<img src="\Previews\CustomKeyboardFlowChart.svg" alt="CustomKeyboardFlowChart" />
+<img src="./Previews/CustomKeyboardFlowChart.svg" alt="CustomKeyboardFlowChart" />
+
+## 결과
+첫 번째, 두 번째 화면|키보드 익스텐션
+:-:|:-:
+![](./Previews/result1.gif)|![](./Previews/result2.gif)
 
 ## 이슈
 ### 키보드 입력시 긴 글자가 다음 줄로 안넘어 가는 현상
@@ -69,7 +73,3 @@ mini|cobugi
 - NSCache, FileManager (이미지 캐싱)
 - XCTest
 
-## 결과
-이미지1|이미지2|이미지3
--|-|-
-![](https://i.picsum.photos/id/682/2560/1440.jpg?hmac=6CnDAyJ4sqM6r-Ue0NIGazspfqpqsFGAInkNYGfUXuk)|![](https://i.picsum.photos/id/682/2560/1440.jpg?hmac=6CnDAyJ4sqM6r-Ue0NIGazspfqpqsFGAInkNYGfUXuk)|![](https://i.picsum.photos/id/682/2560/1440.jpg?hmac=6CnDAyJ4sqM6r-Ue0NIGazspfqpqsFGAInkNYGfUXuk)
