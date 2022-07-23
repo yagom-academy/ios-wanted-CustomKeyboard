@@ -29,6 +29,22 @@ class ReviewAPIService {
         request.httpMethod = HTTPMethod.POST.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        URLSession.request(.shared, content: content, endpoint: request, completion: completion)
+        let review = Post(content: content)
+        
+        guard let uploadData = try? JSONEncoder().encode(review) else {
+            completion(.failure(.failed))
+            return
+        }
+        
+        URLSession.request(.shared, uploadData: uploadData, endpoint: request) { result in
+            switch result {
+            case .success(let data):
+                guard let content = String(data: data, encoding: .utf8) else { return }
+                let post = Post(content: content)
+                completion(.success(post))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
 }

@@ -45,7 +45,7 @@ extension ReviewViewController {
     private func attribute() {
         reviewTableView.delegate = self
         reviewTableView.dataSource = self
-        reviewTableView.register(ReviewTableViewCell.self, forCellReuseIdentifier: "ReviewTableViewCell")
+        reviewTableView.register(cellType: ReviewTableViewCell.self)
         reviewTableView.register(ReviewTableViewHeader.self, forHeaderFooterViewReuseIdentifier: "ReviewTableViewHeader")
         
         navigationItem.title = "리뷰"
@@ -79,7 +79,7 @@ extension ReviewViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewTableViewCell", for: indexPath) as? ReviewTableViewCell else { return UITableViewCell() }
+        let cell = tableView.dequeueReusableCell(cellType: ReviewTableViewCell.self, indexPath: indexPath)
         
         let review = reviewList[indexPath.row]
         cell.setup(review)
@@ -88,7 +88,7 @@ extension ReviewViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "ReviewTableViewHeader") as? ReviewTableViewHeader else { return UIView() }
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: ReviewTableViewHeader.identifier) as? ReviewTableViewHeader else { return UIView() }
         
         header.setup()
         header.reviewTextField.delegate = self
