@@ -11,29 +11,23 @@ final class Hangeul {
     var prev: Hangeul?
     var next: Hangeul?
     
-    var eumun: HangeulEumun
     let text: String
     var unicode: Int?
     var status: HangeulCombinationStatus
     var position: [HangeulCombinationPosition]
+    
+    private let dictionary = HangeulDictionary()
     
     init(_ input: String) {
         self.prev = nil
         self.next = nil
         self.text = input
         self.position = []
-        self.eumun = .jaeum
         
         guard input != Text.space else {
             self.unicode = nil
             self.status = .finished
             return
-        }
-        
-        for hangeul in HangeulDictionary.compatible.jungseong.allCases {
-            if hangeul.rawValue == self.unicode {
-                self.eumun = .moeum
-            }
         }
         
         let converter = HangeulConverter()
@@ -67,30 +61,28 @@ extension Hangeul {
 
 extension Hangeul {
     
-    func canBeJungseong() -> Bool {
-        for hangeul in HangeulDictionary.compatible.jungseong.allCases {
-            if hangeul.rawValue == self.unicode {
-                return true
-            }
+    func canBecome(_ position: HangeulCombinationPosition) -> Bool {
+        guard let unicode = self.unicode else {
+            return false
+        }
+        
+        let allCases = dictionary.getAllCases(of: .compatible, in: position)
+        
+        if allCases.contains(unicode) {
+            return true
         }
         return false
     }
-    
-    func canBeJongseong() -> Bool {
-        for hangeul in HangeulDictionary.compatible.jongseong.allCases {
-            if hangeul.rawValue == self.unicode {
-                return true
-            }
-        }
-        return false
-    }
-    
     
     func isDoubleJungseong() -> Bool {
-        for hangeul in HangeulDictionary.compatible.doubleJungseong.allCases {
-            if hangeul.rawValue == self.unicode {
-                return true
-            }
+        guard let unicode = self.unicode else {
+            return false
+        }
+        
+        let allCases = HangeulUnicodeType.Compatible.doubleJungseong.allCases.map {$0.rawValue}
+        
+        if allCases.contains(unicode) {
+            return true
         }
         return false
     }
@@ -121,7 +113,6 @@ extension Hangeul {
         }
         
         let mostPreviousLetterText: String? = previousLetter.prev?.text
-        let dictionary = HangeulDictionary()
         
         if dictionary.getTripleMidUnicode(mostPreviousLetterText, previousLetter.text, self.text) == nil {
             return false
@@ -131,8 +122,6 @@ extension Hangeul {
     
     
     func canBeDoubleJungseong() -> Bool {
-        let dictionary = HangeulDictionary()
-
         if self.prev?.prev?.status != .finished && self.prev?.prev?.position.last == .jungseong {
             return false
         } else if self.prev?.isDoubleJungseong() == true {
@@ -144,8 +133,6 @@ extension Hangeul {
     }
     
     func canBeDoubleJongseong() -> Bool {
-        let dictionary = HangeulDictionary()
-
         if self.prev?.prev?.position.last == .jongseong  {
             return false
         } else if dictionary.getDoubleUnicode(self.prev, self) == nil {
@@ -172,7 +159,7 @@ extension Hangeul {
         guard let oldUnicode = self.unicode else {
             return nil
         }
-        let dictionary = HangeulDictionary()
+
         var oldCompatibleUnicode: Int
         
         if self.position.isEmpty {

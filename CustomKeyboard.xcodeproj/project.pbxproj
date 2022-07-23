@@ -38,6 +38,14 @@
 		01EA7CB9288538500006A23B /* Hangeul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB695452881A3AA00F6AE87 /* Hangeul.swift */; };
 		01EA7CBA288538500006A23B /* HangeulConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6954D28821D8300F6AE87 /* HangeulConverter.swift */; };
 		01EA7CBB288538500006A23B /* HangeulDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB695532882265900F6AE87 /* HangeulDictionary.swift */; };
+		9F30D00A288A818000FAD4C2 /* HangeulUnicodeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F30D009288A818000FAD4C2 /* HangeulUnicodeType.swift */; };
+		9F30D00B288A829A00FAD4C2 /* HangeulUnicodeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F30D009288A818000FAD4C2 /* HangeulUnicodeType.swift */; };
+		9F30D00D288A84E500FAD4C2 /* HangeulCombinationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F30D00C288A84E500FAD4C2 /* HangeulCombinationStatus.swift */; };
+		9F30D00E288A84F100FAD4C2 /* HangeulCombinationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F30D00C288A84E500FAD4C2 /* HangeulCombinationStatus.swift */; };
+		9F30D010288A850A00FAD4C2 /* HangeulCombinationPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F30D00F288A850A00FAD4C2 /* HangeulCombinationPosition.swift */; };
+		9F30D012288A851E00FAD4C2 /* HangeulOutputEditMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F30D011288A851E00FAD4C2 /* HangeulOutputEditMode.swift */; };
+		9F30D013288A853600FAD4C2 /* HangeulOutputEditMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F30D011288A851E00FAD4C2 /* HangeulOutputEditMode.swift */; };
+		9F30D014288A853800FAD4C2 /* HangeulCombinationPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F30D00F288A850A00FAD4C2 /* HangeulCombinationPosition.swift */; };
 		9F4652712883D722008D26D2 /* normal_input_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4652702883D722008D26D2 /* normal_input_Tests.swift */; };
 		9F4652732884101A008D26D2 /* back_input_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4652722884101A008D26D2 /* back_input_Tests.swift */; };
 		9F4652752884201D008D26D2 /* space_input_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4652742884201D008D26D2 /* space_input_Tests.swift */; };
@@ -47,8 +55,8 @@
 		9F57B5462887E3D100B2DC24 /* HangeulCombineBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F57B5452887E3D100B2DC24 /* HangeulCombineBuffer.swift */; };
 		9F57B5472887E82000B2DC24 /* HangeulCombineBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F57B5452887E3D100B2DC24 /* HangeulCombineBuffer.swift */; };
 		9F57B5482887E82400B2DC24 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F57B5432887C4AD00B2DC24 /* Text.swift */; };
-		9F57B54A2887EAC600B2DC24 /* HangeulEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F57B5492887EAC600B2DC24 /* HangeulEnums.swift */; };
-		9F57B54B2887EAC900B2DC24 /* HangeulEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F57B5492887EAC600B2DC24 /* HangeulEnums.swift */; };
+		9F57B54A2887EAC600B2DC24 /* HangeulInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F57B5492887EAC600B2DC24 /* HangeulInputMode.swift */; };
+		9F57B54B2887EAC900B2DC24 /* HangeulInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F57B5492887EAC600B2DC24 /* HangeulInputMode.swift */; };
 		9F57B54D28881BA500B2DC24 /* double_input_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F57B54C28881BA500B2DC24 /* double_input_Tests.swift */; };
 		9F76CB78288A0053002D1535 /* total_input_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F76CB77288A0053002D1535 /* total_input_Tests.swift */; };
 		9FB695462881A3AA00F6AE87 /* Hangeul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB695452881A3AA00F6AE87 /* Hangeul.swift */; };
@@ -129,6 +137,10 @@
 		019814B728895C2A00A7A59C /* MockURLSessionDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSessionDataTask.swift; sourceTree = "<group>"; };
 		01A45B8228867D1B001F44D6 /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
 		01A45B842886DC6F001F44D6 /* LazyImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyImageView.swift; sourceTree = "<group>"; };
+		9F30D009288A818000FAD4C2 /* HangeulUnicodeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulUnicodeType.swift; sourceTree = "<group>"; };
+		9F30D00C288A84E500FAD4C2 /* HangeulCombinationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulCombinationStatus.swift; sourceTree = "<group>"; };
+		9F30D00F288A850A00FAD4C2 /* HangeulCombinationPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulCombinationPosition.swift; sourceTree = "<group>"; };
+		9F30D011288A851E00FAD4C2 /* HangeulOutputEditMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulOutputEditMode.swift; sourceTree = "<group>"; };
 		01D73F6D288A86D3001016E8 /* MockResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockResponse.swift; sourceTree = "<group>"; };
 		9F4652702883D722008D26D2 /* normal_input_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = normal_input_Tests.swift; sourceTree = "<group>"; };
 		9F4652722884101A008D26D2 /* back_input_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = back_input_Tests.swift; sourceTree = "<group>"; };
@@ -138,7 +150,7 @@
 		9F504318287E323300CDBD9C /* CustomKeyboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomKeyboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F57B5432887C4AD00B2DC24 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		9F57B5452887E3D100B2DC24 /* HangeulCombineBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulCombineBuffer.swift; sourceTree = "<group>"; };
-		9F57B5492887EAC600B2DC24 /* HangeulEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulEnums.swift; sourceTree = "<group>"; };
+		9F57B5492887EAC600B2DC24 /* HangeulInputMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulInputMode.swift; sourceTree = "<group>"; };
 		9F57B54C28881BA500B2DC24 /* double_input_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = double_input_Tests.swift; sourceTree = "<group>"; };
 		9F76CB77288A0053002D1535 /* total_input_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = total_input_Tests.swift; sourceTree = "<group>"; };
 		9FB695452881A3AA00F6AE87 /* Hangeul.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hangeul.swift; sourceTree = "<group>"; };
@@ -316,7 +328,11 @@
 			isa = PBXGroup;
 			children = (
 				9F57B5432887C4AD00B2DC24 /* Text.swift */,
-				9F57B5492887EAC600B2DC24 /* HangeulEnums.swift */,
+				9F57B5492887EAC600B2DC24 /* HangeulInputMode.swift */,
+				9F30D009288A818000FAD4C2 /* HangeulUnicodeType.swift */,
+				9F30D00C288A84E500FAD4C2 /* HangeulCombinationStatus.swift */,
+				9F30D00F288A850A00FAD4C2 /* HangeulCombinationPosition.swift */,
+				9F30D011288A851E00FAD4C2 /* HangeulOutputEditMode.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -542,6 +558,7 @@
 			files = (
 				0141A8572884F1F300EEB918 /* KeyboardViewController.swift in Sources */,
 				01EA7CBB288538500006A23B /* HangeulDictionary.swift in Sources */,
+				9F30D013288A853600FAD4C2 /* HangeulOutputEditMode.swift in Sources */,
 				01EA7CB7288538500006A23B /* HangeulCombiner.swift in Sources */,
 				01EA7CB5288538430006A23B /* HangeulIOManager.swift in Sources */,
 				9F57B5472887E82000B2DC24 /* HangeulCombineBuffer.swift in Sources */,
@@ -549,9 +566,12 @@
 				0141A8602884F3B400EEB918 /* KeyboardView.swift in Sources */,
 				01A45B8128867C1A001F44D6 /* HangeulList.swift in Sources */,
 				01EA7CBA288538500006A23B /* HangeulConverter.swift in Sources */,
-				9F57B54B2887EAC900B2DC24 /* HangeulEnums.swift in Sources */,
+				9F57B54B2887EAC900B2DC24 /* HangeulInputMode.swift in Sources */,
+				9F30D00E288A84F100FAD4C2 /* HangeulCombinationStatus.swift in Sources */,
 				9F57B5482887E82400B2DC24 /* Text.swift in Sources */,
 				01EA7CB6288538500006A23B /* HangeulUpdater.swift in Sources */,
+				9F30D014288A853800FAD4C2 /* HangeulCombinationPosition.swift in Sources */,
+				9F30D00B288A829A00FAD4C2 /* HangeulUnicodeType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,8 +613,10 @@
 				012EDE46287EC14C0035C3E6 /* HttpMethod.swift in Sources */,
 				01A45B8328867D1B001F44D6 /* Content.swift in Sources */,
 				9F57B5442887C4AD00B2DC24 /* Text.swift in Sources */,
-				9F57B54A2887EAC600B2DC24 /* HangeulEnums.swift in Sources */,
+				9F57B54A2887EAC600B2DC24 /* HangeulInputMode.swift in Sources */,
+				012EDE56287FA0BD0035C3E6 /* Provider.swift in Sources */,
 				0142F4D0287C0C9C006F3E48 /* ReviewResponse.swift in Sources */,
+				9F30D00A288A818000FAD4C2 /* HangeulUnicodeType.swift in Sources */,
 				019814B428895B0D00A7A59C /* URLSessionDataTaskProtocol.swift in Sources */,
 				9F57B5462887E3D100B2DC24 /* HangeulCombineBuffer.swift in Sources */,
 				012EDE42287EB9FA0035C3E6 /* NetworkManager.swift in Sources */,
@@ -605,12 +627,15 @@
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				9FB6954A288219F100F6AE87 /* HangeulCombiner.swift in Sources */,
 				01A45B852886DC6F001F44D6 /* LazyImageView.swift in Sources */,
+				9F30D012288A851E00FAD4C2 /* HangeulOutputEditMode.swift in Sources */,
 				0142F4CC287C0A76006F3E48 /* HomeTableViewCell.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 				9F504301287C484900CDBD9C /* TimeManager.swift in Sources */,
 				9FC4B34C2885606400F15B2D /* HangeulList.swift in Sources */,
+				9F30D00D288A84E500FAD4C2 /* HangeulCombinationStatus.swift in Sources */,
 				9F5042FF287C467400CDBD9C /* DateFormatter_Extension.swift in Sources */,
 				012EDEAF288139480035C3E6 /* ImageCacheManager.swift in Sources */,
+				9F30D010288A850A00FAD4C2 /* HangeulCombinationPosition.swift in Sources */,
 				9FB6954C28821A3300F6AE87 /* HangeulUpdater.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

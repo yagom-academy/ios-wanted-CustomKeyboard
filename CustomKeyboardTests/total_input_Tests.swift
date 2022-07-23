@@ -64,7 +64,7 @@ class total_input_Tests: XCTestCase {
         let c = HangeulConverter()
         
         let input = ["ㄱ", "ㅜ", "ㅓ", "ㄹ", "Space", "ㄱ", "Back", "ㄱ", "ㅅ", "ㅓ", "Space", "Space", "Back", "Back", "ㅂ", "ㅅ", "ㅆ", "ㅏ", "ㄹ", "ㅎ", "ㄲ", "ㅜ", "ㅓ", "ㅣ", "ㄴ", "ㅎ", "Back", "Back", "Back", "Back", "ㅔ", "ㄴ", "ㅎ", "Space"]
-        let expectation = "궐 " + c.toString(from: HangeulDictionary.fixed.choseong.ㄱ.rawValue)! + "섮쌇꿶 "
+        let expectation = "궐 " + c.toString(from: HangeulUnicodeType.Fixed.choseong.ㄱ.rawValue)! + "섮쌇꿶 "
         
         for ele in input {
             ioManager.process(input: ele)
@@ -79,7 +79,7 @@ class total_input_Tests: XCTestCase {
         let c = HangeulConverter()
 
         let input = ["ㅎ", "ㅎ", "ㅎ", "ㅎ", "ㅎ", "ㅎ", "ㅎ", "ㅎ", "Space", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "ㅎ", "ㅎ", "ㅎ", "Back"]
-        let expectation = c.toString(from: HangeulDictionary.fixed.choseong.ㅎ.rawValue)! + c.toString(from: HangeulDictionary.fixed.choseong.ㅎ.rawValue)!
+        let expectation = c.toString(from: HangeulUnicodeType.Fixed.choseong.ㅎ.rawValue)! + c.toString(from: HangeulUnicodeType.Fixed.choseong.ㅎ.rawValue)!
         
         for ele in input {
             ioManager.process(input: ele)
@@ -94,7 +94,7 @@ class total_input_Tests: XCTestCase {
         let c = HangeulConverter()
 
         let input = ["ㅠ", "ㅓ", "ㅣ", "ㅜ", "ㅓ", "ㅣ", "ㅗ", "ㅏ", "Space", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "ㅗ", "ㅐ", "ㅠ", "Back"]
-        let expectation = c.toString(from: HangeulDictionary.fixed.jungseong.ㅙ.rawValue)!
+        let expectation = c.toString(from: HangeulUnicodeType.Fixed.jungseong.ㅙ.rawValue)!
         
         for ele in input {
             ioManager.process(input: ele)
@@ -123,7 +123,7 @@ class total_input_Tests: XCTestCase {
         let c = HangeulConverter()
 
         let input = ["Space", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Space", "Space", "Space", "Space", "Back", "ㄱ", "ㅅ"]
-        let expectation = "   " + c.toString(from: HangeulDictionary.fixed.choseong.ㄱ.rawValue)! + c.toString(from: HangeulDictionary.fixed.choseong.ㅅ.rawValue)!
+        let expectation = "   " + c.toString(from: HangeulUnicodeType.Fixed.choseong.ㄱ.rawValue)! + c.toString(from: HangeulUnicodeType.Fixed.choseong.ㅅ.rawValue)!
         
         for ele in input {
             ioManager.process(input: ele)
@@ -138,7 +138,7 @@ class total_input_Tests: XCTestCase {
         let c = HangeulConverter()
 
         let input = ["Space", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Back", "Space", "Space", "Space", "Space", "Back", "ㅜ", "ㅓ"]
-        let expectation = "   " + c.toString(from: HangeulDictionary.fixed.jungseong.ㅝ.rawValue)!
+        let expectation = "   " + c.toString(from: HangeulUnicodeType.Fixed.jungseong.ㅝ.rawValue)!
         
         for ele in input {
             ioManager.process(input: ele)

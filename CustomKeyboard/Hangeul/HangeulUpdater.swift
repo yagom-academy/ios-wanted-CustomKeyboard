@@ -90,7 +90,7 @@ extension HangeulUpdater {
     private func updatePropertiesOnlyOne(_ letter: Hangeul) {
         if letter.isDoubleJungseong() {
             letter.update(newStatus: .finished, newPosition: .jungseong)
-        } else if letter.canBeJungseong() {
+        } else if letter.canBecome(.jungseong) {
             letter.update(newPosition: .jungseong)
         } else {
             letter.update(newPosition: .choseong)
@@ -107,7 +107,7 @@ extension HangeulUpdater {
             return
         }
         
-        if letter.canBeJungseong() {
+        if letter.canBecome(.jungseong) {
             letter.update(newPosition: .jungseong)
         } else {
             previousLetter.update(newStatus: .finished)
@@ -127,10 +127,10 @@ extension HangeulUpdater {
             letter.update(newStatus: .finished, newPosition: .jungseong)
         } else if letter.canBeDoubleJungseong() {
             letter.update(newPosition: .jungseong)
-        } else if letter.canBeJungseong() {
+        } else if letter.canBecome(.jungseong) {
             previousLetter.update(newStatus: .finished)
             letter.update(newPosition: .jungseong)
-        } else if previousLetter.canHaveJongseong() && letter.canBeJongseong() {
+        } else if previousLetter.canHaveJongseong() && letter.canBecome(.jongseong) {
             letter.update(newPosition: .jongseong)
         } else {
             previousLetter.update(newStatus: .finished)
@@ -146,7 +146,7 @@ extension HangeulUpdater {
             return
         }
         
-        if letter.canBeJungseong() {
+        if letter.canBecome(.jungseong) {
             mostPreviousLetter.update(newStatus: .finished)
             previousLetter.update(newPosition: .choseong)
             letter.update(newPosition: .jungseong)
