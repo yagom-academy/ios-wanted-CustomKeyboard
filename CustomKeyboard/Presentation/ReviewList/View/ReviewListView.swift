@@ -57,7 +57,7 @@ class ReviewListView: UIView {
         return stackView
     }()
     
-    let tableView: UITableView = { // 항상 보이는 것이 아닌 것은 lazy var로 해야될 거 같은데 tableview는 왜 let으로 해도 같은지?
+    let tableView: UITableView = {
         lazy var tableView = UITableView()
         tableView.register(ReviewListTableViewCell.self, forCellReuseIdentifier: ReviewListTableViewCell.identifier)
         tableView.rowHeight = UITableView.automaticDimension

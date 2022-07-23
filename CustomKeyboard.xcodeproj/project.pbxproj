@@ -29,7 +29,6 @@
 		C7638F5528895E2100D06944 /* KoreanAutomata.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7638F502889488800D06944 /* KoreanAutomata.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
-		DE15E66028604278003DD2F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65F28604278003DD2F5 /* ViewController.swift */; };
 		DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66428604279003DD2F5 /* Assets.xcassets */; };
 		DE15E66828604279003DD2F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -66,8 +65,8 @@
 		965B4294287C3BBF00E304E4 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		965B4296287C3BCA00E304E4 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		965B4299287C3EC700E304E4 /* KeyboadCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboadCollectionViewCell.swift; sourceTree = "<group>"; };
-		C746399D287DB705007C350E /* ReviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewData.swift; sourceTree = SOURCE_ROOT; };
-		C746399F287DB73C007C350E /* ReviewDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDataManager.swift; sourceTree = SOURCE_ROOT; };
+		C746399D287DB705007C350E /* ReviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewData.swift; path = CustomKeyboard/Data/ReviewData.swift; sourceTree = SOURCE_ROOT; };
+		C746399F287DB73C007C350E /* ReviewDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewDataManager.swift; path = CustomKeyboard/Data/Manager/ReviewDataManager.swift; sourceTree = SOURCE_ROOT; };
 		C7463AEC28868294007C350E /* KeyboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewModel.swift; sourceTree = "<group>"; };
 		C7463AEF288682A8007C350E /* ReviewListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewModel.swift; sourceTree = "<group>"; };
 		C747F2D32887C384001FB6F3 /* SeochoKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SeochoKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,7 +76,6 @@
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE15E65D28604278003DD2F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DE15E65F28604278003DD2F5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DE15E66428604279003DD2F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DE15E66728604279003DD2F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DE15E66928604279003DD2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -275,7 +273,6 @@
 				965B427F287BF54D00E304E4 /* Presentation */,
 				965B427E287BF51000E304E4 /* Resource */,
 				965B427D287BF4F100E304E4 /* Application */,
-				DE15E65F28604278003DD2F5 /* ViewController.swift */,
 				DE15E66928604279003DD2F5 /* Info.plist */,
 			);
 			path = CustomKeyboard;
@@ -406,7 +403,6 @@
 				965B428D287BF6E800E304E4 /* BaseViewController.swift in Sources */,
 				965B4289287BF68F00E304E4 /* ReviewListView.swift in Sources */,
 				C7463AED28868294007C350E /* KeyboardViewModel.swift in Sources */,
-				DE15E66028604278003DD2F5 /* ViewController.swift in Sources */,
 				C74639A0287DB73C007C350E /* ReviewDataManager.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,

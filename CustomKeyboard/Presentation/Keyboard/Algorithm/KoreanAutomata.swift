@@ -182,9 +182,7 @@ class KoreanAutomata {
     
     func handleConsonantAtFirst(_ i : inout Int) {
         if initial.contains(buffer[i]) {
-            // 기존에 있던 초성을 AutomataInfo.finish에 append
             AutomataInfo.finalArray.append(initial[AutomataInfo.Index.initial])
-            // 이것을 AutomataInfo.Index.initial에 할당
             AutomataInfo.Flag.initial = 1
             AutomataInfo.Index.initial = initial.firstIndex(of: buffer[i]) ?? -1
         } else if neuter.contains(buffer[i]) {
@@ -241,9 +239,7 @@ class KoreanAutomata {
         }
         // 자음이 또 왔을 때 기존의 종성과 함쳐질 수 없으면
         else if initial.contains(buffer[i]), !final.contains(final[AutomataInfo.Index.final] + buffer[i]) {
-            // 기존에 완성된 글자 append
             appendToFinalArray()
-            // AutomataInfo.Index.initial에 value 저장
             AutomataInfo.Index.initial = initial.firstIndex(of: buffer[i]) ?? -1
             AutomataInfo.Flag.initial = 1
             initInfo(except: "initial")
@@ -270,7 +266,6 @@ class KoreanAutomata {
             // ㄴ, ㅈ 합쳐서 새로운 인덱스로 넣고
             AutomataInfo.Index.final = final.firstIndex(of: final[AutomataInfo.Index.final] + final[AutomataInfo.Index.secondFinal]) ?? -1
             AutomataInfo.Flag.finishWord = 1
-            // 기존에 완성된거 출력
             appendToFinalArray()
             initInfo(except: "None")
         }

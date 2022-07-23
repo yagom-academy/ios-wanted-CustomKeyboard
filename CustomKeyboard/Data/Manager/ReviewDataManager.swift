@@ -8,9 +8,7 @@
 import Foundation
 
 struct ReviewDataManager {
-    
-    static let shared = ReviewDataManager()
-    
+        
     func getData(_ url : String, completion : @escaping (ReviewList) -> Void ) {
         if let url = URL(string: url) {
             let session = URLSession(configuration: .default)
@@ -19,7 +17,6 @@ struct ReviewDataManager {
                     print(error)
                     return
                 }
-        
                 if let safeData = data {
                     guard let result = self.parseJSON(safeData) else {return}
                     completion(result)
@@ -39,10 +36,11 @@ struct ReviewDataManager {
         }
     }
     
-    func postData(_ url : String, _ content : String) {
+    func postData(_ url : String, _ content : String, completion : @escaping (String?) -> Void) {
+        
         guard let url = URL(string: url) else {return}
         let data = uploadData(content: content)
-        
+
         guard let uploadData = try? JSONEncoder().encode(data) else {return}
         
         var request = URLRequest(url: url)
@@ -54,8 +52,14 @@ struct ReviewDataManager {
                 print(error)
                 return
             }
-            
-            print((response as? HTTPURLResponse)?.statusCode)
+            let successRange = 200..<300
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {return}
+            if successRange.contains(statusCode) {
+                guard let data = data else {
+                    return
+                }
+                completion(String(data: data, encoding: .utf8))
+            }
         }
         task.resume()
     }

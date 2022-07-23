@@ -8,26 +8,22 @@
 import UIKit
 import Combine
 
-protocol KeyboardViewControllerDelegate {
+protocol KeyboardViewControllerDelegate : AnyObject {
     func updateLabelText(_ reviewText : String?)
 }
 
 class KeyboardViewController: BaseViewController {
     
     private let keyboardView = KeyboardView()
-    
     var keyboardViewModel = KeyboardViewModel()
-    
     var koreanAutomata = KoreanAutomata()
-    
     var disposalbleBag = Set<AnyCancellable>()
-    
-    var delegate : KeyboardViewControllerDelegate?
+    weak var delegate : KeyboardViewControllerDelegate?
 
     var onShift : Int = 0
     var buffer : [String] = []
     var count : Int = 0
-        
+
     override func loadView() {
         super.loadView()
         self.view = keyboardView
@@ -35,23 +31,27 @@ class KeyboardViewController: BaseViewController {
         keyboardView.collectionView.delegate = self
         setBindings()
     }
+    
+    deinit {
+        print("deinit")
+    }
 }
 
 extension KeyboardViewController {
     func setBindings() {
-        self.keyboardViewModel.$buffer.sink { updatedBuffer in
-            self.buffer = updatedBuffer
+        self.keyboardViewModel.$buffer.sink {[weak self] updatedBuffer in
+            self?.buffer = updatedBuffer
         }.store(in: &disposalbleBag)
         
-        self.keyboardViewModel.$onShift.sink { updatedShift in
-            self.onShift = updatedShift
+        self.keyboardViewModel.$onShift.sink {[weak self] updatedShift in
+            self?.onShift = updatedShift
             DispatchQueue.main.async {
-                self.keyboardView.collectionView.reloadData()
+                self?.keyboardView.collectionView.reloadData()
             }
         }.store(in: &disposalbleBag)
         
-        self.keyboardViewModel.$count.sink { updatedCount in
-            self.count = updatedCount
+        self.keyboardViewModel.$count.sink {[weak self] updatedCount in
+            self?.count = updatedCount
         }.store(in: &disposalbleBag)
     }
 }
@@ -77,35 +77,33 @@ extension KeyboardViewController: UICollectionViewDataSource {
 }
 
 extension KeyboardViewController: UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize { //cell의 크기를 지정해주는 함수 sizeForItemAt
-        if keyboardViewModel.keyboardLayout[indexPath.row] == "변환" || keyboardViewModel.keyboardLayout[indexPath.row] == "지움" {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if keyboardViewModel.keyboardLayout[indexPath.row] == "Shift" || keyboardViewModel.keyboardLayout[indexPath.row] == "Del" {
             return CGSize(width: self.view.bounds.width / 8.5, height: 40)
-        } else if keyboardViewModel.keyboardLayout[indexPath.row] == "스페이스" {
+        } else if keyboardViewModel.keyboardLayout[indexPath.row] == "Space" {
             return CGSize(width: self.view.bounds.width * 3.6 / 5, height: 40)
-        } else if keyboardViewModel.keyboardLayout[indexPath.row] == "엔터" {
+        } else if keyboardViewModel.keyboardLayout[indexPath.row] == "Return" {
             return CGSize(width: self.view.bounds.width * 1.1 / 5, height: 40)
         } else {
             return CGSize(width: self.view.bounds.width / 11, height: 40)
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {// 옆 간격을 지정해 줄 수 있는 함수 minimumInteritemSpacingForSectionAt
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat { // 위 아래 세로 간격을 지정해주는
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 6
     }
     
     static func createLayout() -> UICollectionViewCompositionalLayout {
-        // Item
         let item = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1),
                 heightDimension: .fractionalHeight(1))
         )
         
-        //Group
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1),
@@ -114,7 +112,6 @@ extension KeyboardViewController: UICollectionViewDelegateFlowLayout{
             subitem: item,
             count: 3
         )
-        //Sections
         let section = NSCollectionLayoutSection(group: group)
         
         return UICollectionViewCompositionalLayout(section: section)
@@ -123,19 +120,16 @@ extension KeyboardViewController: UICollectionViewDelegateFlowLayout{
 
 extension KeyboardViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if keyboardViewModel.keyboardLayout[indexPath.row] == "엔터" || keyboardViewModel.keyboardLayoutWithShift[indexPath.row] == "엔터" {
-            // 첫번째 화면의 label에 내용 담고 모달 닫기
+        if keyboardViewModel.keyboardLayout[indexPath.row] == "Return" || keyboardViewModel.keyboardLayoutWithShift[indexPath.row] == "Return" {
             pressEnter()
         }
-        
         keyboardViewModel.handleKeyboardInput(indexPath.row)
         keyboardViewModel.automata()
-        keyboardView.reviewTextLabel.text = KoreanAutomata.AutomataInfo.finalArray.joined(separator: "") // convert array to string
-
+        keyboardView.reviewTextLabel.text = KoreanAutomata.AutomataInfo.finalArray.joined(separator: "")
     }
     
     func pressEnter() {
         delegate?.updateLabelText(keyboardView.reviewTextLabel.text)
-        dismiss(animated: true)
+        self.dismiss(animated: true)
     }
 }

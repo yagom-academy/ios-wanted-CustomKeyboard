@@ -11,15 +11,11 @@ import Combine
 class ReviewListViewController: BaseViewController {
     
     private let reviewListView = ReviewListView()
-    
     var reviewList : ReviewList?
-    
     var reviewListViewModel = ReviewListViewModel()
-    
     var disposalbleBag = Set<AnyCancellable>()
         
     override func loadView() {
-//        super.loadView()
         self.view = reviewListView
     }
     
@@ -52,10 +48,10 @@ class ReviewListViewController: BaseViewController {
 
 extension ReviewListViewController {
     func setBinding() {
-        self.reviewListViewModel.$reviewList.sink { updatedReviewList in
-            self.reviewList = updatedReviewList
+        self.reviewListViewModel.$reviewList.sink {[weak self] updatedReviewList in
+            self?.reviewList = updatedReviewList
             DispatchQueue.main.async {
-                self.reviewListView.tableView.reloadData()
+                self?.reviewListView.tableView.reloadData()
             }
         }.store(in: &disposalbleBag)
     }

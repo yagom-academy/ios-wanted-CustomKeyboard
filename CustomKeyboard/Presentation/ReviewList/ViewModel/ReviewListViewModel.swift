@@ -10,30 +10,28 @@ import UIKit
 
 class ReviewListViewModel: ObservableObject {
     
-    @Published var reviewList : ReviewList? // 서버가 문제다
+    @Published var reviewList : ReviewList?
     let reviewDataManager = ReviewDataManager()
     
-    init() {
-        print(#function)
-    }
+    init() {}
 }
 
 extension ReviewListViewModel {
     func getDataFromServer() {
-        reviewDataManager.getData("https://api.plkey.app/theme/review?themeId=PLKEY0-L-81&start=0&count=20") { result in
-            self.reviewList = result
+        reviewDataManager.getData("https://api.plkey.app/theme/review?themeId=PLKEY0-L-81&start=0&count=20") {[weak self] result in
+            self?.reviewList = result
         }
     }
     
     func postDataToServer(_ content : String) {
-        reviewDataManager.postData("https://api.plkey.app/tmp/theme/PLKEY0-L-81/review", content) { content in
+        reviewDataManager.postData("https://api.plkey.app/tmp/theme/PLKEY0-L-81/review", content) {[weak self] content in
             guard let content = content else {
                 return
             }
 
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd'T'hh:mm"
-            self.reviewList?.data.insert(ReviewData(user: User(userName: "비공개", profileImage: "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"), content: content, createdAt: formatter.string(from: Date())), at: 0)
+            self?.reviewList?.data.insert(ReviewData(user: User(userName: "비공개", profileImage: "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"), content: content, createdAt: formatter.string(from: Date())), at: 0)
         }
     }
 }
@@ -57,12 +55,10 @@ extension ReviewListViewModel {
         
         if currentDate != reviewDate {
             return String(reviewDate)
-        } else { // 하루 이내
+        } else {
             if currentHour != reviewHour {
-                // 분 단위 표시
                  return ("\(reviewMinute)분 전")
             } else {
-                // 시간 단위 표시
                  return ("\(reviewHour)시간 전")
             }
         }
