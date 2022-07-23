@@ -5,7 +5,7 @@
 
 import UIKit
 
-final class ReviewListViewController: BaseViewController {
+final class ReviewListViewController: UIViewController {
 
     // MARK: - Properties
 
@@ -24,10 +24,6 @@ final class ReviewListViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchReviews()
-    }
-
-    override func setupView() {
         setTableViewDelegate()
     }
 

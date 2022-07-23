@@ -272,6 +272,7 @@ extension KeyboardView {
     }
 
     private func setupView() {
+        self.backgroundColor = .white
         insertKeyboardKeys()
 
         [textLabel,

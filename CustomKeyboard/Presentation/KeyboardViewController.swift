@@ -7,7 +7,7 @@
 
 import UIKit
 
-class KeyboardViewController: BaseViewController {
+class KeyboardViewController: UIViewController {
 
     var keyboardView: KeyboardView!
     
