@@ -48,18 +48,30 @@ class KoreanAutomata {
     
     func initExceptInitial() {
         AutomataInfo.Flag.neuter = 0
+        AutomataInfo.Flag.secondNeuter = 0
+        AutomataInfo.Flag.neuterTemp = 0
         AutomataInfo.Flag.final = 0
         AutomataInfo.Flag.secondFinal = 0
+        AutomataInfo.Flag.finishWord = 0
+        
         AutomataInfo.Index.neuter = -1
+        AutomataInfo.Index.secondNeuter = -1
+        AutomataInfo.Index.neuterTemp = -1
         AutomataInfo.Index.final = -1
         AutomataInfo.Index.secondFinal = -1
     }
     
     func initExceptNeuter() {
         AutomataInfo.Flag.initial = 0
+        AutomataInfo.Flag.secondNeuter = 0
+        AutomataInfo.Flag.neuterTemp = 0
         AutomataInfo.Flag.final = 0
         AutomataInfo.Flag.secondFinal = 0
+        AutomataInfo.Flag.finishWord = 0
+        
         AutomataInfo.Index.initial = -1
+        AutomataInfo.Index.secondNeuter = -1
+        AutomataInfo.Index.neuterTemp = -1
         AutomataInfo.Index.final = -1
         AutomataInfo.Index.secondFinal = -1
     }
@@ -67,9 +79,15 @@ class KoreanAutomata {
     func initExceptFinal() {
         AutomataInfo.Flag.initial = 0
         AutomataInfo.Flag.neuter = 0
+        AutomataInfo.Flag.secondNeuter = 0
+        AutomataInfo.Flag.neuterTemp = 0
         AutomataInfo.Flag.secondFinal = 0
+        AutomataInfo.Flag.finishWord = 0
+        
         AutomataInfo.Index.initial = -1
         AutomataInfo.Index.neuter = -1
+        AutomataInfo.Index.secondNeuter = -1
+        AutomataInfo.Index.neuterTemp = -1
         AutomataInfo.Index.secondFinal = -1
     }
     
@@ -77,11 +95,15 @@ class KoreanAutomata {
         AutomataInfo.Flag.initial = 0
         AutomataInfo.Flag.neuter = 0
         AutomataInfo.Flag.secondNeuter = 0
+        AutomataInfo.Flag.neuterTemp = 0
         AutomataInfo.Flag.final = 0
         AutomataInfo.Flag.secondFinal = 0
+        AutomataInfo.Flag.finishWord = 0
+        
         AutomataInfo.Index.initial = -1
         AutomataInfo.Index.neuter = -1
         AutomataInfo.Index.secondNeuter = -1
+        AutomataInfo.Index.neuterTemp = -1
         AutomataInfo.Index.final = -1
         AutomataInfo.Index.secondFinal = -1
     }
