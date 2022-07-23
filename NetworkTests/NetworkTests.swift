@@ -15,7 +15,7 @@ final class NetworkTests: XCTestCase {
     
     override func setUpWithError() throws {
         endpoint = APIEndpoints.getReviews()
-        data = JSONLoader.data(fileName: "ReviewResponse")
+        data = MockResponse.reviewResponse
     }
 
     override func tearDownWithError() throws {
@@ -36,7 +36,7 @@ final class NetworkTests: XCTestCase {
             }
         }
         
-        let expectation: ReviewResponse? = JSONLoader.load(type: ReviewResponse.self, fileName: "ReviewResponse")
+        let expectation: ReviewResponse? = try? JSONDecoder().decode(ReviewResponse.self, from: data)
         XCTAssertEqual(result?.data.count, expectation?.data.count)
         XCTAssertEqual(result?.data.first?.content, result?.data.first?.content)
     }
