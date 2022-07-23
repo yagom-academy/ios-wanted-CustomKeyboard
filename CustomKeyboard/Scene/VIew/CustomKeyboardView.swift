@@ -28,7 +28,7 @@ class CustomKeyboardView: UIView {
   private lazy var secondLineButtonList = makeButtonList(viewModel.secondLineCharList)
   private lazy var thirdLineButtonList = makeButtonList(viewModel.thirdLineCharList)
   
-  private lazy var shiftButton : CustomRoundButton = {
+  private lazy var shiftButton: CustomRoundButton = {
     let button = CustomRoundButton()
     setupBasicSetting(button: button, backgroundColor: .gray)
     button.setImage(UIImage(systemName: "shift"), for: .normal)
@@ -37,7 +37,7 @@ class CustomKeyboardView: UIView {
     return button
   }()
   
-  private lazy var deleteButton : CustomRoundButton = {
+  private lazy var deleteButton: CustomRoundButton = {
     let button = CustomRoundButton()
     setupBasicSetting(button: button, backgroundColor: .gray)
     button.setImage(UIImage(systemName: "delete.left"), for: .normal)
@@ -45,7 +45,7 @@ class CustomKeyboardView: UIView {
     return button
   }()
   
-  private lazy var returnButton : CustomRoundButton = {
+  private lazy var returnButton: CustomRoundButton = {
     let button = CustomRoundButton()
     setupBasicSetting(button: button, backgroundColor: .gray)
     button.setImage(UIImage(systemName: "return.left"), for: .normal)
@@ -53,7 +53,7 @@ class CustomKeyboardView: UIView {
     return button
   }()
   
-  private lazy var spaceButton : CustomRoundButton = {
+  private lazy var spaceButton: CustomRoundButton = {
     let button = CustomRoundButton()
     setupBasicSetting(button: button, backgroundColor: .lightGray)
     button.setTitle("스페이스", for: .normal)
@@ -63,7 +63,7 @@ class CustomKeyboardView: UIView {
     return button
   }()
   
-  private lazy var specialCharButton : CustomRoundButton = {
+  private lazy var specialCharButton: CustomRoundButton = {
     let button = CustomRoundButton()
     setupBasicSetting(button: button, backgroundColor: .gray)
     button.setTitle("123", for: .normal)
@@ -72,14 +72,14 @@ class CustomKeyboardView: UIView {
     return button
   }()
   
-  private var containerView : UIView = {
+  private var containerView: UIView = {
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
     view.backgroundColor = #colorLiteral(red: 0.1686274707, green: 0.1686274707, blue: 0.1686274707, alpha: 1)
     return view
   }()
   
-  private lazy var firstLineStackView : UIStackView = {
+  private lazy var firstLineStackView: UIStackView = {
     let stackView = UIStackView(arrangedSubviews: firstLineButtonList)
     stackView.axis = .horizontal
     stackView.spacing = 4
@@ -88,7 +88,7 @@ class CustomKeyboardView: UIView {
     return stackView
   }()
   
-  private lazy var secondLineStackView : UIStackView = {
+  private lazy var secondLineStackView: UIStackView = {
     let stackView = UIStackView(arrangedSubviews: secondLineButtonList)
     stackView.axis = .horizontal
     stackView.spacing = 4
@@ -97,7 +97,7 @@ class CustomKeyboardView: UIView {
     return stackView
   }()
   
-  private lazy var thirdLineStackView : UIStackView = {
+  private lazy var thirdLineStackView: UIStackView = {
     let stackView = UIStackView(arrangedSubviews: thirdLineButtonList)
     stackView.axis = .horizontal
     stackView.spacing = 4
@@ -196,7 +196,7 @@ class CustomKeyboardView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func makeButtonList(_ list:[String]) -> [CustomRoundButton] {
+  func makeButtonList(_ list: [String]) -> [CustomRoundButton] {
     var buttonList : [CustomRoundButton] = []
     for char in list {
       let button = CustomRoundButton()
@@ -209,7 +209,7 @@ class CustomKeyboardView: UIView {
     return buttonList
   }
   
-  private func setupBasicSetting(button : CustomRoundButton, backgroundColor : BackgroundColor) {
+  private func setupBasicSetting(button: CustomRoundButton, backgroundColor: BackgroundColor) {
     if backgroundColor == .gray{
       button.backgroundColor = #colorLiteral(red: 0.274509728, green: 0.274509728, blue: 0.274509728, alpha: 1)
     } else {
@@ -260,7 +260,7 @@ class CustomKeyboardView: UIView {
     
   }
   
-  @objc func pressedChar(_ sender : Any) {
+  @objc func pressedChar(_ sender: Any) {
     if let button = sender as? CustomRoundButton {
       if let char = button.titleLabel?.text{
         if shiftButton.isSelected {
@@ -272,15 +272,15 @@ class CustomKeyboardView: UIView {
     }
   }
   
-  @objc func pressedSpace(_ sender : Any) {
+  @objc func pressedSpace(_ sender: Any) {
     viewModel.processText(operation: .spacePressed)
   }
   
-  @objc func pressedRetrun(_ sender : Any) {
+  @objc func pressedRetrun(_ sender: Any) {
     pressedRetrunButton?()
   }
   
-  @objc func pressedDelete(_ sender : Any) {
+  @objc func pressedDelete(_ sender: Any) {
     viewModel.processText(operation: .deletePressed)
   }
   

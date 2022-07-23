@@ -7,11 +7,11 @@
 
 import Foundation
 
-class HangeulManger : UnicodeManger {
+class HangeulManger: UnicodeManger {
     
     var converter : UnicodeConverter
     
-    init(_ converter : UnicodeConverter) {
+    init(_ converter: UnicodeConverter) {
         self.converter = converter
     }
     func addChar(_ unicode: Int, _ inputChar: Int) -> String {
@@ -32,7 +32,7 @@ class HangeulManger : UnicodeManger {
         }
     }
     
-    func removeChar(_ unicode : Int) -> String {
+    func removeChar(_ unicode: Int) -> String {
         let lastCodeState = converter.lastCharState(unicode)
         
         switch lastCodeState {
@@ -165,7 +165,7 @@ class HangeulManger : UnicodeManger {
         return converter.convertCharFromUniCode(lastCharUnicode) + converter.convertCharFromUniCode(nextCharUnicode)
     }
     //MARK: - 받침 없음
-    private func combineNoneFinalChar(lastChar: HangeulStruct, inputChar : Int) -> String {
+    private func combineNoneFinalChar(lastChar: HangeulStruct, inputChar: Int) -> String {
         if inputChar <= CharUnicode.ㅎ.value {
             return combineNoneFinalToConsonant(lastChar: lastChar, inputChar: inputChar)
         } else {
@@ -179,7 +179,7 @@ class HangeulManger : UnicodeManger {
         }
     }
     
-    private func combineNoneFinalToConsonant(lastChar : HangeulStruct, inputChar : Int) -> String {
+    private func combineNoneFinalToConsonant(lastChar: HangeulStruct, inputChar: Int) -> String {
         var lastCharUnicode = 0
         switch inputChar {
         case CharUnicode.ㅃ.value, CharUnicode.ㄸ.value, CharUnicode.ㅉ.value :
@@ -192,7 +192,7 @@ class HangeulManger : UnicodeManger {
         }
     }
     
-    private func combineNoneFinalToVowel(lastChar : HangeulStruct, inputChar : Int) -> Int{
+    private func combineNoneFinalToVowel(lastChar: HangeulStruct, inputChar: Int) -> Int{
         let neutralValue = Neutral.getVowelToNeutralValue(inputChar)
         var lastCharUnicode = 0
         switch lastChar.neutral {
@@ -238,7 +238,7 @@ class HangeulManger : UnicodeManger {
         return lastCharUnicode
     }
     //MARK: - 자음만
-    private func combineOnlyConsonant(consonant : Int, inputChar : Int) -> String {
+    private func combineOnlyConsonant(consonant: Int, inputChar: Int) -> String {
         if inputChar <= CharUnicode.ㅎ.value {
             let combineCharUnicode = combineConsonantToConsonant(consonant: consonant, inputChar: inputChar)
             if combineCharUnicode == 0 {
@@ -247,10 +247,10 @@ class HangeulManger : UnicodeManger {
                 return converter.convertCharFromUniCode(combineCharUnicode)
             }
         } else {
-            return combineConsonantToVowel(consonant : consonant, inputChar : inputChar)
+            return combineConsonantToVowel(consonant: consonant, inputChar: inputChar)
         }
     }
-    private func combineConsonantToConsonant(consonant : Int, inputChar : Int) -> Int {
+    private func combineConsonantToConsonant(consonant: Int, inputChar: Int) -> Int {
         let inputinitial = Initial.getConsonantToInitialValue(inputChar)
         let lastinitial = Initial.getConsonantToInitialValue(consonant)
         var lastCharUnicode = 0
@@ -281,14 +281,14 @@ class HangeulManger : UnicodeManger {
         return lastCharUnicode
     }
     
-    private func combineConsonantToVowel(consonant : Int, inputChar : Int) -> String {
+    private func combineConsonantToVowel(consonant: Int, inputChar: Int) -> String {
         let neutralValue = Neutral.getVowelToNeutralValue(inputChar)
         let initialValue = Initial.getConsonantToInitialValue(consonant)
         let lastCharUnicode = converter.combineCharToUnicode(initial: initialValue, neutral: neutralValue, final: 0)
         return converter.convertCharFromUniCode(lastCharUnicode)
     }
     //MARK: - 모음만
-    private func combineOnlyVowel(vowel : Int, inputChar : Int) -> String {
+    private func combineOnlyVowel(vowel: Int, inputChar: Int) -> String {
         if inputChar <= CharUnicode.ㅎ.value {
             return combineVowelToConsonant(vowel: vowel, inputChar: inputChar)
         } else {
@@ -300,11 +300,11 @@ class HangeulManger : UnicodeManger {
             }
         }
     }
-    private func combineVowelToConsonant(vowel : Int, inputChar : Int) -> String {
+    private func combineVowelToConsonant(vowel: Int, inputChar: Int) -> String {
         return converter.convertCharFromUniCode(vowel) + converter.convertCharFromUniCode(inputChar)
     }
     
-    private func combineVowelToVowel(vowel : Int, inputChar : Int) -> Int {
+    private func combineVowelToVowel(vowel: Int, inputChar: Int) -> Int {
         let inputNeutral = Neutral.getVowelToNeutralValue(inputChar)
         let lastNeutral = Neutral.getVowelToNeutralValue(vowel)
         var lastCharUnicode = 0
@@ -398,7 +398,7 @@ class HangeulManger : UnicodeManger {
         return converter.convertCharFromUniCode(lastCharUnicode)
     }
     //MARK: - Remove 자음만
-    func removeOnlyConsonant(consonant : Int) -> String {
+    func removeOnlyConsonant(consonant: Int) -> String {
         switch consonant {
         case CharUnicode.ㄲ.value :
             return converter.convertCharFromUniCode(CharUnicode.ㄱ.value)
@@ -415,7 +415,7 @@ class HangeulManger : UnicodeManger {
         }
     }
     //MARK: - Remove 모음만
-    private func removeOnlyVowel(vowel : Int) -> String {
+    private func removeOnlyVowel(vowel: Int) -> String {
         switch vowel {
         case CharUnicode.ㅐ.value :
             return converter.convertCharFromUniCode(CharUnicode.ㅏ.value)

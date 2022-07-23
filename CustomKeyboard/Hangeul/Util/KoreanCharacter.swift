@@ -9,10 +9,10 @@ import Foundation
 
 struct KoreanCharacter {
     
-    enum koreanConsonant : String {
+    enum koreanConsonant: String {
         case ㄱ ,ㄴ ,ㄷ, ㄹ, ㅁ, ㅂ, ㅅ, ㅇ,ㅈ, ㅊ, ㅌ, ㅋ, ㅎ, ㄲ, ㄸ, ㅃ, ㅆ, ㅉ
         
-        var doubleConsonant : String {
+        var doubleConsonant: String {
             switch self {
             case .ㄱ :
                 return "ㄲ"
@@ -29,7 +29,7 @@ struct KoreanCharacter {
             }
         }
         
-        var reverceDoubleConsonant : String {
+        var reverceDoubleConsonant: String {
             switch self {
             case .ㄲ :
                 return "ㄱ"
@@ -47,10 +47,10 @@ struct KoreanCharacter {
         }
     }
     
-    enum koreanVowel : String {
+    enum koreanVowel: String {
         case ㅏ, ㅑ, ㅓ, ㅕ, ㅗ, ㅛ, ㅜ, ㅠ, ㅡ ,ㅣ, ㅐ, ㅔ, ㅒ, ㅖ
         
-        var diphthong : String{
+        var diphthong: String{
             switch self {
             case .ㅐ :
                 return "ㅒ"
@@ -61,7 +61,7 @@ struct KoreanCharacter {
             }
         }
         
-        var reverceDiphthong : String{
+        var reverceDiphthong: String{
             switch self {
             case .ㅒ:
                 return "ㅐ"
@@ -73,6 +73,6 @@ struct KoreanCharacter {
         }
     }
     
-    let consonant : koreanConsonant?
-    let vowel : koreanVowel?
+    let consonant: koreanConsonant?
+    let vowel: koreanVowel?
 }

@@ -108,7 +108,6 @@
 		B747B297287FE7C300DE15FC /* KeyboardButton */ = {
 			isa = PBXGroup;
 			children = (
-				B747B298287FE80700DE15FC /* CustomKeyboardView.swift */,
 				B747B29E2880491E00DE15FC /* CustomRoundButton.swift */,
 			);
 			path = KeyboardButton;
@@ -122,6 +121,7 @@
 				B779BBCC287D4B5300BB8DF5 /* EndPoint.swift */,
 				B779BBC7287D4B5300BB8DF5 /* Request.swift */,
 				B779BBC8287D4B5300BB8DF5 /* NetworkError.swift */,
+				B779BBD7287D51B000BB8DF5 /* Repository */,
 				B779BBC9287D4B5300BB8DF5 /* protocols */,
 			);
 			path = "Network ";
@@ -161,6 +161,7 @@
 				B779BBDD287D54D700BB8DF5 /* Encoder.swift */,
 				B779BBF2287E4C7B00BB8DF5 /* DateFormatter.swift */,
 				B779BC00287E920900BB8DF5 /* Observable.swift */,
+				B779BBF4287E4FF400BB8DF5 /* Extensions */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -192,6 +193,7 @@
 				B7F1DCEF287C12EE0065D587 /* ReviewTableViewCell.swift */,
 				DE15E65F28604278003DD2F5 /* HomeViewController.swift */,
 				B78B2D56288B086500615067 /* ReviewViewController.swift */,
+				B747B298287FE80700DE15FC /* CustomKeyboardView.swift */,
 			);
 			path = VIew;
 			sourceTree = "<group>";
@@ -265,9 +267,7 @@
 		DE15E65A28604278003DD2F5 /* CustomKeyboard */ = {
 			isa = PBXGroup;
 			children = (
-				B779BBF4287E4FF400BB8DF5 /* Extensions */,
 				B779BBDA287D53CD00BB8DF5 /* Helpers */,
-				B779BBD7287D51B000BB8DF5 /* Repository */,
 				B779BBCD287D4B5300BB8DF5 /* Domain */,
 				B779BBC4287D4B5300BB8DF5 /* Network  */,
 				B7AF93742887D8970058526E /* Hangeul */,

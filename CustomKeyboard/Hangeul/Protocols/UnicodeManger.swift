@@ -8,6 +8,6 @@
 import Foundation
 
 protocol UnicodeManger {
-    func addChar(_ unitcode : Int,_ inputChar : Int) -> String
-    func removeChar(_ unitcode : Int) -> String
+    func addChar(_ unitcode: Int,_ inputChar: Int) -> String
+    func removeChar(_ unitcode: Int) -> String
 }

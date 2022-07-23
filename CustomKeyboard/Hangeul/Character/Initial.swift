@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum Initial : Int {
+enum Initial: Int {
     case ㄱ,ㄲ,ㄴ,ㄷ,ㄸ,ㄹ,ㅁ,ㅂ,ㅃ,ㅅ,ㅆ,ㅇ,ㅈ,ㅉ,ㅊ,ㅋ,ㅌ,ㅍ,ㅎ
     
-    var value : Int {
+    var value: Int {
         return self.rawValue
     }
     

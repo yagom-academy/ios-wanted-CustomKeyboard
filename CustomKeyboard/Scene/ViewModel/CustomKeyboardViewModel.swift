@@ -14,9 +14,7 @@ class CustomKeyboardViewModel {
     let thirdLineCharList = ["ㅋ","ㅌ","ㅊ","ㅍ","ㅠ","ㅜ","ㅡ"]
     
     var text = Observable<String>("")
-    
     var hangeulManger = HangeulManger(HangeulConverter())
-    
     
     func processText(operation: TextOperation) {
         switch operation {
@@ -31,8 +29,7 @@ class CustomKeyboardViewModel {
         }
     }
     
-    func addChar(_ InputCode : Int ){
-        
+    func addChar(_ InputCode: Int ){
         guard let inputChar = UnicodeScalar(InputCode)?.description else {
             print("Fail Paring To Int")
             text.value = ""
