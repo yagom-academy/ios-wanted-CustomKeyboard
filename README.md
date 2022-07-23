@@ -59,21 +59,13 @@
     
 ```Text
 → 네트워크 관련 라이브러리를 사용하지 않을 때 효율적인 network layer를 만들 수 있을지에 대한 고민과 에러 및 예외 처리에 대한 고민
-
-→  여러 시도 후 URL, NetworkError, HTTPMethod, URLSession, URLRequest, API, Resource 등으로 나누어 구현
-
+→ 여러 시도 후 URL, NetworkError, HTTPMethod, URLSession, URLRequest, API, Resource 등으로 나누어 구현
 → ConstanURL : “GET”, “POST” 통신을 하는 URL 등을 지정하는 별도 파일
-
 → NetworkError : 네트워크 및 서비스 관련 설정한 에러를 처리할 수 있도록 생성
-
 → Resource : Encodable, Decodable type을 Generic하게 입력받을 수 있도록 생성
-
 → HTTPMethod : HTTPMethod를 enum type 으로 전달
-
 → URLSession : URLSession의 request를 Resource에 맞춰 request할 수 있도록, upload, load 함수 생성
-
 → API : Singleton 방식으로 API 객체를 생성하여 관리하고 통신을 시도하는 객체
-
 → 현재 URL이 적어 URL주소 전체를 적용했으나 추후 많은 양의 URL주소가 있을 시 
   URL을 scheme, host, path, parameter(questyString) 등으로 나누어 구현하는 방법도 적용해보는 것도 좋을 것 같음
 ```
@@ -84,14 +76,11 @@
 
 ```Text
 → 처음 네트워크 구현 시 init(contesntsOf: url)메소드 사용
-
 → init(contesntsOf: url) 메소드는 동기적으로 작동해 현재 작업중인 스레드의 모든 작업을 해당 작업을 수행하는 동안 멈추게할 위험이 있어 
   DispatchQueue.global().async를 통해 스레드 문제를 해결해도 GCD의 제한된 작업스레드 중 하나를 묶는 것이 되어 직접적이진 않아도 
   간접적으로 성능에 영향을 줄 수 있어 권장하지 않음
-
 → URLSession에서는 오류가 네트워크 오류인지, HTTP 오류인지, contents 오류 인지 등을 판할 수 있는 반면 
   init(contentsOf:)에서는 이를 확인할 수 없음
-
 → URLSession으로 변경
 ```
 
@@ -145,20 +134,89 @@ while textDocumentProxy.hasText {
 
 ## 💼 리팩토링
 
-- 
+- 이미지로더 Data(contentsOf: url?) → URLsession 으로 변경
 
 ```swift
-
+// 변경 전
+if let data = try? Data(contentsOf: imageUrl) {
+                guard let image = UIImage(data: data) else { return }
+                self.imageCache.setObject(image, forKey: imageUrl.lastPathComponent as NSString)
+                DispatchQueue.main.async {
+                    complition(.success(image))
+								} else {
+                DispatchQueue.main.async {
+                    complition(.failure(ImageLoaderError.noImage))
+								}
 ```
 
 ```swift
-
+// 변경 후
+guard let imageUrl = URL(string: url) else { return }
+            let session = URLSession(configuration: .ephemeral)
+            let task = session.dataTask(with: imageUrl) { data, response, error in
+                if let error = error {
+                    completion(.failure(NetworkError.networkError(error)))
+                } else {
+								guard let httpResponse = response as? HTTPURLResponse else { return }
+                guard 200..<300 ~= httpResponse.statusCode else { completion(.failure(SevericeError.noReponseError))
+                    return
+                }
+                if let data = data {
+                    guard let image = UIImage(data: data) else { return }
+                    ImageLoder.imageCache.setObject(image, forKey: url as NSString)
+                    DispatchQueue.main.async {
+                        completion(.success(image))
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        completion(.failure(NetworkError.invalidData))
+                    }
+                }
 ```
 
 <br>
 
-- 
+- UIImage 관련 string → enum Type 으로 관리 및 변경
 
 ```swift
+// 변경 전
+profileImageVIew.image = UIImage(systemName: "person.crop.circle.fill")
+// 변경 후
+profileImageVIew.image = Icon.personFill.image
+```
+
+<br>
+
+- 리뷰 시간변환 Cell에서 구현 → Class 객체 및 데이터모델에서 변경
+
+```swift
+// 변경 전
+// ReviewTableViewCell.swift
+guard let reviewDate = data.createdAt.stringToDate else { return }
+        if reviewDate > Date(timeIntervalSinceNow: -86400) {
+            timeLabel.text = reviewDate.dateToRelativeTimeString
+        } else {
+            timeLabel.text = reviewDate.dateToOverTimeString
+        }
 
 ```
+
+```swift
+// 변경 후
+// ReviewDateConverter.swift
+class ReviewDateConverter {
+    
+    func convertReviewDate(rawData: String) -> String {
+        if rawData.stringToDate ?? Date() > Date(timeIntervalSinceNow: -86400) {
+            return rawData.stringToDate?.dateToRelativeTimeString ?? rawData
+        } else {
+            return rawData.stringToDate?.dateToOverTimeString ?? rawData
+        }
+    }
+}
+
+// ReviewData.swift
+let date = try values.decode(String.self, forKey: .createdAt)
+createdAt = ReviewDateConverter().convertReviewDate(rawData: date)
+```
+
