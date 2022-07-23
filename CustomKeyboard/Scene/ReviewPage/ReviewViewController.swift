@@ -46,7 +46,7 @@ extension ReviewViewController {
         reviewTableView.delegate = self
         reviewTableView.dataSource = self
         reviewTableView.register(cellType: ReviewTableViewCell.self)
-        reviewTableView.register(ReviewTableViewHeader.self, forHeaderFooterViewReuseIdentifier: "ReviewTableViewHeader")
+        reviewTableView.register(headerFooterType: ReviewTableViewHeader.self)
         
         navigationItem.title = "리뷰"
     }

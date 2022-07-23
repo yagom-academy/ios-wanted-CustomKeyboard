@@ -22,13 +22,17 @@ extension UITableView {
         self.register(cellType, forCellReuseIdentifier: cellType.identifier)
     }
     
+    func register<T: UITableViewHeaderFooterView>(headerFooterType: T.Type) where T: ReusableCell {
+        self.register(headerFooterType, forHeaderFooterViewReuseIdentifier: headerFooterType.identifier)
+    }
+    
     func dequeueReusableCell<T: UITableViewCell>(cellType: T.Type, indexPath: IndexPath) -> T where T: ReusableCell {
         guard let cell = self.dequeueReusableCell(withIdentifier: cellType.identifier, for: indexPath) as? T else { fatalError() }
         return cell
     }
 }
 
-class ReviewTableViewCell: UITableViewCell {
+class ReviewTableViewCell: UITableViewCell, ReusableCell {
     private let profileImage: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 30
@@ -176,8 +180,4 @@ extension ReviewTableViewCell {
             return ("별점: ", "리뷰: ")
         }
     }
-}
-
-extension ReviewTableViewCell: ReusableCell {
-    
 }
