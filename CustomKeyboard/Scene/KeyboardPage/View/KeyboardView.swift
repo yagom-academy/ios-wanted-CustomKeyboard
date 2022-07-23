@@ -18,7 +18,6 @@ class KeyboardView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .gray
         layout()
     }
     
