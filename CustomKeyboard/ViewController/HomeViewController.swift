@@ -17,7 +17,7 @@ final class HomeViewController: UIViewController {
     @IBOutlet weak var reviewButton: UIButton!
     @IBOutlet weak var submitButton: UIButton!
     
-    private let viewModel = HomeViewModel()
+    private let viewModel = HomeViewModel(networkManager: NetworkManager())
     private var cancellable = Set<AnyCancellable>()
     
     override func viewDidLoad() {

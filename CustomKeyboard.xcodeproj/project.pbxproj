@@ -10,7 +10,6 @@
 		012EDE42287EB9FA0035C3E6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE40287EB9FA0035C3E6 /* NetworkManager.swift */; };
 		012EDE46287EC14C0035C3E6 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE45287EC14C0035C3E6 /* HttpMethod.swift */; };
 		012EDE54287F9B960035C3E6 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE53287F9B960035C3E6 /* Endpoint.swift */; };
-		012EDE56287FA0BD0035C3E6 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE55287FA0BC0035C3E6 /* Provider.swift */; };
 		012EDE5A287FA6FA0035C3E6 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE59287FA6FA0035C3E6 /* APIEndpoints.swift */; };
 		012EDE5C287FAF790035C3E6 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012EDE5B287FAF790035C3E6 /* ReviewViewController.swift */; };
 		012EDEAB288135430035C3E6 /* KeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 012EDEAA288135430035C3E6 /* KeyboardView.xib */; };
@@ -24,6 +23,13 @@
 		0142F4D0287C0C9C006F3E48 /* ReviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4CF287C0C9C006F3E48 /* ReviewResponse.swift */; };
 		0142F4D6287C3078006F3E48 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4D5287C3078006F3E48 /* HomeViewModel.swift */; };
 		0142F4E8287D62ED006F3E48 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0142F4E7287D62ED006F3E48 /* KeyboardView.swift */; };
+		019814B028895A9D00A7A59C /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019814AF28895A9D00A7A59C /* NetworkTests.swift */; };
+		019814B228895AFE00A7A59C /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019814B128895AFE00A7A59C /* URLSessionProtocol.swift */; };
+		019814B428895B0D00A7A59C /* URLSessionDataTaskProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019814B328895B0D00A7A59C /* URLSessionDataTaskProtocol.swift */; };
+		019814B628895BF400A7A59C /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019814B528895BF400A7A59C /* MockURLSession.swift */; };
+		019814B828895C2A00A7A59C /* MockURLSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019814B728895C2A00A7A59C /* MockURLSessionDataTask.swift */; };
+		019814BA2889761B00A7A59C /* ReviewResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 019814B92889761B00A7A59C /* ReviewResponse.json */; };
+		019814BC2889763B00A7A59C /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019814BB2889763B00A7A59C /* JSONLoader.swift */; };
 		01A45B8128867C1A001F44D6 /* HangeulList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC4B34B2885606400F15B2D /* HangeulList.swift */; };
 		01A45B8328867D1B001F44D6 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A45B8228867D1B001F44D6 /* Content.swift */; };
 		01A45B852886DC6F001F44D6 /* LazyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A45B842886DC6F001F44D6 /* LazyImageView.swift */; };
@@ -78,6 +84,13 @@
 			remoteGlobalIDString = 0141A8532884F1F300EEB918;
 			remoteInfo = MyKeyboard;
 		};
+		019814AA28895A8800A7A59C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE15E65028604278003DD2F5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DE15E65728604278003DD2F5;
+			remoteInfo = CustomKeyboard;
+		};
 		9F50431C287E323300CDBD9C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DE15E65028604278003DD2F5 /* Project object */;
@@ -105,7 +118,6 @@
 		012EDE40287EB9FA0035C3E6 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		012EDE45287EC14C0035C3E6 /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
 		012EDE53287F9B960035C3E6 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
-		012EDE55287FA0BC0035C3E6 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		012EDE59287FA6FA0035C3E6 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		012EDE5B287FAF790035C3E6 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		012EDEAA288135430035C3E6 /* KeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardView.xib; sourceTree = "<group>"; };
@@ -118,6 +130,14 @@
 		0142F4CF287C0C9C006F3E48 /* ReviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewResponse.swift; sourceTree = "<group>"; };
 		0142F4D5287C3078006F3E48 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		0142F4E7287D62ED006F3E48 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		019814A628895A8800A7A59C /* NetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		019814AF28895A9D00A7A59C /* NetworkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
+		019814B128895AFE00A7A59C /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
+		019814B328895B0D00A7A59C /* URLSessionDataTaskProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskProtocol.swift; sourceTree = "<group>"; };
+		019814B528895BF400A7A59C /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
+		019814B728895C2A00A7A59C /* MockURLSessionDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSessionDataTask.swift; sourceTree = "<group>"; };
+		019814B92889761B00A7A59C /* ReviewResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ReviewResponse.json; sourceTree = "<group>"; };
+		019814BB2889763B00A7A59C /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
 		01A45B8228867D1B001F44D6 /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
 		01A45B842886DC6F001F44D6 /* LazyImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyImageView.swift; sourceTree = "<group>"; };
 		9F30D009288A818000FAD4C2 /* HangeulUnicodeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulUnicodeType.swift; sourceTree = "<group>"; };
@@ -161,6 +181,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		019814A328895A8800A7A59C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9F504315287E323300CDBD9C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -184,8 +211,9 @@
 				012EDE45287EC14C0035C3E6 /* HttpMethod.swift */,
 				012EDE53287F9B960035C3E6 /* Endpoint.swift */,
 				012EDE59287FA6FA0035C3E6 /* APIEndpoints.swift */,
-				012EDE55287FA0BC0035C3E6 /* Provider.swift */,
 				012EDE40287EB9FA0035C3E6 /* NetworkManager.swift */,
+				019814B128895AFE00A7A59C /* URLSessionProtocol.swift */,
+				019814B328895B0D00A7A59C /* URLSessionDataTaskProtocol.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -266,6 +294,18 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		019814A728895A8800A7A59C /* NetworkTests */ = {
+			isa = PBXGroup;
+			children = (
+				019814B92889761B00A7A59C /* ReviewResponse.json */,
+				019814AF28895A9D00A7A59C /* NetworkTests.swift */,
+				019814B528895BF400A7A59C /* MockURLSession.swift */,
+				019814B728895C2A00A7A59C /* MockURLSessionDataTask.swift */,
+				019814BB2889763B00A7A59C /* JSONLoader.swift */,
+			);
+			path = NetworkTests;
+			sourceTree = "<group>";
+		};
 		9F5042FD287C463300CDBD9C /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,7 +314,7 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		9F504319287E323300CDBD9C /* Tests */ = {
+		9F504319287E323300CDBD9C /* CustomKeyboardTests */ = {
 			isa = PBXGroup;
 			children = (
 				9F4652702883D722008D26D2 /* normal_input_Tests.swift */,
@@ -284,7 +324,7 @@
 				9F57B54C28881BA500B2DC24 /* double_input_Tests.swift */,
 				9F76CB77288A0053002D1535 /* total_input_Tests.swift */,
 			);
-			path = Tests;
+			path = CustomKeyboardTests;
 			sourceTree = "<group>";
 		};
 		9F57B5422887C48D00B2DC24 /* Enums */ = {
@@ -320,8 +360,9 @@
 			isa = PBXGroup;
 			children = (
 				DE15E65A28604278003DD2F5 /* CustomKeyboard */,
-				9F504319287E323300CDBD9C /* Tests */,
 				0141A8552884F1F300EEB918 /* MyKeyboard */,
+				9F504319287E323300CDBD9C /* CustomKeyboardTests */,
+				019814A728895A8800A7A59C /* NetworkTests */,
 				DE15E65928604278003DD2F5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -332,6 +373,7 @@
 				DE15E65828604278003DD2F5 /* CustomKeyboard.app */,
 				9F504318287E323300CDBD9C /* CustomKeyboardTests.xctest */,
 				0141A8542884F1F300EEB918 /* MyKeyboard.appex */,
+				019814A628895A8800A7A59C /* NetworkTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -372,6 +414,24 @@
 			productName = MyKeyboard;
 			productReference = 0141A8542884F1F300EEB918 /* MyKeyboard.appex */;
 			productType = "com.apple.product-type.app-extension";
+		};
+		019814A528895A8800A7A59C /* NetworkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 019814AE28895A8800A7A59C /* Build configuration list for PBXNativeTarget "NetworkTests" */;
+			buildPhases = (
+				019814A228895A8800A7A59C /* Sources */,
+				019814A328895A8800A7A59C /* Frameworks */,
+				019814A428895A8800A7A59C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				019814AB28895A8800A7A59C /* PBXTargetDependency */,
+			);
+			name = NetworkTests;
+			productName = NetworkTests;
+			productReference = 019814A628895A8800A7A59C /* NetworkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		9F504317287E323300CDBD9C /* CustomKeyboardTests */ = {
 			isa = PBXNativeTarget;
@@ -423,6 +483,10 @@
 					0141A8532884F1F300EEB918 = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
+					019814A528895A8800A7A59C = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = DE15E65728604278003DD2F5;
+					};
 					9F504317287E323300CDBD9C = {
 						CreatedOnToolsVersion = 13.4.1;
 						TestTargetID = DE15E65728604278003DD2F5;
@@ -448,6 +512,7 @@
 				DE15E65728604278003DD2F5 /* CustomKeyboard */,
 				9F504317287E323300CDBD9C /* CustomKeyboardTests */,
 				0141A8532884F1F300EEB918 /* MyKeyboard */,
+				019814A528895A8800A7A59C /* NetworkTests */,
 			);
 		};
 /* End PBXProject section */
@@ -459,6 +524,14 @@
 			files = (
 				0141A8662885041100EEB918 /* MyKeyboard.xib in Resources */,
 				0141A8612884F3B800EEB918 /* KeyboardView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		019814A428895A8800A7A59C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				019814BA2889761B00A7A59C /* ReviewResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +579,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		019814A228895A8800A7A59C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				019814BC2889763B00A7A59C /* JSONLoader.swift in Sources */,
+				019814B828895C2A00A7A59C /* MockURLSessionDataTask.swift in Sources */,
+				019814B628895BF400A7A59C /* MockURLSession.swift in Sources */,
+				019814B028895A9D00A7A59C /* NetworkTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9F504314287E323300CDBD9C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -523,6 +607,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				019814B228895AFE00A7A59C /* URLSessionProtocol.swift in Sources */,
 				9FB695542882265900F6AE87 /* HangeulDictionary.swift in Sources */,
 				9FB695462881A3AA00F6AE87 /* Hangeul.swift in Sources */,
 				0142F4E8287D62ED006F3E48 /* KeyboardView.swift in Sources */,
@@ -536,6 +621,7 @@
 				012EDE56287FA0BD0035C3E6 /* Provider.swift in Sources */,
 				0142F4D0287C0C9C006F3E48 /* ReviewResponse.swift in Sources */,
 				9F30D00A288A818000FAD4C2 /* HangeulUnicodeType.swift in Sources */,
+				019814B428895B0D00A7A59C /* URLSessionDataTaskProtocol.swift in Sources */,
 				9F57B5462887E3D100B2DC24 /* HangeulCombineBuffer.swift in Sources */,
 				012EDE42287EB9FA0035C3E6 /* NetworkManager.swift in Sources */,
 				9FB6955028821F4F00F6AE87 /* HangeulIOManager.swift in Sources */,
@@ -565,6 +651,11 @@
 			isa = PBXTargetDependency;
 			target = 0141A8532884F1F300EEB918 /* MyKeyboard */;
 			targetProxy = 0141A8592884F1F300EEB918 /* PBXContainerItemProxy */;
+		};
+		019814AB28895A8800A7A59C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DE15E65728604278003DD2F5 /* CustomKeyboard */;
+			targetProxy = 019814AA28895A8800A7A59C /* PBXContainerItemProxy */;
 		};
 		9F50431D287E323300CDBD9C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -602,7 +693,7 @@
 				INFOPLIST_FILE = MyKeyboard/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MyKeyboard;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -614,7 +705,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -627,7 +718,7 @@
 				INFOPLIST_FILE = MyKeyboard/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MyKeyboard;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -639,7 +730,43 @@
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		019814AC28895A8800A7A59C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rae.NetworkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CustomKeyboard.app/CustomKeyboard";
+			};
+			name = Debug;
+		};
+		019814AD28895A8800A7A59C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rae.NetworkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CustomKeyboard.app/CustomKeyboard";
 			};
 			name = Release;
 		};
@@ -731,7 +858,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -785,7 +912,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -863,6 +990,15 @@
 			buildConfigurations = (
 				0141A85D2884F1F300EEB918 /* Debug */,
 				0141A85E2884F1F300EEB918 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		019814AE28895A8800A7A59C /* Build configuration list for PBXNativeTarget "NetworkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				019814AC28895A8800A7A59C /* Debug */,
+				019814AD28895A8800A7A59C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

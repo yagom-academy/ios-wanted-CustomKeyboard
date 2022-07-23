@@ -12,6 +12,12 @@ final class HomeViewModel {
     @Published var reviews: [Review] = []
     @Published var isUploaded = false
     
+    private let networkManager: NetworkManager
+    
+    init(networkManager: NetworkManager) {
+        self.networkManager = networkManager
+    }
+    
     func reviewsCount() -> Int {
         return reviews.count
     }
@@ -22,10 +28,11 @@ final class HomeViewModel {
     
     func fetch() {
         let reviewsEndpoint = APIEndpoints.getReviews()
-        Provider().request(endpoint: reviewsEndpoint) { (result: Result<ReviewResponse, Error>) in
+        
+        networkManager.fetchData(endpoint: reviewsEndpoint, dataType: ReviewResponse.self) { [weak self] result in
             switch result {
             case .success(let reviewResponse):
-                self.reviews = reviewResponse.data
+                self?.reviews = reviewResponse.data
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -35,14 +42,14 @@ final class HomeViewModel {
     func submit(contentString: String) {
         let content = Content(content: contentString)
         
-        guard let data = try? JSONEncoder().encode(content) else {
+        guard let bodyData = try? JSONEncoder().encode(content) else {
             print("JSONEncoder Error")
             return
         }
         
-        let postEndpoint = APIEndpoints.postReview(bodyData: data)
+        let postEndpoint = APIEndpoints.postReview(bodyData: bodyData)
         
-        Provider().postRequest(endpoint: postEndpoint) { result in
+        networkManager.postRequest(endpoint: postEndpoint) { result in
             switch result {
             case .success(let data):
                 let content = String(decoding: data, as: UTF8.self)
