@@ -20,7 +20,7 @@ class HangulKeyboardManager {
     
     func enterText(text: String) {
         let keyboardData = keyboardIOManager.stringToKeyboardData(input: text)
-        guard !isEnter(inputData: keyboardData) else { return }
+        guard !isReturnKeyPressed(inputData: keyboardData) else { return }
         let result = keyboardMaker.putKeyboardData(data: keyboardData)
         delegate.hangulKeyboard(
             updatedResult: keyboardIOManager.keyboardDataToString(
@@ -29,7 +29,7 @@ class HangulKeyboardManager {
         )
     }
     
-    private func isEnter(inputData: HangulKeyboardData) -> Bool {
+    private func isReturnKeyPressed(inputData: HangulKeyboardData) -> Bool {
         guard inputData.unicode == SpecialCharSet.enter else { return false }
         delegate.hangulKeyboard(enterPressed: inputData)
         return true
