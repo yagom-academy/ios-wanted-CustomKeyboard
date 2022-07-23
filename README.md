@@ -14,9 +14,9 @@ mini|cobugi
 <img src="./Previews/CustomKeyboardFlowChart.svg" alt="CustomKeyboardFlowChart" />
 
 ## 결과
-첫 번째, 두 번째 화면|키보드 익스텐션
-:-:|:-:
-![](./Previews/result1.gif)|![](./Previews/result2.gif)
+첫 번째 화면|두 번째 화면|키보드 익스텐션
+:-:|:-:|:-:
+![](./Previews/result1.gif)|![](./Previews/result3.gif)|![](./Previews/result2.gif)
 
 ## 이슈
 ### 키보드 입력시 긴 글자가 다음 줄로 안넘어 가는 현상
