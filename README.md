@@ -108,7 +108,7 @@
 ### 네트워크 Layer 
 
   <p align="center">
-   <img src="https://user-images.githubusercontent.com/36659877/180599495-02eed3b1-0141-460c-a8ed-656b2e86f5fa.png" width="300" height="250"> 
+   <img src="https://user-images.githubusercontent.com/36659877/180599495-02eed3b1-0141-460c-a8ed-656b2e86f5fa.png" width="300" height="200"> 
    </p>
 
 - Endpoint
