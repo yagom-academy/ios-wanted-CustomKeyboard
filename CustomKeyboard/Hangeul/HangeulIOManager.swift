@@ -16,6 +16,12 @@ final class HangeulIOManger {
     private let combiner = HangeulCombiner()
 }
 
+extension HangeulIOManger {
+    private enum InputlistTailInformation {
+        case tailIsFinished, tailWasJongseong, tailIsNormal
+    }
+}
+
 // MARK: - Public 
 
 extension HangeulIOManger {
@@ -24,7 +30,7 @@ extension HangeulIOManger {
         inputList.append(input)
         
         switch input {
-        case Text.back:
+        case Text.back where !inputList.isEmpty():
             processWhenInputIsBack()
         case Text.space:
             processWhenInputIsSpace()
@@ -50,32 +56,26 @@ extension HangeulIOManger {
 extension HangeulIOManger {
     
     private func processWhenInputIsBack() {
-        if inputList.isEmpty() {
-            return
-        }
-        
         inputList.removeLast()
         setOutput(with: Text.emptyString, editMode: .remove)
         
-        guard let lastInputLetter = inputList.tail else {
+        guard let tail = inputList.tail else {
             return
         }
         
-        if lastInputLetter.status == .finished {
-            updater.updateProperties(of: lastInputLetter, when: .remove)
-            return
-        }
+        let tailInformation = getInformationAbout(tail)
         
-        if lastInputLetter.position.count > 1 {
-            updater.updateProperties(of: lastInputLetter, when: .remove)
-            setOutput(with: Text.emptyString, editMode: .remove)
+        switch tailInformation {
+        case .tailIsFinished:
+            updater.updateProperties(of: tail, when: .remove)
+        case .tailWasJongseong:
+            updater.updateProperties(of: tail, when: .remove)
+            let result = combiner.combineCharacter(using: tail, when: .remove)
+            setOutput(with: result?.combinedCharacter, editMode: .change)
+        case .tailIsNormal:
+            let result = combiner.combineCharacter(using: tail, when: .remove)
+            setOutput(with: result?.combinedCharacter, editMode: .add)
         }
-        
-        guard let result = combiner.combineCharacter(using: lastInputLetter, when: .remove) else {
-            return
-        }
-        
-        setOutput(with: result.combinedCharacter, editMode: .add)
     }
     
     private func processWhenInputIsSpace() {
@@ -94,11 +94,9 @@ extension HangeulIOManger {
         
         updater.updateProperties(of: lastInputLetter, when: .add)
         
-        guard let result = combiner.combineCharacter(using: lastInputLetter, when: .add) else {
-            return
+        if let result = combiner.combineCharacter(using: lastInputLetter, when: .add) {
+            setOutput(with: result.combinedCharacter, editMode: result.outputEditMode)
         }
-        
-        setOutput(with: result.combinedCharacter, editMode: result.outputEditMode)
     }
 }
 
@@ -122,6 +120,21 @@ extension HangeulIOManger {
             output.unicodeScalars.removeLast()
         default:
             break
+        }
+    }
+}
+
+// MARK: - get information about tail of input list
+
+extension HangeulIOManger {
+    
+    private func getInformationAbout(_ tail: Hangeul) -> InputlistTailInformation {
+        if tail.status == .finished {
+            return .tailIsFinished
+        } else if tail.position.count > 1 {
+            return .tailWasJongseong
+        } else {
+            return .tailIsNormal
         }
     }
 }

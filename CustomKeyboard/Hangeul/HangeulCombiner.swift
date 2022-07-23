@@ -14,21 +14,31 @@ final class HangeulCombiner {
     private let dictionary = HangeulDictionary()
 }
 
+// MARK: - Enum
+
+extension HangeulCombiner {
+    private enum BufferStatus {
+        case onlyHaveOneJungseongLetter
+        case onlyHaveOneChoseongLetter
+        case HaveOneChoseongWhichWasJongseong
+        case HaveNormalLetters
+    }
+}
+
 // MARK: - Public
 
 extension HangeulCombiner {
     
     func combineCharacter(using letter: Hangeul, when inputMode: HangeulInputMode) -> (combinedCharacter: String?, outputEditMode: HangeulOutputEditMode)? {
         let buffer = HangeulCombineBuffer(letter)
+        let bufferStatus = getStatus(of: buffer, in: inputMode)
         
-        if buffer.choseongSection.isEmpty && buffer.jungseongSection.count == 1 {
-            return (getCombinedCharacter(buffer.jungseongSection.first), .add)
-        } else if buffer.jungseongSection.isEmpty && buffer.jongseongSection.isEmpty  {
+        switch bufferStatus {
+        case .onlyHaveOneChoseongLetter:
             return (getCombinedCharacter(buffer.choseongSection.first), .add)
-        } else if inputMode == .add
-                    && buffer.jongseongSection.isEmpty
-                    && buffer.jungseongSection.count == 1
-                    && buffer.choseongSection.first?.position.count ?? 0 > 1 {
+        case .onlyHaveOneJungseongLetter:
+            return (getCombinedCharacter(buffer.jungseongSection.first), .add)
+        case .HaveOneChoseongWhichWasJongseong:
             let previousBuffer = HangeulCombineBuffer(buffer.choseongSection.first?.prev)
             guard let previousCombinedCharacter = getCombinedCharacter(with: previousBuffer),
                   let currentCombinedCharacter = getCombinedCharacter(with: buffer) else {
@@ -36,7 +46,7 @@ extension HangeulCombiner {
             }
             let combinedCharacter = previousCombinedCharacter + currentCombinedCharacter
             return (combinedCharacter, .change)
-        } else {
+        case .HaveNormalLetters:
             return (getCombinedCharacter(with: buffer), .change)
         }
     }
@@ -78,24 +88,39 @@ extension HangeulCombiner {
     }
     
     private func getLetterUnicode(of section: [Hangeul], in position: HangeulCombinationPosition) -> Int? {
-    
-        switch section.count {
-        case 0 where position == .jongseong:
+        if section.count == 0 && position == .jongseong {
             return HangeulUnicodeType.Fixed.jongseong.blank.rawValue
-        case 1:
+        } else if section.count == 1 {
             return section.first?.unicode
-        case 2:
+        } else if section.count == 2 {
             return dictionary.getDoubleUnicode(section.first, section.last)
-        case 3:
+        } else if section.count == 3 {
             return dictionary.getTripleMidUnicode(section[0].text, section[1].text, section[2].text)
-        default:
-            return nil
         }
+        return nil
     }
     
     private func getIndexForCombine(of section: [Hangeul], in position: HangeulCombinationPosition) -> Int? {
         let letterUnicode = getLetterUnicode(of: section, in: position)
         
         return dictionary.getIndex(of: letterUnicode, in: position, type: .fixed)
+    }
+}
+
+extension HangeulCombiner {
+    
+    private func getStatus(of buffer: HangeulCombineBuffer, in inputMode: HangeulInputMode) -> BufferStatus {
+        if buffer.choseongSection.isEmpty && buffer.jungseongSection.count == 1 {
+            return .onlyHaveOneJungseongLetter
+        } else if buffer.jungseongSection.isEmpty && buffer.jongseongSection.isEmpty  {
+            return .onlyHaveOneChoseongLetter
+        } else if inputMode == .add
+                    && buffer.jongseongSection.isEmpty
+                    && buffer.jungseongSection.count == 1
+                    && buffer.choseongSection.first?.position.count ?? 0 > 1 {
+            return .HaveOneChoseongWhichWasJongseong
+        } else {
+            return .HaveNormalLetters
+        }
     }
 }
