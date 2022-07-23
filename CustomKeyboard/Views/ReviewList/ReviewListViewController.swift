@@ -74,7 +74,9 @@ class ReviewListViewController: UIViewController {
             case .failure(let error as NetworkError):
                 switch error {
                 case .decodeError:
-                    print(error)
+                    let decodedErrorAlert = UIAlertController(title: "알림", message: "데이터를 불러오는데 실패했습니다.", preferredStyle: .alert)
+                    decodedErrorAlert.addAction(UIAlertAction(title: "확인", style: .default))
+                    present(decodedErrorAlert, animated: true)
                 default:
                     break
                 }
