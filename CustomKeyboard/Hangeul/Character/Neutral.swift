@@ -13,4 +13,12 @@ enum Neutral:Int {
     var value: Int {
         return self.rawValue
     }
+    
+    static func getVowelToNeutralValue(_ unicode: Int) -> Int {
+        return unicode - 12623
+    }
+
+    static func getNeutralValueToVowel(_ NeutralValue: Int) -> Int {
+        return NeutralValue + 12623
+    }
 }

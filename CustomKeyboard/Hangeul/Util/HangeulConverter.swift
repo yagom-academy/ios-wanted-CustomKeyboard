@@ -62,11 +62,13 @@ class HangeulConverter : UnicodeConverter {
     func lastCharState(_ unicode: Int) -> CharState {
         if unicode >= 44032 {
             let value:Int = unicode - 44032
+            let initial = value/28/21
+            let neutral = (value / 28) % 21
             let final:Int = value % 28
             if final == 0 {
-                return .noneFinalChar
+                return .noneFinalChar(initial: initial, neutral: neutral)
             } else {
-                return .includingFinalChar
+                return .includingFinalChar(initial: initial, neutral: neutral, final: final)
             }
         } else if (unicode <= CharUnicode.ㅎ.value) {
             return .onlyConsonant
