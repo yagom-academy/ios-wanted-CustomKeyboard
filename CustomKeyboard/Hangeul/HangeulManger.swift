@@ -78,10 +78,14 @@ class HangeulManger : UnicodeManger {
         case Final.ㄱ.value :
             if initialValue == Initial.ㄱ.value {
                 lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄲ.value)
+            } else if initialValue == Initial.ㅅ.value {
+                lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄳ.value)
             }
         case Final.ㄴ.value :
             if initialValue == Initial.ㅈ.value {
                 lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄵ.value)
+            } else if initialValue == Initial.ㅎ.value {
+                lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄶ.value)
             }
         case Final.ㄹ.value :
             if initialValue == Initial.ㄱ.value {
