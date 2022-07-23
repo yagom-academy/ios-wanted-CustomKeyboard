@@ -50,7 +50,7 @@ class ReviewListHeaderView: UITableViewHeaderFooterView {
     }
     
     func setLayout() {
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .systemBackground
         contentView.addSubview(profileImageView)
         contentView.addSubview(reviewTextField)
         contentView.addSubview(presentButton)

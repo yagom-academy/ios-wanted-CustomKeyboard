@@ -35,7 +35,7 @@ class ReviewListViewController: UIViewController {
     
     private func setNavigationLayout() {
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .white
+        appearance.backgroundColor = .systemBackground
         navigationItem.title = "ReviewList"
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
