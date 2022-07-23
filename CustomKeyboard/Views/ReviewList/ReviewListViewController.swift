@@ -95,6 +95,7 @@ extension ReviewListViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? ReviewTableViewCell else { return UITableViewCell()}
         let reviewData = dataList.data[indexPath.row]
         cell.fetchDataFromTableView(data: reviewData)
+        cell.selectionStyle = .none
         return cell
     }
     
