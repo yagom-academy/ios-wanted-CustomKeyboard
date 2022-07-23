@@ -10,6 +10,7 @@ import UIKit
 class ReviewContentView: UIView {
   
   var startEditing:((String?) -> Void)?
+  var doneEditing:((String?) -> Void)?
   
   let placeHolderText = "어떤점이 인상 깊었나요?"
   
@@ -92,8 +93,8 @@ private extension ReviewContentView {
   
   func setCustomKeyBoardClosure() {
     customKeyboard.pressedRetrunButton = {
-      self.reviewTextView.text += "\n"
-      self.startEditing?(self.reviewTextView.text)
+      self.reviewTextView.resignFirstResponder()
+      self.doneEditing?(self.reviewTextView.text)
     }
     customKeyboard.buttonPressed = {
       self.reviewTextView.text = $0

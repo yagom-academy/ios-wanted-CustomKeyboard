@@ -48,7 +48,7 @@ final class ReviewViewController: UIViewController {
   }()
   
   private func setNavigationBar(){
-    let naviBar = UINavigationBar(frame: .init(x: 0, y: view.safeAreaInsets.top + 40, width: view.frame.width, height: 20))
+    let naviBar = UINavigationBar(frame: .init(x: 0, y: view.safeAreaInsets.top + 40, width: view.frame.width, height: 40))
     naviBar.isTranslucent = false
     naviBar.backgroundColor = .secondarySystemFill
     naviBar.items = [naviItem]
@@ -65,21 +65,29 @@ final class ReviewViewController: UIViewController {
         self.naviItem.rightBarButtonItem?.isEnabled = false
       }
     }
+    
+    reviewContentView.doneEditing = { input in
+      if self.naviItem.rightBarButtonItem?.isEnabled == true {
+        self.uploadReview()
+      }
+    }
   }
-  
   
   private lazy var cancel = UIAction { _ in
     self.dismiss(animated: true)
   }
   
-  private lazy var  sumbit = UIAction { _ in
+  private lazy var sumbit = UIAction { _ in
+    self.uploadReview()
+  }
+  
+  private func uploadReview() {
     self.viewModel.makeReview(review: self.reviewContentView.reviewTextView.text) { _ in
       DispatchQueue.main.async {
         self.dismiss(animated: true)
       }
     }
   }
-  
   
   private func setConstraints() {
     view.addSubview(reviewContentView)
@@ -90,6 +98,4 @@ final class ReviewViewController: UIViewController {
       reviewContentView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
     ])
   }
-  
-  
 }
