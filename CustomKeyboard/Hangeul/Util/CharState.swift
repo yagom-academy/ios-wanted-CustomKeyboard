@@ -8,8 +8,8 @@
 import Foundation
 
 enum CharState {
-    case includingFinalChar(initial: Int,neutral: Int,final: Int)
-    case noneFinalChar(initial: Int,neutral: Int)
+    case includingFinalChar(Int,Int,Int)
+    case noneFinalChar(Int,Int)
     case onlyConsonant
     case onlyVowel
 }
