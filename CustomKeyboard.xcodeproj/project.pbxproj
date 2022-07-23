@@ -170,9 +170,9 @@
 		68A3B4C62881338600DD1631 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				043D075B287D408B0061DCA2 /* ReviewTableViewCell.swift */,
 				04486782287D4B080004A512 /* ReviewTableViewHeader.swift */,
 				68AE794E287D3E87003F4426 /* ReviewTableViewHeaderViewModel.swift */,
-				043D075B287D408B0061DCA2 /* ReviewTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

@@ -12,8 +12,9 @@ protocol PassReviewDelegate: AnyObject {
 }
 
 class ReviewTableViewHeader: UITableViewHeaderFooterView {
-    private var viewModel = ReviewTableViewHeaderViewModel()
+    static let identifier = String(describing: ReviewTableViewHeader.self)
     weak var delegate: PassReviewDelegate?
+    private var viewModel = ReviewTableViewHeaderViewModel()
     
     private let profileImage: UIImageView = {
         let image = UIImageView()
@@ -54,8 +55,8 @@ class ReviewTableViewHeader: UITableViewHeaderFooterView {
                 switch result {
                 case .success(let post):
                     print(post)
-                case .failure(_):
-                    print(Error.self)
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
             delegate?.sendReviewData(review: review)

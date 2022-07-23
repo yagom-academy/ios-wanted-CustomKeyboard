@@ -58,14 +58,7 @@ extension URLSession {
         }
     }
     
-    static func request<T: Decodable>(_ session: URLSession = .shared, content: String, endpoint: URLRequest, completion: @escaping(Result<T, APIError>) -> Void) {
-        let review = Post(content: content)
-        
-        guard let uploadData = try? JSONEncoder().encode(review) else {
-            completion(.failure(.failed))
-            return
-        }
-                
+    static func request(_ session: URLSession = .shared, uploadData: Data, endpoint: URLRequest, completion: @escaping (Result<Data, APIError>) -> Void) {
         session.uploadTask(uploadData, endpoint) { data, response, error in
             guard error == nil else {
                 completion(.failure(.failed))
@@ -89,7 +82,8 @@ extension URLSession {
             
             if let data = data, let dataString = String(data: data, encoding: .utf8) {
                 print("\(dataString)")
-                completion(.success(review as! T))
+                
+                completion(.success(data))
                 return
             }
         }
