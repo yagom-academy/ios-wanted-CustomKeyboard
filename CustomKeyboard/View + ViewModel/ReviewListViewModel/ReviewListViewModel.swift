@@ -37,7 +37,7 @@ class ReviewListViewModel {
             case .success(let list):
                 self.reviewList.value = list
             case .failure(let error):
-                print(error.description, "🎉")
+                debugPrint(error.description, "🎉")
             }
         }
     }

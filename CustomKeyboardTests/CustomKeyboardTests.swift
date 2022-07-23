@@ -183,11 +183,11 @@ class CustomKeyboardTests: XCTestCase {
             }
         }
         
-        print(compats)
+        debugPrint(compats)
         
         compats.forEach { value in
             viewModel.didTapKeyboardButton(buffer: value)
         }
-        print(viewModel.result.value)
+        debugPrint(viewModel.result.value)
     }
 }
