@@ -8,7 +8,7 @@
 import Foundation
 
 class HangeulManger : UnicodeManger {
-
+    
     var converter : UnicodeConverter
     
     init(_ converter : UnicodeConverter) {
@@ -48,42 +48,40 @@ class HangeulManger : UnicodeManger {
             return removeOnlyVowel(vowel: unicode)
         }
     }
-
-//MARK: - 받침 있음
+    
+    //MARK: - 받침 있음
     private func combineIncludingFinalChar(lastChar: HangeulStruct, inputhChar : Int) -> String{
-        
         if inputhChar <= CharUnicode.ㅎ.value {
-            return combineFinalToConsonant(lastChar: lastChar, consonant: inputhChar)
+            guard let final = lastChar.final else {
+                print("Not Have Final")
+                return ""
+            }
+            let combineCharValue = combineFinalToConsonant(lastChar: lastChar, consonant: inputhChar)
+            if combineCharValue == 0 {
+                let lastChar = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: final)
+                return converter.convertCharFromUniCode(lastChar) + converter.convertCharFromUniCode(inputhChar)
+            } else {
+                return converter.convertCharFromUniCode(combineCharValue)
+            }
         } else {
             return combineFinalToVowel(lastChar: lastChar, vowel: inputhChar)
         }
     }
-    private func combineFinalToConsonant(lastChar: HangeulStruct, consonant: Int) -> String {
+    private func combineFinalToConsonant(lastChar: HangeulStruct, consonant: Int) -> Int {
         guard let final = lastChar.final else {
             print("Not Have Final")
-            return ""
+            return 0
         }
         let initialValue = Initial.getConsonantToInitialValue(consonant)
         var lastCharUnicode = 0
-        let nextCharUnicode = consonant
         switch final {
         case Final.ㄱ.value :
             if initialValue == Initial.ㄱ.value {
                 lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄲ.value)
-            } else if initialValue == Initial.ㅅ.value {
-                lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄳ.value)
-            } else {
-                lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: final)
-                return converter.convertCharFromUniCode(lastCharUnicode) + converter.convertCharFromUniCode(nextCharUnicode)
             }
         case Final.ㄴ.value :
             if initialValue == Initial.ㅈ.value {
                 lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄵ.value)
-            } else if initialValue == Initial.ㅎ.value {
-                lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄶ.value)
-            } else {
-                lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: final)
-                return converter.convertCharFromUniCode(lastCharUnicode) + converter.convertCharFromUniCode(nextCharUnicode)
             }
         case Final.ㄹ.value :
             if initialValue == Initial.ㄱ.value {
@@ -100,30 +98,20 @@ class HangeulManger : UnicodeManger {
                 lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄿ.value)
             }else if initialValue == Initial.ㅎ.value {
                 lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㅀ.value)
-            } else {
-                lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: final)
-                return converter.convertCharFromUniCode(lastCharUnicode) + converter.convertCharFromUniCode(nextCharUnicode)
             }
         case Final.ㅂ.value :
             if initialValue == Initial.ㅅ.value {
                 lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㅄ.value)
-            } else {
-                lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: final)
-                return converter.convertCharFromUniCode(lastCharUnicode) + converter.convertCharFromUniCode(nextCharUnicode)
             }
         case Final.ㅅ.value :
             if initialValue == Initial.ㅅ.value {
                 lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㅆ.value)
-            } else {
-                lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: final)
-                return converter.convertCharFromUniCode(lastCharUnicode) + converter.convertCharFromUniCode(nextCharUnicode)
             }
         default:
-            lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: final)
-            return converter.convertCharFromUniCode(lastCharUnicode) + converter.convertCharFromUniCode(nextCharUnicode)
+            return 0
         }
         
-        return converter.convertCharFromUniCode(lastCharUnicode)
+        return lastCharUnicode
     }
     private func combineFinalToVowel(lastChar: HangeulStruct,vowel: Int) -> String {
         guard let final = lastChar.final else {
@@ -135,46 +123,36 @@ class HangeulManger : UnicodeManger {
         var nextCharUnicode = 0
         switch final {
         case Final.ㄲ.value :
-            print("ㄲ")
             lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄱ.value)
             nextCharUnicode = converter.combineCharToUnicode(initial: Initial.ㄱ.value, neutral: neutral, final: 0)
         case Final.ㄳ.value :
-            print("ㄳ")
             lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄱ.value)
             nextCharUnicode = converter.combineCharToUnicode(initial: Initial.ㅅ.value, neutral: neutral, final: 0)
         case Final.ㄵ.value :
-            print("ㄵ")
             lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄴ.value)
             nextCharUnicode = converter.combineCharToUnicode(initial: Initial.ㅈ.value, neutral: neutral, final: 0)
         case Final.ㄶ.value :
-            print("ㄶ")
             lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄴ.value)
             nextCharUnicode = converter.combineCharToUnicode(initial: Initial.ㅎ.value, neutral: neutral, final: 0)
         case Final.ㄺ.value :
-            print("ㄺ")
             lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄹ.value)
             nextCharUnicode = converter.combineCharToUnicode(initial: Initial.ㄱ.value, neutral: neutral, final: 0)
         case Final.ㄻ.value :
-            print("ㄻ")
             lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄹ.value)
             nextCharUnicode = converter.combineCharToUnicode(initial: Initial.ㅁ.value, neutral: neutral, final: 0)
         case Final.ㄼ.value :
-            print("ㄼ")
             lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄹ.value)
             nextCharUnicode = converter.combineCharToUnicode(initial: Initial.ㅂ.value, neutral: neutral, final: 0)
         case Final.ㄽ.value :
-            print("ㄽ")
             lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄹ.value)
             nextCharUnicode = converter.combineCharToUnicode(initial: Initial.ㅅ.value, neutral: neutral, final: 0)
         case Final.ㄾ.value :
-            print("ㄾ")
             lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄹ.value)
             nextCharUnicode = converter.combineCharToUnicode(initial: Initial.ㅌ.value, neutral: neutral, final: 0)
         case Final.ㅀ.value :
             lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: Final.ㄹ.value)
             nextCharUnicode = converter.combineCharToUnicode(initial: Initial.ㅎ.value, neutral: neutral, final: 0)
         default:
-            print("default")
             let paringValue = Initial.getFinalValueToInitialValue(final)
             lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: 0)
             nextCharUnicode = converter.combineCharToUnicode(initial: paringValue, neutral: neutral, final: 0)
@@ -182,12 +160,18 @@ class HangeulManger : UnicodeManger {
         
         return converter.convertCharFromUniCode(lastCharUnicode) + converter.convertCharFromUniCode(nextCharUnicode)
     }
-//MARK: - 받침 없음
+    //MARK: - 받침 없음
     private func combineNoneFinalChar(lastChar: HangeulStruct, inputChar : Int) -> String {
         if inputChar <= CharUnicode.ㅎ.value {
             return combineNoneFinalToConsonant(lastChar: lastChar, inputChar: inputChar)
         } else {
-            return combineNoneFinalToVowel(lastChar: lastChar, inputChar: inputChar)
+            let combineCharUnicode = combineNoneFinalToVowel(lastChar: lastChar, inputChar: inputChar)
+            if combineCharUnicode == 0 {
+                let lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: 0)
+                return converter.convertCharFromUniCode(lastCharUnicode) + converter.convertCharFromUniCode(inputChar)
+            } else {
+                return converter.convertCharFromUniCode(combineCharUnicode)
+            }
         }
     }
     
@@ -204,37 +188,25 @@ class HangeulManger : UnicodeManger {
         }
     }
     
-    private func combineNoneFinalToVowel(lastChar : HangeulStruct, inputChar : Int) -> String{
+    private func combineNoneFinalToVowel(lastChar : HangeulStruct, inputChar : Int) -> Int{
         let neutralValue = Neutral.getVowelToNeutralValue(inputChar)
         var lastCharUnicode = 0
         switch lastChar.neutral {
         case Neutral.ㅏ.value :
             if neutralValue == Neutral.ㅣ.value {
                 lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: Neutral.ㅐ.value, final: 0)
-            } else {
-                lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: 0)
-                return converter.convertCharFromUniCode(lastCharUnicode) + converter.convertCharFromUniCode(inputChar)
             }
         case Neutral.ㅑ.value :
             if neutralValue == Neutral.ㅣ.value {
                 lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: Neutral.ㅒ.value, final: 0)
-            } else {
-                lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: 0)
-                return converter.convertCharFromUniCode(lastCharUnicode) + converter.convertCharFromUniCode(inputChar)
             }
         case Neutral.ㅓ.value :
             if neutralValue == Neutral.ㅣ.value {
                 lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: Neutral.ㅔ.value, final: 0)
-            } else {
-                lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: 0)
-                return converter.convertCharFromUniCode(lastCharUnicode) + converter.convertCharFromUniCode(inputChar)
             }
         case Neutral.ㅕ.value :
             if neutralValue == Neutral.ㅣ.value {
                 lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: Neutral.ㅖ.value, final: 0)
-            } else {
-                lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: 0)
-                return converter.convertCharFromUniCode(lastCharUnicode) + converter.convertCharFromUniCode(inputChar)
             }
         case Neutral.ㅗ.value :
             if neutralValue == Neutral.ㅏ.value {
@@ -243,9 +215,6 @@ class HangeulManger : UnicodeManger {
                 lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: Neutral.ㅙ.value, final: 0)
             } else if neutralValue == Neutral.ㅣ.value {
                 lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: Neutral.ㅚ.value, final: 0)
-            } else {
-                lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: 0)
-                return converter.convertCharFromUniCode(lastCharUnicode) + converter.convertCharFromUniCode(inputChar)
             }
         case Neutral.ㅜ.value :
             if neutralValue == Neutral.ㅓ.value {
@@ -254,70 +223,58 @@ class HangeulManger : UnicodeManger {
                 lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: Neutral.ㅞ.value, final: 0)
             } else if neutralValue == Neutral.ㅣ.value {
                 lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: Neutral.ㅟ.value, final: 0)
-            } else {
-                lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: 0)
-                return converter.convertCharFromUniCode(lastCharUnicode) + converter.convertCharFromUniCode(inputChar)
             }
         case Neutral.ㅡ.value :
             if neutralValue == Neutral.ㅣ.value {
                 lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: Neutral.ㅢ.value, final: 0)
-            } else {
-                lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: 0)
-                return converter.convertCharFromUniCode(lastCharUnicode) + converter.convertCharFromUniCode(inputChar)
             }
         default :
-            lastCharUnicode = converter.combineCharToUnicode(initial: lastChar.initial, neutral: lastChar.neutral, final: 0)
-            return converter.convertCharFromUniCode(lastCharUnicode) + converter.convertCharFromUniCode(inputChar)
+            return 0
         }
-        return converter.convertCharFromUniCode(lastCharUnicode)
+        return lastCharUnicode
     }
-//MARK: - 자음만
+    //MARK: - 자음만
     private func combineOnlyConsonant(consonant : Int, inputChar : Int) -> String {
         if inputChar <= CharUnicode.ㅎ.value {
-            return combineConsonantToConsonant(consonant: consonant, inputChar: inputChar)
+            let combineCharUnicode = combineConsonantToConsonant(consonant: consonant, inputChar: inputChar)
+            if combineCharUnicode == 0 {
+                return converter.convertCharFromUniCode(consonant) + converter.convertCharFromUniCode(inputChar)
+            } else {
+                return converter.convertCharFromUniCode(combineCharUnicode)
+            }
         } else {
             return combineConsonantToVowel(consonant : consonant, inputChar : inputChar)
         }
     }
-    private func combineConsonantToConsonant(consonant : Int, inputChar : Int) -> String {
-        let initial = Initial.getConsonantToInitialValue(inputChar)
-        let initialValue = Initial.getConsonantToInitialValue(consonant)
+    private func combineConsonantToConsonant(consonant : Int, inputChar : Int) -> Int {
+        let inputinitial = Initial.getConsonantToInitialValue(inputChar)
+        let lastinitial = Initial.getConsonantToInitialValue(consonant)
         var lastCharUnicode = 0
-        switch initialValue {
+        switch lastinitial {
         case Initial.ㄱ.value :
-            if initial == Initial.ㄱ.value {
+            if inputinitial == Initial.ㄱ.value {
                 lastCharUnicode = CharUnicode.ㄲ.value
-            } else {
-                return converter.convertCharFromUniCode(consonant) + converter.convertCharFromUniCode(inputChar)
             }
         case Initial.ㄷ.value :
-            if initial == Initial.ㄷ.value {
+            if inputinitial == Initial.ㄷ.value {
                 lastCharUnicode = CharUnicode.ㄸ.value
-            } else {
-                return converter.convertCharFromUniCode(consonant) + converter.convertCharFromUniCode(inputChar)
             }
         case Initial.ㅂ.value :
-            if initial == Initial.ㅂ.value {
+            if inputinitial == Initial.ㅂ.value {
                 lastCharUnicode = CharUnicode.ㅃ.value
-            } else {
-                return converter.convertCharFromUniCode(consonant) + converter.convertCharFromUniCode(inputChar)
             }
         case Initial.ㅅ.value :
-            if initial == Initial.ㅅ.value {
+            if inputinitial == Initial.ㅅ.value {
                 lastCharUnicode = CharUnicode.ㅆ.value
-            } else {
-                return converter.convertCharFromUniCode(consonant) + converter.convertCharFromUniCode(inputChar)
             }
         case Initial.ㅈ.value :
-            if initial == Initial.ㅈ.value {
+            if inputinitial == Initial.ㅈ.value {
                 lastCharUnicode = CharUnicode.ㅉ.value
-            } else {
-                return converter.convertCharFromUniCode(consonant) + converter.convertCharFromUniCode(inputChar)
             }
         default :
-            return converter.convertCharFromUniCode(consonant) + converter.convertCharFromUniCode(inputChar)
+            return 0
         }
-        return converter.convertCharFromUniCode(lastCharUnicode)
+        return lastCharUnicode
     }
     
     private func combineConsonantToVowel(consonant : Int, inputChar : Int) -> String {
@@ -326,19 +283,24 @@ class HangeulManger : UnicodeManger {
         let lastCharUnicode = converter.combineCharToUnicode(initial: initialValue, neutral: neutralValue, final: 0)
         return converter.convertCharFromUniCode(lastCharUnicode)
     }
-//MARK: - 모음만
+    //MARK: - 모음만
     private func combineOnlyVowel(vowel : Int, inputChar : Int) -> String {
         if inputChar <= CharUnicode.ㅎ.value {
             return combineVowelToConsonant(vowel: vowel, inputChar: inputChar)
         } else {
-            return combineVowelToVowel(vowel: vowel, inputChar: inputChar)
+            let combineCharUnicode = combineVowelToVowel(vowel: vowel, inputChar: inputChar)
+            if combineCharUnicode == 0 {
+                return converter.convertCharFromUniCode(vowel) + converter.convertCharFromUniCode(inputChar)
+            } else {
+                return converter.convertCharFromUniCode(combineCharUnicode)
+            }
         }
     }
     private func combineVowelToConsonant(vowel : Int, inputChar : Int) -> String {
         return converter.convertCharFromUniCode(vowel) + converter.convertCharFromUniCode(inputChar)
     }
     
-    private func combineVowelToVowel(vowel : Int, inputChar : Int) -> String {
+    private func combineVowelToVowel(vowel : Int, inputChar : Int) -> Int {
         let inputNeutral = Neutral.getVowelToNeutralValue(inputChar)
         let lastNeutral = Neutral.getVowelToNeutralValue(vowel)
         var lastCharUnicode = 0
@@ -346,26 +308,18 @@ class HangeulManger : UnicodeManger {
         case Neutral.ㅏ.value :
             if inputNeutral == Neutral.ㅣ.value {
                 lastCharUnicode = CharUnicode.ㅐ.value
-            } else {
-                return converter.convertCharFromUniCode(vowel) + converter.convertCharFromUniCode(inputChar)
             }
         case Neutral.ㅑ.value :
             if inputNeutral == Neutral.ㅣ.value {
                 lastCharUnicode = CharUnicode.ㅒ.value
-            } else {
-                return converter.convertCharFromUniCode(vowel) + converter.convertCharFromUniCode(inputChar)
             }
         case Neutral.ㅓ.value :
             if inputNeutral == Neutral.ㅣ.value {
                 lastCharUnicode = CharUnicode.ㅔ.value
-            } else {
-                return converter.convertCharFromUniCode(vowel) + converter.convertCharFromUniCode(inputChar)
             }
         case Neutral.ㅕ.value :
             if inputNeutral == Neutral.ㅣ.value {
                 lastCharUnicode = CharUnicode.ㅖ.value
-            } else {
-                return converter.convertCharFromUniCode(vowel) + converter.convertCharFromUniCode(inputChar)
             }
         case Neutral.ㅗ.value :
             if inputNeutral == Neutral.ㅏ.value {
@@ -374,8 +328,6 @@ class HangeulManger : UnicodeManger {
                 lastCharUnicode = CharUnicode.ㅙ.value
             } else if inputNeutral == Neutral.ㅣ.value {
                 lastCharUnicode = CharUnicode.ㅚ.value
-            } else {
-                return converter.convertCharFromUniCode(vowel) + converter.convertCharFromUniCode(inputChar)
             }
         case Neutral.ㅜ.value :
             if inputNeutral == Neutral.ㅓ.value {
@@ -384,19 +336,15 @@ class HangeulManger : UnicodeManger {
                 lastCharUnicode = CharUnicode.ㅞ.value
             } else if inputNeutral == Neutral.ㅣ.value {
                 lastCharUnicode = CharUnicode.ㅟ.value
-            } else {
-                return converter.convertCharFromUniCode(vowel) + converter.convertCharFromUniCode(inputChar)
             }
         case Neutral.ㅡ.value :
             if inputNeutral == Neutral.ㅣ.value {
                 lastCharUnicode = CharUnicode.ㅢ.value
-            } else {
-                return converter.convertCharFromUniCode(vowel) + converter.convertCharFromUniCode(inputChar)
             }
         default :
-            return converter.convertCharFromUniCode(vowel) + converter.convertCharFromUniCode(inputChar)
+            return 0
         }
-        return converter.convertCharFromUniCode(lastCharUnicode)
+        return lastCharUnicode
     }
     //MARK: - Remove 받침 있음
     private func removeIncludingFinalChar(lastChar: HangeulStruct) -> String{
@@ -484,8 +432,5 @@ class HangeulManger : UnicodeManger {
         }
         
     }
-
-
-    
 }
 

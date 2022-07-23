@@ -62,8 +62,8 @@ class HangeulConverter : UnicodeConverter {
     func lastCharState(_ unicode: Int) -> CharState {
         if unicode >= 44032 {
             let value:Int = unicode - 44032
-            let initial = value/28/21
-            let neutral = (value / 28) % 21
+            let initial: Int = value/28/21
+            let neutral: Int = (value / 28) % 21
             let final:Int = value % 28
             if final == 0 {
                 return .noneFinalChar(initial,neutral)
