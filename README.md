@@ -32,6 +32,8 @@
 
 <br>
 
+* * *
+
 # 🖼 디자인 패턴
 ### MVVM? MVC?
 
@@ -44,6 +46,8 @@
 3. 모듈화를 통한 VC의 책임 분산 -> 기존 MVC의 단점 해소
 
 <br>
+
+* * *
 
 # 📌 핵심 기술
 
@@ -127,15 +131,15 @@ switch processingBuffer.currentState {
 
 <br>
 
+* * *
+
 # 📖 DataFlow
 
-![CustomKeyboard](https://user-images.githubusercontent.com/36326157/180591790-8a0e5138-953d-4d5f-8340-706dfbdc0683.jpg)
-
-
-
- 
+![CustomKeyboard](https://user-images.githubusercontent.com/36326157/180591790-8a0e5138-953d-4d5f-8340-706dfbdc0683.jpg) 
 
 <br>
+
+* * *
 
 # ⚠️ 이슈
 
@@ -208,12 +212,13 @@ while textDocumentProxy.hasText {
 오토마타의 기존 배열에서의 종성과 이중종성을 구별할 수 없어 삭제에 어려움을 겪고 있던 도중 모든 음소를 저장 할 배열을 하나 더 추가하여
 완성된 한글을 분해하여 비교를 통해 해결 하였다.
 ```  
-[한글 오토마타 구현 코드] https://github.com/ScutiUY/ios-wanted-CustomKeyboard/blob/fix/automata/CustomKeyboard/Hangul/KeyboardMaker.swift
+[한글 오토마타 구현 코드] [https://github.com/ScutiUY/ios-wanted-CustomKeyboard/blob/fix/automata/CustomKeyboard/Hangul/KeyboardMaker.swift](https://github.com/ScutiUY/ios-wanted-CustomKeyboard/blob/develope/CustomKeyboard/Hangul/KeyboardMaker.swift)
 
 
 
 <br>
 
+* * *
 
 # 💼 리팩토링
 
