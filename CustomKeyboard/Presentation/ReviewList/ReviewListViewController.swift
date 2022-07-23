@@ -17,6 +17,11 @@ final class ReviewListViewController: UIViewController {
     private let reviewTextView = UITextView()
     private var reviewPostButton = UIButton()
     
+    struct Math {
+        static let reviewTextViewFontSize: CGFloat = UIScreen.main.bounds.width < 340 ? 12.0 : 17.0
+        static let reviewPostButtonFontSize: CGFloat = UIScreen.main.bounds.width < 340 ? 11.0 : 15.0
+    }
+    
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,7 +128,7 @@ extension ReviewListViewController {
         //텍스트뷰
         reviewTextView.text = "이 테마가 마음에 드시나요?"
         reviewTextView.textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 5, right: 5)
-        reviewTextView.font = .boldSystemFont(ofSize: 16)
+        reviewTextView.font = .boldSystemFont(ofSize: Math.reviewTextViewFontSize)
         reviewTextView.layer.cornerRadius = 15
         reviewTextView.backgroundColor = .systemGray6
         
@@ -132,7 +137,7 @@ extension ReviewListViewController {
         reviewPostButton.backgroundColor = .systemBlue
         reviewPostButton.layer.cornerRadius = 10
         reviewPostButton.setTitle("작성", for: .normal)
-        reviewPostButton.titleLabel?.font = .boldSystemFont(ofSize: 15)
+        reviewPostButton.titleLabel?.font = .boldSystemFont(ofSize: Math.reviewPostButtonFontSize)
         reviewPostButton.setTitleColor(.white, for: .normal)
         reviewPostButton.addTarget(self, action: #selector(didTapWriteButton) , for: .touchUpInside)
         

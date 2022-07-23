@@ -18,6 +18,13 @@ final class ReviewListCell: UICollectionViewCell, ReuseIdentifying {
     private let declarationIcon = UIImageView()
     private let declarationLabel = UILabel()
     
+    struct Math {
+        static let userNameLabelFontSize: CGFloat = UIScreen.main.bounds.width < 340 ? 14.0 : 16.0
+        static let timeLabelFontSize: CGFloat = UIScreen.main.bounds.width < 340 ? 10.0 : 14.0
+        static let declarationLabelFontSize: CGFloat = UIScreen.main.bounds.width < 340 ? 11.0 : 14.0
+        static let contentsLabelFontSize: CGFloat = UIScreen.main.bounds.width < 340 ? 12.0 : 14.0
+    }
+    
     // MARK: - Life Cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -66,13 +73,14 @@ extension ReviewListCell {
         }
         
         //유저네임
-        userNameLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        userNameLabel.font = .boldSystemFont(ofSize: Math.userNameLabelFontSize)
         
         contentsLabel.numberOfLines = 3
+        contentsLabel.font = .systemFont(ofSize: Math.contentsLabelFontSize, weight: .medium)
         
         //시간
         timeLabel.textColor = .lightGray
-        timeLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        timeLabel.font = .boldSystemFont(ofSize: Math.timeLabelFontSize)
         
         //신고 스택뷰
         declarationStack.axis = .horizontal
@@ -81,10 +89,12 @@ extension ReviewListCell {
         //신고 아이콘
         let imageIcon = UIImage(systemName: "lightbulb.circle.fill")?.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
         declarationIcon.image = imageIcon
+        declarationIcon.contentMode = .scaleAspectFit
         
         //신고 라벨
         declarationLabel.textColor = .lightGray
         declarationLabel.text = "신고"
+        declarationLabel.font = .systemFont(ofSize: Math.declarationLabelFontSize, weight: .medium)
     }
     
     private func configureLayout() {
