@@ -38,6 +38,8 @@ final class ReviewTableViewCell: UITableViewCell {
         label.text = Text.userName
         label.font = UIFont.preferredFont(forTextStyle: .headline)
         label.textColor = .label
+        label.numberOfLines = 1
+        label.lineBreakMode = .byTruncatingTail
         return label
     }()
 
@@ -135,6 +137,7 @@ extension ReviewTableViewCell {
     private func setupConstraintsOfTextVerticalStackView() {
         NSLayoutConstraint.activate([
             reviewVerticalStackView.leadingAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.trailingAnchor, constant: Style.padding),
+            reviewVerticalStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -Style.padding),
             reviewVerticalStackView.topAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.topAnchor),
             reviewVerticalStackView.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor)
         ])
