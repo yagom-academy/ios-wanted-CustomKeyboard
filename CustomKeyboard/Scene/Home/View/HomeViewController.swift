@@ -7,7 +7,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
   
-  private let viewModel = ReviewViewModel()
+  private let viewModel = HomeViewModel()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -35,7 +35,7 @@ class HomeViewController: UIViewController {
   
   private let reviewTableView : UITableView = {
     let tableView = UITableView()
-    tableView.register(ReviewTableViewCell.self, forCellReuseIdentifier: ReviewTableViewCell.cellID)
+    tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: HomeTableViewCell.cellID)
     tableView.estimatedRowHeight = 120
     tableView.rowHeight = UITableView.automaticDimension
     tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -94,7 +94,7 @@ extension HomeViewController : UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = reviewTableView.dequeueReusableCell(withIdentifier: ReviewTableViewCell.cellID, for: indexPath) as? ReviewTableViewCell else { return UITableViewCell() }
+    guard let cell = reviewTableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.cellID, for: indexPath) as? HomeTableViewCell else { return UITableViewCell() }
     
     let model = viewModel[indexPath]
     cell.selectionStyle = .none

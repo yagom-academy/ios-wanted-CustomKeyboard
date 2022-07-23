@@ -25,11 +25,10 @@
 		B779BBF3287E4C7B00BB8DF5 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBF2287E4C7B00BB8DF5 /* DateFormatter.swift */; };
 		B779BBF6287E500100BB8DF5 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBF5287E500100BB8DF5 /* String+.swift */; };
 		B779BBF8287E8A5100BB8DF5 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBF7287E8A5100BB8DF5 /* Comment.swift */; };
-		B779BBFF287E91E700BB8DF5 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBFE287E91E700BB8DF5 /* ReviewViewModel.swift */; };
+		B779BBFF287E91E700BB8DF5 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BBFE287E91E700BB8DF5 /* HomeViewModel.swift */; };
 		B779BC01287E920900BB8DF5 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779BC00287E920900BB8DF5 /* Observable.swift */; };
 		B78B2D57288B086500615067 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78B2D56288B086500615067 /* ReviewViewController.swift */; };
 		B78B2D59288B1E5900615067 /* ReviewContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78B2D58288B1E5900615067 /* ReviewContentView.swift */; };
-		B78B2D5B288B1F1500615067 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78B2D5A288B1F1500615067 /* UITextField+.swift */; };
 		B7AF93772887D9D90058526E /* Initial.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF93762887D9D90058526E /* Initial.swift */; };
 		B7AF93792887D9E90058526E /* Neutral.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF93782887D9E90058526E /* Neutral.swift */; };
 		B7AF937B2887D9F30058526E /* Final.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF937A2887D9F30058526E /* Final.swift */; };
@@ -41,7 +40,7 @@
 		B7AF93902888CBD10058526E /* CustomKeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF938F2888CBD10058526E /* CustomKeyboardViewModel.swift */; };
 		B7AF93922888CC100058526E /* UnicodeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF93912888CC100058526E /* UnicodeManger.swift */; };
 		B7AF939428895B950058526E /* HangeulStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF939328895B950058526E /* HangeulStruct.swift */; };
-		B7F1DCF0287C12EE0065D587 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F1DCEF287C12EE0065D587 /* ReviewTableViewCell.swift */; };
+		B7F1DCF0287C12EE0065D587 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F1DCEF287C12EE0065D587 /* HomeTableViewCell.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
 		DE15E66028604278003DD2F5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65F28604278003DD2F5 /* HomeViewController.swift */; };
@@ -68,11 +67,10 @@
 		B779BBF2287E4C7B00BB8DF5 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		B779BBF5287E500100BB8DF5 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		B779BBF7287E8A5100BB8DF5 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
-		B779BBFE287E91E700BB8DF5 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
+		B779BBFE287E91E700BB8DF5 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B779BC00287E920900BB8DF5 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		B78B2D56288B086500615067 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		B78B2D58288B1E5900615067 /* ReviewContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewContentView.swift; sourceTree = "<group>"; };
-		B78B2D5A288B1F1500615067 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		B7AF93762887D9D90058526E /* Initial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initial.swift; sourceTree = "<group>"; };
 		B7AF93782887D9E90058526E /* Neutral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neutral.swift; sourceTree = "<group>"; };
 		B7AF937A2887D9F30058526E /* Final.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Final.swift; sourceTree = "<group>"; };
@@ -84,7 +82,7 @@
 		B7AF938F2888CBD10058526E /* CustomKeyboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyboardViewModel.swift; sourceTree = "<group>"; };
 		B7AF93912888CC100058526E /* UnicodeManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnicodeManger.swift; sourceTree = "<group>"; };
 		B7AF939328895B950058526E /* HangeulStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangeulStruct.swift; sourceTree = "<group>"; };
-		B7F1DCEF287C12EE0065D587 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
+		B7F1DCEF287C12EE0065D587 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* CustomKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE15E65D28604278003DD2F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,15 +103,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B747B297287FE7C300DE15FC /* KeyboardButton */ = {
+		B747B297287FE7C300DE15FC /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
-				B747B29E2880491E00DE15FC /* CustomRoundButton.swift */,
+				B78B2D64288C08AB00615067 /* Component */,
+				B779BBFD287E91C300BB8DF5 /* ViewModel */,
+				B779BBFC287E91AF00BB8DF5 /* VIew */,
 			);
-			path = KeyboardButton;
+			path = Keyboard;
 			sourceTree = "<group>";
 		};
-		B779BBC4287D4B5300BB8DF5 /* Network  */ = {
+		B779BBC4287D4B5300BB8DF5 /* Network Layer */ = {
 			isa = PBXGroup;
 			children = (
 				B779BBC5287D4B5300BB8DF5 /* ReviewDTO.swift */,
@@ -122,25 +122,25 @@
 				B779BBC7287D4B5300BB8DF5 /* Request.swift */,
 				B779BBC8287D4B5300BB8DF5 /* NetworkError.swift */,
 				B779BBD7287D51B000BB8DF5 /* Repository */,
-				B779BBC9287D4B5300BB8DF5 /* protocols */,
+				B779BBC9287D4B5300BB8DF5 /* Protocols */,
 			);
-			path = "Network ";
+			path = "Network Layer";
 			sourceTree = "<group>";
 		};
-		B779BBC9287D4B5300BB8DF5 /* protocols */ = {
+		B779BBC9287D4B5300BB8DF5 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				B779BBCA287D4B5300BB8DF5 /* EndPointable.swift */,
 				B779BBCB287D4B5300BB8DF5 /* Requestable.swift */,
 			);
-			path = protocols;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		B779BBCD287D4B5300BB8DF5 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				B779BBCE287D4B5300BB8DF5 /* Review.swift */,
-				B779BBF7287E8A5100BB8DF5 /* Comment.swift */,
+				B78B2D5D288C071000615067 /* Korean */,
+				B78B2D5C288C070200615067 /* Review */,
 				B7AF939328895B950058526E /* HangeulStruct.swift */,
 			);
 			path = Domain;
@@ -161,6 +161,9 @@
 				B779BBDD287D54D700BB8DF5 /* Encoder.swift */,
 				B779BBF2287E4C7B00BB8DF5 /* DateFormatter.swift */,
 				B779BC00287E920900BB8DF5 /* Observable.swift */,
+				B7AF937E2887DB320058526E /* HangeulConverter.swift */,
+				B7AF93852887E0D20058526E /* HangeulManger.swift */,
+				B7AF93802887DBFD0058526E /* Protocols */,
 				B779BBF4287E4FF400BB8DF5 /* Extensions */,
 			);
 			path = Helpers;
@@ -170,7 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				B779BBF5287E500100BB8DF5 /* String+.swift */,
-				B78B2D5A288B1F1500615067 /* UITextField+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -178,9 +180,9 @@
 		B779BBFB287E916E00BB8DF5 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				B747B297287FE7C300DE15FC /* KeyboardButton */,
-				B779BBFD287E91C300BB8DF5 /* ViewModel */,
-				B779BBFC287E91AF00BB8DF5 /* VIew */,
+				B78B2D5F288C07C900615067 /* Review */,
+				B78B2D5E288C07C200615067 /* Home */,
+				B747B297287FE7C300DE15FC /* Keyboard */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -188,11 +190,6 @@
 		B779BBFC287E91AF00BB8DF5 /* VIew */ = {
 			isa = PBXGroup;
 			children = (
-				B7344043287E830900C9B8B0 /* HomeBannerView.swift */,
-				B78B2D58288B1E5900615067 /* ReviewContentView.swift */,
-				B7F1DCEF287C12EE0065D587 /* ReviewTableViewCell.swift */,
-				DE15E65F28604278003DD2F5 /* HomeViewController.swift */,
-				B78B2D56288B086500615067 /* ReviewViewController.swift */,
 				B747B298287FE80700DE15FC /* CustomKeyboardView.swift */,
 			);
 			path = VIew;
@@ -201,21 +198,78 @@
 		B779BBFD287E91C300BB8DF5 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				B779BBFE287E91E700BB8DF5 /* ReviewViewModel.swift */,
 				B7AF938F2888CBD10058526E /* CustomKeyboardViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		B7AF93742887D8970058526E /* Hangeul */ = {
+		B78B2D5C288C070200615067 /* Review */ = {
 			isa = PBXGroup;
 			children = (
-				B7AF93872887E11E0058526E /* Util */,
-				B7AF93802887DBFD0058526E /* Protocols */,
-				B7AF93752887D98F0058526E /* Character */,
-				B7AF93852887E0D20058526E /* HangeulManger.swift */,
+				B779BBCE287D4B5300BB8DF5 /* Review.swift */,
+				B779BBF7287E8A5100BB8DF5 /* Comment.swift */,
 			);
-			path = Hangeul;
+			path = Review;
+			sourceTree = "<group>";
+		};
+		B78B2D5D288C071000615067 /* Korean */ = {
+			isa = PBXGroup;
+			children = (
+				B7AF93752887D98F0058526E /* Character */,
+			);
+			path = Korean;
+			sourceTree = "<group>";
+		};
+		B78B2D5E288C07C200615067 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B78B2D61288C07DA00615067 /* ViewModel */,
+				B78B2D60288C07D300615067 /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		B78B2D5F288C07C900615067 /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				B78B2D62288C083B00615067 /* View */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
+		B78B2D60288C07D300615067 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B7F1DCEF287C12EE0065D587 /* HomeTableViewCell.swift */,
+				B7344043287E830900C9B8B0 /* HomeBannerView.swift */,
+				DE15E65F28604278003DD2F5 /* HomeViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B78B2D61288C07DA00615067 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B779BBFE287E91E700BB8DF5 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B78B2D62288C083B00615067 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B78B2D58288B1E5900615067 /* ReviewContentView.swift */,
+				B78B2D56288B086500615067 /* ReviewViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B78B2D64288C08AB00615067 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				B747B29E2880491E00DE15FC /* CustomRoundButton.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		B7AF93752887D98F0058526E /* Character */ = {
@@ -225,6 +279,8 @@
 				B7AF93782887D9E90058526E /* Neutral.swift */,
 				B7AF937A2887D9F30058526E /* Final.swift */,
 				B7AF937C2887DA970058526E /* CharUnicode.swift */,
+				B747B2EE2885363B00DE15FC /* KoreanCharacter.swift */,
+				B7AF93832887DEED0058526E /* CharState.swift */,
 			);
 			path = Character;
 			sourceTree = "<group>";
@@ -236,16 +292,6 @@
 				B7AF93912888CC100058526E /* UnicodeManger.swift */,
 			);
 			path = Protocols;
-			sourceTree = "<group>";
-		};
-		B7AF93872887E11E0058526E /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				B7AF937E2887DB320058526E /* HangeulConverter.swift */,
-				B747B2EE2885363B00DE15FC /* KoreanCharacter.swift */,
-				B7AF93832887DEED0058526E /* CharState.swift */,
-			);
-			path = Util;
 			sourceTree = "<group>";
 		};
 		DE15E64F28604278003DD2F5 = {
@@ -269,8 +315,7 @@
 			children = (
 				B779BBDA287D53CD00BB8DF5 /* Helpers */,
 				B779BBCD287D4B5300BB8DF5 /* Domain */,
-				B779BBC4287D4B5300BB8DF5 /* Network  */,
-				B7AF93742887D8970058526E /* Hangeul */,
+				B779BBC4287D4B5300BB8DF5 /* Network Layer */,
 				B779BBFB287E916E00BB8DF5 /* Scene */,
 				DE15E65B28604278003DD2F5 /* AppDelegate.swift */,
 				DE15E65D28604278003DD2F5 /* SceneDelegate.swift */,
@@ -356,17 +401,16 @@
 				DE15E66028604278003DD2F5 /* HomeViewController.swift in Sources */,
 				B747B299287FE80700DE15FC /* CustomKeyboardView.swift in Sources */,
 				B779BBD2287D4B5300BB8DF5 /* NetworkError.swift in Sources */,
-				B779BBFF287E91E700BB8DF5 /* ReviewViewModel.swift in Sources */,
+				B779BBFF287E91E700BB8DF5 /* HomeViewModel.swift in Sources */,
 				B747B29F2880491E00DE15FC /* CustomRoundButton.swift in Sources */,
 				B7AF939428895B950058526E /* HangeulStruct.swift in Sources */,
 				B7AF93792887D9E90058526E /* Neutral.swift in Sources */,
-				B78B2D5B288B1F1500615067 /* UITextField+.swift in Sources */,
 				B7AF93822887DC200058526E /* UnicodeConverter.swift in Sources */,
 				B779BBDE287D54D700BB8DF5 /* Encoder.swift in Sources */,
 				B7AF937B2887D9F30058526E /* Final.swift in Sources */,
 				B779BBD3287D4B5300BB8DF5 /* EndPointable.swift in Sources */,
 				B7AF93862887E0D20058526E /* HangeulManger.swift in Sources */,
-				B7F1DCF0287C12EE0065D587 /* ReviewTableViewCell.swift in Sources */,
+				B7F1DCF0287C12EE0065D587 /* HomeTableViewCell.swift in Sources */,
 				B7AF93842887DEED0058526E /* CharState.swift in Sources */,
 				B779BBDC287D544300BB8DF5 /* Decoder.swift in Sources */,
 				B779BBF8287E8A5100BB8DF5 /* Comment.swift in Sources */,

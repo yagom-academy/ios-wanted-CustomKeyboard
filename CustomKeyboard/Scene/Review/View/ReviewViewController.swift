@@ -9,9 +9,9 @@ import UIKit
 
 final class ReviewViewController: UIViewController {
   
-  private var viewModel: ReviewViewModel
+  private var viewModel: HomeViewModel
   
-  init(viewModel: ReviewViewModel) {
+  init(viewModel: HomeViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
   }

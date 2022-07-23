@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewTableViewCell: UITableViewCell {
+class HomeTableViewCell: UITableViewCell {
     
     static let cellID = "CellID"
     
