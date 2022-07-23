@@ -10,8 +10,8 @@ final class ReviewListViewController: UIViewController {
     // MARK: - Properties
 
     private let reviewListView = ReviewListView()
-    private let reviewAPIProvider = ReviewAPIProvider(networkRequester: NetworkRequester())
-    private let profileImageProvider = ProfileImageProvider(networkRequester: NetworkRequester())
+    private var reviewAPIProvider: ReviewAPIProviderType?
+    private var profileImageProvider: ProfileImageProviderType?
     
     private var reviews: [ReviewResult] = []
 
@@ -25,8 +25,18 @@ final class ReviewListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableViewDelegate()
+        fetchReviews()
     }
 
+    static func instantiate(
+        with reviewAPIProvider: ReviewAPIProviderType,
+        _ profileImageProvider: ProfileImageProviderType
+    ) -> ReviewListViewController {
+        let viewController = ReviewListViewController()
+        viewController.reviewAPIProvider = reviewAPIProvider
+        viewController.profileImageProvider = profileImageProvider
+        return viewController
+    }
 }
 
 // MARK: - objc Methods
@@ -44,7 +54,7 @@ extension ReviewListViewController: KeyboardViewPresentable {
 extension ReviewListViewController: ReviewUploadable {
     
     func uploadReview(with contents: String) {
-        reviewAPIProvider.upload(review: contents) { result in
+        reviewAPIProvider?.upload(review: contents) { result in
             switch result {
             case.success(let success):
                 self.reviews.append(
@@ -81,7 +91,7 @@ extension ReviewListViewController {
 extension ReviewListViewController {
     
     func fetchReviews() {
-        reviewAPIProvider.fetchReviews(completion: { result in
+        reviewAPIProvider?.fetchReviews(completion: { result in
             switch result {
             case .success(let reviews):
                 self.reviews = reviews
@@ -119,7 +129,7 @@ extension ReviewListViewController: UITableViewDataSource {
             return cell
         }
         
-        profileImageProvider.fetchImage(from: review.user.profileImage) { result in
+        profileImageProvider?.fetchImage(from: review.user.profileImage) { result in
             switch result {
             case .success(let profileImage):
                 cell.setupProfileImage(profileImage)

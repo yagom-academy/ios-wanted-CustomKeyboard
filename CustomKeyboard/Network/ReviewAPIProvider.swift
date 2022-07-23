@@ -14,7 +14,7 @@ protocol ReviewAPIProviderType {
     
 }
 
-struct ReviewAPIProvider {
+struct ReviewAPIProvider: ReviewAPIProviderType {
     
     let networkRequester: NetworkRequesterType
     
