@@ -22,7 +22,7 @@
 # 다이어그램
 <img src="https://github.com/hhhan0315/ios-wanted-CustomKeyboard/blob/main/스크린샷/diagram.png">
 
-# 한글 입력 처리 방
+# 한글 입력 처리 방식
 ![무제6](https://user-images.githubusercontent.com/66169740/180589919-5d9604db-5a9d-476e-91bc-eb93d20fc1a7.png)
 
 
@@ -135,4 +135,4 @@ func test_fetchData_Data가_존재하며_statusCode가_200일때() {
 
 
 # 개발 과정
-- [노션 주소](https://www.notion.so/315a86cbbca5496aa26fe869fad87ec0?v=0c821910441c41e29a06a371ec58148b)
+- [노션 주소](https://broken-redcurrant-2ce.notion.site/315a86cbbca5496aa26fe869fad87ec0)
