@@ -107,7 +107,20 @@
 
 ### 네트워크 Layer 
 
-![image](https://user-images.githubusercontent.com/36659877/180598912-9d8d8f11-1d49-496d-b6c5-f0132031b928.png)
+  <p align="center">
+   <img src="[https://user-images.githubusercontent.com/36659877/154011812-4b23e761-0a37-4d33-8b8b-c8142cc47585.png](https://user-images.githubusercontent.com/36659877/180598912-9d8d8f11-1d49-496d-b6c5-f0132031b928.png)" width="350" height="250"> 
+   </p>
+
+- Endpoint
+> 특정 API 주소 를 갖는 ServerPath 와, queryItem 들을 가지고 있습니다. 
+> URLComponents 를 사용하여 request 보낼 특정 url 를 계산할수 있습니다. 
+
+- Request 
+> HTTP 요청타입, body 에 담을 데이터, endPoint 를 가지고 있습니다. 
+> 이 정보들을 사용하여 `URLRequest` 를 만들수 있습니다.
+
+- NetworkService
+> 서버에 요청하고, response 를 받아오는 핵심로직을 가지고 있습니다. 
 
 ### 아키텍쳐 
 
