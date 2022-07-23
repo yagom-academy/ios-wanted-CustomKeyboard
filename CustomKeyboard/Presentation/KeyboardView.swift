@@ -26,6 +26,7 @@ final class KeyboardView: UIView {
     private lazy var textLabel: UILabel = {
         let label = UILabel()
         label.text = Text.textLabelPlaceHolder
+        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         label.numberOfLines = .zero
         return label
     }()
@@ -86,6 +87,13 @@ final class KeyboardView: UIView {
         button.layer.cornerRadius = Style.keyboardKeyCornerRaidus
         button.setImage(Style.deleteKeyImage, for: .normal)
         button.tintColor = .black
+        
+        button.addTarget(
+            nil,
+            action: #selector(deleteKeyButtonTouched(_:)),
+            for: .touchUpInside
+        )
+        
         button.heightAnchor.constraint(equalToConstant: keyboardKeyHeight) .isActive  = true
         button.widthAnchor.constraint(equalTo: button.heightAnchor).isActive = true
         return button
@@ -113,6 +121,8 @@ final class KeyboardView: UIView {
         button.setTitleColor(.black, for: .normal)
         button.setTitle(Text.spaceKey, for: .normal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .subheadline)
+        
+        button.addTarget(nil, action: #selector(spaceKeyButtonTouched(_:)), for: .touchUpInside)
 
         button.heightAnchor.constraint(equalToConstant: keyboardKeyHeight) .isActive  = true
         button.widthAnchor.constraint(
@@ -153,6 +163,7 @@ final class KeyboardView: UIView {
 
     private var toBeConvertedButtons = [UIButton]()
     weak var delegate: KeyboardViewDismissible?
+    let keyboardAutomata = KeyboardAutomata()
 
     // MARK: - LifeCycles
 
@@ -175,8 +186,8 @@ final class KeyboardView: UIView {
         guard let contents = sender.titleLabel?.text else {
             return
         }
-
-        print(contents)
+        keyboardAutomata.insert(contents)
+        textLabel.text = keyboardAutomata.outputToDisplay
     }
 
     @objc func shiftButtonTouched(_ sender: UIButton) {
@@ -186,11 +197,22 @@ final class KeyboardView: UIView {
         }
     }
     
+    @objc func spaceKeyButtonTouched(_ sender: UIButton) {
+        keyboardAutomata.space()
+        textLabel.text = keyboardAutomata.outputToDisplay
+    }
+    
+    @objc func deleteKeyButtonTouched(_ sender: UIButton) {
+        keyboardAutomata.delete()
+        textLabel.text = keyboardAutomata.outputToDisplay
+    }
+    
     @objc func returnButtonTouched(_ sender: UIButton) {
         guard let contents = textLabel.text else {
             return
         }
         delegate?.dismissKeyboardViewController(reviewContents: contents)
+        keyboardAutomata.reset()
     }
 
 }
@@ -455,7 +477,7 @@ extension KeyboardView {
 extension KeyboardView {
 
     private enum Text {
-        static let textLabelPlaceHolder: String = "ㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaaㅇslnaa"
+        static let textLabelPlaceHolder: String = "리뷰를 작성해 주세요.😆"
         static let functionKey: String = "123"
         static let spaceKey: String = "스페이스"
     }
@@ -475,7 +497,7 @@ extension KeyboardView {
         static let numberOfStackView: Double = 4.0
         static let keyboardKeyHeightRatio: Double = 0.8
         static let functionKeyWidthRatio: Double = 0.24
-        static let spaceKeyWdithRatio: Double = 0.49
+        static let spaceKeyWdithRatio: Double = 0.43
         static let horizontalStackViewHeightRatio: Double = 0.25
         static let secondStackViewWidthRatio: Double = 0.9
         static let keyboardKeyWidthRatio: CGFloat = 0.085

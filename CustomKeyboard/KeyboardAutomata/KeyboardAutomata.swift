@@ -125,6 +125,10 @@ class KeyboardAutomata {
             return compose(choSung: chosung, jungSung: combinedJungsung, jongSung: nil)
 
         case .jongSung:
+            if last == Text.space {
+                next = String(Text.space) + next
+                return next
+            }
             var decomposed = decompose(char: last!)
             _ = decomposed.removeLast()
             let jungsung = decomposed.removeLast()
@@ -215,8 +219,26 @@ class KeyboardAutomata {
             }
 
         case .jongSung:
+            if last == Text.space {
+                return Status.choSung
+            }
+            if jungSungList.contains(char) {
+                return Status.jungSung
+            }
+
             var decomposed = decompose(char: last!)
             let jongsung = decomposed.removeLast()
+            if combinedJongsungPossibleList.contains(jongsung) {
+                let combinedJongsungCharacter = String(jongsung) + String(char)
+                if let _ = combinedJongSungList[combinedJongsungCharacter] {
+                    return Status.combinedJongsung
+                }
+            }
+            
+            if jongSungList.contains(char) {
+                return Status.end
+            }
+
             if jungSungList.contains(char) {
                 return Status.jungSung
             } else if combinedJongsungPossibleList.contains(jongsung) {
@@ -258,7 +280,7 @@ class KeyboardAutomata {
         var currentString = outputToDisplay
 
         if isSpaceTyped {
-            outputToDisplay.removeLast()
+            outputToDisplay.popLast()
             status = .start
             return
         }
