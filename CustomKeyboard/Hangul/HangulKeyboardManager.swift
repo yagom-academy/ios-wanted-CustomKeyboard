@@ -21,7 +21,7 @@ class HangulKeyboardManager {
     func enterText(text: String) {
         let keyboardData = keyboardIOManager.stringToKeyboardData(input: text)
         guard !isReturnKeyPressed(inputData: keyboardData) else { return }
-        let result = keyboardMaker.putKeyboardData(data: keyboardData)
+        let result = keyboardMaker.insertKeyboardData(data: keyboardData)
         delegate.hangulKeyboard(
             updatedResult: keyboardIOManager.keyboardDataToString(
                 outputKeyboardData: result
