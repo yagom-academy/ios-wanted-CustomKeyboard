@@ -16,6 +16,8 @@
 		DFC5102C287D4CC8003D26B0 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC5102B287D4CC8003D26B0 /* ReviewTableViewCell.swift */; };
 		DFE6D8D1287EBD2800A45033 /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE6D8D0287EBD2800A45033 /* BasePaddingLabel.swift */; };
 		DFE6D8D3287EBD9C00A45033 /* ReviewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE6D8D2287EBD9C00A45033 /* ReviewListView.swift */; };
+		DFFCAB24288BCBA800D9423E /* KeyboardAutomata.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFCAB23288BCBA800D9423E /* KeyboardAutomata.swift */; };
+		DFFCAB26288BCBD100D9423E /* Character+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFCAB25288BCBD100D9423E /* Character+extension.swift */; };
 		E11AAD6C287D4E11001B1F96 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11AAD6B287D4E11001B1F96 /* KeyboardViewController.swift */; };
 		E11AAD6E287D5101001B1F96 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11AAD6D287D5101001B1F96 /* KeyboardView.swift */; };
 		E17122F52886785E00FDAF6C /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17122F42886785E00FDAF6C /* HTTPMethod.swift */; };
@@ -42,6 +44,8 @@
 		DFC5102B287D4CC8003D26B0 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		DFE6D8D0287EBD2800A45033 /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
 		DFE6D8D2287EBD9C00A45033 /* ReviewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListView.swift; sourceTree = "<group>"; };
+		DFFCAB23288BCBA800D9423E /* KeyboardAutomata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAutomata.swift; sourceTree = "<group>"; };
+		DFFCAB25288BCBD100D9423E /* Character+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Character+extension.swift"; sourceTree = "<group>"; };
 		E11AAD6B287D4E11001B1F96 /* KeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		E11AAD6D287D5101001B1F96 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		E17122F42886785E00FDAF6C /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -90,6 +94,7 @@
 				E17122F32886784600FDAF6C /* Network */,
 				DFC51021287D468F003D26B0 /* Application */,
 				DFC51022287D46A6003D26B0 /* Presentation */,
+				DFFCAB22288BCB9200D9423E /* KeyboardAutomata */,
 				DFC51024287D48A0003D26B0 /* Util */,
 				DFC51023287D46AF003D26B0 /* Resource */,
 			);
@@ -131,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				DFC51025287D48B1003D26B0 /* Base */,
+				DFFCAB25288BCBD100D9423E /* Character+extension.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -174,6 +180,14 @@
 				E171230A2886A75A00FDAF6C /* PostReviewDTO.swift */,
 			);
 			path = DTO;
+            sourceTree = "<group>";
+        };
+		DFFCAB22288BCB9200D9423E /* KeyboardAutomata */ = {
+			isa = PBXGroup;
+			children = (
+				DFFCAB23288BCBA800D9423E /* KeyboardAutomata.swift */,
+			);
+			path = KeyboardAutomata;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,8 +265,8 @@
 				DFC5102C287D4CC8003D26B0 /* ReviewTableViewCell.swift in Sources */,
 				DFE6D8D3287EBD9C00A45033 /* ReviewListView.swift in Sources */,
 				E17122F52886785E00FDAF6C /* HTTPMethod.swift in Sources */,
-				DE15E66028604278003DD2F5 /* ReviewListViewController.swift in Sources */,
 				E171230B2886A75A00FDAF6C /* PostReviewDTO.swift in Sources */,
+				DFFCAB24288BCBA800D9423E /* KeyboardAutomata.swift in Sources */,
 				E11AAD6C287D4E11001B1F96 /* KeyboardViewController.swift in Sources */,
 				DFC51027287D48CC003D26B0 /* BaseViewController.swift in Sources */,
 				E11AAD6E287D5101001B1F96 /* KeyboardView.swift in Sources */,
@@ -260,6 +274,7 @@
 				E171230728869AAD00FDAF6C /* ReviewResult.swift in Sources */,
 				E1B120992887956B00910E84 /* ProfileImageProvider.swift in Sources */,
 				E1712300288692D000FDAF6C /* ReviewAPIProvider.swift in Sources */,
+				DFFCAB26288BCBD100D9423E /* Character+extension.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 				E17122F72886787C00FDAF6C /* ReviewEndPoint.swift in Sources */,
 				E171230528869A6100FDAF6C /* ReviewDataDTO.swift in Sources */,
