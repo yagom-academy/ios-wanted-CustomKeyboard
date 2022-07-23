@@ -57,7 +57,6 @@ class HangulCombinator {
     }
     
     func decomposeHangul(hangul: String, lastState: HangulKeyboardData.HangulState) -> [HangulKeyboardData] {
-        print(hangul)
         let keyboardData = HangulKeyboardData(char: hangul, state: lastState)
         let hangulUnicode = keyboardData.unicode
         
@@ -83,7 +82,6 @@ class HangulCombinator {
                 return [cho, jung, jong]
             }
             let jong = decomposeJongs(str: HangulSet.jongs[jongIndex])
-            print(jong)
             return [cho, jung] + jong
         } else if jongIndex == 0 {
             let cho = HangulKeyboardData(char: HangulSet.chos[choIndex], state: .cho)
