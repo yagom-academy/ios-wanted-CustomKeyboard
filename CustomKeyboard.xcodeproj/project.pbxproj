@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		040319F5288A87B000892003 /* LoadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040319F4288A87B000892003 /* LoadImage.swift */; };
+		040319F8288B775500892003 /* KeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A3B4C72885570900DD1631 /* KeyboardViewModel.swift */; };
 		04158AD5287D3DB7004F6B9A /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04158AD4287D3DB7004F6B9A /* Review.swift */; };
 		043D075C287D408B0061DCA2 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D075B287D408B0061DCA2 /* ReviewTableViewCell.swift */; };
 		04486783287D4B080004A512 /* ReviewTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04486782287D4B080004A512 /* ReviewTableViewHeader.swift */; };
@@ -38,7 +39,6 @@
 		68EBC4EF2889308A0088A238 /* KeyFourthLineStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D17D67287E8F6A003E9BAC /* KeyFourthLineStackView.swift */; };
 		68EBC4F02889308F0088A238 /* KeyThirdLineStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D17D65287E8F5A003E9BAC /* KeyThirdLineStackView.swift */; };
 		68EBC4F1288930910088A238 /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AE7951287D3F8C003F4426 /* KeyButton.swift */; };
-		68EBC4F22889309A0088A238 /* KeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A3B4C72885570900DD1631 /* KeyboardViewModel.swift */; };
 		68EBC4F3288930B80088A238 /* Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B9A086287E605E00D09A0A /* Delegates.swift */; };
 		68EBC4F5288945840088A238 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EBC4F4288945840088A238 /* EndPoint.swift */; };
 		68EBC4F8288949270088A238 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EBC4F7288949270088A238 /* HTTPMethod.swift */; };
@@ -373,11 +373,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				68EBC4EE288930880088A238 /* KeySecondLineStackView.swift in Sources */,
+				040319F8288B775500892003 /* KeyboardViewModel.swift in Sources */,
 				68EBC4ED288930850088A238 /* KeyFirstLineStackView.swift in Sources */,
 				68EBC4E228892B090088A238 /* KeyboardViewController.swift in Sources */,
 				68EBC4EF2889308A0088A238 /* KeyFourthLineStackView.swift in Sources */,
 				68EBC4EB28892EC40088A238 /* KeyboardView.swift in Sources */,
-				68EBC4F22889309A0088A238 /* KeyboardViewModel.swift in Sources */,
 				68EBC4F3288930B80088A238 /* Delegates.swift in Sources */,
 				68EBC4F02889308F0088A238 /* KeyThirdLineStackView.swift in Sources */,
 				68EBC4EC28892FCA0088A238 /* KeyboardManager.swift in Sources */,

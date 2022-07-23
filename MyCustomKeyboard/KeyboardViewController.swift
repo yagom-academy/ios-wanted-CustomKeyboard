@@ -19,6 +19,12 @@ class KeyboardViewController: UIInputViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        keyboardView.keyFirstLine.delegate = self
+        keyboardView.keySecondLine.delegate = self
+        keyboardView.keyThirdLine.delegate = self
+        keyboardView.keyFourthLine.delegate = self
+        keyboardView.keyThirdLine.shiftDelegate = self
+        
         guard let inputView = inputView else { return }
         inputView.addSubview(keyboardView)
         keyboardView.translatesAutoresizingMaskIntoConstraints = false
@@ -42,11 +48,12 @@ class KeyboardViewController: UIInputViewController {
 extension KeyboardViewController: ButtonDelegate {
     func eraseButtonClickEvent(sender: KeyButton) {
         viewModel.eraseButton(textView, keyboardView)
+        setProxy()
     }
     
     func buttonClickEvent(sender: KeyButton) {
         viewModel.buttonClick(textView, keyboardView, sender)
-        print(textView.text)
+        setProxy()
     }
 }
 
