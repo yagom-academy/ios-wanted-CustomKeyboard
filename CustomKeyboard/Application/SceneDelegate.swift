@@ -16,7 +16,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = scene as? UIWindowScene else { return }
         window = UIWindow(windowScene: windowScene)
-        let rootViewController = ReviewListViewController()
+        let networkRequester = NetworkRequester()
+        let reviewAPIProvider = ReviewAPIProvider(networkRequester: networkRequester)
+        let profileImageProvider = ProfileImageProvider(networkRequester: networkRequester)
+        let rootViewController = ReviewListViewController.instantiate(
+            with: reviewAPIProvider,
+            profileImageProvider
+        )
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
     }

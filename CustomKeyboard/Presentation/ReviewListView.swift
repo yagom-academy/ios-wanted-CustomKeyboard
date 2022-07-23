@@ -145,6 +145,8 @@ extension ReviewListView {
 extension ReviewListView {
 
     private func setupView() {
+        self.backgroundColor = .white
+
         [profileImageView, reviewWritingLabel, uploadButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             reviewWritingView.addSubview($0)
