@@ -38,7 +38,7 @@ final class ReviewTableViewCell: UITableViewCell {
         label.text = Text.userName
         label.font = UIFont.preferredFont(forTextStyle: .headline)
         label.textColor = .label
-        label.numberOfLines = 1
+        label.numberOfLines = Style.oneLine
         label.lineBreakMode = .byTruncatingTail
         return label
     }()
@@ -48,7 +48,7 @@ final class ReviewTableViewCell: UITableViewCell {
         label.text = Text.review
         label.font = UIFont.preferredFont(forTextStyle: .body)
         label.textColor = .label
-        label.numberOfLines = 0
+        label.numberOfLines = .zero
         return label
     }()
 
@@ -106,12 +106,15 @@ extension ReviewTableViewCell {
 extension ReviewTableViewCell {
 
     private func setupView() {
-        [profileImageView, reviewVerticalStackView].forEach {
+        [profileImageView,
+         reviewVerticalStackView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview($0)
         }
 
-        [nameLabel, reviewLabel, uploadedTimeLabel].forEach {
+        [nameLabel,
+         reviewLabel,
+         uploadedTimeLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             reviewVerticalStackView.addArrangedSubview($0)
         }
@@ -128,18 +131,36 @@ extension ReviewTableViewCell {
                 equalTo: self.safeAreaLayoutGuide.leadingAnchor,
                 constant: Style.padding
             ),
-            profileImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: Style.padding),
-            profileImageView.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: Style.widthRatio),
-            profileImageView.heightAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.widthAnchor)
+            profileImageView.topAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.topAnchor,
+                constant: Style.padding
+            ),
+            profileImageView.widthAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.widthAnchor,
+                multiplier: Style.widthRatio
+            ),
+            profileImageView.heightAnchor.constraint(
+                equalTo: profileImageView.safeAreaLayoutGuide.widthAnchor
+            )
         ])
     }
 
     private func setupConstraintsOfTextVerticalStackView() {
         NSLayoutConstraint.activate([
-            reviewVerticalStackView.leadingAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.trailingAnchor, constant: Style.padding),
-            reviewVerticalStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -Style.padding),
-            reviewVerticalStackView.topAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.topAnchor),
-            reviewVerticalStackView.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor)
+            reviewVerticalStackView.leadingAnchor.constraint(
+                equalTo: profileImageView.safeAreaLayoutGuide.trailingAnchor,
+                constant: Style.padding
+            ),
+            reviewVerticalStackView.trailingAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.trailingAnchor,
+                constant: -Style.padding
+            ),
+            reviewVerticalStackView.topAnchor.constraint(
+                equalTo: profileImageView.safeAreaLayoutGuide.topAnchor
+            ),
+            reviewVerticalStackView.centerYAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.centerYAnchor
+            )
         ])
     }
 
@@ -151,12 +172,12 @@ extension ReviewTableViewCell {
 
     private enum Text {
         static let userName: String = "o달빔o"
-//        static let starRating: String = "별점: ⭐️⭐️⭐️⭐️⭐️"
         static let review: String = "리뷰: 아진짜 귀여워요!!!!"
         static let uploadedTime: String = "1분"
     }
 
     private enum Style {
+        static let oneLine: Int = 1
         static let profileImage: UIImage? = UIImage(systemName: "person.fill")
         static let spacing: CGFloat = 10
         static let padding: CGFloat = 15

@@ -8,5 +8,6 @@
 import Foundation
 
 struct PostReviewDTO: Encodable {
+
     let content: String
 }

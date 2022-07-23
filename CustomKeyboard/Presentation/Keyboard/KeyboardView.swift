@@ -217,7 +217,7 @@ final class KeyboardView: UIView {
 
 }
 
-// MARK: - View setting methods
+// MARK: - Keyboard button setting methods
 
 extension KeyboardView {
 
@@ -241,28 +241,6 @@ extension KeyboardView {
         for i in [numberKeyButton, spaceKeyButton, returnKeyButton] {
             keyboardFourthLineStackView.addArrangedSubview(i)
         }
-    }
-
-    private func makeKeyboardButtons(contents: String) -> UIButton {
-        let button = UIButton()
-        button.setTitle(contents, for: .normal)
-        if checkToBeConverted(contents: contents) {
-            let doubleCharacter = convertToDouble(contents: contents)
-            button.setTitle(doubleCharacter, for: .selected)
-            button.setTitle(doubleCharacter, for: Style.selectedAndHighlighted)
-            toBeConvertedButtons.append(button)
-        }
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(nil, action: #selector(keyboardButtonTouched(_:)), for: .touchUpInside)
-        button.backgroundColor = .white
-        button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = .preferredFont(forTextStyle: .title3)
-        button.layer.cornerRadius = Style.keyboardKeyCornerRaidus
-
-        button.heightAnchor.constraint(equalToConstant: keyboardKeyHeight) .isActive  = true
-        button.widthAnchor.constraint(equalToConstant: keyboardKeyWidth).isActive = true
-
-        return button
     }
 
     private func checkToBeConverted(contents: String) -> Bool {
@@ -292,6 +270,33 @@ extension KeyboardView {
             return contents
         }
     }
+
+    private func makeKeyboardButtons(contents: String) -> UIButton {
+        let button = UIButton()
+        button.setTitle(contents, for: .normal)
+        if checkToBeConverted(contents: contents) {
+            let doubleCharacter = convertToDouble(contents: contents)
+            button.setTitle(doubleCharacter, for: .selected)
+            button.setTitle(doubleCharacter, for: Style.selectedAndHighlighted)
+            toBeConvertedButtons.append(button)
+        }
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(nil, action: #selector(keyboardButtonTouched(_:)), for: .touchUpInside)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .title3)
+        button.layer.cornerRadius = Style.keyboardKeyCornerRaidus
+
+        button.heightAnchor.constraint(equalToConstant: keyboardKeyHeight) .isActive  = true
+        button.widthAnchor.constraint(equalToConstant: keyboardKeyWidth).isActive = true
+
+        return button
+    }
+}
+
+// MARK: - View setting methods
+
+extension KeyboardView {
 
     private func setupView() {
         self.backgroundColor = .white

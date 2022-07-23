@@ -8,6 +8,8 @@
 import Foundation
 
 extension Notification.Name {
+    
     static let sendKeyboardContentsToReviewWrittingLabel =
         Notification.Name.init("sendKeyboardContentsToReviewWrittingLabel")
+
 }

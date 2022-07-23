@@ -8,6 +8,7 @@
 import Foundation
 
 struct ReviewDataDTO: Decodable {
+
     let datas: [ReviewResult]
     
     enum CodingKeys: String, CodingKey {

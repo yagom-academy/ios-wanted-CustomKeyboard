@@ -124,7 +124,7 @@ extension ReviewListView {
     
     @objc func reviewContentsUpdated(_ sender: NSNotification) {
         guard let userInfo = sender.userInfo,
-              let contents = userInfo["reviewContents"] as? String else {
+              let contents = userInfo[Text.reviewContents] as? String else {
             return
         }
         
@@ -147,12 +147,15 @@ extension ReviewListView {
     private func setupView() {
         self.backgroundColor = .white
 
-        [profileImageView, reviewWritingLabel, uploadButton].forEach {
+        [profileImageView,
+         reviewWritingLabel,
+         uploadButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             reviewWritingView.addSubview($0)
         }
 
-        [reviewWritingView, reviewTableView].forEach {
+        [reviewWritingView,
+         reviewTableView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview($0)
         }
@@ -168,47 +171,98 @@ extension ReviewListView {
 
     private func setupConstraintsOfReviewWritingView() {
         NSLayoutConstraint.activate([
-            reviewWritingView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: Style.padding),
-            reviewWritingView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-            reviewWritingView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-            reviewWritingView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
-            reviewWritingView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * Style.reviewWritingViewHeightRatio)
+            reviewWritingView.topAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.topAnchor,
+                constant: Style.padding
+            ),
+            reviewWritingView.leadingAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.leadingAnchor
+            ),
+            reviewWritingView.trailingAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.trailingAnchor
+            ),
+            reviewWritingView.widthAnchor.constraint(
+                equalToConstant: UIScreen.main.bounds.width
+            ),
+            reviewWritingView.heightAnchor.constraint(
+                equalToConstant: UIScreen.main.bounds.width * Style.reviewWritingViewHeightRatio
+            )
         ])
     }
 
     private func setupConstraintsOfProfileImageView() {
         NSLayoutConstraint.activate([
-            profileImageView.leadingAnchor.constraint(equalTo: reviewWritingView.safeAreaLayoutGuide.leadingAnchor, constant: Style.padding),
-            profileImageView.topAnchor.constraint(equalTo: reviewWritingView.safeAreaLayoutGuide.topAnchor, constant: Style.padding),
-            profileImageView.widthAnchor.constraint(equalTo: reviewWritingView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.15),
-            profileImageView.heightAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.widthAnchor)
+            profileImageView.leadingAnchor.constraint(
+                equalTo: reviewWritingView.safeAreaLayoutGuide.leadingAnchor,
+                constant: Style.padding
+            ),
+            profileImageView.topAnchor.constraint(
+                equalTo: reviewWritingView.safeAreaLayoutGuide.topAnchor,
+                constant: Style.padding
+            ),
+            profileImageView.widthAnchor.constraint(
+                equalTo: reviewWritingView.safeAreaLayoutGuide.widthAnchor,
+                multiplier: Style.profileImageWidthRatio
+            ),
+            profileImageView.heightAnchor.constraint(
+                equalTo: profileImageView.safeAreaLayoutGuide.widthAnchor
+            )
         ])
     }
 
     private func setupConstraintsOfReviewWritingLabel() {
         NSLayoutConstraint.activate([
-            reviewWritingLabel.leadingAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.trailingAnchor, constant: Style.spacing),
-            reviewWritingLabel.centerYAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.centerYAnchor),
-            reviewWritingLabel.heightAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.widthAnchor, multiplier: Style.reviewWritingLabelHeightRatio)
+            reviewWritingLabel.leadingAnchor.constraint(
+                equalTo: profileImageView.safeAreaLayoutGuide.trailingAnchor,
+                constant: Style.spacing
+            ),
+            reviewWritingLabel.centerYAnchor.constraint(
+                equalTo: profileImageView.safeAreaLayoutGuide.centerYAnchor
+            ),
+            reviewWritingLabel.heightAnchor.constraint(
+                equalTo: profileImageView.safeAreaLayoutGuide.widthAnchor,
+                multiplier: Style.reviewWritingLabelHeightRatio
+            )
         ])
     }
 
     private func setupConstraintsOfUploadButton() {
         NSLayoutConstraint.activate([
-            uploadButton.leadingAnchor.constraint(equalTo: reviewWritingLabel.safeAreaLayoutGuide.trailingAnchor, constant: Style.spacing),
-            uploadButton.trailingAnchor.constraint(equalTo: reviewWritingView.safeAreaLayoutGuide.trailingAnchor, constant: -Style.spacing),
-            uploadButton.centerYAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.centerYAnchor),
-            uploadButton.widthAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.widthAnchor),
-            uploadButton.heightAnchor.constraint(equalTo: profileImageView.safeAreaLayoutGuide.heightAnchor, multiplier: Style.uploadButtonHeightRatio)
+            uploadButton.leadingAnchor.constraint(
+                equalTo: reviewWritingLabel.safeAreaLayoutGuide.trailingAnchor,
+                constant: Style.spacing
+            ),
+            uploadButton.trailingAnchor.constraint(
+                equalTo: reviewWritingView.safeAreaLayoutGuide.trailingAnchor,
+                constant: -Style.spacing
+            ),
+            uploadButton.centerYAnchor.constraint(
+                equalTo: profileImageView.safeAreaLayoutGuide.centerYAnchor
+            ),
+            uploadButton.widthAnchor.constraint(
+                equalTo: profileImageView.safeAreaLayoutGuide.widthAnchor
+            ),
+            uploadButton.heightAnchor.constraint(
+                equalTo: profileImageView.safeAreaLayoutGuide.heightAnchor,
+                multiplier: Style.uploadButtonHeightRatio
+            )
         ])
     }
 
     private func setupConstraintsOfTableView() {
         NSLayoutConstraint.activate([
-            reviewTableView.topAnchor.constraint(equalTo: reviewWritingView.safeAreaLayoutGuide.bottomAnchor),
-            reviewTableView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-            reviewTableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-            reviewTableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
+            reviewTableView.topAnchor.constraint(
+                equalTo: reviewWritingView.safeAreaLayoutGuide.bottomAnchor
+            ),
+            reviewTableView.leadingAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.leadingAnchor
+            ),
+            reviewTableView.trailingAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.trailingAnchor
+            ),
+            reviewTableView.bottomAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.bottomAnchor
+            )
         ])
     }
 
@@ -221,6 +275,7 @@ extension ReviewListView {
     private enum Text {
         static let reviewWritingPlaceHolder: String = "이 테마가 마음에 드시나요?"
         static let uploadButtonTitle: String = "작성"
+        static let reviewContents: String = "reviewContents"
     }
 
     private enum Style {

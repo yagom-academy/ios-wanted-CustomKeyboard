@@ -8,10 +8,13 @@
 import Foundation
 
 struct ReviewResult: Decodable {
+
     let user: User
     let content: String
     let createdAt: String
 }
+
+// MARK: - Upload time converting methods
 
 extension ReviewResult {
     
@@ -44,7 +47,6 @@ extension ReviewResult {
         }
         
         let absIntervalValue = Int(interval.magnitude)
-        print(absIntervalValue)
         switch absIntervalValue {
         case TimeScale.hour.rawValue..<TimeScale.day.rawValue:
             return "\(absIntervalValue / TimeScale.hour.rawValue)시간 전"

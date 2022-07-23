@@ -280,7 +280,7 @@ class KeyboardAutomata {
         var currentString = outputToDisplay
 
         if isSpaceTyped {
-            outputToDisplay.popLast()
+            _ = outputToDisplay.popLast()
             status = .start
             return
         }

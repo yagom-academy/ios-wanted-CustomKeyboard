@@ -16,6 +16,16 @@ final class ReviewListViewController: UIViewController {
     private var reviews: [ReviewResult] = []
 
     // MARK: - Lifecycle
+    
+    static func instantiate(
+        with reviewAPIProvider: ReviewAPIProviderType,
+        _ profileImageProvider: ProfileImageProviderType
+    ) -> ReviewListViewController {
+        let viewController = ReviewListViewController()
+        viewController.reviewAPIProvider = reviewAPIProvider
+        viewController.profileImageProvider = profileImageProvider
+        return viewController
+    }
 
     override func loadView() {
         reviewListView.delegate = self
@@ -28,18 +38,9 @@ final class ReviewListViewController: UIViewController {
         fetchReviews()
     }
 
-    static func instantiate(
-        with reviewAPIProvider: ReviewAPIProviderType,
-        _ profileImageProvider: ProfileImageProviderType
-    ) -> ReviewListViewController {
-        let viewController = ReviewListViewController()
-        viewController.reviewAPIProvider = reviewAPIProvider
-        viewController.profileImageProvider = profileImageProvider
-        return viewController
-    }
 }
 
-// MARK: - objc Methods
+// MARK: - View presenting methods
 
 extension ReviewListViewController: KeyboardViewPresentable {
 
@@ -51,33 +52,6 @@ extension ReviewListViewController: KeyboardViewPresentable {
 
 }
 
-extension ReviewListViewController: ReviewUploadable {
-    
-    func uploadReview(with contents: String) {
-        reviewAPIProvider?.upload(review: contents) { result in
-            switch result {
-            case.success(let success):
-                self.reviews.append(
-                    ReviewResult.init(
-                        user: User.init(
-                            userName: Text.writterName,
-                            profileImage: Text.noImage
-                        ),
-                        content: contents,
-                        createdAt: Date.now.description
-                    )
-                )
-                DispatchQueue.main.async {
-                    self.reviewListView.reviewTableView.reloadData()
-                }
-            case.failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-}
-
 // MARK: - View setting methods
 
 extension ReviewListViewController {
@@ -87,6 +61,8 @@ extension ReviewListViewController {
     }
 
 }
+
+// MARK: - Review networking methods
 
 extension ReviewListViewController {
     
@@ -103,6 +79,34 @@ extension ReviewListViewController {
             }
         })
     }
+
+}
+
+extension ReviewListViewController: ReviewUploadable {
+    
+    func uploadReview(with contents: String) {
+        reviewAPIProvider?.upload(review: contents) { result in
+            switch result {
+            case.success(_):
+                self.reviews.append(
+                    ReviewResult.init(
+                        user: User.init(
+                            userName: Text.writterName,
+                            profileImageURL: Text.noImage
+                        ),
+                        content: contents,
+                        createdAt: Date.now.description
+                    )
+                )
+                DispatchQueue.main.async {
+                    self.reviewListView.reviewTableView.reloadData()
+                }
+            case.failure(let error):
+                print(error)
+            }
+        }
+    }
+    
 }
 
 // MARK: - UITableViewDataSource
@@ -125,11 +129,11 @@ extension ReviewListViewController: UITableViewDataSource {
         let review = reviews[indexPath.row]
         cell.setupCell(review: review)
         
-        guard review.user.profileImage != Text.noImage else {
+        guard review.user.profileImageURL != Text.noImage else {
             return cell
         }
         
-        profileImageProvider?.fetchImage(from: review.user.profileImage) { result in
+        profileImageProvider?.fetchImage(from: review.user.profileImageURL) { result in
             switch result {
             case .success(let profileImage):
                 cell.setupProfileImage(profileImage)
@@ -142,9 +146,13 @@ extension ReviewListViewController: UITableViewDataSource {
 
 }
 
+// MARK: - NameSpaces
+
 extension ReviewListViewController {
+
     private enum Text {
         static let writterName = "당신"
         static let noImage = "noImage"
     }
+
 }
