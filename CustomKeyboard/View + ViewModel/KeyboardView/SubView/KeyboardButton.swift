@@ -10,7 +10,7 @@ import UIKit
 class KeyboardButton: UIButton {
     // MARK: - Properties
     static let width = (UIScreen.main.bounds.width - 60.0) / 10
-    static let height = width * 1.3
+    static let height: CGFloat = (233 - 45) / 4
     
     var text: String?
     var compatibility: Compatibility

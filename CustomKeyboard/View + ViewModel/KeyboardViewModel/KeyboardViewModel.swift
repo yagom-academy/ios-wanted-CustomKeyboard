@@ -253,7 +253,8 @@ class KeyboardViewModel {
     }
 }
 
-private extension KeyboardViewModel {
+extension KeyboardViewModel {
+    // KeyboardExtension에서 사용하여 private ❌
     /// 두개의 종성을 이중 종성으로 반환하는 메서드
     ///
     /// 반환값이 `nil`인 경우 이중 종성이 불가능하다.

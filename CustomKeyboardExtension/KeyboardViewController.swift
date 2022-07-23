@@ -8,51 +8,31 @@ import UIKit
 
 class KeyboardViewController: UIInputViewController {
     // MARK: - Properties
-    @IBOutlet var nextKeyboardButton: UIButton!
     let viewModel = KeyboardViewModel()
     lazy var keyboardView = KeyboardView(viewModel: viewModel)
     var isDoubleDelete: Bool = false
     var preValuesCount: Int = 0
-    lazy var proxy = self.textDocumentProxy
     
-    override func updateViewConstraints() {
-        super.updateViewConstraints()
-    }
+    lazy var proxy = self.textDocumentProxy
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.addSubview(keyboardView)
         keyboardView.translatesAutoresizingMaskIntoConstraints = false
         keyboardView.sizeToFit()
-
-        self.keyboardView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        self.keyboardView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        self.keyboardView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        self.keyboardView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-
-        self.nextKeyboardButton = UIButton(type: .system)
-
-        self.nextKeyboardButton.setTitle(NSLocalizedString("Next Keyboard", comment: "Title for 'Next Keyboard' button"), for: [])
-        self.nextKeyboardButton.sizeToFit()
-        self.nextKeyboardButton.translatesAutoresizingMaskIntoConstraints = false
-
-        self.nextKeyboardButton.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
         
-        
-        self.inputBinding(proxy: proxy)
-        self.deleteBinding(proxy: proxy)
-        
-    }
-    
-    override func textDidChange(_ textInput: UITextInput?) {
-        var textColor: UIColor
-        let proxy = self.textDocumentProxy
-        
-        if proxy.keyboardAppearance == UIKeyboardAppearance.dark {
-            textColor = UIColor.white
-        } else {
-            textColor = UIColor.black
-        }
+        NSLayoutConstraint.activate([
+            keyboardView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            keyboardView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            keyboardView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            keyboardView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+
+
+
+        inputBinding(proxy: proxy)
+        deleteBinding(proxy: proxy)
     }
     
     func deleteBinding(proxy: UITextDocumentProxy) {
@@ -142,8 +122,13 @@ class KeyboardViewController: UIInputViewController {
             
             // 3(안) : 3 (앉)
             if self.preValuesCount == count {
-                proxy.deleteBackward()
+                
+                if self.viewModel.splitJongsung(Jongsung(rawValue: result.unicodeScalars.last!.value)) != nil {
+                    proxy.deleteBackward()
+                }
+                
                 proxy.insertText(result)
+
             }
             
             self.preValuesCount = count
