@@ -51,7 +51,7 @@
 ### KeyboardPage
 |중성조합 <br /> `(ㅗ,ㅏ,ㅣ = ㅙ)`|종성조합 <br />`ㄱㅅ = ㄳ` <br /> 종성->중성|음절 단위삭제|단어 단위삭제|
 |:--:|:--:|:--:|:--:|
-|<img src = "https://i.imgur.com/DdcHeAE.gif" width = "220">|<img src = "https://i.imgur.com/B9DDH5L.gif" width = "220">|<img src = "https://i.imgur.com/clNjQqU.gif" width = "220">|<img src = "https://i.imgur.com/zqavRmj.gif" width = "220">|
+|<img src = "https://i.imgur.com/DdcHeAE.gif" width = "180">|<img src = "https://i.imgur.com/B9DDH5L.gif" width = "180">|<img src = "https://i.imgur.com/clNjQqU.gif" width = "180">|<img src = "https://i.imgur.com/zqavRmj.gif" width = "180">|
 
 ## 객체 역할 소개
 ### 앱 설계 모식도
