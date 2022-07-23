@@ -24,6 +24,8 @@
 		36AA02232888CF58006A9704 /* HangulCombinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F039F8B3288692A900E7B637 /* HangulCombinator.swift */; };
 		36AA02242888CF5D006A9704 /* CustomKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36431EBC287D9598003C99B4 /* CustomKeyboard.xib */; };
 		36AA02252888CF5D006A9704 /* CustomKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36431EBA287D9581003C99B4 /* CustomKeyboardView.swift */; };
+		36AB21B1288B8607005A175C /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AB21B0288B8607005A175C /* Icon.swift */; };
+		36AB21B5288B954D005A175C /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AB21B0288B8607005A175C /* Icon.swift */; };
 		36B1CD042887DB6B003E13C3 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B1CD032887DB6B003E13C3 /* HTTPMethod.swift */; };
 		36B1CD062887DBC1003E13C3 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B1CD052887DBC1003E13C3 /* Resource.swift */; };
 		36B1CD082887DC0D003E13C3 /* URLSession+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B1CD072887DC0D003E13C3 /* URLSession+extension.swift */; };
@@ -84,6 +86,7 @@
 		36AA02102888CED4006A9704 /* My Custom Keyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "My Custom Keyboard.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36AA02122888CED4006A9704 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		36AA02142888CED4006A9704 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36AB21B0288B8607005A175C /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		36B1CD032887DB6B003E13C3 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		36B1CD052887DBC1003E13C3 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		36B1CD072887DC0D003E13C3 /* URLSession+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+extension.swift"; sourceTree = "<group>"; };
@@ -256,6 +259,7 @@
 				F0D4B435287D564D0083E8AE /* ReviewData.swift */,
 				36FCAC0C28825D0B003AF9AF /* PostReviewData.swift */,
 				F039F8C728881FBA00E7B637 /* ReviewDateConverter.swift */,
+				36AB21B0288B8607005A175C /* Icon.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -372,6 +376,7 @@
 				36AA02222888CF58006A9704 /* HangulKeyboardData.swift in Sources */,
 				36AA021D2888CF58006A9704 /* KeyboardMaker.swift in Sources */,
 				36AA021F2888CF58006A9704 /* HangulKeyboardConverter.swift in Sources */,
+				36AB21B5288B954D005A175C /* Icon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +386,7 @@
 			files = (
 				36081E06287FFC0200A933AE /* Date+extension.swift in Sources */,
 				36B1CD0C2887DE4D003E13C3 /* NetworkError.swift in Sources */,
+				36AB21B1288B8607005A175C /* Icon.swift in Sources */,
 				F0D4B436287D564D0083E8AE /* ReviewData.swift in Sources */,
 				F039F8AA28866A2500E7B637 /* HangulKeyboardData.swift in Sources */,
 				DE15E66028604278003DD2F5 /* ReviewListViewController.swift in Sources */,

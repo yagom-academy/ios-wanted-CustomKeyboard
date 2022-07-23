@@ -17,7 +17,7 @@ class ReviewListHeaderView: UITableViewHeaderFooterView {
 
     private let profileImageView: UIImageView = {
         let profileImageVIew = UIImageView()
-        profileImageVIew.image = UIImage(systemName: "person.crop.circle.fill")
+        profileImageVIew.image = Icon.personFill.image
         profileImageVIew.tintColor = .systemGray4
         return profileImageVIew
     }()

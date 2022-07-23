@@ -2,7 +2,6 @@
 //  CustomKeyboardView.swift
 //  CustomKeyboard
 //
-//  Created by 효우 on 2022/07/12.
 //
 
 import UIKit
@@ -96,7 +95,7 @@ class CustomKeyboardView: UIView {
             oButton.setTitle("ㅒ", for: .normal)
             pButton.setTitle("ㅖ", for: .normal)
             shiftButton.isSelected = isShiftPressed
-            shiftButton.setImage(UIImage(systemName: "shift.fill"), for: .normal)
+            shiftButton.setImage(Icon.shiftFill.image, for: .normal)
         } else {
             qButton.setTitle("ㅂ", for: .normal)
             wButton.setTitle("ㅈ", for: .normal)
@@ -106,7 +105,7 @@ class CustomKeyboardView: UIView {
             oButton.setTitle("ㅐ", for: .normal)
             pButton.setTitle("ㅔ", for: .normal)
             shiftButton.isSelected = isShiftPressed
-            shiftButton.setImage(UIImage(systemName: "shift"), for: .normal)
+            shiftButton.setImage(Icon.shift.image, for: .normal)
         }
         self.layoutIfNeeded()
     }
