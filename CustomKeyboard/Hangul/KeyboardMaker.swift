@@ -173,8 +173,11 @@ class KeyboardMaker {
             var decomposedHangul = combinator.decomposeHangul(hangul: releaseTextField.last!, lastState: processingBuffer.currentState)
             
             decomposedHangul = decomposedHangul.filter{$0.hangul != " "}
-            processingBuffer.alphaRepository.removeLast()
-            decomposedHangul.removeLast()
+            let lastAlpha = processingBuffer.alphaRepository.removeLast()
+            let lastDecomposed = decomposedHangul.removeLast()
+            if lastAlpha.hangul != lastDecomposed.hangul {
+                decomposedHangul[1] = processingBuffer.alphaRepository.last!
+            }
             combineBuffer = [HangulKeyboardData](repeating: HangulKeyboardData(char: "", state: .empty), count: 3)
             decomposedHangul.enumerated().forEach{ combineBuffer[$0.offset] = $0.element }
             
