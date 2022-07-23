@@ -11,7 +11,6 @@ final class ReviewRepository {
   
   private let network: NetworkServiceable
   private var imageCache = NSCache<NSURL,NSData>()
-
   
   init(network: NetworkService = NetworkService()){
     self.network = network
@@ -36,8 +35,6 @@ final class ReviewRepository {
   }
   
   func loadImage(url:URL?, completion: @escaping (Result<Data,Error>) -> Void) {
-
-    
     if let data = imageCache.object(forKey: url! as NSURL) {
       completion(.success(data as Data))
       return
@@ -61,15 +58,12 @@ final class ReviewRepository {
     let URLRequest = URLRequest.makeURLRequest(request: Requset(requestType: .post, body: commentData, endPoint: endPoint))
     network.request(on: URLRequest) { result in
       switch result {
-      case .success(let data):
+      case .success(_):
         completion(.success(true))
       case .failure(let error):
         completion(.failure(error))
       }
     }
-    
-    
-    
   }
   
 }

@@ -8,11 +8,8 @@
 import Foundation
 
 protocol UnicodeConverter {
-    func convertCharFromUniCode(_ unicode: Int) -> String
-    func convertUniCodeFromChar(_ char: String) -> Int
-    func combineCharToUnicode(initial: Int, neutral : Int, final: Int) -> Int
-    func getInitalValue(_ unicode: Int) -> Int?
-    func getNeutralValue(_ unicode: Int) -> Int?
-    func getFinalValue(_ unicode: Int) -> Int?
-    func lastCharState(_ unicode: Int) -> CharState
+  func convertCharFromUniCode(_ unicode: Int) -> String
+  func convertUniCodeFromChar(_ char: String) -> Int
+  func combineCharToUnicode(initial: Int, neutral : Int, final: Int) -> Int
+  func lastCharState(_ unicode: Int) -> CharState
 }

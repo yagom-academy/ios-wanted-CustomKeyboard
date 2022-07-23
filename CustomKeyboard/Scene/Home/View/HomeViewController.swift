@@ -5,7 +5,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
   
   private let viewModel = HomeViewModel()
   
@@ -87,7 +87,7 @@ class HomeViewController: UIViewController {
   
 }
 
-extension HomeViewController : UITableViewDataSource {
+extension HomeViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return viewModel.reviewList.value.count
@@ -106,8 +106,9 @@ extension HomeViewController : UITableViewDataSource {
       }})
     return cell
   }
+  
 }
-extension HomeViewController : UITableViewDelegate {
+extension HomeViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
     return UITableView.automaticDimension
   }

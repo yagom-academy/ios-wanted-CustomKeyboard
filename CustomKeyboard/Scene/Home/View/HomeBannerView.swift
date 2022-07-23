@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeBannerView: UIView {
+final class HomeBannerView: UIView {
   
   var buttonDidTap:(() -> Void)?
   
@@ -29,7 +29,7 @@ class HomeBannerView: UIView {
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
-    
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     backgroundColor = .white
@@ -40,11 +40,12 @@ class HomeBannerView: UIView {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
+  
 }
 
 
 private extension HomeBannerView {
+  
   func setConstraints() {
     addSubview(userProfileImageView)
     addSubview(reviewButton)
@@ -63,6 +64,7 @@ private extension HomeBannerView {
       reviewButton.heightAnchor.constraint(equalToConstant: 40),
     ])
   }
+  
   func setReviewButtonAction() {
     reviewButton.addTarget(self, action: #selector(reviewButtonDidTap), for: .touchUpInside)
   }
@@ -70,6 +72,7 @@ private extension HomeBannerView {
   @objc  func reviewButtonDidTap() {
     buttonDidTap?()
   }
+  
 }
 
 

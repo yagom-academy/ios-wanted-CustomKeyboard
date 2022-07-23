@@ -18,7 +18,7 @@ enum TextOperation {
   case spacePressed
 }
 
-class CustomKeyboardView: UIView {
+final class CustomKeyboardView: UIView {
   
   var buttonPressed: ((String) -> Void)?
   var pressedRetrunButton: (()->Void)?
@@ -195,6 +195,9 @@ class CustomKeyboardView: UIView {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+}
+
+private extension CustomKeyboardView {
   
   func makeButtonList(_ list: [String]) -> [CustomRoundButton] {
     var buttonList : [CustomRoundButton] = []
@@ -209,20 +212,19 @@ class CustomKeyboardView: UIView {
     return buttonList
   }
   
-  private func setupBasicSetting(button: CustomRoundButton, backgroundColor: BackgroundColor) {
+  func setupBasicSetting(button: CustomRoundButton, backgroundColor: BackgroundColor) {
     if backgroundColor == .gray{
       button.backgroundColor = #colorLiteral(red: 0.274509728, green: 0.274509728, blue: 0.274509728, alpha: 1)
     } else {
       button.backgroundColor = #colorLiteral(red: 0.4196077883, green: 0.4196078777, blue: 0.4196078181, alpha: 1)
     }
     let selectColor = #colorLiteral(red: 0.8313727379, green: 0.8313727379, blue: 0.8313726187, alpha: 1)
-    button.setBackgroundColor(selectColor, for: .highlighted)
+    button.setKeyBoardBackgroundColor(selectColor, for: .highlighted)
     button.translatesAutoresizingMaskIntoConstraints = false
   }
   
   func changeShiftMode() {
     shiftButton.isSelected = !shiftButton.isSelected
-    
     if shiftButton.isSelected {
       shiftButton.backgroundColor = #colorLiteral(red: 0.8313727379, green: 0.8313727379, blue: 0.8313726187, alpha: 1)
       shiftButton.imageView?.tintColor = .black
@@ -240,7 +242,7 @@ class CustomKeyboardView: UIView {
         }
       }
       
-    } else {
+    }else {
       shiftButton.backgroundColor = #colorLiteral(red: 0.274509728, green: 0.274509728, blue: 0.274509728, alpha: 1)
       shiftButton.imageView?.tintColor = .white
       for button in firstLineButtonList {
@@ -257,7 +259,6 @@ class CustomKeyboardView: UIView {
         }
       }
     }
-    
   }
   
   @objc func pressedChar(_ sender: Any) {
@@ -287,4 +288,5 @@ class CustomKeyboardView: UIView {
   @objc func pressedShift() {
     changeShiftMode()
   }
+  
 }

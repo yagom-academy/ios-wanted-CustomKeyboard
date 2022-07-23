@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewContentView: UIView {
+final class ReviewContentView: UIView {
   
   var startEditing:((String?) -> Void)?
   var doneEditing:((String?) -> Void)?
@@ -66,6 +66,7 @@ class ReviewContentView: UIView {
 
 private extension ReviewContentView {
   func setConstraints() {
+    
     addSubview(userProfileImageView)
     addSubview(reviewerInfoLabel)
     addSubview(reviewTextView)

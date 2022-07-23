@@ -27,7 +27,7 @@ struct NetworkService: NetworkServiceable {
         completion(.failure(.serverError(statusCode: response?.statusCode)))
         return
       }
-
+      
       guard let data = data else {
         completion(.failure(.noData))
         return

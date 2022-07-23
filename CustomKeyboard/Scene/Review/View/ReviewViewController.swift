@@ -15,11 +15,11 @@ final class ReviewViewController: UIViewController {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
   }
-
+  
   required init?(coder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
+    fatalError("init(coder:) has not been implemented")
   }
-    
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setDisplay()
@@ -31,7 +31,7 @@ final class ReviewViewController: UIViewController {
     setConstraints()
     setTextViewBinding()
   }
-
+  
   private let reviewContentView: ReviewContentView = {
     let reviewContentView = ReviewContentView()
     reviewContentView.translatesAutoresizingMaskIntoConstraints = false
@@ -41,14 +41,23 @@ final class ReviewViewController: UIViewController {
   
   private lazy var naviItem: UINavigationItem = {
     let naviItem = UINavigationItem(title: "리뷰 남기기")
-    naviItem.rightBarButtonItem = UIBarButtonItem(title: "게시", image: nil, primaryAction: sumbit, menu: nil)
+    naviItem.rightBarButtonItem = UIBarButtonItem(title: "게시",
+                                                  image: nil,
+                                                  primaryAction: sumbit,
+                                                  menu: nil)
     naviItem.rightBarButtonItem?.isEnabled = false
-    naviItem.leftBarButtonItem = UIBarButtonItem(title: "취소", image: nil, primaryAction: cancel, menu: nil)
+    naviItem.leftBarButtonItem = UIBarButtonItem(title: "취소",
+                                                 image: nil,
+                                                 primaryAction: cancel,
+                                                 menu: nil)
     return naviItem
   }()
   
   private func setNavigationBar(){
-    let naviBar = UINavigationBar(frame: .init(x: 0, y: view.safeAreaInsets.top + 40, width: view.frame.width, height: 40))
+    let naviBar = UINavigationBar(frame: .init(x: 0,
+                                               y: view.safeAreaInsets.top + 40,
+                                               width: view.frame.width,
+                                               height: 40))
     naviBar.isTranslucent = false
     naviBar.backgroundColor = .secondarySystemFill
     naviBar.items = [naviItem]

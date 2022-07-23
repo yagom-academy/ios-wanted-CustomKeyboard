@@ -19,8 +19,8 @@ struct EndPoint: EndPointable {
   init(path: ServerPath){
     self.path = path
     self.queryItems = [URLQueryItem(name: "themeId", value: "PLKEY0-L-81"),
-                        URLQueryItem(name: "start", value: "0"),
-                        URLQueryItem(name: "count", value: "20")]
+                       URLQueryItem(name: "start", value: "0"),
+                       URLQueryItem(name: "count", value: "20")]
   }
   
   init(path: ServerPath, queries: [URLQueryItem]?){
