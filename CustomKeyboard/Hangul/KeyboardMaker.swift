@@ -23,7 +23,6 @@ class KeyboardMaker {
         case deleting
     }
     
-    
     private var combineBuffer = [HangulKeyboardData](repeating: HangulKeyboardData(char: "", state: .empty), count: 3)
     private var processingBuffer = Status(currentState: .empty, isCompleted: false, alphaRepository: [], mode: .none)
     private var releaseTextField = [String]()
@@ -66,15 +65,18 @@ class KeyboardMaker {
         case .none:
             return onCombinationProcess()
         case .jong:
+            
             let decomposedHangul = combinator.decomposeHangul(hangul: releaseTextField.last! , lastState: .jong).filter{$0.hangul != " "}
             let newBuffer = [decomposedHangul[0], decomposedHangul[1], HangulKeyboardData(char: "", state: .empty)]
             let newKeyboardData = combinator.combineHangul(buffer: newBuffer, lastState: .jung)
+            
             processingBuffer.mode = .none
             releaseTextField[releaseTextField.count - 1] = newKeyboardData.hangul
+            
             return onCombinationProcess()
         case .doubleJong:
+            
             let lastDoubleJong = processingBuffer.alphaRepository[processingBuffer.alphaRepository.count - 2]
-         
             var decomposedHangul = combinator.decomposeHangul(hangul: releaseTextField.last!, lastState: .doubleJong)
             
             if combineBuffer[0].hangul == lastDoubleJong.hangul {
@@ -89,6 +91,7 @@ class KeyboardMaker {
                 processingBuffer.mode = .none
                 releaseTextField[releaseTextField.count - 1] = newKeyboardData.hangul
             }
+            
             return onCombinationProcess()
         case .deleting:
             return deleteKeyboardData(currentKeyboardData: inputData)
@@ -98,33 +101,40 @@ class KeyboardMaker {
     func onCombinationProcess() -> [String] {
         
         if processingBuffer.isCompleted {
+            
             let combinedHagul = combinator.combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState)
             releaseTextField.append(combinedHagul.hangul)
             processingBuffer.isCompleted = false
+            
             return releaseTextField
         }
-        
         if releaseTextField.count <= 1 {
+            
             let newHangul = combinator.combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState)
             if releaseTextField.isEmpty {
                 releaseTextField.append(newHangul.hangul)
             } else {
                 if processingBuffer.alphaRepository.count == 1 {
                     releaseTextField.append(newHangul.hangul)
+                    
                     return releaseTextField
                 }
                 releaseTextField[0] = newHangul.hangul
             }
         } else if releaseTextField.count > 1 {
             if releaseTextField.last == " " {
+                
                 let combinedHagul = combinator.combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState)
                 releaseTextField.append(combinedHagul.hangul)
                 processingBuffer.isCompleted = false
+                
                 return releaseTextField
             } else if processingBuffer.alphaRepository.count == 1 {
+                
                 let combinedHagul = combinator.combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState)
                 releaseTextField.append(combinedHagul.hangul)
                 processingBuffer.isCompleted = false
+                
                 return releaseTextField
             }
             releaseTextField[releaseTextField.count - 1] = combinator.combineHangul(buffer: combineBuffer, lastState: processingBuffer.currentState).hangul
@@ -137,7 +147,6 @@ class KeyboardMaker {
         
         if !releaseTextField.isEmpty && !processingBuffer.alphaRepository.isEmpty {
             return deleteHangulInEditing()
-            
         } else if inputData.unicode == SpecialCharSet.delete && processingBuffer.alphaRepository.count == 0 {
             return deleteHangulAfterSpacing()
         }
