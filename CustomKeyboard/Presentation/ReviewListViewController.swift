@@ -51,7 +51,16 @@ extension ReviewListViewController: ReviewUploadable {
         reviewAPIProvider.upload(review: contents) { result in
             switch result {
             case.success(let success):
-                self.reviews.append(ReviewResult.init(user: User.init(userName: "당신", profileImage: "noImage"), content: contents, createdAt: Date.now.description))
+                self.reviews.append(
+                    ReviewResult.init(
+                        user: User.init(
+                            userName: Text.writterName,
+                            profileImage: Text.noImage
+                        ),
+                        content: contents,
+                        createdAt: Date.now.description
+                    )
+                )
                 DispatchQueue.main.async {
                     self.reviewListView.reviewTableView.reloadData()
                 }
@@ -109,6 +118,11 @@ extension ReviewListViewController: UITableViewDataSource {
 
         let review = reviews[indexPath.row]
         cell.setupCell(review: review)
+        
+        guard review.user.profileImage != Text.noImage else {
+            return cell
+        }
+        
         profileImageProvider.fetchImage(from: review.user.profileImage) { result in
             switch result {
             case .success(let profileImage):
@@ -122,3 +136,9 @@ extension ReviewListViewController: UITableViewDataSource {
 
 }
 
+extension ReviewListViewController {
+    private enum Text {
+        static let writterName = "당신"
+        static let noImage = "noImage"
+    }
+}

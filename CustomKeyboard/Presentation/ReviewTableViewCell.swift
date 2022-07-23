@@ -72,6 +72,7 @@ final class ReviewTableViewCell: UITableViewCell {
         setupView()
         setupConstraints()
     }
+    
     override func draw(_ rect: CGRect) {
         profileImageView.layer.cornerRadius = profileImageView.frame.width * Style.half
     }
@@ -87,7 +88,7 @@ extension ReviewTableViewCell {
     func setupCell(review: ReviewResult) {
         nameLabel.text = review.user.userName
         reviewLabel.text = review.content
-        uploadedTimeLabel.text = review.createdAt
+        uploadedTimeLabel.text = review.toElapsedTime()
     }
     
     func setupProfileImage(_ image: UIImage) {
