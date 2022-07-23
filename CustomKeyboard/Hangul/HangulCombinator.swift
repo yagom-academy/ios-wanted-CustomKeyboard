@@ -85,6 +85,10 @@ class HangulCombinator {
             return [cho, jung] + jong
         } else if jongIndex == 0 {
             let cho = HangulKeyboardData(char: HangulSet.chos[choIndex], state: .cho)
+            if lastState == .cho || lastState == .jong || lastState == .doubleJong || lastState == .doubleCho {
+                let jung = HangulKeyboardData(char: HangulSet.jungs[jongIndex], state: .jung)
+                return [cho, jung]
+            }
             let jung = decomposeJungs(str: HangulSet.jungs[jungIndex])
             return [cho] + jung
         }
